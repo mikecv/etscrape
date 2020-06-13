@@ -1,0 +1,15 @@
+{
+    "ConfigVersion": 1,
+    "DebugLevel": 20,
+    "LogFileSize": 100000,
+    "LogBackups": 3,
+    "TripData": {
+        "TripPrefix": "Trip",
+        "TripBackColour": "#e6ffff",
+        "EventColour": "#0000ff",
+        "AlertColour": "#ff0000",
+        "SummaryAlertColour": "#0000ff",
+        "ShowOtherEvents": 0,
+        "OtherEventColour": "#99990C"
+    }
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<h1>EarthTrack Log Scraper</h1>
+
+<p>The EarthTrack Log Scraper is relatively simple in that it just reads the contents of a log file from an EarthTrack Fleet Controller module,
+and displays a sanitised version of trips included in the log file. The primary purpose of the application is as a diagnostic tool
+for test personnel; so that they can avoid having to look through the log file which is not as easy to read.</p>
+
+<h2>The application window</h2>
+<p>The application consists of a single window divided into two parts. The left part shows the parsed contents of all trips in the EarthTrack log file,
+while the right part shows summary information for the currently selected trip.</p>
+<br>
+<img src="./appOpen.png" alt="Application start">
+
+<h2>Opening a log file</h2>
+<p>Selecting the &#34;File &#47; Load log file&#34; menu item will launch a file browser from where the log file can be selected and opened.</p>
+<p>Once opened the trips included in the log file will be listed in the Trip Data pane on the left,
+with the first trip being the currently selected trip.
+On the right hand side the Trip Summary pane shows summary information for the selected trip which at the start is trip 1.</p>
+<br>
+<img src="./appLogLoaded.png" alt="Log file opened">
+
+<h2>Navigating the Trip Data pane</h2>
+<p>The Trip Data pane is structured as a tree, with trips as the trunk. A trip can be expanded to reveal the events in the trip,
+and events can be expanded to show specific information for that event.
+There are also &#34;expand all&#34; and &#34;collapse all&#34;; toolbar buttons to expand or collapse all trips, events, and event data items.</p>
+<p>Navigation can be achieved using the mouse and clicking on the + or - (expand or collapse) branch points.
+Alternatively, use the LEFT or RIGHT arrow keys to collapse or expand the current selected item.</p>
+<p>The currently selected item, and therefore the currently selected trip can be set by selecting it with the mouse,
+or by using the UP or DOWN arrow keys to navigate up or down the branch the item is on.
+The HOME, END, PAGE_UP and PAGE_DOWN keys can also be used to select the first/last trips or to skip a page of items at a time.</p>
+<br>
+<img src="./appNavTree.png" alt="Application navigation">
+<p>The parsing of the log file detects other event types, that while detected are not yet supported by the application.
+Where supported in this context means that the no details are shown for these events.
+There is a configuration option &#34;ShowOtherEvents&#34; (see the section on &#34;Application configuration&#34; below)
+to enable the display of these other events. Setting this parameter to 1 will show the other events as illustrated below.</p>
+<br>
+<img src="./appNavOther.png" alt="Showing (Other) data">
+<p>Note that the colour for the &#34;other&#34; events can also be set in configration.
+Note also, that when other events are configured to be shown an extra entry is displayed in the Trip Summary pane.</p>
+	
+<h2>Trip Data pane alert formatting</h2>
+<p>The trip headers are highlighted to make the start of trips easier to find when all trips are expanded.
+Events are normally highlighted in a blue font, and event data is normally shown in black font.
+The application does some simple checking of event data looking for edge conditions or potentially bad data,
+and highlights this data. Where some event data has been highlighted the corresponding event and associated trip are highlighted in the same colour.</p>
+<br>
+<img src="./appAlertData.png" alt="Alert data highlighted">
+<p>In the example above a zero duration event has been detected for a zone overspeed event, which may or may not be an error.
+The trip and event are also highlighted so that the presence of the alert is visible even if the trip tree is collapsed.</p>
+
+<h2>The Trip Summary pane</h2>
+<p>The Trip Summary pane shows summary information for the currently selected trip,
+noting that any item in the trip can be the currently selected item.</p>
+<p>Apart from the trip start and end times, and trip duration, the summary information includes the total of different event types for that trip.
+None zero totals are highlighted to make them more obvious. Refer to the previous image of Trip Data for a selected trip.</p>
+
+<h2>Application configuration</h2>
+<p>The application has a number of configurable parameters; these are held in Json format in a file called etscrape.json.
+The configuration parameters include parameters for logging and colours for formatting Trip Data displays.</p>
+<p>If the configuration file is not found a default file will be created.
+Similarly, if the version of the configration file is less than the required version the file will be overwritten with current and/or default values.</p>
+<br>
+<img src="./appJsonConfig.png" alt="Application configuration data">
+		
+<h2>Application logging</h2>
+<p>The application uses the standard Python logging library. Configuration parameters are used to control the number of log files used
+and the maximum size of each log file. The main log file is called etscrape.log, and older log files are suffixed with .1, .2, .3 etc.</p>
+<p>The configuration parameter "DebugLevel" specifies the logging level as per the Python standard,
+refer to <a href="https://docs.python.org/3/library/logging.html">https://docs.python.org/3/library/logging.html</a></p>
+<br>
+<img src="./appLogFormat.png" alt="Log file format">
+
+</body>
+</html>
