@@ -27,12 +27,9 @@ from mplCharts import *
 # *******************************************
 # TODO List
 #
-# Add view menu option and add show/hide input / other / and out of trip events.
 # When adding log file ask to append or flush and add new; do we need to separate log files in the tree (maybe not).
 # Generate report between dates, and produce PDF.
-# NEXT ==========Fix hiding of tree items, only clear alert on event and trip if no other alerts.
 # Check for trip start times going backwards, and trips ending before they start.
-# How to alert for errors in hidden data, e.g. speed errors or time going backwards, currently included but not alerted.
 # Shade speed areas: ax.fill_between(x, y1, y2, where=y2 >= y1, facecolor='green', interpolate=True)
 # Add properties dialog to set all parameters and generate config file.
 # *******************************************
@@ -82,6 +79,17 @@ class UI(QMainWindow):
         # Attach to the Load Log File menu item.
         self.actionLoadLog.triggered.connect(self.loadLogFile)
 
+        # Set up show menu items according to configuration.
+        # These are just for the session, they are not written to configuration.
+        self.actionShowInputEvents.setChecked(config.TripData["ShowInputEvents"])
+        self.actionShowOtherEvents.setChecked(config.TripData["ShowOtherEvents"])
+        self.actionShowOutOfTripEvents.setChecked(config.TripData["ShowOutOfTripEvents"])
+
+        # Attach to the show menu items.
+        self.actionShowInputEvents.triggered.connect(self.showHideInputEvents)
+        self.actionShowOtherEvents.triggered.connect(self.showHideOtherEvents)
+        self.actionShowOutOfTripEvents.triggered.connect(self.showHideOutOfTripEvents)
+
         # Attach to the Quit menu item.
         self.actionQuit.triggered.connect(app.quit)
 
@@ -105,7 +113,7 @@ class UI(QMainWindow):
         self.PrevTripBtn.clicked.connect(lambda: self.tripButtonClicked(False))
 
         # Create figure for speed plots.
-        self.spdFig = MplCanvas(self, config, logger, width=7, height=2, dpi=100)
+        self.spdFig = MplCanvas(self, config, logger, width=10, height=3, dpi=100)
         self.plotTbar = NavigationToolbar(self.spdFig, self)
         self.ChartLayout.addWidget(self.plotTbar)
         self.ChartLayout.addWidget(self.spdFig)
@@ -195,6 +203,54 @@ class UI(QMainWindow):
             self.PrevTripBtn.setEnabled(True)
 
     # *******************************************
+    # Callback function for show/hide input events menu checkbox.
+    # *******************************************
+    def showHideInputEvents(self):
+        logger.debug("User set show event menu state: {0:b}".format(self.actionShowInputEvents.isChecked()))
+
+        # If we have trips clear them and add them again.
+        # will lose collapse/expand state though.
+        if self.haveTrips:
+            # Clear triptrip tree.
+            self.clearTrips()
+            # Clear speed plot.
+            self.spdFig.clearFigure()
+            # Repopulate trips.
+            self.populateTrips()
+
+    # *******************************************
+    # Callback function for show/hide other events menu checkbox.
+    # *******************************************
+    def showHideOtherEvents(self):
+        logger.debug("User set show event menu state: {0:b}".format(self.actionShowOtherEvents.isChecked()))
+
+        # If we have trips clear them and add them again.
+        # will lose collapse/expand state though.
+        if self.haveTrips:
+            # Clear triptrip tree.
+            self.clearTrips()
+            # Clear speed plot.
+            self.spdFig.clearFigure()
+            # Repopulate trips.
+            self.populateTrips()
+
+    # *******************************************
+    # Callback function for show/hide out of trip events menu checkbox.
+    # *******************************************
+    def showHideOutOfTripEvents(self):
+        logger.debug("User set show event menu state: {0:b}".format(self.actionShowOutOfTripEvents.isChecked()))
+
+        # If we have trips clear them and add them again.
+        # will lose collapse/expand state though.
+        if self.haveTrips:
+            # Clear triptrip tree.
+            self.clearTrips()
+            # Clear speed plot.
+            self.spdFig.clearFigure()
+            # Repopulate trips.
+            self.populateTrips()
+
+    # *******************************************
     # Show temporary status message.
     # Pass message string and duration in (msec).
     # Default is for permanent message.
@@ -203,15 +259,22 @@ class UI(QMainWindow):
         self.statusbar.showMessage(msg, dur)
 
     # *******************************************
+    # Clear loaded trips.
+    # *******************************************
+    def clearTrips(self):
+        # If we have trip data then delete data.
+        if self.haveTrips:
+            self.tripDataTree.setParent(None)
+            self.tripDataTree = None
+
+    # *******************************************
     # Load log file.
     # *******************************************
     def loadLogFile(self):
         logger.debug("User selected Load Log File control.")
 
-        # If we have trip data then delete data.
-        if self.haveTrips:
-            self.tripDataTree.setParent(None)
-            self.tripDataTree = None
+        # Clear trips if we have any.
+        self.clearTrips()
 
         # Clear trip data to show.
         self.haveTrips = False
@@ -357,19 +420,26 @@ class UI(QMainWindow):
                             detailLevel.setForeground(1, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
                             # If detail alert then also use alert colour for related event.
                             eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
+
                             # If detail alert then also use alert colour for related trip.
-                            tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
+                            # Don't highlight trip if event is hidden.
+                            if (ev.isInput and (self.actionShowInputEvents.isChecked())):
+                                tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
+                            elif (ev.isOther and (self.actionShowOtherEvents.isChecked())):
+                                tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
+                            elif ((not ev.isInput) and (not ev.isOther)):
+                                tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
 
                 # Hide input events if not configured to do so.
-                if (ev.isInput and (config.TripData["ShowInputEvents"] == 0)):
+                if (ev.isInput and (not self.actionShowInputEvents.isChecked())):
                     eventLevel.setHidden(True)
 
                 # Hide other events if not configured to do so.
-                if (ev.isOther and (config.TripData["ShowOtherEvents"] == 0)):
+                if (ev.isOther and (not self.actionShowOtherEvents.isChecked())):
                     eventLevel.setHidden(True)
 
                 # Hide out of trip events if not configured to do so.
-                if (ev.isOutOfTrip and (config.TripData["ShowOutOfTripEvents"] == 0)):
+                if (ev.isOutOfTrip and (not self.actionShowOutOfTripEvents.isChecked())):
                     eventLevel.setHidden(True)
 
         # Add trip data tree to layout.
@@ -423,7 +493,7 @@ class UI(QMainWindow):
         self.StartTimeLbl.setText("{0:s}".format(datetime.fromtimestamp(ti.tripStart).strftime('%d/%m/%Y %H:%M:%S')))
         self.EndTimeLbl.setText("{0:s}".format(datetime.fromtimestamp(ti.tripEnd).strftime('%d/%m/%Y %H:%M:%S')))
         self.TripDurationLbl.setText("{0:s}".format(secsToTime(ti.tripEnd - ti.tripStart)))
-        # EveshadeOverspeedZonesnt counts.
+        # Event counts.
         # Vehicle events.
         self.VehicleEventsLbl.setText("{0:d}".format(ti.numVehicleEvents))
         self.updateSummaryCount(self.VehicleOverspeedLbl, ti.numOverspeed)
@@ -476,13 +546,11 @@ class UI(QMainWindow):
             sList.append(sl.speed)
 
         # Plot with updated data.
-        self.spdFig.updatePlotData(tList, sList)
+        self.spdFig.updatePlotData(self.selectedTrip, tList, sList)
 
         # Plot speed limit lines on plot.
         # At this point from configuration as not include in log.
         self.spdFig.drawSpeedLimits(config.SpdPlot["DefaultLowLimit"], config.SpdPlot["DefaultHiLimit"])
-
-        self.spdFig.shadeOverspeedZones()
 
         # Need to show plot as originally hidden.
         self.plotTbar.show()
@@ -698,7 +766,9 @@ class UI(QMainWindow):
             "<li>Added check for bad speed values in SIGNON event header, i.e. > 150kph.</li>" \
             "<li>Added check for events with different Trip ID to sign-on event.</li>" \
             "<li>Added INPUT event to report input changes; events can be hidden using configuration parameter.</li>" \
-            "<li>Added option to hide out of trip events; not that this option overrides showing input and other event configuration.</li>" \
+            "<li>Added option to hide out of trip events; not that this option overrides showing input and other event configuration. \
+                Added menu items to show/hide out of trip events as wells as INPUT events and other events. \
+                These menu items are initialised from configuration and only persist for the application session.</li>" \
             "<li>Corrected checking of Trip ID for out of trip events, i.e. not checking.</li>" \
             "<li>Added additional events POWERDOWN and SERVICE.</li>" \
             "<li>Added _ underscore and spacebar characters in event name search to catch oddball events.</li>" \

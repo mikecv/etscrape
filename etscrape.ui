@@ -88,33 +88,36 @@
         <number>2</number>
        </property>
        <property name="topMargin">
-        <number>2</number>
+        <number>0</number>
        </property>
        <property name="rightMargin">
         <number>2</number>
        </property>
        <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <property name="horizontalSpacing">
         <number>2</number>
        </property>
-       <property name="spacing">
-        <number>2</number>
+       <property name="verticalSpacing">
+        <number>0</number>
        </property>
        <item row="0" column="0">
         <layout class="QVBoxLayout" name="ChartLayout">
          <property name="spacing">
-          <number>5</number>
+          <number>0</number>
          </property>
          <property name="leftMargin">
           <number>5</number>
          </property>
          <property name="topMargin">
-          <number>5</number>
+          <number>0</number>
          </property>
          <property name="rightMargin">
           <number>5</number>
          </property>
          <property name="bottomMargin">
-          <number>5</number>
+          <number>0</number>
          </property>
         </layout>
        </item>
@@ -1329,7 +1332,16 @@
     <addaction name="actionChangeLog"/>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="actionShowInputEvents"/>
+    <addaction name="actionShowOtherEvents"/>
+    <addaction name="actionShowOutOfTripEvents"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuView"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
@@ -1421,6 +1433,30 @@
   <action name="actionChangeLog">
    <property name="text">
     <string>Change Log</string>
+   </property>
+  </action>
+  <action name="actionShowInputEvents">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Input Events</string>
+   </property>
+  </action>
+  <action name="actionShowOtherEvents">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Other Events</string>
+   </property>
+  </action>
+  <action name="actionShowOutOfTripEvents">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Out of Trip Events</string>
    </property>
   </action>
  </widget>

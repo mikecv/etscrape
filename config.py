@@ -26,11 +26,11 @@ class Config():
             "AlertColour" : "#ff0000",
             "CommentColour" : "#ff0000",
             "SummaryAlertColour" : "#0000ff",
-            "ShowOtherEvents" : 1,
             "OtherEventColour" : "#99990c",
             "InputEventColour" : "#ffbf00",
             "TmpStatusMessagesMsec" : 10000,
-            "ShowInputEvents" : 0,
+            "ShowInputEvents" : 1,
+            "ShowOtherEvents" : 1,
             "ShowOutOfTripEvents" : 0
         }
 
@@ -40,7 +40,9 @@ class Config():
             "DefaultHiLimit": 60,
             "SpeedColour": "#00ff00",
             "SpdLimLowColour": "#ff9933",
-            "SpdLimHiColour": "#ff0000"
+            "SpdLimHiColour": "#ff0000",
+            "AxesTitleFontSize": 7,
+            "PlotTitleFontSize":10
         }
 
         # Input channel definitions.
@@ -68,24 +70,24 @@ class Config():
             with open('etscrape.json') as config_file:
                 config = json.load(config_file)
 
-                # Update configuration values if possible.
-                # If not, just update with default + whatever values read.
-                try:
-                    self.DebugLevel = config["DebugLevel"]
-                    self.LogFileSize = config["LogFileSize"]
-                    self.LogBackups = config["LogBackups"]
-                    self.TripData = config["TripData"]
-                    self.SpdPlot = config["SpdPlot"]
-                    self.Channels = config["Channels"]
-                except Exception:
-                    print("Error rff00eading configuration file.")
-                    # Create default configuration file.
-                    self.saveConfig()
-
                 # Check configuration version.
                 # If version not a match then just update.
                 if config["ConfigVersion"] != self.ConfigVersion:
+                    print("Upgrading configuration file.")
                     self.saveConfig()
+                else:
+
+                    # Update configuration values if possible.
+                    # If not, just update with default + whatever values read.
+                    try:
+                        self.DebugLevel = config["DebugLevel"]
+                        self.LogFileSize = config["LogFileSize"]
+                        self.LogBackups = config["LogBackups"]
+                        self.TripData = config["TripData"]
+                        self.SpdPlot = config["SpdPlot"]
+                        self.Channels = config["Channels"]
+                    except Exception:
+                        print("Error reading configuration file.")
 
         except Exception:
             print("Error opening configuration file.")
