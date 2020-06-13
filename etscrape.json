@@ -1,15 +1,62 @@
 {
-    "ConfigVersion": 1,
-    "DebugLevel": 20,
+    "ConfigVersion": 2,
+    "DebugLevel": 10,
     "LogFileSize": 100000,
     "LogBackups": 3,
     "TripData": {
         "TripPrefix": "Trip",
-        "TripBackColour": "#e6ffff",
+        "TripBackColour": "#fffff0",
+        "TripColour": "#000000",
         "EventColour": "#0000ff",
         "AlertColour": "#ff0000",
+        "CommentColour": "#ff0000",
         "SummaryAlertColour": "#0000ff",
-        "ShowOtherEvents": 0,
-        "OtherEventColour": "#99990C"
-    }
+        "ShowOtherEvents": 1,
+        "OtherEventColour": "#99990c",
+        "InputEventColour": "#ffbf00",
+        "TmpStatusMessagesMsec": 10000,
+        "ShowInputEvents": 1,
+        "ShowOutOfTripEvents": 0
+    },
+    "SpdPlot": {
+        "DefaultLowLimit": 15,
+        "DefaultHiLimit": 30,
+        "SpeedColour": "#00ff00",
+        "SpdLimLowColour": "#ff9933",
+        "SpdLimHiColour": "#ff0000"
+    },
+    "Channels": [
+        {
+            "Name": "Engine Oil Pressure"
+        },
+        {
+            "Name": "Engine Temperature"
+        },
+        {
+            "Name": "Ground Speed"
+        },
+        {
+            "Name": "Engine Speed"
+        },
+        {
+            "Name": "Passenger Seatbelt"
+        },
+        {
+            "Name": "Operator Seatbelt"
+        },
+        {
+            "Name": "Engine Coolant Level"
+        },
+        {
+            "Name": "Ignition Switch"
+        },
+        {
+            "No": 9,
+            "Name": "Accelerometer"
+        },
+        {
+            "No": 10,
+            "Name": "GNSS"
+        }
+    ]
 }

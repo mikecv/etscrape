@@ -15,14 +15,30 @@ import webbrowser
 
 from config import *
 from tripinfo import *
+from mplCharts import *
 
 # *******************************************
 # Program history.
 # 0.1   MDC 21/05/2020  Original.
+# 0.2   MDC 06/06/2020  Added speed chart.
+#                       Added ability to read message logs as well.
+# *******************************************
+
+# *******************************************
+# TODO List
+#
+# Add view menu option and add show/hide input / other / and out of trip events.
+# When adding log file ask to append or flush and add new; do we need to separate log files in the tree (maybe not).
+# Generate report between dates, and produce PDF.
+# NEXT ==========Fix hiding of tree items, only clear alert on event and trip if no other alerts.
+# Check for trip start times going backwards, and trips ending before they start.
+# How to alert for errors in hidden data, e.g. speed errors or time going backwards, currently included but not alerted.
+# Shade speed areas: ax.fill_between(x, y1, y2, where=y2 >= y1, facecolor='green', interpolate=True)
+# Add properties dialog to set all parameters and generate config file.
 # *******************************************
 
 # Program version.
-progVersion = "0.1"
+progVersion = "0.2"
 
 # Create configuration values class object.
 config = Config()
@@ -43,7 +59,7 @@ logger.info("Program version : {0:s}".format(progVersion))
 
 # *******************************************
 # Determine resource path being the relative path to the resource file.
-# The resource path changes when built for an executable.
+# The resource path changes when built for an executable.loadLogFile
 # *******************************************
 def res_path(relative_path):
     try:
@@ -72,6 +88,9 @@ class UI(QMainWindow):
         # Attach to the Help menu item.
         self.actionHelp.triggered.connect(self.help)
 
+        # Attach to the Change Log menu item.
+        self.actionChangeLog.triggered.connect(self.changeLog)
+
         # Attach to the About menu item.
         self.actionAbout.triggered.connect(self.about)
 
@@ -85,6 +104,14 @@ class UI(QMainWindow):
         self.PrevTripBtn.setEnabled(False)
         self.PrevTripBtn.clicked.connect(lambda: self.tripButtonClicked(False))
 
+        # Create figure for speed plots.
+        self.spdFig = MplCanvas(self, config, logger, width=7, height=2, dpi=100)
+        self.plotTbar = NavigationToolbar(self.spdFig, self)
+        self.ChartLayout.addWidget(self.plotTbar)
+        self.ChartLayout.addWidget(self.spdFig)
+        self.plotTbar.hide()
+        self.spdFig.hide()
+
         # Flag indicating no data to show.
         # And flag indicating no trip selected.
         self.haveTrips = False
@@ -95,7 +122,7 @@ class UI(QMainWindow):
         self.actionExpandAllLevels.setEnabled(False)
 
         # Don't show 'other' events static text if not configured.
-        if config.ShowOtherEvents == False:
+        if config.TripData["ShowOtherEvents"] == False:
             self.OtherEventsStaticLbl.hide()
 
         # Show appliction window.
@@ -142,6 +169,7 @@ class UI(QMainWindow):
                     self.selectedTrip += 1
                     self.tripDataTree.setCurrentItem(self.tripDataTree.topLevelItem((self.selectedTrip - 1)))
                     self.updateTripSummary(self.selectedTrip)
+                    self.plotTripData(self.selectedTrip)
                     # Check if no more next trips, then disable the button.
                     self.updateTripBtnState()
             else:
@@ -149,6 +177,7 @@ class UI(QMainWindow):
                     self.selectedTrip -= 1
                     self.tripDataTree.setCurrentItem(self.tripDataTree.topLevelItem((self.selectedTrip - 1)))
                     self.updateTripSummary(self.selectedTrip)
+                    self.plotTripData(self.selectedTrip)
                     # Check if no more previous trips, then disable the button.
                     self.updateTripBtnState()
 
@@ -168,8 +197,9 @@ class UI(QMainWindow):
     # *******************************************
     # Show temporary status message.
     # Pass message string and duration in (msec).
+    # Default is for permanent message.
     # *******************************************
-    def showTempStatusMsg(self, msg, dur=10000):
+    def showTempStatusMsg(self, msg, dur=0):
         self.statusbar.showMessage(msg, dur)
 
     # *******************************************
@@ -193,11 +223,14 @@ class UI(QMainWindow):
         # Get log file to load.
         self.openLogFile()
 
+        # Change to wait cursor as large files may take a while to open and process.
+        QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+
         self.numTrips = 0
         self.tripLog = []
 
         # Look for all the trip starts and capture individual buffers.
-        patternStart = re.compile(r'([0-9]{2}/[0-9]{2}/[0-9]{4}) ([0-9]{2}:[0-9]{2}:[0-9]{2}) EVENT .+ (SIGNON).?')
+        patternStart = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,2}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT .+ (SIGNON).?')
         for st in re.finditer(patternStart, self.logData):
             # Store start and end (actually next start) for buffer for each trip.
             edge = st.start(0)
@@ -240,71 +273,104 @@ class UI(QMainWindow):
             # Show pop-up indicating no trip data found in log file.
             showPopup("Trip", "Log file contains no trip information.", "(No trip start \"SIGNON\" events encountered)")
 
+        # Revert to the normal cursor.
+        QApplication.restoreOverrideCursor()
+
     # *******************************************
     # Populate trip data.
     # *******************************************
     def populateTrips(self):
         # Define a tree widget for trip data.
         self.tripDataTree = QTreeWidget()
-        self.tripDataTree.setHeaderLabels(['Trip Data', ''])
+        self.tripDataTree.setHeaderLabels(['Trip Data', '', ''])
         self.tripDataTree.header().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.tripDataTree.header().setStretchLastSection(False)
+        self.tripDataTree.setAlternatingRowColors(True)
+
+        fontBold = QtGui.QFont()
+        fontBold.setBold(True)
+        fontPlain = QtGui.QFont()
+        fontPlain.setBold(False)
 
         # Populate trip titles.
         for idx, t in enumerate(self.tripLog):
             # Add top levels to trees.
             # Label trips with trip number and time.
-            tripNum = "{0:s} {1:02d}".format(config.TripPrefix, (idx+1))
-            tripTime = "{0:s} to {1:s}".format(datetime.fromtimestamp(t.tripStart).strftime('%d/%m/%Y %H:%M:%S'),
-                                        datetime.fromtimestamp(t.tripEnd).strftime('%d/%m/%Y %H:%M:%S'))
+            tripNum = "{0:s} {1:02d}".format(config.TripData["TripPrefix"], (idx+1))
+            # Need to check that the trip was ended.
+            if t.tripEnd > 0:
+                tripTime = "{0:s} => {1:s}".format(datetime.fromtimestamp(t.tripStart).strftime('%d/%m/%Y %H:%M:%S'),
+                                            datetime.fromtimestamp(t.tripEnd).strftime('%d/%m/%Y %H:%M:%S'))
+                logger.debug("Adding trip: {0:d}, occurred: {1:s}".format(idx+1, tripTime))
+                tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime])
+            else:
+                tripTime = "{0:s} =>".format(datetime.fromtimestamp(t.tripStart).strftime('%d/%m/%Y %H:%M:%S'))
+                logger.debug("Adding trip: {0:d}, occurred: {1:s}".format(idx+1, tripTime))
+                tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime, "No trip end."])
+                tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["TripColour"])))
+                tripLevel.setForeground(1, QtGui.QBrush(QtGui.QColor(config.TripData["TripColour"])))
+                tripLevel.setForeground(2, QtGui.QBrush(QtGui.QColor(config.TripData["CommentColour"])))
+                tripLevel.setFont(2, fontBold)
 
-            logger.debug("Adding trip: {0:d}, occurred: {1:s}".format(idx+1, tripTime))
-            tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime])
-            tripLevel.setBackground(0, QtGui.QBrush(QtGui.QColor(config.TripBackColour)))
-            tripLevel.setBackground(1, QtGui.QBrush(QtGui.QColor(config.TripBackColour)))
-            font0 = QtGui.QFont()
-            font0.setBold(True)
-            tripLevel.setFont(0, font0)
+            tripLevel.setBackground(0, QtGui.QBrush(QtGui.QColor(config.TripData["TripBackColour"])))
+            tripLevel.setBackground(1, QtGui.QBrush(QtGui.QColor(config.TripData["TripBackColour"])))
+            tripLevel.setFont(0, fontBold)
+            tripLevel.setFont(1, fontBold)
 
             # Populate event titles.
             for idx2, ev in enumerate(t.events):
-                # Check to see if we have to show 'Other' type events as well.
-                if ((ev.isOther and config.ShowOtherEvents) or (not ev.isOther)):
-                    # Label events with event type and time.
-                    eventType = "{0:s}".format(ev.event)
-                    eventTime = "{0:s}".format(datetime.fromtimestamp(ev.serverTime).strftime('%d/%m/%Y %H:%M:%S'))
-                    logger.debug("Adding event: {0:s}, occurred: {1:s}".format(eventType, eventTime))
-                    eventLevel = QTreeWidgetItem(tripLevel, [eventType, eventTime])
-                    # If this is an Other event then do specific colouring.
-                    if not ev.isOther:
-                        eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.EventColour)))
-                    else:
-                        eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.OtherEventColour)))
-                    font0 = QtGui.QFont()
-                    font0.setBold(True)
-                    eventLevel.setFont(0, font0)
+                # Label events with event type and time.
+                eventType = "{0:s}".format(ev.event)
+                eventTime = "{0:s}".format(datetime.fromtimestamp(ev.serverTime).strftime('%d/%m/%Y %H:%M:%S'))
+                logger.debug("Adding event: {0:s}, occurred: {1:s}".format(eventType, eventTime))
+                eventLevel = QTreeWidgetItem(tripLevel, [eventType, eventTime, ev.alertText])
 
-                    # Check it see if event is of other type in which case don't have details.
-                    if  not ev.isOther:
-                        # Populate event details.
-                        for idx3, evDetail in enumerate(self.getEventDetails(ev)):
-                            # Include event details for all events.
-                            detailLevel = QTreeWidgetItem(eventLevel, [evDetail[0], evDetail[1]])
-                            logger.debug("Adding event detail: {0:s}, value: {1:s}".format(evDetail[0], evDetail[1]))
-                            detailLevel.setTextAlignment(0, QtCore.Qt.AlignRight)
-                            font0 = QtGui.QFont()
-                            font0.setBold(True)
-                            detailLevel.setFont(0, font0)
-                            if evDetail[2] == True:
-                                font1 = QtGui.QFont()
-                                font1.setBold(True)
-                                detailLevel.setFont(1, font1)
-                                # If detail alert then use alert colour.
-                                detailLevel.setForeground(1, QtGui.QBrush(QtGui.QColor(config.AlertColour)))
-                                # If detail alert then also use alert colour for related event.
-                                eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.AlertColour)))
-                                # If detail alert then also use alert colour for related trip.
-                                tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.AlertColour)))
+                # Apply specific formatting for normal events.
+                # Apply different formatting if INPUT or 'other' events.
+                if not ev.isOther:
+                    if ev.isInput:
+                        eventLevel.setFont(0, fontPlain)
+                        eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["InputEventColour"])))
+                    else:
+                        eventLevel.setFont(0, fontBold)
+                        eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["EventColour"])))
+                else:
+                    eventLevel.setFont(0, fontPlain)
+                    eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["OtherEventColour"])))
+
+                if ev.alertText != "":
+                    eventLevel.setFont(2, fontBold)
+                    eventLevel.setForeground(2, QtGui.QBrush(QtGui.QColor(config.TripData["CommentColour"])))
+
+                # Check it see if event is of other type in which case don't have details.
+                if  not ev.isOther:
+                    # Populate event details.
+                    for idx3, evDetail in enumerate(self.getEventDetails(t, ev)):
+                        # Include event details for all events.
+                        detailLevel = QTreeWidgetItem(eventLevel, [evDetail[0], evDetail[1]])
+                        logger.debug("Adding event detail: {0:s}, value: {1:s}".format(evDetail[0], evDetail[1]))
+                        detailLevel.setTextAlignment(0, QtCore.Qt.AlignRight)
+                        detailLevel.setFont(0, fontBold)
+                        if evDetail[2] == True:
+                            detailLevel.setFont(1, fontBold)
+                            # If detail alert then use alert colour.
+                            detailLevel.setForeground(1, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
+                            # If detail alert then also use alert colour for related event.
+                            eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
+                            # If detail alert then also use alert colour for related trip.
+                            tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
+
+                # Hide input events if not configured to do so.
+                if (ev.isInput and (config.TripData["ShowInputEvents"] == 0)):
+                    eventLevel.setHidden(True)
+
+                # Hide other events if not configured to do so.
+                if (ev.isOther and (config.TripData["ShowOtherEvents"] == 0)):
+                    eventLevel.setHidden(True)
+
+                # Hide out of trip events if not configured to do so.
+                if (ev.isOutOfTrip and (config.TripData["ShowOutOfTripEvents"] == 0)):
+                    eventLevel.setHidden(True)
 
         # Add trip data tree to layout.
         self.verticalLayout.addWidget(self.tripDataTree)
@@ -314,6 +380,7 @@ class UI(QMainWindow):
         self.tripDataTree.setCurrentItem(self.tripDataTree.topLevelItem(0))
         self.selectedTrip = 1
         self.updateTripSummary(1)
+        self.plotTripData(self.selectedTrip)
 
         # Define callback if selection is made to a different trip.
         self.tripDataTree.itemSelectionChanged.connect(self.tripItemSelected)
@@ -336,13 +403,15 @@ class UI(QMainWindow):
             node = node.parent()
         # Extract the trip number from the column 0 text.
         trip = node.text(0)
-        self.selectedTrip = int(trip[(len(config.TripPrefix)+1):])
+        self.selectedTrip = int(trip[(len(config.TripData["TripPrefix"])+1):])
 
         # If trip changed then update the trip summary information.
         if (self.selectedTrip != originalTrip):
             self.updateTripSummary(self.selectedTrip)
             # Update the state of the prev/next trip buttons.
             self.updateTripBtnState()
+            # Update plot trip data.
+            self.plotTripData(self.selectedTrip)
 
     # *******************************************
     # Update trip summary information for selected trip.
@@ -354,7 +423,7 @@ class UI(QMainWindow):
         self.StartTimeLbl.setText("{0:s}".format(datetime.fromtimestamp(ti.tripStart).strftime('%d/%m/%Y %H:%M:%S')))
         self.EndTimeLbl.setText("{0:s}".format(datetime.fromtimestamp(ti.tripEnd).strftime('%d/%m/%Y %H:%M:%S')))
         self.TripDurationLbl.setText("{0:s}".format(secsToTime(ti.tripEnd - ti.tripStart)))
-        # Event counts.
+        # EveshadeOverspeedZonesnt counts.
         # Vehicle events.
         self.VehicleEventsLbl.setText("{0:d}".format(ti.numVehicleEvents))
         self.updateSummaryCount(self.VehicleOverspeedLbl, ti.numOverspeed)
@@ -376,10 +445,11 @@ class UI(QMainWindow):
         # Report events.
         self.ReportEventsLbl.setText("{0:d}".format(ti.numReportEvents))
         # Other events.
-        if config.ShowOtherEvents:
+        if config.TripData["ShowOtherEvents"] != 0:
             self.OtherEventsLbl.setText("{0:d}".format(ti.numOtherEvents))
 
-    # *******************************************
+  # Hide plot until first plot drawn.
+  # *******************************************
     # Update trip summary information for selected trip.
     # Also highlight if count not zero.
     # *******************************************
@@ -387,11 +457,36 @@ class UI(QMainWindow):
         # Set additional still if count > 0.
         # Else clear.
         if count > 0:
-            item.setStyleSheet("font-weight: bold; color: {0:s}".format(config.SummaryAlertColour))
+            item.setStyleSheet("font-weight: bold; color: {0:s}".format(config.TripData["SummaryAlertColour"]))
         else:
             item.setStyleSheet("")
         # Update count text.
         item.setText("{0:d}".format(count))
+
+    # *******************************************
+    # Do plotting of speed etc.
+    # *******************************************
+    def plotTripData(self, tripNo):
+
+        # Get speed data for the nominated trip.
+        tList = []
+        sList = []
+        for sl in self.tripLog[tripNo-1].speedLog:
+            tList.append(datetime.fromtimestamp(sl.time))
+            sList.append(sl.speed)
+
+        # Plot with updated data.
+        self.spdFig.updatePlotData(tList, sList)
+
+        # Plot speed limit lines on plot.
+        # At this point from configuration as not include in log.
+        self.spdFig.drawSpeedLimits(config.SpdPlot["DefaultLowLimit"], config.SpdPlot["DefaultHiLimit"])
+
+        self.spdFig.shadeOverspeedZones()
+
+        # Need to show plot as originally hidden.
+        self.plotTbar.show()
+        self.spdFig.show()
 
     # *******************************************
     # Toolbar to collapse all trip data.
@@ -412,13 +507,15 @@ class UI(QMainWindow):
     # *******************************************
     # Get event details for event.
     # *******************************************
-    def getEventDetails(self, event):
+    def getEventDetails(self, trip, event):
         # Initialise list of event details
         eventList = []
 
         # Event details will depend on event type.
         # Check for alert values as well.
         if event.event == "SIGNON":
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
             eventList.append(("Driver ID", "{0:d}".format(event.driverId), False))
             eventList.append(("Card ID", "{0:d}".format(event.cardId), False))
             eventList.append(("Result", "{0:s}".format(event.result), False))
@@ -426,22 +523,27 @@ class UI(QMainWindow):
             eventList.append(("Keyboard", "{0:s}".format(event.keyboard), False))
             eventList.append(("Card Reader", "{0:s}".format(event.cardReader), False))
         elif event.event == "OVERSPEED":
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
-            eventList.append(("Maximum Speed", "{0:d}".format(event.maxSpeed), (event.maxSpeed == 150)))
-        elif event.event == "ZONEOVERSPEED":
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
-            eventList.append(("Maximum Speed", "{0:d}".format(event.maxSpeed), (event.maxSpeed == 150)))
+        elif event.event == "ZONEOVERSPEED":
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
+            eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
+            eventList.append(("Maximum Speed", "{0:d}".format(event.maxSpeed), (event.maxSpeed >= 150)))
             eventList.append(("Zone Output", "{0:d}".format(event.zoneOutput), False))
         elif event.event == "ENGINEOVERSPEED":
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
             eventList.append(("Maximum RPM", "{0:d}".format(event.maxRPM), False))
         elif event.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP"}:
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
         elif event.event == "UNBUCKLED":
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
             if event.seatOwner == "D":
                 seatOwner = "Operator"
@@ -451,11 +553,14 @@ class UI(QMainWindow):
                 seatOwner = "?"
             eventList.append(("Seat Owner", "{0:s}".format(seatOwner), (seatOwner == "?")))
         elif event.event == "ZONECHANGE":
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
             eventList.append(("From Zone", "{0:d}".format(event.fromZone), False))
             eventList.append(("To Zone", "{0:d}".format(event.toZone), False))
             eventList.append(("Zone Output", "{0:d}".format(event.zoneOutput), False))
         elif event.event == "IMPACT":
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
             eventList.append(("Forward G", "{0:0.1f}".format(event.fwdG), False))
             eventList.append(("Reverse G", "{0:0.1f}".format(event.revG), False))
             eventList.append(("Left G", "{0:0.1f}".format(event.leftG), False))
@@ -470,7 +575,7 @@ class UI(QMainWindow):
                 severity = "Low"
             eventList.append(("Severity", "{0:s}".format(severity), False))
         elif event.event == "CHECKLIST":
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Result", "{0:s}".format(event.result), False))
             eventList.append(("Failed Questions", "{0:d}".format(event.failedQ), False))
             eventList.append(("Time Taken", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
@@ -487,22 +592,34 @@ class UI(QMainWindow):
         elif event.event == "XSIDLESTART":
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
         elif event.event == "XSIDLE":
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Max Idle Time", "{0:s}".format(str(timedelta(seconds=event.maxIdle))), (event.maxIdle == 0)))
         elif event.event == "CONFIG":
             pass
+        elif event.event == "SERVICE":
+            eventList.append(("Service ID", "{0:d}".format(event.serviceId), False))
+        elif event.event == "POWERDOWN":
+            pass
         elif event.event == "REPORT":
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
-            eventList.append(("Speed", "{0:d}".format(event.speed), (event.speed == 150)))
+            if (event.signOnId == -1):
+                eventList.append(("Sign-on ID", "{0:s}".format("*"), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            else:
+                eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Report Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
             eventList.append(("Direction", "{0:d}".format(event.direction), ((event.direction < 0) or (event.direction > 360))))
+        elif event.event == "INPUT":
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
+            eventList.append(("Input", "{0:d} - {1:s}".format(event.inputNo, config.Channels[event.inputNo - 1]["Name"]), ((event.inputNo < 1) or (event.inputNo > 10))))
+            eventList.append(("State", "{0:d}".format(event.inputState), ((event.inputState < 0) or (event.inputState > 1))))
+            eventList.append(("Active Time", "{0:s}".format(str(timedelta(seconds=event.activeTime))), False))
         elif event.event == "TRIP":
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
             eventList.append(("Time Forward", "{0:s}".format(str(timedelta(seconds=event.timeFwd))), False))
             eventList.append(("Time Reverse", "{0:s}".format(str(timedelta(seconds=event.timeRev))), False))
             eventList.append(("Time Idle", "{0:s}".format(str(timedelta(seconds=event.timeIdle))), False))
             eventList.append(("Max Idle Time", "{0:s}".format(str(timedelta(seconds=event.maxIdle))), False))
         elif event.event == "TRIPSUMMARY":
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
 
         # Return list of all event details to display
         return eventList
@@ -528,7 +645,7 @@ class UI(QMainWindow):
                 with open(filenames[0], encoding='cp1252') as f:
                     self.logData = f.read()
                 logger.info("Opened and read log file : {0:s}".format(filenames[0]))
-                self.showTempStatusMsg("Opened and read log file : {0:s}".format(filenames[0]), 10000)
+                self.showTempStatusMsg("{0:s}".format(filenames[0]), config.TripData["TmpStatusMessagesMsec"])
 
     # *******************************************
     # About control selected.
@@ -555,6 +672,49 @@ class UI(QMainWindow):
         dlg.exec_()
 
     # *******************************************
+    # Change Log control selected.
+    # Displays a "Change Log" dialog box.
+    # *******************************************
+    def changeLog(self):
+        logger.debug("User selected Change Log menu control.")
+
+        # Create about dialog.        
+        dlg = ChangeLogDialog(self)
+
+        # Set dialog window icon.
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(res_path("./resources/about.png")))
+        dlg.setWindowIcon(icon)
+
+        # Update change log.
+        dlg.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        dlg.changeLogText.textCursor().insertHtml("<h2><b>Version 0.2</b></h2>")
+        dlg.changeLogText.textCursor().insertHtml("<ul><li>Added plot of speed data.</li>" \
+            "<li>Added ability to read message logs (.csv) as well as debuglog files.</li>" \
+            "<li>Added speed in event header data to events details information.</li>" \
+            "<li>Added plot of vehicle speed. \
+                Added zone 1 and 2 speed lines, which are defined in configuration.</li>" \
+            "<li>Added check for trips without end of trip (TRIP) event.</li>" \
+            "<li>Added check for bad speed values in SIGNON event header, i.e. > 150kph.</li>" \
+            "<li>Added check for events with different Trip ID to sign-on event.</li>" \
+            "<li>Added INPUT event to report input changes; events can be hidden using configuration parameter.</li>" \
+            "<li>Added option to hide out of trip events; not that this option overrides showing input and other event configuration.</li>" \
+            "<li>Corrected checking of Trip ID for out of trip events, i.e. not checking.</li>" \
+            "<li>Added additional events POWERDOWN and SERVICE.</li>" \
+            "<li>Added _ underscore and spacebar characters in event name search to catch oddball events.</li>" \
+            "<li>Refactored configuration file format; additional parameters added.</li>" \
+            "<li>Set trip data tree to use alternate row colours to improve readability.</li>" \
+            "<li>Show wait cursor when opening log files as large files can take time to load.</li>" \
+            "<li>Cosmetic changes to improve readability.</li></ul><br>")
+        dlg.changeLogText.textCursor().insertHtml("<h2><b>Version 0.1</b></h2>")
+        dlg.changeLogText.textCursor().insertHtml("<ul><li>Initial draft release.</li>" \
+            "<li>Parses log files and displays event data.</li>" \
+            "<li>Not all event types supported.</li></ul>")
+
+        # Show dialog.
+        dlg.exec_()
+
+    # *******************************************
     # Help control selected.
     # Displays help file using web browser.
     # *******************************************
@@ -567,14 +727,14 @@ class UI(QMainWindow):
         # Call the web browser to render the url.
         # This is not guaranteed to be the default browser on any particular system.
         webbrowser.open(url)
- 
+
 # *******************************************
-# Help dialog class.
+# Change Log dialog class.
 # *******************************************
-class HelpDialog(QDialog):
+class ChangeLogDialog(QDialog):
     def __init__(self, *args, **kwargs):
-        super(HelpDialog, self).__init__(*args, **kwargs)
-        uic.loadUi(res_path("help.ui"), self)
+        super(ChangeLogDialog, self).__init__(*args, **kwargs)
+        uic.loadUi(res_path("changeLog.ui"), self)
 
 # *******************************************
 # About dialog class.
@@ -617,6 +777,15 @@ def secsToTime(t):
     hrs = mins // 60
     mins = mins - (hrs * 60)
     return ("{0:02d}:{1:02d}:{2:02d}".format(hrs, mins, secs))
+
+# *******************************************
+# Delete all children from a layout.
+# *******************************************
+def delKidsInLayout(layout):
+    # Cycle through widgets in layout in reverse order.
+    # Delete widget by giving it no parent.
+    for i in reversed(range(layout.count())):
+        layout.itemAt(i).widget().setParent(None)
 
 # *******************************************
 # Create UI
