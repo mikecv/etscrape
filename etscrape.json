@@ -21,9 +21,8 @@
     "SpdPlot": {
         "DefaultLowLimit": 30,
         "DefaultHiLimit": 60,
-        "SpeedColour": "#00ff00",
-        "SpdLimLowColour": "#ff9933",
-        "SpdLimHiColour": "#ff0000",
+        "SpeedColour": "#0000ff",
+        "ZoneColour": "#ff66ff",
         "AxesTitleFontSize": 7,
         "PlotTitleFontSize": 10
     },

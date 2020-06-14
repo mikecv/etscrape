@@ -22,6 +22,7 @@ from mplCharts import *
 # 0.1   MDC 21/05/2020  Original.
 # 0.2   MDC 06/06/2020  Added speed chart.
 #                       Added ability to read message logs as well.
+#                       Numerous bug fixes and cosmetic changes.
 # *******************************************
 
 # *******************************************
@@ -29,8 +30,6 @@ from mplCharts import *
 #
 # When adding log file ask to append or flush and add new; do we need to separate log files in the tree (maybe not).
 # Generate report between dates, and produce PDF.
-# Check for trip start times going backwards, and trips ending before they start.
-# Shade speed areas: ax.fill_between(x, y1, y2, where=y2 >= y1, facecolor='green', interpolate=True)
 # Add properties dialog to set all parameters and generate config file.
 # *******************************************
 
@@ -113,7 +112,7 @@ class UI(QMainWindow):
         self.PrevTripBtn.clicked.connect(lambda: self.tripButtonClicked(False))
 
         # Create figure for speed plots.
-        self.spdFig = MplCanvas(self, config, logger, width=10, height=3, dpi=100)
+        self.spdFig = MplCanvas(self, config, logger, width=10, height=6, dpi=100)
         self.plotTbar = NavigationToolbar(self.spdFig, self)
         self.ChartLayout.addWidget(self.plotTbar)
         self.ChartLayout.addWidget(self.spdFig)
@@ -278,6 +277,9 @@ class UI(QMainWindow):
 
         # Clear trip data to show.
         self.haveTrips = False
+
+        # Delete log data.
+        self.logData = ""
 
         # Enable expand / collapse buttons.
         self.actionCollapseAllLevels.setEnabled(False)
@@ -518,8 +520,7 @@ class UI(QMainWindow):
         if config.TripData["ShowOtherEvents"] != 0:
             self.OtherEventsLbl.setText("{0:d}".format(ti.numOtherEvents))
 
-  # Hide plot until first plot drawn.
-  # *******************************************
+    # *******************************************
     # Update trip summary information for selected trip.
     # Also highlight if count not zero.
     # *******************************************
@@ -549,8 +550,23 @@ class UI(QMainWindow):
         self.spdFig.updatePlotData(self.selectedTrip, tList, sList)
 
         # Plot speed limit lines on plot.
-        # At this point from configuration as not include in log.
-        self.spdFig.drawSpeedLimits(config.SpdPlot["DefaultLowLimit"], config.SpdPlot["DefaultHiLimit"])
+        # At this point speed limits from application configuration as not include in log.
+        # Get zone change data for the nominated trip.
+        tList = []
+        zList = []
+        for zl in self.tripLog[tripNo-1].zoneXings:
+            tList.append(datetime.fromtimestamp(zl.time))
+            if zl.zoneOutput == 1:
+                # Slow zone.
+                zList.append(config.SpdPlot["DefaultLowLimit"])
+            elif zl.zoneOutput == 2:
+                # Fast zone.
+                zList.append(config.SpdPlot["DefaultHiLimit"])
+            else:
+                # Open zone.
+                zList.append(0)
+
+        self.spdFig.drawSpeedLimits(tList, zList)
 
         # Need to show plot as originally hidden.
         self.plotTbar.show()
@@ -761,10 +777,11 @@ class UI(QMainWindow):
             "<li>Added ability to read message logs (.csv) as well as debuglog files.</li>" \
             "<li>Added speed in event header data to events details information.</li>" \
             "<li>Added plot of vehicle speed. \
-                Added zone 1 and 2 speed lines, which are defined in configuration.</li>" \
+                Added zone speed limit line which is based on zone change events and \
+                zone 1 & 2 speed limits as defined in application configuration.</li>" \
             "<li>Added check for trips without end of trip (TRIP) event.</li>" \
             "<li>Added check for bad speed values in SIGNON event header, i.e. > 150kph.</li>" \
-            "<li>Added check for events with different Trip ID to sign-on event.</li>" \
+            "<li>Added check for events with different Trip ID to sign-on event, or event times that are going backwards.</li>" \
             "<li>Added INPUT event to report input changes; events can be hidden using configuration parameter.</li>" \
             "<li>Added option to hide out of trip events; not that this option overrides showing input and other event configuration. \
                 Added menu items to show/hide out of trip events as wells as INPUT events and other events. \

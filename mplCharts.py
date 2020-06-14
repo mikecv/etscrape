@@ -23,9 +23,11 @@ class MplCanvas(FigureCanvasQTAgg):
         # Keep layout tight so that it fits into the frame nicely.
         self.fig.set_tight_layout(True)
 
-        # Single chart.        
+        # Single plot with two line plots.
+        # One line for speed, and one line for speed limit.        
         self.axes = self.fig.add_subplot(111)
         self.line, = self.axes.plot_date([], [], color=self.cfg.SpdPlot["SpeedColour"], marker='o', linestyle='solid', linewidth=1)
+        self.zone, = self.axes.plot_date([], [], color=self.cfg.SpdPlot["ZoneColour"], marker=None, linestyle='dashed', linewidth=1)
 
         # Setup plot labels.
         self.axes.set_xlabel("Time", fontsize=self.cfg.SpdPlot["AxesTitleFontSize"])
@@ -38,7 +40,7 @@ class MplCanvas(FigureCanvasQTAgg):
     # Just by clearing the input data lists.
     # *******************************************
     def clearFigure(self):
-        self.updatePlotData([], [])
+        self.updatePlotData(0, [], [])
 
     # *******************************************
     # Update plot with new plot.
@@ -66,6 +68,22 @@ class MplCanvas(FigureCanvasQTAgg):
     # *******************************************
     # Draw zone speed limit lines on plot.
     # *******************************************
-    def drawSpeedLimits(self, lim1, lim2):
-        self.axes.axhline(lim1, color=self.cfg.SpdPlot["SpdLimLowColour"], linestyle='dashed', linewidth=1, alpha=0.5)
-        self.axes.axhline(lim2, color=self.cfg.SpdPlot["SpdLimHiColour"], linestyle='dashed', linewidth=1, alpha=0.5)
+    def drawSpeedLimits(self, tList, zList):
+        # Clear old zone data.
+        self.zone.set_xdata([])
+        self.zone.set_ydata([])
+
+        # Update zone data.
+        self.zone.set_xdata(tList)
+        self.zone.set_ydata(zList)
+
+        # Fill below the zone speed line (if we have data).
+        if len(zList) > 0:
+            self.axes.fill_between(self.zone.get_xdata(), self.zone.get_ydata(), 0, color=self.cfg.SpdPlot["ZoneColour"], alpha=0.1)
+
+        # Rescale axes.
+        self.axes.relim()
+        self.axes.autoscale_view()
+
+        # Draw plot.
+        self.draw()

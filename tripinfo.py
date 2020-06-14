@@ -71,6 +71,19 @@ class SpeedInfo():
         self.speed = eSpeed
 
 # *******************************************
+# Zone Crossing Info class.
+# Zone is zone output and not zone number.
+# *******************************************
+class ZoneInfo():
+    # Initializer / Instance Attributes
+    def __init__(self, xTime, fromZ, toZ, zOut):
+
+        self.time = xTime
+        self.fromZone = fromZ
+        self.toZone = toZ
+        self.zoneOutput = zOut
+
+# *******************************************
 # Trip class.
 # *******************************************
 class Trip():
@@ -90,6 +103,9 @@ class Trip():
     
         # Speed data.
         self.speedLog = []
+
+        # Zone crossings.
+        self.zoneXings = []
 
     # *******************************************
     # Extract trip data from buffer snippet.
@@ -117,6 +133,7 @@ class Trip():
         self.numImpact_H = 0
         self.numImpact_M = 0
         self.numImpact_L = 0
+
         # Total specific Operator events.
         self.numUnbuckled_O = 0
         self.numUnbuckled_P = 0
@@ -124,6 +141,9 @@ class Trip():
 
         # Track last time to check if event time going backwards.
         self.lastTime = 0
+
+        # Track first from zone.
+        self.firstFromZone = None
 
         # ******************************
         # Look for SIGNON event.
@@ -305,6 +325,17 @@ class Trip():
                         self.numOperatorEvents += 1
                         self.numZoneChange += 1
 
+                        # Record the zone change event in the zone change log.
+                        # This can be used if we plot zone speed limits on speed plot.
+                        # Record the previous zone change at this time so that we can get a step function.
+                        if len(self.zoneXings) > 0:
+                            self.zoneXings.append(ZoneInfo(int(su.group(4)), self.zoneXings[-1].fromZone, self.zoneXings[-1].toZone, self.zoneXings[-1].zoneOutput))
+                        else:
+                            # Record first from zone so that we can possibly do step at first zonechange.
+                            self.firstFromZone = event.fromZone
+                        
+                        self.zoneXings.append(ZoneInfo(int(su.group(4)), event.fromZone, event.toZone, event.zoneOutput))
+
                         # Add event to list of events.
                         self.events.append(event)
                 # =============================================================================
@@ -463,6 +494,22 @@ class Trip():
 
                         # Increment event counters.
                         self.numTripEvents += 1
+
+                        # At end of trip can extend last zone to end of trip.
+                        if len(self.zoneXings) > 0:
+                            self.zoneXings.append(ZoneInfo(int(su.group(4)), self.zoneXings[-1].fromZone, self.zoneXings[-1].toZone, self.zoneXings[-1].zoneOutput))
+
+                        # Can also check if we can extend the zone at the beginning of the trip.
+                        # Can only do this if we have revisited the first zone during the trip.
+                        for z in self.zoneXings[1:]:
+                            # See if we visited first zone later in the trip.
+                            if self.firstFromZone == z.toZone:
+                                fz1 = ZoneInfo(self.tripStart, 0, 0, z.zoneOutput)
+                                fz2 = ZoneInfo(self.zoneXings[0].time, 0, 0, z.zoneOutput)
+                                # Have been in zone before, so add step at start of speed plot.
+                                self.zoneXings.insert(0, fz2)
+                                self.zoneXings.insert(0, fz1)
+                                break
 
                         # Add event to list of events.
                         self.events.append(event)
