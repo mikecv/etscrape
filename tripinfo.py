@@ -25,7 +25,7 @@ class Event():
         self.isOutOfTrip = False
 
         # Additional event variables.
-        self.driverId = 0
+        self.driverId = ""
         self.cardId = 0
         self.result = ""
         self.bitsRead = 0
@@ -155,7 +155,7 @@ class Trip():
             # Break out some of the event data explicitly.
             eventSpecifics = su.group(11)
 
-            specPatern = re.compile(r'([-\+0-9]+) ([0-9a-f]+) (.+?) ([0-9]+) ([0-9]+) (.+?)')
+            specPatern = re.compile(r'([-\*\+0-9]+) ([0-9a-f]+) (.+?) ([0-9]+) ([0-9]+) (.+?)')
             sp = re.search(specPatern, eventSpecifics)
             if sp:
                 # Create event object.
@@ -172,7 +172,7 @@ class Trip():
 
                 # Add additional event data.
                 event.signOnId = int(su.group(3))
-                event.driverId = int(sp.group(1))
+                event.driverId = sp.group(1)
                 event.cardId = int(sp.group(2), base=16)
                 event.result = sp.group(3)
                 event.bitsRead = int(sp.group(4))

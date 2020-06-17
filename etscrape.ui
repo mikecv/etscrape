@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
+    <width>1050</width>
     <height>778</height>
    </rect>
   </property>
@@ -25,7 +25,7 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>1000</width>
+     <width>1050</width>
      <height>695</height>
     </size>
    </property>
@@ -134,13 +134,13 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>325</width>
+        <width>360</width>
         <height>475</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>16777215</width>
+        <width>360</width>
         <height>16777215</height>
        </size>
       </property>
@@ -163,7 +163,7 @@
       <widget class="QPushButton" name="PrevTripBtn">
        <property name="geometry">
         <rect>
-         <x>72</x>
+         <x>60</x>
          <y>5</y>
          <width>40</width>
          <height>28</height>
@@ -176,7 +176,7 @@
       <widget class="QPushButton" name="NextTripBtn">
        <property name="geometry">
         <rect>
-         <x>182</x>
+         <x>200</x>
          <y>5</y>
          <width>40</width>
          <height>28</height>
@@ -189,9 +189,9 @@
       <widget class="QLabel" name="TripNoLbl">
        <property name="geometry">
         <rect>
-         <x>123</x>
+         <x>113</x>
          <y>3</y>
-         <width>51</width>
+         <width>71</width>
          <height>31</height>
         </rect>
        </property>
@@ -239,7 +239,7 @@
         <rect>
          <x>160</x>
          <y>40</y>
-         <width>150</width>
+         <width>191</width>
          <height>16</height>
         </rect>
        </property>
@@ -292,7 +292,7 @@
         <rect>
          <x>160</x>
          <y>60</y>
-         <width>150</width>
+         <width>191</width>
          <height>16</height>
         </rect>
        </property>
@@ -347,7 +347,7 @@
         <rect>
          <x>160</x>
          <y>80</y>
-         <width>150</width>
+         <width>191</width>
          <height>16</height>
         </rect>
        </property>
@@ -1312,7 +1312,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>1050</width>
      <height>22</height>
     </rect>
    </property>
@@ -1320,7 +1320,14 @@
     <property name="title">
      <string>File</string>
     </property>
+    <widget class="QMenu" name="menuExport_Report">
+     <property name="title">
+      <string>Export Report</string>
+     </property>
+     <addaction name="actionExportCurrentTrip"/>
+    </widget>
     <addaction name="actionLoadLog"/>
+    <addaction name="menuExport_Report"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -1351,8 +1358,11 @@
      <bold>true</bold>
     </font>
    </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
    <property name="styleSheet">
-    <string notr="true">QStatusBar{padding-left:8px;background:rgba(00,153,255,255);color:black;font-weight:bold;}</string>
+    <string notr="true">QStatusBar{padding-left:8px;padding-right:8px;background:rgba(00,153,255,255);color:black;font-weight:bold;border:None;}</string>
    </property>
    <property name="sizeGripEnabled">
     <bool>false</bool>
@@ -1457,6 +1467,11 @@
    </property>
    <property name="text">
     <string>Show Out of Trip Events</string>
+   </property>
+  </action>
+  <action name="actionExportCurrentTrip">
+   <property name="text">
+    <string>Current Selected Trip</string>
    </property>
   </action>
  </widget>

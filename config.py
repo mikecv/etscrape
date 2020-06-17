@@ -10,16 +10,18 @@ class Config():
     def __init__(self):
 
         # Version of configuration.
-        self.ConfigVersion = 2
+        self.ConfigVersion = 3
 
-        # Program configuration values
+        # Logger configuration values
         self.DebugLevel = 20
         self.LogFileSize = 100000
         self.LogBackups = 3
 
+        # Application general configuration
+        self.TimeUTC = 1
+
         # Trip related data.
         self.TripData = {
-            "TripPrefix" : "Trip",
             "TripBackColour" : "#ffff00",
             "TripColour" : "#000000",
             "EventColour" : "#0000ff",
@@ -82,6 +84,7 @@ class Config():
                         self.DebugLevel = config["DebugLevel"]
                         self.LogFileSize = config["LogFileSize"]
                         self.LogBackups = config["LogBackups"]
+                        self.TimeUTC = config["TimeUTC"]
                         self.TripData = config["TripData"]
                         self.SpdPlot = config["SpdPlot"]
                         self.Channels = config["Channels"]
@@ -104,6 +107,7 @@ class Config():
             "DebugLevel" : self.DebugLevel,
             "LogFileSize" : self.LogFileSize,
             "LogBackups" : self.LogBackups,
+            "TimeUTC" : self.TimeUTC,
             "TripData" : self.TripData,
             "SpdPlot" : self.SpdPlot,
             "Channels" : self.Channels

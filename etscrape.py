@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from PyQt5.QtWidgets import QMainWindow, QDialog, QFileDialog, QMessageBox, QTreeWidget, QTreeWidgetItem, QHeaderView, qApp, QApplication
+from PyQt5.QtWidgets import QMainWindow, QFileDialog, QLabel, QTreeWidget, QTreeWidgetItem, QHeaderView, qApp, QApplication
 from PyQt5 import QtCore, QtGui
 from PyQt5 import uic
 import logging
@@ -9,13 +9,15 @@ import json
 import re
 import time
 from datetime import timedelta, datetime
-import os
 import sys
 import webbrowser
 
 from config import *
+from utils import *
 from tripinfo import *
 from mplCharts import *
+from changeLog import *
+from about import *
 
 # *******************************************
 # Program history.
@@ -23,18 +25,23 @@ from mplCharts import *
 # 0.2   MDC 06/06/2020  Added speed chart.
 #                       Added ability to read message logs as well.
 #                       Numerous bug fixes and cosmetic changes.
+# 0.3   MDC 15/06/2020  Added trip report export.
+#                       Added configuration to show times in UTC or local time.
+#                       Bug fixes.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
+# Look at drag and drop of files into application to open automatically.
+# INPUT event names for smartrack logs is wrong; look into options, perhaps smartrack mode in configuration, check log for smartrack.
 # When adding log file ask to append or flush and add new; do we need to separate log files in the tree (maybe not).
-# Generate report between dates, and produce PDF.
+# Generate trip report. IN PROGRESS.
 # Add properties dialog to set all parameters and generate config file.
 # *******************************************
 
 # Program version.
-progVersion = "0.2"
+progVersion = "0.3"
 
 # Create configuration values class object.
 config = Config()
@@ -52,17 +59,6 @@ logger.addHandler(handler)
 
 # Log program version.
 logger.info("Program version : {0:s}".format(progVersion))
-
-# *******************************************
-# Determine resource path being the relative path to the resource file.
-# The resource path changes when built for an executable.loadLogFile
-# *******************************************
-def res_path(relative_path):
-    try:
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath('.')
-    return os.path.join(base_path, relative_path)
 
 # *******************************************
 # Etscrape class
@@ -88,6 +84,9 @@ class UI(QMainWindow):
         self.actionShowInputEvents.triggered.connect(self.showHideInputEvents)
         self.actionShowOtherEvents.triggered.connect(self.showHideOtherEvents)
         self.actionShowOutOfTripEvents.triggered.connect(self.showHideOutOfTripEvents)
+
+        # Attach to the Export report for current trip menu item.
+        self.actionExportCurrentTrip.triggered.connect(self.exportCurrentTrip)
 
         # Attach to the Quit menu item.
         self.actionQuit.triggered.connect(app.quit)
@@ -116,13 +115,14 @@ class UI(QMainWindow):
         self.plotTbar = NavigationToolbar(self.spdFig, self)
         self.ChartLayout.addWidget(self.plotTbar)
         self.ChartLayout.addWidget(self.spdFig)
-        self.plotTbar.hide()
-        self.spdFig.hide()
 
         # Flag indicating no data to show.
         # And flag indicating no trip selected.
         self.haveTrips = False
         self.selectedTrip = 0
+
+        # If we don't have any trips loaded yet then disable the export menu.
+        self.actionExportCurrentTrip.setEnabled(self.haveTrips)
 
         # Enable expand / collapse buttons.
         self.actionCollapseAllLevels.setEnabled(False)
@@ -131,6 +131,8 @@ class UI(QMainWindow):
         # Don't show 'other' events static text if not configured.
         if config.TripData["ShowOtherEvents"] == False:
             self.OtherEventsStaticLbl.hide()
+
+        self.showEpochStatus()
 
         # Show appliction window.
         self.show()
@@ -258,6 +260,18 @@ class UI(QMainWindow):
         self.statusbar.showMessage(msg, dur)
 
     # *******************************************
+    # Show time epoch on status bar.
+    # *******************************************
+    def showEpochStatus(self):
+        boldFont=QtGui.QFont()
+        boldFont.setBold(True)
+        self.epochLbl = QLabel()
+        self.epochLbl.setStyleSheet("color: black; ")
+        self.epochLbl.setFont(boldFont)
+        self.epochLbl.setText(tzone())
+        self.statusBar().addPermanentWidget(self.epochLbl)
+
+    # *******************************************
     # Clear loaded trips.
     # *******************************************
     def clearTrips(self):
@@ -281,9 +295,12 @@ class UI(QMainWindow):
         # Delete log data.
         self.logData = ""
 
-        # Enable expand / collapse buttons.
+        # Disable expand / collapse buttons.
         self.actionCollapseAllLevels.setEnabled(False)
         self.actionExpandAllLevels.setEnabled(False)
+
+        # Disable the export menu.
+        self.actionExportCurrentTrip.setEnabled(False)
 
         # Get log file to load.
         self.openLogFile()
@@ -332,9 +349,15 @@ class UI(QMainWindow):
             self.actionCollapseAllLevels.setEnabled(True)
             self.actionExpandAllLevels.setEnabled(True)
 
+            # Enable the export menu.
+            self.actionExportCurrentTrip.setEnabled(True)
+
             # Populate trip data.updateTripBtnState
             self.populateTrips()
         else:
+            # Revert to the normal cursor.
+            QApplication.restoreOverrideCursor()
+
             # Show pop-up indicating no trip data found in log file.
             showPopup("Trip", "Log file contains no trip information.", "(No trip start \"SIGNON\" events encountered)")
 
@@ -360,19 +383,18 @@ class UI(QMainWindow):
         # Populate trip titles.
         for idx, t in enumerate(self.tripLog):
             # Add top levels to trees.
-            # Label trips with trip number and time.
-            tripNum = "{0:s} {1:02d}".format(config.TripData["TripPrefix"], (idx+1))
+            # Label trips with trip number (including signon ID) and time.
+            tripNum = "Trip {0:d} [ID {1:d}]".format((idx+1), t.signOnId)
             # Need to check that the trip was ended.
             if t.tripEnd > 0:
-                tripTime = "{0:s} => {1:s}".format(datetime.fromtimestamp(t.tripStart).strftime('%d/%m/%Y %H:%M:%S'),
-                                            datetime.fromtimestamp(t.tripEnd).strftime('%d/%m/%Y %H:%M:%S'))
+                tripTime = "{0:s}  to  {1:s}".format(unixTime(t.tripStart, config.TimeUTC), unixTime(t.tripEnd, config.TimeUTC))
                 logger.debug("Adding trip: {0:d}, occurred: {1:s}".format(idx+1, tripTime))
                 tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime])
             else:
-                tripTime = "{0:s} =>".format(datetime.fromtimestamp(t.tripStart).strftime('%d/%m/%Y %H:%M:%S'))
+                tripTime = "{0:s}".format(unixTime(t.tripStart, config.TimeUTC))
                 logger.debug("Adding trip: {0:d}, occurred: {1:s}".format(idx+1, tripTime))
                 tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime, "No trip end."])
-                tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["TripColour"])))
+                tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
                 tripLevel.setForeground(1, QtGui.QBrush(QtGui.QColor(config.TripData["TripColour"])))
                 tripLevel.setForeground(2, QtGui.QBrush(QtGui.QColor(config.TripData["CommentColour"])))
                 tripLevel.setFont(2, fontBold)
@@ -386,7 +408,7 @@ class UI(QMainWindow):
             for idx2, ev in enumerate(t.events):
                 # Label events with event type and time.
                 eventType = "{0:s}".format(ev.event)
-                eventTime = "{0:s}".format(datetime.fromtimestamp(ev.serverTime).strftime('%d/%m/%Y %H:%M:%S'))
+                eventTime = "{0:s}".format(unixTime(ev.serverTime, config.TimeUTC))
                 logger.debug("Adding event: {0:s}, occurred: {1:s}".format(eventType, eventTime))
                 eventLevel = QTreeWidgetItem(tripLevel, [eventType, eventTime, ev.alertText])
 
@@ -475,7 +497,15 @@ class UI(QMainWindow):
             node = node.parent()
         # Extract the trip number from the column 0 text.
         trip = node.text(0)
-        self.selectedTrip = int(trip[(len(config.TripData["TripPrefix"])+1):])
+        patternTrip = re.compile(r'Trip ([0-9]+) \[')
+        t = re.search(patternTrip, trip)
+        if t:
+            self.selectedTrip = int(t.group(1))
+        else:
+            # Error if trip number not found.
+            # Set selected trip 0 which will cause a termination.
+            logger.error("No trip number found.")
+            self.selectedTrip = 0
 
         # If trip changed then update the trip summary information.
         if (self.selectedTrip != originalTrip):
@@ -492,8 +522,8 @@ class UI(QMainWindow):
         ti = self.tripLog[t-1]
         # Trip information.
         self.TripNoLbl.setText("{0:02d}".format(t))
-        self.StartTimeLbl.setText("{0:s}".format(datetime.fromtimestamp(ti.tripStart).strftime('%d/%m/%Y %H:%M:%S')))
-        self.EndTimeLbl.setText("{0:s}".format(datetime.fromtimestamp(ti.tripEnd).strftime('%d/%m/%Y %H:%M:%S')))
+        self.StartTimeLbl.setText("{0:s}".format(unixTime(ti.tripStart, config.TimeUTC)))
+        self.EndTimeLbl.setText("{0:s}".format(unixTime(ti.tripEnd, config.TimeUTC)))
         self.TripDurationLbl.setText("{0:s}".format(secsToTime(ti.tripEnd - ti.tripStart)))
         # Event counts.
         # Vehicle events.
@@ -573,6 +603,42 @@ class UI(QMainWindow):
         self.spdFig.show()
 
     # *******************************************
+    # Callback function for export report for current trip menu selection.
+    # *******************************************
+    def exportCurrentTrip(self):
+        logger.debug("User selected Export current trip report menu item.")
+
+        # Configure and launch file selection dialog.
+        dialog = QFileDialog(self)
+        dialog.setFileMode(QFileDialog.AnyFile)
+        dialog.setNameFilter("*.txt")
+        dialog.setDefaultSuffix('.txt')
+        dialog.setViewMode(QFileDialog.List)
+        dialog.setAcceptMode(QFileDialog.AcceptSave)
+
+        # If returned filename then open/create.
+        if dialog.exec_():
+            filenames = dialog.selectedFiles()
+
+            # If have a filename then open.
+            if filenames[0] != "":
+                # Open file for writing
+                xf = open(filenames[0], "w")
+
+                # Export selected trip.
+                self.exportTrip(xf, self.selectedTrip)
+
+                # Close file after writing.
+                xf.close()
+
+    # *******************************************
+    # Export report for nominated trip.
+    # *******************************************
+    def exportTrip(self, xf, t):
+        logger.debug("Exporting trip report for trip: {0:d}".format(t))
+        xf.write("Writing to the file.")
+
+    # *******************************************
     # Toolbar to collapse all trip data.
     # *******************************************
     def collapseAllLevels(self):
@@ -585,7 +651,8 @@ class UI(QMainWindow):
     # *******************************************
     def expandAllLevels(self):
         logger.debug("User selected Expand All Levels control.")
-        if self.haveTrips:
+        if self.haveTrips:# Fix wait cursor when opening log and get an error; change back to normal cursor.
+
             self.tripDataTree.expandAll()
 
     # *******************************************
@@ -600,7 +667,10 @@ class UI(QMainWindow):
         if event.event == "SIGNON":
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
-            eventList.append(("Driver ID", "{0:d}".format(event.driverId), False))
+            if event.driverId == "*":
+                eventList.append(("Driver ID", "{0:s}".format(event.driverId), True))
+            else:
+                eventList.append(("Driver ID", "{0:d}".format(int(event.driverId)), False))
             eventList.append(("Card ID", "{0:d}".format(event.cardId), False))
             eventList.append(("Result", "{0:s}".format(event.result), False))
             eventList.append(("Bits Read", "{0:d}".format(event.bitsRead), False))
@@ -739,21 +809,7 @@ class UI(QMainWindow):
         logger.debug("User selected About menu control.")
 
         # Create about dialog.        
-        dlg = AboutDialog(self)
-
-        # Set dialog window icon.
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(res_path("./resources/about.png")))
-        dlg.setWindowIcon(icon)
-
-        # Update version information.
-        dlg.updateVersion("Version : {0:s}".format(progVersion))
-
-        # Update dialog icon.
-        dlg.aboutIcon.setPixmap(QtGui.QPixmap(res_path("./resources/about.png")))
-
-        # Show dialog.
-        dlg.exec_()
+        AboutDialog(progVersion)
 
     # *******************************************
     # Change Log control selected.
@@ -763,43 +819,7 @@ class UI(QMainWindow):
         logger.debug("User selected Change Log menu control.")
 
         # Create about dialog.        
-        dlg = ChangeLogDialog(self)
-
-        # Set dialog window icon.
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(res_path("./resources/about.png")))
-        dlg.setWindowIcon(icon)
-
-        # Update change log.
-        dlg.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
-        dlg.changeLogText.textCursor().insertHtml("<h2><b>Version 0.2</b></h2>")
-        dlg.changeLogText.textCursor().insertHtml("<ul><li>Added plot of speed data.</li>" \
-            "<li>Added ability to read message logs (.csv) as well as debuglog files.</li>" \
-            "<li>Added speed in event header data to events details information.</li>" \
-            "<li>Added plot of vehicle speed. \
-                Added zone speed limit line which is based on zone change events and \
-                zone 1 & 2 speed limits as defined in application configuration.</li>" \
-            "<li>Added check for trips without end of trip (TRIP) event.</li>" \
-            "<li>Added check for bad speed values in SIGNON event header, i.e. > 150kph.</li>" \
-            "<li>Added check for events with different Trip ID to sign-on event, or event times that are going backwards.</li>" \
-            "<li>Added INPUT event to report input changes; events can be hidden using configuration parameter.</li>" \
-            "<li>Added option to hide out of trip events; not that this option overrides showing input and other event configuration. \
-                Added menu items to show/hide out of trip events as wells as INPUT events and other events. \
-                These menu items are initialised from configuration and only persist for the application session.</li>" \
-            "<li>Corrected checking of Trip ID for out of trip events, i.e. not checking.</li>" \
-            "<li>Added additional events POWERDOWN and SERVICE.</li>" \
-            "<li>Added _ underscore and spacebar characters in event name search to catch oddball events.</li>" \
-            "<li>Refactored configuration file format; additional parameters added.</li>" \
-            "<li>Set trip data tree to use alternate row colours to improve readability.</li>" \
-            "<li>Show wait cursor when opening log files as large files can take time to load.</li>" \
-            "<li>Cosmetic changes to improve readability.</li></ul><br>")
-        dlg.changeLogText.textCursor().insertHtml("<h2><b>Version 0.1</b></h2>")
-        dlg.changeLogText.textCursor().insertHtml("<ul><li>Initial draft release.</li>" \
-            "<li>Parses log files and displays event data.</li>" \
-            "<li>Not all event types supported.</li></ul>")
-
-        # Show dialog.
-        dlg.exec_()
+        ChangeLogDialog()
 
     # *******************************************
     # Help control selected.
@@ -814,65 +834,6 @@ class UI(QMainWindow):
         # Call the web browser to render the url.
         # This is not guaranteed to be the default browser on any particular system.
         webbrowser.open(url)
-
-# *******************************************
-# Change Log dialog class.
-# *******************************************
-class ChangeLogDialog(QDialog):
-    def __init__(self, *args, **kwargs):
-        super(ChangeLogDialog, self).__init__(*args, **kwargs)
-        uic.loadUi(res_path("changeLog.ui"), self)
-
-# *******************************************
-# About dialog class.
-# *******************************************
-class AboutDialog(QDialog):
-    def __init__(self, *args, **kwargs):
-        super(AboutDialog, self).__init__(*args, **kwargs)
-        uic.loadUi(res_path("about.ui"), self)
-
-    # *******************************************
-    # Update version string in about dialog.
-    # *******************************************
-    def updateVersion(self, version):
-        self.versionLbl.setText(version)
-
-# *******************************************
-# Pop-up message box.
-# *******************************************
-def showPopup(title, msg, info="", details=""):
-    # Create pop-up message box.
-    # Mandatory title and message.
-    # Optional information and details.
-    mb = QMessageBox()
-    mb.setIcon(QMessageBox.Information)
-    mb.setText(msg)
-    if (info != ""):
-        mb.setInformativeText(info)
-    mb.setWindowTitle(title)
-    if (details != ""):
-        mb.setDetailedText(details)
-    # Show message box.
-    mb.exec_()
-
-# *******************************************
-# Convert seconds to time string.
-# *******************************************
-def secsToTime(t):
-    secs = t % 60
-    mins = t // 60
-    hrs = mins // 60
-    mins = mins - (hrs * 60)
-    return ("{0:02d}:{1:02d}:{2:02d}".format(hrs, mins, secs))
-
-# *******************************************
-# Delete all children from a layout.
-# *******************************************
-def delKidsInLayout(layout):
-    # Cycle through widgets in layout in reverse order.
-    # Delete widget by giving it no parent.
-    for i in reversed(range(layout.count())):
-        layout.itemAt(i).widget().setParent(None)
 
 # *******************************************
 # Create UI
