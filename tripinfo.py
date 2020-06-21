@@ -145,6 +145,9 @@ class Trip():
         # Track first from zone.
         self.firstFromZone = None
 
+        # Initialise flag to stop collecting trip speed plot data.
+        self.stopSpeedData = False
+
         # ******************************
         # Look for SIGNON event.
         # ******************************
@@ -204,11 +207,13 @@ class Trip():
                 self.lastTime = int(su.group(4))
 
                 # Get speed data from event header.
-                event.speed = int(su.group(9))
-                # If speedlog already has speed for this time then skip, else append to list.
-                if self.checkForSpeedTime(int(su.group(4))) == False:
-                    self.speedLog.append(SpeedInfo(int(su.group(4)), int(su.group(9))))
-                    self.logger.debug("Logged speed: {0:d}, at {1:s}".format(int(su.group(9)), datetime.fromtimestamp(int(su.group(4))).strftime('%d/%m/%Y %H:%M:%S')))
+                # But only if still collecting speed data, i.e. trip has not ended.
+                if not self.stopSpeedData:
+                    event.speed = int(su.group(9))
+                    # If speedlog already has speed for this time then skip, else append to list.
+                    if self.checkForSpeedTime(int(su.group(4))) == False:
+                        self.speedLog.append(SpeedInfo(int(su.group(4)), int(su.group(9))))
+                        self.logger.debug("Logged speed: {0:d}, at {1:s}".format(int(su.group(9)), datetime.fromtimestamp(int(su.group(4))).strftime('%d/%m/%Y %H:%M:%S')))
 
                 # Check if out of trip event, i.e. end trip time > 0.
                 if self.tripEnd > 0:
@@ -216,6 +221,8 @@ class Trip():
 
                 # Break out some of the event data explicitly.
                 eventSpecifics = su.group(11)
+
+                # If event is
 
                 # =============================================================================
                 # OVERSPEED event
@@ -510,6 +517,9 @@ class Trip():
                                 self.zoneXings.insert(0, fz2)
                                 self.zoneXings.insert(0, fz1)
                                 break
+
+                        # Don't want to collect eny more speed data as not useful for trip speed plots.
+                        self.stopSpeedData = True
 
                         # Add event to list of events.
                         self.events.append(event)

@@ -33,7 +33,10 @@ from about import *
 # *******************************************
 # TODO List
 #
+# Don't plot out of trip events as can be long time after end of trip causing trip plot to be compressed.
+# Add details to DEBUG messages; useful for detecting 1H time shift errors.
 # Look at drag and drop of files into application to open automatically.
+# Speed plot always shows local time on time axis, needs to follow configuration setting.
 # INPUT event names for smartrack logs is wrong; look into options, perhaps smartrack mode in configuration, check log for smartrack.
 # When adding log file ask to append or flush and add new; do we need to separate log files in the tree (maybe not).
 # Generate trip report. IN PROGRESS.
@@ -41,7 +44,7 @@ from about import *
 # *******************************************
 
 # Program version.
-progVersion = "0.3"
+progVersion = "0.3 (wip)"
 
 # Create configuration values class object.
 config = Config()
@@ -521,7 +524,8 @@ class UI(QMainWindow):
     def updateTripSummary(self, t):
         ti = self.tripLog[t-1]
         # Trip information.
-        self.TripNoLbl.setText("{0:02d}".format(t))
+        self.TripNoLbl.setText("{0:d}".format(t))
+        self.TripIdLbl.setText("[{0:d}]".format(ti.signOnId))
         self.StartTimeLbl.setText("{0:s}".format(unixTime(ti.tripStart, config.TimeUTC)))
         self.EndTimeLbl.setText("{0:s}".format(unixTime(ti.tripEnd, config.TimeUTC)))
         self.TripDurationLbl.setText("{0:s}".format(secsToTime(ti.tripEnd - ti.tripStart)))
@@ -635,8 +639,37 @@ class UI(QMainWindow):
     # Export report for nominated trip.
     # *******************************************
     def exportTrip(self, xf, t):
+        # Get trip info.
+        ti = self.tripLog[t-1]
+        # Export trip data to file.
         logger.debug("Exporting trip report for trip: {0:d}".format(t))
-        xf.write("Writing to the file.")
+        xf.write("===================================================\n")
+        xf.write("Signon ID  : {0:d}\n".format(ti.signOnId))
+        xf.write("Start time : {0:s}\n".format(unixTime(ti.tripStart, config.TimeUTC)))
+        xf.write("End time   : {0:s}\n".format(unixTime(ti.tripEnd, config.TimeUTC)))
+        xf.write("===================================================\n\n")
+        xf.write("===================================================\n")
+        xf.write("EVENTS (TOTALS)\n")
+        xf.write("===================================================\n")
+        xf.write("Vehicle overspeed            : {0:d}\n".format(ti.numOverspeed))
+        xf.write("Zone overspeed               : {0:d}\n".format(ti.numZoneOverspeed))
+        xf.write("Engine overspeed             : {0:d}\n".format(ti.numEngineOverspeed))
+        xf.write("Engine coolant level low     : {0:d}\n".format(ti.numLowCoolant))
+        xf.write("Engine oil pressure low      : {0:d}\n".format(ti.numOilPressure))
+        xf.write("Engine temperature high      : {0:d}\n".format(ti.numEngineTemperature))
+        xf.write("Seatbelt unbuckled operator  : {0:d}\n".format(ti.numUnbuckled_O))
+        xf.write("Seatbelt unbuckled passenger : {0:d}\n".format(ti.numUnbuckled_P))
+        xf.write("Impact Critical              : {0:d}\n".format(ti.numImpact_H))
+        xf.write("Impact High                  : {0:d}\n".format(ti.numImpact_M))
+        xf.write("Impact Low                   : {0:d}\n".format(ti.numImpact_L))
+        xf.write("Zone change                  : {0:d}\n".format(ti.numZoneChange))
+        xf.write("===================================================\n\n")
+        xf.write("===================================================\n")
+        xf.write("EVENTS (DETAILS)\n")
+        xf.write("===================================================\n")
+        for ev in ti.events:
+            xf.write("{0:s}\n".format(ev.event))
+            xf.write("\tTime : {0:s}\n".format(unixTime(ev.serverTime, config.TimeUTC)))
 
     # *******************************************
     # Toolbar to collapse all trip data.

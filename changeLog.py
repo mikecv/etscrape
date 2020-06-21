@@ -32,8 +32,9 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added configuration to show times in UTC or local time. \
                 Includes epoch indicator in status bar and suffix on displayed times.</li>" \
-            "<li>Included signon ID in trip number in trip data view to relate better to logs.</li>" \
+            "<li>Included signon ID in trip number in trip data pane and trip summary pane to relate better to logs.</li>" \
             "<li>Fixed bug where SIGNON events with no (*) driver ID were not being detected properly.</li>" \
+            "<li>Don't plot post trip speed points as detracts from trip events.</li>" \
             "<li>Set empty speed plot pane visible at start to highlight trip data area.</li>" \
             "<li>Fixed bug with wait cursor if log contains no trips.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.2</b></h2>")

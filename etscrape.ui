@@ -163,7 +163,7 @@
       <widget class="QPushButton" name="PrevTripBtn">
        <property name="geometry">
         <rect>
-         <x>60</x>
+         <x>50</x>
          <y>5</y>
          <width>40</width>
          <height>28</height>
@@ -176,7 +176,7 @@
       <widget class="QPushButton" name="NextTripBtn">
        <property name="geometry">
         <rect>
-         <x>200</x>
+         <x>210</x>
          <y>5</y>
          <width>40</width>
          <height>28</height>
@@ -210,8 +210,8 @@
       <widget class="QLabel" name="label_2">
        <property name="geometry">
         <rect>
-         <x>53</x>
-         <y>40</y>
+         <x>54</x>
+         <y>70</y>
          <width>100</width>
          <height>16</height>
         </rect>
@@ -238,7 +238,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>40</y>
+         <y>70</y>
          <width>191</width>
          <height>16</height>
         </rect>
@@ -263,8 +263,8 @@
       <widget class="QLabel" name="label_5">
        <property name="geometry">
         <rect>
-         <x>53</x>
-         <y>60</y>
+         <x>54</x>
+         <y>90</y>
          <width>100</width>
          <height>16</height>
         </rect>
@@ -291,7 +291,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>60</y>
+         <y>90</y>
          <width>191</width>
          <height>16</height>
         </rect>
@@ -316,8 +316,8 @@
       <widget class="QLabel" name="label_3">
        <property name="geometry">
         <rect>
-         <x>53</x>
-         <y>80</y>
+         <x>54</x>
+         <y>110</y>
          <width>100</width>
          <height>16</height>
         </rect>
@@ -346,7 +346,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>80</y>
+         <y>110</y>
          <width>191</width>
          <height>16</height>
         </rect>
@@ -372,7 +372,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>110</y>
+         <y>130</y>
          <width>155</width>
          <height>16</height>
         </rect>
@@ -390,6 +390,9 @@
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 85, 255);</string>
+       </property>
        <property name="text">
         <string>Vehicle Events : </string>
        </property>
@@ -401,7 +404,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>110</y>
+         <y>130</y>
          <width>150</width>
          <height>16</height>
         </rect>
@@ -427,7 +430,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>130</y>
+         <y>150</y>
          <width>150</width>
          <height>16</height>
         </rect>
@@ -453,7 +456,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>130</y>
+         <y>150</y>
          <width>155</width>
          <height>16</height>
         </rect>
@@ -482,7 +485,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>150</y>
+         <y>170</y>
          <width>150</width>
          <height>16</height>
         </rect>
@@ -508,7 +511,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>150</y>
+         <y>170</y>
          <width>155</width>
          <height>16</height>
         </rect>
@@ -537,7 +540,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>170</y>
+         <y>190</y>
          <width>150</width>
          <height>16</height>
         </rect>
@@ -563,7 +566,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>170</y>
+         <y>190</y>
          <width>155</width>
          <height>16</height>
         </rect>
@@ -592,7 +595,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>190</y>
+         <y>210</y>
          <width>155</width>
          <height>16</height>
         </rect>
@@ -621,7 +624,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>190</y>
+         <y>210</y>
          <width>150</width>
          <height>16</height>
         </rect>
@@ -647,7 +650,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>210</y>
+         <y>230</y>
          <width>150</width>
          <height>16</height>
         </rect>
@@ -673,7 +676,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>210</y>
+         <y>230</y>
          <width>155</width>
          <height>16</height>
         </rect>
@@ -702,7 +705,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>230</y>
+         <y>250</y>
          <width>155</width>
          <height>16</height>
         </rect>
@@ -731,7 +734,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>230</y>
+         <y>250</y>
          <width>150</width>
          <height>16</height>
         </rect>
@@ -757,7 +760,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>250</y>
+         <y>270</y>
          <width>155</width>
          <height>16</height>
         </rect>
@@ -786,7 +789,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>250</y>
+         <y>270</y>
          <width>150</width>
          <height>16</height>
         </rect>
@@ -812,7 +815,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>270</y>
+         <y>290</y>
          <width>150</width>
          <height>16</height>
         </rect>
@@ -838,7 +841,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>270</y>
+         <y>290</y>
          <width>155</width>
          <height>16</height>
         </rect>
@@ -867,7 +870,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>290</y>
+         <y>310</y>
          <width>150</width>
          <height>16</height>
         </rect>
@@ -893,7 +896,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>290</y>
+         <y>310</y>
          <width>155</width>
          <height>16</height>
         </rect>
@@ -922,7 +925,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>340</y>
+         <y>350</y>
          <width>150</width>
          <height>16</height>
         </rect>
@@ -948,7 +951,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>340</y>
+         <y>350</y>
          <width>155</width>
          <height>16</height>
         </rect>
@@ -977,7 +980,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>360</y>
+         <y>370</y>
          <width>155</width>
          <height>16</height>
         </rect>
@@ -1006,7 +1009,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>360</y>
+         <y>370</y>
          <width>150</width>
          <height>16</height>
         </rect>
@@ -1032,7 +1035,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>320</y>
+         <y>330</y>
          <width>155</width>
          <height>16</height>
         </rect>
@@ -1050,6 +1053,9 @@
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 85, 255);</string>
+       </property>
        <property name="text">
         <string>Operator Events : </string>
        </property>
@@ -1061,7 +1067,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>320</y>
+         <y>330</y>
          <width>150</width>
          <height>16</height>
         </rect>
@@ -1131,6 +1137,10 @@
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);
+color: rgb(0, 85, 255);</string>
+       </property>
        <property name="text">
         <string>Other Events : </string>
        </property>
@@ -1142,7 +1152,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>380</y>
+         <y>390</y>
          <width>155</width>
          <height>16</height>
         </rect>
@@ -1171,7 +1181,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>380</y>
+         <y>390</y>
          <width>150</width>
          <height>16</height>
         </rect>
@@ -1241,6 +1251,9 @@
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 85, 255);</string>
+       </property>
        <property name="text">
         <string>Trip Events : </string>
        </property>
@@ -1269,6 +1282,9 @@
          <weight>75</weight>
          <bold>true</bold>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 85, 255);</string>
        </property>
        <property name="text">
         <string>Report Events : </string>
@@ -1301,6 +1317,27 @@
        </property>
        <property name="text">
         <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="TripIdLbl">
+       <property name="geometry">
+        <rect>
+         <x>104</x>
+         <y>30</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </widget>
@@ -1362,7 +1399,8 @@
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">QStatusBar{padding-left:8px;padding-right:8px;background:rgba(00,153,255,255);color:black;font-weight:bold;border:None;}</string>
+    <string notr="true">background-color: rgb(0, 170, 255);
+border-color: rgb(0, 170, 255);</string>
    </property>
    <property name="sizeGripEnabled">
     <bool>false</bool>
