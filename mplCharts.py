@@ -5,7 +5,6 @@ matplotlib.use('Qt5Agg')
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT as NavigationToolbar
 from matplotlib.figure import Figure
 import matplotlib.dates as mdates
-import time
 
 # *******************************************
 # Matplotlib plotting class
@@ -23,9 +22,6 @@ class MplCanvas(FigureCanvasQTAgg):
 
         # Keep layout tight so that it fits into the frame nicely.
         self.fig.set_tight_layout(True)
-
-        # Set the timezone for the plot.
-        #matplotlib.rcParams['timezone'] = -8
 
         # Single plot with two line plots.
         # One line for speed, and one line for speed limit.        

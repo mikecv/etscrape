@@ -33,10 +33,8 @@ from about import *
 # *******************************************
 # TODO List
 #
-# Don't plot out of trip events as can be long time after end of trip causing trip plot to be compressed.
 # Add details to DEBUG messages; useful for detecting 1H time shift errors.
 # Look at drag and drop of files into application to open automatically.
-# Speed plot always shows local time on time axis, needs to follow configuration setting.
 # INPUT event names for smartrack logs is wrong; look into options, perhaps smartrack mode in configuration, check log for smartrack.
 # When adding log file ask to append or flush and add new; do we need to separate log files in the tree (maybe not).
 # Generate trip report. IN PROGRESS.
@@ -577,7 +575,11 @@ class UI(QMainWindow):
         tList = []
         sList = []
         for sl in self.tripLog[tripNo-1].speedLog:
-            tList.append(datetime.fromtimestamp(sl.time))
+            # Format time axis list in the correct timezone for display.
+            if config.TimeUTC == 0:
+                tList.append(datetime.fromtimestamp(sl.time))
+            else:
+                tList.append(datetime.utcfromtimestamp(sl.time))
             sList.append(sl.speed)
 
         # Plot with updated data.
@@ -589,7 +591,11 @@ class UI(QMainWindow):
         tList = []
         zList = []
         for zl in self.tripLog[tripNo-1].zoneXings:
-            tList.append(datetime.fromtimestamp(zl.time))
+            # Format time axis list in the correct timezone for display.
+            if config.TimeUTC == 0:
+                tList.append(datetime.fromtimestamp(zl.time))
+            else:
+                tList.append(datetime.utcfromtimestamp(zl.time))
             if zl.zoneOutput == 1:
                 # Slow zone.
                 zList.append(config.SpdPlot["DefaultLowLimit"])
@@ -669,7 +675,14 @@ class UI(QMainWindow):
         xf.write("===================================================\n")
         for ev in ti.events:
             xf.write("{0:s}\n".format(ev.event))
-            xf.write("\tTime : {0:s}\n".format(unixTime(ev.serverTime, config.TimeUTC)))
+            if (ev.event == "SIGNON"):
+                xf.write("\tTime        : {0:s}\n".format(unixTime(ev.serverTime, config.TimeUTC)))
+                xf.write("\tDriver ID   : {0:s}\n".format(ev.driverId))
+                xf.write("\tCard ID     : {0:d}\n".format(ev.cardId))
+                xf.write("\tResult      : {0:s}\n".format(ev.result))
+                xf.write("\tBits Read   : {0:d}\n".format(ev.bitsRead))
+                xf.write("\tKeyboard    : {0:s}\n".format(ev.keyboard))
+                xf.write("\tCard Reader : {0:s}\n".format(ev.cardReader))
 
     # *******************************************
     # Toolbar to collapse all trip data.
