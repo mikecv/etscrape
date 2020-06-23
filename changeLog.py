@@ -35,8 +35,10 @@ class ChangeLogDialog(QDialog):
             "<li>Included signon ID in trip number in trip data pane and trip summary pane to relate better to logs.</li>" \
             "<li>Fixed bug where speed plot always had time axis in local timezone.</li>" \
             "<li>Fixed bug where SIGNON events with no (*) driver ID were not being detected properly.</li>" \
+            "<li>Fixed bug when opening log file so current file not cleared unless new log file selected.</li>" \
             "<li>Don't plot post trip speed points as detracts from trip events.</li>" \
             "<li>Set empty speed plot pane visible at start to highlight trip data area.</li>" \
+            "<li>Made speed and tacho high limits configuration values.</li>" \
             "<li>Fixed bug with wait cursor if log contains no trips.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.2</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>" \

@@ -33,7 +33,9 @@ class Config():
             "TmpStatusMessagesMsec" : 10000,
             "ShowInputEvents" : 1,
             "ShowOtherEvents" : 1,
-            "ShowOutOfTripEvents" : 0
+            "ShowOutOfTripEvents" : 0,
+            "BadSpeedLimit" : 150,
+            "BadRpmLimit" : 1500
         }
 
         # Speed plot data.
@@ -48,16 +50,16 @@ class Config():
 
         # Input channel definitions.
         self.Channels = [
-            {"No" : 1, "Name" : "Engine Oil Pressure"},
-            {"No" : 2, "Name" : "Engine Temperature"},
-            {"No" : 3, "Name" : "Ground Speed"},
-            {"No" : 4, "Name" : "Engine Speed"},
-            {"No" : 5, "Name" : "Passenger Seatbelt"},
-            {"No" : 6, "Name" : "Operator Seatbelt"},
-            {"No" : 7, "Name" : "Engine Coolant Level"},
-            {"No" : 8, "Name" : "Ignition Switch"},
-            {"No" : 9, "Name" : "Accelerometer"},
-            {"No" : 10, "Name" : "GNSS"}
+            {"No" : 1, "Name" : "[ET] Engine Oil Pressure"},
+            {"No" : 2, "Name" : "[ET] Engine Temperature"},
+            {"No" : 3, "Name" : "[ET] Ground Speed"},
+            {"No" : 4, "Name" : "[ET] Engine Speed"},
+            {"No" : 5, "Name" : "[ET] Passenger Seatbelt"},
+            {"No" : 6, "Name" : "[ET] Operator Seatbelt"},
+            {"No" : 7, "Name" : "[ET] Engine Coolant Level"},
+            {"No" : 8, "Name" : "[ET][ST] Ignition Switch"},
+            {"No" : 9, "Name" : "[ET][ST] Accelerometer"},
+            {"No" : 10, "Name" : "[ET][ST] GNSS"}
             ]
 
         # Read / update configuration from file.

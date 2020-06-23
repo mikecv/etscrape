@@ -1362,6 +1362,7 @@ color: rgb(0, 85, 255);</string>
       <string>Export Report</string>
      </property>
      <addaction name="actionExportCurrentTrip"/>
+     <addaction name="actionExportAllTrips"/>
     </widget>
     <addaction name="actionLoadLog"/>
     <addaction name="menuExport_Report"/>
@@ -1509,7 +1510,12 @@ border-color: rgb(0, 170, 255);</string>
   </action>
   <action name="actionExportCurrentTrip">
    <property name="text">
-    <string>Current Selected Trip</string>
+    <string>Currently Selected Trip</string>
+   </property>
+  </action>
+  <action name="actionExportAllTrips">
+   <property name="text">
+    <string>All Trips</string>
    </property>
   </action>
  </widget>
