@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 
-from PyQt5.QtWidgets import QMainWindow, QFileDialog, QLabel, QTreeWidget, QTreeWidgetItem, QHeaderView, qApp, QApplication
-from PyQt5 import QtCore, QtGui
+from PyQt5.QtWidgets import QMainWindow, QDialog, QFileDialog, QLabel, QTreeWidget, QTreeWidgetItem, QHeaderView, qApp, QApplication
 from PyQt5 import uic
+from PyQt5 import QtCore, QtGui
 import logging
 import logging.handlers
 import json
 import re
 import time
 from datetime import timedelta, datetime
+import os
 import sys
 import webbrowser
 
@@ -16,8 +17,6 @@ from config import *
 from utils import *
 from tripinfo import *
 from mplCharts import *
-from changeLog import *
-from about import *
 
 # *******************************************
 # Program history.
@@ -35,7 +34,6 @@ from about import *
 #
 # Add details to DEBUG messages; useful for detecting 1H time shift errors.
 # Look at drag and drop of files into application to open automatically.
-# INPUT event names for smartrack logs is wrong; look into options, perhaps smartrack mode in configuration, check log for smartrack.
 # When adding log file ask to append or flush and add new; do we need to separate log files in the tree (maybe not).
 # Generate trip report. IN PROGRESS.
 # Add properties dialog to set all parameters and generate config file.
@@ -60,6 +58,18 @@ logger.addHandler(handler)
 
 # Log program version.
 logger.info("Program version : {0:s}".format(progVersion))
+
+# *******************************************
+# Determine resource path being the relative path to the resource file.
+# The resource path changes when built for an executable.
+# *******************************************
+def res_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath('.')
+    resPath = os.path.join(base_path, relative_path)
+    return resPath
 
 # *******************************************
 # Etscrape class
@@ -88,6 +98,9 @@ class UI(QMainWindow):
 
         # Attach to the Export report for current trip menu item.
         self.actionExportCurrentTrip.triggered.connect(self.exportCurrentTrip)
+
+        # Attach to the Export report for all trips menu item.
+        self.actionExportAllTrips.triggered.connect(self.exportAllTrips)
 
         # Attach to the Quit menu item.
         self.actionQuit.triggered.connect(app.quit)
@@ -124,6 +137,7 @@ class UI(QMainWindow):
 
         # If we don't have any trips loaded yet then disable the export menu.
         self.actionExportCurrentTrip.setEnabled(self.haveTrips)
+        self.actionExportAllTrips.setEnabled(self.haveTrips)
 
         # Enable expand / collapse buttons.
         self.actionCollapseAllLevels.setEnabled(False)
@@ -287,83 +301,83 @@ class UI(QMainWindow):
     def loadLogFile(self):
         logger.debug("User selected Load Log File control.")
 
-        # Clear trips if we have any.
-        self.clearTrips()
-
-        # Clear trip data to show.
-        self.haveTrips = False
-
-        # Delete log data.
-        self.logData = ""
-
-        # Disable expand / collapse buttons.
-        self.actionCollapseAllLevels.setEnabled(False)
-        self.actionExpandAllLevels.setEnabled(False)
-
-        # Disable the export menu.
-        self.actionExportCurrentTrip.setEnabled(False)
-
         # Get log file to load.
-        self.openLogFile()
+        # Only clear trips and parse log file if opened.
+        if self.openLogFile() == True:
 
-        # Change to wait cursor as large files may take a while to open and process.
-        QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+            # Clear trips if we have any.
+            self.clearTrips()
 
-        self.numTrips = 0
-        self.tripLog = []
+            # Clear trip data to show.
+            self.haveTrips = False
 
-        # Look for all the trip starts and capture individual buffers.
-        patternStart = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,2}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT .+ (SIGNON).?')
-        for st in re.finditer(patternStart, self.logData):
-            # Store start and end (actually next start) for buffer for each trip.
-            edge = st.start(0)
-            if (self.numTrips == 0):
-                prevStart = edge
+            # Disable expand / collapse buttons.
+            self.actionCollapseAllLevels.setEnabled(False)
+            self.actionExpandAllLevels.setEnabled(False)
+
+            # Disable the export menu.
+            self.actionExportCurrentTrip.setEnabled(False)
+            self.actionExportAllTrips.setEnabled(False)
+
+            # Change to wait cursor as large files may take a while to open and process.
+            QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+
+            self.numTrips = 0
+            self.tripLog = []
+
+            # Look for all the trip starts and capture individual buffers.
+            patternStart = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,2}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT .+ (SIGNON).?')
+            for st in re.finditer(patternStart, self.logData):
+                # Store start and end (actually next start) for buffer for each trip.
+                edge = st.start(0)
+                if (self.numTrips == 0):
+                    prevStart = edge
+                else:
+                    self.tripLog.append(Trip(config, logger, self.logData[prevStart:edge]))
+                    prevStart = edge
+
+                # Increment trip counter.
+                self.numTrips += 1
+            
+            # Total trips in file.
+            logger.debug("Trips in file : {0:d}".format(self.numTrips))
+
+            # Update last trip to end of file.
+            if (self.numTrips > 0):
+                self.tripLog.append(Trip(config, logger, self.logData[prevStart:len(self.logData)]))
+
+                # Extract data from all trips.
+                for t in self.tripLog:
+                    t.extractTripData()
+
+                # Set flag indicating we have trip data to show.
+                self.haveTrips = True
+
+                # Set first trip as selected trip.
+                self.selectedTrip = 1
+
+                # Update prev/next button states.
+                self.updateTripBtnState()
+
+                # Enable expand / collapse buttons.
+                self.actionCollapseAllLevels.setEnabled(True)
+                self.actionExpandAllLevels.setEnabled(True)
+
+                # Enable the export menu.
+                self.actionExportCurrentTrip.setEnabled(True)
+                self.actionExportAllTrips.setEnabled(True)
+
+                # Populate trip data.updateTripBtnState
+                self.populateTrips()
             else:
-                self.tripLog.append(Trip(config, logger, self.logData[prevStart:edge]))
-                prevStart = edge
+                # Revert to the normal cursor.
+                QApplication.restoreOverrideCursor()
 
-            # Increment trip counter.
-            self.numTrips += 1
-        
-        # Total trips in file.
-        logger.debug("Trips in file : {0:d}".format(self.numTrips))
+                # Show pop-up indicating no trip data found in log file.
+                showPopup("Trip", "Log file contains no trip information.", "(No trip start \"SIGNON\" events encountered)")
 
-        # Update last trip to end of file.
-        if (self.numTrips > 0):
-            self.tripLog.append(Trip(config, logger, self.logData[prevStart:len(self.logData)]))
-
-            # Extract data from all trips.
-            for t in self.tripLog:
-                t.extractTripData()
-
-            # Set flag indicating we have trip data to show.
-            self.haveTrips = True
-
-            # Set first trip as selected trip.
-            self.selectedTrip = 1
-
-            # Update prev/next button states.
-            self.updateTripBtnState()
-
-            # Enable expand / collapse buttons.
-            self.actionCollapseAllLevels.setEnabled(True)
-            self.actionExpandAllLevels.setEnabled(True)
-
-            # Enable the export menu.
-            self.actionExportCurrentTrip.setEnabled(True)
-
-            # Populate trip data.updateTripBtnState
-            self.populateTrips()
-        else:
             # Revert to the normal cursor.
-            QApplication.restoreOverrideCursor()
-
-            # Show pop-up indicating no trip data found in log file.
-            showPopup("Trip", "Log file contains no trip information.", "(No trip start \"SIGNON\" events encountered)")
-
-        # Revert to the normal cursor.
-        QApplication.restoreOverrideCursor()
+            QApplication.restoreOverrideCursor()                       
 
     # *******************************************
     # Populate trip data.
@@ -638,6 +652,47 @@ class UI(QMainWindow):
                 # Export selected trip.
                 self.exportTrip(xf, self.selectedTrip)
 
+                logger.info("Opened and wrote export file : {0:s}".format(filenames[0]))
+                self.showTempStatusMsg("{0:s}".format(filenames[0]), config.TripData["TmpStatusMessagesMsec"])
+
+                # Close file after writing.
+                xf.close()
+
+    # *******************************************
+    # Callback function for export report for all trips menu selection.
+    # *******************************************
+    def exportAllTrips(self):
+        logger.debug("User selected Export all trips report menu item.")
+
+        # Configure and launch file selection dialog.
+        dialog = QFileDialog(self)
+        dialog.setFileMode(QFileDialog.AnyFile)
+        dialog.setNameFilter("*.txt")
+        dialog.setDefaultSuffix('.txt')
+        dialog.setViewMode(QFileDialog.List)
+        dialog.setAcceptMode(QFileDialog.AcceptSave)
+
+        # If returned filename then open/create.
+        if dialog.exec_():
+            filenames = dialog.selectedFiles()
+
+            # If have a filename then open.
+            if filenames[0] != "":
+
+                # Get filename components.
+                fp, fn, fext = getFileParts(filenames[0])
+
+                # Append the trip ID to the name of the file.
+                tfile = ("{0:s}/{1:s}-{2:d}{3:s}".format(fp, fn, self.tripLog[0].signOnId, fext))
+                # Open file for writing
+                xf = open(tfile, "w")
+
+                # Export selected trip.
+                self.exportTrip(xf, self.selectedTrip)
+
+                logger.info("Opened and wrote export file : {0:s}".format(tfile))
+                self.showTempStatusMsg("{0:s}".format(tfile), config.TripData["TmpStatusMessagesMsec"])
+
                 # Close file after writing.
                 xf.close()
 
@@ -675,15 +730,83 @@ class UI(QMainWindow):
         xf.write("===================================================\n")
         for ev in ti.events:
             xf.write("{0:s}\n".format(ev.event))
+            xf.write("\tTime              : {0:s}\n".format(unixTime(ev.serverTime, config.TimeUTC)))
             if (ev.event == "SIGNON"):
-                xf.write("\tTime        : {0:s}\n".format(unixTime(ev.serverTime, config.TimeUTC)))
-                xf.write("\tDriver ID   : {0:s}\n".format(ev.driverId))
-                xf.write("\tCard ID     : {0:d}\n".format(ev.cardId))
-                xf.write("\tResult      : {0:s}\n".format(ev.result))
-                xf.write("\tBits Read   : {0:d}\n".format(ev.bitsRead))
-                xf.write("\tKeyboard    : {0:s}\n".format(ev.keyboard))
-                xf.write("\tCard Reader : {0:s}\n".format(ev.cardReader))
-
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tDriver ID         : {0:s}\n".format(ev.driverId))
+                xf.write("\tCard ID           : {0:d}\n".format(ev.cardId))
+                xf.write("\tResult            : {0:s}\n".format(ev.result))
+                xf.write("\tBits Read         : {0:d}\n".format(ev.bitsRead))
+                xf.write("\tKeyboard          : {0:s}\n".format(ev.keyboard))
+                xf.write("\tCard Reader       : {0:s}\n".format(ev.cardReader))
+            elif (ev.event == "OVERSPEED"):
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
+            elif (ev.event == "ZONEOVERSPEED"):
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
+                xf.write("\tMax Speed         : {0:d}\n".format(ev.maxSpeed))
+                xf.write("\tZone Output       : {0:d}\n".format(ev.zoneOutput))
+            elif (ev.event == "ENGINEOVERSPEED"):
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
+                xf.write("\tMax RPM           : {0:d}\n".format(ev.maxRPM))
+            elif ev.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP"}:
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
+            elif ev.event == "UNBUCKLED":
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
+                if ev.seatOwner == "D":
+                    seatOwner = "Operator"
+                elif ev.seatOwner == "P":
+                    seatOwner = "Passenger"
+                else:
+                    seatOwner = "?"
+                xf.write("\tSeat Owner        : {0:s}\n".format(seatOwner))
+            elif ev.event == "ZONECHANGE":
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tFrom Zone         : {0:d}\n".format(ev.fromZone))
+                xf.write("\tTo Zone           : {0:d}\n".format(ev.toZone))
+                xf.write("\tZone Output       : {0:d}\n".format(ev.zoneOutput))
+            elif ev.event == "IMPACT":
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tForward G         : {0:0.1f}\n".format(ev.fwdG))
+                xf.write("\tReverse G         : {0:0.1f}\n".format(ev.revG))
+                xf.write("\tLeft G            : {0:0.1f}\n".format(ev.leftG))
+                xf.write("\tRight G           : {0:0.1f}\n".format(ev.rightG))
+                xf.write("\tMax G (1)         : {0:0.1f}\n".format(ev.maxG1))
+                xf.write("\tMax G (2)         : {0:0.1f}\n".format(ev.maxG2))
+                if ev.severity == "C":
+                    severity = "High"
+                elif ev.severity == "W":
+                    severity = "Medium"
+                elif ev.severity == "-":
+                    severity = "Low"
+                xf.write("\tSeverity          : {0:s}\n".format(severity))
+            elif ev.event == "CHECKLIST":
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tResult            : {0:s}\n".format(ev.result))
+                xf.write("\tFailed Questions  : {0:d}\n".format(ev.failedQ))
+                xf.write("\tTime Taken        : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
+                xf.write("\tChecklist Version : {0:d}\n".format(ev.failedQ))
+                if ev.chkType == "F":
+                    chkType = "Full"
+                elif ev.chkType == "C":
+                    chkType = "Operator Change"
+                elif ev.chkType == "B":
+                    chkType = "Bypass"
+                else:
+                    chkType = "?"
+                xf.write("\tChecklist Type    : {0:s}\n".format(chkType))
+            elif ev.event == "XSIDLESTART":
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+            elif ev.event == "XSIDLE":
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tMaximum Idle Time : {0:s}\n".format(str(timedelta(seconds=ev.maxIdle))))
+            elif ev.event == "SERVICE":
+                xf.write("\tService ID        : {0:d}\n".format(ev.serviceId))
+            
     # *******************************************
     # Toolbar to collapse all trip data.
     # *******************************************
@@ -711,7 +834,7 @@ class UI(QMainWindow):
         # Event details will depend on event type.
         # Check for alert values as well.
         if event.event == "SIGNON":
-            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
             if event.driverId == "*":
                 eventList.append(("Driver ID", "{0:s}".format(event.driverId), True))
@@ -724,26 +847,26 @@ class UI(QMainWindow):
             eventList.append(("Card Reader", "{0:s}".format(event.cardReader), False))
         elif event.event == "OVERSPEED":
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
-            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
         elif event.event == "ZONEOVERSPEED":
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
-            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
-            eventList.append(("Maximum Speed", "{0:d}".format(event.maxSpeed), (event.maxSpeed >= 150)))
-            eventList.append(("Zone Output", "{0:d}".format(event.zoneOutput), False))
+            eventList.append(("Maximum Speed", "{0:d}".format(event.maxSpeed), (event.maxSpeed >= config.TripData["BadSpeedLimit"])))
+            eventList.append(("Zone Output", "{0:d}".format(event.zoneOutput),(event.zoneOutput == 0)))
         elif event.event == "ENGINEOVERSPEED":
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
-            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
-            eventList.append(("Maximum RPM", "{0:d}".format(event.maxRPM), False))
+            eventList.append(("Maximum RPM", "{0:d}".format(event.maxRPM), config.TripData["BadRpmLimit"]))
         elif event.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP"}:
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
-            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
         elif event.event == "UNBUCKLED":
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
-            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
             if event.seatOwner == "D":
                 seatOwner = "Operator"
@@ -754,13 +877,13 @@ class UI(QMainWindow):
             eventList.append(("Seat Owner", "{0:s}".format(seatOwner), (seatOwner == "?")))
         elif event.event == "ZONECHANGE":
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
-            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("From Zone", "{0:d}".format(event.fromZone), False))
             eventList.append(("To Zone", "{0:d}".format(event.toZone), False))
             eventList.append(("Zone Output", "{0:d}".format(event.zoneOutput), False))
         elif event.event == "IMPACT":
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
-            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Forward G", "{0:0.1f}".format(event.fwdG), False))
             eventList.append(("Reverse G", "{0:0.1f}".format(event.revG), False))
             eventList.append(("Left G", "{0:0.1f}".format(event.leftG), False))
@@ -805,10 +928,10 @@ class UI(QMainWindow):
                 eventList.append(("Sign-on ID", "{0:s}".format("*"), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             else:
                 eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
-            eventList.append(("Report Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
+            eventList.append(("Report Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Direction", "{0:d}".format(event.direction), ((event.direction < 0) or (event.direction > 360))))
         elif event.event == "INPUT":
-            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= 150)))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Input", "{0:d} - {1:s}".format(event.inputNo, config.Channels[event.inputNo - 1]["Name"]), ((event.inputNo < 1) or (event.inputNo > 10))))
             eventList.append(("State", "{0:d}".format(event.inputState), ((event.inputState < 0) or (event.inputState > 1))))
             eventList.append(("Active Time", "{0:s}".format(str(timedelta(seconds=event.activeTime))), False))
@@ -846,6 +969,12 @@ class UI(QMainWindow):
                     self.logData = f.read()
                 logger.info("Opened and read log file : {0:s}".format(filenames[0]))
                 self.showTempStatusMsg("{0:s}".format(filenames[0]), config.TripData["TmpStatusMessagesMsec"])
+                return True
+            else:
+                logger.info("No log file selected.")
+                return False
+        else:
+            return False
 
     # *******************************************
     # About control selected.
@@ -880,6 +1009,100 @@ class UI(QMainWindow):
         # Call the web browser to render the url.
         # This is not guaranteed to be the default browser on any particular system.
         webbrowser.open(url)
+
+# *******************************************
+# About dialog class.
+# *******************************************
+class AboutDialog(QDialog):
+    def __init__(self, version):
+        super(AboutDialog, self).__init__()
+        uic.loadUi(res_path("about.ui"), self)
+
+        self.showAbout(version)
+
+    # *******************************************
+    # Displays an "About" dialog box.
+    # *******************************************
+    def showAbout(self, version):
+        # Set dialog window icon.
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(res_path("./resources/about.png")))
+        self.setWindowIcon(icon)
+
+        # Update version information.
+        self.versionLbl.setText("Version : {0:s}".format(version))
+
+        # Update dialog icon.
+        self.aboutIcon.setPixmap(QtGui.QPixmap(res_path("./resources/about.png")))
+
+        # Show dialog.
+        self.exec_()
+
+# *******************************************
+# Change Log dialog class.
+# *******************************************
+class ChangeLogDialog(QDialog):
+    def __init__(self):
+        super(ChangeLogDialog, self).__init__()
+        uic.loadUi(res_path("changeLog.ui"), self)
+
+        # Show the change log.
+        self.showChangeLog()
+
+    # *******************************************
+    # Displays a "Change Log" dialog box.
+    # *******************************************
+    def showChangeLog(self):
+
+        # Set dialog window icon.
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(res_path("./resources/about.png")))
+        self.setWindowIcon(icon)
+
+        # Update change log.
+        self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.3</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Added configuration to show times in UTC or local time. \
+                Includes epoch indicator in status bar and suffix on displayed times.</li>" \
+            "<li>Included signon ID in trip number in trip data pane and trip summary pane to relate better to logs.</li>" \
+            "<li>Fixed bug where speed plot always had time axis in local timezone.</li>" \
+            "<li>Fixed bug where SIGNON events with no (*) driver ID were not being detected properly.</li>" \
+            "<li>Fixed bug when opening log file so current file not cleared unless new log file selected.</li>" \
+            "<li>Don't plot post trip speed points as detracts from trip events.</li>" \
+            "<li>Set empty speed plot pane visible at start to highlight trip data area.</li>" \
+            "<li>Made speed and tacho high limits configuration values.</li>" \
+            "<li>Fixed bug with wait cursor if log contains no trips.</li></ul><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.2</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>" \
+            "<li>Added plot of speed data.</li>" \
+            "<li>Added ability to read message logs (.csv) as well as debuglog files.</li>" \
+            "<li>Added speed in event header data to events details information.</li>" \
+            "<li>Added plot of vehicle speed. \
+                Added zone speed limit line which is based on zone change events and \
+                zone 1 & 2 speed limits as defined in application configuration.</li>" \
+            "<li>Added check for trips without end of trip (TRIP) event.</li>" \
+            "<li>Added check for bad speed values in SIGNON event header, i.e. > 150kph.</li>" \
+            "<li>Added check for events with different Trip ID to sign-on event, or event times that are going backwards.</li>" \
+            "<li>Added INPUT event to report input changes; events can be hidden using configuration parameter.</li>" \
+            "<li>Added option to hide out of trip events; not that this option overrides showing input and other event configuration. \
+                Added menu items to show/hide out of trip events as wells as INPUT events and other events. \
+                These menu items are initialised from configuration and only persist for the application session.</li>" \
+            "<li>Corrected checking of Trip ID for out of trip events, i.e. not checking.</li>" \
+            "<li>Added additional events POWERDOWN and SERVICE.</li>" \
+            "<li>Added _ underscore and spacebar characters in event name search to catch oddball events.</li>" \
+            "<li>Refactored configuration file format; additional parameters added.</li>" \
+            "<li>Set trip data tree to use alternate row colours to improve readability.</li>" \
+            "<li>Show wait cursor when opening log files as large files can take time to load.</li>" \
+            "<li>Cosmetic changes to improve readability.</li></ul><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.1</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>" \
+            "<li>Initial draft release.</li>" \
+            "<li>Parses log files and displays event data.</li>" \
+            "<li>Not all event types supported.</li></ul>")
+
+        # Show dialog.
+        self.exec_()
 
 # *******************************************
 # Create UI

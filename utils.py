@@ -1,20 +1,9 @@
 #!/usr/bin/env python3
 
 from PyQt5.QtWidgets import QMessageBox
-import os
 import time
+import os
 from datetime import datetime
-
-# *******************************************
-# Determine resource path being the relative path to the resource file.
-# The resource path changes when built for an executable.loadLogFile
-# *******************************************
-def res_path(relative_path):
-    try:
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath('.')
-    return os.path.join(base_path, relative_path)
 
 # *******************************************
 # Convert seconds to time string.
@@ -63,3 +52,11 @@ def showPopup(title, msg, info="", details=""):
         mb.setDetailedText(details)
     # Show message box.
     mb.exec_()
+
+# *******************************************
+# Get path, filename, and extension.
+# *******************************************
+def getFileParts(fname):
+    path, filename = os.path.split(fname)
+    fn, fext = os.path.splitext(filename)
+    return path, fn, fext
