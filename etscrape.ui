@@ -1383,6 +1383,7 @@ color: rgb(0, 85, 255);</string>
     </property>
     <addaction name="actionShowInputEvents"/>
     <addaction name="actionShowOtherEvents"/>
+    <addaction name="actionShowDebugEvents"/>
     <addaction name="actionShowOutOfTripEvents"/>
    </widget>
    <addaction name="menuFile"/>
@@ -1498,6 +1499,14 @@ border-color: rgb(0, 170, 255);</string>
    </property>
    <property name="text">
     <string>Show Other Events</string>
+   </property>
+  </action>
+  <action name="actionShowDebugEvents">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Debug Events</string>
    </property>
   </action>
   <action name="actionShowOutOfTripEvents">

@@ -26,16 +26,14 @@ from mplCharts import *
 #                       Numerous bug fixes and cosmetic changes.
 # 0.3   MDC 15/06/2020  Added trip report export.
 #                       Added configuration to show times in UTC or local time.
+#                       Added option to export trip data to file.
 #                       Bug fixes.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
-# Add details to DEBUG messages; useful for detecting 1H time shift errors.
 # Look at drag and drop of files into application to open automatically.
-# When adding log file ask to append or flush and add new; do we need to separate log files in the tree (maybe not).
-# Generate trip report. IN PROGRESS.
 # Add properties dialog to set all parameters and generate config file.
 # *******************************************
 
@@ -89,11 +87,13 @@ class UI(QMainWindow):
         # These are just for the session, they are not written to configuration.
         self.actionShowInputEvents.setChecked(config.TripData["ShowInputEvents"])
         self.actionShowOtherEvents.setChecked(config.TripData["ShowOtherEvents"])
+        self.actionShowDebugEvents.setChecked(config.TripData["ShowDebugEvents"])
         self.actionShowOutOfTripEvents.setChecked(config.TripData["ShowOutOfTripEvents"])
 
         # Attach to the show menu items.
         self.actionShowInputEvents.triggered.connect(self.showHideInputEvents)
         self.actionShowOtherEvents.triggered.connect(self.showHideOtherEvents)
+        self.actionShowDebugEvents.triggered.connect(self.showHideDebugEvents)
         self.actionShowOutOfTripEvents.triggered.connect(self.showHideOutOfTripEvents)
 
         # Attach to the Export report for current trip menu item.
@@ -239,6 +239,22 @@ class UI(QMainWindow):
     # *******************************************
     def showHideOtherEvents(self):
         logger.debug("User set show event menu state: {0:b}".format(self.actionShowOtherEvents.isChecked()))
+
+        # If we have trips clear them and add them again.
+        # will lose collapse/expand state though.
+        if self.haveTrips:
+            # Clear triptrip tree.
+            self.clearTrips()
+            # Clear speed plot.
+            self.spdFig.clearFigure()
+            # Repopulate trips.
+            self.populateTrips()
+
+    # *******************************************
+    # Callback function for show/hide debug events menu checkbox.
+    # *******************************************
+    def showHideDebugEvents(self):
+        logger.debug("User set show event menu state: {0:b}".format(self.actionShowDebugEvents.isChecked()))
 
         # If we have trips clear them and add them again.
         # will lose collapse/expand state though.
@@ -433,6 +449,9 @@ class UI(QMainWindow):
                     if ev.isInput:
                         eventLevel.setFont(0, fontPlain)
                         eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["InputEventColour"])))
+                    elif ev.isDebug:
+                        eventLevel.setFont(0, fontPlain)
+                        eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["DebugEventColour"])))
                     else:
                         eventLevel.setFont(0, fontBold)
                         eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["EventColour"])))
@@ -445,7 +464,8 @@ class UI(QMainWindow):
                     eventLevel.setForeground(2, QtGui.QBrush(QtGui.QColor(config.TripData["CommentColour"])))
 
                 # Check it see if event is of other type in which case don't have details.
-                if  not ev.isOther:
+                # Note 'debug' events are also 'other' events.
+                if not ev.isOther:
                     # Populate event details.
                     for idx3, evDetail in enumerate(self.getEventDetails(t, ev)):
                         # Include event details for all events.
@@ -464,9 +484,11 @@ class UI(QMainWindow):
                             # Don't highlight trip if event is hidden.
                             if (ev.isInput and (self.actionShowInputEvents.isChecked())):
                                 tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
+                            elif (ev.isDebug and (self.actionShowDebugEvents.isChecked())):
+                                tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
                             elif (ev.isOther and (self.actionShowOtherEvents.isChecked())):
                                 tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
-                            elif ((not ev.isInput) and (not ev.isOther)):
+                            elif ((not ev.isInput) and (not ev.isOther) and (not ev.isDebug)):
                                 tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
 
                 # Hide input events if not configured to do so.
@@ -475,6 +497,10 @@ class UI(QMainWindow):
 
                 # Hide other events if not configured to do so.
                 if (ev.isOther and (not self.actionShowOtherEvents.isChecked())):
+                    eventLevel.setHidden(True)
+
+                # Hide debug events if not configured to do so.
+                if (ev.isDebug and (not self.actionShowDebugEvents.isChecked())):
                     eventLevel.setHidden(True)
 
                 # Hide out of trip events if not configured to do so.
@@ -650,7 +676,7 @@ class UI(QMainWindow):
                 xf = open(filenames[0], "w")
 
                 # Export selected trip.
-                self.exportTrip(xf, self.selectedTrip)
+                self.exportTrip(xf, self.tripLog[self.selectedTrip - 1])
 
                 logger.info("Opened and wrote export file : {0:s}".format(filenames[0]))
                 self.showTempStatusMsg("{0:s}".format(filenames[0]), config.TripData["TmpStatusMessagesMsec"])
@@ -678,20 +704,22 @@ class UI(QMainWindow):
 
             # If have a filename then open.
             if filenames[0] != "":
-
-                # Get filename components.
-                fp, fn, fext = getFileParts(filenames[0])
-
-                # Append the trip ID to the name of the file.
-                tfile = ("{0:s}/{1:s}-{2:d}{3:s}".format(fp, fn, self.tripLog[0].signOnId, fext))
                 # Open file for writing
-                xf = open(tfile, "w")
+                xf = open(filenames[0], "w")
 
-                # Export selected trip.
-                self.exportTrip(xf, self.selectedTrip)
+                # Change to wait cursor as exporting a lot of files may take a while.
+                QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
 
-                logger.info("Opened and wrote export file : {0:s}".format(tfile))
-                self.showTempStatusMsg("{0:s}".format(tfile), config.TripData["TmpStatusMessagesMsec"])
+                # Cycle through each trip and export.
+                for t in self.tripLog:
+                    # Export trip.
+                    self.exportTrip(xf, t)
+
+                # Retore the wait cursor now that export complete.
+                QApplication.restoreOverrideCursor()
+
+                logger.info("Opened and wrote export file : {0:s}".format(filenames[0]))
+                self.showTempStatusMsg("{0:s}".format(filenames[0]), config.TripData["TmpStatusMessagesMsec"])
 
                 # Close file after writing.
                 xf.close()
@@ -699,16 +727,20 @@ class UI(QMainWindow):
     # *******************************************
     # Export report for nominated trip.
     # *******************************************
-    def exportTrip(self, xf, t):
-        # Get trip info.
-        ti = self.tripLog[t-1]
+    def exportTrip(self, xf, ti):
         # Export trip data to file.
-        logger.debug("Exporting trip report for trip: {0:d}".format(t))
+        logger.debug("Exporting trip report for Trip ID: {0:d}".format(ti.signOnId))
+        xf.write("===================================================\n")
+        xf.write("              ____  ____  ____  ____ \n")
+        xf.write("             (_  _)(  _ \(_  _)(  _ \\\n")
+        xf.write("               )(   )   / _)(_  )___/\n")
+        xf.write("              (__) (_)\_)(____)(__)  \n")
+        xf.write("                                     \n")
         xf.write("===================================================\n")
         xf.write("Signon ID  : {0:d}\n".format(ti.signOnId))
         xf.write("Start time : {0:s}\n".format(unixTime(ti.tripStart, config.TimeUTC)))
         xf.write("End time   : {0:s}\n".format(unixTime(ti.tripEnd, config.TimeUTC)))
-        xf.write("===================================================\n\n")
+        xf.write("===================================================\n")
         xf.write("===================================================\n")
         xf.write("EVENTS (TOTALS)\n")
         xf.write("===================================================\n")
@@ -724,7 +756,7 @@ class UI(QMainWindow):
         xf.write("Impact High                  : {0:d}\n".format(ti.numImpact_M))
         xf.write("Impact Low                   : {0:d}\n".format(ti.numImpact_L))
         xf.write("Zone change                  : {0:d}\n".format(ti.numZoneChange))
-        xf.write("===================================================\n\n")
+        xf.write("===================================================\n")
         xf.write("===================================================\n")
         xf.write("EVENTS (DETAILS)\n")
         xf.write("===================================================\n")
@@ -806,7 +838,27 @@ class UI(QMainWindow):
                 xf.write("\tMaximum Idle Time : {0:s}\n".format(str(timedelta(seconds=ev.maxIdle))))
             elif ev.event == "SERVICE":
                 xf.write("\tService ID        : {0:d}\n".format(ev.serviceId))
-            
+            elif ev.event == "REPORT":
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tReport Speed      : {0:d}\n".format(ev.speed))
+                xf.write("\tDirection         : {0:d}\n".format(ev.direction))
+            elif ev.event == "INPUT":
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
+                xf.write("\tInput             : {0:d} - {1:s}\n".format(ev.inputNo, config.Channels[ev.inputNo - 1]["Name"]))
+                xf.write("\tState             : {0:d}\n".format(ev.inputState))
+                xf.write("\tActive Time       : {0:s}\n".format(str(timedelta(seconds=ev.activeTime))))
+            elif ev.event == "DEBUG":
+                xf.write("\tDetails           : {0:s}\n".format(ev.debugInfo))
+            elif ev.event == "TRIP":
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tTime Forward      : {0:s}\n".format(str(timedelta(seconds=ev.timeFwd))))
+                xf.write("\tTime Reverse      : {0:s}\n".format(str(timedelta(seconds=ev.timeRev))))
+                xf.write("\tTime Idle         : {0:s}\n".format(str(timedelta(seconds=ev.timeIdle))))
+                xf.write("\tMax Idle Time     : {0:s}\n".format(str(timedelta(seconds=ev.maxIdle))))
+            elif ev.event == "TRIPSUMMARY":
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+        xf.write("===================================================\n\n")
+                
     # *******************************************
     # Toolbar to collapse all trip data.
     # *******************************************
@@ -820,8 +872,7 @@ class UI(QMainWindow):
     # *******************************************
     def expandAllLevels(self):
         logger.debug("User selected Expand All Levels control.")
-        if self.haveTrips:# Fix wait cursor when opening log and get an error; change back to normal cursor.
-
+        if self.haveTrips:
             self.tripDataTree.expandAll()
 
     # *******************************************
@@ -935,6 +986,8 @@ class UI(QMainWindow):
             eventList.append(("Input", "{0:d} - {1:s}".format(event.inputNo, config.Channels[event.inputNo - 1]["Name"]), ((event.inputNo < 1) or (event.inputNo > 10))))
             eventList.append(("State", "{0:d}".format(event.inputState), ((event.inputState < 0) or (event.inputState > 1))))
             eventList.append(("Active Time", "{0:s}".format(str(timedelta(seconds=event.activeTime))), False))
+        elif event.event == "DEBUG":
+            eventList.append(("Details", "{0:s}".format(event.debugInfo), ("Time1H" in event.debugInfo)))
         elif event.event == "TRIP":
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
             eventList.append(("Time Forward", "{0:s}".format(str(timedelta(seconds=event.timeFwd))), False))
@@ -1063,9 +1116,12 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.3</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Added menu items to export data for the selected trip or for all trips to a file.</li>" \
             "<li>Added configuration to show times in UTC or local time. \
                 Includes epoch indicator in status bar and suffix on displayed times.</li>" \
             "<li>Included signon ID in trip number in trip data pane and trip summary pane to relate better to logs.</li>" \
+            "<li>Added option to show/hide DEBUG events. Also added additional detail on DEBUG events, \
+                including alerting if 1H time correction is detected.</li>" \
             "<li>Fixed bug where speed plot always had time axis in local timezone.</li>" \
             "<li>Fixed bug where SIGNON events with no (*) driver ID were not being detected properly.</li>" \
             "<li>Fixed bug when opening log file so current file not cleared unless new log file selected.</li>" \

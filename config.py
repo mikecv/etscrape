@@ -30,9 +30,11 @@ class Config():
             "SummaryAlertColour" : "#0000ff",
             "OtherEventColour" : "#99990c",
             "InputEventColour" : "#ffbf00",
+            "DebugEventColour" : "#00fa9a",
             "TmpStatusMessagesMsec" : 10000,
             "ShowInputEvents" : 1,
             "ShowOtherEvents" : 1,
+            "ShowDebugEvents" : 1,
             "ShowOutOfTripEvents" : 0,
             "BadSpeedLimit" : 150,
             "BadRpmLimit" : 1500

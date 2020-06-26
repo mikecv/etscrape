@@ -21,6 +21,8 @@ class Event():
         self.isOther = False
         # Indicate if 'input' event.
         self.isInput = False
+        # Indicate if 'debug' event.
+        self.isDebug = False
         # Indicate if out of trip event.
         self.isOutOfTrip = False
 
@@ -59,6 +61,7 @@ class Event():
         self.inputState = 0
         self.activeTime = 0
         self.serviceId = 0
+        self.debugInfo = ""
 
 # *******************************************
 # Speed Info class.
@@ -444,6 +447,10 @@ class Trip():
                 # =============================================================================
                 elif event.event == "POWERDOWN":
 
+                        # Indicate that event is OTHER event.
+                        # The event is supported, but still considered other.
+                        event.isOther = True
+
                         # Add event to list of events.
                         self.events.append(event)
                 # *********************************************************************************************************************************************
@@ -479,6 +486,23 @@ class Trip():
 
                         # Indicate event is Input event to control presentation format.
                         event.isInput = True
+
+                        # Add event to list of events.
+                        self.events.append(event)
+                # *********************************************************************************************************************************************
+                # DEBUG event.
+                # *********************************************************************************************************************************************
+                elif event.event == "DEBUG":   
+
+                        # Don't decode extra information, just report all.
+                        event.debugInfo = eventSpecifics
+
+                        # Check and alert for known critical debug issues.
+                        if "Time1H" in eventSpecifics:
+                            event.alertText = appendAlertText(event.alertText, "Time correction.")
+
+                        # Indicate event is Debug event to control presentation format.
+                        event.isDebug = True
 
                         # Add event to list of events.
                         self.events.append(event)
