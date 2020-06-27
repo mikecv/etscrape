@@ -44,6 +44,9 @@
         <height>16777215</height>
        </size>
       </property>
+      <property name="acceptDrops">
+       <bool>false</bool>
+      </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>

@@ -27,13 +27,13 @@ from mplCharts import *
 # 0.3   MDC 15/06/2020  Added trip report export.
 #                       Added configuration to show times in UTC or local time.
 #                       Added option to export trip data to file.
+#                       Added support to drag and drop log files to application.
 #                       Bug fixes.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
-# Look at drag and drop of files into application to open automatically.
 # Add properties dialog to set all parameters and generate config file.
 # *******************************************
 
@@ -114,6 +114,10 @@ class UI(QMainWindow):
         # Attach to the About menu item.
         self.actionAbout.triggered.connect(self.about)
 
+        # Set application to accept drag and drop files.
+        # Can drop file anywhere on the main window.
+        self.setAcceptDrops(True)
+
         # View actions.
         self.actionCollapseAllLevels.triggered.connect(self.collapseAllLevels)
         self.actionExpandAllLevels.triggered.connect(self.expandAllLevels)
@@ -151,6 +155,37 @@ class UI(QMainWindow):
 
         # Show appliction window.
         self.show()
+
+
+    # *******************************************
+    # Respond to drag / drop events.
+    # *******************************************
+    def dragEnterEvent(self, event):
+        if event.mimeData().hasUrls():
+            event.accept()
+            logger.debug("User dropped acceptable file type on application.")
+        else:
+            event.ignore()
+            logger.debug("User dropped unacceptable file type on application.")
+
+    # *******************************************
+    # Overwrite response to accepted dropped file method.
+    # *******************************************
+    def dropEvent(self, event):
+        # If more than one file selected to load only load the first one.
+        filename = event.mimeData().urls()[0].toLocalFile()
+        # Only process files.
+        if os.path.isfile(filename):
+            logger.debug("File dropped on application: {0:s}".format(filename))
+
+            # Open and read log file.
+            with open(filename, encoding='cp1252') as f:
+                self.logData = f.read()
+            logger.info("Opened and read log file : {0:s}".format(filename))
+            self.showTempStatusMsg("{0:s}".format(filename), config.TripData["TmpStatusMessagesMsec"])
+
+            # Process the loaded log file.
+            self.processLogFile()
 
     # *******************************************
     # Set up various window and widget icons.
@@ -310,90 +345,87 @@ class UI(QMainWindow):
         if self.haveTrips:
             self.tripDataTree.setParent(None)
             self.tripDataTree = None
+            self.spdFig.clearFigure()
 
     # *******************************************
-    # Load log file.
+    # Process log file.
     # *******************************************
-    def loadLogFile(self):
-        logger.debug("User selected Load Log File control.")
+    def processLogFile(self):
+        logger.debug("Processing loaded log file.")
 
-        # Get log file to load.
-        # Only clear trips and parse log file if opened.
-        if self.openLogFile() == True:
+        # Clear trips if we have any.
+        self.clearTrips()
 
-            # Clear trips if we have any.
-            self.clearTrips()
+        # Clear trip data to show.
+        self.haveTrips = False
 
-            # Clear trip data to show.
-            self.haveTrips = False
+        # Disable expand / collapse buttons.
+        self.actionCollapseAllLevels.setEnabled(False)
+        self.actionExpandAllLevels.setEnabled(False)
 
-            # Disable expand / collapse buttons.
-            self.actionCollapseAllLevels.setEnabled(False)
-            self.actionExpandAllLevels.setEnabled(False)
+        # Disable the export menu.
+        self.actionExportCurrentTrip.setEnabled(False)
+        self.actionExportAllTrips.setEnabled(False)
 
-            # Disable the export menu.
-            self.actionExportCurrentTrip.setEnabled(False)
-            self.actionExportAllTrips.setEnabled(False)
+        # Change to wait cursor as large files may take a while to open and process.
+        QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
 
-            # Change to wait cursor as large files may take a while to open and process.
-            QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+        self.numTrips = 0
+        self.tripLog = []
 
-            self.numTrips = 0
-            self.tripLog = []
-
-            # Look for all the trip starts and capture individual buffers.
-            patternStart = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,2}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT .+ (SIGNON).?')
-            for st in re.finditer(patternStart, self.logData):
-                # Store start and end (actually next start) for buffer for each trip.
-                edge = st.start(0)
-                if (self.numTrips == 0):
-                    prevStart = edge
-                else:
-                    self.tripLog.append(Trip(config, logger, self.logData[prevStart:edge]))
-                    prevStart = edge
-
-                # Increment trip counter.
-                self.numTrips += 1
-            
-            # Total trips in file.
-            logger.debug("Trips in file : {0:d}".format(self.numTrips))
-
-            # Update last trip to end of file.
-            if (self.numTrips > 0):
-                self.tripLog.append(Trip(config, logger, self.logData[prevStart:len(self.logData)]))
-
-                # Extract data from all trips.
-                for t in self.tripLog:
-                    t.extractTripData()
-
-                # Set flag indicating we have trip data to show.
-                self.haveTrips = True
-
-                # Set first trip as selected trip.
-                self.selectedTrip = 1
-
-                # Update prev/next button states.
-                self.updateTripBtnState()
-
-                # Enable expand / collapse buttons.
-                self.actionCollapseAllLevels.setEnabled(True)
-                self.actionExpandAllLevels.setEnabled(True)
-
-                # Enable the export menu.
-                self.actionExportCurrentTrip.setEnabled(True)
-                self.actionExportAllTrips.setEnabled(True)
-
-                # Populate trip data.updateTripBtnState
-                self.populateTrips()
+        # Look for all the trip starts and capture individual buffers.
+        patternStart = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,2}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT .+ (SIGNON).?')
+        for st in re.finditer(patternStart, self.logData):
+            # Store start and end (actually next start) for buffer for each trip.
+            edge = st.start(0)
+            if (self.numTrips == 0):
+                prevStart = edge
             else:
-                # Revert to the normal cursor.
-                QApplication.restoreOverrideCursor()
+                self.tripLog.append(Trip(config, logger, self.logData[prevStart:edge]))
+                prevStart = edge
 
-                # Show pop-up indicating no trip data found in log file.
-                showPopup("Trip", "Log file contains no trip information.", "(No trip start \"SIGNON\" events encountered)")
+            # Increment trip counter.
+            self.numTrips += 1
+        
+        # Total trips in file.
+        logger.debug("Trips in file : {0:d}".format(self.numTrips))
 
+        # Update last trip to end of file.
+        if (self.numTrips > 0):
+            self.tripLog.append(Trip(config, logger, self.logData[prevStart:len(self.logData)]))
+
+            # Extract data from all trips.
+            for t in self.tripLog:
+                t.extractTripData()
+
+            # Set flag indicating we have trip data to show.
+            self.haveTrips = True
+
+            # Set first trip as selected trip.
+            self.selectedTrip = 1
+
+            # Update prev/next button states.
+            self.updateTripBtnState()
+
+            # Enable expand / collapse buttons.
+            self.actionCollapseAllLevels.setEnabled(True)
+            self.actionExpandAllLevels.setEnabled(True)
+
+            # Enable the export menu.
+            self.actionExportCurrentTrip.setEnabled(True)
+            self.actionExportAllTrips.setEnabled(True)
+
+            # Populate trip data.updateTripBtnState
+            self.populateTrips()
+        else:
             # Revert to the normal cursor.
-            QApplication.restoreOverrideCursor()                       
+            QApplication.restoreOverrideCursor()
+
+            # Show pop-up indicating no trip data found in log file.
+            showPopup("Trip", "Log file contains no trip information.", "(No trip start \"SIGNON\" events encountered)")
+
+        # Revert to the normal cursor.
+        QApplication.restoreOverrideCursor()                       
 
     # *******************************************
     # Populate trip data.
@@ -1001,9 +1033,10 @@ class UI(QMainWindow):
         return eventList
 
     # *******************************************
-    # Open log file.
+    # Load log file.
     # *******************************************
-    def openLogFile(self):
+    def loadLogFile(self):
+        logger.debug("User selected Load Log File control.")
         # Configure and launch file selection dialog.
         dialog = QFileDialog(self)
         dialog.setAcceptMode(QFileDialog.AcceptOpen)
@@ -1022,12 +1055,11 @@ class UI(QMainWindow):
                     self.logData = f.read()
                 logger.info("Opened and read log file : {0:s}".format(filenames[0]))
                 self.showTempStatusMsg("{0:s}".format(filenames[0]), config.TripData["TmpStatusMessagesMsec"])
-                return True
+
+                # Process the loaded log file.
+                self.processLogFile()
             else:
                 logger.info("No log file selected.")
-                return False
-        else:
-            return False
 
     # *******************************************
     # About control selected.
@@ -1117,6 +1149,7 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.3</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added menu items to export data for the selected trip or for all trips to a file.</li>" \
+            "<li>Added ability to drag and drop log files onto application and have them open automatically.</li>" \
             "<li>Added configuration to show times in UTC or local time. \
                 Includes epoch indicator in status bar and suffix on displayed times.</li>" \
             "<li>Included signon ID in trip number in trip data pane and trip summary pane to relate better to logs.</li>" \
