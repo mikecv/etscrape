@@ -62,6 +62,13 @@ class Event():
         self.activeTime = 0
         self.serviceId = 0
         self.debugInfo = ""
+        self.criticalOutput = 0
+        self.travelLoaded = 0
+        self.travelUnloaded = 0
+        self.idleLoaded = 0
+        self.idleUnloaded = 0
+        self.liftCount = 0
+        self.cumWeight = 0
 
 # *******************************************
 # Speed Info class.
@@ -279,9 +286,9 @@ class Trip():
                         # Add event to list of events.
                         self.events.append(event)
                 # =============================================================================
-                # LOWCOOLANT, OILPRESSURE, or ENGINETEMP event (all the same format)
+                # LOWCOOLANT, OILPRESSURE, ENGINETEMP, OFFSEAT, OVERLOAD event (all the same format)
                 # =============================================================================
-                elif event.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP"}:
+                elif event.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP", "OFFSEAT", "OVERLOAD"}:
                     specPatern = re.compile(r'([0-9]+) ([0-9]+)')
                     sp = re.search(specPatern, eventSpecifics)
                     if sp:
@@ -337,12 +344,7 @@ class Trip():
 
                         # Record the zone change event in the zone change log.
                         # This can be used if we plot zone speed limits on speed plot.
-                        # Record the previous zone change at this time so that we can get a step function.
-                        if len(self.zoneXings) > 0:
-                            self.zoneXings.append(ZoneInfo(int(su.group(4)), self.zoneXings[-1].fromZone, self.zoneXings[-1].toZone, self.zoneXings[-1].zoneOutput))
-                        else:
-                            # Record first from zone so that we can possibly do step at first zonechange.
-                            self.firstFromZone = event.fromZone
+                        # Record the previous zone changeventomZone
                         
                         self.zoneXings.append(ZoneInfo(int(su.group(4)), event.fromZone, event.toZone, event.zoneOutput))
 
@@ -474,6 +476,18 @@ class Trip():
                         # Add event to list of events.
                         self.events.append(event)
                 # *********************************************************************************************************************************************
+                # CRITICALOUTPUTSET event.
+                # *********************************************************************************************************************************************
+                elif event.event == "CRITICALOUTPUTSET":   
+                    specPatern = re.compile(r'([0-9]+) ([0-9]+)')
+                    sp = re.search(specPatern, eventSpecifics)
+                    if sp:
+                        event.signOnId = int(sp.group(1))
+                        event.criticalOutput = int(sp.group(2))
+
+                        # Add event to list of events.
+                        self.events.append(event)
+                # *********************************************************************************************************************************************
                 # INPUT event.
                 # *********************************************************************************************************************************************
                 elif event.event == "INPUT":   
@@ -549,15 +563,15 @@ class Trip():
                         self.events.append(event)
 
                         # *********************************************************************************************************************************************
-                        # Look for trip summary event. This occurs after the TRIP event but is only generated if events occurred during the trip.
+                        # Look for trip summary type event. These occurs after the TRIP event but are only generated if events occurred during the trip.
                         # Doing this event separately as it a different format to the other event messages.
                         # *********************************************************************************************************************************************
-                        patternSummary = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,22}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT ([0-9]+) ([0-9]+) .+ (TRIPSUMMARY) (.+)$', re.MULTILINE)
+                        patternSummary = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,22}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT ([0-9]+) ([0-9]+) .+ (TRIP[A-Z]+) (.+)$', re.MULTILINE)
                         su = re.search(patternSummary, self.logBuf)
                         if su:
                             # Initialised with event type and time as in all events.
                             event = Event(su.group(5), int(su.group(4)))
-                            self.logger.debug("Detected trip summary at {0:s}".format(datetime.fromtimestamp(int(su.group(4))).strftime('%d/%m/%Y %H:%M:%S')))
+                            self.logger.debug("Detected trip summary {0:s} at {1:s}".format(su.group(5), datetime.fromtimestamp(int(su.group(4))).strftime('%d/%m/%Y %H:%M:%S')))
 
                             # Check for event time in the past.
                             if int(su.group(4)) < self.lastTime:
@@ -567,16 +581,34 @@ class Trip():
                             # Break out some of the event data explicitly.
                             eventSpecifics = su.group(6)
 
-                            specPatern = re.compile(r'([0-9]+)')
-                            sp = re.search(specPatern, eventSpecifics)
-                            if sp:
-                                event.signOnId = int(sp.group(1))
+                            if su.group(5) == "TRIPSUMMARY":
+                                specPatern = re.compile(r'([0-9]+)')
+                                sp = re.search(specPatern, eventSpecifics)
+                                if sp:
+                                    event.signOnId = int(sp.group(1))
 
-                                # Increment event counters.
-                                self.numTripEvents += 1
+                                    # Increment event counters.
+                                    self.numTripEvents += 1
 
-                                # Add event to list of events.
-                                self.events.append(event)
+                                    # Add event to list of events.
+                                    self.events.append(event)
+                            elif su.group(5) == "TRIPLOAD":
+                                specPatern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+)')
+                                sp = re.search(specPatern, eventSpecifics)
+                                if sp:
+                                    event.signOnId = int(sp.group(1))
+                                    event.travelLoaded = int(sp.group(2))
+                                    event.travelUnloaded = int(sp.group(3))
+                                    event.idleLoaded = int(sp.group(4))
+                                    event.idleUnloaded = int(sp.group(5))
+                                    event.liftCount = int(sp.group(6))
+                                    event.cumWeight = int(sp.group(7))
+
+                                    # Increment event counters.
+                                    self.numTripEvents += 1
+
+                                    # Add event to list of events.
+                                    self.events.append(event)
 
                 # *********************************************************************************************************************************************
                 # Other events
@@ -584,7 +616,7 @@ class Trip():
                 # *********************************************************************************************************************************************
                 else:
                     # Don't include SIGNON, TRIP, and TRIPSUMMARY as they are detected separately.
-                    if event.event not in ["SIGNON", "TRIP", "TRIPSUMMARY"]:
+                    if event.event not in ["SIGNON", "TRIP", "TRIPSUMMARY", "TRIPLOAD"]:
 
                         # Indicate that event is OTHER event, i.e. not supported (yet).
                         event.isOther = True

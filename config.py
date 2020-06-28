@@ -32,18 +32,18 @@ class Config():
             "InputEventColour" : "#ffbf00",
             "DebugEventColour" : "#00fa9a",
             "TmpStatusMessagesMsec" : 10000,
-            "ShowInputEvents" : 1,
             "ShowOtherEvents" : 1,
+            "ShowInputEvents" : 1,
             "ShowDebugEvents" : 1,
             "ShowOutOfTripEvents" : 0,
             "BadSpeedLimit" : 150,
-            "BadRpmLimit" : 1500
+            "BadRpmLimit" : 5000
         }
 
         # Speed plot data.
         self.SpdPlot = {
             "DefaultLowLimit": 30,
-            "DefaultHiLimit": 60,
+            #"DefaultHiLimit": 60,
             "SpeedColour": "#0000ff",
             "ZoneColour": "#ff66ff",
             "AxesTitleFontSize": 7,
@@ -52,12 +52,12 @@ class Config():
 
         # Input channel definitions.
         self.Channels = [
-            {"No" : 1, "Name" : "[ET] Engine Oil Pressure"},
+            {"No" : 1, "Name" : "[ET] Engine Oil Pressure, [ST] Seat"},
             {"No" : 2, "Name" : "[ET] Engine Temperature"},
             {"No" : 3, "Name" : "[ET] Ground Speed"},
             {"No" : 4, "Name" : "[ET] Engine Speed"},
-            {"No" : 5, "Name" : "[ET] Passenger Seatbelt"},
-            {"No" : 6, "Name" : "[ET] Operator Seatbelt"},
+            {"No" : 5, "Name" : "[ET] Passenger Seatbelt, [ST] Weight"},
+            {"No" : 6, "Name" : "[ET][ST] Operator Seatbelt"},
             {"No" : 7, "Name" : "[ET] Engine Coolant Level"},
             {"No" : 8, "Name" : "[ET][ST] Ignition Switch"},
             {"No" : 9, "Name" : "[ET][ST] Accelerometer"},
@@ -76,9 +76,29 @@ class Config():
                 config = json.load(config_file)
 
                 # Check configuration version.
-                # If version not a match then just update.
+                # If version not a match then try and update as much as possible.
+                # Only updating by whole lists, so restructured file may not update completely.
                 if config["ConfigVersion"] != self.ConfigVersion:
                     print("Upgrading configuration file.")
+                    try:
+                        self.DebugLevel = config["DebugLevel"]
+                        self.LogFileSize = config["LogFileSize"]
+                        self.LogBackups = config["LogBackups"]
+                        self.TimeUTC = config["TimeUTC"]
+                    except Exception:
+                        print("Error updating configuration values - sundry.")
+                    try:
+                        self.TripData = config["TripData"]
+                    except Exception:
+                        print("Error updating configuration values - trip data.")
+                    try:
+                        self.SpdPlot = config["SpdPlot"]
+                    except Exception:
+                        print("Error updating configuration values - speed plot.")
+                    try:
+                        self.Channels = config["Channels"]
+                    except Exception:
+                        print("Error updating configuration values - channels.")
                     self.saveConfig()
                 else:
 

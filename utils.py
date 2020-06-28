@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from PyQt5.QtWidgets import QMessageBox
 import time
 import os
 from datetime import datetime
@@ -34,24 +33,6 @@ def tzone():
             return ("[UTC}")
         else:
             return ("[UTC{0:+d}]".format(int(time.timezone / -3600)))
-
-# *******************************************
-# Pop-up message box.
-# *******************************************
-def showPopup(title, msg, info="", details=""):
-    # Create pop-up message box.
-    # Mandatory title and message.
-    # Optional information and details.
-    mb = QMessageBox()
-    mb.setIcon(QMessageBox.Information)
-    mb.setText(msg)
-    if (info != ""):
-        mb.setInformativeText(info)
-    mb.setWindowTitle(title)
-    if (details != ""):
-        mb.setDetailedText(details)
-    # Show message box.
-    mb.exec_()
 
 # *******************************************
 # Get path, filename, and extension.

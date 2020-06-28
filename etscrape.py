@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from PyQt5.QtWidgets import QMainWindow, QDialog, QFileDialog, QLabel, QTreeWidget, QTreeWidgetItem, QHeaderView, qApp, QApplication
+from PyQt5.QtWidgets import QMainWindow, QDialog, QFileDialog, QColorDialog, QLabel, QMessageBox, QTreeWidget, QTreeWidgetItem, QHeaderView, qApp, QApplication
 from PyQt5 import uic
 from PyQt5 import QtCore, QtGui
 import logging
@@ -28,17 +28,17 @@ from mplCharts import *
 #                       Added configuration to show times in UTC or local time.
 #                       Added option to export trip data to file.
 #                       Added support to drag and drop log files to application.
+#                       Added edit preferences dialog.
 #                       Bug fixes.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
-# Add properties dialog to set all parameters and generate config file.
 # *******************************************
 
 # Program version.
-progVersion = "0.3 (wip)"
+progVersion = "0.3"
 
 # Create configuration values class object.
 config = Config()
@@ -101,6 +101,9 @@ class UI(QMainWindow):
 
         # Attach to the Export report for all trips menu item.
         self.actionExportAllTrips.triggered.connect(self.exportAllTrips)
+
+        # Attach to the edit preferences menu item.
+        self.actionPreferences.triggered.connect(self.editPreferences)
 
         # Attach to the Quit menu item.
         self.actionQuit.triggered.connect(app.quit)
@@ -431,6 +434,9 @@ class UI(QMainWindow):
     # Populate trip data.
     # *******************************************
     def populateTrips(self):
+        # Change to wait cursor as large files may take a while to populate.
+        QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+
         # Define a tree widget for trip data.
         self.tripDataTree = QTreeWidget()
         self.tripDataTree.setHeaderLabels(['Trip Data', '', ''])
@@ -551,6 +557,9 @@ class UI(QMainWindow):
 
         # Define callback if selection is made to a different trip.
         self.tripDataTree.itemSelectionChanged.connect(self.tripItemSelected)
+
+        # Revert to the normal cursor.
+        QApplication.restoreOverrideCursor()                       
 
         # Show the trip data tree.
         self.tripDataTree.show()
@@ -943,7 +952,7 @@ class UI(QMainWindow):
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
             eventList.append(("Maximum RPM", "{0:d}".format(event.maxRPM), config.TripData["BadRpmLimit"]))
-        elif event.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP"}:
+        elif event.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP", "OFFSEAT", "OVERLOAD"}:
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
@@ -1013,6 +1022,10 @@ class UI(QMainWindow):
                 eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Report Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Direction", "{0:d}".format(event.direction), ((event.direction < 0) or (event.direction > 360))))
+        elif event.event == "CRITICALOUTPUTSET":
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
+            eventList.append(("Critical Output Set", "{0:d}".format(event.criticalOutput), False))
         elif event.event == "INPUT":
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Input", "{0:d} - {1:s}".format(event.inputNo, config.Channels[event.inputNo - 1]["Name"]), ((event.inputNo < 1) or (event.inputNo > 10))))
@@ -1028,6 +1041,14 @@ class UI(QMainWindow):
             eventList.append(("Max Idle Time", "{0:s}".format(str(timedelta(seconds=event.maxIdle))), False))
         elif event.event == "TRIPSUMMARY":
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
+        elif event.event == "TRIPLOAD":
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
+            eventList.append(("Travel Time Loaded", "{0:s}".format(str(timedelta(seconds=event.travelLoaded))), False))
+            eventList.append(("Travel Time Unloaded", "{0:s}".format(str(timedelta(seconds=event.travelUnloaded))), False))
+            eventList.append(("Idle Time Loaded", "{0:s}".format(str(timedelta(seconds=event.idleLoaded))), False))
+            eventList.append(("Idle Time Unloaded", "{0:s}".format(str(timedelta(seconds=event.idleUnloaded))), False))
+            eventList.append(("Lift Count", "{0:d}".format(event.liftCount), False))
+            eventList.append(("Cummulative Weight", "{0:d}".format(event.cumWeight), False))
 
         # Return list of all event details to display
         return eventList
@@ -1062,6 +1083,16 @@ class UI(QMainWindow):
                 logger.info("No log file selected.")
 
     # *******************************************
+    # Edit Preferences control selected.
+    # Displays an "About" dialog box.
+    # *******************************************
+    def editPreferences(self):
+        logger.debug("User selected Edit Preferences menu control.")
+
+        # Create edit prefernces dialog.        
+        PreferencesDialog(config)
+
+    # *******************************************
     # About control selected.
     # Displays an "About" dialog box.
     # *******************************************
@@ -1094,6 +1125,326 @@ class UI(QMainWindow):
         # Call the web browser to render the url.
         # This is not guaranteed to be the default browser on any particular system.
         webbrowser.open(url)
+
+# *******************************************
+# Pop-up message box.
+# *******************************************
+def showPopup(title, msg, info="", details=""):
+    # Create pop-up message box.
+    # Mandatory title and message.
+    # Optional information and details.
+    mb = QMessageBox()
+    mb.setIcon(QMessageBox.Information)
+    mb.setText(msg)
+    if (info != ""):
+        mb.setInformativeText(info)
+    mb.setWindowTitle(title)
+    if (details != ""):
+        mb.setDetailedText(details)
+    # Show message box.
+    mb.exec_()
+
+# *******************************************
+# Preferences dialog class.
+# *******************************************
+class PreferencesDialog(QDialog):
+    def __init__(self, config):
+        super(PreferencesDialog, self).__init__()
+        uic.loadUi(res_path("preferences.ui"), self)
+
+        self.config = config
+
+        # Preload the configuration values.
+
+        # Debug values.
+        self.debugLevelVal.setValidator(QtGui.QIntValidator(0, 100))
+        self.debugLevelVal.setText(str(self.config.DebugLevel))
+        self.debugFileSizeVal.setValidator(QtGui.QIntValidator(1, 1000))
+        self.debugFileSizeVal.setText(str(int(self.config.LogFileSize / 1000)))
+        self.debugBackupsVal.setValidator(QtGui.QIntValidator(1, 3))
+        self.debugBackupsVal.setText(str(self.config.LogBackups))
+
+        # Locale values.
+        self.utcVal.setChecked(not (self.config.TimeUTC == 0))
+
+        # Trip values.
+        self.tripTitleBgColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.TripData["TripBackColour"]))
+        self.tripTitleBgColVal.clicked.connect(lambda: self.getColour(self.tripTitleBgColVal))
+        self.tripIDTxtColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.TripData["TripColour"]))
+        self.tripIDTxtColVal.clicked.connect(lambda: self.getColour(self.TripColour))
+        self.eventNameColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.TripData["EventColour"]))
+        self.eventNameColVal.clicked.connect(lambda: self.getColour(self.eventNameColVal))
+        self.alertColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.TripData["AlertColour"]))
+        self.alertColVal.clicked.connect(lambda: self.getColour(self.alertColVal))
+        self.commentColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.TripData["CommentColour"]))
+        self.commentColVal.clicked.connect(lambda: self.getColour(self.commentColVal))
+        self.summaryAlertColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.TripData["SummaryAlertColour"]))
+        self.summaryAlertColVal.clicked.connect(lambda: self.getColour(self.summaryAlertColVal))
+        self.otherEventColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.TripData["OtherEventColour"]))
+        self.otherEventColVal.clicked.connect(lambda: self.getColour(self.otherEventColVal))
+        self.inputEventColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.TripData["InputEventColour"]))
+        self.inputEventColVal.clicked.connect(lambda: self.getColour(self.inputEventColVal))
+        self.debugEventColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.TripData["DebugEventColour"]))
+        self.debugEventColVal.clicked.connect(lambda: self.getColour(self.debugEventColVal))
+        self.tempMsgMsecVal.setValidator(QtGui.QIntValidator(1, 60))
+        self.tempMsgMsecVal.setText(str(int(self.config.TripData["TmpStatusMessagesMsec"] / 1000)))
+        self.showOtherVal.setChecked(not (self.config.TripData["ShowOtherEvents"] == 0))
+        self.showInputVal.setChecked(not (self.config.TripData["ShowInputEvents"] == 0))
+        self.showDebugVal.setChecked(not (self.config.TripData["ShowDebugEvents"] == 0))
+        self.showOutOfTripVal.setChecked(not (self.config.TripData["ShowOutOfTripEvents"] == 0))
+        self.speedAlertLimVal.setValidator(QtGui.QIntValidator(30, 160))
+        self.speedAlertLimVal.setText(str(self.config.TripData["BadSpeedLimit"]))
+        self.rpmAlertLimVal.setValidator(QtGui.QIntValidator(500, 10000))
+        self.rpmAlertLimVal.setText(str(self.config.TripData["BadRpmLimit"]))
+
+        # Speed plot values.
+        self.lowSpeedVal.setValidator(QtGui.QIntValidator(1, 160))
+        self.lowSpeedVal.setText(str(self.config.SpdPlot["DefaultLowLimit"]))
+        self.highSpeedVal.setValidator(QtGui.QIntValidator(1, 160))
+        self.highSpeedVal.setText(str(self.config.SpdPlot["DefaultHiLimit"]))
+        self.speedLineColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.SpdPlot["SpeedColour"]))
+        self.speedLineColVal.clicked.connect(lambda: self.getColour(self.speedLineColVal))
+        self.zoneLineColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.SpdPlot["ZoneColour"]))
+        self.zoneLineColVal.clicked.connect(lambda: self.getColour(self.zoneLineColVal))
+        self.axisFontSizeVal.setValidator(QtGui.QIntValidator(5, 10))
+        self.axisFontSizeVal.setText(str(self.config.SpdPlot["AxesTitleFontSize"]))
+        self.titleFontSizeVal.setValidator(QtGui.QIntValidator(6, 12))
+        self.titleFontSizeVal.setText(str(self.config.SpdPlot["PlotTitleFontSize"]))
+
+        # Connect to SAVE dialog button for processing.
+        self.accepted.connect(self.savePreferences)
+
+        # Show the edit preferences dialog.
+        self.showPreferences()
+
+    # *******************************************
+    # Pick a colour and set.
+    # Set the QPushButton colour to the colour selected.
+    # *******************************************
+    def getColour(self, colVar):
+        colName = QColorDialog.getColor().name()
+        colVar.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(colName))
+
+    # *******************************************
+    # Displays a "Preferences" dialog box.
+    # *******************************************
+    def showPreferences(self):
+
+        # Show dialog.
+        self.exec_()
+
+    # *******************************************
+    # User selected to save preferences.
+    # *******************************************
+    def savePreferences(self):
+        logger.debug("User saving preferences.")
+
+        # Flag indicating a preference has changed.
+        prefChanged = False
+
+        ###########################
+        # Debugging
+        ###########################
+        # Debug level.
+        val = int(self.debugLevelVal.text())
+        if val != self.config.DebugLevel:
+            # Set the configuration value.
+            self.config.DebugLevel = val
+            logger.debug("Change to debug level: {0:d}".format(self.config.DebugLevel))
+            logger.setLevel(self.config.DebugLevel)
+            prefChanged = True
+        # Debug file size.
+        val = int(self.debugFileSizeVal.text()) * 1000
+        if val != self.config.LogFileSize:
+            # Set the configuration value.
+            self.config.LogFileSize = val
+            logger.debug("Change to debug file size: {0:d}".format(self.config.LogFileSize))
+            prefChanged = True
+        # Debug backup count.
+        val = int(self.debugBackupsVal.text())
+        if val != self.config.LogBackups:
+            # Set the configuration value.
+            self.config.LogBackups = val
+            logger.debug("Change to debug backup count: {0:d}".format(self.config.LogBackups))
+            prefChanged = True
+
+        ###########################
+        # Locale
+        ###########################
+        # UTC time reference.
+        val = self.utcVal.isChecked()
+        if val == (self.config.TimeUTC == 0):
+            # Set the configuration value.
+            self.config.TimeUTC = int(val)
+            logger.debug("Change to time reference (UTC): {0:d}".format(self.config.TimeUTC))
+            prefChanged = True
+
+        ###########################
+        # Trip Data
+        ###########################
+        # Trip title background colour.
+        col = self.tripTitleBgColVal.palette().button().color().name()
+        if col != self.config.TripData["TripBackColour"]:
+            # Set the configuration value.
+            self.config.TripData["TripBackColour"] = col
+            logger.debug("Change to trip tile background colour: {0:s}".format(self.config.TripData["TripBackColour"]))
+            prefChanged = True
+        # Trip ID text colour.
+        col = self.tripIDTxtColVal.palette().button().color().name()
+        if col != self.config.TripData["TripColour"]:
+            # Set the configuration value.
+            self.config.TripData["TripColour"] = col
+            logger.debug("Change to trip text colour: {0:s}".format(self.config.TripData["TripColour"]))
+            prefChanged = True
+        # Event text colour.
+        col = self.eventNameColVal.palette().button().color().name()
+        if col != self.config.TripData["EventColour"]:
+            # Set the configuration value.
+            self.config.TripData["EventColour"] = col
+            logger.debug("Change to event text colour: {0:s}".format(self.config.TripData["EventColour"]))
+            prefChanged = True
+        # Alert text colour.
+        col = self.alertColVal.palette().button().color().name()
+        if col != self.config.TripData["AlertColour"]:
+            # Set the configuration value.
+            self.config.TripData["AlertColour"] = col
+            logger.debug("Change to alert text colour: {0:s}".format(self.config.TripData["AlertColour"]))
+            prefChanged = True
+        # Comment text colour.
+        col = self.commentColVal.palette().button().color().name()
+        if col != self.config.TripData["CommentColour"]:
+            # Set the configuration value.
+            self.config.TripData["CommentColour"] = col
+            logger.debug("Change to comment text colour: {0:s}".format(self.config.TripData["CommentColour"]))
+            prefChanged = True
+        # Summary alert text colour.
+        col = self.summaryAlertColVal.palette().button().color().name()
+        if col != self.config.TripData["SummaryAlertColour"]:
+            # Set the configuration value.
+            self.config.TripData["SummaryAlertColour"] = col
+            logger.debug("Change to summary alert text colour: {0:s}".format(self.config.TripData["SummaryAlertColour"]))
+            prefChanged = True
+        # Other event text colour.
+        col = self.otherEventColVal.palette().button().color().name()
+        if col != self.config.TripData["OtherEventColour"]:
+            # Set the configuration value.
+            self.config.TripData["OtherEventColour"] = col
+            logger.debug("Change to other event text colour: {0:s}".format(self.config.TripData["OtherEventColour"]))
+            prefChanged = True
+        # Input event text colour.
+        col = self.inputEventColVal.palette().button().color().name()
+        if col != self.config.TripData["InputEventColour"]:
+            # Set the configuration value.
+            self.config.TripData["InputEventColour"] = col
+            logger.debug("Change to input event text colour: {0:s}".format(self.config.TripData["InputEventColour"]))
+            prefChanged = True
+        # Debug event text colour.
+        col = self.debugEventColVal.palette().button().color().name()
+        if col != self.config.TripData["DebugEventColour"]:
+            # Set the configuration value.
+            self.config.TripData["DebugEventColour"] = col
+            logger.debug("Change to debug event text colour: {0:s}".format(self.config.TripData["DebugEventColour"]))
+            prefChanged = True
+        # Temporary status message timeout.
+        val = int(self.tempMsgMsecVal.text()) * 1000
+        if val != self.config.TripData["TmpStatusMessagesMsec"]:
+            # Set the configuration value.
+            self.config.TripData["TmpStatusMessagesMsec"] = val
+            logger.debug("Change to temporary status message timeout: {0:d}".format(self.config.TripData["TmpStatusMessagesMsec"]))
+            prefChanged = True
+        # Show other events.
+        val = self.showOtherVal.isChecked()
+        if val == (self.config.TripData["ShowOtherEvents"] == 0):
+            # Set the configuration value.
+            self.config.TripData["ShowOtherEvents"] = int(val)
+            logger.debug("Change to show other events: {0:d}".format(self.config.TripData["ShowOtherEvents"]))
+            prefChanged = True
+        # Show input events.
+        val = self.showInputVal.isChecked()
+        if val == (self.config.TripData["ShowInputEvents"] == 0):
+            # Set the configuration value.
+            self.config.TripData["ShowInputEvents"] = int(val)
+            logger.debug("Change to show input events: {0:d}".format(self.config.TripData["ShowInputEvents"]))
+            prefChanged = True
+        # Show debug events.
+        val = self.showDebugVal.isChecked()
+        if val == (self.config.TripData["ShowDebugEvents"] == 0):
+            # Set the configuration value.
+            self.config.TripData["ShowDebugEvents"] = int(val)
+            logger.debug("Change to show debug events: {0:d}".format(self.config.TripData["ShowDebugEvents"]))
+            prefChanged = True
+        # Show out of trip events.
+        val = self.showOutOfTripVal.isChecked()
+        if val == (self.config.TripData["ShowOutOfTripEvents"] == 0):
+            # Set the configuration value.
+            self.config.TripData["ShowOutOfTripEvents"] = int(val)
+            logger.debug("Change to show out of trip events: {0:d}".format(self.config.TripData["ShowOutOfTripEvents"]))
+            prefChanged = True
+        # Bad vehicle speed limit.
+        val = int(self.speedAlertLimVal.text())
+        if val != self.config.TripData["BadSpeedLimit"]:
+            # Set the configuration value.
+            self.config.TripData["BadSpeedLimit"] = val
+            logger.debug("Change to bad vehicle speed limit: {0:d}".format(self.config.TripData["BadSpeedLimit"]))
+            prefChanged = True
+        # Bad engine speed limit.
+        val = int(self.rpmAlertLimVal.text())
+        if val != self.config.TripData["BadRpmLimit"]:
+            # Set the configuration value.
+            self.config.TripData["BadRpmLimit"] = val
+            logger.debug("Change to bad engine speed limit: {0:d}".format(self.config.TripData["BadRpmLimit"]))
+            prefChanged = True
+
+        ###########################
+        # Speed Plot Data
+        ###########################
+        # Default slow zone speed limit.
+        val = int(self.lowSpeedVal.text())
+        if val != self.config.SpdPlot["DefaultLowLimit"]:
+            # Set the configuration value.
+            self.config.SpdPlot["DefaultLowLimit"] = val
+            logger.debug("Change to default slow zone speed limit: {0:d}".format(self.config.SpdPlot["DefaultLowLimit"]))
+            prefChanged = True
+        # Default fast zone speed limit.
+        val = int(self.highSpeedVal.text())
+        if val != self.config.SpdPlot["DefaultHiLimit"]:
+            # Set the configuration value.
+            self.config.SpdPlot["DefaultHiLimit"] = val
+            logger.debug("Change to default fast zone speed limit: {0:d}".format(self.config.SpdPlot["DefaultHiLimit"]))
+            prefChanged = True
+        # Speed line colour.
+        col = self.speedLineColVal.palette().button().color().name()
+        if col != self.config.SpdPlot["SpeedColour"]:
+            # Set the configuration value.
+            self.config.SpdPlot["SpeedColour"] = col
+            logger.debug("Change to speed plot line colour: {0:s}".format(self.config.SpdPlot["SpeedColour"]))
+            prefChanged = True
+        # Zone change line colour.
+        col = self.zoneLineColVal.palette().button().color().name()
+        if col != self.config.SpdPlot["ZoneColour"]:
+            # Set the configuration value.
+            self.config.SpdPlot["ZoneColour"] = col
+            logger.debug("Change to zone change plot line colour: {0:s}".format(self.config.SpdPlot["ZoneColour"]))
+            prefChanged = True
+        # Plot axis text font size.
+        val = int(self.axisFontSizeVal.text())
+        if val != self.config.SpdPlot["AxesTitleFontSize"]:
+            # Set the configuration value.
+            self.config.SpdPlot["AxesTitleFontSize"] = val
+            logger.debug("Change to plot axis text font size: {0:d}".format(self.config.SpdPlot["AxesTitleFontSize"]))
+            prefChanged = True
+        # Plot title text font size.
+        val = int(self.titleFontSizeVal.text())
+        if val != self.config.SpdPlot["PlotTitleFontSize"]:
+            # Set the configuration value.
+            self.config.SpdPlot["PlotTitleFontSize"] = val
+            logger.debug("Change to plot title text font size: {0:d}".format(self.config.SpdPlot["PlotTitleFontSize"]))
+            prefChanged = True
+
+        # Save the configuration values (if changed).
+        if prefChanged:
+            logger.debug("Changes saved to preferences.")
+            self.config.saveConfig()
 
 # *******************************************
 # About dialog class.
@@ -1150,6 +1501,7 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added menu items to export data for the selected trip or for all trips to a file.</li>" \
             "<li>Added ability to drag and drop log files onto application and have them open automatically.</li>" \
+            "<li>Added Edit Preferences dialog from main menu. Saves changes to configuration file.</li>" \
             "<li>Added configuration to show times in UTC or local time. \
                 Includes epoch indicator in status bar and suffix on displayed times.</li>" \
             "<li>Included signon ID in trip number in trip data pane and trip summary pane to relate better to logs.</li>" \

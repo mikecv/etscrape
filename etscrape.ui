@@ -1389,8 +1389,15 @@ color: rgb(0, 85, 255);</string>
     <addaction name="actionShowDebugEvents"/>
     <addaction name="actionShowOutOfTripEvents"/>
    </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionPreferences"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
+   <addaction name="menuEdit"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
@@ -1528,6 +1535,11 @@ border-color: rgb(0, 170, 255);</string>
   <action name="actionExportAllTrips">
    <property name="text">
     <string>All Trips</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>Preferences</string>
    </property>
   </action>
  </widget>
