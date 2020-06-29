@@ -15,7 +15,7 @@
         "InputEventColour": "#ffbf00",
         "DebugEventColour": "#00fa9a",
         "TmpStatusMessagesMsec": 10000,
-        "ShowOtherEvents": 1,
+        "ShowOtherEvents": 0,
         "ShowInputEvents": 1,
         "ShowDebugEvents": 1,
         "ShowOutOfTripEvents": 0,

@@ -30,15 +30,21 @@ from mplCharts import *
 #                       Added support to drag and drop log files to application.
 #                       Added edit preferences dialog.
 #                       Bug fixes.
+# 0.4   MDC 29/06/2020  Bug fixes.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
+# Need to reload/rerender log if settings change; update in help.
+# Add alternate help video format for Windows.
+# Check creation of new json config file if parameter missing.
+# Get rid of videos in help file as doesn't work on all browsers.
+# Fix order of save and cancel buttons on edit preferences screen.
 # *******************************************
 
 # Program version.
-progVersion = "0.3"
+progVersion = "0.4"
 
 # Create configuration values class object.
 config = Config()
@@ -264,13 +270,7 @@ class UI(QMainWindow):
 
         # If we have trips clear them and add them again.
         # will lose collapse/expand state though.
-        if self.haveTrips:
-            # Clear triptrip tree.
-            self.clearTrips()
-            # Clear speed plot.
-            self.spdFig.clearFigure()
-            # Repopulate trips.
-            self.populateTrips()
+        self.rerenderTripData()
 
     # *******************************************
     # Callback function for show/hide other events menu checkbox.
@@ -280,13 +280,7 @@ class UI(QMainWindow):
 
         # If we have trips clear them and add them again.
         # will lose collapse/expand state though.
-        if self.haveTrips:
-            # Clear triptrip tree.
-            self.clearTrips()
-            # Clear speed plot.
-            self.spdFig.clearFigure()
-            # Repopulate trips.
-            self.populateTrips()
+        self.rerenderTripData()
 
     # *******************************************
     # Callback function for show/hide debug events menu checkbox.
@@ -296,13 +290,7 @@ class UI(QMainWindow):
 
         # If we have trips clear them and add them again.
         # will lose collapse/expand state though.
-        if self.haveTrips:
-            # Clear triptrip tree.
-            self.clearTrips()
-            # Clear speed plot.
-            self.spdFig.clearFigure()
-            # Repopulate trips.
-            self.populateTrips()
+        self.rerenderTripData()
 
     # *******************************************
     # Callback function for show/hide out of trip events menu checkbox.
@@ -312,6 +300,12 @@ class UI(QMainWindow):
 
         # If we have trips clear them and add them again.
         # will lose collapse/expand state though.
+        self.rerenderTripData()
+
+    # *******************************************
+    # Re-render trip data.
+    # *******************************************
+    def rerenderTripData(self):
         if self.haveTrips:
             # Clear triptrip tree.
             self.clearTrips()
@@ -337,7 +331,7 @@ class UI(QMainWindow):
         self.epochLbl = QLabel()
         self.epochLbl.setStyleSheet("color: black; ")
         self.epochLbl.setFont(boldFont)
-        self.epochLbl.setText(tzone())
+        self.epochLbl.setText(tzone(config.TimeUTC))
         self.statusBar().addPermanentWidget(self.epochLbl)
 
     # *******************************************
@@ -1090,7 +1084,7 @@ class UI(QMainWindow):
         logger.debug("User selected Edit Preferences menu control.")
 
         # Create edit prefernces dialog.        
-        PreferencesDialog(config)
+        PreferencesDialog(config, self)
 
     # *******************************************
     # About control selected.
@@ -1148,11 +1142,12 @@ def showPopup(title, msg, info="", details=""):
 # Preferences dialog class.
 # *******************************************
 class PreferencesDialog(QDialog):
-    def __init__(self, config):
+    def __init__(self, config, app):
         super(PreferencesDialog, self).__init__()
         uic.loadUi(res_path("preferences.ui"), self)
 
         self.config = config
+        self.app = app
 
         # Preload the configuration values.
 
@@ -1188,10 +1183,10 @@ class PreferencesDialog(QDialog):
         self.debugEventColVal.clicked.connect(lambda: self.getColour(self.debugEventColVal))
         self.tempMsgMsecVal.setValidator(QtGui.QIntValidator(1, 60))
         self.tempMsgMsecVal.setText(str(int(self.config.TripData["TmpStatusMessagesMsec"] / 1000)))
-        self.showOtherVal.setChecked(not (self.config.TripData["ShowOtherEvents"] == 0))
-        self.showInputVal.setChecked(not (self.config.TripData["ShowInputEvents"] == 0))
-        self.showDebugVal.setChecked(not (self.config.TripData["ShowDebugEvents"] == 0))
-        self.showOutOfTripVal.setChecked(not (self.config.TripData["ShowOutOfTripEvents"] == 0))
+        self.showOtherVal.setChecked(self.app.actionShowOtherEvents.isChecked())
+        self.showInputVal.setChecked(self.app.actionShowInputEvents.isChecked())
+        self.showDebugVal.setChecked(self.app.actionShowDebugEvents.isChecked())
+        self.showOutOfTripVal.setChecked(self.app.actionShowOutOfTripEvents.isChecked())
         self.speedAlertLimVal.setValidator(QtGui.QIntValidator(30, 160))
         self.speedAlertLimVal.setText(str(self.config.TripData["BadSpeedLimit"]))
         self.rpmAlertLimVal.setValidator(QtGui.QIntValidator(500, 10000))
@@ -1242,6 +1237,9 @@ class PreferencesDialog(QDialog):
         # Flag indicating a preference has changed.
         prefChanged = False
 
+        # Flag indicating if need to re-render trip data for prefernece to take effect.
+        rerender = False
+
         ###########################
         # Debugging
         ###########################
@@ -1277,7 +1275,10 @@ class PreferencesDialog(QDialog):
             # Set the configuration value.
             self.config.TimeUTC = int(val)
             logger.debug("Change to time reference (UTC): {0:d}".format(self.config.TimeUTC))
+            # Update status bar item.
+            self.app.epochLbl.setText(tzone(val))
             prefChanged = True
+            rerender = True
 
         ###########################
         # Trip Data
@@ -1289,6 +1290,7 @@ class PreferencesDialog(QDialog):
             self.config.TripData["TripBackColour"] = col
             logger.debug("Change to trip tile background colour: {0:s}".format(self.config.TripData["TripBackColour"]))
             prefChanged = True
+            rerender = True
         # Trip ID text colour.
         col = self.tripIDTxtColVal.palette().button().color().name()
         if col != self.config.TripData["TripColour"]:
@@ -1296,6 +1298,7 @@ class PreferencesDialog(QDialog):
             self.config.TripData["TripColour"] = col
             logger.debug("Change to trip text colour: {0:s}".format(self.config.TripData["TripColour"]))
             prefChanged = True
+            rerender = True
         # Event text colour.
         col = self.eventNameColVal.palette().button().color().name()
         if col != self.config.TripData["EventColour"]:
@@ -1303,6 +1306,7 @@ class PreferencesDialog(QDialog):
             self.config.TripData["EventColour"] = col
             logger.debug("Change to event text colour: {0:s}".format(self.config.TripData["EventColour"]))
             prefChanged = True
+            rerender = True
         # Alert text colour.
         col = self.alertColVal.palette().button().color().name()
         if col != self.config.TripData["AlertColour"]:
@@ -1310,6 +1314,7 @@ class PreferencesDialog(QDialog):
             self.config.TripData["AlertColour"] = col
             logger.debug("Change to alert text colour: {0:s}".format(self.config.TripData["AlertColour"]))
             prefChanged = True
+            rerender = True
         # Comment text colour.
         col = self.commentColVal.palette().button().color().name()
         if col != self.config.TripData["CommentColour"]:
@@ -1317,6 +1322,7 @@ class PreferencesDialog(QDialog):
             self.config.TripData["CommentColour"] = col
             logger.debug("Change to comment text colour: {0:s}".format(self.config.TripData["CommentColour"]))
             prefChanged = True
+            rerender = True
         # Summary alert text colour.
         col = self.summaryAlertColVal.palette().button().color().name()
         if col != self.config.TripData["SummaryAlertColour"]:
@@ -1324,6 +1330,7 @@ class PreferencesDialog(QDialog):
             self.config.TripData["SummaryAlertColour"] = col
             logger.debug("Change to summary alert text colour: {0:s}".format(self.config.TripData["SummaryAlertColour"]))
             prefChanged = True
+            rerender = True
         # Other event text colour.
         col = self.otherEventColVal.palette().button().color().name()
         if col != self.config.TripData["OtherEventColour"]:
@@ -1331,6 +1338,7 @@ class PreferencesDialog(QDialog):
             self.config.TripData["OtherEventColour"] = col
             logger.debug("Change to other event text colour: {0:s}".format(self.config.TripData["OtherEventColour"]))
             prefChanged = True
+            rerender = True
         # Input event text colour.
         col = self.inputEventColVal.palette().button().color().name()
         if col != self.config.TripData["InputEventColour"]:
@@ -1338,6 +1346,7 @@ class PreferencesDialog(QDialog):
             self.config.TripData["InputEventColour"] = col
             logger.debug("Change to input event text colour: {0:s}".format(self.config.TripData["InputEventColour"]))
             prefChanged = True
+            rerender = True
         # Debug event text colour.
         col = self.debugEventColVal.palette().button().color().name()
         if col != self.config.TripData["DebugEventColour"]:
@@ -1345,6 +1354,7 @@ class PreferencesDialog(QDialog):
             self.config.TripData["DebugEventColour"] = col
             logger.debug("Change to debug event text colour: {0:s}".format(self.config.TripData["DebugEventColour"]))
             prefChanged = True
+            rerender = True
         # Temporary status message timeout.
         val = int(self.tempMsgMsecVal.text()) * 1000
         if val != self.config.TripData["TmpStatusMessagesMsec"]:
@@ -1354,32 +1364,44 @@ class PreferencesDialog(QDialog):
             prefChanged = True
         # Show other events.
         val = self.showOtherVal.isChecked()
-        if val == (self.config.TripData["ShowOtherEvents"] == 0):
+        if val != self.app.actionShowOtherEvents.isChecked():
             # Set the configuration value.
             self.config.TripData["ShowOtherEvents"] = int(val)
             logger.debug("Change to show other events: {0:d}".format(self.config.TripData["ShowOtherEvents"]))
+            # Update menu item.
+            self.app.actionShowOtherEvents.setChecked(val)
             prefChanged = True
+            rerender = True
         # Show input events.
         val = self.showInputVal.isChecked()
-        if val == (self.config.TripData["ShowInputEvents"] == 0):
+        if val != self.app.actionShowInputEvents.isChecked():
             # Set the configuration value.
             self.config.TripData["ShowInputEvents"] = int(val)
             logger.debug("Change to show input events: {0:d}".format(self.config.TripData["ShowInputEvents"]))
+            # Update menu item.
+            self.app.actionShowInputEvents.setChecked(val)
             prefChanged = True
+            rerender = True
         # Show debug events.
         val = self.showDebugVal.isChecked()
-        if val == (self.config.TripData["ShowDebugEvents"] == 0):
+        if val != self.app.actionShowDebugEvents.isChecked():
             # Set the configuration value.
             self.config.TripData["ShowDebugEvents"] = int(val)
             logger.debug("Change to show debug events: {0:d}".format(self.config.TripData["ShowDebugEvents"]))
+            # Update menu item.
+            self.app.actionShowDebugEvents.setChecked(val)
             prefChanged = True
+            rerender = True
         # Show out of trip events.
         val = self.showOutOfTripVal.isChecked()
-        if val == (self.config.TripData["ShowOutOfTripEvents"] == 0):
+        if val != self.app.actionShowOutOfTripEvents.isChecked():
             # Set the configuration value.
             self.config.TripData["ShowOutOfTripEvents"] = int(val)
             logger.debug("Change to show out of trip events: {0:d}".format(self.config.TripData["ShowOutOfTripEvents"]))
+            # Update menu item.
+            self.app.actionShowOutOfTripEvents.setChecked(val)
             prefChanged = True
+            rerender = True
         # Bad vehicle speed limit.
         val = int(self.speedAlertLimVal.text())
         if val != self.config.TripData["BadSpeedLimit"]:
@@ -1387,6 +1409,7 @@ class PreferencesDialog(QDialog):
             self.config.TripData["BadSpeedLimit"] = val
             logger.debug("Change to bad vehicle speed limit: {0:d}".format(self.config.TripData["BadSpeedLimit"]))
             prefChanged = True
+            rerender = True
         # Bad engine speed limit.
         val = int(self.rpmAlertLimVal.text())
         if val != self.config.TripData["BadRpmLimit"]:
@@ -1446,6 +1469,10 @@ class PreferencesDialog(QDialog):
             logger.debug("Changes saved to preferences.")
             self.config.saveConfig()
 
+        # Rerender display if UI preference changed.
+        if rerender:
+            self.app.rerenderTripData()
+
 # *******************************************
 # About dialog class.
 # *******************************************
@@ -1497,6 +1524,11 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.4</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Fixed bug with editing preferences where Show menu items did not reflect changes to configuration.</li>" \
+            "<li>Fixed bug with time zone in status bar always showing local timezone.</li>" \
+            "<li>Added rerendering of trip data if UI changes were made to preferences so would apply straight away.</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.3</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added menu items to export data for the selected trip or for all trips to a file.</li>" \

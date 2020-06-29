@@ -43,7 +43,7 @@ class Config():
         # Speed plot data.
         self.SpdPlot = {
             "DefaultLowLimit": 30,
-            #"DefaultHiLimit": 60,
+            "DefaultHiLimit": 60,
             "SpeedColour": "#0000ff",
             "ZoneColour": "#ff66ff",
             "AxesTitleFontSize": 7,
@@ -54,7 +54,7 @@ class Config():
         self.Channels = [
             {"No" : 1, "Name" : "[ET] Engine Oil Pressure, [ST] Seat"},
             {"No" : 2, "Name" : "[ET] Engine Temperature"},
-            {"No" : 3, "Name" : "[ET] Ground Speed"},
+            {"No" : 3, "Name" : "[ET][ST] Ground Speed"},
             {"No" : 4, "Name" : "[ET] Engine Speed"},
             {"No" : 5, "Name" : "[ET] Passenger Seatbelt, [ST] Weight"},
             {"No" : 6, "Name" : "[ET][ST] Operator Seatbelt"},
@@ -99,6 +99,7 @@ class Config():
                         self.Channels = config["Channels"]
                     except Exception:
                         print("Error updating configuration values - channels.")
+                    # Save configuration to file.
                     self.saveConfig()
                 else:
 
