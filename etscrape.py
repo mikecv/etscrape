@@ -36,11 +36,8 @@ from mplCharts import *
 # *******************************************
 # TODO List
 #
-# Need to reload/rerender log if settings change; update in help.
-# Add alternate help video format for Windows.
-# Check creation of new json config file if parameter missing.
-# Get rid of videos in help file as doesn't work on all browsers.
 # Fix order of save and cancel buttons on edit preferences screen.
+# Add error message if failing to read a debug file. Add to help.
 # *******************************************
 
 # Program version.
@@ -190,6 +187,7 @@ class UI(QMainWindow):
             # Open and read log file.
             with open(filename, encoding='cp1252') as f:
                 self.logData = f.read()
+
             logger.info("Opened and read log file : {0:s}".format(filename))
             self.showTempStatusMsg("{0:s}".format(filename), config.TripData["TmpStatusMessagesMsec"])
 
@@ -661,7 +659,7 @@ class UI(QMainWindow):
         self.spdFig.updatePlotData(self.selectedTrip, tList, sList)
 
         # Plot speed limit lines on plot.
-        # At this point speed limits from application configuration as not include in log.
+        # At this point speed limits from application configuration as not included in log.
         # Get zone change data for the nominated trip.
         tList = []
         zList = []
@@ -1526,8 +1524,13 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.4</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Fixed zone change line in speed plot which was inadvertantly broken in previous release.</li>" \
+            "<li>Removed time reversal check on POWERDOWN event as always out of order. \
+                also removed POWERDOWN event from speed plot.</li>" \
             "<li>Fixed bug with editing preferences where Show menu items did not reflect changes to configuration.</li>" \
+            "<li>Fixed bug when upgrading configuration file.</li>" \
             "<li>Fixed bug with time zone in status bar always showing local timezone.</li>" \
+            "<li>Removed video file from help page as not compliant with all browsers.</li>" \
             "<li>Added rerendering of trip data if UI changes were made to preferences so would apply straight away.</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.3</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\

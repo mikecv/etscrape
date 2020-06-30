@@ -211,19 +211,22 @@ class Trip():
                 event = Event(su.group(10), int(su.group(4)))
                 self.logger.debug("Detected event: {0:s}, at: {1:s}".format(su.group(10), datetime.fromtimestamp(int(su.group(4))).strftime('%d/%m/%Y %H:%M:%S')))
 
-                # Check for event time in the past.
-                if int(su.group(4)) < self.lastTime:
-                    event.alertText = appendAlertText(event.alertText, "Event time reversal.")
-                self.lastTime = int(su.group(4))
+                # Check for event time in the past, except if event is POWERDOWN as this is always in the past.
+                if su.group(10) != "POWERDOWN":
+                    if int(su.group(4)) < self.lastTime:
+                        event.alertText = appendAlertText(event.alertText, "Event time reversal.")
+                    self.lastTime = int(su.group(4))
 
                 # Get speed data from event header.
                 # But only if still collecting speed data, i.e. trip has not ended.
                 if not self.stopSpeedData:
                     event.speed = int(su.group(9))
-                    # If speedlog already has speed for this time then skip, else append to list.
-                    if self.checkForSpeedTime(int(su.group(4))) == False:
-                        self.speedLog.append(SpeedInfo(int(su.group(4)), int(su.group(9))))
-                        self.logger.debug("Logged speed: {0:d}, at {1:s}".format(int(su.group(9)), datetime.fromtimestamp(int(su.group(4))).strftime('%d/%m/%Y %H:%M:%S')))
+                    # Don't get speed from POWERDOWN event as these events occur out of order.
+                    if su.group(10) != "POWERDOWN": 
+                        # If speedlog already has speed for this time then skip, else append to list.
+                        if self.checkForSpeedTime(int(su.group(4))) == False:
+                            self.speedLog.append(SpeedInfo(int(su.group(4)), int(su.group(9))))
+                            self.logger.debug("Logged speed: {0:d}, at {1:s}".format(int(su.group(9)), datetime.fromtimestamp(int(su.group(4))).strftime('%d/%m/%Y %H:%M:%S')))
 
                 # Check if out of trip event, i.e. end trip time > 0.
                 if self.tripEnd > 0:
@@ -344,8 +347,13 @@ class Trip():
 
                         # Record the zone change event in the zone change log.
                         # This can be used if we plot zone speed limits on speed plot.
-                        # Record the previous zone changeventomZone
-                        
+                        # Record the previous zone change at this time so that we can get a step function.
+                        if len(self.zoneXings) > 0:
+                            self.zoneXings.append(ZoneInfo(int(su.group(4)), self.zoneXings[-1].fromZone, self.zoneXings[-1].toZone, self.zoneXings[-1].zoneOutput))
+                        else:
+                            # Record first from zone so that we can possibly do step at first zonechange.
+                            self.firstFromZone = event.fromZone
+
                         self.zoneXings.append(ZoneInfo(int(su.group(4)), event.fromZone, event.toZone, event.zoneOutput))
 
                         # Add event to list of events.

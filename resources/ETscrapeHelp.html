@@ -7,10 +7,12 @@
 
 <h1>EarthTrack Log Scraper</h1>
 
-<p>The EarthTrack Log Scraper is relatively simple in that it just reads the contents of a log file from an EarthTrack Fleet Controller module,
-and displays a sanitised version of trips included in the log file. The primary purpose of the application is as a diagnostic tool
-for test personnel; so that they can avoid having to look through the log file which is not as easy to read.</p>
-
+<p>The EarthTrack Log Scraper is relatively simple in that it just reads the contents of a debug log file downloaded from an EarthTrack Fleet Controller module
+or message log file downloaded from the EarthTrack server, and displays a sanitised version of trips included in the log file.
+The primary purpose of the application is as a diagnostic tool for test personnel;
+so that they can avoid having to look through the log file which is not as easy to read.</p>
+<p>Remember that debug log files are plain text files, i.e. not the zipped debug log archives as downloaded from the Fleet Controller.</p>
+  
 <h2>The application window</h2>
 <p>The application consists of a single window divided into three panes. The left pane shows the parsed contents of all trips in the EarthTrack log file,
 the right pane shows summary information for the currently selected trip,
@@ -27,13 +29,9 @@ Note that the application supports message logs (.csv) available at the server, 
 <img src="./logOpenMenu.png" alt="Log file open with menu">
 
 <h3>Dragging and dropping a log file onto the application</h3>
-<p>From a file explorer or browser drag and drop a log file onto the application trip data pane as illustrated in the following video.
+<p>From a file explorer or browser drag and drop a log file onto the application trip data pane.
 The cursor will change to a drag cursor when over the application window if a file has been selected.
 Note that if you attempt to drag more than one log file into the application, only the first file will be loaded.</p>
-<br>
-<video controls width="1064">
-  <source src="./logOpenDrag.webm" type="video/webm">
-</video>
 
 <h3>Log file trip data organisation</h3>
 <p>Once opened the trips included in the log file will be listed in the Trip Data pane on the left,
@@ -146,7 +144,8 @@ Selecting the &#34;Edit &#47; Preferences&#34; menu item will launch a dialog wh
 To change a configuration item colour, select the adjacent shaded button which will present a colour selection dialog
 from which a colour can be selected.</p>
 <p>Selecting &#34;Save&#34; on the Edit Preferences dialog will save all preferences to the application configuration file.
-Note that all but the logging preferences (other than than the logging level) will have immediate effect.</p>
+For changes affecting the UI the application will rerender loaded trip data so that the changes can take effect,
+this will require that the trip data is collapsed.</p>
         
 <h2>Application logging</h2>
 <p>The application uses the standard Python logging library. Configuration parameters are used to control the number of log files used

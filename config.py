@@ -76,29 +76,9 @@ class Config():
                 config = json.load(config_file)
 
                 # Check configuration version.
-                # If version not a match then try and update as much as possible.
-                # Only updating by whole lists, so restructured file may not update completely.
+                # If version not a match then update completely.
                 if config["ConfigVersion"] != self.ConfigVersion:
                     print("Upgrading configuration file.")
-                    try:
-                        self.DebugLevel = config["DebugLevel"]
-                        self.LogFileSize = config["LogFileSize"]
-                        self.LogBackups = config["LogBackups"]
-                        self.TimeUTC = config["TimeUTC"]
-                    except Exception:
-                        print("Error updating configuration values - sundry.")
-                    try:
-                        self.TripData = config["TripData"]
-                    except Exception:
-                        print("Error updating configuration values - trip data.")
-                    try:
-                        self.SpdPlot = config["SpdPlot"]
-                    except Exception:
-                        print("Error updating configuration values - speed plot.")
-                    try:
-                        self.Channels = config["Channels"]
-                    except Exception:
-                        print("Error updating configuration values - channels.")
                     # Save configuration to file.
                     self.saveConfig()
                 else:

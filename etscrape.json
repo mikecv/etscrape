@@ -1,9 +1,9 @@
 {
     "ConfigVersion": 3,
-    "DebugLevel": 10,
+    "DebugLevel": 20,
     "LogFileSize": 100000,
     "LogBackups": 3,
-    "TimeUTC": 0,
+    "TimeUTC": 1,
     "TripData": {
         "TripBackColour": "#ffff00",
         "TripColour": "#000000",
@@ -15,7 +15,7 @@
         "InputEventColour": "#ffbf00",
         "DebugEventColour": "#00fa9a",
         "TmpStatusMessagesMsec": 10000,
-        "ShowOtherEvents": 0,
+        "ShowOtherEvents": 1,
         "ShowInputEvents": 1,
         "ShowDebugEvents": 1,
         "ShowOutOfTripEvents": 0,
@@ -33,7 +33,7 @@
     "Channels": [
         {
             "No": 1,
-            "Name": "[ET] Engine Oil Pressure"
+            "Name": "[ET] Engine Oil Pressure, [ST] Seat"
         },
         {
             "No": 2,
@@ -41,7 +41,7 @@
         },
         {
             "No": 3,
-            "Name": "[ET] Ground Speed"
+            "Name": "[ET][ST] Ground Speed"
         },
         {
             "No": 4,
@@ -49,11 +49,11 @@
         },
         {
             "No": 5,
-            "Name": "[ET] Passenger Seatbelt"
+            "Name": "[ET] Passenger Seatbelt, [ST] Weight"
         },
         {
             "No": 6,
-            "Name": "[ET] Operator Seatbelt"
+            "Name": "[ET][ST] Operator Seatbelt"
         },
         {
             "No": 7,
