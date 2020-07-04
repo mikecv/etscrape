@@ -1,9 +1,9 @@
 {
     "ConfigVersion": 3,
-    "DebugLevel": 20,
+    "DebugLevel": 10,
     "LogFileSize": 100000,
     "LogBackups": 3,
-    "TimeUTC": 1,
+    "TimeUTC": 0,
     "TripData": {
         "TripBackColour": "#ffff00",
         "TripColour": "#000000",

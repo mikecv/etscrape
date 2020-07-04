@@ -132,6 +132,7 @@ class Trip():
         self.numTripEvents = 0
         self.numReportEvents = 0
         self.numOtherEvents = 0
+        self.numDebugEvents = 0
 
         # Total specific vehicle events.
         self.numOverspeed = 0
@@ -145,6 +146,7 @@ class Trip():
         self.numImpact_L = 0
 
         # Total specific Operator events.
+        self.numChecklist = 0
         self.numUnbuckled_O = 0
         self.numUnbuckled_P = 0
         self.numZoneChange = 0
@@ -401,6 +403,7 @@ class Trip():
 
                         # Increment event counters.
                         self.numOperatorEvents += 1
+                        self.numChecklist += 1
 
                         # Add event to list of events.
                         self.events.append(event)
@@ -525,6 +528,7 @@ class Trip():
 
                         # Indicate event is Debug event to control presentation format.
                         event.isDebug = True
+                        self.numDebugEvents += 1
 
                         # Add event to list of events.
                         self.events.append(event)

@@ -54,11 +54,11 @@ class Config():
         self.Channels = [
             {"No" : 1, "Name" : "[ET] Engine Oil Pressure, [ST] Seat"},
             {"No" : 2, "Name" : "[ET] Engine Temperature"},
-            {"No" : 3, "Name" : "[ET][ST] Ground Speed"},
-            {"No" : 4, "Name" : "[ET] Engine Speed"},
+            {"No" : 3, "Name" : "[ET] Ground Speed, [ST] Work 1"},
+            {"No" : 4, "Name" : "[ET] Engine Speed, [ST] Work 2"},
             {"No" : 5, "Name" : "[ET] Passenger Seatbelt, [ST] Weight"},
             {"No" : 6, "Name" : "[ET][ST] Operator Seatbelt"},
-            {"No" : 7, "Name" : "[ET] Engine Coolant Level"},
+            {"No" : 7, "Name" : "[ET] Engine Coolant Level, [ST] Work 3"},
             {"No" : 8, "Name" : "[ET][ST] Ignition Switch"},
             {"No" : 9, "Name" : "[ET][ST] Accelerometer"},
             {"No" : 10, "Name" : "[ET][ST] GNSS"}

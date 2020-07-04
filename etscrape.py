@@ -12,6 +12,7 @@ from datetime import timedelta, datetime
 import os
 import sys
 import webbrowser
+import zipfile
 
 from config import *
 from utils import *
@@ -31,13 +32,13 @@ from mplCharts import *
 #                       Added edit preferences dialog.
 #                       Bug fixes.
 # 0.4   MDC 29/06/2020  Bug fixes.
+#                       Additions to the Trip Summary pane.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
-# Fix order of save and cancel buttons on edit preferences screen.
-# Add error message if failing to read a debug file. Add to help.
+# Option for separate plot that shows all events like HighCharts for current trip.
 # *******************************************
 
 # Program version.
@@ -162,7 +163,6 @@ class UI(QMainWindow):
         # Show appliction window.
         self.show()
 
-
     # *******************************************
     # Respond to drag / drop events.
     # *******************************************
@@ -185,7 +185,7 @@ class UI(QMainWindow):
             logger.debug("File dropped on application: {0:s}".format(filename))
 
             # Open and read log file.
-            with open(filename, encoding='cp1252') as f:
+            with open(filename, encoding='cp1252', errors="surrogateescape") as f:
                 self.logData = f.read()
 
             logger.info("Opened and read log file : {0:s}".format(filename))
@@ -540,11 +540,11 @@ class UI(QMainWindow):
         # Add trip data tree to layout.
         self.verticalLayout.addWidget(self.tripDataTree)
 
-        # Set the first trip as the current trip.
-        # This is so that we can populate the trip details frame.
-        self.tripDataTree.setCurrentItem(self.tripDataTree.topLevelItem(0))
-        self.selectedTrip = 1
-        self.updateTripSummary(1)
+        # Set the previously designated current trip as the current trip.
+        # The selected trip is initialised to 1 when the log file is loaded,
+        # there after the selected trip is maintained so that when log file is re-rendered
+        self.tripDataTree.setCurrentItem(self.tripDataTree.topLevelItem(self.selectedTrip - 1))
+        self.updateTripSummary(self.selectedTrip)
         self.plotTripData(self.selectedTrip)
 
         # Define callback if selection is made to a different trip.
@@ -609,21 +609,23 @@ class UI(QMainWindow):
         self.updateSummaryCount(self.LowCoolantLbl, ti.numLowCoolant)
         self.updateSummaryCount(self.LowOilPressureLbl, ti.numOilPressure)
         self.updateSummaryCount(self.HighTemperatureLbl, ti.numEngineTemperature)
-        self.updateSummaryCount(self.UnbuckledOpLbl, ti.numUnbuckled_O)
-        self.updateSummaryCount(self.UnbuckledPassLbl, ti.numUnbuckled_P)
-        # Operator events.
-        self.OperatorEventsLbl.setText("{0:d}".format(ti.numOperatorEvents))
         self.updateSummaryCount(self.HiImpactLbl, ti.numImpact_H)
         self.updateSummaryCount(self.MidImpactLbl, ti.numImpact_M)
         self.updateSummaryCount(self.LoImpactLbl, ti.numImpact_L)
+        # Operator events.
+        self.OperatorEventsLbl.setText("{0:d}".format(ti.numOperatorEvents))
+        self.updateSummaryCount(self.UnbuckledOpLbl, ti.numUnbuckled_O)
+        self.updateSummaryCount(self.UnbuckledPassLbl, ti.numUnbuckled_P)
+        self.updateSummaryCount(self.ChecklistLbl, ti.numChecklist)
         self.updateSummaryCount(self.ZoneChangeLbl, ti.numZoneChange)
         # Trip events.
         self.TripEventsLbl.setText("{0:d}".format(ti.numTripEvents))
         # Report events.
         self.ReportEventsLbl.setText("{0:d}".format(ti.numReportEvents))
         # Other events.
-        if config.TripData["ShowOtherEvents"] != 0:
-            self.OtherEventsLbl.setText("{0:d}".format(ti.numOtherEvents))
+        self.OtherEventsLbl.setText("{0:d}".format(ti.numOtherEvents))
+        # Debug events.
+        self.DebugEventsLbl.setText("{0:d}".format(ti.numDebugEvents))
 
     # *******************************************
     # Update trip summary information for selected trip.
@@ -1064,8 +1066,9 @@ class UI(QMainWindow):
             # If have a filename then open.
             if filenames[0] != "":
                 # Open and read log file.
-                with open(filenames[0], encoding='cp1252') as f:
+                with open(filenames[0], encoding='cp1252', errors="surrogateescape") as f:
                     self.logData = f.read()
+
                 logger.info("Opened and read log file : {0:s}".format(filenames[0]))
                 self.showTempStatusMsg("{0:s}".format(filenames[0]), config.TripData["TmpStatusMessagesMsec"])
 
@@ -1205,7 +1208,9 @@ class PreferencesDialog(QDialog):
         self.titleFontSizeVal.setText(str(self.config.SpdPlot["PlotTitleFontSize"]))
 
         # Connect to SAVE dialog button for processing.
-        self.accepted.connect(self.savePreferences)
+        self.SaveDialogBtn.clicked.connect(self.savePreferences)
+        # Connect to CANCEL dialog button to quit dialog.
+        self.CancelDialogBtn.clicked.connect(self.close)
 
         # Show the edit preferences dialog.
         self.showPreferences()
@@ -1416,6 +1421,9 @@ class PreferencesDialog(QDialog):
             logger.debug("Change to bad engine speed limit: {0:d}".format(self.config.TripData["BadRpmLimit"]))
             prefChanged = True
 
+        # Cancel, so close dialog.
+        self.close()
+
         ###########################
         # Speed Plot Data
         ###########################
@@ -1526,11 +1534,18 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Fixed zone change line in speed plot which was inadvertantly broken in previous release.</li>" \
             "<li>Removed time reversal check on POWERDOWN event as always out of order. \
-                also removed POWERDOWN event from speed plot.</li>" \
-            "<li>Fixed bug with editing preferences where Show menu items did not reflect changes to configuration.</li>" \
+                also removed POWERDOWN event from speed plot.</li>"
+            "<li>Save selected trip so not lost when rerendering the trip data, e.g. after showning hidden events.</li>" \
+            "<li>Fixed crash if opening bad codec files, e.g. zipped files.</li>" \
+            "<li>Fixed bug with editing preferences where Show menu items did not reflect changes to configuration, \
+                also fixed Cancel/Save buttons which are swapped for Linux/Windows.</li>" \
             "<li>Fixed bug when upgrading configuration file.</li>" \
             "<li>Fixed bug with time zone in status bar always showing local timezone.</li>" \
+            "<li>Fixed summary pane data some static text being cropped, \
+                also added checklist total to summary data.</li>" \
             "<li>Removed video file from help page as not compliant with all browsers.</li>" \
+            "<li>Added Added DEBUG totals to Trip Summary pane; \
+                changed so that summary totals always updated even if event type not shown.</li>" \
             "<li>Added rerendering of trip data if UI changes were made to preferences so would apply straight away.</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.3</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
