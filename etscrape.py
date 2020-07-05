@@ -38,7 +38,6 @@ from mplCharts import *
 # *******************************************
 # TODO List
 #
-# Option for separate plot that shows all events like HighCharts for current trip.
 # *******************************************
 
 # Program version.
