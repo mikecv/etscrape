@@ -1,9 +1,9 @@
 {
-    "ConfigVersion": 3,
-    "DebugLevel": 10,
+    "ConfigVersion": 4,
+    "DebugLevel": 20,
     "LogFileSize": 100000,
     "LogBackups": 3,
-    "TimeUTC": 0,
+    "TimeUTC": 1,
     "TripData": {
         "TripBackColour": "#ffff00",
         "TripColour": "#000000",
@@ -30,6 +30,12 @@
         "AxesTitleFontSize": 7,
         "PlotTitleFontSize": 10
     },
+    "EvPlot": {
+        "AxesTitleFontSize": 7,
+        "PlotTitleFontSize": 10,
+        "AxisLabelFontSize": 6,
+        "EventTraceColour": "#0000ff"
+    },
     "Channels": [
         {
             "No": 1,
@@ -41,11 +47,11 @@
         },
         {
             "No": 3,
-            "Name": "[ET][ST] Ground Speed"
+            "Name": "[ET] Ground Speed, [ST] Work 1"
         },
         {
             "No": 4,
-            "Name": "[ET] Engine Speed"
+            "Name": "[ET] Engine Speed, [ST] Work 2"
         },
         {
             "No": 5,
@@ -57,7 +63,7 @@
         },
         {
             "No": 7,
-            "Name": "[ET] Engine Coolant Level"
+            "Name": "[ET] Engine Coolant Level, [ST] Work 3"
         },
         {
             "No": 8,
@@ -70,6 +76,51 @@
         {
             "No": 10,
             "Name": "[ET][ST] GNSS"
+        }
+    ],
+    "EventTraces": [
+        {
+            "No": 1,
+            "Event": "ZONEOVERSPEED",
+            "Title": "Zone\nOverspeed"
+        },
+        {
+            "No": 2,
+            "Event": "ENGINEOVERSPEED",
+            "Title": "Engine\nOverspeed"
+        },
+        {
+            "No": 3,
+            "Event": "LOWCOOLANT",
+            "Title": "Engine Coolant\nLevel Low"
+        },
+        {
+            "No": 4,
+            "Event": "OILPRESSURE",
+            "Title": "Engine Oil\nPressure Low"
+        },
+        {
+            "No": 5,
+            "Event": "ENGINETEMP",
+            "Title": "Engine Temperature\nHigh"
+        },
+        {
+            "No": 7,
+            "Event": "INPUT",
+            "Title": "Input 1",
+            "Channel": 1
+        },
+        {
+            "No": 8,
+            "Event": "INPUT",
+            "Title": "Input 2",
+            "Channel": 2
+        },
+        {
+            "No": 9,
+            "Event": "INPUT",
+            "Title": "Input 8",
+            "Channel": 8
         }
     ]
 }

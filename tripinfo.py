@@ -236,9 +236,6 @@ class Trip():
 
                 # Break out some of the event data explicitly.
                 eventSpecifics = su.group(11)
-
-                # If event is
-
                 # =============================================================================
                 # OVERSPEED event
                 # =============================================================================
@@ -523,8 +520,14 @@ class Trip():
                         event.debugInfo = eventSpecifics
 
                         # Check and alert for known critical debug issues.
-                        if "Time1H" in eventSpecifics:
+                        if "Time1H:" in eventSpecifics:
                             event.alertText = appendAlertText(event.alertText, "Time correction.")
+
+                        elif "Time1H INV:" in eventSpecifics:
+                            event.alertText = appendAlertText(event.alertText, "Invalid time detected.")
+
+                        elif "Time(BAD)" in eventSpecifics:
+                            event.alertText = appendAlertText(event.alertText, "BAD time detected.")
 
                         # Indicate event is Debug event to control presentation format.
                         event.isDebug = True

@@ -10,7 +10,7 @@ class Config():
     def __init__(self):
 
         # Version of configuration.
-        self.ConfigVersion = 3
+        self.ConfigVersion = 4
 
         # Logger configuration values
         self.DebugLevel = 20
@@ -47,7 +47,15 @@ class Config():
             "SpeedColour": "#0000ff",
             "ZoneColour": "#ff66ff",
             "AxesTitleFontSize": 7,
-            "PlotTitleFontSize":10
+            "PlotTitleFontSize": 10
+        }
+
+        # Event plot data.
+        self.EvPlot = {
+            "AxesTitleFontSize": 7,
+            "PlotTitleFontSize": 10,
+            "AxisLabelFontSize": 6,
+            "EventTraceColour": "#0000ff"
         }
 
         # Input channel definitions.
@@ -62,6 +70,18 @@ class Config():
             {"No" : 8, "Name" : "[ET][ST] Ignition Switch"},
             {"No" : 9, "Name" : "[ET][ST] Accelerometer"},
             {"No" : 10, "Name" : "[ET][ST] GNSS"}
+            ]
+
+        # Event chart.
+        self.EventTraces = [
+            {"No" : 1, "Event" : "ZONEOVERSPEED", "Title" : "Zone\nOverspeed"},
+            {"No" : 2, "Event" : "ENGINEOVERSPEED", "Title" : "Engine\nOverspeed"},
+            {"No" : 3, "Event" : "LOWCOOLANT", "Title" : "Engine Coolant\nLevel Low"},
+            {"No" : 4, "Event" : "OILPRESSURE", "Title" : "Engine Oil\nPressure Low"},
+            {"No" : 5, "Event" : "ENGINETEMP", "Title" : "Engine Temperature\nHigh"},
+            {"No" : 7, "Event" : "INPUT", "Title" : "Input 1", "Channel" : 1},
+            {"No" : 8, "Event" : "INPUT", "Title" : "Input 2", "Channel" : 2},
+            {"No" : 9, "Event" : "INPUT", "Title" : "Input 8", "Channel" : 8}
             ]
 
         # Read / update configuration from file.
@@ -92,7 +112,9 @@ class Config():
                         self.TimeUTC = config["TimeUTC"]
                         self.TripData = config["TripData"]
                         self.SpdPlot = config["SpdPlot"]
+                        self.EvPlot = config["EvPlot"]
                         self.Channels = config["Channels"]
+                        self.EventTraces = config["EventTraces"]
                     except Exception:
                         print("Error reading configuration file.")
 
@@ -115,7 +137,9 @@ class Config():
             "TimeUTC" : self.TimeUTC,
             "TripData" : self.TripData,
             "SpdPlot" : self.SpdPlot,
-            "Channels" : self.Channels
+            "EvPlot" : self.EvPlot,
+            "Channels" : self.Channels,
+            "EventTraces" : self.EventTraces
         }
 
         # Open file for writing.

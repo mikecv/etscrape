@@ -30,13 +30,13 @@ def unixTime(t, utc):
 def tzone(useUTC):
     if useUTC:
         # If usig UTC retrun UTC as timezone.
-        return ("[UTC}")
+        return ("[UTC]")
     else:
         # Else return the local timezone.
         offset =  int(time.timezone / -3600)
         if offset == 0:
             # Local timezone is actually UTC anyway.
-            return ("[UTC}")
+            return ("[UTC]")
         else:
             # Else local timezone is offset from UTC.
             return ("[UTC{0:+d}]".format(int(time.timezone / -3600)))

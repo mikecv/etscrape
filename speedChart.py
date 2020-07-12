@@ -5,42 +5,51 @@ matplotlib.use('Qt5Agg')
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT as NavigationToolbar
 from matplotlib.figure import Figure
 import matplotlib.dates as mdates
+from utils import *
 
 # *******************************************
-# Matplotlib plotting class
+# Speed plotting class
 # *******************************************
-class MplCanvas(FigureCanvasQTAgg):   
-    def __init__(self, parent, config, logger, width, height, dpi):
+class SpeedCanvas(FigureCanvasQTAgg):   
+    def __init__(self, data, config, logger, width, height, dpi):
 
+        self.data = data
         self.cfg = config
         self.logger = logger
 
-        self.logger.debug("Mplanvas class constructor.")
+        self.logger.debug("SpeedCanvas class constructor.")
 
-        # Create Matplotlib figure
+        # Create Matplotlib figure.
         self.fig = Figure(figsize=(width, height), dpi=dpi)
 
         # Keep layout tight so that it fits into the frame nicely.
         self.fig.set_tight_layout(True)
 
-        # Single plot with two line plots.
-        # One line for speed, and one line for speed limit.        
+        # Create the axes for the plot.
+        self.createAxes()
+
+        super(SpeedCanvas, self).__init__(self.fig)
+
+    # *******************************************
+    # Create the axes for the chart.
+    # *******************************************
+    def createAxes(self):
         self.axes = self.fig.add_subplot(111)
         self.line, = self.axes.plot_date([], [], color=self.cfg.SpdPlot["SpeedColour"], marker='o', linestyle='solid', linewidth=1)
         self.zone, = self.axes.plot_date([], [], color=self.cfg.SpdPlot["ZoneColour"], marker=None, linestyle='dashed', linewidth=1)
 
         # Setup plot labels.
-        self.axes.set_xlabel("Time", fontsize=self.cfg.SpdPlot["AxesTitleFontSize"])
+        self.axes.set_xlabel("Time {0:s}".format(tzone(self.cfg.TimeUTC)), fontsize=self.cfg.SpdPlot["AxesTitleFontSize"])
         self.axes.set_ylabel("Speed", fontsize=self.cfg.SpdPlot["AxesTitleFontSize"])
-
-        super(MplCanvas, self).__init__(self.fig)
 
     # *******************************************
     # Clear the figure.
-    # Just by clearing the input data lists.
+    # Clear data, the current axes and then create new axes.
     # *******************************************
     def clearFigure(self):
-        self.updatePlotData(0, [], [])
+        # Clear the axes and create afresh.
+        self.axes.clear()
+        self.createAxes()
 
     # *******************************************
     # Update plot with new plot.
@@ -48,7 +57,7 @@ class MplCanvas(FigureCanvasQTAgg):
     def updatePlotData(self, No, tList, sList):
 
         # Add trip number as the plot title.
-        self.axes.set_title("Trip {0:02d}".format(No), fontsize=self.cfg.SpdPlot["PlotTitleFontSize"])
+        self.axes.set_title("Trip {0:d} [{1:d}]".format(No, self.data.tripLog[No-1].signOnId), fontsize=self.cfg.SpdPlot["PlotTitleFontSize"])
 
         # Clear old plot data.
         self.line.set_xdata([])

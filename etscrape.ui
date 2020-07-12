@@ -1509,9 +1509,16 @@ color: rgb(0, 85, 255);</string>
     </property>
     <addaction name="actionPreferences"/>
    </widget>
+   <widget class="QMenu" name="menuWindows">
+    <property name="title">
+     <string>Windows</string>
+    </property>
+    <addaction name="actionShowEventsChart"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuWindows"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
@@ -1654,6 +1661,11 @@ border-color: rgb(0, 170, 255);</string>
   <action name="actionPreferences">
    <property name="text">
     <string>Preferences</string>
+   </property>
+  </action>
+  <action name="actionShowEventsChart">
+   <property name="text">
+    <string>Show Events Chart</string>
    </property>
   </action>
  </widget>

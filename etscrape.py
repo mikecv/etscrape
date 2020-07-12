@@ -12,12 +12,12 @@ from datetime import timedelta, datetime
 import os
 import sys
 import webbrowser
-import zipfile
 
 from config import *
 from utils import *
 from tripinfo import *
-from mplCharts import *
+from speedChart import *
+from eventsChart import *
 
 # *******************************************
 # Program history.
@@ -33,15 +33,28 @@ from mplCharts import *
 #                       Bug fixes.
 # 0.4   MDC 29/06/2020  Bug fixes.
 #                       Additions to the Trip Summary pane.
+# 0.5   MDC 05/07/2020  Add events chart, similar to HighCharts.
+#                       Added additional DEBUG checks for invalid times.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
+# Option for separate plot that shows all events like HighCharts for current trip.
+# Fix time axis value clutter on events plot.
+# Fix timezone and indications on speed and event plots.
+# Add events plot configuration to preferences page.
+# Look at fixing speed plot to calculate x and y lists in speed file like done for event plots.
+# Prevent events plot dialog from opening more than once.
+# Add sub-category of event for event plot so that we can plot specific INPUT value.
+# Fix freezing of plots after pan and zoom.
+# Close events plot with main application close.
+# Update change log.
+# Update help file.
 # *******************************************
 
 # Program version.
-progVersion = "0.4"
+progVersion = "0.5"
 
 # Create configuration values class object.
 config = Config()
@@ -108,6 +121,9 @@ class UI(QMainWindow):
         # Attach to the edit preferences menu item.
         self.actionPreferences.triggered.connect(self.editPreferences)
 
+        # Attach to the show window item.
+        self.actionShowEventsChart.triggered.connect(self.showEventsChartWindow)
+
         # Attach to the Quit menu item.
         self.actionQuit.triggered.connect(app.quit)
 
@@ -134,28 +150,30 @@ class UI(QMainWindow):
         self.PrevTripBtn.setEnabled(False)
         self.PrevTripBtn.clicked.connect(lambda: self.tripButtonClicked(False))
 
-        # Create figure for speed plots.
-        self.spdFig = MplCanvas(self, config, logger, width=10, height=6, dpi=100)
+        # Create figure for speed plot.
+        self.spdFig = SpeedCanvas(self, config, logger, width=10, height=6, dpi=100)
         self.plotTbar = NavigationToolbar(self.spdFig, self)
         self.ChartLayout.addWidget(self.plotTbar)
         self.ChartLayout.addWidget(self.spdFig)
+
+        # Create events chart dialog.        
+        self.eventsChart = EventsChartDialog(config, self)
 
         # Flag indicating no data to show.
         # And flag indicating no trip selected.
         self.haveTrips = False
         self.selectedTrip = 0
 
-        # If we don't have any trips loaded yet then disable the export menu.
-        self.actionExportCurrentTrip.setEnabled(self.haveTrips)
-        self.actionExportAllTrips.setEnabled(self.haveTrips)
-
-        # Enable expand / collapse buttons.
+        # Disable expand / collapse buttons.
         self.actionCollapseAllLevels.setEnabled(False)
         self.actionExpandAllLevels.setEnabled(False)
 
-        # Don't show 'other' events static text if not configured.
-        if config.TripData["ShowOtherEvents"] == False:
-            self.OtherEventsStaticLbl.hide()
+        # Disable the export menus.
+        self.actionExportCurrentTrip.setEnabled(False)
+        self.actionExportAllTrips.setEnabled(False)
+
+        # Disable show events chart window.
+        self.actionShowEventsChart.setEnabled(False)
 
         self.showEpochStatus()
 
@@ -231,18 +249,29 @@ class UI(QMainWindow):
             # If next trip button pressed, then increment trip if we can.
             if nxtTrip:
                 if self.selectedTrip < self.numTrips:
+                    # Clear the current speed figure.
+                    # This is because if it was zoomed we start afresh.
+                    self.spdFig.clearFigure()
+                    self.eventsChart.fig.clearFigure()
+                    # Update 
                     self.selectedTrip += 1
                     self.tripDataTree.setCurrentItem(self.tripDataTree.topLevelItem((self.selectedTrip - 1)))
                     self.updateTripSummary(self.selectedTrip)
                     self.plotTripData(self.selectedTrip)
+                    self.plotEventsData(self.selectedTrip)
                     # Check if no more next trips, then disable the button.
                     self.updateTripBtnState()
             else:
                 if self.selectedTrip > 1:
+                    # Clear the current speed figure.
+                    # This is because if it was zoomed we start afresh.
+                    self.spdFig.clearFigure()
+                    self.eventsChart.fig.clearFigure()
                     self.selectedTrip -= 1
                     self.tripDataTree.setCurrentItem(self.tripDataTree.topLevelItem((self.selectedTrip - 1)))
                     self.updateTripSummary(self.selectedTrip)
                     self.plotTripData(self.selectedTrip)
+                    self.plotEventsData(self.selectedTrip)
                     # Check if no more previous trips, then disable the button.
                     self.updateTripBtnState()
 
@@ -306,8 +335,9 @@ class UI(QMainWindow):
         if self.haveTrips:
             # Clear triptrip tree.
             self.clearTrips()
-            # Clear speed plot.
+            # Clear speed and event plots.
             self.spdFig.clearFigure()
+            self.eventsChart.fig.clearFigure()
             # Repopulate trips.
             self.populateTrips()
 
@@ -337,9 +367,12 @@ class UI(QMainWindow):
     def clearTrips(self):
         # If we have trip data then delete data.
         if self.haveTrips:
+            # Clear trip data.
             self.tripDataTree.setParent(None)
             self.tripDataTree = None
+            # Clear speed and event plots.
             self.spdFig.clearFigure()
+            self.eventsChart.fig.clearFigure()
 
     # *******************************************
     # Process log file.
@@ -360,6 +393,9 @@ class UI(QMainWindow):
         # Disable the export menu.
         self.actionExportCurrentTrip.setEnabled(False)
         self.actionExportAllTrips.setEnabled(False)
+
+        # Disable show events chart window.
+        self.actionShowEventsChart.setEnabled(False)
 
         # Change to wait cursor as large files may take a while to open and process.
         QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
@@ -408,6 +444,9 @@ class UI(QMainWindow):
             # Enable the export menu.
             self.actionExportCurrentTrip.setEnabled(True)
             self.actionExportAllTrips.setEnabled(True)
+
+            # Enable show events chart window.
+            self.actionShowEventsChart.setEnabled(True)
 
             # Populate trip data.updateTripBtnState
             self.populateTrips()
@@ -545,6 +584,7 @@ class UI(QMainWindow):
         self.tripDataTree.setCurrentItem(self.tripDataTree.topLevelItem(self.selectedTrip - 1))
         self.updateTripSummary(self.selectedTrip)
         self.plotTripData(self.selectedTrip)
+        self.plotEventsData(self.selectedTrip)
 
         # Define callback if selection is made to a different trip.
         self.tripDataTree.itemSelectionChanged.connect(self.tripItemSelected)
@@ -586,7 +626,11 @@ class UI(QMainWindow):
             # Update the state of the prev/next trip buttons.
             self.updateTripBtnState()
             # Update plot trip data.
+            self.spdFig.clearFigure()
             self.plotTripData(self.selectedTrip)
+            # Update the events chart window.
+            self.eventsChart.fig.clearFigure()
+            self.plotEventsData(self.selectedTrip)
 
     # *******************************************
     # Update trip summary information for selected trip.
@@ -685,6 +729,12 @@ class UI(QMainWindow):
         # Need to show plot as originally hidden.
         self.plotTbar.show()
         self.spdFig.show()
+
+    # *******************************************
+    # Do plotting of events charts if window shown.
+    # *******************************************
+    def plotEventsData(self, No):
+        self.eventsChart.fig.updatePlotData(No)
 
     # *******************************************
     # Callback function for export report for current trip menu selection.
@@ -790,6 +840,7 @@ class UI(QMainWindow):
         xf.write("Impact High                  : {0:d}\n".format(ti.numImpact_M))
         xf.write("Impact Low                   : {0:d}\n".format(ti.numImpact_L))
         xf.write("Zone change                  : {0:d}\n".format(ti.numZoneChange))
+        xf.write("Checklist                    : {0:d}\n".format(ti.numChecklist))
         xf.write("===================================================\n")
         xf.write("===================================================\n")
         xf.write("EVENTS (DETAILS)\n")
@@ -908,6 +959,15 @@ class UI(QMainWindow):
         logger.debug("User selected Expand All Levels control.")
         if self.haveTrips:
             self.tripDataTree.expandAll()
+
+    # *******************************************
+    # Menu item to show events chart window.
+    # *******************************************
+    def showEventsChartWindow(self):
+        logger.debug("User selected Display Events Chart window menu item.")
+
+        # Create events chart dialog.        
+        self.eventsChart.showEventsChart()
 
     # *******************************************
     # Get event details for event.
@@ -1139,6 +1199,31 @@ def showPopup(title, msg, info="", details=""):
     mb.exec_()
 
 # *******************************************
+# Events Chart dialog class.
+# *******************************************
+class EventsChartDialog(QDialog):
+    def __init__(self, config, data):
+        super(EventsChartDialog, self).__init__()
+        uic.loadUi(res_path("eventsChart.ui"), self)
+
+        # Create figure for events plot.
+        self.fig = EventCanvas(data, config, logger, width=6, height=10, dpi=100)
+        self.plotTbar = NavigationToolbar(self.fig, self)
+        self.eventChartLayout.addWidget(self.plotTbar)
+        self.eventChartLayout.addWidget(self.fig)
+
+    # *******************************************
+    # Displays an events chart dialog box.
+    # *******************************************
+    def showEventsChart(self):
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(res_path("./resources/about.png")))
+        self.setWindowIcon(icon)
+
+        # Show dialog.
+        self.show()
+
+# *******************************************
 # Preferences dialog class.
 # *******************************************
 class PreferencesDialog(QDialog):
@@ -1147,7 +1232,6 @@ class PreferencesDialog(QDialog):
         uic.loadUi(res_path("preferences.ui"), self)
 
         self.config = config
-        self.app = app
 
         # Preload the configuration values.
 
@@ -1226,6 +1310,9 @@ class PreferencesDialog(QDialog):
     # Displays a "Preferences" dialog box.
     # *******************************************
     def showPreferences(self):
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(res_path("./resources/about.png")))
+        self.setWindowIcon(icon)
 
         # Show dialog.
         self.exec_()
@@ -1529,6 +1616,12 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.5</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Added modal events chart dialog selectable from the main menu.</li>" \
+            "<li>Updated trip export with checklist total.</li>" \
+            "<li>Added additional checks and alert messages for Time1H DEBUG event errors.</li>" \
+            "<li>Refactored speed plot class and method names.</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.4</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Fixed zone change line in speed plot which was inadvertantly broken in previous release.</li>" \
