@@ -54,10 +54,18 @@ class SpeedCanvas(FigureCanvasQTAgg):
     # *******************************************
     # Update plot with new plot.
     # *******************************************
-    def updatePlotData(self, No, tList, sList):
-
+    def updatePlotData(self, No):
         # Add trip number as the plot title.
         self.axes.set_title("Trip {0:d} [{1:d}]".format(No, self.data.tripLog[No-1].signOnId), fontsize=self.cfg.SpdPlot["PlotTitleFontSize"])
+
+        tList = []
+        sList = []
+
+        # Update speed data.
+        for sl in self.data.tripLog[No-1].speedLog:
+            # Format time axis list in the correct timezone for display.
+            tList.append(timeTZ(sl.time, self.cfg.TimeUTC))
+            sList.append(sl.speed)
 
         # Clear old plot data.
         self.line.set_xdata([])
@@ -77,18 +85,32 @@ class SpeedCanvas(FigureCanvasQTAgg):
     # *******************************************
     # Draw zone speed limit lines on plot.
     # *******************************************
-    def drawSpeedLimits(self, tList, zList):
-        # Clear old zone data.
-        self.zone.set_xdata([])
-        self.zone.set_ydata([])
+    def drawSpeedLimits(self, No):
+        zList = []
 
         # Update zone data.
-        self.zone.set_xdata(tList)
-        self.zone.set_ydata(zList)
+        for zl in self.data.tripLog[No-1].zoneXings:
+            # Format time axis list in the correct timezone for display.
+            tList.append(timeTZ(zl.time, self.cfg.TimeUTC))
+            if zl.zoneOutput == 1:
+                # Slow zone.
+                zList.append(self.cfg.SpdPlot["DefaultLowLimit"])
+            elif zl.zoneOutput == 2:
+                # Fast zone.
+                zList.append(self.cfg.SpdPlot["DefaultHiLimit"])
+            else:
+                # Open zone.
+                zList.append(0)
 
         # Fill below the zone speed line (if we have data).
         if len(zList) > 0:
             self.axes.fill_between(self.zone.get_xdata(), self.zone.get_ydata(), 0, color=self.cfg.SpdPlot["ZoneColour"], alpha=0.1)
+
+        # Clear old zone data.
+        self.zone.set_ydata([])
+
+        # Update zone data.
+        self.zone.set_ydata(zList)
 
         # Rescale axes.
         self.axes.relim()

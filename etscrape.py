@@ -35,6 +35,7 @@ from eventsChart import *
 #                       Additions to the Trip Summary pane.
 # 0.5   MDC 05/07/2020  Add events chart, similar to HighCharts.
 #                       Added additional DEBUG checks for invalid times.
+#                       Refactored speed chart to match events charts.
 # *******************************************
 
 # *******************************************
@@ -42,13 +43,10 @@ from eventsChart import *
 #
 # Option for separate plot that shows all events like HighCharts for current trip.
 # Fix time axis value clutter on events plot.
-# Fix timezone and indications on speed and event plots.
 # Add events plot configuration to preferences page.
-# Look at fixing speed plot to calculate x and y lists in speed file like done for event plots.
-# Prevent events plot dialog from opening more than once.
 # Add sub-category of event for event plot so that we can plot specific INPUT value.
-# Fix freezing of plots after pan and zoom.
 # Close events plot with main application close.
+# If UTC time flag changed need to regenerate plots else will be stuck in wrong timezone.
 # Update change log.
 # Update help file.
 # *******************************************
@@ -486,11 +484,11 @@ class UI(QMainWindow):
             tripNum = "Trip {0:d} [ID {1:d}]".format((idx+1), t.signOnId)
             # Need to check that the trip was ended.
             if t.tripEnd > 0:
-                tripTime = "{0:s}  to  {1:s}".format(unixTime(t.tripStart, config.TimeUTC), unixTime(t.tripEnd, config.TimeUTC))
+                tripTime = "{0:s}  to  {1:s}".format(unixTimeString(t.tripStart, config.TimeUTC), unixTimeString(t.tripEnd, config.TimeUTC))
                 logger.debug("Adding trip: {0:d}, occurred: {1:s}".format(idx+1, tripTime))
                 tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime])
             else:
-                tripTime = "{0:s}".format(unixTime(t.tripStart, config.TimeUTC))
+                tripTime = "{0:s}".format(unixTimeString(t.tripStart, config.TimeUTC))
                 logger.debug("Adding trip: {0:d}, occurred: {1:s}".format(idx+1, tripTime))
                 tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime, "No trip end."])
                 tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
@@ -507,7 +505,7 @@ class UI(QMainWindow):
             for idx2, ev in enumerate(t.events):
                 # Label events with event type and time.
                 eventType = "{0:s}".format(ev.event)
-                eventTime = "{0:s}".format(unixTime(ev.serverTime, config.TimeUTC))
+                eventTime = "{0:s}".format(unixTimeString(ev.serverTime, config.TimeUTC))
                 logger.debug("Adding event: {0:s}, occurred: {1:s}".format(eventType, eventTime))
                 eventLevel = QTreeWidgetItem(tripLevel, [eventType, eventTime, ev.alertText])
 
@@ -640,8 +638,8 @@ class UI(QMainWindow):
         # Trip information.
         self.TripNoLbl.setText("{0:d}".format(t))
         self.TripIdLbl.setText("[{0:d}]".format(ti.signOnId))
-        self.StartTimeLbl.setText("{0:s}".format(unixTime(ti.tripStart, config.TimeUTC)))
-        self.EndTimeLbl.setText("{0:s}".format(unixTime(ti.tripEnd, config.TimeUTC)))
+        self.StartTimeLbl.setText("{0:s}".format(unixTimeString(ti.tripStart, config.TimeUTC)))
+        self.EndTimeLbl.setText("{0:s}".format(unixTimeString(ti.tripEnd, config.TimeUTC)))
         self.TripDurationLbl.setText("{0:s}".format(secsToTime(ti.tripEnd - ti.tripStart)))
         # Event counts.
         # Vehicle events.
@@ -689,42 +687,9 @@ class UI(QMainWindow):
     # *******************************************
     def plotTripData(self, tripNo):
 
-        # Get speed data for the nominated trip.
-        tList = []
-        sList = []
-        for sl in self.tripLog[tripNo-1].speedLog:
-            # Format time axis list in the correct timezone for display.
-            if config.TimeUTC == 0:
-                tList.append(datetime.fromtimestamp(sl.time))
-            else:
-                tList.append(datetime.utcfromtimestamp(sl.time))
-            sList.append(sl.speed)
-
-        # Plot with updated data.
-        self.spdFig.updatePlotData(self.selectedTrip, tList, sList)
-
-        # Plot speed limit lines on plot.
-        # At this point speed limits from application configuration as not included in log.
-        # Get zone change data for the nominated trip.
-        tList = []
-        zList = []
-        for zl in self.tripLog[tripNo-1].zoneXings:
-            # Format time axis list in the correct timezone for display.
-            if config.TimeUTC == 0:
-                tList.append(datetime.fromtimestamp(zl.time))
-            else:
-                tList.append(datetime.utcfromtimestamp(zl.time))
-            if zl.zoneOutput == 1:
-                # Slow zone.
-                zList.append(config.SpdPlot["DefaultLowLimit"])
-            elif zl.zoneOutput == 2:
-                # Fast zone.
-                zList.append(config.SpdPlot["DefaultHiLimit"])
-            else:
-                # Open zone.
-                zList.append(0)
-
-        self.spdFig.drawSpeedLimits(tList, zList)
+        # Update speed plots.
+        self.spdFig.updatePlotData(self.selectedTrip)
+        self.spdFig.drawSpeedLimits(self.selectedTrip)
 
         # Need to show plot as originally hidden.
         self.plotTbar.show()
@@ -822,8 +787,8 @@ class UI(QMainWindow):
         xf.write("                                     \n")
         xf.write("===================================================\n")
         xf.write("Signon ID  : {0:d}\n".format(ti.signOnId))
-        xf.write("Start time : {0:s}\n".format(unixTime(ti.tripStart, config.TimeUTC)))
-        xf.write("End time   : {0:s}\n".format(unixTime(ti.tripEnd, config.TimeUTC)))
+        xf.write("Start time : {0:s}\n".format(unixTimeString(ti.tripStart, config.TimeUTC)))
+        xf.write("End time   : {0:s}\n".format(unixTimeString(ti.tripEnd, config.TimeUTC)))
         xf.write("===================================================\n")
         xf.write("===================================================\n")
         xf.write("EVENTS (TOTALS)\n")
@@ -847,7 +812,7 @@ class UI(QMainWindow):
         xf.write("===================================================\n")
         for ev in ti.events:
             xf.write("{0:s}\n".format(ev.event))
-            xf.write("\tTime              : {0:s}\n".format(unixTime(ev.serverTime, config.TimeUTC)))
+            xf.write("\tTime              : {0:s}\n".format(unixTimeString(ev.serverTime, config.TimeUTC)))
             if (ev.event == "SIGNON"):
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tDriver ID         : {0:s}\n".format(ev.driverId))
@@ -984,7 +949,7 @@ class UI(QMainWindow):
             if event.driverId == "*":
                 eventList.append(("Driver ID", "{0:s}".format(event.driverId), True))
             else:
-                eventList.append(("Driver ID", "{0:d}".format(int(event.driverId)), False))
+                eventList.append(("Driver ID", "{0:d} (BYPASS)".format(int(event.driverId)), (int(event.driverId) == -12)))
             eventList.append(("Card ID", "{0:d}".format(event.cardId), False))
             eventList.append(("Result", "{0:s}".format(event.result), False))
             eventList.append(("Bits Read", "{0:d}".format(event.bitsRead), False))
@@ -1074,7 +1039,7 @@ class UI(QMainWindow):
             else:
                 eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Report Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
-            eventList.append(("Direction", "{0:d}".format(event.direction), ((event.direction < 0) or (event.direction > 360))))
+            eventList.append(("Direction", "{0:d}".format(event.direction), ((event.direction < 0) or (event.direction > 359))))
         elif event.event == "CRITICALOUTPUTSET":
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
@@ -1232,6 +1197,7 @@ class PreferencesDialog(QDialog):
         uic.loadUi(res_path("preferences.ui"), self)
 
         self.config = config
+        self.app = app
 
         # Preload the configuration values.
 
@@ -1621,6 +1587,11 @@ class ChangeLogDialog(QDialog):
             "<li>Added modal events chart dialog selectable from the main menu.</li>" \
             "<li>Updated trip export with checklist total.</li>" \
             "<li>Added additional checks and alert messages for Time1H DEBUG event errors.</li>" \
+            "<li>Added check and alert for bypass detection; alerts in SIGON events for Driver ID = -12.</li>" \
+            "<li>Added check for invalid direction in REPORT events, i.e. 0 > x > 359.</li>" \
+            "<li>Refactored speed chart plotting to align with implementation for events chart.</li>" \
+            "<li>Looked at updating plots after pan/zoom. Still require to change currently selected trip to reset plot.</li>" \
+            "<li>Speed plots show time according to the current timezone.</li>" \
             "<li>Refactored speed plot class and method names.</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.4</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\

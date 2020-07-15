@@ -194,6 +194,10 @@ class Trip():
                 event.keyboard = sp.group(5)
                 event.cardReader = sp.group(6)
 
+                # Check for Bypass condition; indicated by driver ID of -12.
+                if event.driverId == "-12":
+                    event.alertText = appendAlertText(event.alertText, "Bypass detected.")
+
                 # Get speed data from event header.
                 event.speed = int(su.group(9))
 

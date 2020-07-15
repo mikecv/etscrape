@@ -15,14 +15,23 @@ def secsToTime(t):
     return ("{0:02d}:{1:02d}:{2:02d}".format(hrs, mins, secs))
 
 # *******************************************
-# Convert Unix time to string.
+# Convert Unix time to string with timezone.
 # *******************************************
-def unixTime(t, utc):
+def unixTimeString(t, utc):
     if utc != 0:
         return ("{0:s} [UTC]".format(datetime.utcfromtimestamp(t).strftime('%d/%m/%Y %H:%M:%S')))
     else:
         offset =  int(time.timezone / -3600)
         return ("{0:s} [UTC{1:+d}]".format(datetime.fromtimestamp(t).strftime('%d/%m/%Y %H:%M:%S'), offset))
+
+# *******************************************
+# Convert Unix time to string without timezone.
+# *******************************************
+def timeTZ(t, utc):
+    if utc != 0:
+        return datetime.utcfromtimestamp(t)
+    else:
+        return datetime.fromtimestamp(t)
 
 # *******************************************
 # Get time zone string.
