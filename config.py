@@ -55,7 +55,10 @@ class Config():
             "AxesTitleFontSize": 7,
             "PlotTitleFontSize": 10,
             "AxisLabelFontSize": 6,
-            "EventTraceColour": "#0000ff"
+            "EventTraceColour": "#0000ff",
+            "TripTraceColour": "#000000",
+            "EventFillColour": "#0000ff",
+            "TripFillColour": "#ffff00"
         }
 
         # Input channel definitions.

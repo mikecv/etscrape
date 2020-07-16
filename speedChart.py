@@ -86,6 +86,7 @@ class SpeedCanvas(FigureCanvasQTAgg):
     # Draw zone speed limit lines on plot.
     # *******************************************
     def drawSpeedLimits(self, No):
+        tList = []
         zList = []
 
         # Update zone data.
@@ -102,15 +103,17 @@ class SpeedCanvas(FigureCanvasQTAgg):
                 # Open zone.
                 zList.append(0)
 
-        # Fill below the zone speed line (if we have data).
-        if len(zList) > 0:
-            self.axes.fill_between(self.zone.get_xdata(), self.zone.get_ydata(), 0, color=self.cfg.SpdPlot["ZoneColour"], alpha=0.1)
-
         # Clear old zone data.
+        self.zone.set_xdata([])
         self.zone.set_ydata([])
 
         # Update zone data.
+        self.zone.set_xdata(tList)
         self.zone.set_ydata(zList)
+
+        # Fill below the zone speed line (if we have data).
+        if len(zList) > 0:
+            self.axes.fill_between(self.zone.get_xdata(), self.zone.get_ydata(), 0, color=self.cfg.SpdPlot["ZoneColour"], alpha=0.1)
 
         # Rescale axes.
         self.axes.relim()
