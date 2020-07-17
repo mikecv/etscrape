@@ -89,7 +89,6 @@ class EventCanvas(FigureCanvasQTAgg):
     # Update plot with new plot.
     # *******************************************
     def updatePlotData(self, No):
-
         # Clear old plot data.
         for t in self.traces:
             t[0].set_xdata([])
@@ -105,12 +104,15 @@ class EventCanvas(FigureCanvasQTAgg):
         # Get start and end trip times to use for all event plots.
         # Trip start will correspond to SIGNON event.
         tripStartTime = timeTZ(self.data.tripLog[No-1].tripStart, self.cfg.TimeUTC)
+        plotStartTime = timeTZ((self.data.tripLog[No-1].tripStart - 60), self.cfg.TimeUTC)
         # Trip end will correspond to TRIP event if one is included.
         if self.data.tripLog[No-1].tripEnd == 0:
             # Look for last event in the trip (so far) and make this the end of the trip.
             tripEndTime = timeTZ(self.data.tripLog[No-1].events[-1].serverTime, self.cfg.TimeUTC)
+            plotEndTime = timeTZ((self.data.tripLog[No-1].events[-1].serverTime + 60), self.cfg.TimeUTC)
         else:
             tripEndTime = timeTZ(self.data.tripLog[No-1].tripEnd, self.cfg.TimeUTC)
+            plotEndTime = timeTZ((self.data.tripLog[No-1].tripEnd + 60), self.cfg.TimeUTC)
 
         # Create data for trip trace.
         tList = []
@@ -133,11 +135,10 @@ class EventCanvas(FigureCanvasQTAgg):
         self.traces[0][0].set_ydata(eList.copy())
 
         # Fill in the event bars.
-        self.traces[0][1].fill_between(self.traces[0][0].get_xdata(), self.traces[0][0].get_ydata(), 0, color=self.cfg.EvPlot["TripFillColour"])
+        self.traces[0][1].fill_between(self.traces[0][0].get_xdata(), self.traces[0][0].get_ydata(), 0, color=self.cfg.EvPlot["TripFillColour"], alpha=0.5)
 
-        # Rescale axes.
-        self.traces[0][1].relim()
-        self.traces[0][1].autoscale_view()
+        # Set axis for trace to trip extents.
+        self.traces[0][1].set_xlim([plotStartTime, plotEndTime])
 
         # Create data for each event trace.
         # Iterate in reverse to line up with how traces have been stacked.
@@ -214,12 +215,11 @@ class EventCanvas(FigureCanvasQTAgg):
             self.traces[self.numEvCharts - idx][0].set_xdata(tList.copy())
             self.traces[self.numEvCharts - idx][0].set_ydata(eList.copy())
 
-            # Fill in the event bars.
-            self.traces[self.numEvCharts - idx][1].fill_between(self.traces[self.numEvCharts - idx][0].get_xdata(), self.traces[self.numEvCharts - idx][0].get_ydata(), 0, color=self.cfg.EvPlot["EventFillColour"])
+            # Set axis for trace to trip extents.
+            self.traces[self.numEvCharts - idx][1].set_xlim([plotStartTime, plotEndTime])
 
-            # Rescale axes.
-            self.traces[self.numEvCharts - idx][1].relim()
-            self.traces[self.numEvCharts - idx][1].autoscale_view()
+            # Fill in the event bars.
+            self.traces[self.numEvCharts - idx][1].fill_between(self.traces[self.numEvCharts - idx][0].get_xdata(), self.traces[self.numEvCharts - idx][0].get_ydata(), 0, color=self.cfg.EvPlot["EventFillColour"], alpha=0.5)
 
         # Draw plot.
         self.draw()
