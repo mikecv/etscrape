@@ -36,17 +36,14 @@ from eventsChart import *
 # 0.5   MDC 05/07/2020  Add events chart, similar to HighCharts.
 #                       Added additional DEBUG checks for invalid times.
 #                       Refactored speed chart to match events charts.
+#                       Updated preferences dialog with event chart preferences.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
-# Option for separate plot that shows all events like HighCharts for current trip.
-# Fix time axis value clutter on events plot.
-# Add events plot configuration to preferences page.
-# Add sub-category of event for event plot so that we can plot specific INPUT value.
+# Add dialog to set events to plot.
 # Close events plot with main application close.
-# If UTC time flag changed need to regenerate plots else will be stuck in wrong timezone.
 # Update change log.
 # Update help file.
 # *******************************************
@@ -1256,6 +1253,20 @@ class PreferencesDialog(QDialog):
         self.titleFontSizeVal.setValidator(QtGui.QIntValidator(6, 12))
         self.titleFontSizeVal.setText(str(self.config.SpdPlot["PlotTitleFontSize"]))
 
+        # Event plot values.
+        self.eventLineColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.EvPlot["EventTraceColour"]))
+        self.eventLineColVal.clicked.connect(lambda: self.getColour(self.eventLineColVal))
+        self.eventFillColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.EvPlot["EventFillColour"]))
+        self.eventFillColVal.clicked.connect(lambda: self.getColour(self.eventFillColVal))
+        self.tripLineColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.EvPlot["TripTraceColour"]))
+        self.tripLineColVal.clicked.connect(lambda: self.getColour(self.tripLineColVal))
+        self.tripFillColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.EvPlot["TripFillColour"]))
+        self.tripFillColVal.clicked.connect(lambda: self.getColour(self.tripFillColVal))
+        self.eventAxisFontSizeVal.setValidator(QtGui.QIntValidator(5, 10))
+        self.eventAxisFontSizeVal.setText(str(self.config.EvPlot["AxesTitleFontSize"]))
+        self.eventTitleFontSizeVal.setValidator(QtGui.QIntValidator(6, 12))
+        self.eventTitleFontSizeVal.setText(str(self.config.EvPlot["PlotTitleFontSize"]))
+
         # Connect to SAVE dialog button for processing.
         self.SaveDialogBtn.clicked.connect(self.savePreferences)
         # Connect to CANCEL dialog button to quit dialog.
@@ -1360,10 +1371,7 @@ class PreferencesDialog(QDialog):
             # Set the configuration value.
             self.config.TripData["EventColour"] = col
             logger.debug("Change to event text colour: {0:s}".format(self.config.TripData["EventColour"]))
-            prefChanged = True
-            rerender = True
-        # Alert text colour.
-        col = self.alertColVal.palette().button().color().name()
+            prefChanged = TruezoneLineColVal
         if col != self.config.TripData["AlertColour"]:
             # Set the configuration value.
             self.config.TripData["AlertColour"] = col
@@ -1512,14 +1520,60 @@ class PreferencesDialog(QDialog):
         if val != self.config.SpdPlot["AxesTitleFontSize"]:
             # Set the configuration value.
             self.config.SpdPlot["AxesTitleFontSize"] = val
-            logger.debug("Change to plot axis text font size: {0:d}".format(self.config.SpdPlot["AxesTitleFontSize"]))
+            logger.debug("Change to speed plot axis text font size: {0:d}".format(self.config.SpdPlot["AxesTitleFontSize"]))
             prefChanged = True
         # Plot title text font size.
         val = int(self.titleFontSizeVal.text())
         if val != self.config.SpdPlot["PlotTitleFontSize"]:
             # Set the configuration value.
             self.config.SpdPlot["PlotTitleFontSize"] = val
-            logger.debug("Change to plot title text font size: {0:d}".format(self.config.SpdPlot["PlotTitleFontSize"]))
+            logger.debug("Change to speed plot title text font size: {0:d}".format(self.config.SpdPlot["PlotTitleFontSize"]))
+            prefChanged = True
+
+        ###########################
+        # Event Plot Data
+        ###########################
+        # Event trace line colour.
+        col = self.eventLineColVal.palette().button().color().name()
+        if col != self.config.EvPlot["EventTraceColour"]:
+            # Set the configuration value.
+            self.config.EvPlot["EventTraceColour"] = col
+            logger.debug("Change to event plot line colour: {0:s}".format(self.config.EvPlot["EventTraceColour"]))
+            prefChanged = True
+        # Event trace fill colour.
+        col = self.eventFillColVal.palette().button().color().name()
+        if col != self.config.EvPlot["EventFillColour"]:
+            # Set the configuration value.
+            self.config.EvPlot["EventFillColour"] = col
+            logger.debug("Change to event plot fill colour: {0:s}".format(self.config.EvPlot["EventFillColour"]))
+            prefChanged = True
+        # Trip trace line colour.
+        col = self.tripLineColVal.palette().button().color().name()
+        if col != self.config.EvPlot["TripTraceColour"]:
+            # Set the configuration value.
+            self.config.EvPlot["TripTraceColour"] = col
+            logger.debug("Change to trip plot line colour: {0:s}".format(self.config.EvPlot["TripTraceColour"]))
+            prefChanged = True
+        # Trip trace fill colour.
+        col = self.tripFillColVal.palette().button().color().name()
+        if col != self.config.EvPlot["TripFillColour"]:
+            # Set the configuration value.
+            self.config.EvPlot["TripFillColour"] = col
+            logger.debug("Change to trip plot fill colour: {0:s}".format(self.config.EvPlot["TripFillColour"]))
+            prefChanged = True
+        # Plot axis text font size.
+        val = int(self.axisFontSizeVal.text())
+        if val != self.config.EvPlot["AxesTitleFontSize"]:
+            # Set the configuration value.
+            self.config.EvPlot["AxesTitleFontSize"] = val
+            logger.debug("Change to event plot axis text font size: {0:d}".format(self.config.EvPlot["AxesTitleFontSize"]))
+            prefChanged = True
+        # Plot title text font size.
+        val = int(self.titleFontSizeVal.text())
+        if val != self.config.EvPlot["PlotTitleFontSize"]:
+            # Set the configuration value.
+            self.config.EvPlot["PlotTitleFontSize"] = val
+            logger.debug("Change to event plot title text font size: {0:d}".format(self.config.EvPlot["PlotTitleFontSize"]))
             prefChanged = True
 
         # Save the configuration values (if changed).
@@ -1584,14 +1638,16 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.5</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
-            "<li>Added modal events chart dialog selectable from the main menu.</li>" \
+            "<li>Added modal events chart dialog selectable from the main menu. \
+                Shows timeline of events, including INPUT events where specific channel can be specified.</li>" \
+            "<li>Updated preferences dialog with configuration values for events plot.</li>" \
             "<li>Updated trip export with checklist total.</li>" \
             "<li>Added additional checks and alert messages for Time1H DEBUG event errors.</li>" \
             "<li>Added check and alert for bypass detection; alerts in SIGON events for Driver ID = -12.</li>" \
             "<li>Added check for invalid direction in REPORT events, i.e. 0 > x > 359.</li>" \
             "<li>Refactored speed chart plotting to align with implementation for events chart.</li>" \
             "<li>Looked at updating plots after pan/zoom. Still require to change currently selected trip to reset plot.</li>" \
-            "<li>Speed plots show time according to the current timezone.</li>" \
+            "<li>Speed plots show time according to the current timezone. Plots regenerate if visible when time zone preference changed.</li>" \
             "<li>Refactored speed plot class and method names.</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.4</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\

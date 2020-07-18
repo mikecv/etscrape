@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>560</width>
-    <height>475</height>
+    <height>535</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,13 +22,13 @@
   <property name="minimumSize">
    <size>
     <width>560</width>
-    <height>475</height>
+    <height>535</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>560</width>
-    <height>475</height>
+    <height>535</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -42,21 +42,21 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>200</y>
+     <y>126</y>
      <width>265</width>
-     <height>175</height>
+     <height>165</height>
     </rect>
    </property>
    <property name="minimumSize">
     <size>
      <width>265</width>
-     <height>175</height>
+     <height>165</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
      <width>265</width>
-     <height>175</height>
+     <height>165</height>
     </size>
    </property>
    <property name="title">
@@ -738,8 +738,8 @@
   <widget class="QGroupBox" name="localeBox">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>130</y>
+     <x>280</x>
+     <y>400</y>
      <width>265</width>
      <height>60</height>
     </rect>
@@ -911,7 +911,7 @@
    <property name="geometry">
     <rect>
      <x>440</x>
-     <y>430</y>
+     <y>490</y>
      <width>90</width>
      <height>28</height>
     </rect>
@@ -927,7 +927,7 @@
    <property name="geometry">
     <rect>
      <x>330</x>
-     <y>430</y>
+     <y>490</y>
      <width>90</width>
      <height>28</height>
     </rect>
@@ -935,6 +935,211 @@
    <property name="text">
     <string>Cancel</string>
    </property>
+  </widget>
+  <widget class="QGroupBox" name="EventsBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>297</y>
+     <width>265</width>
+     <height>175</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>265</width>
+     <height>175</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>265</width>
+     <height>175</height>
+    </size>
+   </property>
+   <property name="title">
+    <string>Events Chart</string>
+   </property>
+   <widget class="QLabel" name="label_29">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>37</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Event Line Colour</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_30">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Trip Line  Colour</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tripLineColVal">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>79</y>
+      <width>51</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="eventLineColVal">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>37</y>
+      <width>51</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="eventTitleFontSizeVal">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>140</y>
+      <width>51</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string extracomment="Debug level (0-100)"/>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="maxLength">
+     <number>2</number>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="eventAxisFontSizeVal">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>119</y>
+      <width>51</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string extracomment="Debug level (0-100)"/>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="maxLength">
+     <number>2</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_31">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>119</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Plot Axis Text Font Size</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_32">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>139</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Plot Title Text Font Size</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_33">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Event Fill Colour</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="eventFillColVal">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>58</y>
+      <width>51</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_34">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Trip Fill  Colour</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tripFillColVal">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>100</y>
+      <width>51</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

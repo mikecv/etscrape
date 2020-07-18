@@ -77,14 +77,14 @@ class Config():
 
         # Event chart.
         self.EventTraces = [
-            {"No" : 1, "Event" : "ZONEOVERSPEED", "Title" : "Zone\nOverspeed"},
-            {"No" : 2, "Event" : "ENGINEOVERSPEED", "Title" : "Engine\nOverspeed"},
-            {"No" : 3, "Event" : "LOWCOOLANT", "Title" : "Engine Coolant\nLevel Low"},
-            {"No" : 4, "Event" : "OILPRESSURE", "Title" : "Engine Oil\nPressure Low"},
-            {"No" : 5, "Event" : "ENGINETEMP", "Title" : "Engine Temperature\nHigh"},
-            {"No" : 7, "Event" : "INPUT", "Title" : "Input 1", "Channel" : 1},
-            {"No" : 8, "Event" : "INPUT", "Title" : "Input 2", "Channel" : 2},
-            {"No" : 9, "Event" : "INPUT", "Title" : "Input 8", "Channel" : 8}
+            {"Event" : "ZONEOVERSPEED", "Title" : "Zone\nOverspeed"},
+            {"Event" : "ENGINEOVERSPEED", "Title" : "Engine\nOverspeed"},
+            {"Event" : "LOWCOOLANT", "Title" : "Engine Coolant\nLevel Low"},
+            {"Event" : "OILPRESSURE", "Title" : "Engine Oil\nPressure Low"},
+            {"Event" : "ENGINETEMP", "Title" : "Engine\nTemperature High"},
+            {"Event" : "INPUT", "Title" : "Input 1", "Channel" : 1},
+            {"Event" : "INPUT", "Title" : "Input 2", "Channel" : 2},
+            {"Event" : "INPUT", "Title" : "Input 8", "Channel" : 8}
             ]
 
         # Read / update configuration from file.
