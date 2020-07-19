@@ -1508,6 +1508,7 @@ color: rgb(0, 85, 255);</string>
      <string>Edit</string>
     </property>
     <addaction name="actionPreferences"/>
+    <addaction name="actionEventsChartConfig"/>
    </widget>
    <widget class="QMenu" name="menuWindows">
     <property name="title">
@@ -1666,6 +1667,11 @@ border-color: rgb(0, 170, 255);</string>
   <action name="actionShowEventsChart">
    <property name="text">
     <string>Show Events Chart</string>
+   </property>
+  </action>
+  <action name="actionEventsChartConfig">
+   <property name="text">
+    <string>Event Chart Config</string>
    </property>
   </action>
  </widget>

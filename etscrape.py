@@ -43,6 +43,7 @@ from eventsChart import *
 # TODO List
 #
 # Add dialog to set events to plot.
+# Close events plot if log open failed; disable menu item.
 # Close events plot with main application close.
 # Update change log.
 # Update help file.
@@ -115,6 +116,9 @@ class UI(QMainWindow):
 
         # Attach to the edit preferences menu item.
         self.actionPreferences.triggered.connect(self.editPreferences)
+
+        # Attach to the edit events chart config menu item.
+        self.actionEventsChartConfig.triggered.connect(self.editEventsChartConfig)
 
         # Attach to the show window item.
         self.actionShowEventsChart.triggered.connect(self.showEventsChartWindow)
@@ -1100,13 +1104,23 @@ class UI(QMainWindow):
 
     # *******************************************
     # Edit Preferences control selected.
-    # Displays an "About" dialog box.
+    # Displays an "Edit Preferences" dialog box.
     # *******************************************
     def editPreferences(self):
         logger.debug("User selected Edit Preferences menu control.")
 
         # Create edit prefernces dialog.        
         PreferencesDialog(config, self)
+
+    # *******************************************
+    # Edit Events Chart Config control selected.
+    # Displays an "Edit Events Chart Config" dialog box.
+    # *******************************************
+    def editEventsChartConfig(self):
+        logger.debug("User selected Edit Events Chart Config menu control.")
+
+        # Create edit events chart config dialog.        
+        EventsChartConfigDialog(config, self)
 
     # *******************************************
     # About control selected.
@@ -1584,6 +1598,80 @@ class PreferencesDialog(QDialog):
         # Rerender display if UI preference changed.
         if rerender:
             self.app.rerenderTripData()
+
+# *******************************************
+# Events Chart Config dialog class.
+# *******************************************
+class EventsChartConfigDialog(QDialog):
+    def __init__(self, config, app):
+        super(EventsChartConfigDialog, self).__init__()
+        uic.loadUi(res_path("eventsConfig.ui"), self)
+
+        self.config = config
+        self.app = app
+
+        # Create list of event chart config items.
+        plotCfg = []
+        plotCfg.append((self.EventCombo1, self.titleLineEdit1, self.channelLabel1, self.channelSpinBox1))
+        plotCfg.append((self.EventCombo2, self.titleLineEdit2, self.channelLabel2, self.channelSpinBox2))
+        plotCfg.append((self.EventCombo3, self.titleLineEdit3, self.channelLabel3, self.channelSpinBox3))
+        plotCfg.append((self.EventCombo4, self.titleLineEdit4, self.channelLabel4, self.channelSpinBox4))
+        plotCfg.append((self.EventCombo5, self.titleLineEdit5, self.channelLabel5, self.channelSpinBox5))
+        plotCfg.append((self.EventCombo6, self.titleLineEdit6, self.channelLabel6, self.channelSpinBox6))
+        plotCfg.append((self.EventCombo7, self.titleLineEdit7, self.channelLabel7, self.channelSpinBox7))
+        plotCfg.append((self.EventCombo8, self.titleLineEdit8, self.channelLabel8, self.channelSpinBox8))
+
+        # Configure combo boxes.
+        for p in plotCfg:
+            p[0].addItems(self.config.events)
+
+        # Preconfigure to current selections.
+        for idx, p in enumerate(plotCfg):
+            try:
+                selection = self.config.events.index(self.config.EventTraces[idx]["Event"])
+                p[0].setCurrentIndex(selection)
+                logger.debug("Event selected item: {0:d}".format(selection))
+                if (p[0].currentText() != "INPUT"):
+                    p[1].setText(self.config.EventTraces[idx]["Title"])
+                    p[2].setEnabled(False)
+                    p[3].setEnabled(False)
+                else:
+                    p[1].setText("Input {0:d}".format(self.config.EventTraces[idx]["Channel"]))
+                    p[1].setEnabled(False)
+                    p[3].setValue(self.config.EventTraces[idx]["Channel"])
+            except ValueError:
+                logger.warning("Invalid event for events chart: {0:s}".format(self.config.EventTraces[idx]["Event"]))
+
+        # Connect to SAVE dialog button for processing.
+        self.SaveDialogBtn.clicked.connect(self.saveEventsChartConfig)
+        # Connect to CANCEL dialog button to quit dialog.
+        self.CancelDialogBtn.clicked.connect(self.close)
+
+        # Show the edit events chart config dialog.
+        self.showEventsChartConfig()
+
+    # *******************************************
+    # Displays an "Events Chart Config" dialog box.
+    # *******************************************
+    def showEventsChartConfig(self):
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(res_path("./resources/about.png")))
+        self.setWindowIcon(icon)
+
+        # Show dialog.
+        self.exec_()
+
+    # *******************************************
+    # User selected to save events chart config.
+    # *******************************************
+    def saveEventsChartConfig(self):
+        logger.debug("User saving events chart config.")
+
+        # Flag indicating events chart config has changed.
+        prefChanged = False
+
+        # Flag indicating if need to re-render events chart for config to take effect.
+        rerender = False
 
 # *******************************************
 # About dialog class.

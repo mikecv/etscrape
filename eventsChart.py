@@ -69,7 +69,10 @@ class EventCanvas(FigureCanvasQTAgg):
             axes.set_yticklabels([])
             # Set y axis title to event name for trace.
             # Name in reverse so trace 1 ends up at the bottom.
-            axes.set_ylabel(self.cfg.EventTraces[self.numEvCharts - ev - 1]["Title"], rotation=0, horizontalalignment='right', verticalalignment='center', fontsize=self.cfg.EvPlot["AxesTitleFontSize"])
+            if self.cfg.EventTraces[self.numEvCharts - ev - 1]["Event"] == "INPUT":
+                axes.set_ylabel("Input {0:d}".format(self.cfg.EventTraces[self.numEvCharts - ev - 1]["Channel"]), rotation=0, horizontalalignment='right', verticalalignment='center', fontsize=self.cfg.EvPlot["AxesTitleFontSize"])
+            else:
+                axes.set_ylabel(self.cfg.EventTraces[self.numEvCharts - ev - 1]["Title"], rotation=0, horizontalalignment='right', verticalalignment='center', fontsize=self.cfg.EvPlot["AxesTitleFontSize"])
             # Set x axis title and font.
             axes.set_xlabel("Time {0:s}".format(tzone(self.cfg.TimeUTC)), fontsize=self.cfg.EvPlot["AxesTitleFontSize"])
             axes.tick_params(labelsize=self.cfg.EvPlot["AxisLabelFontSize"])

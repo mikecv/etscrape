@@ -20,6 +20,9 @@ class Config():
         # Application general configuration
         self.TimeUTC = 1
 
+        # Supported Events (for events chart)
+        self.events = ["SIGNON", "ZONEOVERSPEED", "ENGINEOVERSPEED", "LOWCOOLANT", "OILPRESSURE", "ENGINETEMP", "INPUT"]
+
         # Trip related data.
         self.TripData = {
             "TripBackColour" : "#ffff00",
@@ -82,9 +85,9 @@ class Config():
             {"Event" : "LOWCOOLANT", "Title" : "Engine Coolant\nLevel Low"},
             {"Event" : "OILPRESSURE", "Title" : "Engine Oil\nPressure Low"},
             {"Event" : "ENGINETEMP", "Title" : "Engine\nTemperature High"},
-            {"Event" : "INPUT", "Title" : "Input 1", "Channel" : 1},
-            {"Event" : "INPUT", "Title" : "Input 2", "Channel" : 2},
-            {"Event" : "INPUT", "Title" : "Input 8", "Channel" : 8}
+            {"Event" : "INPUT", "Channel" : 1},
+            {"Event" : "INPUT", "Channel" : 2},
+            {"Event" : "INPUT", "Channel" : 8}
             ]
 
         # Read / update configuration from file.

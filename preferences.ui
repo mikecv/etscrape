@@ -34,10 +34,6 @@
   <property name="windowTitle">
    <string>Edit Preferences</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>resources/about.png</normaloff>resources/about.png</iconset>
-  </property>
   <widget class="QGroupBox" name="SpeedBox">
    <property name="geometry">
     <rect>

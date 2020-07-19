@@ -1,0 +1,10 @@
+
+logs/
+
+about.py
+
+changeLog.py
+
+__pycache__/
+
+*.log.*
