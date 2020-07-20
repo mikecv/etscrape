@@ -8,3 +8,5 @@ changeLog.py
 __pycache__/
 
 *.log.*
+
+v0.1/

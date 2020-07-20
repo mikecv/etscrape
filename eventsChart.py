@@ -61,9 +61,10 @@ class EventCanvas(FigureCanvasQTAgg):
         for ev in range(self.numEvCharts):
             # Create trace for each event subplot.
             axes = self.fig.add_subplot(int("{0:d}{1:d}{2:d}".format((self.numEvCharts + 1), 1, (ev+1))))
-            line, = axes.plot_date([], [], color=self.cfg.EvPlot["EventTraceColour"], linestyle='solid', marker=None, linewidth=1)
+            # Add plot line with marker, although will only show markers for zero duration INPUT events.
+            line, = axes.plot_date([], [], color=self.cfg.EvPlot["EventTraceColour"], linestyle='solid', marker='o', linewidth=1)
             # Set y axis range 0 to 1 for all subplots.
-            axes.set_ylim([0, 1])
+            axes.set_ylim([-0.2, 1.2])
             # Hide y axis ticks and tick labels.
             axes.set_yticks([])
             axes.set_yticklabels([])
@@ -160,7 +161,7 @@ class EventCanvas(FigureCanvasQTAgg):
         self.traces[0][0].set_ydata(eList.copy())
 
         # Fill in the event bars.
-        self.traces[0][1].fill_between(self.traces[0][0].get_xdata(), self.traces[0][0].get_ydata(), 0, color=self.cfg.EvPlot["TripFillColour"], alpha=0.5)
+        self.traces[0][1].fill_between(self.traces[0][0].get_xdata(), self.traces[0][0].get_ydata(), 0, color=self.cfg.EvPlot["TripFillColour"], alpha=0.35)
 
         # Set axis for trace to trip extents.
         self.traces[0][1].set_xlim([plotStartTime, plotEndTime])
@@ -171,6 +172,10 @@ class EventCanvas(FigureCanvasQTAgg):
             t = self.cfg.EventTraces[idx]
             tList = []
             eList = []
+            # Initilise list of special markers for zero duration INPUT events.
+            # Need to keep track of points where zero duration INPUT events occur.
+            nullMarkers = []
+            markerIdx = 0
             # Initialise flag if we are dealing with an INPUT event.
             inputEv = False
             # Initialise trace started flag.
@@ -187,6 +192,7 @@ class EventCanvas(FigureCanvasQTAgg):
                             if traceStarted == False:
                                 # Start trace with start of trip.
                                 tList.append(tripStartTime)
+                                markerIdx += 1
                                 if ev.inputState == 1:
                                     eList.append(0)
                                     finalState = 0
@@ -198,15 +204,22 @@ class EventCanvas(FigureCanvasQTAgg):
                             if ev.inputState == 1:
                                 tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
                                 eList.append(finalState)
+                                markerIdx += 1
                                 tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
                                 eList.append(1)
+                                markerIdx += 1
                                 finalState = 1
                             else:
                                 tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
                                 eList.append(finalState)
+                                markerIdx + 1
                                 tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
                                 eList.append(0)
+                                markerIdx += 1
                                 finalState = 0
+                            # Check if we need to add a marker for a zero duration event.
+                            if ev.activeTime == 0:
+                                nullMarkers.append(markerIdx - 1)
                     else:
                         # Check if we need to start the trace.
                         if traceStarted == False:
@@ -242,8 +255,12 @@ class EventCanvas(FigureCanvasQTAgg):
             # Set axis for trace to trip extents.
             self.traces[self.numEvCharts - idx][1].set_xlim([plotStartTime, plotEndTime])
 
+            # Only set markers where zero duration INPUT events have been detected.
+            # Marker list will be empty for non-INPUT events.
+            self.traces[self.numEvCharts - idx][0].set_markevery(nullMarkers)
+
             # Fill in the event bars.
-            self.traces[self.numEvCharts - idx][1].fill_between(self.traces[self.numEvCharts - idx][0].get_xdata(), self.traces[self.numEvCharts - idx][0].get_ydata(), 0, color=self.cfg.EvPlot["EventFillColour"], alpha=0.5)
+            self.traces[self.numEvCharts - idx][1].fill_between(self.traces[self.numEvCharts - idx][0].get_xdata(), self.traces[self.numEvCharts - idx][0].get_ydata(), 0, color=self.cfg.EvPlot["EventFillColour"], alpha=0.35)
 
         # Draw plot.
         self.draw()

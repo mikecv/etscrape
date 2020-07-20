@@ -45,6 +45,7 @@ from eventsChart import *
 # Add dialog to set events to plot.
 # Close events plot if log open failed; disable menu item.
 # Close events plot with main application close.
+# Look at why some Trip titles are showing up in blue?
 # Update change log.
 # Update help file.
 # *******************************************
