@@ -1635,21 +1635,23 @@ class EventsChartConfigDialog(QDialog):
             p[0].addItems(self.config.events)
 
         # Preconfigure to current selections.
-        for idx, p in enumerate(plotCfg):
+        for idx, t in enumerate(self.config.EventTraces):
             try:
-                selection = self.config.events.index(self.config.EventTraces[idx]["Event"])
-                p[0].setCurrentIndex(selection)
-                logger.debug("Event selected item: {0:d}".format(selection))
-                if (p[0].currentText() != "INPUT"):
-                    p[1].setText(self.config.EventTraces[idx]["Title"])
-                    p[2].setEnabled(False)
-                    p[3].setEnabled(False)
-                else:
-                    p[1].setText("Input {0:d}".format(self.config.EventTraces[idx]["Channel"]))
-                    p[1].setEnabled(False)
-                    p[3].setValue(self.config.EventTraces[idx]["Channel"])
-            except ValueError:
-                logger.warning("Invalid event for events chart: {0:s}".format(self.config.EventTraces[idx]["Event"]))
+                # Look for trace event in list of events.
+                selection = self.config.events.index(t["Event"])
+            except:
+                # If no match then use first 'event' which is a blank.
+                selection = 0
+            plotCfg[idx][0].setCurrentIndex(selection)
+            logger.debug("Event selected item: {0:d}".format(selection))
+            if (plotCfg[idx][0].currentText() != "INPUT"):
+                plotCfg[idx][1].setText(self.config.EventTraces[idx]["Title"])
+                plotCfg[idx][2].setEnabled(False)
+                plotCfg[idx][3].setEnabled(False)
+            else:
+                plotCfg[idx][1].setText("Input {0:d}".format(self.config.EventTraces[idx]["Channel"]))
+                plotCfg[idx][1].setEnabled(False)
+                plotCfg[idx][3].setValue(self.config.EventTraces[idx]["Channel"])
 
         # Connect to SAVE dialog button for processing.
         self.SaveDialogBtn.clicked.connect(self.saveEventsChartConfig)
