@@ -43,9 +43,8 @@ from eventsChart import *
 # TODO List
 #
 # Add dialog to set events to plot.
-# Close events plot if log open failed; disable menu item.
+# Close speed plot and events plot if log open failed; disable menu item. Currently shows previous plots.
 # Close events plot with main application close.
-# Some events don't plot to end of chart, e.g. trip 651 (21866) in file 10604-e.csv.
 # Update change log.
 # Update help file.
 # *******************************************
@@ -528,8 +527,15 @@ class UI(QMainWindow):
                     eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["OtherEventColour"])))
 
                 if ev.alertText != "":
-                    eventLevel.setFont(2, fontBold)
-                    eventLevel.setForeground(2, QtGui.QBrush(QtGui.QColor(config.TripData["CommentColour"])))
+                    if ev.isInput:
+                        # For INPUT events alert field has the input channel number,
+                        # so colour in trip colour instead of comment/alert colours.
+                        eventLevel.setFont(2, fontPlain)
+                        eventLevel.setForeground(2, QtGui.QBrush(QtGui.QColor(config.TripData["TripColour"])))
+                    else:
+                        # Not an INPUT event so colour in comment colour and in bold.
+                        eventLevel.setFont(2, fontBold)
+                        eventLevel.setForeground(2, QtGui.QBrush(QtGui.QColor(config.TripData["CommentColour"])))
 
                 # Check it see if event is of other type in which case don't have details.
                 # Note 'debug' events are also 'other' events.
@@ -1736,6 +1742,7 @@ class ChangeLogDialog(QDialog):
             "<li>Added additional checks and alert messages for Time1H DEBUG event errors.</li>" \
             "<li>Added check and alert for bypass detection; alerts in SIGON events for Driver ID = -12.</li>" \
             "<li>Added check for invalid direction in REPORT events, i.e. 0 > x > 359.</li>" \
+            "<li>Added channel number in comment field for INPUT events to make easier to find when collapsed.</li>" \
             "<li>Refactored speed chart plotting to align with implementation for events chart.</li>" \
             "<li>Looked at updating plots after pan/zoom. Still require to change currently selected trip to reset plot.</li>" \
             "<li>Speed plots show time according to the current timezone. Plots regenerate if visible when time zone preference changed.</li>" \

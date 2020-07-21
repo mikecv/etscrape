@@ -174,6 +174,7 @@ class EventCanvas(FigureCanvasQTAgg):
             eList = []
             # Initilise list of special markers for zero duration INPUT events.
             # Need to keep track of points where zero duration INPUT (transition to inactive state) events occur.
+            # This will only really get used if there is a problem; if it slows things down too much markers can be removed.
             nullMarkers = []
             markerIdx = 0
             # Initialise flag if we are dealing with an INPUT event.
@@ -240,9 +241,10 @@ class EventCanvas(FigureCanvasQTAgg):
                         eList.append(1)
                         tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
                         eList.append(0)
+                        finalState = 0
 
-            # End trace with end of trip for INPUT events.
-            if inputEv:
+            # End trace with final state value to end of plot (if event trace was started that is).
+            if traceStarted:
                 tList.append(plotEndTime)
                 eList.append(finalState)
 

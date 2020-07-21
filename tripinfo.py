@@ -512,6 +512,10 @@ class Trip():
                         # Note that activeTime refers to time in the active state.
                         # That is, if inputState is inactive state (0) then active time will always be 0.
 
+                        # For input events add the input number to the alert field.
+                        # This is useful for looking for particular inputs when the events column is collapsed.
+                        event.alertText = appendAlertText(event.alertText, "Input : {0:d}".format(event.inputNo))
+
                         # Indicate event is Input event to control presentation format.
                         event.isInput = True
 
