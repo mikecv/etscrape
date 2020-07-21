@@ -45,7 +45,7 @@ from eventsChart import *
 # Add dialog to set events to plot.
 # Close events plot if log open failed; disable menu item.
 # Close events plot with main application close.
-# Look at why some Trip titles are showing up in blue?
+# Some events don't plot to end of chart, e.g. trip 651 (21866) in file 10604-e.csv.
 # Update change log.
 # Update help file.
 # *******************************************
@@ -675,7 +675,7 @@ class UI(QMainWindow):
     # Also highlight if count not zero.
     # *******************************************
     def updateSummaryCount(self, item, count):
-        # Set additional still if count > 0.
+        # Set additional style if count > 0.
         # Else clear.
         if count > 0:
             item.setStyleSheet("font-weight: bold; color: {0:s}".format(config.TripData["SummaryAlertColour"]))
@@ -1387,6 +1387,8 @@ class PreferencesDialog(QDialog):
             self.config.TripData["EventColour"] = col
             logger.debug("Change to event text colour: {0:s}".format(self.config.TripData["EventColour"]))
             prefChanged = TruezoneLineColVal
+        # Trip alert colour.
+        col = self.alertColVal.palette().button().color().name()
         if col != self.config.TripData["AlertColour"]:
             # Set the configuration value.
             self.config.TripData["AlertColour"] = col
@@ -1737,6 +1739,7 @@ class ChangeLogDialog(QDialog):
             "<li>Refactored speed chart plotting to align with implementation for events chart.</li>" \
             "<li>Looked at updating plots after pan/zoom. Still require to change currently selected trip to reset plot.</li>" \
             "<li>Speed plots show time according to the current timezone. Plots regenerate if visible when time zone preference changed.</li>" \
+            "<li>Fixed bug in preferences dialog code not setting trip event alert colour correctly.</li>" \
             "<li>Refactored speed plot class and method names.</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.4</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\

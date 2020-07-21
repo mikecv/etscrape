@@ -1,6 +1,6 @@
 {
     "ConfigVersion": 4,
-    "DebugLevel": 10,
+    "DebugLevel": 20,
     "LogFileSize": 100000,
     "LogBackups": 3,
     "TimeUTC": 1,
@@ -18,7 +18,7 @@
         "ShowOtherEvents": 1,
         "ShowInputEvents": 1,
         "ShowDebugEvents": 1,
-        "ShowOutOfTripEvents": 0,
+        "ShowOutOfTripEvents": 1,
         "BadSpeedLimit": 150,
         "BadRpmLimit": 5000
     },
@@ -83,24 +83,8 @@
     ],
     "EventTraces": [
         {
-            "Event": "ZONEOVERSPEED",
-            "Title": "Zone\nOverspeed"
-        },
-        {
-            "Event": "ENGINEOVERSPEED",
-            "Title": "Engine\nOverspeed"
-        },
-        {
-            "Event": "LOWCOOLANT",
-            "Title": "Engine Coolant\nLevel Low"
-        },
-        {
             "Event": "OILPRESSURE",
             "Title": "Engine Oil\nPressure Low"
-        },
-        {
-            "Event": "ENGINETEMP",
-            "Title": "Engine\nTemperature High"
         },
         {
             "Event": "INPUT",
@@ -108,7 +92,7 @@
         },
         {
             "Event": "INPUT",
-            "Channel": 2
+            "Channel": 4
         },
         {
             "Event": "INPUT",

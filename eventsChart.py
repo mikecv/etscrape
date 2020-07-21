@@ -173,7 +173,7 @@ class EventCanvas(FigureCanvasQTAgg):
             tList = []
             eList = []
             # Initilise list of special markers for zero duration INPUT events.
-            # Need to keep track of points where zero duration INPUT events occur.
+            # Need to keep track of points where zero duration INPUT (transition to inactive state) events occur.
             nullMarkers = []
             markerIdx = 0
             # Initialise flag if we are dealing with an INPUT event.
@@ -218,7 +218,9 @@ class EventCanvas(FigureCanvasQTAgg):
                                 markerIdx += 1
                                 finalState = 0
                             # Check if we need to add a marker for a zero duration event.
-                            if ev.activeTime == 0:
+                            # Note that active time is always 0 for transitions to the inactive state, i.e.
+                            # only add marker if transition to inactive state and duration is 0.
+                            if ((ev.inputState == 0) and (ev.activeTime == 0)):
                                 nullMarkers.append(markerIdx - 1)
                     else:
                         # Check if we need to start the trace.

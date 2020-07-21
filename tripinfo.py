@@ -509,6 +509,8 @@ class Trip():
                         event.inputNo = int(sp.group(1))
                         event.inputState = int(sp.group(2))
                         event.activeTime = int(sp.group(3))
+                        # Note that activeTime refers to time in the active state.
+                        # That is, if inputState is inactive state (0) then active time will always be 0.
 
                         # Indicate event is Input event to control presentation format.
                         event.isInput = True
