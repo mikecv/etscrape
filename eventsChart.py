@@ -127,10 +127,10 @@ class EventCanvas(FigureCanvasQTAgg):
         tripDuration = self.data.tripLog[No-1].events[endEvent - 1].serverTime - self.data.tripLog[No-1].tripStart
 
         # Create start/end of chart. Make a bit wider than the trip.
-        # Add 10% or 30 seconds, whichever is less, to the trip.
+        # Add 10% or some arbitrary time, whichever is less, to the trip.
         plotEntre = int(tripDuration * 0.1)
-        if plotEntre > 30:
-            plotEntre = 30
+        if plotEntre > 60:
+            plotEntre = 60
 
         # Plot start and end time.
         plotStartTime = timeTZ((self.data.tripLog[No-1].tripStart - plotEntre), self.cfg.TimeUTC)
@@ -173,8 +173,8 @@ class EventCanvas(FigureCanvasQTAgg):
             tList = []
             eList = []
             # Initilise list of special markers for zero duration INPUT events.
-            # Need to keep track of points where zero duration INPUT (transition to inactive state) events occur.
-            # This will only really get used if there is a problem; if it slows things down too much markers can be removed.
+            # Need to keep track of points where zero duration INPUT events occur.
+            # This is useful if there is a problem.
             nullMarkers = []
             markerIdx = 0
             # Initialise flag if we are dealing with an INPUT event.
@@ -193,12 +193,13 @@ class EventCanvas(FigureCanvasQTAgg):
                             if traceStarted == False:
                                 # Start trace with start of trip.
                                 tList.append(tripStartTime)
-                                markerIdx += 1
                                 if ev.inputState == 1:
                                     eList.append(0)
+                                    markerIdx += 1
                                     finalState = 0
                                 else:
                                     eList.append(1)
+                                    markerIdx += 1
                                     finalState = 1
                                 traceStarted = True
                             # Add start of event to trace. Need to check what state input has changed to.
@@ -213,15 +214,14 @@ class EventCanvas(FigureCanvasQTAgg):
                             else:
                                 tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
                                 eList.append(finalState)
-                                markerIdx + 1
+                                markerIdx += 1
                                 tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
                                 eList.append(0)
                                 markerIdx += 1
                                 finalState = 0
                             # Check if we need to add a marker for a zero duration event.
-                            # Note that active time is always 0 for transitions to the inactive state, i.e.
-                            # only add marker if transition to inactive state and duration is 0.
-                            if ((ev.inputState == 0) and (ev.activeTime == 0)):
+                            # Note that active time is always 0 for transitions to the inactive state.
+                            if (ev.activeTime == 0):
                                 nullMarkers.append(markerIdx - 1)
                     else:
                         # Check if we need to start the trace.

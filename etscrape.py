@@ -45,6 +45,7 @@ from eventsChart import *
 # Add dialog to set events to plot.
 # Close speed plot and events plot if log open failed; disable menu item. Currently shows previous plots.
 # Close events plot with main application close.
+# Events plot crashes (possibly because no end of trip), see id 1533 of 10247-c.
 # Update change log.
 # Update help file.
 # *******************************************
