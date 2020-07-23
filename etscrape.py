@@ -46,6 +46,9 @@ from eventsChart import *
 # Close speed plot and events plot if log open failed; disable menu item. Currently shows previous plots.
 # Close events plot with main application close.
 # Events plot crashes (possibly because no end of trip), see id 1533 of 10247-c.
+# Problem with: plotEndTime = timeTZ((self.data.tripLog[No-1].events[endEvent].serverTime + plotEntre), self.cfg.TimeUTC) IndexError: list index out of range
+#   for 10604-g trip 814 ID 26677, viewing oil pressure and inputs 1, 4, and 8.
+#   Trips with just one event don't work.
 # Update change log.
 # Update help file.
 # *******************************************

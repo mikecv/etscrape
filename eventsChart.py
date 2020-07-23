@@ -116,11 +116,10 @@ class EventCanvas(FigureCanvasQTAgg):
             if ev.event == "TRIP":
                 endEvent = idx
                 tripEnded = True
-        # Go an event after the TRIP event.
+        # Go to an event after the TRIP event.
         # This should catch trip summary type events.
-        endEvent += 1
-        if endEvent > len(self.data.tripLog[No-1].events):
-            endEvent = self.data.tripLog[No-1]
+        # if ((tripEnded == True) and (endEvent < (len(self.data.tripLog[No-1].events) - 1))):
+        #     endEvent += 1
 
         # Look for last event in the trip (so far) and make this the end of the trip.
         tripEndTime = timeTZ(self.data.tripLog[No-1].events[endEvent - 1].serverTime, self.cfg.TimeUTC)
