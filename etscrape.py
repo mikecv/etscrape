@@ -45,10 +45,6 @@ from eventsChart import *
 # Add dialog to set events to plot.
 # Close speed plot and events plot if log open failed; disable menu item. Currently shows previous plots.
 # Close events plot with main application close.
-# Events plot crashes (possibly because no end of trip), see id 1533 of 10247-c.
-# Problem with: plotEndTime = timeTZ((self.data.tripLog[No-1].events[endEvent].serverTime + plotEntre), self.cfg.TimeUTC) IndexError: list index out of range
-#   for 10604-g trip 814 ID 26677, viewing oil pressure and inputs 1, 4, and 8.
-#   Trips with just one event don't work.
 # Update change log.
 # Update help file.
 # *******************************************
@@ -1508,9 +1504,6 @@ class PreferencesDialog(QDialog):
             logger.debug("Change to bad engine speed limit: {0:d}".format(self.config.TripData["BadRpmLimit"]))
             prefChanged = True
 
-        # Cancel, so close dialog.
-        self.close()
-
         ###########################
         # Speed Plot Data
         ###########################
@@ -1603,6 +1596,9 @@ class PreferencesDialog(QDialog):
             logger.debug("Change to event plot title text font size: {0:d}".format(self.config.EvPlot["PlotTitleFontSize"]))
             prefChanged = True
 
+        # Cancel, so close dialog.
+        self.close()
+
         # Save the configuration values (if changed).
         if prefChanged:
             logger.debug("Changes saved to preferences.")
@@ -1624,18 +1620,18 @@ class EventsChartConfigDialog(QDialog):
         self.app = app
 
         # Create list of event chart config items.
-        plotCfg = []
-        plotCfg.append((self.EventCombo1, self.titleLineEdit1, self.channelLabel1, self.channelSpinBox1))
-        plotCfg.append((self.EventCombo2, self.titleLineEdit2, self.channelLabel2, self.channelSpinBox2))
-        plotCfg.append((self.EventCombo3, self.titleLineEdit3, self.channelLabel3, self.channelSpinBox3))
-        plotCfg.append((self.EventCombo4, self.titleLineEdit4, self.channelLabel4, self.channelSpinBox4))
-        plotCfg.append((self.EventCombo5, self.titleLineEdit5, self.channelLabel5, self.channelSpinBox5))
-        plotCfg.append((self.EventCombo6, self.titleLineEdit6, self.channelLabel6, self.channelSpinBox6))
-        plotCfg.append((self.EventCombo7, self.titleLineEdit7, self.channelLabel7, self.channelSpinBox7))
-        plotCfg.append((self.EventCombo8, self.titleLineEdit8, self.channelLabel8, self.channelSpinBox8))
+        self.plotCfg = []
+        self.plotCfg.append((self.EventCombo1, self.titleLineEdit1, self.channelLabel1, self.channelSpinBox1))
+        self.plotCfg.append((self.EventCombo2, self.titleLineEdit2, self.channelLabel2, self.channelSpinBox2))
+        self.plotCfg.append((self.EventCombo3, self.titleLineEdit3, self.channelLabel3, self.channelSpinBox3))
+        self.plotCfg.append((self.EventCombo4, self.titleLineEdit4, self.channelLabel4, self.channelSpinBox4))
+        self.plotCfg.append((self.EventCombo5, self.titleLineEdit5, self.channelLabel5, self.channelSpinBox5))
+        self.plotCfg.append((self.EventCombo6, self.titleLineEdit6, self.channelLabel6, self.channelSpinBox6))
+        self.plotCfg.append((self.EventCombo7, self.titleLineEdit7, self.channelLabel7, self.channelSpinBox7))
+        self.plotCfg.append((self.EventCombo8, self.titleLineEdit8, self.channelLabel8, self.channelSpinBox8))
 
         # Configure combo boxes.
-        for p in plotCfg:
+        for p in self.plotCfg:
             p[0].addItems(self.config.events)
 
         # Preconfigure to current selections.
@@ -1646,16 +1642,16 @@ class EventsChartConfigDialog(QDialog):
             except:
                 # If no match then use first 'event' which is a blank.
                 selection = 0
-            plotCfg[idx][0].setCurrentIndex(selection)
+            self.plotCfg[idx][0].setCurrentIndex(selection)
             logger.debug("Event selected item: {0:d}".format(selection))
-            if (plotCfg[idx][0].currentText() != "INPUT"):
-                plotCfg[idx][1].setText(self.config.EventTraces[idx]["Title"])
-                plotCfg[idx][2].setEnabled(False)
-                plotCfg[idx][3].setEnabled(False)
+            if (self.plotCfg[idx][0].currentText() != "INPUT"):
+                self.plotCfg[idx][1].setText(self.config.EventTraces[idx]["Title"])
+                self.plotCfg[idx][2].setEnabled(False)
+                self.plotCfg[idx][3].setEnabled(False)
             else:
-                plotCfg[idx][1].setText("Input {0:d}".format(self.config.EventTraces[idx]["Channel"]))
-                plotCfg[idx][1].setEnabled(False)
-                plotCfg[idx][3].setValue(self.config.EventTraces[idx]["Channel"])
+                self.plotCfg[idx][1].setText("Input {0:d}".format(self.config.EventTraces[idx]["Channel"]))
+                self.plotCfg[idx][1].setEnabled(False)
+                self.plotCfg[idx][3].setValue(self.config.EventTraces[idx]["Channel"])
 
         # Connect to SAVE dialog button for processing.
         self.SaveDialogBtn.clicked.connect(self.saveEventsChartConfig)
@@ -1687,6 +1683,29 @@ class EventsChartConfigDialog(QDialog):
 
         # Flag indicating if need to re-render events chart for config to take effect.
         rerender = False
+
+        # Overwrite configuration values with new values.
+        newConfig = []
+
+        # Go through plot config and save changes.
+        for p in self.plotCfg:
+            p_ev = p[0].currentText()
+            if (p_ev != ""):
+                p_t = p[1].text()
+                if p_ev == "INPUT":
+                    p_ch = p[3].value()
+                    trace = {"Event" : p_ev, "Channel" : p_ch}
+                else:
+                    trace = {"Event" : p_ev, "Title" : p_t}
+                newConfig.append(trace)
+
+        # Cancel, so close dialog.
+        self.close()
+
+        # Save the configuration values (if changed).
+        if prefChanged:
+            logger.debug("Changes saved to preferences.")
+            self.config.saveConfig()
 
 # *******************************************
 # About dialog class.

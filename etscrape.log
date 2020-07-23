@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 20200718-20:18:17.725 [etscrape] [INFO    ] Program version : 0.5
 20200721-20:30:56.195 [etscrape] [INFO    ] Program version : 0.5
 20200721-20:49:31.220 [etscrape] [INFO    ] Program version : 0.5
@@ -8,3 +9,665 @@
 20200721-20:55:17.939 [etscrape] [INFO    ] Program version : 0.5
 20200721-20:59:07.810 [etscrape] [INFO    ] Program version : 0.5
 20200721-21:01:58.415 [etscrape] [INFO    ] Program version : 0.5
+=======
+20200719-13:03:46.835 [etscrape] [DEBUG   ] Adding event detail: Input, value: 1 - [ET] Engine Oil Pressure, [ST] Seat
+20200719-13:03:46.836 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.836 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.836 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:02:40 [UTC]
+20200719-13:03:46.836 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.836 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.836 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.836 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:01:06
+20200719-13:03:46.836 [etscrape] [DEBUG   ] Adding event: OILPRESSURE, occurred: 17/07/2020 01:02:40 [UTC]
+20200719-13:03:46.837 [etscrape] [DEBUG   ] Adding event detail: Sign-on ID, value: 1225
+20200719-13:03:46.837 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.837 [etscrape] [DEBUG   ] Adding event detail: Duration, value: 0:01:01
+20200719-13:03:46.837 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:02:49 [UTC]
+20200719-13:03:46.837 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.837 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.837 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.838 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.838 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:04:19 [UTC]
+20200719-13:03:46.838 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.838 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.838 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.838 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:01:31
+20200719-13:03:46.838 [etscrape] [DEBUG   ] Adding event: OILPRESSURE, occurred: 17/07/2020 01:04:19 [UTC]
+20200719-13:03:46.838 [etscrape] [DEBUG   ] Adding event detail: Sign-on ID, value: 1225
+20200719-13:03:46.839 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.839 [etscrape] [DEBUG   ] Adding event detail: Duration, value: 0:01:29
+20200719-13:03:46.839 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:04:19 [UTC]
+20200719-13:03:46.839 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.839 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.839 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.839 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.840 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:04:40 [UTC]
+20200719-13:03:46.840 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.840 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.840 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.840 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:21
+20200719-13:03:46.840 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:04:40 [UTC]
+20200719-13:03:46.840 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.841 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.841 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.841 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.841 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:05:01 [UTC]
+20200719-13:03:46.841 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.841 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.841 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.841 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:21
+20200719-13:03:46.842 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:05:01 [UTC]
+20200719-13:03:46.842 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.842 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.842 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.842 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.842 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:05:37 [UTC]
+20200719-13:03:46.842 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.843 [etscrape] [DEBUG   ] Adding event detail: Input, value: 1 - [ET] Engine Oil Pressure, [ST] Seat
+20200719-13:03:46.843 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.843 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:04:00
+20200719-13:03:46.843 [etscrape] [DEBUG   ] Adding event: OILPRESSURE, occurred: 17/07/2020 01:05:39 [UTC]
+20200719-13:03:46.843 [etscrape] [DEBUG   ] Adding event detail: Sign-on ID, value: 1225
+20200719-13:03:46.843 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.843 [etscrape] [DEBUG   ] Adding event detail: Duration, value: 0:01:18
+20200719-13:03:46.843 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:06:38 [UTC]
+20200719-13:03:46.844 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.844 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.844 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.844 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:01:37
+20200719-13:03:46.844 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:07:38 [UTC]
+20200719-13:03:46.844 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.844 [etscrape] [DEBUG   ] Adding event detail: Input, value: 1 - [ET] Engine Oil Pressure, [ST] Seat
+20200719-13:03:46.845 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.845 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.845 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:08:38 [UTC]
+20200719-13:03:46.845 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.845 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.845 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.845 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.845 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:09:25 [UTC]
+20200719-13:03:46.846 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.846 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.846 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.846 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:48
+20200719-13:03:46.846 [etscrape] [DEBUG   ] Adding event: OILPRESSURE, occurred: 17/07/2020 01:09:25 [UTC]
+20200719-13:03:46.846 [etscrape] [DEBUG   ] Adding event detail: Sign-on ID, value: 1225
+20200719-13:03:46.846 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.847 [etscrape] [DEBUG   ] Adding event detail: Duration, value: 0:00:46
+20200719-13:03:46.847 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:09:25 [UTC]
+20200719-13:03:46.847 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.847 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.847 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.847 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.847 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:09:46 [UTC]
+20200719-13:03:46.847 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.848 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.848 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.848 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:21
+20200719-13:03:46.848 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:09:46 [UTC]
+20200719-13:03:46.848 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.848 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.848 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.849 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.849 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:11:01 [UTC]
+20200719-13:03:46.849 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.849 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.849 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.849 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:01:15
+20200719-13:03:46.849 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:11:01 [UTC]
+20200719-13:03:46.849 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.850 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.850 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.850 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.850 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:11:07 [UTC]
+20200719-13:03:46.850 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.850 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.850 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.850 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:06
+20200719-13:03:46.851 [etscrape] [DEBUG   ] Adding event: OILPRESSURE, occurred: 17/07/2020 01:11:07 [UTC]
+20200719-13:03:46.851 [etscrape] [DEBUG   ] Adding event detail: Sign-on ID, value: 1225
+20200719-13:03:46.851 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.851 [etscrape] [DEBUG   ] Adding event detail: Duration, value: 0:01:40
+20200719-13:03:46.851 [etscrape] [DEBUG   ] Adding event: REPORT, occurred: 17/07/2020 01:12:37 [UTC]
+20200719-13:03:46.851 [etscrape] [DEBUG   ] Adding event detail: Sign-on ID, value: 1225
+20200719-13:03:46.851 [etscrape] [DEBUG   ] Adding event detail: Report Speed, value: 0
+20200719-13:03:46.852 [etscrape] [DEBUG   ] Adding event detail: Direction, value: 0
+20200719-13:03:46.852 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:12:45 [UTC]
+20200719-13:03:46.852 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.852 [etscrape] [DEBUG   ] Adding event detail: Input, value: 1 - [ET] Engine Oil Pressure, [ST] Seat
+20200719-13:03:46.852 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.852 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:05:07
+20200719-13:03:46.852 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:13:39 [UTC]
+20200719-13:03:46.853 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.853 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.853 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.853 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.853 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:14:37 [UTC]
+20200719-13:03:46.853 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.853 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.853 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.854 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:59
+20200719-13:03:46.854 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:14:37 [UTC]
+20200719-13:03:46.854 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.854 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.854 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.854 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.854 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:14:37 [UTC]
+20200719-13:03:46.854 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.855 [etscrape] [DEBUG   ] Adding event detail: Input, value: 1 - [ET] Engine Oil Pressure, [ST] Seat
+20200719-13:03:46.855 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.855 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.855 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:16:28 [UTC]
+20200719-13:03:46.855 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.855 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.855 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.856 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:01:51
+20200719-13:03:46.856 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:16:28 [UTC]
+20200719-13:03:46.856 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.856 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.856 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.856 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.856 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:17:37 [UTC]
+20200719-13:03:46.857 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.857 [etscrape] [DEBUG   ] Adding event detail: Input, value: 8 - [ET][ST] Ignition Switch
+20200719-13:03:46.857 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.857 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:17:44
+20200719-13:03:46.857 [etscrape] [DEBUG   ] Adding event: OILPRESSURE, occurred: 17/07/2020 01:17:39 [UTC]
+20200719-13:03:46.857 [etscrape] [DEBUG   ] Adding event detail: Sign-on ID, value: 1225
+20200719-13:03:46.857 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.857 [etscrape] [DEBUG   ] Adding event detail: Duration, value: 0:03:00
+20200719-13:03:46.858 [etscrape] [DEBUG   ] Adding event: TRIP, occurred: 17/07/2020 01:17:42 [UTC]
+20200719-13:03:46.858 [etscrape] [DEBUG   ] Adding event detail: Sign-on ID, value: 1225
+20200719-13:03:46.858 [etscrape] [DEBUG   ] Adding event detail: Time Forward, value: 0:00:00
+20200719-13:03:46.858 [etscrape] [DEBUG   ] Adding event detail: Time Reverse, value: 0:12:26
+20200719-13:03:46.858 [etscrape] [DEBUG   ] Adding event detail: Time Idle, value: 0:04:59
+20200719-13:03:46.858 [etscrape] [DEBUG   ] Adding event detail: Max Idle Time, value: 0:02:31
+20200719-13:03:46.858 [etscrape] [DEBUG   ] Adding event: TRIPSUMMARY, occurred: 17/07/2020 01:17:42 [UTC]
+20200719-13:03:46.858 [etscrape] [DEBUG   ] Adding event detail: Sign-on ID, value: 1225
+20200719-13:03:46.859 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:17:43 [UTC]
+20200719-13:03:46.859 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.859 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.859 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.859 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:01:14
+20200719-13:03:46.859 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:19:00 [UTC]
+20200719-13:03:46.859 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.860 [etscrape] [DEBUG   ] Adding event detail: Input, value: 1 - [ET] Engine Oil Pressure, [ST] Seat
+20200719-13:03:46.860 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.860 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:04:22
+20200719-13:03:46.860 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:19:06 [UTC]
+20200719-13:03:46.860 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.860 [etscrape] [DEBUG   ] Adding event detail: Input, value: 8 - [ET][ST] Ignition Switch
+20200719-13:03:46.860 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.860 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.861 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:19:07 [UTC]
+20200719-13:03:46.861 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.861 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.861 [etscrape] [DEBUG   ] Adding event detail: State, value: 1
+20200719-13:03:46.861 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:00
+20200719-13:03:46.861 [etscrape] [DEBUG   ] Adding event: INPUT, occurred: 17/07/2020 01:19:08 [UTC]
+20200719-13:03:46.861 [etscrape] [DEBUG   ] Adding event detail: Current Speed, value: 0
+20200719-13:03:46.862 [etscrape] [DEBUG   ] Adding event detail: Input, value: 4 - [ET] Engine Speed, [ST] Work 2
+20200719-13:03:46.862 [etscrape] [DEBUG   ] Adding event detail: State, value: 0
+20200719-13:03:46.862 [etscrape] [DEBUG   ] Adding event detail: Active Time, value: 0:00:02
+20200719-13:03:50.202 [etscrape] [DEBUG   ] User selected Display Events Chart window menu item.
+20200719-13:18:06.792 [etscrape] [INFO    ] Program version : 0.5
+20200719-13:19:06.500 [etscrape] [INFO    ] Program version : 0.5
+20200719-13:19:15.177 [etscrape] [INFO    ] Opened and read log file : /home/mike/python/etscrape/logs/10247-a
+20200719-13:24:34.702 [etscrape] [INFO    ] Program version : 0.5
+20200719-13:28:22.963 [etscrape] [INFO    ] Program version : 0.5
+20200719-13:54:48.427 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:03:57.431 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:04:41.414 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:06:55.054 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:06:58.970 [etscrape] [WARNING ] Invalid event for events chart: ZONEOVERSPEED
+20200719-14:06:58.971 [etscrape] [WARNING ] Invalid event for events chart: ENGINEOVERSPEED
+20200719-14:06:58.971 [etscrape] [WARNING ] Invalid event for events chart: LOWCOOLANT
+20200719-14:06:58.971 [etscrape] [WARNING ] Invalid event for events chart: OILPRESSURE
+20200719-14:06:58.971 [etscrape] [WARNING ] Invalid event for events chart: ENGINETEMP
+20200719-14:06:58.971 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:06:58.972 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:06:58.972 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:08:43.463 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:08:46.725 [etscrape] [WARNING ] Invalid event for events chart: ZONEOVERSPEED
+20200719-14:08:46.725 [etscrape] [WARNING ] Invalid event for events chart: ENGINEOVERSPEED
+20200719-14:08:46.725 [etscrape] [WARNING ] Invalid event for events chart: LOWCOOLANT
+20200719-14:08:46.725 [etscrape] [WARNING ] Invalid event for events chart: OILPRESSURE
+20200719-14:08:46.725 [etscrape] [WARNING ] Invalid event for events chart: ENGINETEMP
+20200719-14:08:46.725 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:08:46.726 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:08:46.726 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:11:00.229 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:11:00.391 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-14:11:00.419 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-14:11:00.419 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-14:11:03.816 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-14:11:03.822 [etscrape] [WARNING ] Invalid event for events chart: ZONEOVERSPEED
+20200719-14:11:03.822 [etscrape] [WARNING ] Invalid event for events chart: ENGINEOVERSPEED
+20200719-14:11:03.823 [etscrape] [WARNING ] Invalid event for events chart: LOWCOOLANT
+20200719-14:11:03.823 [etscrape] [WARNING ] Invalid event for events chart: OILPRESSURE
+20200719-14:11:03.823 [etscrape] [WARNING ] Invalid event for events chart: ENGINETEMP
+20200719-14:11:03.823 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:11:03.823 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:11:03.824 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:14:54.804 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:14:54.946 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-14:14:54.973 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-14:14:54.974 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-14:14:58.842 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-14:14:58.847 [etscrape] [WARNING ] Invalid event for events chart: ZONEOVERSPEED
+20200719-14:14:58.847 [etscrape] [WARNING ] Invalid event for events chart: ENGINEOVERSPEED
+20200719-14:14:58.847 [etscrape] [WARNING ] Invalid event for events chart: LOWCOOLANT
+20200719-14:14:58.847 [etscrape] [WARNING ] Invalid event for events chart: OILPRESSURE
+20200719-14:14:58.848 [etscrape] [WARNING ] Invalid event for events chart: ENGINETEMP
+20200719-14:14:58.848 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:14:58.848 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:14:58.848 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:20:04.863 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:20:04.998 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-14:20:05.024 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-14:20:05.024 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-14:20:08.685 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-14:20:08.690 [etscrape] [WARNING ] Invalid event for events chart: ZONEOVERSPEED
+20200719-14:20:08.690 [etscrape] [WARNING ] Invalid event for events chart: ENGINEOVERSPEED
+20200719-14:20:08.690 [etscrape] [WARNING ] Invalid event for events chart: LOWCOOLANT
+20200719-14:20:08.690 [etscrape] [WARNING ] Invalid event for events chart: OILPRESSURE
+20200719-14:20:08.690 [etscrape] [WARNING ] Invalid event for events chart: ENGINETEMP
+20200719-14:20:08.690 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:20:08.691 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:20:08.691 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:24:15.196 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:24:15.350 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-14:24:15.379 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-14:24:15.379 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-14:24:19.119 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-14:24:19.124 [etscrape] [WARNING ] Invalid event for events chart: ZONEOVERSPEED
+20200719-14:24:19.124 [etscrape] [WARNING ] Invalid event for events chart: ENGINEOVERSPEED
+20200719-14:24:19.125 [etscrape] [WARNING ] Invalid event for events chart: LOWCOOLANT
+20200719-14:24:19.125 [etscrape] [WARNING ] Invalid event for events chart: OILPRESSURE
+20200719-14:24:19.125 [etscrape] [WARNING ] Invalid event for events chart: ENGINETEMP
+20200719-14:24:19.125 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:24:19.125 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:24:19.126 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:26:22.960 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:26:23.107 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-14:26:23.143 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-14:26:23.143 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-14:26:26.656 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-14:26:26.661 [etscrape] [WARNING ] Invalid event for events chart: ZONEOVERSPEED
+20200719-14:26:26.662 [etscrape] [WARNING ] Invalid event for events chart: ENGINEOVERSPEED
+20200719-14:26:26.662 [etscrape] [WARNING ] Invalid event for events chart: LOWCOOLANT
+20200719-14:26:26.662 [etscrape] [WARNING ] Invalid event for events chart: OILPRESSURE
+20200719-14:26:26.662 [etscrape] [WARNING ] Invalid event for events chart: ENGINETEMP
+20200719-14:26:26.662 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:26:26.663 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:26:26.663 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:31:05.049 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:31:05.195 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-14:31:05.221 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-14:31:05.221 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-14:31:09.652 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-14:31:09.657 [etscrape] [WARNING ] Invalid event for events chart: ZONEOVERSPEED
+20200719-14:31:09.657 [etscrape] [WARNING ] Invalid event for events chart: ENGINEOVERSPEED
+20200719-14:31:09.657 [etscrape] [WARNING ] Invalid event for events chart: LOWCOOLANT
+20200719-14:31:09.657 [etscrape] [WARNING ] Invalid event for events chart: OILPRESSURE
+20200719-14:31:09.657 [etscrape] [WARNING ] Invalid event for events chart: ENGINETEMP
+20200719-14:31:09.658 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:31:09.658 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:31:09.658 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:33:59.700 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:33:59.819 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-14:33:59.849 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-14:33:59.849 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-14:34:04.263 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-14:34:04.267 [etscrape] [WARNING ] Invalid event for events chart: ZONEOVERSPEED
+20200719-14:34:04.268 [etscrape] [WARNING ] Invalid event for events chart: ENGINEOVERSPEED
+20200719-14:34:04.268 [etscrape] [WARNING ] Invalid event for events chart: LOWCOOLANT
+20200719-14:34:04.268 [etscrape] [WARNING ] Invalid event for events chart: OILPRESSURE
+20200719-14:34:04.268 [etscrape] [WARNING ] Invalid event for events chart: ENGINETEMP
+20200719-14:34:04.268 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:34:04.269 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:34:04.269 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:35:27.700 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:35:27.850 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-14:35:27.882 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-14:35:27.882 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-14:35:31.736 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-14:35:31.741 [etscrape] [WARNING ] Invalid event for events chart: ZONEOVERSPEED
+20200719-14:35:31.741 [etscrape] [WARNING ] Invalid event for events chart: ENGINEOVERSPEED
+20200719-14:35:31.742 [etscrape] [WARNING ] Invalid event for events chart: LOWCOOLANT
+20200719-14:35:31.742 [etscrape] [WARNING ] Invalid event for events chart: OILPRESSURE
+20200719-14:35:31.742 [etscrape] [WARNING ] Invalid event for events chart: ENGINETEMP
+20200719-14:35:31.742 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:35:31.743 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:35:31.743 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:36:37.457 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:36:37.598 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-14:36:37.624 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-14:36:37.624 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-14:36:40.697 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-14:36:40.701 [etscrape] [WARNING ] Invalid event for events chart: ZONEOVERSPEED
+20200719-14:36:40.702 [etscrape] [WARNING ] Invalid event for events chart: ENGINEOVERSPEED
+20200719-14:36:40.702 [etscrape] [WARNING ] Invalid event for events chart: LOWCOOLANT
+20200719-14:36:40.702 [etscrape] [WARNING ] Invalid event for events chart: OILPRESSURE
+20200719-14:36:40.702 [etscrape] [WARNING ] Invalid event for events chart: ENGINETEMP
+20200719-14:36:40.703 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:36:40.703 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:36:40.703 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:39:07.869 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:39:08.011 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-14:39:08.042 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-14:39:08.042 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-14:39:11.265 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-14:39:11.270 [etscrape] [WARNING ] Invalid event for events chart: ZONEOVERSPEED
+20200719-14:39:11.271 [etscrape] [WARNING ] Invalid event for events chart: ENGINEOVERSPEED
+20200719-14:39:11.271 [etscrape] [WARNING ] Invalid event for events chart: LOWCOOLANT
+20200719-14:39:11.271 [etscrape] [WARNING ] Invalid event for events chart: OILPRESSURE
+20200719-14:39:11.271 [etscrape] [WARNING ] Invalid event for events chart: ENGINETEMP
+20200719-14:39:11.272 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:39:11.272 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:39:11.272 [etscrape] [WARNING ] Invalid event for events chart: INPUT
+20200719-14:41:07.991 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:41:08.172 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-14:41:08.199 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-14:41:08.199 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-14:41:11.626 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-14:42:19.959 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:42:20.127 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-14:42:20.154 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-14:42:20.154 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-14:42:23.211 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-14:42:23.216 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 5
+20200719-14:42:23.216 [etscrape] [DEBUG   ] Event selected for events chart: ENGINEOVERSPEED, item: 5
+20200719-14:42:23.216 [etscrape] [DEBUG   ] Event selected for events chart: LOWCOOLANT, item: 5
+20200719-14:42:23.217 [etscrape] [DEBUG   ] Event selected for events chart: OILPRESSURE, item: 5
+20200719-14:42:23.217 [etscrape] [DEBUG   ] Event selected for events chart: ENGINETEMP, item: 5
+20200719-14:42:23.217 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 5
+20200719-14:42:23.217 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 5
+20200719-14:42:23.217 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 5
+20200719-14:43:14.762 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:43:14.908 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-14:43:14.935 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-14:43:14.935 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-14:43:18.516 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-14:43:18.521 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 0
+20200719-14:43:18.521 [etscrape] [DEBUG   ] Event selected for events chart: ENGINEOVERSPEED, item: 1
+20200719-14:43:18.521 [etscrape] [DEBUG   ] Event selected for events chart: LOWCOOLANT, item: 2
+20200719-14:43:18.521 [etscrape] [DEBUG   ] Event selected for events chart: OILPRESSURE, item: 3
+20200719-14:43:18.522 [etscrape] [DEBUG   ] Event selected for events chart: ENGINETEMP, item: 4
+20200719-14:43:18.522 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 5
+20200719-14:43:18.522 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 5
+20200719-14:43:18.522 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 5
+20200719-14:49:31.866 [etscrape] [INFO    ] Program version : 0.5
+20200719-14:49:31.990 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-14:49:32.022 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-14:49:32.022 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-14:49:39.566 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-14:49:39.572 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:04:44.892 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:04:45.030 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:04:45.054 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:04:45.054 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:04:49.415 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:04:49.426 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:11:06.185 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:11:06.319 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:11:06.350 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:11:06.350 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:11:19.940 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:11:19.949 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:17:16.607 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:17:16.745 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:17:16.770 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:17:16.771 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:17:20.689 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:17:20.701 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:26:44.752 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:26:44.894 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:26:44.919 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:26:44.919 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:26:49.055 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:26:49.077 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:26:49.077 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:26:49.078 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:26:49.078 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:26:49.078 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:26:49.078 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:26:49.078 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:26:49.078 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:28:12.227 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:28:12.357 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:28:12.387 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:28:12.388 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:28:15.408 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:28:15.425 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:28:15.425 [etscrape] [DEBUG   ] Event selected for events chart: ENGINEOVERSPEED, item: 2
+20200719-15:28:15.425 [etscrape] [DEBUG   ] Event selected for events chart: LOWCOOLANT, item: 3
+20200719-15:28:15.426 [etscrape] [DEBUG   ] Event selected for events chart: OILPRESSURE, item: 4
+20200719-15:28:15.426 [etscrape] [DEBUG   ] Event selected for events chart: ENGINETEMP, item: 5
+20200719-15:28:15.426 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:38.204 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:29:38.350 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:29:38.377 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:29:38.378 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:29:42.065 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:29:42.081 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:29:42.081 [etscrape] [DEBUG   ] Event selected for events chart: ENGINEOVERSPEED, item: 2
+20200719-15:29:42.081 [etscrape] [DEBUG   ] Event selected for events chart: LOWCOOLANT, item: 3
+20200719-15:29:42.082 [etscrape] [DEBUG   ] Event selected for events chart: OILPRESSURE, item: 4
+20200719-15:29:42.082 [etscrape] [DEBUG   ] Event selected for events chart: ENGINETEMP, item: 5
+20200719-15:29:42.082 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.082 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.082 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.082 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:29:42.082 [etscrape] [DEBUG   ] Event selected for events chart: ENGINEOVERSPEED, item: 2
+20200719-15:29:42.082 [etscrape] [DEBUG   ] Event selected for events chart: LOWCOOLANT, item: 3
+20200719-15:29:42.083 [etscrape] [DEBUG   ] Event selected for events chart: OILPRESSURE, item: 4
+20200719-15:29:42.083 [etscrape] [DEBUG   ] Event selected for events chart: ENGINETEMP, item: 5
+20200719-15:29:42.083 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.083 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.083 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.083 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:29:42.083 [etscrape] [DEBUG   ] Event selected for events chart: ENGINEOVERSPEED, item: 2
+20200719-15:29:42.084 [etscrape] [DEBUG   ] Event selected for events chart: LOWCOOLANT, item: 3
+20200719-15:29:42.084 [etscrape] [DEBUG   ] Event selected for events chart: OILPRESSURE, item: 4
+20200719-15:29:42.084 [etscrape] [DEBUG   ] Event selected for events chart: ENGINETEMP, item: 5
+20200719-15:29:42.084 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.084 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.084 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.084 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:29:42.084 [etscrape] [DEBUG   ] Event selected for events chart: ENGINEOVERSPEED, item: 2
+20200719-15:29:42.084 [etscrape] [DEBUG   ] Event selected for events chart: LOWCOOLANT, item: 3
+20200719-15:29:42.085 [etscrape] [DEBUG   ] Event selected for events chart: OILPRESSURE, item: 4
+20200719-15:29:42.085 [etscrape] [DEBUG   ] Event selected for events chart: ENGINETEMP, item: 5
+20200719-15:29:42.085 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.085 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.085 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.085 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:29:42.085 [etscrape] [DEBUG   ] Event selected for events chart: ENGINEOVERSPEED, item: 2
+20200719-15:29:42.085 [etscrape] [DEBUG   ] Event selected for events chart: LOWCOOLANT, item: 3
+20200719-15:29:42.086 [etscrape] [DEBUG   ] Event selected for events chart: OILPRESSURE, item: 4
+20200719-15:29:42.086 [etscrape] [DEBUG   ] Event selected for events chart: ENGINETEMP, item: 5
+20200719-15:29:42.086 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.086 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.086 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.086 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:29:42.086 [etscrape] [DEBUG   ] Event selected for events chart: ENGINEOVERSPEED, item: 2
+20200719-15:29:42.086 [etscrape] [DEBUG   ] Event selected for events chart: LOWCOOLANT, item: 3
+20200719-15:29:42.086 [etscrape] [DEBUG   ] Event selected for events chart: OILPRESSURE, item: 4
+20200719-15:29:42.087 [etscrape] [DEBUG   ] Event selected for events chart: ENGINETEMP, item: 5
+20200719-15:29:42.087 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.087 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.087 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.087 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:29:42.087 [etscrape] [DEBUG   ] Event selected for events chart: ENGINEOVERSPEED, item: 2
+20200719-15:29:42.087 [etscrape] [DEBUG   ] Event selected for events chart: LOWCOOLANT, item: 3
+20200719-15:29:42.087 [etscrape] [DEBUG   ] Event selected for events chart: OILPRESSURE, item: 4
+20200719-15:29:42.087 [etscrape] [DEBUG   ] Event selected for events chart: ENGINETEMP, item: 5
+20200719-15:29:42.088 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.088 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.088 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.088 [etscrape] [DEBUG   ] Event selected for events chart: ZONEOVERSPEED, item: 1
+20200719-15:29:42.088 [etscrape] [DEBUG   ] Event selected for events chart: ENGINEOVERSPEED, item: 2
+20200719-15:29:42.088 [etscrape] [DEBUG   ] Event selected for events chart: LOWCOOLANT, item: 3
+20200719-15:29:42.088 [etscrape] [DEBUG   ] Event selected for events chart: OILPRESSURE, item: 4
+20200719-15:29:42.088 [etscrape] [DEBUG   ] Event selected for events chart: ENGINETEMP, item: 5
+20200719-15:29:42.088 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.089 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:29:42.089 [etscrape] [DEBUG   ] Event selected for events chart: INPUT, item: 6
+20200719-15:34:20.632 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:34:20.784 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:34:20.816 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:34:20.816 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:34:24.316 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:36:46.016 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:36:46.181 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:36:46.208 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:36:46.208 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:36:49.054 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:38:00.808 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:38:00.983 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:38:01.010 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:38:01.010 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:38:03.902 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:38:22.979 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:38:23.106 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:38:23.134 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:38:23.134 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:38:25.558 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:38:25.579 [etscrape] [DEBUG   ] Event selected item: 1
+20200719-15:38:25.579 [etscrape] [DEBUG   ] Event selected item: 2
+20200719-15:38:25.579 [etscrape] [DEBUG   ] Event selected item: 3
+20200719-15:38:25.579 [etscrape] [DEBUG   ] Event selected item: 4
+20200719-15:38:25.579 [etscrape] [DEBUG   ] Event selected item: 5
+20200719-15:38:25.579 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:39:12.991 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:39:13.120 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:39:13.156 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:39:13.156 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:39:16.598 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:39:16.619 [etscrape] [DEBUG   ] Event selected item: 1
+20200719-15:39:16.619 [etscrape] [DEBUG   ] Event selected item: 2
+20200719-15:39:16.619 [etscrape] [DEBUG   ] Event selected item: 3
+20200719-15:39:16.619 [etscrape] [DEBUG   ] Event selected item: 4
+20200719-15:39:16.619 [etscrape] [DEBUG   ] Event selected item: 5
+20200719-15:39:16.619 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:39:16.619 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:39:16.620 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:41:47.967 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:41:48.168 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:41:48.194 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:41:48.194 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:41:51.711 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:41:51.730 [etscrape] [DEBUG   ] Event selected item: 1
+20200719-15:42:31.846 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:42:32.009 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:42:32.043 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:42:32.044 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:42:36.735 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:42:36.754 [etscrape] [DEBUG   ] Event selected item: 1
+20200719-15:42:36.755 [etscrape] [DEBUG   ] Event selected item: 2
+20200719-15:42:36.755 [etscrape] [DEBUG   ] Event selected item: 3
+20200719-15:42:36.755 [etscrape] [DEBUG   ] Event selected item: 4
+20200719-15:42:36.755 [etscrape] [DEBUG   ] Event selected item: 5
+20200719-15:42:36.755 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:45:25.421 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:45:25.581 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:45:25.607 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:45:25.608 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:45:28.688 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:45:28.705 [etscrape] [DEBUG   ] Event selected item: 1
+20200719-15:45:28.705 [etscrape] [DEBUG   ] Event selected item: 2
+20200719-15:45:28.705 [etscrape] [DEBUG   ] Event selected item: 3
+20200719-15:45:28.705 [etscrape] [DEBUG   ] Event selected item: 4
+20200719-15:45:28.706 [etscrape] [DEBUG   ] Event selected item: 5
+20200719-15:45:28.706 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:46:47.128 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:46:47.275 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:46:47.309 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:46:47.309 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:46:51.041 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:46:51.062 [etscrape] [DEBUG   ] Event selected item: 1
+20200719-15:46:51.062 [etscrape] [DEBUG   ] Event selected item: 2
+20200719-15:46:51.062 [etscrape] [DEBUG   ] Event selected item: 3
+20200719-15:46:51.062 [etscrape] [DEBUG   ] Event selected item: 4
+20200719-15:46:51.063 [etscrape] [DEBUG   ] Event selected item: 5
+20200719-15:46:51.063 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:46:51.063 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:46:51.064 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:48:26.405 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:48:26.536 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:48:26.563 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:48:26.563 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:48:29.370 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:48:29.388 [etscrape] [DEBUG   ] Event selected item: 1
+20200719-15:48:29.389 [etscrape] [DEBUG   ] Event selected item: 2
+20200719-15:48:29.389 [etscrape] [DEBUG   ] Event selected item: 3
+20200719-15:48:29.389 [etscrape] [DEBUG   ] Event selected item: 4
+20200719-15:48:29.389 [etscrape] [DEBUG   ] Event selected item: 5
+20200719-15:48:29.390 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:48:29.390 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:48:29.390 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:49:10.473 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:49:10.618 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:49:10.649 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:49:10.649 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:49:13.586 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:49:13.605 [etscrape] [DEBUG   ] Event selected item: 1
+20200719-15:49:13.605 [etscrape] [DEBUG   ] Event selected item: 2
+20200719-15:49:13.606 [etscrape] [DEBUG   ] Event selected item: 3
+20200719-15:49:13.606 [etscrape] [DEBUG   ] Event selected item: 4
+20200719-15:49:13.606 [etscrape] [DEBUG   ] Event selected item: 5
+20200719-15:49:13.606 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:49:13.607 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:49:13.607 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:49:53.395 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:49:53.525 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:49:53.549 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:49:53.549 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:49:56.842 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:49:56.863 [etscrape] [DEBUG   ] Event selected item: 1
+20200719-15:49:56.863 [etscrape] [DEBUG   ] Event selected item: 2
+20200719-15:49:56.864 [etscrape] [DEBUG   ] Event selected item: 3
+20200719-15:49:56.864 [etscrape] [DEBUG   ] Event selected item: 4
+20200719-15:49:56.864 [etscrape] [DEBUG   ] Event selected item: 5
+20200719-15:49:56.864 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:49:56.864 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:49:56.864 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:50:57.353 [etscrape] [INFO    ] Program version : 0.5
+20200719-15:50:57.501 [etscrape] [DEBUG   ] SpeedCanvas class constructor.
+20200719-15:50:57.526 [etscrape] [DEBUG   ] EventCanvas class constructor.
+20200719-15:50:57.526 [etscrape] [DEBUG   ] Number of events chart traces: 8
+20200719-15:51:00.979 [etscrape] [DEBUG   ] User selected Edit Events Chart Config menu control.
+20200719-15:51:00.997 [etscrape] [DEBUG   ] Event selected item: 1
+20200719-15:51:00.997 [etscrape] [DEBUG   ] Event selected item: 2
+20200719-15:51:00.997 [etscrape] [DEBUG   ] Event selected item: 3
+20200719-15:51:00.998 [etscrape] [DEBUG   ] Event selected item: 4
+20200719-15:51:00.998 [etscrape] [DEBUG   ] Event selected item: 5
+20200719-15:51:00.998 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:51:00.998 [etscrape] [DEBUG   ] Event selected item: 6
+20200719-15:51:00.998 [etscrape] [DEBUG   ] Event selected item: 6
+20200721-18:45:20.543 [etscrape] [INFO    ] Program version : 0.5
+20200721-18:45:34.528 [etscrape] [INFO    ] Opened and read log file : /home/mike/python/etscrape/logs/10247-a
+20200721-18:53:59.518 [etscrape] [INFO    ] Program version : 0.5
+20200721-18:54:08.746 [etscrape] [INFO    ] Opened and read log file : /home/mike/python/etscrape/logs/10247-a
+20200721-18:57:41.998 [etscrape] [INFO    ] Program version : 0.5
+20200721-18:57:48.164 [etscrape] [INFO    ] Opened and read log file : /home/mike/python/etscrape/logs/10247-a
+20200721-19:01:08.216 [etscrape] [INFO    ] Program version : 0.5
+20200721-19:01:15.565 [etscrape] [INFO    ] Opened and read log file : /home/mike/python/etscrape/logs/10247-a
+20200721-19:02:49.838 [etscrape] [INFO    ] Program version : 0.5
+20200721-19:02:55.990 [etscrape] [INFO    ] Opened and read log file : /home/mike/python/etscrape/logs/10247-a
+20200721-19:04:52.429 [etscrape] [INFO    ] Program version : 0.5
+20200721-19:04:58.853 [etscrape] [INFO    ] Opened and read log file : /home/mike/python/etscrape/logs/10247-a
+20200721-19:07:54.984 [etscrape] [INFO    ] Program version : 0.5
+20200721-19:08:02.122 [etscrape] [INFO    ] Opened and read log file : /home/mike/python/etscrape/logs/10247-a
+20200721-19:16:49.007 [etscrape] [INFO    ] Program version : 0.5
+20200721-19:17:05.297 [etscrape] [INFO    ] Opened and read log file : /home/mike/python/etscrape/logs/10247-a
+20200721-19:19:01.563 [etscrape] [INFO    ] Program version : 0.5
+20200721-19:20:03.740 [etscrape] [INFO    ] Opened and read log file : /home/mike/python/etscrape/logs/9278-c.csv
+20200721-19:20:42.262 [etscrape] [INFO    ] Opened and read log file : /home/mike/python/etscrape/about.ui
+20200721-19:25:36.463 [etscrape] [INFO    ] Program version : 0.5
+20200721-19:26:05.316 [etscrape] [INFO    ] Opened and read log file : /home/mike/python/etscrape/logs/9278-c.csv
+20200721-19:28:51.200 [etscrape] [INFO    ] Program version : 0.5
+20200721-19:29:04.004 [etscrape] [INFO    ] Opened and read log file : /home/mike/python/etscrape/logs/9278-c.csv
+20200721-19:30:37.653 [etscrape] [INFO    ] Program version : 0.5
+>>>>>>> Stashed changes

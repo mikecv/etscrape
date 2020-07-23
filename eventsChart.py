@@ -46,7 +46,7 @@ class EventCanvas(FigureCanvasQTAgg):
         axes = self.fig.add_subplot(int("{0:d}{1:d}{2:d}".format((self.numEvCharts + 1), 1, (self.numEvCharts + 1))))
         line, = axes.plot_date([], [], color=self.cfg.EvPlot["TripTraceColour"], linestyle='solid', marker=None, linewidth=1)
         # Set y axis range 0 to 1 for all subplots.
-        axes.set_ylim([0, 1])
+        axes.set_ylim([-0.2, 1.2])
         # Hide y axis ticks and tick labels.
         axes.set_yticks([])
         axes.set_yticklabels([])
@@ -109,21 +109,22 @@ class EventCanvas(FigureCanvasQTAgg):
         # Trip start will correspond to SIGNON event.
         tripStartTime = timeTZ(self.data.tripLog[No-1].tripStart, self.cfg.TimeUTC)
         # Trip end will correspond to TRIP event if one is included.
-        # Look for TRIP event as we don't want to report much after that.
+        # Look for TRIP event as we don't want to report after that.
         endEvent = 0
         tripEnded = False
-        for idx, ev in enumerate(self.data.tripLog[No-1].events):
-            if ev.event == "TRIP":
-                endEvent = idx
-                tripEnded = True
-        # Go to an event after the TRIP event.
-        # This should catch trip summary type events.
-        # if ((tripEnded == True) and (endEvent < (len(self.data.tripLog[No-1].events) - 1))):
-        #     endEvent += 1
+        tripJustSignon = False
+        if len(self.data.tripLog[No-1].events) == 1:
+            tripJustSignon = True
+        else:
+            for idx, ev in enumerate(self.data.tripLog[No-1].events):
+                if ev.event == "TRIP":
+                    tripEnded = True
+                    break
+            endEvent = idx
 
         # Look for last event in the trip (so far) and make this the end of the trip.
-        tripEndTime = timeTZ(self.data.tripLog[No-1].events[endEvent - 1].serverTime, self.cfg.TimeUTC)
-        tripDuration = self.data.tripLog[No-1].events[endEvent - 1].serverTime - self.data.tripLog[No-1].tripStart
+        tripEndTime = timeTZ(self.data.tripLog[No-1].events[endEvent].serverTime, self.cfg.TimeUTC)
+        tripDuration = self.data.tripLog[No-1].events[endEvent].serverTime - self.data.tripLog[No-1].tripStart
 
         # Create start/end of chart. Make a bit wider than the trip.
         # Add 10% or some arbitrary time, whichever is less, to the trip.
@@ -244,7 +245,7 @@ class EventCanvas(FigureCanvasQTAgg):
 
             # End trace with final state value to end of plot (if event trace was started that is).
             if traceStarted:
-                tList.append(plotEndTime)
+                tList.append(tripEndTime)
                 eList.append(finalState)
 
             # Clear old plot data.

@@ -80,11 +80,11 @@ class Config():
 
         # Event chart.
         self.EventTraces = [
-            {"Event" : "ZONEOVERSPEED", "Title" : "Zone\nOverspeed"},
-            {"Event" : "ENGINEOVERSPEED", "Title" : "Engine\nOverspeed"},
-            {"Event" : "LOWCOOLANT", "Title" : "Engine Coolant\nLevel Low"},
-            {"Event" : "OILPRESSURE", "Title" : "Engine Oil\nPressure Low"},
-            {"Event" : "ENGINETEMP", "Title" : "Engine\nTemperature High"},
+            {"Event" : "ZONEOVERSPEED", "Title" : "Zone Overspeed"},
+            {"Event" : "ENGINEOVERSPEED", "Title" : "Engine Overspeed"},
+            {"Event" : "LOWCOOLANT", "Title" : "Engine Coolant Level Low"},
+            {"Event" : "OILPRESSURE", "Title" : "Engine Oil Pressure Low"},
+            {"Event" : "ENGINETEMP", "Title" : "Engine Temperature High"},
             {"Event" : "INPUT", "Channel" : 1},
             {"Event" : "INPUT", "Channel" : 2},
             {"Event" : "INPUT", "Channel" : 8}

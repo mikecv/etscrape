@@ -84,7 +84,7 @@
     "EventTraces": [
         {
             "Event": "OILPRESSURE",
-            "Title": "Engine Oil\nPressure Low"
+            "Title": "Engine Oil Pressure Low"
         },
         {
             "Event": "INPUT",
