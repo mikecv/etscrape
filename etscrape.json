@@ -92,11 +92,11 @@
         },
         {
             "Event": "INPUT",
-            "Channel": 4
+            "Channel": 3
         },
         {
             "Event": "INPUT",
-            "Channel": 8
+            "Channel": 4
         }
     ]
 }

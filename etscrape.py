@@ -45,6 +45,7 @@ from eventsChart import *
 # Add dialog to set events to plot.
 # Close speed plot and events plot if log open failed; disable menu item. Currently shows previous plots.
 # Close events plot with main application close.
+# Add function to split event trace title into 2 or three lines to fit onto plots better.
 # Update change log.
 # Update help file.
 # *******************************************
