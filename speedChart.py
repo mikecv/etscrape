@@ -52,6 +52,19 @@ class SpeedCanvas(FigureCanvasQTAgg):
         self.createAxes()
 
     # *******************************************
+    # Reset the figure.
+    # Clear the figure and recreate blnak axis.
+    # Used when there is no data to plot.
+    # *******************************************
+    def resetFigure(self):
+        # Clear figure and recreate axis.
+        self.fig.clf()
+        self.createAxes()
+
+        # Draw plot.
+        self.draw()
+
+    # *******************************************
     # Update plot with new plot.
     # *******************************************
     def updatePlotData(self, No):

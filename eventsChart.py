@@ -54,6 +54,7 @@ class EventCanvas(FigureCanvasQTAgg):
         axes.set_ylabel("Trip", rotation=0, horizontalalignment='right', verticalalignment='center', fontsize=self.cfg.EvPlot["AxesTitleFontSize"])
         # Set x axis title and font.
         axes.set_xlabel("Time {0:s}".format(tzone(self.cfg.TimeUTC)), fontsize=self.cfg.EvPlot["AxesTitleFontSize"])
+        # Set axis label font.
         axes.tick_params(labelsize=self.cfg.EvPlot["AxisLabelFontSize"])
         self.traces.append((line, axes))
 
@@ -62,7 +63,7 @@ class EventCanvas(FigureCanvasQTAgg):
             # Create trace for each event subplot.
             axes = self.fig.add_subplot(int("{0:d}{1:d}{2:d}".format((self.numEvCharts + 1), 1, (ev+1))))
             # Add plot line with marker, although will only show markers for zero duration INPUT events.
-            line, = axes.plot_date([], [], color=self.cfg.EvPlot["EventTraceColour"], linestyle='solid', marker='o', linewidth=1)
+            line, = axes.plot_date([], [], color=self.cfg.EvPlot["EventTraceColour"], linestyle='solid', marker='.', linewidth=1)
             # Set y axis range 0 to 1 for all subplots.
             axes.set_ylim([-0.2, 1.2])
             # Hide y axis ticks and tick labels.
@@ -73,9 +74,11 @@ class EventCanvas(FigureCanvasQTAgg):
             if self.cfg.EventTraces[self.numEvCharts - ev - 1]["Event"] == "INPUT":
                 axes.set_ylabel("Input {0:d}".format(self.cfg.EventTraces[self.numEvCharts - ev - 1]["Channel"]), rotation=0, horizontalalignment='right', verticalalignment='center', fontsize=self.cfg.EvPlot["AxesTitleFontSize"])
             else:
-                axes.set_ylabel(self.cfg.EventTraces[self.numEvCharts - ev - 1]["Title"], rotation=0, horizontalalignment='right', verticalalignment='center', fontsize=self.cfg.EvPlot["AxesTitleFontSize"])
-            # Set x axis title and font.
-            axes.set_xlabel("Time {0:s}".format(tzone(self.cfg.TimeUTC)), fontsize=self.cfg.EvPlot["AxesTitleFontSize"])
+                # Split title if too long for one line. Basic splitting to max line length.
+                # Only appling line length limit to non-INPUT events.
+                splitTitle = splitLongString(self.cfg.EventTraces[self.numEvCharts - ev - 1]["Title"], self.cfg.EvPlot["MaxTitleLineLength"])
+                axes.set_ylabel(splitTitle, rotation=0, horizontalalignment='right', verticalalignment='center', fontsize=self.cfg.EvPlot["AxesTitleFontSize"])
+            # Set axis label font.
             axes.tick_params(labelsize=self.cfg.EvPlot["AxisLabelFontSize"])
             self.traces.append((line, axes))
 
@@ -84,10 +87,23 @@ class EventCanvas(FigureCanvasQTAgg):
     # Clear data, the current axes and then create new axes.
     # *******************************************
     def clearFigure(self):
-            # Clear the axes and create afresh.
-            for t in self.traces:
-                t[1].clear()
-            self.createAxes()
+        # Clear the axes and create afresh.
+        for t in self.traces:
+            t[1].clear()
+        self.createAxes()
+
+    # *******************************************
+    # Reset the figure.
+    # Clear the figure and recreate blnak axis.
+    # Used when there is no data to plot.
+    # *******************************************
+    def resetFigure(self):
+        # Clear figure and recreate axis.
+        self.fig.clf()
+        self.createAxes()
+
+        # Draw plot.
+        self.draw()
 
     # *******************************************
     # Update plot with new plot.
@@ -132,7 +148,7 @@ class EventCanvas(FigureCanvasQTAgg):
         if plotEntre > 60:
             plotEntre = 60
 
-        # Plot start and end time.
+        # Plot start and end time.clearFigure
         plotStartTime = timeTZ((self.data.tripLog[No-1].tripStart - plotEntre), self.cfg.TimeUTC)
         plotEndTime = timeTZ((self.data.tripLog[No-1].events[endEvent].serverTime + plotEntre), self.cfg.TimeUTC)
 
@@ -165,6 +181,10 @@ class EventCanvas(FigureCanvasQTAgg):
 
         # Set axis for trace to trip extents.
         self.traces[0][1].set_xlim([plotStartTime, plotEndTime])
+
+        # Rescale axes.
+        self.traces[0][1].relim()
+        self.traces[0][1].autoscale_view()
 
         # Create data for each event trace.
         # Iterate in reverse to line up with how traces have been stacked.
@@ -265,6 +285,10 @@ class EventCanvas(FigureCanvasQTAgg):
 
             # Fill in the event bars.
             self.traces[self.numEvCharts - idx][1].fill_between(self.traces[self.numEvCharts - idx][0].get_xdata(), self.traces[self.numEvCharts - idx][0].get_ydata(), 0, color=self.cfg.EvPlot["EventFillColour"], alpha=0.35)
+
+            # Rescale axes.
+            self.traces[self.numEvCharts - idx][1].relim()
+            self.traces[self.numEvCharts - idx][1].autoscale_view()
 
         # Draw plot.
         self.draw()

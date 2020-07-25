@@ -581,6 +581,13 @@ class Trip():
                                 self.zoneXings.insert(0, fz1)
                                 break
 
+                        # Can do a check if time in traction / idle adds up to trip duration.
+                        totalTimes = event.timeFwd + event.timeRev + event.timeIdle
+                        tripTime = self.tripEnd - self.tripStart
+                        diff = tripTime - totalTimes
+                        if diff != 0:
+                            event.alertText = appendAlertText(event.alertText, "Trip time inconsistent.")
+
                         # Don't want to collect eny more speed data as not useful for trip speed plots.
                         self.stopSpeedData = True
 

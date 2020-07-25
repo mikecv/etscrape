@@ -3,7 +3,7 @@
     "DebugLevel": 20,
     "LogFileSize": 100000,
     "LogBackups": 3,
-    "TimeUTC": 0,
+    "TimeUTC": 1,
     "TripData": {
         "TripBackColour": "#ffff00",
         "TripColour": "#000000",
@@ -18,7 +18,7 @@
         "ShowOtherEvents": 1,
         "ShowInputEvents": 1,
         "ShowDebugEvents": 1,
-        "ShowOutOfTripEvents": 1,
+        "ShowOutOfTripEvents": 0,
         "BadSpeedLimit": 150,
         "BadRpmLimit": 5000
     },
@@ -37,7 +37,8 @@
         "EventTraceColour": "#0000ff",
         "TripTraceColour": "#000000",
         "EventFillColour": "#0000ff",
-        "TripFillColour": "#ffff00"
+        "TripFillColour": "#ffff00",
+        "MaxTitleLineLength": 17
     },
     "Channels": [
         {
@@ -83,8 +84,24 @@
     ],
     "EventTraces": [
         {
+            "Event": "ZONEOVERSPEED",
+            "Title": "Zone Overspeed"
+        },
+        {
+            "Event": "ENGINEOVERSPEED",
+            "Title": "Engine Overspeed"
+        },
+        {
+            "Event": "LOWCOOLANT",
+            "Title": "Engine Coolant Level Low"
+        },
+        {
             "Event": "OILPRESSURE",
             "Title": "Engine Oil Pressure Low"
+        },
+        {
+            "Event": "ENGINETEMP",
+            "Title": "Engine Temperature High"
         },
         {
             "Event": "INPUT",
@@ -92,11 +109,11 @@
         },
         {
             "Event": "INPUT",
-            "Channel": 3
+            "Channel": 2
         },
         {
             "Event": "INPUT",
-            "Channel": 4
+            "Channel": 8
         }
     ]
 }

@@ -37,15 +37,12 @@ from eventsChart import *
 #                       Added additional DEBUG checks for invalid times.
 #                       Refactored speed chart to match events charts.
 #                       Updated preferences dialog with event chart preferences.
+#                       Added dialog to configure event plots to plot.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
-# Add dialog to set events to plot.
-# Close speed plot and events plot if log open failed; disable menu item. Currently shows previous plots.
-# Close events plot with main application close.
-# Add function to split event trace title into 2 or three lines to fit onto plots better.
 # Update change log.
 # Update help file.
 # *******************************************
@@ -456,6 +453,10 @@ class UI(QMainWindow):
 
             # Show pop-up indicating no trip data found in log file.
             showPopup("Trip", "Log file contains no trip information.", "(No trip start \"SIGNON\" events encountered)")
+
+            # Need to get plots to starting states.
+            self.eventsChart.fig.resetFigure()
+            self.spdFig.resetFigure()
 
         # Revert to the normal cursor.
         QApplication.restoreOverrideCursor()                       
@@ -1112,7 +1113,7 @@ class UI(QMainWindow):
 
     # *******************************************
     # Edit Preferences control selected.
-    # Displays an "Edit Preferences" dialog box.
+    # Displays an "Edit Preferences" dialog.
     # *******************************************
     def editPreferences(self):
         logger.debug("User selected Edit Preferences menu control.")
@@ -1631,8 +1632,21 @@ class EventsChartConfigDialog(QDialog):
         self.plotCfg.append((self.EventCombo7, self.titleLineEdit7, self.channelLabel7, self.channelSpinBox7))
         self.plotCfg.append((self.EventCombo8, self.titleLineEdit8, self.channelLabel8, self.channelSpinBox8))
 
+        # Connect to combo box to apply visibility according to event type.
+        self.plotCfg[0][0].currentIndexChanged.connect((lambda: self.eventSelected(0)))
+        self.plotCfg[1][0].currentIndexChanged.connect((lambda: self.eventSelected(1)))
+        self.plotCfg[2][0].currentIndexChanged.connect((lambda: self.eventSelected(2)))
+        self.plotCfg[3][0].currentIndexChanged.connect((lambda: self.eventSelected(3)))
+        self.plotCfg[4][0].currentIndexChanged.connect((lambda: self.eventSelected(4)))
+        self.plotCfg[5][0].currentIndexChanged.connect((lambda: self.eventSelected(5)))
+        self.plotCfg[6][0].currentIndexChanged.connect((lambda: self.eventSelected(6)))
+        self.plotCfg[7][0].currentIndexChanged.connect((lambda: self.eventSelected(7)))
+
+        self.plotCfg[0][0].setStyleSheet("selection-color: blue")
+
         # Configure combo boxes.
         for p in self.plotCfg:
+            # Add list of events to selection dropdown.
             p[0].addItems(self.config.events)
 
         # Preconfigure to current selections.
@@ -1646,16 +1660,20 @@ class EventsChartConfigDialog(QDialog):
             self.plotCfg[idx][0].setCurrentIndex(selection)
             logger.debug("Event selected item: {0:d}".format(selection))
             if (self.plotCfg[idx][0].currentText() != "INPUT"):
-                self.plotCfg[idx][1].setText(self.config.EventTraces[idx]["Title"])
+                self.plotCfg[idx][1].setEnabled(True)
                 self.plotCfg[idx][2].setEnabled(False)
                 self.plotCfg[idx][3].setEnabled(False)
+                self.plotCfg[idx][1].setText(self.config.EventTraces[idx]["Title"])
             else:
                 self.plotCfg[idx][1].setText("Input {0:d}".format(self.config.EventTraces[idx]["Channel"]))
                 self.plotCfg[idx][1].setEnabled(False)
+                self.plotCfg[idx][2].setEnabled(True)
+                self.plotCfg[idx][3].setEnabled(True)
                 self.plotCfg[idx][3].setValue(self.config.EventTraces[idx]["Channel"])
 
         # Connect to SAVE dialog button for processing.
         self.SaveDialogBtn.clicked.connect(self.saveEventsChartConfig)
+
         # Connect to CANCEL dialog button to quit dialog.
         self.CancelDialogBtn.clicked.connect(self.close)
 
@@ -1674,6 +1692,22 @@ class EventsChartConfigDialog(QDialog):
         self.exec_()
 
     # *******************************************
+    # Event selection combo box selection changed.
+    # *******************************************
+    def eventSelected(self, idx):
+        logger.debug("User changed events trace event : {0:d}".format(idx))
+
+        # Set visibility and readonly status of selections according to event type.
+        if (self.plotCfg[idx][0].currentText() != "INPUT"):
+            self.plotCfg[idx][1].setEnabled(True)
+            self.plotCfg[idx][2].setEnabled(False)
+            self.plotCfg[idx][3].setEnabled(False)
+        else:
+            self.plotCfg[idx][1].setEnabled(False)
+            self.plotCfg[idx][2].setEnabled(True)
+            self.plotCfg[idx][3].setEnabled(True)
+
+    # *******************************************
     # User selected to save events chart config.
     # *******************************************
     def saveEventsChartConfig(self):
@@ -1686,7 +1720,7 @@ class EventsChartConfigDialog(QDialog):
         rerender = False
 
         # Overwrite configuration values with new values.
-        newConfig = []
+        self.config.EventTraces = []
 
         # Go through plot config and save changes.
         for p in self.plotCfg:
@@ -1698,14 +1732,17 @@ class EventsChartConfigDialog(QDialog):
                     trace = {"Event" : p_ev, "Channel" : p_ch}
                 else:
                     trace = {"Event" : p_ev, "Title" : p_t}
-                newConfig.append(trace)
+                # Add trace to trace list.
+                self.config.EventTraces.append(trace)
+                # Have one trace so set 'change' flag.
+                prefChanged = True
 
         # Cancel, so close dialog.
         self.close()
 
         # Save the configuration values (if changed).
         if prefChanged:
-            logger.debug("Changes saved to preferences.")
+            logger.debug("Changes saved to events chart configuration.")
             self.config.saveConfig()
 
 # *******************************************
@@ -1765,7 +1802,9 @@ class ChangeLogDialog(QDialog):
                 Shows timeline of events, including INPUT events where specific channel can be specified.</li>" \
             "<li>Updated preferences dialog with configuration values for events plot.</li>" \
             "<li>Updated trip export with checklist total.</li>" \
+            "<li>Reset speed plot (and events plot) if new log file contains no trips.</li>" \
             "<li>Added additional checks and alert messages for Time1H DEBUG event errors.</li>" \
+            "<li>Added check to see if time in traction and idle adds up to trip time. Highlighted on TRIP event.</li>" \
             "<li>Added check and alert for bypass detection; alerts in SIGON events for Driver ID = -12.</li>" \
             "<li>Added check for invalid direction in REPORT events, i.e. 0 > x > 359.</li>" \
             "<li>Added channel number in comment field for INPUT events to make easier to find when collapsed.</li>" \

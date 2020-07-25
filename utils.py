@@ -57,3 +57,72 @@ def getFileParts(fname):
     path, filename = os.path.split(fname)
     fn, fext = os.path.splitext(filename)
     return path, fn, fext
+
+# *******************************************
+# Split string to multiple strings of maximum length.
+# Don't split words.
+# *******************************************
+def splitLongString(longString, maxLen):
+
+    lineLength = 0
+    lineString = ""
+    lineWords = 0
+    splitString = ""
+    splitLines = 0
+
+    if len(longString) > maxLen:
+        # Get words in the long string as a list.
+        words = longString.split()
+
+        # Cycle through words in list and concatenate until max length exceeded.
+        for idx, w in enumerate(words):
+            newLineLength = lineLength + len(w)
+            if lineWords > 0:
+                newLineLength += 1
+
+            # Check if line too long.
+            if newLineLength > maxLen:
+                # Line too long so back off last word.
+                # If only word on line then have to accept it.
+                if lineWords == 0:
+                    # If this is the first line then title is just this line.
+                    if splitLines == 0:
+                        splitString = w
+                        splitLines += 1
+                    # Else, add newline first.
+                        splitString = "{0:s}\n{1:s}".format(splitString, w)
+                        splitLines += 1
+                        lineLength = 0
+                # Already at least one word on this line, so put new word on next line.
+                else:
+                    # Add the existing part of the current line to the title.
+                    if splitLines == 0:
+                        splitString = "{0:s}".format(lineString)
+                        splitLines += 1
+                    else:
+                        splitString = "{0:s}\n{1:s}".format(splitString, lineString)
+                        splitLines += 1
+                    # Add the new word to the next line.
+                    lineString = w
+                    lineWords = 1
+                    lineLength = len(w)
+            # Can add new word to current line as not over the limit yet.
+            else:
+                # If not the only word on the line then add a space first.
+                if lineWords == 0:
+                    lineString = w
+                    lineLength += len(w)
+                else:
+                    lineString = "{0:s} {1:s}".format(lineString, w)
+                    lineLength += (len(w) + 1)
+                lineWords += 1
+            # If there are no more words to go then add current line to the title.
+            if idx == (len(words) - 1):
+                if splitLines == 0:
+                    splitString = "{0:s}".format(lineString)
+                else:
+                    splitString = "{0:s}\n{1:s}".format(splitString, lineString)
+    else:
+        splitString = longString
+
+    return splitString

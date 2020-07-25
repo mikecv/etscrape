@@ -61,7 +61,8 @@ class Config():
             "EventTraceColour": "#0000ff",
             "TripTraceColour": "#000000",
             "EventFillColour": "#0000ff",
-            "TripFillColour": "#ffff00"
+            "TripFillColour": "#ffff00",
+            "MaxTitleLineLength": 17
         }
 
         # Input channel definitions.
@@ -117,7 +118,7 @@ class Config():
                         self.LogBackups = config["LogBackups"]
                         self.TimeUTC = config["TimeUTC"]
                         self.TripData = config["TripData"]
-                        self.SpdPlot = config["SpdPlot"]
+                        seMaxTitleLineLengthlf.SpdPlot = config["SpdPlot"]
                         self.EvPlot = config["EvPlot"]
                         self.Channels = config["Channels"]
                         self.EventTraces = config["EventTraces"]
