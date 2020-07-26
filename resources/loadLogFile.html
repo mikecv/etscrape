@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="etscrape.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="ETscrapeHelp.html">Home</a>
+  <a href="mainWindow.html">Application Window</a>
+  <a href="tripDataOrganisation.html">Trip Data Organisation</a>
+</div>
+
+<h1>Loading Log Files</h1>
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+
+<p>There are 2 ways to open a log file, i.e. either by using the application menu or by dragging a log file onto the application trip data pane.</p>
+
+<h2>Loading a log file using the application menu</h2>
+<p>Selecting the &#34;File &#47; Load log file&#34; menu item will launch a file browser from where the log file can be selected and opened.
+Note that the application supports message logs (.csv) available at the server, as well as debuglog files downloaded from a controller.</p>
+
+<img src="./logOpenMenu.png" alt="Log file load with menu">
+
+<h2>Dragging and dropping a log file onto the main application window</h2>
+<p>From a file explorer or browser, drag and drop a log file onto the application trip data pane.
+The cursor will change to a drag cursor when over the application window if an acceptable file has been selected.
+Note that if you attempt to drag multiple log files at once into the application, only the first file will be loaded.</p>
+
+<p>Dragging another log file on top of an already loaded one will unload the current log file before doing so.</p>
+
+<h2>Loading empty log files</h2>
+<p>On loading a log file the application checks to see if it contains any trips.
+If the log file does not contain any trips, i.e. no <b>SIGON</b> events, a message dialog will be displayed.</p>
+
+<img src="./noTripMessage.png" alt="Log file does not include trips">
+
+<p>After dismissing the message dialog any previous trip data will have already been cleared,
+i.e. the Trip Data pane, the Trip Summary pane, and any charts will not contain any trip data.</p>
+    
+</body>
+</html>
