@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="etscrape.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="ETscrapeHelp.html">Home</a>
+  <a href="mainWindow.html">Application Window</a>
+  <a href="loadLogFile.html">Loading Log Files</a>
+  <a href="tripDataOrganisation.html">Trip Data Organisation</a>
+</div>
+
+<a name="top"></a>
+
+<h1>Trip Data Alert Formatting</h1>
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+
+<p>The trip headers are highlighted to make the start of trips easier to find when all trips are expanded.
+Events are normally highlighted in a blue (configurable) font, and event data is normally shown in black font.
+The application does some simple checking of event data looking for edge conditions or potentially bad data,
+and highlights this data. Where some event data has been highlighted the corresponding event and associated trip are highlighted in the same colour.
+Note that hidden events to no contribute to the alert highlighting of the trip to which they belong.</p>
+
+<img src="./appAlertData.png" alt="Alert data highlighted">
+
+<p>In the example above a zero duration event has been detected for a zone overspeed event, which may or may not be an error.
+The trip and event are also highlighted so that the presence of the alert is visible even if the trip tree is collapsed.</p>
+
+<p>The application also performs some checking at the trip and event level, e.g. checking that trips are ended,
+or that consecutive events have increasing time. For these types of alerts additional alert comments are added to an extra
+column in the Trip Data pane as illustrated in the figure below.</p>
+
+<img src="./appAlertEeventTrip.png" alt="Alert at trip and event level">
+
+<p>Where alert comments apply to hidden events the highlighing of the assoicated trip is not performed.aion</p>
+<p>In general alert comments are a good indication that something is awry with the log file or the controller itself.</p>
+
+<br>
+<a href="#top">Back to top</a>
+
+</body>
+</html>

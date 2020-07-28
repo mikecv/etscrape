@@ -86,8 +86,8 @@ class Config():
             {"Event" : "LOWCOOLANT", "Title" : "Engine Coolant Level Low"},
             {"Event" : "OILPRESSURE", "Title" : "Engine Oil Pressure Low"},
             {"Event" : "ENGINETEMP", "Title" : "Engine Temperature High"},
-            {"Event" : "INPUT", "Channel" : 1},
-            {"Event" : "INPUT", "Channel" : 2},
+            {"Event" : "INPUT", "Channel" : 3},
+            {"Event" : "INPUT", "Channel" : 4},
             {"Event" : "INPUT", "Channel" : 8}
             ]
 
@@ -118,7 +118,7 @@ class Config():
                         self.LogBackups = config["LogBackups"]
                         self.TimeUTC = config["TimeUTC"]
                         self.TripData = config["TripData"]
-                        seMaxTitleLineLengthlf.SpdPlot = config["SpdPlot"]
+                        self.SpdPlot = config["SpdPlot"]
                         self.EvPlot = config["EvPlot"]
                         self.Channels = config["Channels"]
                         self.EventTraces = config["EventTraces"]

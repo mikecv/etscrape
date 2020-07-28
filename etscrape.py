@@ -43,8 +43,15 @@ from eventsChart import *
 # *******************************************
 # TODO List
 #
-# Update change log.
-# Update help file.
+# For events config, set title to default to event name (except for INPUT events).
+# Make all event plots zoom and pan to the same scale if possible.
+# Update list of events in config for use with events chart config dialog. Only add events that make sense to plot.
+# Checkout checklist type ?, log has "P"; see 10247-d trip 1768.
+# Check events chart operation for events without duration, for IMPACT suggest adding marker for level (low, med, hi).
+# Look at SIGNON event and why keyboard shows 055555 when value entered was 555555; might need to treat as next. id 1962.
+#
+# Update change log. *** In progress ***
+# Update help file. *** In progress ***
 # *******************************************
 
 # Program version.
@@ -884,7 +891,7 @@ class UI(QMainWindow):
                 xf.write("\tChecklist Version : {0:d}\n".format(ev.failedQ))
                 if ev.chkType == "F":
                     chkType = "Full"
-                elif ev.chkType == "C":
+                elif ev.chkType == "P":
                     chkType = "Operator Change"
                 elif ev.chkType == "B":
                     chkType = "Bypass"
@@ -1025,7 +1032,7 @@ class UI(QMainWindow):
             eventList.append(("Checklist Version", "{0:d}".format(event.chkVersion), False))
             if event.chkType == "F":
                 chkType = "Full"
-            elif event.chkType == "C":
+            elif event.chkType == "P":
                 chkType = "Operator Change"
             elif event.chkType == "B":
                 chkType = "Bypass"
@@ -1808,6 +1815,7 @@ class ChangeLogDialog(QDialog):
             "<li>Added check and alert for bypass detection; alerts in SIGON events for Driver ID = -12.</li>" \
             "<li>Added check for invalid direction in REPORT events, i.e. 0 > x > 359.</li>" \
             "<li>Added channel number in comment field for INPUT events to make easier to find when collapsed.</li>" \
+            "<li>Fixed checklist type for operator change from C to P.</li>" \
             "<li>Refactored speed chart plotting to align with implementation for events chart.</li>" \
             "<li>Looked at updating plots after pan/zoom. Still require to change currently selected trip to reset plot.</li>" \
             "<li>Speed plots show time according to the current timezone. Plots regenerate if visible when time zone preference changed.</li>" \
