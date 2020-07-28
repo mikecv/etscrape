@@ -21,7 +21,8 @@ class Config():
         self.TimeUTC = 1
 
         # Supported Events (for events chart)
-        self.events = ["", "SIGNON", "ZONEOVERSPEED", "ENGINEOVERSPEED", "LOWCOOLANT", "OILPRESSURE", "ENGINETEMP", "INPUT"]
+        self.events = ["", "OVERSPEED", "ZONEOVERSPEED", "ENGINEOVERSPEED", "LOWCOOLANT",
+            "OILPRESSURE", "ENGINETEMP", "OFFSEAT", "OVERLOAD", "UNBUCKLED", "IMPACT", "INPUT"]
 
         # Trip related data.
         self.TripData = {

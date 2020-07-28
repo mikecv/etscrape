@@ -43,12 +43,8 @@ from eventsChart import *
 # *******************************************
 # TODO List
 #
-# For events config, set title to default to event name (except for INPUT events).
 # Make all event plots zoom and pan to the same scale if possible.
-# Update list of events in config for use with events chart config dialog. Only add events that make sense to plot.
-# Checkout checklist type ?, log has "P"; see 10247-d trip 1768.
 # Check events chart operation for events without duration, for IMPACT suggest adding marker for level (low, med, hi).
-# Look at SIGNON event and why keyboard shows 055555 when value entered was 555555; might need to treat as next. id 1962.
 #
 # Update change log. *** In progress ***
 # Update help file. *** In progress ***
@@ -1649,7 +1645,15 @@ class EventsChartConfigDialog(QDialog):
         self.plotCfg[6][0].currentIndexChanged.connect((lambda: self.eventSelected(6)))
         self.plotCfg[7][0].currentIndexChanged.connect((lambda: self.eventSelected(7)))
 
-        self.plotCfg[0][0].setStyleSheet("selection-color: blue")
+        # Connect to combo box to apply visibility according to event type.
+        self.plotCfg[0][3].valueChanged.connect((lambda: self.channelSelected(0)))
+        self.plotCfg[1][3].valueChanged.connect((lambda: self.channelSelected(1)))
+        self.plotCfg[2][3].valueChanged.connect((lambda: self.channelSelected(2)))
+        self.plotCfg[3][3].valueChanged.connect((lambda: self.channelSelected(3)))
+        self.plotCfg[4][3].valueChanged.connect((lambda: self.channelSelected(4)))
+        self.plotCfg[5][3].valueChanged.connect((lambda: self.channelSelected(5)))
+        self.plotCfg[6][3].valueChanged.connect((lambda: self.channelSelected(6)))
+        self.plotCfg[7][3].valueChanged.connect((lambda: self.channelSelected(7)))
 
         # Configure combo boxes.
         for p in self.plotCfg:
@@ -1670,13 +1674,16 @@ class EventsChartConfigDialog(QDialog):
                 self.plotCfg[idx][1].setEnabled(True)
                 self.plotCfg[idx][2].setEnabled(False)
                 self.plotCfg[idx][3].setEnabled(False)
-                self.plotCfg[idx][1].setText(self.config.EventTraces[idx]["Title"])
+                if self.config.EventTraces[idx]["Title"] != "":
+                    self.plotCfg[idx][1].setText(self.config.EventTraces[idx]["Title"])
+                else:
+                    self.plotCfg[idx][1].setText(self.config.EventTraces[idx]["Event"])
             else:
-                self.plotCfg[idx][1].setText("Input {0:d}".format(self.config.EventTraces[idx]["Channel"]))
                 self.plotCfg[idx][1].setEnabled(False)
                 self.plotCfg[idx][2].setEnabled(True)
                 self.plotCfg[idx][3].setEnabled(True)
                 self.plotCfg[idx][3].setValue(self.config.EventTraces[idx]["Channel"])
+                self.plotCfg[idx][1].setText("Input {0:d}".format(self.config.EventTraces[idx]["Channel"]))
 
         # Connect to SAVE dialog button for processing.
         self.SaveDialogBtn.clicked.connect(self.saveEventsChartConfig)
@@ -1704,15 +1711,34 @@ class EventsChartConfigDialog(QDialog):
     def eventSelected(self, idx):
         logger.debug("User changed events trace event : {0:d}".format(idx))
 
+        # Default the title to the name of the event.
+        self.plotCfg[idx][1].setText(self.plotCfg[idx][0].currentText())
+
         # Set visibility and readonly status of selections according to event type.
         if (self.plotCfg[idx][0].currentText() != "INPUT"):
             self.plotCfg[idx][1].setEnabled(True)
             self.plotCfg[idx][2].setEnabled(False)
             self.plotCfg[idx][3].setEnabled(False)
+
+            # Default the title to the name of the event.
+            self.plotCfg[idx][1].setText(self.plotCfg[idx][0].currentText())
         else:
             self.plotCfg[idx][1].setEnabled(False)
             self.plotCfg[idx][2].setEnabled(True)
             self.plotCfg[idx][3].setEnabled(True)
+
+            # Default the title to input channel number 1 (default).
+            self.plotCfg[idx][3].setValue(1)
+            self.plotCfg[idx][1].setText("Input 1")
+
+    # *******************************************
+    # Input selection dial changed.
+    # *******************************************
+    def channelSelected(self, idx):
+        logger.debug("User changed input event channel : {0:d}".format(idx))
+
+        # Set the chart title to match the new channel number.
+        self.plotCfg[idx][1].setText("Input {0:d}".format(self.plotCfg[idx][3].value()))
 
     # *******************************************
     # User selected to save events chart config.
