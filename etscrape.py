@@ -45,6 +45,7 @@ from eventsChart import *
 #
 # Make all event plots zoom and pan to the same scale if possible.
 # Check events chart operation for events without duration, for IMPACT suggest adding marker for level (low, med, hi).
+# Search for controller ID when scraping (DONE), and add to status bar. Also, add to export (DONE).
 #
 # Update change log. *** In progress ***
 # Update help file. *** In progress ***
@@ -799,9 +800,10 @@ class UI(QMainWindow):
         xf.write("              (__) (_)\_)(____)(__)  \n")
         xf.write("                                     \n")
         xf.write("===================================================\n")
-        xf.write("Signon ID  : {0:d}\n".format(ti.signOnId))
-        xf.write("Start time : {0:s}\n".format(unixTimeString(ti.tripStart, config.TimeUTC)))
-        xf.write("End time   : {0:s}\n".format(unixTimeString(ti.tripEnd, config.TimeUTC)))
+        xf.write("Controller ID  : {0:d}\n".format(ti.controllerID))
+        xf.write("Signon ID      : {0:d}\n".format(ti.signOnId))
+        xf.write("Start time     : {0:s}\n".format(unixTimeString(ti.tripStart, config.TimeUTC)))
+        xf.write("End time       : {0:s}\n".format(unixTimeString(ti.tripEnd, config.TimeUTC)))
         xf.write("===================================================\n")
         xf.write("===================================================\n")
         xf.write("EVENTS (TOTALS)\n")
