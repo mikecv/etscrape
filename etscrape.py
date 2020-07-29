@@ -45,7 +45,6 @@ from eventsChart import *
 #
 # Make all event plots zoom and pan to the same scale if possible.
 # Check events chart operation for events without duration, for IMPACT suggest adding marker for level (low, med, hi).
-# Search for controller ID when scraping (DONE), and add to status bar. Also, add to export (DONE).
 #
 # Update change log. *** In progress ***
 # Update help file. *** In progress ***
@@ -176,8 +175,12 @@ class UI(QMainWindow):
         # Disable show events chart window.
         self.actionShowEventsChart.setEnabled(False)
 
-        self.showEpochStatus()
+        # Show trip controller ID.
+        self.showControllerStatus()
 
+        # Show epoch selection.
+        self.showEpochStatus()
+        
         # Show appliction window.
         self.show()
 
@@ -363,6 +366,18 @@ class UI(QMainWindow):
         self.statusBar().addPermanentWidget(self.epochLbl)
 
     # *******************************************
+    # Show controller ID on status bar.
+    # *******************************************
+    def showControllerStatus(self):
+            boldFont=QtGui.QFont()
+            boldFont.setBold(True)
+            self.ctrlLbl = QLabel()
+            self.ctrlLbl.setStyleSheet("color: black; ")
+            self.ctrlLbl.setFont(boldFont)
+            self.ctrlLbl.setText("{0:5s}".format(""))
+            self.statusBar().addPermanentWidget(self.ctrlLbl)
+
+    # *******************************************
     # Clear loaded trips.
     # *******************************************
     def clearTrips(self):
@@ -461,6 +476,9 @@ class UI(QMainWindow):
             # Need to get plots to starting states.
             self.eventsChart.fig.resetFigure()
             self.spdFig.resetFigure()
+
+            # Clear the controller ID as no longer relevant.
+            self.ctrlLbl.setText("{0:5s}".format(""))
 
         # Revert to the normal cursor.
         QApplication.restoreOverrideCursor()                       
@@ -655,6 +673,10 @@ class UI(QMainWindow):
         self.StartTimeLbl.setText("{0:s}".format(unixTimeString(ti.tripStart, config.TimeUTC)))
         self.EndTimeLbl.setText("{0:s}".format(unixTimeString(ti.tripEnd, config.TimeUTC)))
         self.TripDurationLbl.setText("{0:s}".format(secsToTime(ti.tripEnd - ti.tripStart)))
+
+        # Controller ID for trip.
+        self.ctrlLbl.setText("{0:5s}".format(str(ti.controllerID)))
+
         # Event counts.
         # Vehicle events.
         self.VehicleEventsLbl.setText("{0:d}".format(ti.numVehicleEvents))
@@ -1844,6 +1866,7 @@ class ChangeLogDialog(QDialog):
             "<li>Added check for invalid direction in REPORT events, i.e. 0 > x > 359.</li>" \
             "<li>Added channel number in comment field for INPUT events to make easier to find when collapsed.</li>" \
             "<li>Fixed checklist type for operator change from C to P.</li>" \
+            "<li>Added controller ID for the trip to the status bar (next to time epoch).</li>" \
             "<li>Refactored speed chart plotting to align with implementation for events chart.</li>" \
             "<li>Looked at updating plots after pan/zoom. Still require to change currently selected trip to reset plot.</li>" \
             "<li>Speed plots show time according to the current timezone. Plots regenerate if visible when time zone preference changed.</li>" \
