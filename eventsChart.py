@@ -119,7 +119,7 @@ class EventCanvas(FigureCanvasQTAgg):
             t[1].autoscale_view()
 
         # Add trip number as the plot title.
-        self.fig.suptitle("Trip {0:d} [{1:d}]".format(No, self.data.tripLog[No-1].signOnId), y=1.0, fontsize=self.cfg.EvPlot["PlotTitleFontSize"])
+        self.fig.suptitle("Controller {0:d} Trip {1:d} [{2:d}]".format(self.data.controllerID, No, self.data.tripLog[No-1].signOnId), y=1.0, fontsize=self.cfg.EvPlot["PlotTitleFontSize"])
 
         # Get start and end trip times to use for all event plots.
         # Trip start will correspond to SIGNON event.
@@ -192,6 +192,7 @@ class EventCanvas(FigureCanvasQTAgg):
             t = self.cfg.EventTraces[idx]
             tList = []
             eList = []
+
             # Initilise list of special markers for zero duration INPUT events.
             # Need to keep track of points where zero duration INPUT events occur.
             # This is useful if there is a problem.
@@ -201,11 +202,15 @@ class EventCanvas(FigureCanvasQTAgg):
             inputEv = False
             # Initialise trace started flag.
             traceStarted = False
+            # Previous INPUT event time.
+            preInputTime = 0
+
             # See if any matching events for the trip.
             for ev in self.data.tripLog[No-1].events[0:endEvent]:
                 if t["Event"] == ev.event:
                     # Check if INPUT event as treated differently.
                     if ev.isInput:
+                        # Event is an INPUT.
                         if int(t["Channel"]) == ev.inputNo:
                             inputEv = True
                             # Found a matching event for this event INPUT channel.
@@ -239,11 +244,54 @@ class EventCanvas(FigureCanvasQTAgg):
                                 eList.append(0)
                                 markerIdx += 1
                                 finalState = 0
+
                             # Check if we need to add a marker for a zero duration event.
                             # Note that active time is always 0 for transitions to the inactive state.
-                            if (ev.activeTime == 0):
-                                nullMarkers.append(markerIdx - 1)
+                            # So mark INPUT events to transition to inactive state if active time is 0,
+                            # or if active state and previous transition time was the same.
+                            if ev.inputState == 0:
+                                if ev.activeTime == 0:
+                                    nullMarkers.append(markerIdx - 1)
+                            else:
+                                if ev.serverTime == preInputTime:
+                                    nullMarkers.append(markerIdx - 2)
+                            # Save INPUT event time to compare with next INPUT event.
+                            preInputTime = ev.serverTime
+                    # Event is an IMPACT event.
+                    # Show intensity on trace.
+                    elif ev.event == "IMPACT":
+                        if traceStarted == False:
+                            # Start trace with start of trip.
+                            tList.append(tripStartTime)
+                            eList.append(0)
+                            markerIdx += 1
+                            traceStarted = True
+                        # Found a matching event for this trace.
+                        # Add start of event to trace. Event is at the end of events for events with a duration.
+                        tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
+                        eList.append(0)
+                        markerIdx += 1
+                        tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
+                        # Set the height of the trace according to the severity (3 levels)
+                        if ev.severity == 'C':
+                            tLevel = 1.0
+                        elif ev.severity == 'W':
+                            tLevel = 0.5
+                        else:
+                            tLevel = 0.25
+                        eList.append(tLevel)
+                        markerIdx += 1
+                        nullMarkers.append(markerIdx - 1)
+                        # Add end of event to trace.
+                        tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                        eList.append(tLevel)
+                        markerIdx += 1
+                        tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                        eList.append(0)
+                        markerIdx += 1
+                        finalState = 0
                     else:
+                        # Event is not special, i.e. not INPUT or IMPACT event.
                         # Check if we need to start the trace.
                         if traceStarted == False:
                             # Start trace with start of trip.

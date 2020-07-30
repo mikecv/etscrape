@@ -117,14 +117,11 @@ class Trip():
         # Zone crossings.
         self.zoneXings = []
 
-        # Controller ID
-        self.controllerID = 0
-
     # *******************************************
     # Extract trip data from buffer snippet.
     # *******************************************
     def extractTripData(self):
-        # Timing
+        # TimingTrip(
         self.tripStart = 0
         self.tripEnd = 0
         self.signOnId = 0
@@ -162,20 +159,6 @@ class Trip():
 
         # Initialise flag to stop collecting trip speed plot data.
         self.stopSpeedData = False
-
-        # ******************************
-        # Look for controller ID.
-        # Only read first instance in log; assume consistant.
-        # ******************************
-        cntrlId = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,2}:[0-9]{2}:[0-9]{2}) .*?\,*?UNIT ([0-9]+)$', re.MULTILINE)
-
-        cid = re.search(cntrlId, self.logBuf)
-        if cid:
-            # Save controller ID.
-            self.controllerID = int(cid.group(3))
-            self.logger.debug("Detected Controller ID for trip {0:d}".format(self.controllerID))
-        else:
-            self.logger.debug("No Controller ID for trip.")
 
         # ******************************
         # Look for SIGNON event.

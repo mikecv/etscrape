@@ -1,6 +1,6 @@
 {
     "ConfigVersion": 4,
-    "DebugLevel": 10,
+    "DebugLevel": 20,
     "LogFileSize": 100000,
     "LogBackups": 3,
     "TimeUTC": 1,
@@ -84,20 +84,8 @@
     ],
     "EventTraces": [
         {
-            "Event": "OILPRESSURE",
-            "Title": "Engine Oil Pressure Low"
-        },
-        {
-            "Event": "INPUT",
-            "Channel": 1
-        },
-        {
-            "Event": "INPUT",
-            "Channel": 4
-        },
-        {
-            "Event": "INPUT",
-            "Channel": 8
+            "Event": "IMPACT",
+            "Title": "Impact"
         }
     ]
 }

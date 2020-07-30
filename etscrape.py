@@ -44,8 +44,9 @@ from eventsChart import *
 # TODO List
 #
 # Make all event plots zoom and pan to the same scale if possible.
-# Check events chart operation for events without duration, for IMPACT suggest adding marker for level (low, med, hi).
-# Put [] around controller ID same as done for epoch.
+# Look at adding y grid lines for events plot; might be useful for IMPACT plots.
+# Look at making minimum height of events chart smaller, i.e. 2 plots of reasonable size, else with only 2 plots looks a little strange.
+# See if changing events config 'events to trace' can work without an application restart.
 #
 # Update change log. *** In progress ***
 # Update help file. *** In progress ***
@@ -417,6 +418,21 @@ class UI(QMainWindow):
         # Change to wait cursor as large files may take a while to open and process.
         QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
 
+
+        # Look for controller ID.
+        # Only read first instance in log; assume consistant.
+        cntrlId = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,2}:[0-9]{2}:[0-9]{2}) .*?\,*?UNIT ([0-9]+)$', re.MULTILINE)
+
+        cid = re.search(cntrlId, self.logData)
+        if cid:
+            # Save controller ID.
+            self.controllerID = int(cid.group(3))
+            self.ctrlLbl.setText(str(self.controllerID))
+            logger.debug("Detected Controller ID : {0:d}".format(self.controllerID))
+        else:
+            logger.debug("No Controller ID for trip.")
+
+        # Look for all trips in the lof file.
         self.numTrips = 0
         self.tripLog = []
 
@@ -675,9 +691,6 @@ class UI(QMainWindow):
         self.EndTimeLbl.setText("{0:s}".format(unixTimeString(ti.tripEnd, config.TimeUTC)))
         self.TripDurationLbl.setText("{0:s}".format(secsToTime(ti.tripEnd - ti.tripStart)))
 
-        # Controller ID for trip.
-        self.ctrlLbl.setText("[{0:s}]".format(str(ti.controllerID)))
-
         # Event counts.
         # Vehicle events.
         self.VehicleEventsLbl.setText("{0:d}".format(ti.numVehicleEvents))
@@ -823,7 +836,7 @@ class UI(QMainWindow):
         xf.write("              (__) (_)\_)(____)(__)  \n")
         xf.write("                                     \n")
         xf.write("===================================================\n")
-        xf.write("Controller ID  : {0:d}\n".format(ti.controllerID))
+        xf.write("Controller ID  : {0:d}\n".format(self.controllerID))
         xf.write("Signon ID      : {0:d}\n".format(ti.signOnId))
         xf.write("Start time     : {0:s}\n".format(unixTimeString(ti.tripStart, config.TimeUTC)))
         xf.write("End time       : {0:s}\n".format(unixTimeString(ti.tripEnd, config.TimeUTC)))
