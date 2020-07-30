@@ -1,0 +1,75 @@
+{
+    "ConfigVersion": 3,
+    "DebugLevel": 10,
+    "LogFileSize": 100000,
+    "LogBackups": 3,
+    "TimeUTC": 0,
+    "TripData": {
+        "TripBackColour": "#ffff00",
+        "TripColour": "#000000",
+        "EventColour": "#0000ff",
+        "AlertColour": "#ff0000",
+        "CommentColour": "#ff0000",
+        "SummaryAlertColour": "#0000ff",
+        "OtherEventColour": "#99990c",
+        "InputEventColour": "#ffbf00",
+        "DebugEventColour": "#00fa9a",
+        "TmpStatusMessagesMsec": 10000,
+        "ShowOtherEvents": 1,
+        "ShowInputEvents": 1,
+        "ShowDebugEvents": 1,
+        "ShowOutOfTripEvents": 0,
+        "BadSpeedLimit": 150,
+        "BadRpmLimit": 5000
+    },
+    "SpdPlot": {
+        "DefaultLowLimit": 30,
+        "DefaultHiLimit": 60,
+        "SpeedColour": "#0000ff",
+        "ZoneColour": "#ff66ff",
+        "AxesTitleFontSize": 7,
+        "PlotTitleFontSize": 10
+    },
+    "Channels": [
+        {
+            "No": 1,
+            "Name": "[ET] Engine Oil Pressure"
+        },
+        {
+            "No": 2,
+            "Name": "[ET] Engine Temperature"
+        },
+        {
+            "No": 3,
+            "Name": "[ET] Ground Speed"
+        },
+        {
+            "No": 4,
+            "Name": "[ET] Engine Speed"
+        },
+        {
+            "No": 5,
+            "Name": "[ET] Passenger Seatbelt"
+        },
+        {
+            "No": 6,
+            "Name": "[ET] Operator Seatbelt"
+        },
+        {
+            "No": 7,
+            "Name": "[ET] Engine Coolant Level"
+        },
+        {
+            "No": 8,
+            "Name": "[ET][ST] Ignition Switch"
+        },
+        {
+            "No": 9,
+            "Name": "[ET][ST] Accelerometer"
+        },
+        {
+            "No": 10,
+            "Name": "[ET][ST] GNSS"
+        }
+    ]
+}

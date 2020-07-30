@@ -12,12 +12,12 @@ from datetime import timedelta, datetime
 import os
 import sys
 import webbrowser
+import zipfile
 
 from config import *
 from utils import *
 from tripinfo import *
-from speedChart import *
-from eventsChart import *
+from mplCharts import *
 
 # *******************************************
 # Program history.
@@ -33,26 +33,15 @@ from eventsChart import *
 #                       Bug fixes.
 # 0.4   MDC 29/06/2020  Bug fixes.
 #                       Additions to the Trip Summary pane.
-# 0.5   MDC 05/07/2020  Add events chart, similar to HighCharts.
-#                       Added additional DEBUG checks for invalid times.
-#                       Refactored speed chart to match events charts.
-#                       Updated preferences dialog with event chart preferences.
-#                       Added dialog to configure event plots to plot.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
-# Make all event plots zoom and pan to the same scale if possible.
-# Check events chart operation for events without duration, for IMPACT suggest adding marker for level (low, med, hi).
-# Put [] around controller ID same as done for epoch.
-#
-# Update change log. *** In progress ***
-# Update help file. *** In progress ***
 # *******************************************
 
 # Program version.
-progVersion = "0.5"
+progVersion = "0.4"
 
 # Create configuration values class object.
 config = Config()
@@ -119,12 +108,6 @@ class UI(QMainWindow):
         # Attach to the edit preferences menu item.
         self.actionPreferences.triggered.connect(self.editPreferences)
 
-        # Attach to the edit events chart config menu item.
-        self.actionEventsChartConfig.triggered.connect(self.editEventsChartConfig)
-
-        # Attach to the show window item.
-        self.actionShowEventsChart.triggered.connect(self.showEventsChartWindow)
-
         # Attach to the Quit menu item.
         self.actionQuit.triggered.connect(app.quit)
 
@@ -151,37 +134,31 @@ class UI(QMainWindow):
         self.PrevTripBtn.setEnabled(False)
         self.PrevTripBtn.clicked.connect(lambda: self.tripButtonClicked(False))
 
-        # Create figure for speed plot.
-        self.spdFig = SpeedCanvas(self, config, logger, width=10, height=6, dpi=100)
+        # Create figure for speed plots.
+        self.spdFig = MplCanvas(self, config, logger, width=10, height=6, dpi=100)
         self.plotTbar = NavigationToolbar(self.spdFig, self)
         self.ChartLayout.addWidget(self.plotTbar)
         self.ChartLayout.addWidget(self.spdFig)
-
-        # Create events chart dialog.        
-        self.eventsChart = EventsChartDialog(config, self)
 
         # Flag indicating no data to show.
         # And flag indicating no trip selected.
         self.haveTrips = False
         self.selectedTrip = 0
 
-        # Disable expand / collapse buttons.
+        # If we don't have any trips loaded yet then disable the export menu.
+        self.actionExportCurrentTrip.setEnabled(self.haveTrips)
+        self.actionExportAllTrips.setEnabled(self.haveTrips)
+
+        # Enable expand / collapse buttons.
         self.actionCollapseAllLevels.setEnabled(False)
         self.actionExpandAllLevels.setEnabled(False)
 
-        # Disable the export menus.
-        self.actionExportCurrentTrip.setEnabled(False)
-        self.actionExportAllTrips.setEnabled(False)
+        # Don't show 'other' events static text if not configured.
+        if config.TripData["ShowOtherEvents"] == False:
+            self.OtherEventsStaticLbl.hide()
 
-        # Disable show events chart window.
-        self.actionShowEventsChart.setEnabled(False)
-
-        # Show trip controller ID.
-        self.showControllerStatus()
-
-        # Show epoch selection.
         self.showEpochStatus()
-        
+
         # Show appliction window.
         self.show()
 
@@ -254,29 +231,18 @@ class UI(QMainWindow):
             # If next trip button pressed, then increment trip if we can.
             if nxtTrip:
                 if self.selectedTrip < self.numTrips:
-                    # Clear the current speed figure.
-                    # This is because if it was zoomed we start afresh.
-                    self.spdFig.clearFigure()
-                    self.eventsChart.fig.clearFigure()
-                    # Update 
                     self.selectedTrip += 1
                     self.tripDataTree.setCurrentItem(self.tripDataTree.topLevelItem((self.selectedTrip - 1)))
                     self.updateTripSummary(self.selectedTrip)
                     self.plotTripData(self.selectedTrip)
-                    self.plotEventsData(self.selectedTrip)
                     # Check if no more next trips, then disable the button.
                     self.updateTripBtnState()
             else:
                 if self.selectedTrip > 1:
-                    # Clear the current speed figure.
-                    # This is because if it was zoomed we start afresh.
-                    self.spdFig.clearFigure()
-                    self.eventsChart.fig.clearFigure()
                     self.selectedTrip -= 1
                     self.tripDataTree.setCurrentItem(self.tripDataTree.topLevelItem((self.selectedTrip - 1)))
                     self.updateTripSummary(self.selectedTrip)
                     self.plotTripData(self.selectedTrip)
-                    self.plotEventsData(self.selectedTrip)
                     # Check if no more previous trips, then disable the button.
                     self.updateTripBtnState()
 
@@ -340,9 +306,8 @@ class UI(QMainWindow):
         if self.haveTrips:
             # Clear triptrip tree.
             self.clearTrips()
-            # Clear speed and event plots.
+            # Clear speed plot.
             self.spdFig.clearFigure()
-            self.eventsChart.fig.clearFigure()
             # Repopulate trips.
             self.populateTrips()
 
@@ -367,29 +332,14 @@ class UI(QMainWindow):
         self.statusBar().addPermanentWidget(self.epochLbl)
 
     # *******************************************
-    # Show controller ID on status bar.
-    # *******************************************
-    def showControllerStatus(self):
-            boldFont=QtGui.QFont()
-            boldFont.setBold(True)
-            self.ctrlLbl = QLabel()
-            self.ctrlLbl.setStyleSheet("color: black; ")
-            self.ctrlLbl.setFont(boldFont)
-            self.ctrlLbl.setText("[  -  ]")
-            self.statusBar().addPermanentWidget(self.ctrlLbl)
-
-    # *******************************************
     # Clear loaded trips.
     # *******************************************
     def clearTrips(self):
         # If we have trip data then delete data.
         if self.haveTrips:
-            # Clear trip data.
             self.tripDataTree.setParent(None)
             self.tripDataTree = None
-            # Clear speed and event plots.
             self.spdFig.clearFigure()
-            self.eventsChart.fig.clearFigure()
 
     # *******************************************
     # Process log file.
@@ -410,9 +360,6 @@ class UI(QMainWindow):
         # Disable the export menu.
         self.actionExportCurrentTrip.setEnabled(False)
         self.actionExportAllTrips.setEnabled(False)
-
-        # Disable show events chart window.
-        self.actionShowEventsChart.setEnabled(False)
 
         # Change to wait cursor as large files may take a while to open and process.
         QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
@@ -462,9 +409,6 @@ class UI(QMainWindow):
             self.actionExportCurrentTrip.setEnabled(True)
             self.actionExportAllTrips.setEnabled(True)
 
-            # Enable show events chart window.
-            self.actionShowEventsChart.setEnabled(True)
-
             # Populate trip data.updateTripBtnState
             self.populateTrips()
         else:
@@ -473,13 +417,6 @@ class UI(QMainWindow):
 
             # Show pop-up indicating no trip data found in log file.
             showPopup("Trip", "Log file contains no trip information.", "(No trip start \"SIGNON\" events encountered)")
-
-            # Need to get plots to starting states.
-            self.eventsChart.fig.resetFigure()
-            self.spdFig.resetFigure()
-
-            # Clear the controller ID as no longer relevant.
-            self.ctrlLbl.setText("[  -  ]")
 
         # Revert to the normal cursor.
         QApplication.restoreOverrideCursor()                       
@@ -510,11 +447,11 @@ class UI(QMainWindow):
             tripNum = "Trip {0:d} [ID {1:d}]".format((idx+1), t.signOnId)
             # Need to check that the trip was ended.
             if t.tripEnd > 0:
-                tripTime = "{0:s}  to  {1:s}".format(unixTimeString(t.tripStart, config.TimeUTC), unixTimeString(t.tripEnd, config.TimeUTC))
+                tripTime = "{0:s}  to  {1:s}".format(unixTime(t.tripStart, config.TimeUTC), unixTime(t.tripEnd, config.TimeUTC))
                 logger.debug("Adding trip: {0:d}, occurred: {1:s}".format(idx+1, tripTime))
                 tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime])
             else:
-                tripTime = "{0:s}".format(unixTimeString(t.tripStart, config.TimeUTC))
+                tripTime = "{0:s}".format(unixTime(t.tripStart, config.TimeUTC))
                 logger.debug("Adding trip: {0:d}, occurred: {1:s}".format(idx+1, tripTime))
                 tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime, "No trip end."])
                 tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
@@ -531,7 +468,7 @@ class UI(QMainWindow):
             for idx2, ev in enumerate(t.events):
                 # Label events with event type and time.
                 eventType = "{0:s}".format(ev.event)
-                eventTime = "{0:s}".format(unixTimeString(ev.serverTime, config.TimeUTC))
+                eventTime = "{0:s}".format(unixTime(ev.serverTime, config.TimeUTC))
                 logger.debug("Adding event: {0:s}, occurred: {1:s}".format(eventType, eventTime))
                 eventLevel = QTreeWidgetItem(tripLevel, [eventType, eventTime, ev.alertText])
 
@@ -552,15 +489,8 @@ class UI(QMainWindow):
                     eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["OtherEventColour"])))
 
                 if ev.alertText != "":
-                    if ev.isInput:
-                        # For INPUT events alert field has the input channel number,
-                        # so colour in trip colour instead of comment/alert colours.
-                        eventLevel.setFont(2, fontPlain)
-                        eventLevel.setForeground(2, QtGui.QBrush(QtGui.QColor(config.TripData["TripColour"])))
-                    else:
-                        # Not an INPUT event so colour in comment colour and in bold.
-                        eventLevel.setFont(2, fontBold)
-                        eventLevel.setForeground(2, QtGui.QBrush(QtGui.QColor(config.TripData["CommentColour"])))
+                    eventLevel.setFont(2, fontBold)
+                    eventLevel.setForeground(2, QtGui.QBrush(QtGui.QColor(config.TripData["CommentColour"])))
 
                 # Check it see if event is of other type in which case don't have details.
                 # Note 'debug' events are also 'other' events.
@@ -615,7 +545,6 @@ class UI(QMainWindow):
         self.tripDataTree.setCurrentItem(self.tripDataTree.topLevelItem(self.selectedTrip - 1))
         self.updateTripSummary(self.selectedTrip)
         self.plotTripData(self.selectedTrip)
-        self.plotEventsData(self.selectedTrip)
 
         # Define callback if selection is made to a different trip.
         self.tripDataTree.itemSelectionChanged.connect(self.tripItemSelected)
@@ -657,11 +586,7 @@ class UI(QMainWindow):
             # Update the state of the prev/next trip buttons.
             self.updateTripBtnState()
             # Update plot trip data.
-            self.spdFig.clearFigure()
             self.plotTripData(self.selectedTrip)
-            # Update the events chart window.
-            self.eventsChart.fig.clearFigure()
-            self.plotEventsData(self.selectedTrip)
 
     # *******************************************
     # Update trip summary information for selected trip.
@@ -671,13 +596,9 @@ class UI(QMainWindow):
         # Trip information.
         self.TripNoLbl.setText("{0:d}".format(t))
         self.TripIdLbl.setText("[{0:d}]".format(ti.signOnId))
-        self.StartTimeLbl.setText("{0:s}".format(unixTimeString(ti.tripStart, config.TimeUTC)))
-        self.EndTimeLbl.setText("{0:s}".format(unixTimeString(ti.tripEnd, config.TimeUTC)))
+        self.StartTimeLbl.setText("{0:s}".format(unixTime(ti.tripStart, config.TimeUTC)))
+        self.EndTimeLbl.setText("{0:s}".format(unixTime(ti.tripEnd, config.TimeUTC)))
         self.TripDurationLbl.setText("{0:s}".format(secsToTime(ti.tripEnd - ti.tripStart)))
-
-        # Controller ID for trip.
-        self.ctrlLbl.setText("[{0:s}]".format(str(ti.controllerID)))
-
         # Event counts.
         # Vehicle events.
         self.VehicleEventsLbl.setText("{0:d}".format(ti.numVehicleEvents))
@@ -710,7 +631,7 @@ class UI(QMainWindow):
     # Also highlight if count not zero.
     # *******************************************
     def updateSummaryCount(self, item, count):
-        # Set additional style if count > 0.
+        # Set additional still if count > 0.
         # Else clear.
         if count > 0:
             item.setStyleSheet("font-weight: bold; color: {0:s}".format(config.TripData["SummaryAlertColour"]))
@@ -724,19 +645,46 @@ class UI(QMainWindow):
     # *******************************************
     def plotTripData(self, tripNo):
 
-        # Update speed plots.
-        self.spdFig.updatePlotData(self.selectedTrip)
-        self.spdFig.drawSpeedLimits(self.selectedTrip)
+        # Get speed data for the nominated trip.
+        tList = []
+        sList = []
+        for sl in self.tripLog[tripNo-1].speedLog:
+            # Format time axis list in the correct timezone for display.
+            if config.TimeUTC == 0:
+                tList.append(datetime.fromtimestamp(sl.time))
+            else:
+                tList.append(datetime.utcfromtimestamp(sl.time))
+            sList.append(sl.speed)
+
+        # Plot with updated data.
+        self.spdFig.updatePlotData(self.selectedTrip, tList, sList)
+
+        # Plot speed limit lines on plot.
+        # At this point speed limits from application configuration as not included in log.
+        # Get zone change data for the nominated trip.
+        tList = []
+        zList = []
+        for zl in self.tripLog[tripNo-1].zoneXings:
+            # Format time axis list in the correct timezone for display.
+            if config.TimeUTC == 0:
+                tList.append(datetime.fromtimestamp(zl.time))
+            else:
+                tList.append(datetime.utcfromtimestamp(zl.time))
+            if zl.zoneOutput == 1:
+                # Slow zone.
+                zList.append(config.SpdPlot["DefaultLowLimit"])
+            elif zl.zoneOutput == 2:
+                # Fast zone.
+                zList.append(config.SpdPlot["DefaultHiLimit"])
+            else:
+                # Open zone.
+                zList.append(0)
+
+        self.spdFig.drawSpeedLimits(tList, zList)
 
         # Need to show plot as originally hidden.
         self.plotTbar.show()
         self.spdFig.show()
-
-    # *******************************************
-    # Do plotting of events charts if window shown.
-    # *******************************************
-    def plotEventsData(self, No):
-        self.eventsChart.fig.updatePlotData(No)
 
     # *******************************************
     # Callback function for export report for current trip menu selection.
@@ -823,10 +771,9 @@ class UI(QMainWindow):
         xf.write("              (__) (_)\_)(____)(__)  \n")
         xf.write("                                     \n")
         xf.write("===================================================\n")
-        xf.write("Controller ID  : {0:d}\n".format(ti.controllerID))
-        xf.write("Signon ID      : {0:d}\n".format(ti.signOnId))
-        xf.write("Start time     : {0:s}\n".format(unixTimeString(ti.tripStart, config.TimeUTC)))
-        xf.write("End time       : {0:s}\n".format(unixTimeString(ti.tripEnd, config.TimeUTC)))
+        xf.write("Signon ID  : {0:d}\n".format(ti.signOnId))
+        xf.write("Start time : {0:s}\n".format(unixTime(ti.tripStart, config.TimeUTC)))
+        xf.write("End time   : {0:s}\n".format(unixTime(ti.tripEnd, config.TimeUTC)))
         xf.write("===================================================\n")
         xf.write("===================================================\n")
         xf.write("EVENTS (TOTALS)\n")
@@ -843,14 +790,13 @@ class UI(QMainWindow):
         xf.write("Impact High                  : {0:d}\n".format(ti.numImpact_M))
         xf.write("Impact Low                   : {0:d}\n".format(ti.numImpact_L))
         xf.write("Zone change                  : {0:d}\n".format(ti.numZoneChange))
-        xf.write("Checklist                    : {0:d}\n".format(ti.numChecklist))
         xf.write("===================================================\n")
         xf.write("===================================================\n")
         xf.write("EVENTS (DETAILS)\n")
         xf.write("===================================================\n")
         for ev in ti.events:
             xf.write("{0:s}\n".format(ev.event))
-            xf.write("\tTime              : {0:s}\n".format(unixTimeString(ev.serverTime, config.TimeUTC)))
+            xf.write("\tTime              : {0:s}\n".format(unixTime(ev.serverTime, config.TimeUTC)))
             if (ev.event == "SIGNON"):
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tDriver ID         : {0:s}\n".format(ev.driverId))
@@ -912,7 +858,7 @@ class UI(QMainWindow):
                 xf.write("\tChecklist Version : {0:d}\n".format(ev.failedQ))
                 if ev.chkType == "F":
                     chkType = "Full"
-                elif ev.chkType == "P":
+                elif ev.chkType == "C":
                     chkType = "Operator Change"
                 elif ev.chkType == "B":
                     chkType = "Bypass"
@@ -964,15 +910,6 @@ class UI(QMainWindow):
             self.tripDataTree.expandAll()
 
     # *******************************************
-    # Menu item to show events chart window.
-    # *******************************************
-    def showEventsChartWindow(self):
-        logger.debug("User selected Display Events Chart window menu item.")
-
-        # Create events chart dialog.        
-        self.eventsChart.showEventsChart()
-
-    # *******************************************
     # Get event details for event.
     # *******************************************
     def getEventDetails(self, trip, event):
@@ -987,7 +924,7 @@ class UI(QMainWindow):
             if event.driverId == "*":
                 eventList.append(("Driver ID", "{0:s}".format(event.driverId), True))
             else:
-                eventList.append(("Driver ID", "{0:d} (BYPASS)".format(int(event.driverId)), (int(event.driverId) == -12)))
+                eventList.append(("Driver ID", "{0:d}".format(int(event.driverId)), False))
             eventList.append(("Card ID", "{0:d}".format(event.cardId), False))
             eventList.append(("Result", "{0:s}".format(event.result), False))
             eventList.append(("Bits Read", "{0:d}".format(event.bitsRead), False))
@@ -1053,7 +990,7 @@ class UI(QMainWindow):
             eventList.append(("Checklist Version", "{0:d}".format(event.chkVersion), False))
             if event.chkType == "F":
                 chkType = "Full"
-            elif event.chkType == "P":
+            elif event.chkType == "C":
                 chkType = "Operator Change"
             elif event.chkType == "B":
                 chkType = "Bypass"
@@ -1077,7 +1014,7 @@ class UI(QMainWindow):
             else:
                 eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Report Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
-            eventList.append(("Direction", "{0:d}".format(event.direction), ((event.direction < 0) or (event.direction > 359))))
+            eventList.append(("Direction", "{0:d}".format(event.direction), ((event.direction < 0) or (event.direction > 360))))
         elif event.event == "CRITICALOUTPUTSET":
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
@@ -1141,23 +1078,13 @@ class UI(QMainWindow):
 
     # *******************************************
     # Edit Preferences control selected.
-    # Displays an "Edit Preferences" dialog.
+    # Displays an "About" dialog box.
     # *******************************************
     def editPreferences(self):
         logger.debug("User selected Edit Preferences menu control.")
 
         # Create edit prefernces dialog.        
         PreferencesDialog(config, self)
-
-    # *******************************************
-    # Edit Events Chart Config control selected.
-    # Displays an "Edit Events Chart Config" dialog box.
-    # *******************************************
-    def editEventsChartConfig(self):
-        logger.debug("User selected Edit Events Chart Config menu control.")
-
-        # Create edit events chart config dialog.        
-        EventsChartConfigDialog(config, self)
 
     # *******************************************
     # About control selected.
@@ -1210,31 +1137,6 @@ def showPopup(title, msg, info="", details=""):
         mb.setDetailedText(details)
     # Show message box.
     mb.exec_()
-
-# *******************************************
-# Events Chart dialog class.
-# *******************************************
-class EventsChartDialog(QDialog):
-    def __init__(self, config, data):
-        super(EventsChartDialog, self).__init__()
-        uic.loadUi(res_path("eventsChart.ui"), self)
-
-        # Create figure for events plot.
-        self.fig = EventCanvas(data, config, logger, width=6, height=10, dpi=100)
-        self.plotTbar = NavigationToolbar(self.fig, self)
-        self.eventChartLayout.addWidget(self.plotTbar)
-        self.eventChartLayout.addWidget(self.fig)
-
-    # *******************************************
-    # Displays an events chart dialog box.
-    # *******************************************
-    def showEventsChart(self):
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(res_path("./resources/about.png")))
-        self.setWindowIcon(icon)
-
-        # Show dialog.
-        self.show()
 
 # *******************************************
 # Preferences dialog class.
@@ -1304,20 +1206,6 @@ class PreferencesDialog(QDialog):
         self.titleFontSizeVal.setValidator(QtGui.QIntValidator(6, 12))
         self.titleFontSizeVal.setText(str(self.config.SpdPlot["PlotTitleFontSize"]))
 
-        # Event plot values.
-        self.eventLineColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.EvPlot["EventTraceColour"]))
-        self.eventLineColVal.clicked.connect(lambda: self.getColour(self.eventLineColVal))
-        self.eventFillColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.EvPlot["EventFillColour"]))
-        self.eventFillColVal.clicked.connect(lambda: self.getColour(self.eventFillColVal))
-        self.tripLineColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.EvPlot["TripTraceColour"]))
-        self.tripLineColVal.clicked.connect(lambda: self.getColour(self.tripLineColVal))
-        self.tripFillColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.EvPlot["TripFillColour"]))
-        self.tripFillColVal.clicked.connect(lambda: self.getColour(self.tripFillColVal))
-        self.eventAxisFontSizeVal.setValidator(QtGui.QIntValidator(5, 10))
-        self.eventAxisFontSizeVal.setText(str(self.config.EvPlot["AxesTitleFontSize"]))
-        self.eventTitleFontSizeVal.setValidator(QtGui.QIntValidator(6, 12))
-        self.eventTitleFontSizeVal.setText(str(self.config.EvPlot["PlotTitleFontSize"]))
-
         # Connect to SAVE dialog button for processing.
         self.SaveDialogBtn.clicked.connect(self.savePreferences)
         # Connect to CANCEL dialog button to quit dialog.
@@ -1338,9 +1226,6 @@ class PreferencesDialog(QDialog):
     # Displays a "Preferences" dialog box.
     # *******************************************
     def showPreferences(self):
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(res_path("./resources/about.png")))
-        self.setWindowIcon(icon)
 
         # Show dialog.
         self.exec_()
@@ -1422,8 +1307,9 @@ class PreferencesDialog(QDialog):
             # Set the configuration value.
             self.config.TripData["EventColour"] = col
             logger.debug("Change to event text colour: {0:s}".format(self.config.TripData["EventColour"]))
-            prefChanged = TruezoneLineColVal
-        # Trip alert colour.
+            prefChanged = True
+            rerender = True
+        # Alert text colour.
         col = self.alertColVal.palette().button().color().name()
         if col != self.config.TripData["AlertColour"]:
             # Set the configuration value.
@@ -1534,6 +1420,9 @@ class PreferencesDialog(QDialog):
             logger.debug("Change to bad engine speed limit: {0:d}".format(self.config.TripData["BadRpmLimit"]))
             prefChanged = True
 
+        # Cancel, so close dialog.
+        self.close()
+
         ###########################
         # Speed Plot Data
         ###########################
@@ -1570,64 +1459,15 @@ class PreferencesDialog(QDialog):
         if val != self.config.SpdPlot["AxesTitleFontSize"]:
             # Set the configuration value.
             self.config.SpdPlot["AxesTitleFontSize"] = val
-            logger.debug("Change to speed plot axis text font size: {0:d}".format(self.config.SpdPlot["AxesTitleFontSize"]))
+            logger.debug("Change to plot axis text font size: {0:d}".format(self.config.SpdPlot["AxesTitleFontSize"]))
             prefChanged = True
         # Plot title text font size.
         val = int(self.titleFontSizeVal.text())
         if val != self.config.SpdPlot["PlotTitleFontSize"]:
             # Set the configuration value.
             self.config.SpdPlot["PlotTitleFontSize"] = val
-            logger.debug("Change to speed plot title text font size: {0:d}".format(self.config.SpdPlot["PlotTitleFontSize"]))
+            logger.debug("Change to plot title text font size: {0:d}".format(self.config.SpdPlot["PlotTitleFontSize"]))
             prefChanged = True
-
-        ###########################
-        # Event Plot Data
-        ###########################
-        # Event trace line colour.
-        col = self.eventLineColVal.palette().button().color().name()
-        if col != self.config.EvPlot["EventTraceColour"]:
-            # Set the configuration value.
-            self.config.EvPlot["EventTraceColour"] = col
-            logger.debug("Change to event plot line colour: {0:s}".format(self.config.EvPlot["EventTraceColour"]))
-            prefChanged = True
-        # Event trace fill colour.
-        col = self.eventFillColVal.palette().button().color().name()
-        if col != self.config.EvPlot["EventFillColour"]:
-            # Set the configuration value.
-            self.config.EvPlot["EventFillColour"] = col
-            logger.debug("Change to event plot fill colour: {0:s}".format(self.config.EvPlot["EventFillColour"]))
-            prefChanged = True
-        # Trip trace line colour.
-        col = self.tripLineColVal.palette().button().color().name()
-        if col != self.config.EvPlot["TripTraceColour"]:
-            # Set the configuration value.
-            self.config.EvPlot["TripTraceColour"] = col
-            logger.debug("Change to trip plot line colour: {0:s}".format(self.config.EvPlot["TripTraceColour"]))
-            prefChanged = True
-        # Trip trace fill colour.
-        col = self.tripFillColVal.palette().button().color().name()
-        if col != self.config.EvPlot["TripFillColour"]:
-            # Set the configuration value.
-            self.config.EvPlot["TripFillColour"] = col
-            logger.debug("Change to trip plot fill colour: {0:s}".format(self.config.EvPlot["TripFillColour"]))
-            prefChanged = True
-        # Plot axis text font size.
-        val = int(self.axisFontSizeVal.text())
-        if val != self.config.EvPlot["AxesTitleFontSize"]:
-            # Set the configuration value.
-            self.config.EvPlot["AxesTitleFontSize"] = val
-            logger.debug("Change to event plot axis text font size: {0:d}".format(self.config.EvPlot["AxesTitleFontSize"]))
-            prefChanged = True
-        # Plot title text font size.
-        val = int(self.titleFontSizeVal.text())
-        if val != self.config.EvPlot["PlotTitleFontSize"]:
-            # Set the configuration value.
-            self.config.EvPlot["PlotTitleFontSize"] = val
-            logger.debug("Change to event plot title text font size: {0:d}".format(self.config.EvPlot["PlotTitleFontSize"]))
-            prefChanged = True
-
-        # Cancel, so close dialog.
-        self.close()
 
         # Save the configuration values (if changed).
         if prefChanged:
@@ -1637,171 +1477,6 @@ class PreferencesDialog(QDialog):
         # Rerender display if UI preference changed.
         if rerender:
             self.app.rerenderTripData()
-
-# *******************************************
-# Events Chart Config dialog class.
-# *******************************************
-class EventsChartConfigDialog(QDialog):
-    def __init__(self, config, app):
-        super(EventsChartConfigDialog, self).__init__()
-        uic.loadUi(res_path("eventsConfig.ui"), self)
-
-        self.config = config
-        self.app = app
-
-        # Create list of event chart config items.
-        self.plotCfg = []
-        self.plotCfg.append((self.EventCombo1, self.titleLineEdit1, self.channelLabel1, self.channelSpinBox1))
-        self.plotCfg.append((self.EventCombo2, self.titleLineEdit2, self.channelLabel2, self.channelSpinBox2))
-        self.plotCfg.append((self.EventCombo3, self.titleLineEdit3, self.channelLabel3, self.channelSpinBox3))
-        self.plotCfg.append((self.EventCombo4, self.titleLineEdit4, self.channelLabel4, self.channelSpinBox4))
-        self.plotCfg.append((self.EventCombo5, self.titleLineEdit5, self.channelLabel5, self.channelSpinBox5))
-        self.plotCfg.append((self.EventCombo6, self.titleLineEdit6, self.channelLabel6, self.channelSpinBox6))
-        self.plotCfg.append((self.EventCombo7, self.titleLineEdit7, self.channelLabel7, self.channelSpinBox7))
-        self.plotCfg.append((self.EventCombo8, self.titleLineEdit8, self.channelLabel8, self.channelSpinBox8))
-
-        # Connect to combo box to apply visibility according to event type.
-        self.plotCfg[0][0].currentIndexChanged.connect((lambda: self.eventSelected(0)))
-        self.plotCfg[1][0].currentIndexChanged.connect((lambda: self.eventSelected(1)))
-        self.plotCfg[2][0].currentIndexChanged.connect((lambda: self.eventSelected(2)))
-        self.plotCfg[3][0].currentIndexChanged.connect((lambda: self.eventSelected(3)))
-        self.plotCfg[4][0].currentIndexChanged.connect((lambda: self.eventSelected(4)))
-        self.plotCfg[5][0].currentIndexChanged.connect((lambda: self.eventSelected(5)))
-        self.plotCfg[6][0].currentIndexChanged.connect((lambda: self.eventSelected(6)))
-        self.plotCfg[7][0].currentIndexChanged.connect((lambda: self.eventSelected(7)))
-
-        # Connect to combo box to apply visibility according to event type.
-        self.plotCfg[0][3].valueChanged.connect((lambda: self.channelSelected(0)))
-        self.plotCfg[1][3].valueChanged.connect((lambda: self.channelSelected(1)))
-        self.plotCfg[2][3].valueChanged.connect((lambda: self.channelSelected(2)))
-        self.plotCfg[3][3].valueChanged.connect((lambda: self.channelSelected(3)))
-        self.plotCfg[4][3].valueChanged.connect((lambda: self.channelSelected(4)))
-        self.plotCfg[5][3].valueChanged.connect((lambda: self.channelSelected(5)))
-        self.plotCfg[6][3].valueChanged.connect((lambda: self.channelSelected(6)))
-        self.plotCfg[7][3].valueChanged.connect((lambda: self.channelSelected(7)))
-
-        # Configure combo boxes.
-        for p in self.plotCfg:
-            # Add list of events to selection dropdown.
-            p[0].addItems(self.config.events)
-
-        # Preconfigure to current selections.
-        for idx, t in enumerate(self.config.EventTraces):
-            try:
-                # Look for trace event in list of events.
-                selection = self.config.events.index(t["Event"])
-            except:
-                # If no match then use first 'event' which is a blank.
-                selection = 0
-            self.plotCfg[idx][0].setCurrentIndex(selection)
-            logger.debug("Event selected item: {0:d}".format(selection))
-            if (self.plotCfg[idx][0].currentText() != "INPUT"):
-                self.plotCfg[idx][1].setEnabled(True)
-                self.plotCfg[idx][2].setEnabled(False)
-                self.plotCfg[idx][3].setEnabled(False)
-                if self.config.EventTraces[idx]["Title"] != "":
-                    self.plotCfg[idx][1].setText(self.config.EventTraces[idx]["Title"])
-                else:
-                    self.plotCfg[idx][1].setText(self.config.EventTraces[idx]["Event"])
-            else:
-                self.plotCfg[idx][1].setEnabled(False)
-                self.plotCfg[idx][2].setEnabled(True)
-                self.plotCfg[idx][3].setEnabled(True)
-                self.plotCfg[idx][3].setValue(self.config.EventTraces[idx]["Channel"])
-                self.plotCfg[idx][1].setText("Input {0:d}".format(self.config.EventTraces[idx]["Channel"]))
-
-        # Connect to SAVE dialog button for processing.
-        self.SaveDialogBtn.clicked.connect(self.saveEventsChartConfig)
-
-        # Connect to CANCEL dialog button to quit dialog.
-        self.CancelDialogBtn.clicked.connect(self.close)
-
-        # Show the edit events chart config dialog.
-        self.showEventsChartConfig()
-
-    # *******************************************
-    # Displays an "Events Chart Config" dialog box.
-    # *******************************************
-    def showEventsChartConfig(self):
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(res_path("./resources/about.png")))
-        self.setWindowIcon(icon)
-
-        # Show dialog.
-        self.exec_()
-
-    # *******************************************
-    # Event selection combo box selection changed.
-    # *******************************************
-    def eventSelected(self, idx):
-        logger.debug("User changed events trace event : {0:d}".format(idx))
-
-        # Default the title to the name of the event.
-        self.plotCfg[idx][1].setText(self.plotCfg[idx][0].currentText())
-
-        # Set visibility and readonly status of selections according to event type.
-        if (self.plotCfg[idx][0].currentText() != "INPUT"):
-            self.plotCfg[idx][1].setEnabled(True)
-            self.plotCfg[idx][2].setEnabled(False)
-            self.plotCfg[idx][3].setEnabled(False)
-
-            # Default the title to the name of the event.
-            self.plotCfg[idx][1].setText(self.plotCfg[idx][0].currentText())
-        else:
-            self.plotCfg[idx][1].setEnabled(False)
-            self.plotCfg[idx][2].setEnabled(True)
-            self.plotCfg[idx][3].setEnabled(True)
-
-            # Default the title to input channel number 1 (default).
-            self.plotCfg[idx][3].setValue(1)
-            self.plotCfg[idx][1].setText("Input 1")
-
-    # *******************************************
-    # Input selection dial changed.
-    # *******************************************
-    def channelSelected(self, idx):
-        logger.debug("User changed input event channel : {0:d}".format(idx))
-
-        # Set the chart title to match the new channel number.
-        self.plotCfg[idx][1].setText("Input {0:d}".format(self.plotCfg[idx][3].value()))
-
-    # *******************************************
-    # User selected to save events chart config.
-    # *******************************************
-    def saveEventsChartConfig(self):
-        logger.debug("User saving events chart config.")
-
-        # Flag indicating events chart config has changed.
-        prefChanged = False
-
-        # Flag indicating if need to re-render events chart for config to take effect.
-        rerender = False
-
-        # Overwrite configuration values with new values.
-        self.config.EventTraces = []
-
-        # Go through plot config and save changes.
-        for p in self.plotCfg:
-            p_ev = p[0].currentText()
-            if (p_ev != ""):
-                p_t = p[1].text()
-                if p_ev == "INPUT":
-                    p_ch = p[3].value()
-                    trace = {"Event" : p_ev, "Channel" : p_ch}
-                else:
-                    trace = {"Event" : p_ev, "Title" : p_t}
-                # Add trace to trace list.
-                self.config.EventTraces.append(trace)
-                # Have one trace so set 'change' flag.
-                prefChanged = True
-
-        # Cancel, so close dialog.
-        self.close()
-
-        # Save the configuration values (if changed).
-        if prefChanged:
-            logger.debug("Changes saved to events chart configuration.")
-            self.config.saveConfig()
 
 # *******************************************
 # About dialog class.
@@ -1854,25 +1529,6 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
-        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.5</b></h2>")
-        self.changeLogText.textCursor().insertHtml("<ul>"\
-            "<li>Added modal events chart dialog selectable from the main menu. \
-                Shows timeline of events, including INPUT events where specific channel can be specified.</li>" \
-            "<li>Updated preferences dialog with configuration values for events plot.</li>" \
-            "<li>Updated trip export with checklist total.</li>" \
-            "<li>Reset speed plot (and events plot) if new log file contains no trips.</li>" \
-            "<li>Added additional checks and alert messages for Time1H DEBUG event errors.</li>" \
-            "<li>Added check to see if time in traction and idle adds up to trip time. Highlighted on TRIP event.</li>" \
-            "<li>Added check and alert for bypass detection; alerts in SIGON events for Driver ID = -12.</li>" \
-            "<li>Added check for invalid direction in REPORT events, i.e. 0 > x > 359.</li>" \
-            "<li>Added channel number in comment field for INPUT events to make easier to find when collapsed.</li>" \
-            "<li>Fixed checklist type for operator change from C to P.</li>" \
-            "<li>Added controller ID for the trip to the status bar (next to time epoch).</li>" \
-            "<li>Refactored speed chart plotting to align with implementation for events chart.</li>" \
-            "<li>Looked at updating plots after pan/zoom. Still require to change currently selected trip to reset plot.</li>" \
-            "<li>Speed plots show time according to the current timezone. Plots regenerate if visible when time zone preference changed.</li>" \
-            "<li>Fixed bug in preferences dialog code not setting trip event alert colour correctly.</li>" \
-            "<li>Refactored speed plot class and method names.</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.4</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Fixed zone change line in speed plot which was inadvertantly broken in previous release.</li>" \
