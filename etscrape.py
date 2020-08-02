@@ -43,13 +43,6 @@ from eventsChart import *
 # *******************************************
 # TODO List
 #
-# Make all event plots zoom and pan to the same scale if possible.
-# Look at adding y grid lines for events plot; might be useful for IMPACT plots.
-# Look at making minimum height of events chart smaller, i.e. 2 plots of reasonable size, else with only 2 plots looks a little strange.
-# See if changing events config 'events to trace' can work without an application restart.
-#
-# Update change log. *** In progress ***
-# Update help file. *** In progress ***
 # *******************************************
 
 # Program version.
@@ -1784,14 +1777,8 @@ class EventsChartConfigDialog(QDialog):
     def saveEventsChartConfig(self):
         logger.debug("User saving events chart config.")
 
-        # Flag indicating events chart config has changed.
-        prefChanged = False
-
-        # Flag indicating if need to re-render events chart for config to take effect.
-        rerender = False
-
-        # Overwrite configuration values with new values.
-        self.config.EventTraces = []
+        # New configuration.
+        newConfig = []
 
         # Go through plot config and save changes.
         for p in self.plotCfg:
@@ -1804,17 +1791,20 @@ class EventsChartConfigDialog(QDialog):
                 else:
                     trace = {"Event" : p_ev, "Title" : p_t}
                 # Add trace to trace list.
-                self.config.EventTraces.append(trace)
-                # Have one trace so set 'change' flag.
-                prefChanged = True
+                newConfig.append(trace)
 
-        # Cancel, so close dialog.
+        # Close dialog.
         self.close()
 
         # Save the configuration values (if changed).
-        if prefChanged:
-            logger.debug("Changes saved to events chart configuration.")
-            self.config.saveConfig()
+        logger.debug("Saving changes to events chart configuration...")
+        self.config.EventTraces = newConfig.copy()
+        self.config.saveConfig()
+
+        # Need to get events plot to starting state.
+        self.app.eventsChart.fig.resetFigure()
+        self.app.eventsChart.fig.createAxes()
+        self.app.eventsChart.fig.updatePlotData(self.app.selectedTrip)
 
 # *******************************************
 # About dialog class.

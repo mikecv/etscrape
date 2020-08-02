@@ -9,11 +9,11 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="ETscrapeHelp.html">Home</a>
+  <a href="mainWindow.html">Application Window</a>
   <a href="loadLogFile.html">Loading Log Files</a>
   <a href="tripDataOrganisation.html">Trip Data Organisation</a>
   <a href="tripDataAlerts.html">Trip Data Alert Formatting</a>
   <a href="tripSummary.html">Trip Summary</a>
-  <a href="speedPlot.html">Speed Plot</a>
   <a href="eventsChart.html">Event Traces Chart</a>
   <a href="tripLogExport.html">Trip Log Export</a>
   <a href="appConfiguration.html">Application Configuration</a>
@@ -22,7 +22,7 @@
 
 <a name="top"></a>
 
-<h1>Application Window</h1>
+<h1>Speed Plot</h1>
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 
 <script>
@@ -35,16 +35,20 @@ function closeNav() {
 }
 </script>
 
-<p>The application consists of one main window divided into three panes. The left pane is the Trip Data pane and shows the parsed contents of all trips in the EarthTrack log file,
-the right pane is the Trip Summary pane and shows summary information for the currently selected trip, and the bottom pane shows a speed plot for the currently selected trip.</p>
+<p>The Speed Plot pane shows the plot of vehicle speed for the currently selected trip, and similarly, a zone change plot.</p>
+<p>The data for the vehicle speed plot comes from log event header information for events during the trip.
+Note that the vehicle speed is displayed in the speed plot even if the events are configured not to be shown in the Trip Data pane.</p>
+<p>It is important to note that while the vehicle speed plot shows a line, only the plot markers come from log data.</p>
 
-<img src="./appOpen.png" alt="Application start">
+<img src="./speedPlot.png" alt="Vehicle speed plot">
 
-<p>There is a blue status bar at the bottom of the application window that displays temporary messages, as well as showing the current epoch
-trip times are displayed in, and the controller ID of the current trip (empty when no trip displayed).</p>
-  
+<p>The plots in the Speed Plot pane use the Python <a href="https://matplotlib.org/">https://matplotlib.org/</a> library.
+The standard matplotlib toolbar is displayed at the top of the Speed Plot pane, and can be used to perform standard functions,
+such as panning or zooming the plot, or to save an image of the plot.</p>
+<p>The colours and fonts used in the plot can be set in the application configuration.</p>
+
 <br>
 <a href="#top">Back to top</a>
-    
+
 </body>
 </html>

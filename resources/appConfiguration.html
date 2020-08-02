@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="etscrape.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="ETscrapeHelp.html">Home</a>
+  <a href="mainWindow.html">Application Window</a>
+  <a href="loadLogFile.html">Loading Log Files</a>
+  <a href="tripDataOrganisation.html">Trip Data Organisation</a>
+  <a href="tripDataAlerts.html">Trip Data Alert Formatting</a>
+  <a href="tripSummary.html">Trip Summary</a>
+  <a href="speedPlot.html">Speed Plot</a>
+  <a href="eventsChart.html">Event Traces Chart</a>
+  <a href="tripLogExport.html">Trip Log Export</a>
+  <a href="appLogging.html">Application Logging</a>
+</div>
+
+<a name="top"></a>
+
+<h1>Application Configuration</h1>
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+
+<p>The application has a number of configurable parameters; these are held in Json format in a file called etscrape.json.
+The configuration parameters include parameters for logging and colours for formatting Trip Data, and the Speed Plot and Events Chart displays.
+Configuration is also included for the naming of INPUT event channels as displayed in the Trip Data pane.</p>
+<p>If the configuration file is not found a default file will be created.
+Similarly, if the version of the configuration file is less than the required version the file will be overwritten with default values when the application is started.</p>
+
+<img src="./appJsonConfig.png" alt="Application configuration data">
+
+<p>Configuration values can be changed directly in the Json configuration file, although care should be taken if doing so.</p>
+<p>User Interface preferences can be changed from within the application by selecting the &#34;Edit &#47; Preferences&#34; menu item.</p>
+
+<img src="./appPreferencesMenu.png" alt="Edit Preferences menu">
+
+<p>Selecting the &#34;Edit &#47; Preferences&#34; menu item will launch a dialog where all UI parameters can be changed and saved.</p>
+
+<img src="./editPreferences.png" alt="Editing user preferences">
+
+<p>Editing numeric fields will limit entry to an allowable range.
+To change a configuration item colour, select the adjacent shaded button which will present a colour selection dialog
+from which a colour can be selected.</p>
+<p>Selecting &#34;Save&#34; on the Edit Preferences dialog will save all preferences to the application configuration file.
+For changes affecting the UI the application will rerender loaded trip data so that the changes can take effect.</p>
+  
+<br>
+<a href="#top">Back to top</a>
+  
+</body>
+</html>

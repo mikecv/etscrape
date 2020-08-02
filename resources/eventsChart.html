@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="etscrape.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="ETscrapeHelp.html">Home</a>
+  <a href="mainWindow.html">Application Window</a>
+  <a href="loadLogFile.html">Loading Log Files</a>
+  <a href="tripDataOrganisation.html">Trip Data Organisation</a>
+  <a href="tripDataAlerts.html">Trip Data Alert Formatting</a>
+  <a href="tripSummary.html">Trip Summary</a>
+  <a href="speedPlot.html">Speed Plot</a>
+  <a href="tripLogExport.html">Trip Log Export</a>
+  <a href="appConfiguration.html">Application Configuration</a>
+  <a href="appLogging.html">Application Logging</a>
+</div>
+
+<a name="top"></a>
+
+<h1>Event Traces Chart</h1>
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+
+<p>The event traces chart is a non-modal dialog that can be lanuched as an alternate view of trip data in the Trip Data pane.</p>
+<p>The event traces chart dialog can be lanuched by selecting the &#34;Windows &#47; Show events chart&#34; menu item.
+Note that the menu item is not available until a log file has been loaded.</p>
+
+<img src="./eventChartMenu.png" alt="Events chart menu">
+
+<p>The event traces chart displays the currently configured event traces for the currently selected trip.
+The chart always includes a trip trace which bounds the extents of the chart to between the SIGNON and TRIP event trimes.
+The title of the chart includes the controller ID and the trip number and ID.</p>
+
+<img src="./eventChartExample.png" alt="Events chart example">
+
+<p>The event traces chart can be opened and closed as required and will always reflect data for the currently selected trip.
+Note that if a log file is loaded that does not include any trips the chart will still be displayed but will not include any data.</p>
+  
+<p>As with the speed plot on the main application window, the event traces chart use the Python <a href="https://matplotlib.org/">https://matplotlib.org/</a> library.
+The standard matplotlib toolbar is displayed at the top of the chart, and can be used to perform standard functions,
+such as panning or zooming individual event traces, or to save an image of the whole chart.</p>
+<p>The colours and fonts used in the chart can be set in the application configuration.</p>
+
+<h2>Chart Configuration</h2>
+
+<p>The event traces to be included in the chart are held in application configuration,
+and can be configured from within the application by selecting the &#34;Edit &#47; Event Chart Config&#34; menu item.</p>
+
+<img src="./eventConfigMenu.png" alt="Edit event chart configuration menu">
+
+<p>Selecting the &#34;Edit &#47; Event chart config&#34; menu item will launch a dialog where the events included in the event traces chart can be changed and saved.</p>
+
+<img src="./eventChartConfig.png" alt="Editing event chart configuration">
+
+<p>The Events Charts Configuration dialog allows up to 8 event traces to be plotted at once.
+Note that the trip trace is an additional trace that is always included.</p>
+
+<p>For each of the 8 chart events the user can select an event from the available events in a drop-down list.
+The first entry in the drop-down list is blank and can be used to clear that event trace.
+Note that blank event traces are ignores and will not be plotted on the Events chart.</p>
+
+<p>The &#34;Title&#34; field is shown on the Events as a y axis label.
+By default the Title field is the same as the event name, but can be edited by the user (with one exception).</p>
+
+<p>If the &#34;INPUT&#34; event is chosen the Title field is fixed and reflects the input number selected.
+The user can select the input number by using the &#34;Channel&#34; spin control.</p>
+
+<h2>Event Trace Features</h2>
+
+<p>All event traces use the same time axis values, i.e. they reflect the period of the trip (plus a bit either end).
+Note that the cursor location in event trace chart coordinates is reflected in the numbers in the top right corner of the chart.</p>
+
+<p>In general event traces reflect when an event was active. For events that by defintion have a zero duration the event will appear as a vertical line.
+For events that include a duration the time the event was active will be shown, noting that the start time is worked out from the event time (end)
+and the duration of the event.</p>
+
+<p>There are a couple of exceptions to how events are traced, namely INPUT and IMPACT events as illustrated below.</p>
+
+<img src="./specialEventTraces.png" alt="Special event traces">
+
+<p>For INPUT events if there is a zero duration transition a round marker is added to the trace vertical line
+(which will be coincident with the next or previous transition if there is one).
+Note that the marker is added to the top or bottom of the trace depending on whether the transition was to the active or inactive state.</p>
+
+<p>For IMPACT events the trace is always a vertical line with a round marker at the top at the time of the impact.
+To give some extra information the <i>severity</i> of the impact is reflected in the height of the trace line,
+i.e. in 3 levels that relate to minor, warning, and critical impact severities.</p>
+
+<h2>Event Trace Pan and Zoom</h2>
+
+<p>At present only one event trace can be panned or zoomed at a time, that is, other event traces remain as they were as illustrated below.
+At this time this is a Matplotlip limitation when using time based x axis charts; and may be resolved or worked around in the future.</p>
+
+<img src="./zoomedTrace.png" alt="Zoomed event trace">
+
+<p>In the illustration above note that in the chart toolbar that the &#34;Zoom&#34; control is active.
+Note also that the &#34;Back Arrow&#34; is highlighted indicating that there are one or more previous views to return to.</p>
+
+<br>
+<a href="#top">Back to top</a>
+    
+</body>
+</html>

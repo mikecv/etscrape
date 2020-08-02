@@ -8,6 +8,7 @@
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="ETscrapeHelp.html">Home</a>
   <a href="mainWindow.html">Application Window</a>
   <a href="loadLogFile.html">Loading Log Files</a>
   <a href="tripDataOrganisation.html">Trip Data Organisation</a>
@@ -15,14 +16,13 @@
   <a href="tripSummary.html">Trip Summary</a>
   <a href="speedPlot.html">Speed Plot</a>
   <a href="eventsChart.html">Event Traces Chart</a>
-  <a href="tripLogExport.html">Trip Log Export</a>
   <a href="appConfiguration.html">Application Configuration</a>
   <a href="appLogging.html">Application Logging</a>
 </div>
 
 <a name="top"></a>
 
-<h1>EarthTrack Log Scraper Help</h1>
+<h1>Trip Log Export</h1>
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 
 <script>
@@ -35,14 +35,22 @@ function closeNav() {
 }
 </script>
 
-<p>The EarthTrack Log Scraper is relatively simple in that it just reads the contents of a debug log file downloaded from an EarthTrack Fleet Controller module
-or message log file downloaded from the EarthTrack server, and displays a sanitised version of trips included in the log file.</p>
+<p>The application allows exporting of trip events for the currently selected trip or all trips in the log file.
+The export options are available from the application menu if a log file is loaded.
+Once selected, a file selection dialog is presented allowing the user to select the file to export to.</p>
 
-<p>The primary purpose of the application is as a diagnostic tool for test personnel; so that they can avoid having to look through the log file
-which is not as easy to read.</p>
+<img src="./exportMenu.png" alt="Export menu">
 
-<p>Use the side menu to browse to specific help topics.</p>
+<p>Exporting is in plain text and mostly reflects the data presented on the Trip Data and Trip Summary panes;
+trip speed data is not exported other than as part of event information.</p>
+<p>If exporting data for all trips is selected, all trips are exported to a single file.</p>
+<p>For each trip the export consists of a header that includes the trip time, contoller ID, and sign-on ID,
+followed by a summary table of events in the trip, and then followed by each of the events in the trip.
+Note that all events are included in the export regardless of whether or not they are currently shown in the Trip Data pane.</p>
 
+<img src="./exportFile.png" alt="Export file structure">
+  
+<br>
 <br>
 <a href="#top">Back to top</a>
   

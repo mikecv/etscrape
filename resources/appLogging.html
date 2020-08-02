@@ -9,6 +9,7 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="ETscrapeHelp.html">Home</a>
+  <a href="mainWindow.html">Application Window</a>
   <a href="loadLogFile.html">Loading Log Files</a>
   <a href="tripDataOrganisation.html">Trip Data Organisation</a>
   <a href="tripDataAlerts.html">Trip Data Alert Formatting</a>
@@ -17,12 +18,11 @@
   <a href="eventsChart.html">Event Traces Chart</a>
   <a href="tripLogExport.html">Trip Log Export</a>
   <a href="appConfiguration.html">Application Configuration</a>
-  <a href="appLogging.html">Application Logging</a>
 </div>
 
 <a name="top"></a>
 
-<h1>Application Window</h1>
+<h1>Application Logging</h1>
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 
 <script>
@@ -35,16 +35,16 @@ function closeNav() {
 }
 </script>
 
-<p>The application consists of one main window divided into three panes. The left pane is the Trip Data pane and shows the parsed contents of all trips in the EarthTrack log file,
-the right pane is the Trip Summary pane and shows summary information for the currently selected trip, and the bottom pane shows a speed plot for the currently selected trip.</p>
+<p>The application uses the standard Python logging library. Configuration parameters are used to control the number of log files used
+and the maximum size of each log file. The main log file is called etscrape.log, and older log files are suffixed with .1, .2, .3 etc.</p>
+<p>The debug level applies as per the Python standard,
+refer to <a href="https://docs.python.org/3/library/logging.html">https://docs.python.org/3/library/logging.html</a></p>
 
-<img src="./appOpen.png" alt="Application start">
-
-<p>There is a blue status bar at the bottom of the application window that displays temporary messages, as well as showing the current epoch
-trip times are displayed in, and the controller ID of the current trip (empty when no trip displayed).</p>
+<img src="./appLogFormat.png" alt="Log file format">
   
 <br>
+<br>
 <a href="#top">Back to top</a>
-    
+  
 </body>
 </html>

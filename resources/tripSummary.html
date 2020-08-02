@@ -9,10 +9,10 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="ETscrapeHelp.html">Home</a>
+  <a href="mainWindow.html">Application Window</a>
   <a href="loadLogFile.html">Loading Log Files</a>
   <a href="tripDataOrganisation.html">Trip Data Organisation</a>
   <a href="tripDataAlerts.html">Trip Data Alert Formatting</a>
-  <a href="tripSummary.html">Trip Summary</a>
   <a href="speedPlot.html">Speed Plot</a>
   <a href="eventsChart.html">Event Traces Chart</a>
   <a href="tripLogExport.html">Trip Log Export</a>
@@ -22,7 +22,7 @@
 
 <a name="top"></a>
 
-<h1>Application Window</h1>
+<h1>Trip Summary Pane</h1>
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 
 <script>
@@ -35,16 +35,18 @@ function closeNav() {
 }
 </script>
 
-<p>The application consists of one main window divided into three panes. The left pane is the Trip Data pane and shows the parsed contents of all trips in the EarthTrack log file,
-the right pane is the Trip Summary pane and shows summary information for the currently selected trip, and the bottom pane shows a speed plot for the currently selected trip.</p>
+<p>The Trip Summary pane shows summary information for the currently selected trip, noting that any item in the trip can be the currently selected item.</p>
+<p>Apart from the trip start and end times, and trip duration, the summary information includes the total of different event types for that trip.
+Non-zero totals are highlighted to make them more obvious. Refer to the previous image of Trip Data for a selected trip.</p>
 
-<img src="./appOpen.png" alt="Application start">
+<img src="./summaryData.png" alt="Summary data">
 
-<p>There is a blue status bar at the bottom of the application window that displays temporary messages, as well as showing the current epoch
-trip times are displayed in, and the controller ID of the current trip (empty when no trip displayed).</p>
-  
+<p>The Trip Summary pane includes totals for most but not all event types.
+The category totals may include totals of other supported event types, e.g. in the example above the XSIDLE and XSIDLESTART events do
+contribute to the &#34;Vehicle Events&#34; total even though they are not included in the list of events in the trip summary.</p>
+
 <br>
 <a href="#top">Back to top</a>
-    
+
 </body>
 </html>

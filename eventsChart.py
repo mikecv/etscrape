@@ -20,10 +20,6 @@ class EventCanvas(FigureCanvasQTAgg):
 
         self.logger.debug("EventCanvas class constructor.")
 
-        # Check to see how many event charts are configured.
-        self.numEvCharts = len(self.cfg.EventTraces)
-        self.logger.debug("Number of events chart traces: {0:d}".format(self.numEvCharts))
-
         # Create Matplotlib figure.
         self.fig = Figure(figsize=(width, height), dpi=dpi)
 
@@ -39,6 +35,10 @@ class EventCanvas(FigureCanvasQTAgg):
     # Create the axes for the chart.
     # *******************************************
     def createAxes(self):
+        # Check to see how many event charts are configured.
+        self.numEvCharts = len(self.cfg.EventTraces)
+        self.logger.debug("Number of events chart traces: {0:d}".format(self.numEvCharts))
+
         # One line trace in each subplot for each event.
         self.traces = []
 
@@ -91,6 +91,9 @@ class EventCanvas(FigureCanvasQTAgg):
         for t in self.traces:
             t[1].clear()
         self.createAxes()
+
+        # Draw plot.
+        self.draw()
 
     # *******************************************
     # Reset the figure.
@@ -276,9 +279,9 @@ class EventCanvas(FigureCanvasQTAgg):
                         if ev.severity == 'C':
                             tLevel = 1.0
                         elif ev.severity == 'W':
-                            tLevel = 0.5
+                            tLevel = 0.6
                         else:
-                            tLevel = 0.25
+                            tLevel = 0.2
                         eList.append(tLevel)
                         markerIdx += 1
                         nullMarkers.append(markerIdx - 1)
@@ -333,6 +336,12 @@ class EventCanvas(FigureCanvasQTAgg):
 
             # Fill in the event bars.
             self.traces[self.numEvCharts - idx][1].fill_between(self.traces[self.numEvCharts - idx][0].get_xdata(), self.traces[self.numEvCharts - idx][0].get_ydata(), 0, color=self.cfg.EvPlot["EventFillColour"], alpha=0.35)
+
+            # Do special axis treatments for particular events.
+            if t["Event"] == "IMPACT":
+                self.traces[self.numEvCharts - idx][1].set_yticks([0.2, 0.6, 1.0])
+                self.traces[self.numEvCharts - idx][1].set_yticklabels(["Lo", "Med", "Hi"], color='cornflowerblue')
+                self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
 
             # Rescale axes.
             self.traces[self.numEvCharts - idx][1].relim()
