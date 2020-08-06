@@ -12,6 +12,7 @@ from datetime import timedelta, datetime
 import os
 import sys
 import webbrowser
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
 from config import *
 from utils import *
@@ -38,10 +39,16 @@ from eventsChart import *
 #                       Refactored speed chart to match events charts.
 #                       Updated preferences dialog with event chart preferences.
 #                       Added dialog to configure event plots to plot.
+# 0.6   MDC 04/08/2020  ...
 # *******************************************
 
 # *******************************************
 # TODO List
+#
+# See if anything can be done with imports to make pyinstaller build executable.
+# Change display of UNBUCKLED events in events chart as duration is not the same as elapsed time from start to end.
+# Look at event display of unended trips; suggest start from SIGNON to last event plus / minus fixed small amount.
+# Add favourites file, e.g. to store event chart configurations.
 #
 # *******************************************
 

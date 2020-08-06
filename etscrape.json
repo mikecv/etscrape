@@ -85,11 +85,35 @@
     "EventTraces": [
         {
             "Event": "IMPACT",
-            "Title": "Vehicle Impact"
+            "Title": "IMPACT"
+        },
+        {
+            "Event": "ENGINEOVERSPEED",
+            "Title": "Engine Overspeed"
+        },
+        {
+            "Event": "LOWCOOLANT",
+            "Title": "Low Engine Coolant Level"
+        },
+        {
+            "Event": "OILPRESSURE",
+            "Title": "Low Engine Oil Pressure"
+        },
+        {
+            "Event": "ZONEOVERSPEED",
+            "Title": "Zone Overspeed"
+        },
+        {
+            "Event": "INPUT",
+            "Channel": 1
         },
         {
             "Event": "INPUT",
             "Channel": 4
+        },
+        {
+            "Event": "INPUT",
+            "Channel": 8
         }
     ]
 }

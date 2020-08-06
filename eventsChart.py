@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 
-import matplotlib
-import matplotlib.pyplot as plt
-matplotlib.use('Qt5Agg')
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
-import matplotlib.dates as mdates
+from matplotlib.axes import Axes, Subplot
+
 from utils import *
 
 # *******************************************
