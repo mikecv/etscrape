@@ -49,11 +49,14 @@ from eventsChart import *
 # Change display of UNBUCKLED events in events chart as duration is not the same as elapsed time from start to end.
 # Look at event display of unended trips; suggest start from SIGNON to last event plus / minus fixed small amount.
 # Add favourites file, e.g. to store event chart configurations.
+# Add vehcile speed to the events chart as well.
 #
+# Update change log.
+# Update help.
 # *******************************************
 
 # Program version.
-progVersion = "0.5"
+progVersion = "0.6"
 
 # Create configuration values class object.
 config = Config()
