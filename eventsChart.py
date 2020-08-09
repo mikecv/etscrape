@@ -3,6 +3,7 @@
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 from matplotlib.axes import Axes, Subplot
+import math
 
 from utils import *
 
@@ -149,9 +150,9 @@ class EventCanvas(FigureCanvasQTAgg):
         if plotEntre > 60:
             plotEntre = 60
 
-        # Plot start and end time.clearFigure
-        plotStartTime = timeTZ((self.data.tripLog[No-1].tripStart - plotEntre), self.cfg.TimeUTC)
-        plotEndTime = timeTZ((self.data.tripLog[No-1].events[endEvent].serverTime + plotEntre), self.cfg.TimeUTC)
+        # Plot start and end time.
+        self.plotStartTime = timeTZ((self.data.tripLog[No-1].tripStart - plotEntre), self.cfg.TimeUTC)
+        self.plotEndTime = timeTZ((self.data.tripLog[No-1].events[endEvent].serverTime + plotEntre), self.cfg.TimeUTC)
 
         # Create data for trip trace.
         tList = []
@@ -166,7 +167,7 @@ class EventCanvas(FigureCanvasQTAgg):
             tList.append(tripEndTime)
             eList.append(0)
         else:
-            tList.append(plotEndTime)
+            tList.append(self.plotEndTime)
             eList.append(1)
 
         # Clear old plot data.
@@ -181,7 +182,7 @@ class EventCanvas(FigureCanvasQTAgg):
         self.traces[0][1].fill_between(self.traces[0][0].get_xdata(), self.traces[0][0].get_ydata(), 0, color=self.cfg.EvPlot["TripFillColour"], alpha=0.35)
 
         # Set axis for trace to trip extents.
-        self.traces[0][1].set_xlim([plotStartTime, plotEndTime])
+        self.traces[0][1].set_xlim([self.plotStartTime, self.plotEndTime])
 
         # Rescale axes.
         self.traces[0][1].relim()
@@ -206,116 +207,159 @@ class EventCanvas(FigureCanvasQTAgg):
             # Previous INPUT event time.
             preInputTime = 0
 
-            # See if any matching events for the trip.
-            for ev in self.data.tripLog[No-1].events[0:endEvent]:
-                if t["Event"] == ev.event:
-                    # Check if INPUT event as treated differently.
-                    if ev.isInput:
-                        # Event is an INPUT.
-                        if int(t["Channel"]) == ev.inputNo:
-                            inputEv = True
-                            # Found a matching event for this event INPUT channel.
+            # Don't need to check for 'special' "Vehicle" event as not a real event.
+            if t["Event"] != "Vehicle Speed":
+                # See if any matching events for the trip.
+                for ev in self.data.tripLog[No-1].events[0:endEvent]:
+                    if t["Event"] == ev.event:
+                        # Check if INPUT event as treated differently.
+                        if ev.isInput:
+                            # Event is an INPUT.
+                            if int(t["Channel"]) == ev.inputNo:
+                                inputEv = True
+                                # Found a matching event for this event INPUT channel.
+                                # Check if we need to start the trace.
+                                if traceStarted == False:
+                                    # Start trace with start of trip.
+                                    tList.append(tripStartTime)
+                                    if ev.inputState == 1:
+                                        eList.append(0)
+                                        markerIdx += 1
+                                        finalState = 0
+                                    else:
+                                        eList.append(1)
+                                        markerIdx += 1
+                                        finalState = 1
+                                    traceStarted = True
+                                # Add start of event to trace. Need to check what state input has changed to.
+                                if ev.inputState == 1:
+                                    tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                                    eList.append(finalState)
+                                    markerIdx += 1
+                                    tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                                    eList.append(1)
+                                    markerIdx += 1
+                                    finalState = 1
+                                else:
+                                    tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                                    eList.append(finalState)
+                                    markerIdx += 1
+                                    tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                                    eList.append(0)
+                                    markerIdx += 1
+                                    finalState = 0
+
+                                # Check if we need to add a marker for a zero duration event.
+                                # Note that active time is always 0 for transitions to the inactive state.
+                                # So mark INPUT events to transition to inactive state if active time is 0,
+                                # or if active state and previous transition time was the same.
+                                if ev.inputState == 0:
+                                    if ev.activeTime == 0:
+                                        nullMarkers.append(markerIdx - 1)
+                                else:
+                                    if ev.serverTime == preInputTime:
+                                        nullMarkers.append(markerIdx - 2)
+                                # Save INPUT event time to compare with next INPUT event.
+                                preInputTime = ev.serverTime
+                        # Event is an IMPACT event.
+                        # Show intensity on trace.
+                        elif ev.event == "IMPACT":
+                            if traceStarted == False:
+                                # Start trace with start of trip.
+                                tList.append(tripStartTime)
+                                eList.append(0)
+                                markerIdx += 1
+                                traceStarted = True
+                            # Found a matching event for this trace.
+                            # Add start of event to trace. Event is at the end of events for events with a duration.
+                            tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
+                            eList.append(0)
+                            markerIdx += 1
+                            tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
+                            # Set the height of the trace according to the severity (3 levels)
+                            if ev.severity == 'C':
+                                tLevel = 1.0
+                            elif ev.severity == 'W':
+                                tLevel = 0.6
+                            else:
+                                tLevel = 0.2
+                            eList.append(tLevel)
+                            markerIdx += 1
+                            nullMarkers.append(markerIdx - 1)
+                            # Add end of event to trace.
+                            tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                            eList.append(tLevel)
+                            markerIdx += 1
+                            tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                            eList.append(0)
+                            markerIdx += 1
+                            finalState = 0
+                        # Event is a ZONECHANGE event.
+                        # Show zone output on trace.
+                        elif ev.event == "ZONECHANGE":
+                            if traceStarted == False:
+                                # Start trace with start of trip.
+                                tList.append(tripStartTime)
+                                eList.append(0)
+                                markerIdx += 1
+                                traceStarted = True
+                            # Found a matching event for this trace.
+                            # Add start of event to trace. Event is at the end of events for events with a duration.
+                            tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
+                            eList.append(0)
+                            markerIdx += 1
+                            tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
+                            # Set the height of the trace according to the zone output (2 levels)
+                            if ev.zoneOutput == 1:
+                                tLevel = 0.5
+                            else:
+                                tLevel = 1.0
+                            eList.append(tLevel)
+                            markerIdx += 1
+                            nullMarkers.append(markerIdx - 1)
+                            # Add end of event to trace.
+                            tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                            eList.append(tLevel)
+                            markerIdx += 1
+                            tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                            eList.append(0)
+                            markerIdx += 1
+                            finalState = 0
+                        else:
+                            # Event is not special, i.e. not INPUT, IMPACT, or ZONECHANGE event.
                             # Check if we need to start the trace.
                             if traceStarted == False:
                                 # Start trace with start of trip.
                                 tList.append(tripStartTime)
-                                if ev.inputState == 1:
-                                    eList.append(0)
-                                    markerIdx += 1
-                                    finalState = 0
-                                else:
-                                    eList.append(1)
-                                    markerIdx += 1
-                                    finalState = 1
-                                traceStarted = True
-                            # Add start of event to trace. Need to check what state input has changed to.
-                            if ev.inputState == 1:
-                                tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
-                                eList.append(finalState)
-                                markerIdx += 1
-                                tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
-                                eList.append(1)
-                                markerIdx += 1
-                                finalState = 1
-                            else:
-                                tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
-                                eList.append(finalState)
-                                markerIdx += 1
-                                tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
                                 eList.append(0)
-                                markerIdx += 1
-                                finalState = 0
-
-                            # Check if we need to add a marker for a zero duration event.
-                            # Note that active time is always 0 for transitions to the inactive state.
-                            # So mark INPUT events to transition to inactive state if active time is 0,
-                            # or if active state and previous transition time was the same.
-                            if ev.inputState == 0:
-                                if ev.activeTime == 0:
-                                    nullMarkers.append(markerIdx - 1)
-                            else:
-                                if ev.serverTime == preInputTime:
-                                    nullMarkers.append(markerIdx - 2)
-                            # Save INPUT event time to compare with next INPUT event.
-                            preInputTime = ev.serverTime
-                    # Event is an IMPACT event.
-                    # Show intensity on trace.
-                    elif ev.event == "IMPACT":
-                        if traceStarted == False:
-                            # Start trace with start of trip.
-                            tList.append(tripStartTime)
+                                traceStarted = True
+                            # Found a matching event for this trace.
+                            # Add start of event to trace. Event is at the end of events for events with a duration.
+                            tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
                             eList.append(0)
-                            markerIdx += 1
-                            traceStarted = True
-                        # Found a matching event for this trace.
-                        # Add start of event to trace. Event is at the end of events for events with a duration.
-                        tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
-                        eList.append(0)
-                        markerIdx += 1
-                        tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
-                        # Set the height of the trace according to the severity (3 levels)
-                        if ev.severity == 'C':
-                            tLevel = 1.0
-                        elif ev.severity == 'W':
-                            tLevel = 0.6
-                        else:
-                            tLevel = 0.2
-                        eList.append(tLevel)
-                        markerIdx += 1
-                        nullMarkers.append(markerIdx - 1)
-                        # Add end of event to trace.
-                        tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
-                        eList.append(tLevel)
-                        markerIdx += 1
-                        tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
-                        eList.append(0)
-                        markerIdx += 1
-                        finalState = 0
-                    else:
-                        # Event is not special, i.e. not INPUT or IMPACT event.
-                        # Check if we need to start the trace.
-                        if traceStarted == False:
-                            # Start trace with start of trip.
-                            tList.append(tripStartTime)
+                            tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
+                            eList.append(1)
+                            # Add end of event to trace.
+                            tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                            eList.append(1)
+                            tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
                             eList.append(0)
-                            traceStarted = True
-                        # Found a matching event for this trace.
-                        # Add start of event to trace. Event is at the end of events for events with a duration.
-                        tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
-                        eList.append(0)
-                        tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
-                        eList.append(1)
-                        # Add end of event to trace.
-                        tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
-                        eList.append(1)
-                        tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
-                        eList.append(0)
-                        finalState = 0
+                            finalState = 0
 
-            # End trace with final state value to end of plot (if event trace was started that is).
-            if traceStarted:
-                tList.append(tripEndTime)
-                eList.append(finalState)
+                # End trace with final state value to end of plot (if event trace was started that is).
+                if traceStarted:
+                    tList.append(tripEndTime)
+                    eList.append(finalState)
+            else:
+                # Update speed data.
+                maxSpeed = 0
+                for sl in self.data.tripLog[No-1].speedLog:
+                    # Format time axis list in the correct timezone for display.
+                    tList.append(timeTZ(sl.time, self.cfg.TimeUTC))
+                    eList.append(sl.speed)
+                    # Get max speed for plot limits.
+                    if sl.speed > maxSpeed:
+                        maxSpeed = sl.speed
 
             # Clear old plot data.
             self.traces[self.numEvCharts - idx][0].set_xdata([])
@@ -326,24 +370,71 @@ class EventCanvas(FigureCanvasQTAgg):
             self.traces[self.numEvCharts - idx][0].set_ydata(eList.copy())
 
             # Set axis for trace to trip extents.
-            self.traces[self.numEvCharts - idx][1].set_xlim([plotStartTime, plotEndTime])
+            self.traces[self.numEvCharts - idx][1].set_xlim([self.plotStartTime, self.plotEndTime])
 
             # Only set markers where zero duration INPUT events have been detected.
             # Marker list will be empty for non-INPUT events.
             self.traces[self.numEvCharts - idx][0].set_markevery(nullMarkers)
 
-            # Fill in the event bars.
-            self.traces[self.numEvCharts - idx][1].fill_between(self.traces[self.numEvCharts - idx][0].get_xdata(), self.traces[self.numEvCharts - idx][0].get_ydata(), 0, color=self.cfg.EvPlot["EventFillColour"], alpha=0.35)
+            # Set up shading etc for plots, special for vehicle speed plots.
+            if t["Event"] == "Vehicle Speed":
+                # Work out y-axis labels (5) for speed range.
+                yinc =math.ceil(maxSpeed / 4.0)
+                ymax = yinc * 5
+                yticks = []
+                yLabels = []
+                for tck in range(0, 5):
+                    yticks.append(tck * yinc)
+                    yLabels.append("{0:d}".format(tck * yinc))
+                # Set y axis limits and labels.
+                self.traces[self.numEvCharts - idx][1].set_ylim([0, ymax])
+                self.traces[self.numEvCharts - idx][1].set_yticks(yticks)
+                self.traces[self.numEvCharts - idx][1].set_yticklabels(yLabels, color='cornflowerblue')
+                self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
+            else:
+                # Fill in the event bars.
+                self.traces[self.numEvCharts - idx][1].fill_between(self.traces[self.numEvCharts - idx][0].get_xdata(), self.traces[self.numEvCharts - idx][0].get_ydata(), 0, color=self.cfg.EvPlot["EventFillColour"], alpha=0.35)
 
             # Do special axis treatments for particular events.
             if t["Event"] == "IMPACT":
                 self.traces[self.numEvCharts - idx][1].set_yticks([0.2, 0.6, 1.0])
                 self.traces[self.numEvCharts - idx][1].set_yticklabels(["Lo", "Med", "Hi"], color='cornflowerblue')
                 self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
+            elif t["Event"] == "ZONECHANGE":
+                self.traces[self.numEvCharts - idx][1].set_yticks([0.5, 1.0])
+                self.traces[self.numEvCharts - idx][1].set_yticklabels(["Slow", "Fast"], color='cornflowerblue')
+                self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
 
-            # Rescale axes.
-            self.traces[self.numEvCharts - idx][1].relim()
-            self.traces[self.numEvCharts - idx][1].autoscale_view()
+        # Draw plot.
+        self.draw()
+
+    # *******************************************
+    # Aline x-axis plots to most restrictive.
+    # *******************************************
+    def alignEventTraces(self):
+
+        firstTrace = True
+
+        # Get most restrictive x-axis scale.
+        for idx in range((self.numEvCharts - 1), -1, -1):
+            txMin, txMax = self.traces[self.numEvCharts - idx][1].get_xlim()
+            if firstTrace:
+                # Initialise limits to that of first trace.
+                xMin = txMin
+                xMax = txMax
+                firstTrace = False
+            else:
+                # Set if more restrictive.
+                if txMin > xMin:
+                    xMin = txMin
+                if txMax < xMax:
+                    xMax = txMax
+        # Set all x-axis to new scale.
+        for idx in range((self.numEvCharts - 1), -1, -1):
+            self.traces[self.numEvCharts - idx][1].set_xlim([xMin, xMax])
+
+        # Set trace for trip to the same x scale too.
+        self.traces[0][1].set_xlim([xMin, xMax])
 
         # Draw plot.
         self.draw()

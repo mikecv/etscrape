@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from PyQt5.QtWidgets import QMainWindow, QDialog, QFileDialog, QColorDialog, QLabel, QPushButton, QMessageBox, QTreeWidget, QTreeWidgetItem, QHeaderView, qApp, QApplication
+from PyQt5.QtWidgets import QMainWindow, QDialog, QFileDialog, QColorDialog, QLabel, QMessageBox, QTreeWidget, QTreeWidgetItem, QHeaderView, qApp, QApplication
 from PyQt5 import uic
 from PyQt5 import QtCore, QtGui
 import logging
@@ -12,7 +12,6 @@ from datetime import timedelta, datetime
 import os
 import sys
 import webbrowser
-from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
 from config import *
 from utils import *
@@ -39,25 +38,15 @@ from eventsChart import *
 #                       Refactored speed chart to match events charts.
 #                       Updated preferences dialog with event chart preferences.
 #                       Added dialog to configure event plots to plot.
-# 0.6   MDC 04/08/2020  Added vehcile speed to events chart.
-#                       Added trace alignment toolbar button on event traces chart.
-#                       Bug fixes.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
-# See if anything can be done with imports to make pyinstaller build executable.
-# Add favourites file, e.g. to store event chart configurations.
-# Not showing y value at mouse coordinate for events chart (is being shown for speed chart).
-#
-# Update change log.
-# Update help.
-#   Special treatment of ZONECHANGE event plotting.
 # *******************************************
 
 # Program version.
-progVersion = "0.6"
+progVersion = "0.5"
 
 # Create configuration values class object.
 config = Config()
@@ -165,9 +154,6 @@ class UI(QMainWindow):
         # Create events chart dialog.        
         self.eventsChart = EventsChartDialog(config, self)
 
-        # Connect align traces custom toolbar button.
-        self.eventsChart.TraceAlignBtn.clicked.connect(self.alignCallback)
-
         # Flag indicating no data to show.
         # And flag indicating no trip selected.
         self.haveTrips = False
@@ -192,14 +178,6 @@ class UI(QMainWindow):
         
         # Show appliction window.
         self.show()
-
-    # *******************************************
-    # Callback function for trace align custom toolbar button on events chart.
-    # *******************************************
-    def alignCallback(self):
-        logger.debug("User selected toolbar button to align event traces.")
-        # Call events chart method to align traces.
-        self.eventsChart.fig.alignEventTraces()
 
     # *******************************************
     # Respond to drag / drop events.
@@ -432,6 +410,7 @@ class UI(QMainWindow):
 
         # Change to wait cursor as large files may take a while to open and process.
         QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+
 
         # Look for controller ID.
         # Only read first instance in log; assume consistant.
@@ -1252,9 +1231,6 @@ class EventsChartDialog(QDialog):
         self.eventChartLayout.addWidget(self.plotTbar)
         self.eventChartLayout.addWidget(self.fig)
 
-        # Update tool button icon.
-        self.TraceAlignBtn.setIcon(QtGui.QIcon(res_path("./resources/alignTraces.png")))
-
     # *******************************************
     # Displays an events chart dialog box.
     # *******************************************
@@ -1828,9 +1804,7 @@ class EventsChartConfigDialog(QDialog):
         # Need to get events plot to starting state.
         self.app.eventsChart.fig.resetFigure()
         self.app.eventsChart.fig.createAxes()
-        # If we have a trip then update plot data.
-        if self.app.selectedTrip > 0:
-            self.app.eventsChart.fig.updatePlotData(self.app.selectedTrip)
+        self.app.eventsChart.fig.updatePlotData(self.app.selectedTrip)
 
 # *******************************************
 # About dialog class.
@@ -1883,12 +1857,6 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
-        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.6</b></h2>")
-        self.changeLogText.textCursor().insertHtml("<ul>"\
-            "<li>Added trace alignment toolbar button to events plot. Alignment after panning and zooming.</li>" \
-            "<li>Added vehicle speed to events plot; not that vehicle speed not actually an event.</li>" \
-            "<li>Added ZONECHANGE event to events chart configuration, and plotting of zone change events.</li>" \
-            "<li>Fixed bug when saving changes to events chart config when no selected trip.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.5</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added modal events chart dialog selectable from the main menu. \

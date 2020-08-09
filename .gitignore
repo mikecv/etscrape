@@ -1,12 +1,12 @@
 
-logs/
-
 about.py
 
 changeLog.py
 
 __pycache__/
 
-*.log.*
+logs/
 
-v0.1/
+*.log
+
+*.log.*

@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+import matplotlib
+matplotlib.use('Qt5Agg')
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT as NavigationToolbar
 from matplotlib.figure import Figure
-
+import matplotlib.dates as mdates
 from utils import *
 
 # *******************************************
@@ -48,9 +50,6 @@ class SpeedCanvas(FigureCanvasQTAgg):
         # Clear the axes and create afresh.
         self.axes.clear()
         self.createAxes()
-
-        # Draw plot.
-        self.draw()
 
     # *******************************************
     # Reset the figure.
@@ -128,6 +127,10 @@ class SpeedCanvas(FigureCanvasQTAgg):
         # Fill below the zone speed line (if we have data).
         if len(zList) > 0:
             self.axes.fill_between(self.zone.get_xdata(), self.zone.get_ydata(), 0, color=self.cfg.SpdPlot["ZoneColour"], alpha=0.1)
+
+        # Rescale axes.
+        self.axes.relim()
+        self.axes.autoscale_view()
 
         # Draw plot.
         self.draw()

@@ -1,9 +1,9 @@
 {
-    "ConfigVersion": 4,
+    "ConfigVersion": 5,
     "DebugLevel": 20,
     "LogFileSize": 100000,
     "LogBackups": 3,
-    "TimeUTC": 0,
+    "TimeUTC": 1,
     "TripData": {
         "TripBackColour": "#ffff00",
         "TripColour": "#000000",
@@ -84,36 +84,16 @@
     ],
     "EventTraces": [
         {
-            "Event": "IMPACT",
-            "Title": "IMPACT"
-        },
-        {
-            "Event": "ENGINEOVERSPEED",
-            "Title": "Engine Overspeed"
-        },
-        {
-            "Event": "LOWCOOLANT",
-            "Title": "Low Engine Coolant Level"
-        },
-        {
-            "Event": "OILPRESSURE",
-            "Title": "Low Engine Oil Pressure"
-        },
-        {
-            "Event": "ZONEOVERSPEED",
-            "Title": "Zone Overspeed"
-        },
-        {
-            "Event": "INPUT",
-            "Channel": 1
+            "Event": "Vehicle Speed",
+            "Title": "Vehicle Speed"
         },
         {
             "Event": "INPUT",
             "Channel": 4
         },
         {
-            "Event": "INPUT",
-            "Channel": 8
+            "Event": "IMPACT",
+            "Title": "Vehicle Impact"
         }
     ]
 }

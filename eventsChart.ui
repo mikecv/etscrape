@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>300</height>
+    <height>400</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>500</width>
-    <height>300</height>
+    <height>400</height>
    </size>
   </property>
   <property name="cursor">
@@ -22,8 +22,11 @@
   <property name="windowTitle">
    <string>Event Traces</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
+  <property name="toolTip">
+   <string/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
     <layout class="QVBoxLayout" name="eventChartLayout">
      <property name="spacing">
       <number>10</number>
@@ -35,6 +38,37 @@
       <number>0</number>
      </property>
     </layout>
+   </item>
+   <item>
+    <widget class="QPushButton" name="TraceAlignBtn">
+     <property name="maximumSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="statusTip">
+      <string>Align Traces</string>
+     </property>
+     <property name="whatsThis">
+      <string>Align Traces</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

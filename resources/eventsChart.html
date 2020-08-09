@@ -52,7 +52,9 @@ Note that if a log file is loaded that does not include any trips the chart will
   
 <p>As with the speed plot on the main application window, the event traces chart use the Python <a href="https://matplotlib.org/">https://matplotlib.org/</a> library.
 The standard matplotlib toolbar is displayed at the top of the chart, and can be used to perform standard functions,
-such as panning or zooming individual event traces, or to save an image of the whole chart.</p>
+such as panning or zooming individual event traces, or to save an image of the whole chart.
+There is an additional toolbar button for aligning event traces (explained in the &#34;Event Trace Pan and Zoom&#34; section below.</p>
+
 <p>The colours and fonts used in the chart can be set in the application configuration.</p>
 
 <h2>Chart Configuration</h2>
@@ -69,9 +71,13 @@ and can be configured from within the application by selecting the &#34;Edit &#4
 <p>The Events Charts Configuration dialog allows up to 8 event traces to be plotted at once.
 Note that the trip trace is an additional trace that is always included.</p>
 
-<p>For each of the 8 chart events the user can select an event from the available events in a drop-down list.
-The first entry in the drop-down list is blank and can be used to clear that event trace.
+<p>For each of the 8 chart events the user can select an event from the available events in a drop-down list.</p>
+
+<p>The first entry in the drop-down list is blank and can be used to clear that event trace.
 Note that blank event traces are ignores and will not be plotted on the Events chart.</p>
+
+<p>The second entry in the drop-down list is &#34;Vehicle Speed&#34; and can used for a plot of the vehicle speed.
+Note that vehicle speed is not a specific event, but current speed taken from the header of other events (as for the speed plot).</p>
 
 <p>The &#34;Title&#34; field is shown on the Events as a y axis label.
 By default the Title field is the same as the event name, but can be edited by the user (with one exception).</p>
@@ -88,7 +94,8 @@ Note that the cursor location in event trace chart coordinates is reflected in t
 For events that include a duration the time the event was active will be shown, noting that the start time is worked out from the event time (end)
 and the duration of the event.</p>
 
-<p>There are a couple of exceptions to how events are traced, namely INPUT and IMPACT events as illustrated below.</p>
+<p>There are a couple of exceptions to how events are traced, namely INPUT, IMPACT, and Vehicle Speed traces as illustrated below.
+Note that strictly speaking the &#34;Vehicle Speed&#34; trace is not an actual event.</p>
 
 <img src="./specialEventTraces.png" alt="Special event traces">
 
@@ -100,15 +107,26 @@ Note that the marker is added to the top or bottom of the trace depending on whe
 To give some extra information the <i>severity</i> of the impact is reflected in the height of the trace line,
 i.e. in 3 levels that relate to minor, warning, and critical impact severities.</p>
 
+<p>For the Vehicle Speed trace the current vehicle speed taken from REPORT events and from the header of most other events is displayed.
+This is the same data as displayed on the speed plot in the main application window.
+</p>
+  
 <h2>Event Trace Pan and Zoom</h2>
 
 <p>At present only one event trace can be panned or zoomed at a time, that is, other event traces remain as they were as illustrated below.
-At this time this is a Matplotlip limitation when using time based x axis charts; and may be resolved or worked around in the future.</p>
+At this time this is a Matplotlip limitation when using time based x axis charts.</p>
 
 <img src="./zoomedTrace.png" alt="Zoomed event trace">
 
-<p>In the illustration above note that in the chart toolbar that the &#34;Zoom&#34; control is active.
-Note also that the &#34;Back Arrow&#34; is highlighted indicating that there are one or more previous views to return to.</p>
+<p>As can be seen in the illustration above there is a custom button at the bottom left of the chart.
+This is the &#34;<b>Align Traces</b>&#34; button and is used to align all traces to be the union of all traces.
+Using this button to align traces in the previous diagram is illustrated below.</p>
+
+<img src="./alignedTrace.png" alt="Aligned traces">
+  
+<p>In the illustration above note that in the Matplotlib toolbar that the &#34;Zoom&#34; control is active.
+Note also that the &#34;Back Arrow&#34; is highlighted indicating that there are one or more previous views to return to.
+Using these controls can be used to return to the intital plot.</p>
 
 <br>
 <a href="#top">Back to top</a>
