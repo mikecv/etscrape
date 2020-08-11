@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 
 import logging
-import logging.handlers
-import json
 import re
-from datetime import timedelta, datetime
+from datetime import datetime
 
 # *******************************************
 # Event class.

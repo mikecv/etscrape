@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-import time
-import os
+from time import timezone
 from datetime import datetime
+from os import path
 
 # *******************************************
 # Convert seconds to time string.
@@ -21,7 +21,7 @@ def unixTimeString(t, utc):
     if utc != 0:
         return ("{0:s} [UTC]".format(datetime.utcfromtimestamp(t).strftime('%d/%m/%Y %H:%M:%S')))
     else:
-        offset =  int(time.timezone / -3600)
+        offset =  int(timezone / -3600)
         return ("{0:s} [UTC{1:+d}]".format(datetime.fromtimestamp(t).strftime('%d/%m/%Y %H:%M:%S'), offset))
 
 # *******************************************
@@ -42,21 +42,21 @@ def tzone(useUTC):
         return ("[UTC]")
     else:
         # Else return the local timezone.
-        offset =  int(time.timezone / -3600)
+        offset =  int(timezone / -3600)
         if offset == 0:
             # Local timezone is actually UTC anyway.
             return ("[UTC]")
         else:
             # Else local timezone is offset from UTC.
-            return ("[UTC{0:+d}]".format(int(time.timezone / -3600)))
+            return ("[UTC{0:+d}]".format(int(timezone / -3600)))
 
 # *******************************************
 # Get path, filename, and extension.
 # *******************************************
 def getFileParts(fname):
-    path, filename = os.path.split(fname)
-    fn, fext = os.path.splitext(filename)
-    return path, fn, fext
+    pathString, nameString = path.split(fname)
+    fn, fext = path.splitext(nameString)
+    return pathString, fn, fext
 
 # *******************************************
 # Split string to multiple strings of maximum length.

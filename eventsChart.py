@@ -3,7 +3,7 @@
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 from matplotlib.axes import Axes, Subplot
-import math
+from math import ceil
 
 from utils import *
 
@@ -185,8 +185,8 @@ class EventCanvas(FigureCanvasQTAgg):
         self.traces[0][1].set_xlim([self.plotStartTime, self.plotEndTime])
 
         # Rescale axes.
-        self.traces[0][1].relim()
-        self.traces[0][1].autoscale_view()
+        self.traces[0][1].axes.relim()
+        self.traces[0][1].autoscale_view(True, True, False)
 
         # Create data for each event trace.
         # Iterate in reverse to line up with how traces have been stacked.
@@ -372,6 +372,10 @@ class EventCanvas(FigureCanvasQTAgg):
             # Set axis for trace to trip extents.
             self.traces[self.numEvCharts - idx][1].set_xlim([self.plotStartTime, self.plotEndTime])
 
+            # Rescale axes.
+            self.traces[self.numEvCharts - idx][1].axes.relim()
+            self.traces[self.numEvCharts - idx][1].autoscale_view(True, True, False)
+
             # Only set markers where zero duration INPUT events have been detected.
             # Marker list will be empty for non-INPUT events.
             self.traces[self.numEvCharts - idx][0].set_markevery(nullMarkers)
@@ -379,7 +383,7 @@ class EventCanvas(FigureCanvasQTAgg):
             # Set up shading etc for plots, special for vehicle speed plots.
             if t["Event"] == "Vehicle Speed":
                 # Work out y-axis labels (5) for speed range.
-                yinc =math.ceil(maxSpeed / 4.0)
+                yinc = ceil(maxSpeed / 4.0)
                 ymax = yinc * 5
                 yticks = []
                 yLabels = []
@@ -433,8 +437,16 @@ class EventCanvas(FigureCanvasQTAgg):
         for idx in range((self.numEvCharts - 1), -1, -1):
             self.traces[self.numEvCharts - idx][1].set_xlim([xMin, xMax])
 
+            # Rescale axes.
+            self.traces[self.numEvCharts - idx][1].axes.relim()
+            self.traces[self.numEvCharts - idx][1].autoscale_view(True, True, False)
+
         # Set trace for trip to the same x scale too.
         self.traces[0][1].set_xlim([xMin, xMax])
+
+        # Rescale axes.
+        self.traces[0][1].axes.relim()
+        self.traces[0][1].autoscale_view(True, True, False)
 
         # Draw plot.
         self.draw()

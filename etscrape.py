@@ -47,13 +47,12 @@ from eventsChart import *
 # *******************************************
 # TODO List
 #
-# See if anything can be done with imports to make pyinstaller build executable.
 # Add favourites file, e.g. to store event chart configurations.
 # Not showing y value at mouse coordinate for events chart (is being shown for speed chart).
+# Add button on charts to increase/decrease number of ticks on charts.
 #
 # Update change log.
 # Update help.
-#   Special treatment of ZONECHANGE event plotting.
 # *******************************************
 
 # Program version.
@@ -1212,13 +1211,26 @@ class UI(QMainWindow):
     # *******************************************
     def help(self):
         logger.debug("User selected Help menu control.")
-    
+
         # Construct the url.
         url = res_path("./resources/ETscrapeHelp.html")
         url = "file://" + url
+
         # Call the web browser to render the url.
-        # This is not guaranteed to be the default browser on any particular system.
-        webbrowser.open(url)
+        # Try sequence of preferred browsers first.
+        try:
+            webbrowser.get(using='chrome').open(url, new=2)
+        except:
+            try:
+                logger.warning("Chrome browser not found.")
+                webbrowser.get(using='firefox').open(url, new=2)
+            except:
+                try:
+                    logger.warning("Firefox browser not found.")
+                    webbrowser.get(using='windows-default').open(url, new=2)
+                except:
+                    logger.warning("Windows default browser not found.")
+                    webbrowser.open(url, new=2)
 
 # *******************************************
 # Pop-up message box.

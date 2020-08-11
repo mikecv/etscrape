@@ -91,7 +91,7 @@ class SpeedCanvas(FigureCanvasQTAgg):
 
         # Rescale axes.
         self.axes.relim()
-        self.axes.autoscale_view()
+        self.axes.autoscale_view(True, True, True)
 
         # Draw plot.
         self.draw()
