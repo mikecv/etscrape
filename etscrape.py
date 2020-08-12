@@ -56,7 +56,7 @@ from eventsChart import *
 # *******************************************
 
 # Program version.
-progVersion = "0.6"
+progVersion = "0.6 (RC)"
 
 # Create configuration values class object.
 config = Config()
@@ -1227,10 +1227,9 @@ class UI(QMainWindow):
             except:
                 try:
                     logger.warning("Firefox browser not found.")
-                    webbrowser.get(using='windows-default').open(url, new=2)
-                except:
-                    logger.warning("Windows default browser not found.")
                     webbrowser.open(url, new=2)
+                except:
+                    logger.error("Browser not found.")
 
 # *******************************************
 # Pop-up message box.
