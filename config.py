@@ -41,7 +41,7 @@ class Config():
             "ShowDebugEvents" : 1,
             "ShowOutOfTripEvents" : 0,
             "BadSpeedLimit" : 150,
-            "BadRpmLimit" : 5000
+            "BadRpmLimit" : 15000
         }
 
         # Speed plot data.

@@ -49,14 +49,15 @@ from eventsChart import *
 #
 # Add favourites file, e.g. to store event chart configurations.
 # Not showing y value at mouse coordinate for events chart (is being shown for speed chart).
-# Add button on charts to increase/decrease number of ticks on charts.
+# Add buttons on charts to increase/decrease number of ticks on charts.
+# Trip summary pane not quite wide enough.
 #
 # Update change log.
 # Update help.
 # *******************************************
 
 # Program version.
-progVersion = "0.6 (RC)"
+progVersion = "0.6"
 
 # Create configuration values class object.
 config = Config()
@@ -1033,7 +1034,7 @@ class UI(QMainWindow):
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
-            eventList.append(("Maximum RPM", "{0:d}".format(event.maxRPM), config.TripData["BadRpmLimit"]))
+            eventList.append(("Maximum RPM", "{0:d}".format(event.maxRPM), (event.maxRPM >= config.TripData["BadRpmLimit"])))
         elif event.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP", "OFFSEAT", "OVERLOAD"}:
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
@@ -1898,6 +1899,7 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added trace alignment toolbar button to events plot. Alignment after panning and zooming.</li>" \
             "<li>Added vehicle speed to events plot; not that vehicle speed not actually an event.</li>" \
+            "<li>Fixed bug why bad RPM was not being highlighted.</li>" \
             "<li>Added ZONECHANGE event to events chart configuration, and plotting of zone change events.</li>" \
             "<li>Fixed bug when saving changes to events chart config when no selected trip.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.5</b></h2>")
