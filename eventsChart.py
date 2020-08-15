@@ -3,6 +3,7 @@
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 from matplotlib.axes import Axes, Subplot
+import matplotlib.dates as dates
 from math import ceil
 
 from utils import *
@@ -25,9 +26,12 @@ class EventCanvas(FigureCanvasQTAgg):
         # Keep layout tight so that it fits into the frame nicely.
         self.fig.set_tight_layout(True)
 
+        # Set fig date/time formating for x-axis.
+        self.fig.autofmt_xdate()
+        self.xfmt = dates.DateFormatter('%H:%M:%S')
+
         # Create the axes for the plot.
         self.createAxes()
-
         super(EventCanvas, self).__init__(self.fig)
 
     # *******************************************
@@ -55,6 +59,9 @@ class EventCanvas(FigureCanvasQTAgg):
         axes.set_xlabel("Time {0:s}".format(tzone(self.cfg.TimeUTC)), fontsize=self.cfg.EvPlot["AxesTitleFontSize"])
         # Set axis label font.
         axes.tick_params(labelsize=self.cfg.EvPlot["AxisLabelFontSize"])
+        # Set date/time format for x-axis.
+        axes.xaxis.set_major_formatter(self.xfmt)
+        # Add axis to list of axes.
         self.traces.append((line, axes))
 
         # Create trace for each event.
@@ -79,6 +86,9 @@ class EventCanvas(FigureCanvasQTAgg):
                 axes.set_ylabel(splitTitle, rotation=0, horizontalalignment='right', verticalalignment='center', fontsize=self.cfg.EvPlot["AxesTitleFontSize"])
             # Set axis label font.
             axes.tick_params(labelsize=self.cfg.EvPlot["AxisLabelFontSize"])
+            # Set date/time format for x-axis.
+            axes.xaxis.set_major_formatter(self.xfmt)
+            # Add axis to list of axes.
             self.traces.append((line, axes))
 
     # *******************************************

@@ -10,7 +10,7 @@ class Config():
     def __init__(self):
 
         # Version of configuration.
-        self.ConfigVersion = 5
+        self.ConfigVersion = 6
 
         # Logger configuration values
         self.DebugLevel = 20
@@ -82,14 +82,12 @@ class Config():
 
         # Event chart.
         self.EventTraces = [
-            {"Event" : "ZONEOVERSPEED", "Title" : "Zone Overspeed"},
+            {"Event" : "Vehicle Speed", "Title" : "Vehicle Speed"},
             {"Event" : "ENGINEOVERSPEED", "Title" : "Engine Overspeed"},
-            {"Event" : "LOWCOOLANT", "Title" : "Engine Coolant Level Low"},
             {"Event" : "OILPRESSURE", "Title" : "Engine Oil Pressure Low"},
-            {"Event" : "ENGINETEMP", "Title" : "Engine Temperature High"},
+            {"Event" : "INPUT", "Channel" : 1},
             {"Event" : "INPUT", "Channel" : 3},
-            {"Event" : "INPUT", "Channel" : 4},
-            {"Event" : "INPUT", "Channel" : 8}
+            {"Event" : "INPUT", "Channel" : 4}
             ]
 
         # Read / update configuration from file.

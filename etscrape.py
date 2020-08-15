@@ -25,7 +25,8 @@ from eventsChart import *
 # 0.1   MDC 21/05/2020  Original.
 # 0.2   MDC 06/06/2020  Added speed chart.
 #                       Added ability to read message logs as well.
-#                       Numerous bug fixes and cosmetic changes.
+#                       Numerous bug fixes and cosmetic changes.import matplotlib.ticker as ticker
+
 # 0.3   MDC 15/06/2020  Added trip report export.
 #                       Added configuration to show times in UTC or local time.
 #                       Added option to export trip data to file.
@@ -39,21 +40,15 @@ from eventsChart import *
 #                       Refactored speed chart to match events charts.
 #                       Updated preferences dialog with event chart preferences.
 #                       Added dialog to configure event plots to plot.
-# 0.6   MDC 04/08/2020  Added vehcile speed to events chart.
+# 0.6   MDC 04/08/2020  Added vehicle speed to events chart.
 #                       Added trace alignment toolbar button on event traces chart.
 #                       Bug fixes.
+#                       Cosmetic changes.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
-# Add favourites file, e.g. to store event chart configurations.
-# Not showing y value at mouse coordinate for events chart (is being shown for speed chart).
-# Add buttons on charts to increase/decrease number of ticks on charts.
-# Trip summary pane not quite wide enough.
-#
-# Update change log.
-# Update help.
 # *******************************************
 
 # Program version.
@@ -1901,7 +1896,9 @@ class ChangeLogDialog(QDialog):
             "<li>Added vehicle speed to events plot; not that vehicle speed not actually an event.</li>" \
             "<li>Fixed bug why bad RPM was not being highlighted.</li>" \
             "<li>Added ZONECHANGE event to events chart configuration, and plotting of zone change events.</li>" \
-            "<li>Fixed bug when saving changes to events chart config when no selected trip.</li></ul><br>")
+            "<li>Fixed bug when saving changes to events chart config when no selected trip.</li>" \
+            "<li>Changed x-axis tick labels to time only to improve readability.</li>" \
+            "<li>Fixed width of Summary Pane to accommodate long time strings.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.5</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added modal events chart dialog selectable from the main menu. \

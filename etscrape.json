@@ -1,5 +1,5 @@
 {
-    "ConfigVersion": 5,
+    "ConfigVersion": 6,
     "DebugLevel": 20,
     "LogFileSize": 100000,
     "LogBackups": 3,
@@ -20,7 +20,7 @@
         "ShowDebugEvents": 1,
         "ShowOutOfTripEvents": 0,
         "BadSpeedLimit": 150,
-        "BadRpmLimit": 5000
+        "BadRpmLimit": 15000
     },
     "SpdPlot": {
         "DefaultLowLimit": 30,
@@ -88,12 +88,24 @@
             "Title": "Vehicle Speed"
         },
         {
-            "Event": "INPUT",
-            "Channel": 4
+            "Event": "ENGINEOVERSPEED",
+            "Title": "Engine Overspeed"
         },
         {
-            "Event": "IMPACT",
-            "Title": "Vehicle Impact"
+            "Event": "OILPRESSURE",
+            "Title": "Engine Oil Pressure Low"
+        },
+        {
+            "Event": "INPUT",
+            "Channel": 1
+        },
+        {
+            "Event": "INPUT",
+            "Channel": 3
+        },
+        {
+            "Event": "INPUT",
+            "Channel": 4
         }
     ]
 }
