@@ -44,15 +44,19 @@ from eventsChart import *
 #                       Added trace alignment toolbar button on event traces chart.
 #                       Bug fixes.
 #                       Cosmetic changes.
+# 0.7   MDC 17/08/2020  Add detection of battery voltage from event messages.
+#                       Add battery voltage to event plotting.
+#                       Changed application icon to be a Scraper.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
+# Implement filtering trips containing specific events.
 # *******************************************
 
 # Program version.
-progVersion = "0.6"
+progVersion = "0.7 draft"
 
 # Create configuration values class object.
 config = Config()
@@ -698,7 +702,10 @@ class UI(QMainWindow):
         self.TripIdLbl.setText("[{0:d}]".format(ti.signOnId))
         self.StartTimeLbl.setText("{0:s}".format(unixTimeString(ti.tripStart, config.TimeUTC)))
         self.EndTimeLbl.setText("{0:s}".format(unixTimeString(ti.tripEnd, config.TimeUTC)))
-        self.TripDurationLbl.setText("{0:s}".format(secsToTime(ti.tripEnd - ti.tripStart)))
+        if ti.tripEnd > 0:
+            self.TripDurationLbl.setText("{0:s}".format(secsToTime(ti.tripEnd - ti.tripStart)))
+        else:
+            self.TripDurationLbl.setText("Trip not ended.")
 
         # Event counts.
         # Vehicle events.
@@ -1004,6 +1011,7 @@ class UI(QMainWindow):
         # Event details will depend on event type.
         # Check for alert values as well.
         if event.event == "SIGNON":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
             if event.driverId == "*":
@@ -1016,25 +1024,30 @@ class UI(QMainWindow):
             eventList.append(("Keyboard", "{0:s}".format(event.keyboard), False))
             eventList.append(("Card Reader", "{0:s}".format(event.cardReader), False))
         elif event.event == "OVERSPEED":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
         elif event.event == "ZONEOVERSPEED":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
             eventList.append(("Maximum Speed", "{0:d}".format(event.maxSpeed), (event.maxSpeed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Zone Output", "{0:d}".format(event.zoneOutput),(event.zoneOutput == 0)))
         elif event.event == "ENGINEOVERSPEED":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
             eventList.append(("Maximum RPM", "{0:d}".format(event.maxRPM), (event.maxRPM >= config.TripData["BadRpmLimit"])))
         elif event.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP", "OFFSEAT", "OVERLOAD"}:
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
         elif event.event == "UNBUCKLED":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
@@ -1046,12 +1059,14 @@ class UI(QMainWindow):
                 seatOwner = "?"
             eventList.append(("Seat Owner", "{0:s}".format(seatOwner), (seatOwner == "?")))
         elif event.event == "ZONECHANGE":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("From Zone", "{0:d}".format(event.fromZone), False))
             eventList.append(("To Zone", "{0:d}".format(event.toZone), False))
             eventList.append(("Zone Output", "{0:d}".format(event.zoneOutput), False))
         elif event.event == "IMPACT":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Forward G", "{0:0.1f}".format(event.fwdG), False))
@@ -1068,6 +1083,7 @@ class UI(QMainWindow):
                 severity = "Low"
             eventList.append(("Severity", "{0:s}".format(severity), False))
         elif event.event == "CHECKLIST":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Result", "{0:s}".format(event.result), False))
             eventList.append(("Failed Questions", "{0:d}".format(event.failedQ), False))
@@ -1083,8 +1099,10 @@ class UI(QMainWindow):
                 chkType = "?"
             eventList.append(("Checklist Type", "{0:s}".format(chkType), (chkType == "?")))
         elif event.event == "XSIDLESTART":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
         elif event.event == "XSIDLE":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Max Idle Time", "{0:s}".format(str(timedelta(seconds=event.maxIdle))), (event.maxIdle == 0)))
         elif event.event == "CONFIG":
@@ -1094,6 +1112,7 @@ class UI(QMainWindow):
         elif event.event == "POWERDOWN":
             pass
         elif event.event == "REPORT":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             if (event.signOnId == -1):
                 eventList.append(("Sign-on ID", "{0:s}".format("*"), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             else:
@@ -1101,17 +1120,21 @@ class UI(QMainWindow):
             eventList.append(("Report Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Direction", "{0:d}".format(event.direction), ((event.direction < 0) or (event.direction > 359))))
         elif event.event == "CRITICALOUTPUTSET":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Critical Output Set", "{0:d}".format(event.criticalOutput), False))
         elif event.event == "INPUT":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Input", "{0:d} - {1:s}".format(event.inputNo, config.Channels[event.inputNo - 1]["Name"]), ((event.inputNo < 1) or (event.inputNo > 10))))
             eventList.append(("State", "{0:d}".format(event.inputState), ((event.inputState < 0) or (event.inputState > 1))))
             eventList.append(("Active Time", "{0:s}".format(str(timedelta(seconds=event.activeTime))), False))
         elif event.event == "DEBUG":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Details", "{0:s}".format(event.debugInfo), ("Time1H" in event.debugInfo)))
         elif event.event == "TRIP":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
             eventList.append(("Time Forward", "{0:s}".format(str(timedelta(seconds=event.timeFwd))), False))
             eventList.append(("Time Reverse", "{0:s}".format(str(timedelta(seconds=event.timeRev))), False))
@@ -1718,15 +1741,18 @@ class EventsChartConfigDialog(QDialog):
         self.plotCfg[7][3].valueChanged.connect((lambda: self.channelSelected(7)))
 
         # Configure combo boxes.
+        # Combine 'blank' and special traces with event traces from configuration.
+        eventOptions = ["", "Vehicle Speed", "Battery Voltage"] + self.config.events
+
         for p in self.plotCfg:
             # Add list of events to selection dropdown.
-            p[0].addItems(self.config.events)
+            p[0].addItems(eventOptions)
 
         # Preconfigure to current selections.
         for idx, t in enumerate(self.config.EventTraces):
             try:
                 # Look for trace event in list of events.
-                selection = self.config.events.index(t["Event"])
+                selection = eventOptions.index(t["Event"])
             except:
                 # If no match then use first 'event' which is a blank.
                 selection = 0
@@ -1890,6 +1916,14 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.7</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Added battery voltage from event messages to trip data display, and also to event plots.</li>" \
+            "<li>Refactored configuration class to restrict events list to actual events, i.e. vehicle speed and battery voltage not included," \
+            "they are however included in event trace selection drop-down boxes.</li>" \
+            "<li>Fixed trip duration for unended trips in trip summary.</li>" \
+            "<li>Changed application icon to be a scraper; changed the About icon size to be a bit larger to suit icon aspect.</li>" \
+            "<li>Reduced size of markers on speed plot on main application window.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.6</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added trace alignment toolbar button to events plot. Alignment after panning and zooming.</li>" \

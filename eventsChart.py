@@ -4,7 +4,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 from matplotlib.axes import Axes, Subplot
 import matplotlib.dates as dates
-from math import ceil
+from math import ceil, floor
 
 from utils import *
 
@@ -217,8 +217,8 @@ class EventCanvas(FigureCanvasQTAgg):
             # Previous INPUT event time.
             preInputTime = 0
 
-            # Don't need to check for 'special' "Vehicle" event as not a real event.
-            if t["Event"] != "Vehicle Speed":
+            # Don't need to check for 'special' "Vehicle" events as not real events.
+            if (t["Event"] != "Vehicle Speed") and (t["Event"] != "Battery Voltage"):
                 # See if any matching events for the trip.
                 for ev in self.data.tripLog[No-1].events[0:endEvent]:
                     if t["Event"] == ev.event:
@@ -361,15 +361,30 @@ class EventCanvas(FigureCanvasQTAgg):
                     tList.append(tripEndTime)
                     eList.append(finalState)
             else:
-                # Update speed data.
-                maxSpeed = 0
-                for sl in self.data.tripLog[No-1].speedLog:
-                    # Format time axis list in the correct timezone for display.
-                    tList.append(timeTZ(sl.time, self.cfg.TimeUTC))
-                    eList.append(sl.speed)
-                    # Get max speed for plot limits.
-                    if sl.speed > maxSpeed:
-                        maxSpeed = sl.speed
+                # Special vehicle event.
+                if t["Event"] == "Vehicle Speed":
+                    # Update speed data.
+                    maxSpeed = 0
+                    for sl in self.data.tripLog[No-1].speedLog:
+                        # Format time axis list in the correct timezone for display.
+                        tList.append(timeTZ(sl.time, self.cfg.TimeUTC))
+                        eList.append(sl.speed)
+                        # Get max speed for plot limits.
+                        if sl.speed > maxSpeed:
+                            maxSpeed = sl.speed
+                elif t["Event"] == "Battery Voltage":
+                    # Update battery voltage data.
+                    minBattery = 100.0
+                    maxBattery = 0.0
+                    for bl in self.data.tripLog[No-1].batteryLevel:
+                        # Format time axis list in the correct timezone for display.
+                        tList.append(timeTZ(bl.time, self.cfg.TimeUTC))
+                        eList.append(bl.battery)
+                        # Get battery voltage for plot limits.
+                        if bl.battery > maxBattery:
+                            maxBattery = bl.battery
+                        if bl.battery < minBattery:
+                            minBattery = bl.battery
 
             # Clear old plot data.
             self.traces[self.numEvCharts - idx][0].set_xdata([])
@@ -402,6 +417,21 @@ class EventCanvas(FigureCanvasQTAgg):
                     yLabels.append("{0:d}".format(tck * yinc))
                 # Set y axis limits and labels.
                 self.traces[self.numEvCharts - idx][1].set_ylim([0, ymax])
+                self.traces[self.numEvCharts - idx][1].set_yticks(yticks)
+                self.traces[self.numEvCharts - idx][1].set_yticklabels(yLabels, color='cornflowerblue')
+                self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
+            elif t["Event"] == "Battery Voltage":
+                # Work out y-axis labels (5) for battery voltage range range.
+                ymin = minBattery - 0.25
+                ymax = maxBattery + 0.25
+                yinc = (ymax - ymin) / 4.0
+                yticks = []
+                yLabels = []
+                for tck in range(0, 5):
+                    yticks.append(ymin + (tck * yinc))
+                    yLabels.append("{0:2.2f}".format(ymin + (tck * yinc)))
+                # Set y axis limits and labels.
+                self.traces[self.numEvCharts - idx][1].set_ylim([ymin, ymax])
                 self.traces[self.numEvCharts - idx][1].set_yticks(yticks)
                 self.traces[self.numEvCharts - idx][1].set_yticklabels(yLabels, color='cornflowerblue')
                 self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')

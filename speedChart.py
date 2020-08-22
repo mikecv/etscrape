@@ -38,7 +38,7 @@ class SpeedCanvas(FigureCanvasQTAgg):
     # *******************************************
     def createAxes(self):
         self.axes = self.fig.add_subplot(111)
-        self.line, = self.axes.plot_date([], [], color=self.cfg.SpdPlot["SpeedColour"], marker='o', linestyle='solid', linewidth=1)
+        self.line, = self.axes.plot_date([], [], color=self.cfg.SpdPlot["SpeedColour"], marker='.', linestyle='solid', linewidth=1)
         self.zone, = self.axes.plot_date([], [], color=self.cfg.SpdPlot["ZoneColour"], marker=None, linestyle='dashed', linewidth=1)
         # Set date/time format for x-axis.
         self.axes.xaxis.set_major_formatter(self.xfmt)

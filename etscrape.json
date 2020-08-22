@@ -1,5 +1,5 @@
 {
-    "ConfigVersion": 6,
+    "ConfigVersion": 7,
     "DebugLevel": 20,
     "LogFileSize": 100000,
     "LogBackups": 3,
@@ -88,24 +88,16 @@
             "Title": "Vehicle Speed"
         },
         {
-            "Event": "ENGINEOVERSPEED",
-            "Title": "Engine Overspeed"
-        },
-        {
-            "Event": "OILPRESSURE",
-            "Title": "Engine Oil Pressure Low"
-        },
-        {
-            "Event": "INPUT",
-            "Channel": 1
-        },
-        {
-            "Event": "INPUT",
-            "Channel": 3
+            "Event": "Battery Voltage",
+            "Title": "Battery Voltage"
         },
         {
             "Event": "INPUT",
             "Channel": 4
+        },
+        {
+            "Event": "IMPACT",
+            "Title": "Vehicle Impact"
         }
     ]
 }
