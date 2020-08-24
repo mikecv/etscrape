@@ -25,8 +25,7 @@ from eventsChart import *
 # 0.1   MDC 21/05/2020  Original.
 # 0.2   MDC 06/06/2020  Added speed chart.
 #                       Added ability to read message logs as well.
-#                       Numerous bug fixes and cosmetic changes.import matplotlib.ticker as ticker
-
+#                       Numerous bug fixes and cosmetic changes.
 # 0.3   MDC 15/06/2020  Added trip report export.
 #                       Added configuration to show times in UTC or local time.
 #                       Added option to export trip data to file.
@@ -53,6 +52,10 @@ from eventsChart import *
 # TODO List
 #
 # Implement filtering trips containing specific events.
+# If item is hidden after filtering then need to get next if there is one. Alternatively, always set to first.
+# If filter changed then apply straight afterwards if applied already.
+# Add menu option and functionality to export filtered trips.
+# Increase width of column 0 on tree view as trip IDs can be wide numbers.
 # *******************************************
 
 # Program version.
@@ -114,6 +117,9 @@ class UI(QMainWindow):
         self.actionShowDebugEvents.triggered.connect(self.showHideDebugEvents)
         self.actionShowOutOfTripEvents.triggered.connect(self.showHideOutOfTripEvents)
 
+        # Attach to Set Event Filter menu item.
+        self.actionSetEventFilter.triggered.connect(self.setEventFilter)
+
         # Attach to the Export report for current trip menu item.
         self.actionExportCurrentTrip.triggered.connect(self.exportCurrentTrip)
 
@@ -148,6 +154,7 @@ class UI(QMainWindow):
         # View actions.
         self.actionCollapseAllLevels.triggered.connect(self.collapseAllLevels)
         self.actionExpandAllLevels.triggered.connect(self.expandAllLevels)
+        self.actionEventFilter.triggered.connect(self.eventFilter)
 
         # Trip summary actions.
         self.NextTripBtn.setEnabled(False)
@@ -170,7 +177,17 @@ class UI(QMainWindow):
         # Flag indicating no data to show.
         # And flag indicating no trip selected.
         self.haveTrips = False
+        self.numTrips = 0
         self.selectedTrip = 0
+
+        # Initialise flags indicating that event filter has a setting and is applied.
+        # Also initialise the current event filter.
+        self.eventFilterSet = False
+        self.eventFilterApplied = False
+        self.currentEventFilter = ""
+
+        # Disable event filter button.
+        self.actionEventFilter.setEnabled(False)
 
         # Disable expand / collapse buttons.
         self.actionCollapseAllLevels.setEnabled(False)
@@ -260,40 +277,56 @@ class UI(QMainWindow):
         iconE.addPixmap(QtGui.QPixmap(res_path("./resources/expand.png")))
         self.actionExpandAllLevels.setIcon(iconE)
 
+        # Set Event Filter button icon.
+        # Will change colour of icon depending on whether or not filter is applied.
+        self.eFilterIconOff = QtGui.QIcon()
+        self.eFilterIconOff.addPixmap(QtGui.QPixmap(res_path("./resources/filterOff.png")))
+        self.eFilterIconOn = QtGui.QIcon()
+        self.eFilterIconOn.addPixmap(QtGui.QPixmap(res_path("./resources/filterOn.png")))
+        self.actionEventFilter.setIcon(self.eFilterIconOff)
+
     # *******************************************
     # Callback function in next/prev trip buttons pressed.
     # *******************************************
     def tripButtonClicked(self, nxtTrip):
         # Only action if we have a trip.
         if self.haveTrips:
-            # If next trip button pressed, then increment trip if we can.
+            # If next trip button pressed, so go to next trip if we can.
             if nxtTrip:
-                if self.selectedTrip < self.numTrips:
-                    # Clear the current speed figure.
-                    # This is because if it was zoomed we start afresh.
-                    self.spdFig.clearFigure()
-                    self.eventsChart.fig.clearFigure()
-                    # Update 
-                    self.selectedTrip += 1
-                    self.tripDataTree.setCurrentItem(self.tripDataTree.topLevelItem((self.selectedTrip - 1)))
-                    self.updateTripSummary(self.selectedTrip)
-                    self.plotTripData(self.selectedTrip)
-                    self.plotEventsData(self.selectedTrip)
-                    # Check if no more next trips, then disable the button.
-                    self.updateTripBtnState()
+                self.tripDataTree.setCurrentItem(self.tripDataTree.itemBelow(self.tripDataTree.topLevelItem((self.selectedTrip - 1))))
+
+                # Update trip summary data and plot information.
+                self.updateTripSummary(self.selectedTrip)
+                self.plotTripData(self.selectedTrip)
+                self.plotEventsData(self.selectedTrip)
+
+                # Update state of next and previous buttons.
+                if self.tripDataTree.itemBelow(self.tripDataTree.topLevelItem((self.selectedTrip - 1))) == None:
+                    self.NextTripBtn.setEnabled(False)
+                else:
+                    self.NextTripBtn.setEnabled(True)
+                if self.tripDataTree.itemAbove(self.tripDataTree.topLevelItem((self.selectedTrip - 1))) == None:
+                    self.PrevTripBtn.setEnabled(False)
+                else:
+                    self.PrevTripBtn.setEnabled(True)
             else:
-                if self.selectedTrip > 1:
-                    # Clear the current speed figure.
-                    # This is because if it was zoomed we start afresh.
-                    self.spdFig.clearFigure()
-                    self.eventsChart.fig.clearFigure()
-                    self.selectedTrip -= 1
-                    self.tripDataTree.setCurrentItem(self.tripDataTree.topLevelItem((self.selectedTrip - 1)))
-                    self.updateTripSummary(self.selectedTrip)
-                    self.plotTripData(self.selectedTrip)
-                    self.plotEventsData(self.selectedTrip)
-                    # Check if no more previous trips, then disable the button.
-                    self.updateTripBtnState()
+                # Else previous trip button pressed, so go to previous trip if we can.
+                self.tripDataTree.setCurrentItem(self.tripDataTree.itemAbove(self.tripDataTree.topLevelItem((self.selectedTrip - 1))))
+
+                # Update trip summary data and plot information.
+                self.updateTripSummary(self.selectedTrip)
+                self.plotTripData(self.selectedTrip)
+                self.plotEventsData(self.selectedTrip)
+
+                # Update state of next and previous buttons.
+                if self.tripDataTree.itemBelow(self.tripDataTree.topLevelItem((self.selectedTrip - 1))) == None:
+                    self.NextTripBtn.setEnabled(False)
+                else:
+                    self.NextTripBtn.setEnabled(True)
+                if self.tripDataTree.itemAbove(self.tripDataTree.topLevelItem((self.selectedTrip - 1))) == None:
+                    self.PrevTripBtn.setEnabled(False)
+                else:
+                    self.PrevTripBtn.setEnabled(True)
 
     # *******************************************
     # Update next/prev trip button state.
@@ -360,6 +393,9 @@ class UI(QMainWindow):
             self.eventsChart.fig.clearFigure()
             # Repopulate trips.
             self.populateTrips()
+            # Clear event filter applied flag and icon colour.
+            self.eventFilterApplied = False
+            self.actionEventFilter.setIcon(self.eFilterIconOff)
 
     # *******************************************
     # Show temporary status message.
@@ -405,6 +441,9 @@ class UI(QMainWindow):
             # Clear speed and event plots.
             self.spdFig.clearFigure()
             self.eventsChart.fig.clearFigure()
+            # Clear event filter applied flag and icon colour.
+            self.eventFilterApplied = False
+            self.actionEventFilter.setIcon(self.eFilterIconOff)
 
     # *******************************************
     # Process log file.
@@ -421,6 +460,10 @@ class UI(QMainWindow):
         # Disable expand / collapse buttons.
         self.actionCollapseAllLevels.setEnabled(False)
         self.actionExpandAllLevels.setEnabled(False)
+
+        # Clear event filter applied flag and icon colour.
+        self.eventFilterApplied = False
+        self.actionEventFilter.setIcon(self.eFilterIconOff)
 
         # Disable the export menu.
         self.actionExportCurrentTrip.setEnabled(False)
@@ -445,7 +488,7 @@ class UI(QMainWindow):
         else:
             logger.debug("No Controller ID for trip.")
 
-        # Look for all trips in the lof file.
+        # Look for all trips in the log file.
         self.numTrips = 0
         self.tripLog = []
 
@@ -486,6 +529,9 @@ class UI(QMainWindow):
             # Enable expand / collapse buttons.
             self.actionCollapseAllLevels.setEnabled(True)
             self.actionExpandAllLevels.setEnabled(True)
+
+            # Enable event filter button.
+            self.actionEventFilter.setEnabled(True)
 
             # Enable the export menu.
             self.actionExportCurrentTrip.setEnabled(True)
@@ -664,21 +710,27 @@ class UI(QMainWindow):
 
         # Determine trip details selected.
         # Get the currently selected item.
-        node = self.tripDataTree.selectedItems()[0]
-        # Look for the top parent (trip) for selected item.
-        while node.parent() != None:
-            node = node.parent()
-        # Extract the trip number from the column 0 text.
-        trip = node.text(0)
-        patternTrip = re.compile(r'Trip ([0-9]+) \[')
-        t = re.search(patternTrip, trip)
-        if t:
-            self.selectedTrip = int(t.group(1))
-        else:
-            # Error if trip number not found.
-            # Set selected trip 0 which will cause a termination.
-            logger.error("No trip number found.")
-            self.selectedTrip = 0
+        # If filtering in place then might not be a next trip.
+        try:
+            node = self.tripDataTree.selectedItems()[0]
+            # Look for the top parent (trip) for selected item.
+            while node.parent() != None:
+                node = node.parent()
+            # Extract the trip number from the column 0 text.
+            trip = node.text(0)
+            patternTrip = re.compile(r'Trip ([0-9]+) \[')
+            t = re.search(patternTrip, trip)
+            if t:
+                self.selectedTrip = int(t.group(1))
+            else:
+                # Error if trip number not found.
+                # Set selected trip to 0 which will cause a termination.
+                logger.error("No trip number found.")
+                self.selectedTrip = 0
+        except:
+            # Return the selection to the original trip, as no other trip.
+            self.selectedTrip = originalTrip
+            self.tripDataTree.setCurrentItem(self.tripDataTree.topLevelItem((self.selectedTrip - 1)))
 
         # If trip changed then update the trip summary information.
         if (self.selectedTrip != originalTrip):
@@ -752,7 +804,6 @@ class UI(QMainWindow):
     # Do plotting of speed etc.
     # *******************************************
     def plotTripData(self, tripNo):
-
         # Update speed plots.
         self.spdFig.updatePlotData(self.selectedTrip)
         self.spdFig.drawSpeedLimits(self.selectedTrip)
@@ -993,6 +1044,53 @@ class UI(QMainWindow):
             self.tripDataTree.expandAll()
 
     # *******************************************
+    # Toolbar to filter (on or off) trip data.
+    # *******************************************
+    def eventFilter(self):
+        logger.debug("User selected Event Filter control.")
+
+        # Check if filter applied, and if not apply.
+        if self.eventFilterApplied == False:
+            # First check if event filter already set, if not try and set.
+            if self.eventFilterSet == False:
+                self.setEventFilter()
+
+            # Check to see that filter was actually set.
+            if self.eventFilterSet == True:
+                # Go through all trips and include trips that include specific event.
+                searchList = self.tripDataTree.findItems(self.currentEventFilter, QtCore.Qt.MatchContains | QtCore.Qt.MatchRecursive, 0)
+
+                # Start with all items hidden.
+                for idx in range(self.numTrips):
+                    self.tripDataTree.topLevelItem((idx)).setHidden(True)
+
+                # Unhide all the items matching filter.
+                for item in searchList:
+                    # Find the parent of the item to show, and then un-hide.
+                    while item.parent() != None:
+                        item = item.parent()
+                    item.setHidden(False)
+
+                # Set filter applied flag and icon colour.
+                self.eventFilterApplied = True
+                self.actionEventFilter.setIcon(self.eFilterIconOn)
+
+                # Show the tree widget again.
+                self.tripDataTree.show()
+        else:
+            # Need to clear the filter, i.e. show all items.
+            # Unhide all items.
+            for idx in range(self.numTrips):
+                self.tripDataTree.topLevelItem((idx)).setHidden(False)
+
+            # Clear event filter applied flag and icon colour.
+            self.eventFilterApplied = False
+            self.actionEventFilter.setIcon(self.eFilterIconOff)
+
+            # Show the tree widget again.
+            self.tripDataTree.show()
+
+    # *******************************************
     # Menu item to show events chart window.
     # *******************************************
     def showEventsChartWindow(self):
@@ -1159,6 +1257,7 @@ class UI(QMainWindow):
     # *******************************************
     def loadLogFile(self):
         logger.debug("User selected Load Log File control.")
+
         # Configure and launch file selection dialog.
         dialog = QFileDialog(self)
         dialog.setAcceptMode(QFileDialog.AcceptOpen)
@@ -1203,6 +1302,16 @@ class UI(QMainWindow):
 
         # Create edit events chart config dialog.        
         EventsChartConfigDialog(config, self)
+
+    # *******************************************
+    # Event Filter Set control selected.
+    # Displays an "Event Filter Set" dialog box.
+    # *******************************************
+    def setEventFilter(self):
+        logger.debug("User selected Event Filter Set menu control.")
+
+        # Create edit event filter set dialog.        
+        EventFilterSetDialog(config, self)
 
     # *******************************************
     # About control selected.
@@ -1741,7 +1850,7 @@ class EventsChartConfigDialog(QDialog):
         self.plotCfg[7][3].valueChanged.connect((lambda: self.channelSelected(7)))
 
         # Configure combo boxes.
-        # Combine 'blank' and special traces with event traces from configuration.
+        # Combine 'blank' and special traces with events from configuration.
         eventOptions = ["", "Vehicle Speed", "Battery Voltage"] + self.config.events
 
         for p in self.plotCfg:
@@ -1864,6 +1973,72 @@ class EventsChartConfigDialog(QDialog):
         # If we have a trip then update plot data.
         if self.app.selectedTrip > 0:
             self.app.eventsChart.fig.updatePlotData(self.app.selectedTrip)
+
+# *******************************************
+# Event Filter Setting dialog class.
+# *******************************************
+class EventFilterSetDialog(QDialog):
+    def __init__(self, config, app):
+        super(EventFilterSetDialog, self).__init__()
+        uic.loadUi(res_path("eventFilter.ui"), self)
+
+        self.config = config
+        self.app = app
+
+        # Configure combo box.
+        # Combine 'blank' and events from configuration.
+        eventOptions = [""] + self.config.events
+
+        # Configure combo box.
+        self.EventCombo.addItems(eventOptions)
+
+        # Get current selection.
+        try:
+            # Look for current selection in list of events.
+            selection = eventOptions.index(self.app.currentEventFilter)
+        except:
+            # If no match then use first 'event' which is a blank.
+            selection = 0
+        self.EventCombo.setCurrentIndex(selection)
+        logger.debug("Event Filter item: {0:d}".format(selection))
+
+        # Connect to SAVE dialog button for processing.
+        self.SaveDialogBtn.clicked.connect(self.saveFilterSetting)
+
+        # Connect to CANCEL dialog button to quit dialog.
+        self.CancelDialogBtn.clicked.connect(self.close)
+
+        # Show the edit events chart config dialog.
+        self.showEventFilterSetting()
+
+    # *******************************************
+    # Displays a "Event Filter Setting" dialog box.
+    # *******************************************
+    def showEventFilterSetting(self):
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(res_path("./resources/about.png")))
+        self.setWindowIcon(icon)
+
+        # Show dialog.
+        self.exec_()
+
+    # *******************************************
+    # User selected to save event filter setting.
+    # *******************************************
+    def saveFilterSetting(self):
+        logger.debug("User saving event filter setting.")
+
+        # Save current event filter selection.
+        self.app.currentEventFilter = self.EventCombo.currentText()
+
+        # If not cleared than set flag saved.
+        if self.EventCombo.currentText() != "":
+            self.app.eventFilterSet = True
+        else:
+            self.app.eventFilterSet = False
+
+        # Close dialog.
+        self.close()
 
 # *******************************************
 # About dialog class.

@@ -1502,6 +1502,8 @@ color: rgb(0, 85, 255);</string>
     <addaction name="actionShowInputEvents"/>
     <addaction name="actionShowDebugEvents"/>
     <addaction name="actionShowOutOfTripEvents"/>
+    <addaction name="separator"/>
+    <addaction name="actionSetEventFilter"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -1569,6 +1571,7 @@ border-color: rgb(0, 170, 255);</string>
    </attribute>
    <addaction name="actionExpandAllLevels"/>
    <addaction name="actionCollapseAllLevels"/>
+   <addaction name="actionEventFilter"/>
   </widget>
   <action name="actionAbout">
    <property name="text">
@@ -1672,6 +1675,25 @@ border-color: rgb(0, 170, 255);</string>
   <action name="actionEventsChartConfig">
    <property name="text">
     <string>Event Chart Config</string>
+   </property>
+  </action>
+  <action name="actionEventFilter">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="iconText">
+    <string/>
+   </property>
+   <property name="toolTip">
+    <string>Event Filter</string>
+   </property>
+  </action>
+  <action name="actionSetEventFilter">
+   <property name="text">
+    <string>Set Event Filter</string>
    </property>
   </action>
  </widget>
