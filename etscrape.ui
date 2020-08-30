@@ -1480,6 +1480,8 @@ color: rgb(0, 85, 255);</string>
      </property>
      <addaction name="actionExportCurrentTrip"/>
      <addaction name="actionExportAllTrips"/>
+     <addaction name="separator"/>
+     <addaction name="actionFilterReport"/>
     </widget>
     <addaction name="actionLoadLog"/>
     <addaction name="menuExport_Report"/>
@@ -1694,6 +1696,14 @@ border-color: rgb(0, 170, 255);</string>
   <action name="actionSetEventFilter">
    <property name="text">
     <string>Set Event Filter</string>
+   </property>
+  </action>
+  <action name="actionFilterReport">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Filter Report</string>
    </property>
   </action>
  </widget>

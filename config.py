@@ -26,6 +26,8 @@ class Config():
 
         # Trip related data.
         self.TripData = {
+            "MinColumnWidth" : 165,
+            "DefaultColumn2Width" : 365,
             "TripBackColour" : "#ffff00",
             "TripColour" : "#000000",
             "EventColour" : "#0000ff",
@@ -40,8 +42,8 @@ class Config():
             "ShowInputEvents" : 1,
             "ShowDebugEvents" : 1,
             "ShowOutOfTripEvents" : 0,
-            "BadSpeedLimit" : 150,
-            "BadRpmLimit" : 15000
+            "BadSpeedLimit" : 100,
+            "BadRpmLimit" : 5200
         }
 
         # Speed plot data.

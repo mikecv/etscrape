@@ -45,21 +45,18 @@ from eventsChart import *
 #                       Cosmetic changes.
 # 0.7   MDC 17/08/2020  Add detection of battery voltage from event messages.
 #                       Add battery voltage to event plotting.
+#                       Added filtering by event type.
+#                       Cosmetic improvements.
 #                       Changed application icon to be a Scraper.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
-# Implement filtering trips containing specific events.
-# If item is hidden after filtering then need to get next if there is one. Alternatively, always set to first.
-# If filter changed then apply straight afterwards if applied already.
-# Add menu option and functionality to export filtered trips.
-# Increase width of column 0 on tree view as trip IDs can be wide numbers.
 # *******************************************
 
 # Program version.
-progVersion = "0.7 draft"
+progVersion = "0.7 (wip)"
 
 # Create configuration values class object.
 config = Config()
@@ -105,7 +102,6 @@ class UI(QMainWindow):
         self.actionLoadLog.triggered.connect(self.loadLogFile)
 
         # Set up show menu items according to configuration.
-        # These are just for the session, they are not written to configuration.
         self.actionShowInputEvents.setChecked(config.TripData["ShowInputEvents"])
         self.actionShowOtherEvents.setChecked(config.TripData["ShowOtherEvents"])
         self.actionShowDebugEvents.setChecked(config.TripData["ShowDebugEvents"])
@@ -180,11 +176,12 @@ class UI(QMainWindow):
         self.numTrips = 0
         self.selectedTrip = 0
 
-        # Initialise flags indicating that event filter has a setting and is applied.
+        # Initialise flags indicating that event filter is applied.
         # Also initialise the current event filter.
-        self.eventFilterSet = False
         self.eventFilterApplied = False
         self.currentEventFilter = ""
+        self.currentEventAlertFilter = False
+        self.numFilteredTripsIn = 0
 
         # Disable event filter button.
         self.actionEventFilter.setEnabled(False)
@@ -569,8 +566,9 @@ class UI(QMainWindow):
         # Define a tree widget for trip data.
         self.tripDataTree = QTreeWidget()
         self.tripDataTree.setHeaderLabels(['Trip Data', '', ''])
-        self.tripDataTree.header().setSectionResizeMode(QHeaderView.ResizeToContents)
-        self.tripDataTree.header().setStretchLastSection(False)
+        self.tripDataTree.header().setMinimumSectionSize(config.TripData["MinColumnWidth"])
+        self.tripDataTree.header().resizeSection(1, config.TripData["DefaultColumn2Width"])
+        self.tripDataTree.header().setSectionResizeMode(QHeaderView.Interactive)
         self.tripDataTree.setAlternatingRowColors(True)
 
         fontBold = QtGui.QFont()
@@ -653,6 +651,8 @@ class UI(QMainWindow):
                             detailLevel.setForeground(1, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
                             # If detail alert then also use alert colour for related event.
                             eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
+                            # Set flag indicating trip in alert; used for filtering.
+                            t.tripInAlert = True
 
                             # If detail alert then also use alert colour for related trip.
                             # Don't highlight trip if event is hidden.
@@ -876,10 +876,27 @@ class UI(QMainWindow):
                 # Change to wait cursor as exporting a lot of files may take a while.
                 QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
 
+                # If report is filtered then indicate in the report.
+                if self.actionFilterReport.isChecked():
+                    logger.debug("Exporting preamble to indicate filtered export.")
+                    xf.write("===================================================\n")
+                    xf.write(" This trip export has event filtering applied.\n")
+                    xf.write(" Includes trips with event : {0:s}\n".format(self.currentEventFilter))
+                    xf.write(" For trips in alert : {0}\n".format(self.currentEventAlertFilter))
+                    xf.write(" Includes {0:d} of {1:d} trips.\n".format(self.numFilteredTripsIn, self.numTrips))
+                    xf.write("===================================================\n")
+    
                 # Cycle through each trip and export.
-                for t in self.tripLog:
-                    # Export trip.
-                    self.exportTrip(xf, t)
+                for tidx, t in enumerate(self.tripLog):
+
+                    # If checkbox set to filter reports then only export if not hidden.
+                    if self.actionFilterReport.isChecked():
+                        if not self.tripDataTree.topLevelItem(tidx).isHidden():
+                            # Export trip.
+                            self.exportTrip(xf, t)
+                    else:
+                        # Export trip.
+                        self.exportTrip(xf, t)
 
                 # Retore the wait cursor now that export complete.
                 QApplication.restoreOverrideCursor()
@@ -1046,37 +1063,56 @@ class UI(QMainWindow):
     # *******************************************
     # Toolbar to filter (on or off) trip data.
     # *******************************************
-    def eventFilter(self):
-        logger.debug("User selected Event Filter control.")
+    def eventFilter(self, reapply=False):
+        logger.debug("User selected Event Filter control, or Event Filter reapplied.")
 
         # Check if filter applied, and if not apply.
-        if self.eventFilterApplied == False:
-            # First check if event filter already set, if not try and set.
-            if self.eventFilterSet == False:
-                self.setEventFilter()
+        # Reapply if required.
+        if (self.eventFilterApplied == False) or (reapply == True):
 
-            # Check to see that filter was actually set.
-            if self.eventFilterSet == True:
-                # Go through all trips and include trips that include specific event.
-                searchList = self.tripDataTree.findItems(self.currentEventFilter, QtCore.Qt.MatchContains | QtCore.Qt.MatchRecursive, 0)
+            # Go through all trips and include trips that include specific event.
+            searchList = self.tripDataTree.findItems(self.currentEventFilter, QtCore.Qt.MatchContains | QtCore.Qt.MatchRecursive, 0)
 
-                # Start with all items hidden.
-                for idx in range(self.numTrips):
-                    self.tripDataTree.topLevelItem((idx)).setHidden(True)
+            # Start with all items hidden.
+            for idx in range(self.numTrips):
+                self.tripDataTree.topLevelItem((idx)).setHidden(True)
 
-                # Unhide all the items matching filter.
-                for item in searchList:
-                    # Find the parent of the item to show, and then un-hide.
-                    while item.parent() != None:
-                        item = item.parent()
-                    item.setHidden(False)
+            # Initialise number filtered items 0 (all hidden).
+            self.numFilteredTripsIn = 0
 
-                # Set filter applied flag and icon colour.
-                self.eventFilterApplied = True
-                self.actionEventFilter.setIcon(self.eFilterIconOn)
+            # Unhide all the items matching filter.
+            for item in searchList:
+                # Find the parent of the item to show.
+                while item.parent() != None:
+                    item = item.parent()
+                # Hide item if not already hidden.
+                # Do this as can be more than one event in a trip that matches filtered
+                if item.isHidden():
+                    # Check if filter setting to filter if in alert.
+                    if self.currentEventAlertFilter:
+                        # Check if trip is in alert state.
+                        if self.tripLog[self.tripDataTree.indexOfTopLevelItem(item)].tripInAlert:
+                            item.setHidden(False)
+                            self.numFilteredTripsIn += 1
+                    else:
+                        item.setHidden(False)
+                        self.numFilteredTripsIn += 1
 
-                # Show the tree widget again.
-                self.tripDataTree.show()
+            # Set filter applied flag and icon colour.
+            self.eventFilterApplied = True
+            self.actionEventFilter.setIcon(self.eFilterIconOn)
+
+            # Need to check if the currently selected trip is still visibile (or not).
+            currentItem = self.tripDataTree.currentItem()
+            if currentItem.isHidden():
+                # Trip is not visible in filter, therefore pick the nearest one.
+                self.tripDataTree.scrollToItem(self.tripDataTree.setCurrentItem(self.tripDataTree.itemBelow(currentItem)))
+            else:
+                # Item still visible so just scroll to it.
+                self.tripDataTree.scrollToItem(currentItem)
+
+            # Show the tree widget again.
+            self.tripDataTree.show()
         else:
             # Need to clear the filter, i.e. show all items.
             # Unhide all items.
@@ -1086,6 +1122,13 @@ class UI(QMainWindow):
             # Clear event filter applied flag and icon colour.
             self.eventFilterApplied = False
             self.actionEventFilter.setIcon(self.eFilterIconOff)
+
+            # Number of filtered trips in is all as no filtering.
+            self.numFilteredTripsIn = self.numTrips
+
+            # Need to make sure current item is still visible in view, so scroll to it.
+            currentItem = self.tripDataTree.currentItem()
+            self.tripDataTree.scrollToItem(currentItem)
 
             # Show the tree widget again.
             self.tripDataTree.show()
@@ -1419,17 +1462,26 @@ class PreferencesDialog(QDialog):
         # Preload the configuration values.
 
         # Debug values.
-        self.debugLevelVal.setValidator(QtGui.QIntValidator(0, 100))
+        # Validate debugLevelVal 0 to 100.
+        self.debugLevelVal.setValidator(self.regexValidator('^([0-9]|([1-9][0-9])|100)$'))
         self.debugLevelVal.setText(str(self.config.DebugLevel))
-        self.debugFileSizeVal.setValidator(QtGui.QIntValidator(1, 1000))
+        # Validate debugFileSizeVal 1 to 1000.
+        self.debugFileSizeVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|([1-9][0-9][0-9])|1000)$'))
         self.debugFileSizeVal.setText(str(int(self.config.LogFileSize / 1000)))
-        self.debugBackupsVal.setValidator(QtGui.QIntValidator(1, 3))
+        # Validate debugBackupsVal 1 to 3.
+        self.debugBackupsVal.setValidator(self.regexValidator('^([1-3])$'))
         self.debugBackupsVal.setText(str(self.config.LogBackups))
 
         # Locale values.
         self.utcVal.setChecked(not (self.config.TimeUTC == 0))
 
         # Trip values.
+        # Validate minColWidthVal 1 to 185.
+        self.minColWidthVal.setValidator(self.regexValidator('^(([1-9][0-9])|(1[0-7][0-9])|(18[0-5])|185)$'))
+        self.minColWidthVal.setText(str(int(self.config.TripData["MinColumnWidth"])))
+        # Validate defWidthCol2Val 1 to 385.
+        self.defWidthCol2Val.setValidator(self.regexValidator('^(([1-2][0-9][0-9])|(3[0-7][0-9])|(38[0-5])|385)$'))
+        self.defWidthCol2Val.setText(str(int(self.config.TripData["DefaultColumn2Width"])))
         self.tripTitleBgColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.TripData["TripBackColour"]))
         self.tripTitleBgColVal.clicked.connect(lambda: self.getColour(self.tripTitleBgColVal))
         self.tripIDTxtColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.TripData["TripColour"]))
@@ -1448,29 +1500,36 @@ class PreferencesDialog(QDialog):
         self.inputEventColVal.clicked.connect(lambda: self.getColour(self.inputEventColVal))
         self.debugEventColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.TripData["DebugEventColour"]))
         self.debugEventColVal.clicked.connect(lambda: self.getColour(self.debugEventColVal))
-        self.tempMsgMsecVal.setValidator(QtGui.QIntValidator(1, 60))
+        # Validate tempMsgMsecVal 1 to 60.
+        self.tempMsgMsecVal.setValidator(self.regexValidator('^([0-9]|([1-5][0-9])|60)$'))
         self.tempMsgMsecVal.setText(str(int(self.config.TripData["TmpStatusMessagesMsec"] / 1000)))
         self.showOtherVal.setChecked(self.app.actionShowOtherEvents.isChecked())
         self.showInputVal.setChecked(self.app.actionShowInputEvents.isChecked())
         self.showDebugVal.setChecked(self.app.actionShowDebugEvents.isChecked())
         self.showOutOfTripVal.setChecked(self.app.actionShowOutOfTripEvents.isChecked())
-        self.speedAlertLimVal.setValidator(QtGui.QIntValidator(30, 160))
+        # Validate speedAlertLimVal 1 to 160.
+        self.speedAlertLimVal.setValidator(self.regexValidator('^(([1-9][0-9])|(1[0-5][0-9])|160)$'))
         self.speedAlertLimVal.setText(str(self.config.TripData["BadSpeedLimit"]))
-        self.rpmAlertLimVal.setValidator(QtGui.QIntValidator(500, 10000))
+        # Validate rpmAlertLimVal 1 to 10000.
+        self.rpmAlertLimVal.setValidator(self.regexValidator('^(([1-9][0-9][0-9][0-9])|10000)$'))
         self.rpmAlertLimVal.setText(str(self.config.TripData["BadRpmLimit"]))
 
         # Speed plot values.
-        self.lowSpeedVal.setValidator(QtGui.QIntValidator(1, 160))
+        # Validate lowSpeedVal 1 to 160.
+        self.lowSpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
         self.lowSpeedVal.setText(str(self.config.SpdPlot["DefaultLowLimit"]))
-        self.highSpeedVal.setValidator(QtGui.QIntValidator(1, 160))
+        # Validate highSpeedVal 1 to 160.
+        self.highSpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
         self.highSpeedVal.setText(str(self.config.SpdPlot["DefaultHiLimit"]))
         self.speedLineColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.SpdPlot["SpeedColour"]))
         self.speedLineColVal.clicked.connect(lambda: self.getColour(self.speedLineColVal))
         self.zoneLineColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.SpdPlot["ZoneColour"]))
         self.zoneLineColVal.clicked.connect(lambda: self.getColour(self.zoneLineColVal))
-        self.axisFontSizeVal.setValidator(QtGui.QIntValidator(5, 10))
+        # Validate axisFontSizeVal 1 to 10.
+        self.axisFontSizeVal.setValidator(self.regexValidator('^([1-9]|10)$'))
         self.axisFontSizeVal.setText(str(self.config.SpdPlot["AxesTitleFontSize"]))
-        self.titleFontSizeVal.setValidator(QtGui.QIntValidator(6, 12))
+        # Validate titleFontSizeVal 1 to 12.
+        self.titleFontSizeVal.setValidator(self.regexValidator('^([1-9]|(1[0-2]))$'))
         self.titleFontSizeVal.setText(str(self.config.SpdPlot["PlotTitleFontSize"]))
 
         # Event plot values.
@@ -1482,9 +1541,11 @@ class PreferencesDialog(QDialog):
         self.tripLineColVal.clicked.connect(lambda: self.getColour(self.tripLineColVal))
         self.tripFillColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.EvPlot["TripFillColour"]))
         self.tripFillColVal.clicked.connect(lambda: self.getColour(self.tripFillColVal))
-        self.eventAxisFontSizeVal.setValidator(QtGui.QIntValidator(5, 10))
+        # Validate eventAxisFontSizeVal 1 to 10.
+        self.eventAxisFontSizeVal.setValidator(self.regexValidator('^([1-9]|10)$'))
         self.eventAxisFontSizeVal.setText(str(self.config.EvPlot["AxesTitleFontSize"]))
-        self.eventTitleFontSizeVal.setValidator(QtGui.QIntValidator(6, 12))
+        # Validate eventTitleFontSizeVal 1 to 12.
+        self.eventTitleFontSizeVal.setValidator(self.regexValidator('^([1-9]|(1[0-2]))$'))
         self.eventTitleFontSizeVal.setText(str(self.config.EvPlot["PlotTitleFontSize"]))
 
         # Connect to SAVE dialog button for processing.
@@ -1494,6 +1555,12 @@ class PreferencesDialog(QDialog):
 
         # Show the edit preferences dialog.
         self.showPreferences()
+
+    # *******************************************
+    # Return a validator based on a regexp.
+    # *******************************************
+    def regexValidator(self, rex):
+        return QtGui.QRegExpValidator(QtCore.QRegExp(rex))
 
     # *******************************************
     # Pick a colour and set.
@@ -1569,6 +1636,20 @@ class PreferencesDialog(QDialog):
         ###########################
         # Trip Data
         ###########################
+        # Minimum column width.
+        val = int(self.minColWidthVal.text())
+        if val != self.config.TripData["MinColumnWidth"]:
+            # Set the configuration value.
+            self.config.TripData["MinColumnWidth"] = val
+            logger.debug("Change to minimum column width: {0:d}".format(self.config.TripData["MinColumnWidth"]))
+            prefChanged = True
+        # Default width.for column 2 (actually column 1 as 0 based).
+        val = int(self.defWidthCol2Val.text())
+        if val != self.config.TripData["DefaultColumn2Width"]:
+            # Set the configuration value.
+            self.config.TripData["DefaultColumn2Width"] = val
+            logger.debug("Change to default width for column 2: {0:d}".format(self.config.TripData["DefaultColumn2Width"]))
+            prefChanged = True
         # Trip title background colour.
         col = self.tripTitleBgColVal.palette().button().color().name()
         if col != self.config.TripData["TripBackColour"]:
@@ -1992,15 +2073,19 @@ class EventFilterSetDialog(QDialog):
         # Configure combo box.
         self.EventCombo.addItems(eventOptions)
 
-        # Get current selection.
+        # Get current event selection.
         try:
             # Look for current selection in list of events.
-            selection = eventOptions.index(self.app.currentEventFilter)
+            eventSelection = eventOptions.index(self.app.currentEventFilter)
         except:
             # If no match then use first 'event' which is a blank.
-            selection = 0
-        self.EventCombo.setCurrentIndex(selection)
-        logger.debug("Event Filter item: {0:d}".format(selection))
+            eventSelection = 0
+        self.EventCombo.setCurrentIndex(eventSelection)
+        logger.debug("Event Filter item: {0:d}".format(eventSelection))
+
+        # Get current event selection.
+        self.eventInAlertCB.setChecked(self.app.currentEventAlertFilter)
+        logger.debug("Event Filter trips in alert: {0}".format(self.app.currentEventAlertFilter))
 
         # Connect to SAVE dialog button for processing.
         self.SaveDialogBtn.clicked.connect(self.saveFilterSetting)
@@ -2030,12 +2115,19 @@ class EventFilterSetDialog(QDialog):
 
         # Save current event filter selection.
         self.app.currentEventFilter = self.EventCombo.currentText()
+        self.app.currentEventAlertFilter = self.eventInAlertCB.isChecked()
 
         # If not cleared than set flag saved.
-        if self.EventCombo.currentText() != "":
-            self.app.eventFilterSet = True
-        else:
-            self.app.eventFilterSet = False
+        # if self.EventCombo.currentText() != "":
+        #     self.app.eventFilterSet = True
+        # else:
+        #     self.app.eventFilterSet = False
+        self.app.eventFilterSet = True
+
+        # If filter is currently active, then need to reapply as may have changed.
+        # Not checking if different to before, just doing it.
+        if self.app.eventFilterApplied:
+            self.app.eventFilter(True)
 
         # Close dialog.
         self.close()
@@ -2094,9 +2186,13 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.7</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added battery voltage from event messages to trip data display, and also to event plots.</li>" \
+            "<li>Added filtering of trips that include specified event; including filtering of trips in alert condition.</li>" \
+            "<li>Added menu checklist option to apply current filter to all trip export.</li>" \
             "<li>Refactored configuration class to restrict events list to actual events, i.e. vehicle speed and battery voltage not included," \
             "they are however included in event trace selection drop-down boxes.</li>" \
+            "<li>Made trip data column widths changeable; set minimum width; configurable from preferences dialog.</li>" \
             "<li>Fixed trip duration for unended trips in trip summary.</li>" \
+            "<li>Fixed bugs with validating preferences integer entry; not ideal but workable.</li>" \
             "<li>Changed application icon to be a scraper; changed the About icon size to be a bit larger to suit icon aspect.</li>" \
             "<li>Reduced size of markers on speed plot on main application window.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.6</b></h2>")

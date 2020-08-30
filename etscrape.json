@@ -1,10 +1,12 @@
 {
     "ConfigVersion": 7,
-    "DebugLevel": 10,
+    "DebugLevel": 20,
     "LogFileSize": 100000,
     "LogBackups": 3,
     "TimeUTC": 1,
     "TripData": {
+        "MinColumnWidth": 165,
+        "DefaultColumn2Width": 365,
         "TripBackColour": "#ffff00",
         "TripColour": "#000000",
         "EventColour": "#0000ff",
@@ -19,8 +21,8 @@
         "ShowInputEvents": 1,
         "ShowDebugEvents": 1,
         "ShowOutOfTripEvents": 0,
-        "BadSpeedLimit": 150,
-        "BadRpmLimit": 15000
+        "BadSpeedLimit": 100,
+        "BadRpmLimit": 5200
     },
     "SpdPlot": {
         "DefaultLowLimit": 30,
@@ -88,16 +90,24 @@
             "Title": "Vehicle Speed"
         },
         {
-            "Event": "Battery Voltage",
-            "Title": "Battery Voltage"
+            "Event": "ENGINEOVERSPEED",
+            "Title": "Engine Overspeed"
+        },
+        {
+            "Event": "OILPRESSURE",
+            "Title": "Engine Oil Pressure Low"
+        },
+        {
+            "Event": "INPUT",
+            "Channel": 1
+        },
+        {
+            "Event": "INPUT",
+            "Channel": 3
         },
         {
             "Event": "INPUT",
             "Channel": 4
-        },
-        {
-            "Event": "IMPACT",
-            "Title": "Vehicle Impact"
         }
     ]
 }

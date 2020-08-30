@@ -133,10 +133,14 @@ class Trip():
     # Extract trip data from buffer snippet.
     # *******************************************
     def extractTripData(self):
-        # TimingTrip(
+        # Trip timing.
         self.tripStart = 0
         self.tripEnd = 0
         self.signOnId = 0
+
+        # Trip in alert.
+        # Used by trip data display.
+        self.tripInAlert = False
 
         # Total event category totals.
         self.numVehicleEvents = 0
@@ -169,8 +173,8 @@ class Trip():
         # Track first from zone.
         self.firstFromZone = None
 
-        # Initialise flag to stop collecting trip speed plot data.
-        self.stopSpeedData = False
+        # Initialise flag to stop collecting extra data past end of trip.
+        self.stopExtraData = False
 
         # ******************************
         # Look for SIGNON event.
@@ -214,13 +218,15 @@ class Trip():
                 event.speed = int(su.group(9))
 
                 # Read battery voltage from event header.
-                event.battery = int(sp.group(7)) / 10.0
-                # And add to battery level list.
-                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                # But only if still collecting extra data, i.e. trip has not ended.
+                if not self.stopExtraData:
+                    event.battery = int(sp.group(7)) / 10.0
+                    # And add to battery level list.
+                    self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                # Check for negative battery voltage condition.
-                if event.battery < 0:
-                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                    # Check for negative battery voltage condition.
+                    if event.battery < 0:
+                        event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                 # Increment event counters.
                 self.numTripEvents += 1
@@ -245,8 +251,8 @@ class Trip():
                     self.lastTime = int(su.group(4))
 
                 # Get speed data from event header.
-                # But only if still collecting speed data, i.e. trip has not ended.
-                if not self.stopSpeedData:
+                # But only if still collecting extra data, i.e. trip has not ended.
+                if not self.stopExtraData:
                     event.speed = int(su.group(9))
                     # Don't get speed from POWERDOWN event as these events occur out of order.
                     if su.group(10) != "POWERDOWN": 
@@ -272,13 +278,16 @@ class Trip():
                         event.duration = int(sp.group(2))
 
                         # Read battery voltage from event header.
-                        event.battery = int(sp.group(3)) / 10.0
-                        # And add to battery level list.
-                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            # Read battery voltage from event header.
+                            event.battery = int(sp.group(3)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                        # Check for negative battery voltage condition.
-                        if event.battery < 0:
-                            event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numVehicleEvents += 1
@@ -299,9 +308,16 @@ class Trip():
                         event.zoneOutput = int(sp.group(4))
 
                         # Read battery voltage from event header.
-                        event.battery = int(sp.group(5)) / 10.0
-                        # And add to battery level list.
-                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            # Read battery voltage from event header.
+                            event.battery = int(sp.group(5)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numVehicleEvents += 1
@@ -321,9 +337,15 @@ class Trip():
                         event.maxRPM = int(sp.group(3))
 
                         # Read battery voltage from event header.
-                        event.battery = int(sp.group(4)) / 10.0
-                        # And add to battery level list.
-                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp.group(4)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numVehicleEvents += 1
@@ -342,9 +364,15 @@ class Trip():
                         event.duration = int(sp.group(2))
 
                         # Read battery voltage from event header.
-                        event.battery = int(sp.group(3)) / 10.0
-                        # And add to battery level list.
-                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp.group(3)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numVehicleEvents += 1
@@ -369,9 +397,15 @@ class Trip():
                         event.seatOwner = sp.group(3)
 
                         # Read battery voltage from event header.
-                        event.battery = int(sp.group(4)) / 10.0
-                        # And add to battery level list.
-                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp.group(4)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numOperatorEvents += 1
@@ -395,9 +429,15 @@ class Trip():
                         event.zoneOutput = int(sp.group(4))
 
                         # Read battery voltage from event header.
-                        event.battery = int(sp.group(5)) / 10.0
-                        # And add to battery level list.
-                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp.group(5)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numOperatorEvents += 1
@@ -433,9 +473,15 @@ class Trip():
                         event.severity = sp.group(8)
 
                         # Read battery voltage from event header.
-                        event.battery = int(sp.group(9)) / 10.0
-                        # And add to battery level list.
-                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp.group(9)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numVehicleEvents += 1
@@ -463,9 +509,15 @@ class Trip():
                         event.chkType = sp.group(6)
 
                         # Read battery voltage from event header.
-                        event.battery = int(sp.group(7)) / 10.0
-                        # And add to battery level list.
-                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp.group(7)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numOperatorEvents += 1
@@ -483,9 +535,15 @@ class Trip():
                         event.signOnId = int(sp.group(1))
 
                         # Read battery voltage from event header.
-                        event.battery = int(sp.group(2)) / 10.0
-                        # And add to battery level list.
-                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp.group(2)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numVehicleEvents += 1
@@ -503,9 +561,15 @@ class Trip():
                         event.maxIdle = int(sp.group(2))
 
                         # Read battery voltage from event header.
-                        event.battery = int(sp.group(3)) / 10.0
-                        # And add to battery level list.
-                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp.group(3)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numVehicleEvents += 1
@@ -558,9 +622,15 @@ class Trip():
                         event.direction = int(sp.group(3))
 
                         # Read battery voltage from event header.
-                        event.battery = int(sp.group(4)) / 10.0
-                        # And add to battery level list.
-                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp.group(4)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numReportEvents += 1
@@ -578,9 +648,15 @@ class Trip():
                         event.criticalOutput = int(sp.group(2))
 
                         # Read battery voltage from event header.
-                        event.battery = int(sp.group(3)) / 10.0
-                        # And add to battery level list.
-                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp.group(3)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Add event to list of events.
                         self.events.append(event)
@@ -598,9 +674,15 @@ class Trip():
                         # That is, if inputState is inactive state (0) then active time will always be 0.
 
                         # Read battery voltage from event header.
-                        event.battery = int(sp.group(4)) / 10.0
-                        # And add to battery level list.
-                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp.group(4)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # For input events add the input number to the alert field.
                         # This is useful for looking for particular inputs when the events column is collapsed.
@@ -634,9 +716,15 @@ class Trip():
                             event.alertText = appendAlertText(event.alertText, "BAD time detected.")
 
                         # Read battery voltage from event header.
-                        event.battery = int(sp.group(2)) / 10.0
-                        # And add to battery level list.
-                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp.group(2)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Indicate event is Debug event to control presentation format.
                         event.isDebug = True
@@ -662,9 +750,15 @@ class Trip():
                         event.maxIdle = int(sp.group(5))
 
                         # Read battery voltage from event header.
-                        event.battery = int(sp.group(7)) / 10.0
-                        # And add to battery level list.
-                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp.group(7)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numTripEvents += 1
@@ -692,8 +786,8 @@ class Trip():
                         if diff != 0:
                             event.alertText = appendAlertText(event.alertText, "Trip time inconsistent.")
 
-                        # Don't want to collect eny more speed data as not useful for trip speed plots.
-                        self.stopSpeedData = True
+                        # Don't want to collect eny more extra data as not useful for trip plots.
+                        self.stopExtraData = True
 
                         # Add event to list of events.
                         self.events.append(event)
