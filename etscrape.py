@@ -53,6 +53,9 @@ from eventsChart import *
 # *******************************************
 # TODO List
 #
+# Change export filtered trips to be menu selection and not a check box.
+# Rework event filtering to associate the alert status WITH the event being filtered.
+# Update help.
 # *******************************************
 
 # Program version.
