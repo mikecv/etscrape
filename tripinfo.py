@@ -53,6 +53,7 @@ class Event():
         self.timeFwd = 0
         self.timeRev = 0
         self.timeIdle = 0
+        self.timeOnSeat = 0
         self.speed = 0
         self.direction = 0
         self.inputNo = 0
@@ -68,6 +69,8 @@ class Event():
         self.liftCount = 0
         self.cumWeight = 0
         self.battery = 0.0
+        self.voltage = 0.0
+        self.batteryState = ""
 
 # *******************************************
 # Speed Info class.
@@ -733,7 +736,32 @@ class Trip():
                         # Add event to list of events.
                         self.events.append(event)
                 # *********************************************************************************************************************************************
-                # TRIP event.
+                # POWER event.
+                # *********************************************************************************************************************************************
+                elif event.event == "POWER":
+                    specPatern = re.compile(r'([0-9]+) ([ _A-Z]+) ([0-9]+) v:([0-9]+)$')
+                    sp = re.search(specPatern, eventSpecifics)
+                    if sp:
+                        event.signOnId = int(sp.group(3))
+                        event.voltage = int(sp.group(1)) / 10.0
+                        event.batteryState = sp.group(2)
+
+                        # If battery voltage not okay set alert text.
+                        if event.batteryState != "OK":
+                            event.alertText = appendAlertText(event.alertText, "Battery not OK.")
+
+
+                        # Read battery voltage from event header.
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp.group(4)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                        # Add event to list of events.
+                        self.events.append(event)
+                # *********************************************************************************************************************************************
+                # TRIP event (EarthTrack)
                 # *********************************************************************************************************************************************
                 elif event.event == "TRIP":   
 
@@ -748,6 +776,7 @@ class Trip():
                         event.timeRev = int(sp.group(3))
                         event.timeIdle = int(sp.group(4))
                         event.maxIdle = int(sp.group(5))
+                        event.timeOnSeat = int(sp.group(6))
 
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.

@@ -48,6 +48,7 @@ from eventsChart import *
 #                       Added filtering by event type.
 #                       Cosmetic improvements.
 #                       Changed application icon to be a Scraper.
+#                       Added POWER event.
 # *******************************************
 
 # *******************************************
@@ -55,6 +56,7 @@ from eventsChart import *
 #
 # Change export filtered trips to be menu selection and not a check box.
 # Rework event filtering to associate the alert status WITH the event being filtered.
+# Add power event support to filtering and plotting.
 # Update help.
 # *******************************************
 
@@ -1043,6 +1045,7 @@ class UI(QMainWindow):
                 xf.write("\tTime Reverse      : {0:s}\n".format(str(timedelta(seconds=ev.timeRev))))
                 xf.write("\tTime Idle         : {0:s}\n".format(str(timedelta(seconds=ev.timeIdle))))
                 xf.write("\tMax Idle Time     : {0:s}\n".format(str(timedelta(seconds=ev.maxIdle))))
+                xf.write("\tTime on Seat      : {0:s}\n".format(str(timedelta(seconds=ev.timeOnSeat))))
             elif ev.event == "TRIPSUMMARY":
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
         xf.write("===================================================\n\n")
@@ -1274,6 +1277,11 @@ class UI(QMainWindow):
             eventList.append(("Input", "{0:d} - {1:s}".format(event.inputNo, config.Channels[event.inputNo - 1]["Name"]), ((event.inputNo < 1) or (event.inputNo > 10))))
             eventList.append(("State", "{0:d}".format(event.inputState), ((event.inputState < 0) or (event.inputState > 1))))
             eventList.append(("Active Time", "{0:s}".format(str(timedelta(seconds=event.activeTime))), False))
+        elif event.event == "POWER":
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.voltage), (event.voltage < 0)))
+            eventList.append(("Battery State", "{0:s}".format(event.batteryState), (event.batteryState != "OK")))
         elif event.event == "DEBUG":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Details", "{0:s}".format(event.debugInfo), ("Time1H" in event.debugInfo)))
@@ -1284,6 +1292,7 @@ class UI(QMainWindow):
             eventList.append(("Time Reverse", "{0:s}".format(str(timedelta(seconds=event.timeRev))), False))
             eventList.append(("Time Idle", "{0:s}".format(str(timedelta(seconds=event.timeIdle))), False))
             eventList.append(("Max Idle Time", "{0:s}".format(str(timedelta(seconds=event.maxIdle))), False))
+            eventList.append(("Time on Seat", "{0:s}".format(str(timedelta(seconds=event.timeOnSeat))), False))
         elif event.event == "TRIPSUMMARY":
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
         elif event.event == "TRIPLOAD":
@@ -2191,10 +2200,12 @@ class ChangeLogDialog(QDialog):
             "<li>Added battery voltage from event messages to trip data display, and also to event plots.</li>" \
             "<li>Added filtering of trips that include specified event; including filtering of trips in alert condition.</li>" \
             "<li>Added menu checklist option to apply current filter to all trip export.</li>" \
-            "<li>Refactored configuration class to restrict events list to actual events, i.e. vehicle speed and battery voltage not included," \
+            "<li>Added support for POWER event.</li>" \
+           "<li>Refactored configuration class to restrict events list to actual events, i.e. vehicle speed and battery voltage not included," \
             "they are however included in event trace selection drop-down boxes.</li>" \
             "<li>Made trip data column widths changeable; set minimum width; configurable from preferences dialog.</li>" \
             "<li>Fixed trip duration for unended trips in trip summary.</li>" \
+            "<li>Added 'Time on Seat' parameter to TRIP event for compatibility with Smartrack.</li>" \
             "<li>Fixed bugs with validating preferences integer entry; not ideal but workable.</li>" \
             "<li>Changed application icon to be a scraper; changed the About icon size to be a bit larger to suit icon aspect.</li>" \
             "<li>Reduced size of markers on speed plot on main application window.</li></ul><br>")
