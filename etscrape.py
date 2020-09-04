@@ -47,6 +47,7 @@ from eventsChart import *
 #                       Add battery voltage to event plotting.
 #                       Added filtering by event type.
 #                       Cosmetic improvements.
+#                       Bug fixes to event data.
 #                       Changed application icon to be a Scraper.
 #                       Added POWER event.
 # *******************************************
@@ -57,6 +58,7 @@ from eventsChart import *
 # Change export filtered trips to be menu selection and not a check box.
 # Rework event filtering to associate the alert status WITH the event being filtered.
 # Add power event support to filtering and plotting.
+# Have separate list for fileter events, e.g. want to filter e.g. XSIDLE but not plot it in charts.
 # Update help.
 # *******************************************
 
@@ -1026,6 +1028,7 @@ class UI(QMainWindow):
             elif ev.event == "XSIDLE":
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tMaximum Idle Time : {0:s}\n".format(str(timedelta(seconds=ev.maxIdle))))
+                xf.write("\tIdle Reason       : {0:d}\n".format(ev.xsidleReason))
             elif ev.event == "SERVICE":
                 xf.write("\tService ID        : {0:d}\n".format(ev.serviceId))
             elif ev.event == "REPORT":
@@ -1252,6 +1255,7 @@ class UI(QMainWindow):
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Max Idle Time", "{0:s}".format(str(timedelta(seconds=event.maxIdle))), (event.maxIdle == 0)))
+            eventList.append(("Idle Reason", "{0:d}".format(event.xsidleReason), False))
         elif event.event == "CONFIG":
             pass
         elif event.event == "SERVICE":
@@ -2204,6 +2208,7 @@ class ChangeLogDialog(QDialog):
            "<li>Refactored configuration class to restrict events list to actual events, i.e. vehicle speed and battery voltage not included," \
             "they are however included in event trace selection drop-down boxes.</li>" \
             "<li>Made trip data column widths changeable; set minimum width; configurable from preferences dialog.</li>" \
+            "<li>Fixed XSIDLE event data to account for XSIDLE reason which appears in some implementations.</li>" \
             "<li>Fixed trip duration for unended trips in trip summary.</li>" \
             "<li>Added 'Time on Seat' parameter to TRIP event for compatibility with Smartrack.</li>" \
             "<li>Fixed bugs with validating preferences integer entry; not ideal but workable.</li>" \
