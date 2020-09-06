@@ -36,20 +36,32 @@ function closeNav() {
 }
 </script>
 
-<p>The application allows exporting of trip events for the currently selected trip or all trips in the log file.
-The export options are available from the application menu if a log file is loaded.
+<p>The application allows exporting of trip events for the currently selected trip, all trips in the log file,
+or all filtered trips (refer to <a href="eventFilter.html">Event Filtering</a>).
+The export options are available from the application menu if a log file is loaded,
+with the exception of the &#34;All trips (filtered)&#34; option which is only available if a filter has been applied.
 Once selected, a file selection dialog is presented allowing the user to select the file to export to.</p>
 
 <img src="./exportMenu.png" alt="Export menu">
 
 <p>Exporting is in plain text and mostly reflects the data presented on the Trip Data and Trip Summary panes;
 trip speed data is not exported other than as part of event information.</p>
+
 <p>If exporting data for all trips is selected, all trips are exported to a single file.</p>
+
+<p>If exporting data for all filtered trips is selected, all trips matching the filter are exported to a single file.
+Note that trips mathcing the filter are always displayed in the Trip Data pane when the filter is applied.</p>
+
 <p>For each trip the export consists of a header that includes the trip time, contoller ID, and sign-on ID,
 followed by a summary table of events in the trip, and then followed by each of the events in the trip.
 Note that all events are included in the export regardless of whether or not they are currently shown in the Trip Data pane.</p>
 
 <img src="./exportFile.png" alt="Export file structure">
+
+<p>When the export is of filtered trips the export file includes a preamble indicating the filtering applied,
+and the number of trips (out of the total number of trips) included in the export.</p>
+
+<img src="./filteredExport.png" alt="Filtered export preamble">
   
 <br>
 <br>

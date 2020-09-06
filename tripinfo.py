@@ -24,6 +24,10 @@ class Event():
         # Indicate if out of trip event.
         self.isOutOfTrip = False
 
+        # Event in alert.
+        # Used by trip data display.
+        self.eventInAlert = False
+
         # Additional event variables.
         self.driverId = ""
         self.cardId = 0
@@ -50,6 +54,7 @@ class Event():
         self.chkVersion = 0
         self.chkType = ""
         self.maxIdle = 0
+        self.xsidleReason = 0
         self.timeFwd = 0
         self.timeRev = 0
         self.timeIdle = 0
@@ -555,18 +560,45 @@ class Trip():
                         self.events.append(event)
                 # =============================================================================
                 # XSIDLE event
+                # (variation with XSIDLE reason)
+                # Need to check for longest search string first.
                 # =============================================================================
                 elif event.event == "XSIDLE":
-                    specPatern = re.compile(r'([0-9]+) ([0-9]+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
-                    if sp:
-                        event.signOnId = int(sp.group(1))
-                        event.maxIdle = int(sp.group(2))
+                    specPatern1 = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) v:([0-9]+)$')
+                    specPatern2 = re.compile(r'([0-9]+) ([0-9]+) v:([0-9]+)$')
+                    sp1 = re.search(specPatern1, eventSpecifics)
+                    sp2 = re.search(specPatern2, eventSpecifics)
+                    # Check for extended XSIDLE event with added event reason.
+                    if sp1:
+                        event.signOnId = int(sp1.group(1))
+                        event.maxIdle = int(sp1.group(2))
+                        event.xsidleReason = int(sp1.group(3))
 
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp.group(3)) / 10.0
+                            event.battery = int(sp1.group(4)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+
+                        # Increment event counters.
+                        self.numVehicleEvents += 1
+
+                        # Add event to list of events.
+                        self.events.append(event)
+                    # Check for basic XSIDLE event.
+                    elif sp2:
+                        event.signOnId = int(sp2.group(1))
+                        event.maxIdle = int(sp2.group(2))
+
+                        # Read battery voltage from event header.
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp2.group(3)) / 10.0
                             # And add to battery level list.
                             self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
@@ -761,27 +793,32 @@ class Trip():
                         # Add event to list of events.
                         self.events.append(event)
                 # *********************************************************************************************************************************************
-                # TRIP event (EarthTrack)
+                # TRIP event
+                # (variation with no On Seat time)
+                # Need to check for longest search string first.
                 # *********************************************************************************************************************************************
                 elif event.event == "TRIP":   
 
                     self.tripEnd = int(su.group(4))
                     self.logger.debug("Detected trip end at {0:s}".format(datetime.fromtimestamp(self.tripEnd).strftime('%d/%m/%Y %H:%M:%S')))
 
-                    specPatern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
-                    if sp:
-                        event.signOnId = int(sp.group(1))
-                        event.timeFwd = int(sp.group(2))
-                        event.timeRev = int(sp.group(3))
-                        event.timeIdle = int(sp.group(4))
-                        event.maxIdle = int(sp.group(5))
-                        event.timeOnSeat = int(sp.group(6))
+                    specPatern1 = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) v:([0-9]+)$')
+                    specPatern2 = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) v:([0-9]+)$')
+                    sp1 = re.search(specPatern1, eventSpecifics)
+                    sp2 = re.search(specPatern2, eventSpecifics)
+                    # Check TRIP event with on seat time.
+                    if sp1:
+                        event.signOnId = int(sp1.group(1))
+                        event.timeFwd = int(sp1.group(2))
+                        event.timeRev = int(sp1.group(3))
+                        event.timeIdle = int(sp1.group(4))
+                        event.maxIdle = int(sp1.group(5))
+                        event.timeOnSeat = int(sp1.group(6))
 
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp.group(7)) / 10.0
+                            event.battery = int(sp1.group(7)) / 10.0
                             # And add to battery level list.
                             self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
@@ -792,6 +829,30 @@ class Trip():
                         # Increment event counters.
                         self.numTripEvents += 1
 
+                    # Check TRIP event without on seat time.
+                    elif sp2:
+                        event.signOnId = int(sp2.group(1))
+                        event.timeFwd = int(sp2.group(2))
+                        event.timeRev = int(sp2.group(3))
+                        event.timeIdle = int(sp2.group(4))
+                        event.maxIdle = int(sp2.group(5))
+
+                        # Read battery voltage from event header.
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp2.group(6)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+
+                        # Increment event counters.
+                        self.numTripEvents += 1
+
+                    # If either type of TRIP event then do end of trip processing.
+                    if sp1 or sp2:
                         # At end of trip can extend last zone to end of trip.
                         if len(self.zoneXings) > 0:
                             self.zoneXings.append(ZoneInfo(int(su.group(4)), self.zoneXings[-1].fromZone, self.zoneXings[-1].toZone, self.zoneXings[-1].zoneOutput))
@@ -815,7 +876,7 @@ class Trip():
                         if diff != 0:
                             event.alertText = appendAlertText(event.alertText, "Trip time inconsistent.")
 
-                        # Don't want to collect eny more extra data as not useful for trip plots.
+                        # Don't want to collect any more extra data as not useful for trip plots.
                         self.stopExtraData = True
 
                         # Add event to list of events.

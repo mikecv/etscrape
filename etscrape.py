@@ -55,15 +55,10 @@ from eventsChart import *
 # *******************************************
 # TODO List
 #
-# Change export filtered trips to be menu selection and not a check box.
-# Rework event filtering to associate the alert status WITH the event being filtered.
-# Add power event support to filtering and plotting.
-# Have separate list for fileter events, e.g. want to filter e.g. XSIDLE but not plot it in charts.
-# Update help.
 # *******************************************
 
 # Program version.
-progVersion = "0.7 (wip)"
+progVersion = "0.7"
 
 # Create configuration values class object.
 config = Config()
@@ -127,7 +122,10 @@ class UI(QMainWindow):
         self.actionExportCurrentTrip.triggered.connect(self.exportCurrentTrip)
 
         # Attach to the Export report for all trips menu item.
-        self.actionExportAllTrips.triggered.connect(self.exportAllTrips)
+        self.actionExportAllTrips.triggered.connect(lambda: self.exportAllTrips(False))
+
+        # Attach to the Export report for all filtered trips menu item.
+        self.actionExportFilteredTrips.triggered.connect(lambda: self.exportAllTrips(True))
 
         # Attach to the edit preferences menu item.
         self.actionPreferences.triggered.connect(self.editPreferences)
@@ -200,6 +198,7 @@ class UI(QMainWindow):
         # Disable the export menus.
         self.actionExportCurrentTrip.setEnabled(False)
         self.actionExportAllTrips.setEnabled(False)
+        self.actionExportFilteredTrips.setEnabled(False)
 
         # Disable show events chart window.
         self.actionShowEventsChart.setEnabled(False)
@@ -472,6 +471,7 @@ class UI(QMainWindow):
         # Disable the export menu.
         self.actionExportCurrentTrip.setEnabled(False)
         self.actionExportAllTrips.setEnabled(False)
+        self.actionExportFilteredTrips.setEnabled(False)
 
         # Disable show events chart window.
         self.actionShowEventsChart.setEnabled(False)
@@ -540,11 +540,12 @@ class UI(QMainWindow):
             # Enable the export menu.
             self.actionExportCurrentTrip.setEnabled(True)
             self.actionExportAllTrips.setEnabled(True)
+            self.actionExportFilteredTrips.setEnabled(self.eventFilterApplied)
 
             # Enable show events chart window.
             self.actionShowEventsChart.setEnabled(True)
 
-            # Populate trip data.updateTripBtnState
+            # Populate trip data.
             self.populateTrips()
         else:
             # Revert to the normal cursor.
@@ -585,6 +586,10 @@ class UI(QMainWindow):
 
         # Populate trip titles.
         for idx, t in enumerate(self.tripLog):
+
+            # Initialise trip in alert flag.
+            t.tripInAlert = False
+
             # Add top levels to trees.
             # Label trips with trip number (including signon ID) and time.
             tripNum = "Trip {0:d} [ID {1:d}]".format((idx+1), t.signOnId)
@@ -609,6 +614,10 @@ class UI(QMainWindow):
 
             # Populate event titles.
             for idx2, ev in enumerate(t.events):
+
+                # Initialise event in alert flag.
+                ev.eventInAlert = False
+
                 # Label events with event type and time.
                 eventType = "{0:s}".format(ev.event)
                 eventTime = "{0:s}".format(unixTimeString(ev.serverTime, config.TimeUTC))
@@ -658,8 +667,9 @@ class UI(QMainWindow):
                             detailLevel.setForeground(1, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
                             # If detail alert then also use alert colour for related event.
                             eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
-                            # Set flag indicating trip in alert; used for filtering.
+                            # Set flag indicating trip and event in alert; used for filtering.
                             t.tripInAlert = True
+                            ev.eventInAlert = True
 
                             # If detail alert then also use alert colour for related trip.
                             # Don't highlight trip if event is hidden.
@@ -860,7 +870,7 @@ class UI(QMainWindow):
     # *******************************************
     # Callback function for export report for all trips menu selection.
     # *******************************************
-    def exportAllTrips(self):
+    def exportAllTrips(self, filtered):
         logger.debug("User selected Export all trips report menu item.")
 
         # Configure and launch file selection dialog.
@@ -884,11 +894,16 @@ class UI(QMainWindow):
                 QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
 
                 # If report is filtered then indicate in the report.
-                if self.actionFilterReport.isChecked():
+                if filtered:
                     logger.debug("Exporting preamble to indicate filtered export.")
+
+                    if self.currentEventFilter == "":
+                        filterEvent = "N/A"
+                    else:
+                        filterEvent = self.currentEventFilter
                     xf.write("===================================================\n")
                     xf.write(" This trip export has event filtering applied.\n")
-                    xf.write(" Includes trips with event : {0:s}\n".format(self.currentEventFilter))
+                    xf.write(" Includes trips with event : {0:s}\n".format(filterEvent))
                     xf.write(" For trips in alert : {0}\n".format(self.currentEventAlertFilter))
                     xf.write(" Includes {0:d} of {1:d} trips.\n".format(self.numFilteredTripsIn, self.numTrips))
                     xf.write("===================================================\n")
@@ -896,8 +911,9 @@ class UI(QMainWindow):
                 # Cycle through each trip and export.
                 for tidx, t in enumerate(self.tripLog):
 
-                    # If checkbox set to filter reports then only export if not hidden.
-                    if self.actionFilterReport.isChecked():
+                    # If exporting filtered trips then need to check for anything to filter.
+                    if filtered:
+                        # Check if anything to filter.
                         if not self.tripDataTree.topLevelItem(tidx).isHidden():
                             # Export trip.
                             self.exportTrip(xf, t)
@@ -1110,6 +1126,7 @@ class UI(QMainWindow):
             # Set filter applied flag and icon colour.
             self.eventFilterApplied = True
             self.actionEventFilter.setIcon(self.eFilterIconOn)
+            self.actionExportFilteredTrips.setEnabled(True)
 
             # Need to check if the currently selected trip is still visibile (or not).
             currentItem = self.tripDataTree.currentItem()
@@ -1122,6 +1139,11 @@ class UI(QMainWindow):
 
             # Show the tree widget again.
             self.tripDataTree.show()
+
+            # Check if there are any entries visible after filtering, if not advise user.
+            if self.numFilteredTripsIn == 0:
+                showPopup("Filter", "No Trip/Event matching filter criteria.", "(Change filter settings)")
+
         else:
             # Need to clear the filter, i.e. show all items.
             # Unhide all items.
@@ -1131,6 +1153,7 @@ class UI(QMainWindow):
             # Clear event filter applied flag and icon colour.
             self.eventFilterApplied = False
             self.actionEventFilter.setIcon(self.eFilterIconOff)
+            self.actionExportFilteredTrips.setEnabled(False)
 
             # Number of filtered trips in is all as no filtering.
             self.numFilteredTripsIn = self.numTrips
@@ -2083,8 +2106,8 @@ class EventFilterSetDialog(QDialog):
         self.app = app
 
         # Configure combo box.
-        # Combine 'blank' and events from configuration.
-        eventOptions = [""] + self.config.events
+        # Combine 'blank' and filter events from configuration.
+        eventOptions = [""] + self.config.filterEvents
 
         # Configure combo box.
         self.EventCombo.addItems(eventOptions)
@@ -2134,10 +2157,6 @@ class EventFilterSetDialog(QDialog):
         self.app.currentEventAlertFilter = self.eventInAlertCB.isChecked()
 
         # If not cleared than set flag saved.
-        # if self.EventCombo.currentText() != "":
-        #     self.app.eventFilterSet = True
-        # else:
-        #     self.app.eventFilterSet = False
         self.app.eventFilterSet = True
 
         # If filter is currently active, then need to reapply as may have changed.
@@ -2209,6 +2228,7 @@ class ChangeLogDialog(QDialog):
             "they are however included in event trace selection drop-down boxes.</li>" \
             "<li>Made trip data column widths changeable; set minimum width; configurable from preferences dialog.</li>" \
             "<li>Fixed XSIDLE event data to account for XSIDLE reason which appears in some implementations.</li>" \
+            "<li>Fixed trip event to account for variations with and without ON SEAT parameter.</li>" \
             "<li>Fixed trip duration for unended trips in trip summary.</li>" \
             "<li>Added 'Time on Seat' parameter to TRIP event for compatibility with Smartrack.</li>" \
             "<li>Fixed bugs with validating preferences integer entry; not ideal but workable.</li>" \

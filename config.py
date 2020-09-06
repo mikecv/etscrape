@@ -21,14 +21,19 @@ class Config():
         self.TimeUTC = 1
 
         # Supported Events (for events chart)
-        self.events = ["ENGINEOVERSPEED", "ENGINETEMP", "LOWCOOLANT", "IMPACT", "INPUT",
+        self.events = ["ENGINEOVERSPEED", "ENGINETEMP", "IMPACT", "INPUT", "LOWCOOLANT",
             "OFFSEAT", "OILPRESSURE" , "OVERLOAD", "OVERSPEED", "UNBUCKLED", "ZONECHANGE", "ZONEOVERSPEED"]
+
+        # Supported Events (for event filtering)
+        self.filterEvents = ["CHECKLIST", "CRITICALOUTPUTSET", "DEBUG", "ENGINEOVERSPEED", "ENGINETEMP",
+            "IMPACT", "LOWCOOLANT", "OFFSEAT", "OILPRESSURE" , "OVERLOAD", "OVERSPEED", "POWER", "TRIPLOAD",
+            "UNBUCKLED", "XSIDLE", "ZONECHANGE", "ZONEOVERSPEED"]
 
         # Trip related data.
         self.TripData = {
             "MinColumnWidth" : 165,
             "DefaultColumn2Width" : 365,
-            "TripBackColour" : "#ffff00",
+            "TripBackColour" : "#f0e68c",
             "TripColour" : "#000000",
             "EventColour" : "#0000ff",
             "AlertColour" : "#ff0000",

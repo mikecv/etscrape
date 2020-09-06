@@ -35,8 +35,51 @@ function closeNav() {
 }
 </script>
 
-<p>...</p>
+<p>To help searching for trips including particular types of events, event filtering can be used.</p>
 
+<p>A symbol in the toolbar at the top of the application window indicates the status of filtering.
+A <b>red</b> filter symbol indicates that filtering is not active (as illustrated),
+while a <b>green</b> filter symbol indicates that a filter has been applied.</p>
+
+<img src="./filterActiveSymbol.png" alt="Filter active symbol">
+
+<p>Selecting the filter toolbar icon toggles the state of the filter between applied and not applied.</p>
+
+<p>To set or change the event filter settings select the &#34;View &#47; Set Event Filter&#34; menu item.</p>
+
+<img src="./setFilterMenu.png" alt="Event filter menu">
+
+<p>Selecting the &#34;View &#47; Set Event Filter&#34; menu item will display a modal dialog
+allowing the filter to be set.</p>
+
+<img src="./eventFilterDialog.png" alt="Event filter setting dialog">
+
+<p>The event filter dialog has two settings, namely the event to include in the filter,
+and whether or not only trips in alert should be include.
+Note that trips in alert is only referring to highlighting in the Trip Data pane and not to any specific event condition.</p>
+
+<p>The two filter settings are <b>AND</b>ed together.
+Note that to only filter on trips in alert, set the event filter to the first  &#34;blank &#34; entry.</p>
+
+<p>With the filter applied, i.e. a <b>green</b> filter symbol indicated in the toolbar,
+only trips matching the filter settings are displayed.</p>
+  
+<img src="./filteredTripData.png" alt="Filtered trip data">
+
+<p>If the currently selected trip is still visible after a filter is applied it will remain the currently sellected trip.
+If the currently selected trip is not visible after a filter is applied the first visible trip will become the currently selected trip.</p> 
+
+<p>With a filter applied all the normal processing occurs and all normal functions are available
+for the trips displayed in the Trip Data pane.</p>
+
+<p>With a filter applied the option to export only trips matching the filter is available.</p> 
+  
+<p>Selecting the &#34;File &#47; Export Report &#47; All Trips (filtered)&#34; menu item an export of all trips matching the filter
+can be exported (refer to <a href="tripLogExport.html">Trip Log Export</a>).</p>
+  
+<img src="./exportFilteredTripMenu.png" alt="Export all filtered trips menu">
+  
+<br>
 <br>
 <a href="#top">Back to top</a>
   
