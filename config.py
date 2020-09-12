@@ -10,7 +10,7 @@ class Config():
     def __init__(self):
 
         # Version of configuration.
-        self.ConfigVersion = 7
+        self.ConfigVersion = 8
 
         # Logger configuration values
         self.DebugLevel = 20
@@ -25,9 +25,9 @@ class Config():
             "OFFSEAT", "OILPRESSURE" , "OVERLOAD", "OVERSPEED", "UNBUCKLED", "ZONECHANGE", "ZONEOVERSPEED"]
 
         # Supported Events (for event filtering)
-        self.filterEvents = ["CHECKLIST", "CRITICALOUTPUTSET", "DEBUG", "ENGINEOVERSPEED", "ENGINETEMP",
-            "IMPACT", "LOWCOOLANT", "OFFSEAT", "OILPRESSURE" , "OVERLOAD", "OVERSPEED", "POWER", "TRIPLOAD",
-            "UNBUCKLED", "XSIDLE", "ZONECHANGE", "ZONEOVERSPEED"]
+        self.filterEvents = ["CHECKLIST", "CRITICALOUTPUTSET", "DEBUG", "Time1H", "Time1H INV", "Time1H (BAD)",
+            "ENGINEOVERSPEED", "ENGINETEMP", "IMPACT", "LOWCOOLANT", "OFFSEAT", "OILPRESSURE",
+            "OVERLOAD", "OVERSPEED", "POWER", "TRIPLOAD", "UNBUCKLED", "XSIDLE", "ZONECHANGE", "ZONEOVERSPEED"]
 
         # Trip related data.
         self.TripData = {

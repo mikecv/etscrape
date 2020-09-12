@@ -67,7 +67,7 @@ class EventCanvas(FigureCanvasQTAgg):
         # Create trace for each event.
         for ev in range(self.numEvCharts):
             # Create trace for each event subplot.
-            axes = self.fig.add_subplot(int("{0:d}{1:d}{2:d}".format((self.numEvCharts + 1), 1, (ev+1))))
+            axes = self.fig.add_subplot(int("{0:d}{1:d}{2:d}".format((self.numEvCharts + 1), 1, (ev+1))), sharex=self.traces[0][1])
             # Add plot line with marker, although will only show markers for zero duration INPUT events.
             line, = axes.plot_date([], [], color=self.cfg.EvPlot["EventTraceColour"], linestyle='solid', marker='.', linewidth=1)
             # Set y axis range 0 to 1 for all subplots.
@@ -77,6 +77,7 @@ class EventCanvas(FigureCanvasQTAgg):
             axes.set_yticklabels([])
             # Set y axis title to event name for trace.
             # Name in reverse so trace 1 ends up at the bottom.
+            # Share the xaxis with the TRIP plot, so that if one plot is zoomed/panned then so are all plots.
             if self.cfg.EventTraces[self.numEvCharts - ev - 1]["Event"] == "INPUT":
                 axes.set_ylabel("Input {0:d}".format(self.cfg.EventTraces[self.numEvCharts - ev - 1]["Channel"]), rotation=0, horizontalalignment='right', verticalalignment='center', fontsize=self.cfg.EvPlot["AxesTitleFontSize"])
             else:
@@ -448,45 +449,6 @@ class EventCanvas(FigureCanvasQTAgg):
                 self.traces[self.numEvCharts - idx][1].set_yticks([0.5, 1.0])
                 self.traces[self.numEvCharts - idx][1].set_yticklabels(["Slow", "Fast"], color='cornflowerblue')
                 self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
-
-        # Draw plot.
-        self.draw()
-
-    # *******************************************
-    # Aline x-axis plots to most restrictive.
-    # *******************************************
-    def alignEventTraces(self):
-
-        firstTrace = True
-
-        # Get most restrictive x-axis scale.
-        for idx in range((self.numEvCharts - 1), -1, -1):
-            txMin, txMax = self.traces[self.numEvCharts - idx][1].get_xlim()
-            if firstTrace:
-                # Initialise limits to that of first trace.
-                xMin = txMin
-                xMax = txMax
-                firstTrace = False
-            else:
-                # Set if more restrictive.
-                if txMin > xMin:
-                    xMin = txMin
-                if txMax < xMax:
-                    xMax = txMax
-        # Set all x-axis to new scale.
-        for idx in range((self.numEvCharts - 1), -1, -1):
-            self.traces[self.numEvCharts - idx][1].set_xlim([xMin, xMax])
-
-            # Rescale axes.
-            self.traces[self.numEvCharts - idx][1].axes.relim()
-            self.traces[self.numEvCharts - idx][1].autoscale_view(True, True, False)
-
-        # Set trace for trip to the same x scale too.
-        self.traces[0][1].set_xlim([xMin, xMax])
-
-        # Rescale axes.
-        self.traces[0][1].axes.relim()
-        self.traces[0][1].autoscale_view(True, True, False)
 
         # Draw plot.
         self.draw()

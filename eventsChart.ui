@@ -39,37 +39,6 @@
      </property>
     </layout>
    </item>
-   <item>
-    <widget class="QPushButton" name="TraceAlignBtn">
-     <property name="maximumSize">
-      <size>
-       <width>40</width>
-       <height>40</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="statusTip">
-      <string>Align Traces</string>
-     </property>
-     <property name="whatsThis">
-      <string>Align Traces</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>30</width>
-       <height>30</height>
-      </size>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <resources/>

@@ -50,15 +50,20 @@ from eventsChart import *
 #                       Bug fixes to event data.
 #                       Changed application icon to be a Scraper.
 #                       Added POWER event.
+# 0.7   MDC 09/09/2020  Fixed shared scaling of event plots.
+#                       Change log scrolled to top to show most recent changes.
+#                       Cosmetic changes.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
+# Update help on additions to filter list, i.e. searching column 0 and 1.
+# Update help for event plot zooming and plot shared axes.
 # *******************************************
 
 # Program version.
-progVersion = "0.7"
+progVersion = "0.8 (wip)"
 
 # Create configuration values class object.
 config = Config()
@@ -171,9 +176,6 @@ class UI(QMainWindow):
 
         # Create events chart dialog.        
         self.eventsChart = EventsChartDialog(config, self)
-
-        # Connect align traces custom toolbar button.
-        self.eventsChart.TraceAlignBtn.clicked.connect(self.alignCallback)
 
         # Flag indicating no data to show.
         # And flag indicating no trip selected.
@@ -1096,7 +1098,9 @@ class UI(QMainWindow):
         if (self.eventFilterApplied == False) or (reapply == True):
 
             # Go through all trips and include trips that include specific event.
+            # Look in both column 0 and column 1 to catch extra events e.g. DEBUG Time1H events.
             searchList = self.tripDataTree.findItems(self.currentEventFilter, QtCore.Qt.MatchContains | QtCore.Qt.MatchRecursive, 0)
+            searchList += self.tripDataTree.findItems(self.currentEventFilter, QtCore.Qt.MatchContains | QtCore.Qt.MatchRecursive, 1)
 
             # Start with all items hidden.
             for idx in range(self.numTrips):
@@ -1472,9 +1476,6 @@ class EventsChartDialog(QDialog):
         self.plotTbar = NavigationToolbar(self.fig, self)
         self.eventChartLayout.addWidget(self.plotTbar)
         self.eventChartLayout.addWidget(self.fig)
-
-        # Update tool button icon.
-        self.TraceAlignBtn.setIcon(QtGui.QIcon(res_path("./resources/alignTraces.png")))
 
     # *******************************************
     # Displays an events chart dialog box.
@@ -2218,6 +2219,12 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.8</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Fixed sharing of x axis of event chart so that all plots scale together.</li>" \
+            "<li>Changed filter to look at first 2 coluns, not just the first; allows filtering on DEBUB event variations.</li>" \
+            "<li>Scrolled change log to top so that changes for most recent version visible.</li>" \
+            "<li>Cosmetic changes to About dialog.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.7</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added battery voltage from event messages to trip data display, and also to event plots.</li>" \
@@ -2225,7 +2232,7 @@ class ChangeLogDialog(QDialog):
             "<li>Added menu checklist option to apply current filter to all trip export.</li>" \
             "<li>Added support for POWER event.</li>" \
            "<li>Refactored configuration class to restrict events list to actual events, i.e. vehicle speed and battery voltage not included," \
-            "they are however included in event trace selection drop-down boxes.</li>" \
+                "they are however included in event trace selection drop-down boxes.</li>" \
             "<li>Made trip data column widths changeable; set minimum width; configurable from preferences dialog.</li>" \
             "<li>Fixed XSIDLE event data to account for XSIDLE reason which appears in some implementations.</li>" \
             "<li>Fixed trip event to account for variations with and without ON SEAT parameter.</li>" \
@@ -2323,6 +2330,10 @@ class ChangeLogDialog(QDialog):
             "<li>Initial draft release.</li>" \
             "<li>Parses log files and displays event data.</li>" \
             "<li>Not all event types supported.</li></ul>")
+
+        # Scroll to top so that changes for most recent version are visible.
+        self.changeLogText.moveCursor(QtGui.QTextCursor.Start)
+        self.changeLogText.ensureCursorVisible()
 
         # Show dialog.
         self.exec_()
