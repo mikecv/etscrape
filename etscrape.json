@@ -1,5 +1,5 @@
 {
-    "ConfigVersion": 7,
+    "ConfigVersion": 8,
     "DebugLevel": 20,
     "LogFileSize": 100000,
     "LogBackups": 3,

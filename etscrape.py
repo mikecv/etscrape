@@ -58,12 +58,10 @@ from eventsChart import *
 # *******************************************
 # TODO List
 #
-# Update help on additions to filter list, i.e. searching column 0 and 1.
-# Update help for event plot zooming and plot shared axes.
 # *******************************************
 
 # Program version.
-progVersion = "0.8 (wip)"
+progVersion = "0.8"
 
 # Create configuration values class object.
 config = Config()

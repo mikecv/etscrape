@@ -53,8 +53,7 @@ Note that if a log file is loaded that does not include any trips the chart will
   
 <p>As with the speed plot on the main application window, the event traces chart use the Python <a href="https://matplotlib.org/">https://matplotlib.org/</a> library.
 The standard matplotlib toolbar is displayed at the top of the chart, and can be used to perform standard functions,
-such as panning or zooming individual event traces, or to save an image of the whole chart.
-There is an additional toolbar button for aligning event traces (explained in the &#34;Event Trace Pan and Zoom&#34; section below.</p>
+such as panning or zooming individual event traces, or to save an image of the whole chart.</p>
 
 <p>The colours and fonts used in the chart can be set in the application configuration.</p>
 
@@ -114,14 +113,9 @@ In the case of Vehicle Speed, this is the same data as displayed on the speed pl
   
 <h2>Event Trace Pan and Zoom</h2>
 
-<p>At present only one event trace can be panned or zoomed at a time, that is, other event traces remain as they were as illustrated below.
-At this time this is a Matplotlip limitation when using time based x axis charts.</p>
-
-<img src="./zoomedTrace.png" alt="Zoomed event trace">
-
-<p>As can be seen in the illustration above there is a custom button at the bottom left of the chart.
-This is the &#34;<b>Align Traces</b>&#34; button and is used to align all traces to be the union of all traces.
-Using this button to align traces in the previous diagram is illustrated below.</p>
+<p>Using the Matplotlip toolbar any trace can be panned or zoomed,
+and all other traces will be panned or zoomed to match,
+that is, the time (x) axis for all traces will be kept in line as illustrated below.</p>
 
 <img src="./alignedTrace.png" alt="Aligned traces">
   
