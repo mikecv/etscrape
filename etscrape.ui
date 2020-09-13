@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1103</width>
+    <width>1120</width>
     <height>823</height>
    </rect>
   </property>
@@ -25,7 +25,7 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>1060</width>
+     <width>1120</width>
      <height>740</height>
     </size>
    </property>
@@ -137,13 +137,13 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>380</width>
+        <width>410</width>
         <height>500</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>380</width>
+        <width>16777215</width>
         <height>16777215</height>
        </size>
       </property>
@@ -166,7 +166,7 @@
       <widget class="QPushButton" name="PrevTripBtn">
        <property name="geometry">
         <rect>
-         <x>70</x>
+         <x>100</x>
          <y>5</y>
          <width>40</width>
          <height>28</height>
@@ -179,7 +179,7 @@
       <widget class="QPushButton" name="NextTripBtn">
        <property name="geometry">
         <rect>
-         <x>230</x>
+         <x>260</x>
          <y>5</y>
          <width>40</width>
          <height>28</height>
@@ -192,9 +192,9 @@
       <widget class="QLabel" name="TripNoLbl">
        <property name="geometry">
         <rect>
-         <x>133</x>
+         <x>149</x>
          <y>3</y>
-         <width>71</width>
+         <width>100</width>
          <height>31</height>
         </rect>
        </property>
@@ -213,10 +213,10 @@
       <widget class="QLabel" name="label_2">
        <property name="geometry">
         <rect>
-         <x>74</x>
+         <x>73</x>
          <y>70</y>
-         <width>100</width>
-         <height>16</height>
+         <width>111</width>
+         <height>20</height>
         </rect>
        </property>
        <property name="minimumSize">
@@ -240,9 +240,9 @@
       <widget class="QLabel" name="StartTimeLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>70</y>
-         <width>191</width>
+         <width>251</width>
          <height>16</height>
         </rect>
        </property>
@@ -266,10 +266,10 @@
       <widget class="QLabel" name="label_5">
        <property name="geometry">
         <rect>
-         <x>74</x>
+         <x>73</x>
          <y>90</y>
-         <width>100</width>
-         <height>16</height>
+         <width>111</width>
+         <height>20</height>
         </rect>
        </property>
        <property name="minimumSize">
@@ -293,9 +293,9 @@
       <widget class="QLabel" name="EndTimeLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>90</y>
-         <width>191</width>
+         <width>251</width>
          <height>16</height>
         </rect>
        </property>
@@ -319,10 +319,10 @@
       <widget class="QLabel" name="label_3">
        <property name="geometry">
         <rect>
-         <x>74</x>
+         <x>73</x>
          <y>110</y>
-         <width>100</width>
-         <height>16</height>
+         <width>111</width>
+         <height>20</height>
         </rect>
        </property>
        <property name="minimumSize">
@@ -348,9 +348,9 @@
       <widget class="QLabel" name="TripDurationLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>110</y>
-         <width>191</width>
+         <width>251</width>
          <height>16</height>
         </rect>
        </property>
@@ -376,7 +376,7 @@
         <rect>
          <x>4</x>
          <y>130</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -406,7 +406,7 @@
       <widget class="QLabel" name="VehicleEventsLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>130</y>
          <width>150</width>
          <height>20</height>
@@ -432,7 +432,7 @@
       <widget class="QLabel" name="VehicleOverspeedLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>150</y>
          <width>150</width>
          <height>20</height>
@@ -460,7 +460,7 @@
         <rect>
          <x>4</x>
          <y>150</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -487,7 +487,7 @@
       <widget class="QLabel" name="ZoneOverspeedLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>170</y>
          <width>150</width>
          <height>20</height>
@@ -515,7 +515,7 @@
         <rect>
          <x>4</x>
          <y>170</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -542,7 +542,7 @@
       <widget class="QLabel" name="EngineOverspeedLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>190</y>
          <width>150</width>
          <height>20</height>
@@ -570,7 +570,7 @@
         <rect>
          <x>4</x>
          <y>190</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -599,7 +599,7 @@
         <rect>
          <x>4</x>
          <y>210</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -626,7 +626,7 @@
       <widget class="QLabel" name="LowCoolantLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>210</y>
          <width>150</width>
          <height>20</height>
@@ -652,7 +652,7 @@
       <widget class="QLabel" name="LowOilPressureLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>230</y>
          <width>150</width>
          <height>20</height>
@@ -680,7 +680,7 @@
         <rect>
          <x>4</x>
          <y>230</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -709,7 +709,7 @@
         <rect>
          <x>4</x>
          <y>250</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -736,7 +736,7 @@
       <widget class="QLabel" name="HighTemperatureLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>250</y>
          <width>150</width>
          <height>20</height>
@@ -764,7 +764,7 @@
         <rect>
          <x>4</x>
          <y>270</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -791,7 +791,7 @@
       <widget class="QLabel" name="HiImpactLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>270</y>
          <width>150</width>
          <height>20</height>
@@ -817,7 +817,7 @@
       <widget class="QLabel" name="MidImpactLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>290</y>
          <width>150</width>
          <height>20</height>
@@ -845,7 +845,7 @@
         <rect>
          <x>4</x>
          <y>290</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -872,7 +872,7 @@
       <widget class="QLabel" name="LoImpactLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>310</y>
          <width>150</width>
          <height>20</height>
@@ -900,7 +900,7 @@
         <rect>
          <x>4</x>
          <y>310</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -927,7 +927,7 @@
       <widget class="QLabel" name="UnbuckledOpLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>350</y>
          <width>150</width>
          <height>20</height>
@@ -955,7 +955,7 @@
         <rect>
          <x>4</x>
          <y>350</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -973,7 +973,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Unbuckled (Operator) : </string>
+        <string>Unbuckled Operator : </string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -984,7 +984,7 @@
         <rect>
          <x>4</x>
          <y>370</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -1002,7 +1002,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Unbuckled (Passenger) : </string>
+        <string>Unbuckled Crew : </string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1011,7 +1011,7 @@
       <widget class="QLabel" name="UnbuckledPassLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>370</y>
          <width>150</width>
          <height>20</height>
@@ -1039,7 +1039,7 @@
         <rect>
          <x>4</x>
          <y>330</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -1069,7 +1069,7 @@
       <widget class="QLabel" name="OperatorEventsLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>330</y>
          <width>150</width>
          <height>20</height>
@@ -1095,7 +1095,7 @@
       <widget class="QLabel" name="OtherEventsLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>490</y>
          <width>150</width>
          <height>20</height>
@@ -1123,7 +1123,7 @@
         <rect>
          <x>4</x>
          <y>490</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -1156,7 +1156,7 @@ color: rgb(0, 85, 255);</string>
         <rect>
          <x>4</x>
          <y>410</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -1183,7 +1183,7 @@ color: rgb(0, 85, 255);</string>
       <widget class="QLabel" name="ZoneChangeLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>410</y>
          <width>150</width>
          <height>20</height>
@@ -1209,7 +1209,7 @@ color: rgb(0, 85, 255);</string>
       <widget class="QLabel" name="TripEventsLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>430</y>
          <width>150</width>
          <height>20</height>
@@ -1237,7 +1237,7 @@ color: rgb(0, 85, 255);</string>
         <rect>
          <x>4</x>
          <y>430</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -1269,7 +1269,7 @@ color: rgb(0, 85, 255);</string>
         <rect>
          <x>4</x>
          <y>450</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -1299,7 +1299,7 @@ color: rgb(0, 85, 255);</string>
       <widget class="QLabel" name="ReportEventsLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>450</y>
          <width>150</width>
          <height>20</height>
@@ -1325,9 +1325,9 @@ color: rgb(0, 85, 255);</string>
       <widget class="QLabel" name="TripIdLbl">
        <property name="geometry">
         <rect>
-         <x>124</x>
+         <x>144</x>
          <y>30</y>
-         <width>91</width>
+         <width>111</width>
          <height>31</height>
         </rect>
        </property>
@@ -1348,7 +1348,7 @@ color: rgb(0, 85, 255);</string>
         <rect>
          <x>4</x>
          <y>390</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -1375,7 +1375,7 @@ color: rgb(0, 85, 255);</string>
       <widget class="QLabel" name="ChecklistLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>390</y>
          <width>150</width>
          <height>20</height>
@@ -1401,7 +1401,7 @@ color: rgb(0, 85, 255);</string>
       <widget class="QLabel" name="DebugEventsLbl">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>470</y>
          <width>150</width>
          <height>20</height>
@@ -1429,7 +1429,7 @@ color: rgb(0, 85, 255);</string>
         <rect>
          <x>4</x>
          <y>470</y>
-         <width>171</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -1466,7 +1466,7 @@ color: rgb(0, 85, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1103</width>
+     <width>1120</width>
      <height>22</height>
     </rect>
    </property>

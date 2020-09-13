@@ -74,13 +74,16 @@ Note that the trip trace is an additional trace that is always included.</p>
 <p>For each of the 8 chart events the user can select an event from the available events in a drop-down list.</p>
 
 <p>The first entry in the drop-down list is blank and can be used to clear that event trace.
-Note that blank event traces are ignores and will not be plotted on the Events chart.</p>
+Note that blank event traces are ignored and will not be plotted on the Events chart.</p>
 
 <p>The second entry in the drop-down list is &#34;Vehicle Speed&#34; and can used for a plot of the vehicle speed.
-Note that vehicle speed is not a specific event, but current speed taken from the header of other events (as for the speed plot).</p>
+Note that vehicle speed is not a specific event, but current speed taken from the header of other events (as for the speed plot).
+The same applies for the third entry in the drop-down list, i.e. &#34;Battery Voltage&#34;
+which displays the battery voltage included in the header of other events.</p>
 
 <p>The &#34;Title&#34; field is shown on the Events as a y axis label.
-By default the Title field is the same as the event name, but can be edited by the user (with one exception).</p>
+By default the Title field is the same as the event name, but can be edited by the user (with some exceptions,
+namely the INPUT event and the Vehicle Speed and Battery Voltage event selections).</p>
 
 <p>If the &#34;INPUT&#34; event is chosen the Title field is fixed and reflects the input number selected.
 The user can select the input number by using the &#34;Channel&#34; spin control.</p>
@@ -121,7 +124,7 @@ that is, the time (x) axis for all traces will be kept in line as illustrated be
   
 <p>In the illustration above note that in the Matplotlib toolbar that the &#34;Zoom&#34; control is active.
 Note also that the &#34;Back Arrow&#34; is highlighted indicating that there are one or more previous views to return to.
-Using these controls can be used to return to the intital plot.</p>
+These controls can be used to return to the previous or intital plot.</p>
 
 <br>
 <a href="#top">Back to top</a>

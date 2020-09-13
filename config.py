@@ -31,8 +31,8 @@ class Config():
 
         # Trip related data.
         self.TripData = {
-            "MinColumnWidth" : 165,
-            "DefaultColumn2Width" : 365,
+            "MinColumnWidth" : 185,
+            "DefaultColumn2Width" : 375,
             "TripBackColour" : "#f0e68c",
             "TripColour" : "#000000",
             "EventColour" : "#0000ff",
@@ -56,7 +56,7 @@ class Config():
             "DefaultLowLimit": 30,
             "DefaultHiLimit": 60,
             "SpeedColour": "#0000ff",
-            "ZoneColour": "#ff66ff",
+            "ZoneColour": "#ff0000",
             "AxesTitleFontSize": 7,
             "PlotTitleFontSize": 10
         }

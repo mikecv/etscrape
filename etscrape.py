@@ -50,7 +50,7 @@ from eventsChart import *
 #                       Bug fixes to event data.
 #                       Changed application icon to be a Scraper.
 #                       Added POWER event.
-# 0.7   MDC 09/09/2020  Fixed shared scaling of event plots.
+# 0.8   MDC 09/09/2020  Fixed shared scaling of event plots.
 #                       Change log scrolled to top to show most recent changes.
 #                       Cosmetic changes.
 # *******************************************
@@ -2220,7 +2220,7 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.8</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Fixed sharing of x axis of event chart so that all plots scale together.</li>" \
-            "<li>Changed filter to look at first 2 coluns, not just the first; allows filtering on DEBUB event variations.</li>" \
+            "<li>Changed filter to look at first 2 columns, not just the first; allows filtering on DEBUB event variations.</li>" \
             "<li>Scrolled change log to top so that changes for most recent version visible.</li>" \
             "<li>Cosmetic changes to About dialog.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.7</b></h2>")
