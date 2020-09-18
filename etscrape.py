@@ -53,15 +53,20 @@ from eventsChart import *
 # 0.8   MDC 09/09/2020  Fixed shared scaling of event plots.
 #                       Change log scrolled to top to show most recent changes.
 #                       Cosmetic changes.
+# 0.9   MDC 16/09/2020  Configuration improvements.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
+# Change chart event setting configuration to include default title.
+# Add horizontal grid lines on speed plot.
+# Add (day) on speed and event charts.
+# Look at adding date to speed and event charts so that available when saved.
 # *******************************************
 
 # Program version.
-progVersion = "0.8"
+progVersion = "0.9"
 
 # Create configuration values class object.
 config = Config()
@@ -211,14 +216,6 @@ class UI(QMainWindow):
         
         # Show appliction window.
         self.show()
-
-    # *******************************************
-    # Callback function for trace align custom toolbar button on events chart.
-    # *******************************************
-    def alignCallback(self):
-        logger.debug("User selected toolbar button to align event traces.")
-        # Call events chart method to align traces.
-        self.eventsChart.fig.alignEventTraces()
 
     # *******************************************
     # Respond to drag / drop events.
@@ -1937,6 +1934,9 @@ class EventsChartConfigDialog(QDialog):
         self.config = config
         self.app = app
 
+        # Event selection dropdown selection.
+        self.EventSelection = 0
+
         # Create list of event chart config items.
         self.plotCfg = []
         self.plotCfg.append((self.EventCombo1, self.titleLineEdit1, self.channelLabel1, self.channelSpinBox1))
@@ -1949,14 +1949,14 @@ class EventsChartConfigDialog(QDialog):
         self.plotCfg.append((self.EventCombo8, self.titleLineEdit8, self.channelLabel8, self.channelSpinBox8))
 
         # Connect to combo box to apply visibility according to event type.
-        self.plotCfg[0][0].currentIndexChanged.connect((lambda: self.eventSelected(0)))
-        self.plotCfg[1][0].currentIndexChanged.connect((lambda: self.eventSelected(1)))
-        self.plotCfg[2][0].currentIndexChanged.connect((lambda: self.eventSelected(2)))
-        self.plotCfg[3][0].currentIndexChanged.connect((lambda: self.eventSelected(3)))
-        self.plotCfg[4][0].currentIndexChanged.connect((lambda: self.eventSelected(4)))
-        self.plotCfg[5][0].currentIndexChanged.connect((lambda: self.eventSelected(5)))
-        self.plotCfg[6][0].currentIndexChanged.connect((lambda: self.eventSelected(6)))
-        self.plotCfg[7][0].currentIndexChanged.connect((lambda: self.eventSelected(7)))
+        self.plotCfg[0][0].currentIndexChanged.connect((lambda: self.eventSelected(0, self.EventSelection)))
+        self.plotCfg[1][0].currentIndexChanged.connect((lambda: self.eventSelected(1, self.EventSelection)))
+        self.plotCfg[2][0].currentIndexChanged.connect((lambda: self.eventSelected(2, self.EventSelection)))
+        self.plotCfg[3][0].currentIndexChanged.connect((lambda: self.eventSelected(3, self.EventSelection)))
+        self.plotCfg[4][0].currentIndexChanged.connect((lambda: self.eventSelected(4, self.EventSelection)))
+        self.plotCfg[5][0].currentIndexChanged.connect((lambda: self.eventSelected(5, self.EventSelection)))
+        self.plotCfg[6][0].currentIndexChanged.connect((lambda: self.eventSelected(6, self.EventSelection)))
+        self.plotCfg[7][0].currentIndexChanged.connect((lambda: self.eventSelected(7, self.EventSelection)))
 
         # Connect to combo box to apply visibility according to event type.
         self.plotCfg[0][3].valueChanged.connect((lambda: self.channelSelected(0)))
@@ -1969,37 +1969,44 @@ class EventsChartConfigDialog(QDialog):
         self.plotCfg[7][3].valueChanged.connect((lambda: self.channelSelected(7)))
 
         # Configure combo boxes.
-        # Combine 'blank' and special traces with events from configuration.
-        eventOptions = ["", "Vehicle Speed", "Battery Voltage"] + self.config.events
+        self.eventOptions = []
+        for cc in self.config.chartEvents:
+            self.eventOptions.append(cc["Event"])
 
         for p in self.plotCfg:
             # Add list of events to selection dropdown.
-            p[0].addItems(eventOptions)
+            p[0].addItems(self.eventOptions)
 
         # Preconfigure to current selections.
         for idx, t in enumerate(self.config.EventTraces):
             try:
                 # Look for trace event in list of events.
-                selection = eventOptions.index(t["Event"])
+                self.EventSelection = self.eventOptions.index(t["Event"])
             except:
                 # If no match then use first 'event' which is a blank.
-                selection = 0
-            self.plotCfg[idx][0].setCurrentIndex(selection)
-            logger.debug("Event selected item: {0:d}".format(selection))
-            if (self.plotCfg[idx][0].currentText() != "INPUT"):
-                self.plotCfg[idx][1].setEnabled(True)
+                logger.warning("Event not in chart event list: {0:s}".format(t["Event"]))
+                self.EventSelection = 0
+            self.plotCfg[idx][0].setCurrentIndex(self.EventSelection)
+            logger.debug("Event selected item: {0:d}".format(self.EventSelection))
+            if (self.plotCfg[idx][0].currentText() == ""):
+                self.plotCfg[idx][1].setEnabled(False)
                 self.plotCfg[idx][2].setEnabled(False)
                 self.plotCfg[idx][3].setEnabled(False)
-                if self.config.EventTraces[idx]["Title"] != "":
-                    self.plotCfg[idx][1].setText(self.config.EventTraces[idx]["Title"])
-                else:
-                    self.plotCfg[idx][1].setText(self.config.EventTraces[idx]["Event"])
-            else:
+                self.plotCfg[idx][1].setText("")
+            elif (self.plotCfg[idx][0].currentText() == "INPUT"):
                 self.plotCfg[idx][1].setEnabled(False)
                 self.plotCfg[idx][2].setEnabled(True)
                 self.plotCfg[idx][3].setEnabled(True)
                 self.plotCfg[idx][3].setValue(self.config.EventTraces[idx]["Channel"])
                 self.plotCfg[idx][1].setText("Input {0:d}".format(self.config.EventTraces[idx]["Channel"]))
+            else:
+                self.plotCfg[idx][1].setEnabled(True)
+                self.plotCfg[idx][2].setEnabled(False)
+                self.plotCfg[idx][3].setEnabled(False)
+                if self.config.EventTraces[idx]["Title"] != "":
+                    self.plotCfg[idx][1].setText(self.config.EventTraces[idx]["Title"]) # FIX
+                else:
+                    self.plotCfg[idx][1].setText(self.config.chartEvents[self.EventSelection]["Title"])
 
         # Connect to SAVE dialog button for processing.
         self.SaveDialogBtn.clicked.connect(self.saveEventsChartConfig)
@@ -2024,7 +2031,7 @@ class EventsChartConfigDialog(QDialog):
     # *******************************************
     # Event selection combo box selection changed.
     # *******************************************
-    def eventSelected(self, idx):
+    def eventSelected(self, idx, sel):
         logger.debug("User changed events trace event : {0:d}".format(idx))
 
         # Default the title to the name of the event.
@@ -2037,7 +2044,7 @@ class EventsChartConfigDialog(QDialog):
             self.plotCfg[idx][3].setEnabled(False)
 
             # Default the title to the name of the event.
-            self.plotCfg[idx][1].setText(self.plotCfg[idx][0].currentText())
+            self.plotCfg[idx][1].setText(self.config.chartEvents[sel]["Title"]) # FIX
         else:
             self.plotCfg[idx][1].setEnabled(False)
             self.plotCfg[idx][2].setEnabled(True)
@@ -2217,6 +2224,9 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.9</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Improved configuration to preserve config as much as possible when upgrading.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.8</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Fixed sharing of x axis of event chart so that all plots scale together.</li>" \

@@ -24,6 +24,16 @@ class Config():
         self.events = ["ENGINEOVERSPEED", "ENGINETEMP", "IMPACT", "INPUT", "LOWCOOLANT",
             "OFFSEAT", "OILPRESSURE" , "OVERLOAD", "OVERSPEED", "UNBUCKLED", "ZONECHANGE", "ZONEOVERSPEED"]
 
+        # Supported Events (for events chart)
+        self.chartEvents = [
+            {"Event" : "", "Title" : ""},
+            {"Event" : "Vehicle Speed", "Title" : "Vehicle Speed"},
+            {"Event" : "Battery Voltage", "Title" : "Battery Voltage"},
+            {"Event" : "ENGINEOVERSPEED", "Title" : "Engine Overspeed"},
+            {"Event" : "ENGINETEMP", "Title" : "Engine Temperature High"},
+            {"Event" : "IMPACT", "Title" : "Vehicle Impact"}
+            ]
+
         # Supported Events (for event filtering)
         self.filterEvents = ["CHECKLIST", "CRITICALOUTPUTSET", "DEBUG", "Time1H", "Time1H INV", "Time1H (BAD)",
             "ENGINEOVERSPEED", "ENGINETEMP", "IMPACT", "LOWCOOLANT", "OFFSEAT", "OILPRESSURE",
@@ -114,22 +124,45 @@ class Config():
                     print("Upgrading configuration file.")
                     # Save configuration to file.
                     self.saveConfig()
-                else:
 
-                    # Update configuration values if possible.
-                    # If not, just update with default + whatever values read.
-                    try:
-                        self.DebugLevel = config["DebugLevel"]
-                        self.LogFileSize = config["LogFileSize"]
-                        self.LogBackups = config["LogBackups"]
-                        self.TimeUTC = config["TimeUTC"]
-                        self.TripData = config["TripData"]
-                        self.SpdPlot = config["SpdPlot"]
-                        self.EvPlot = config["EvPlot"]
-                        self.Channels = config["Channels"]
-                        self.EventTraces = config["EventTraces"]
-                    except Exception:
-                        print("Error reading configuration file.")
+                # Update configuration values if possible.
+                # If not, just update with default + whatever values read.
+                try:
+                    self.DebugLevel = config["DebugLevel"]
+                except Exception:
+                    print("Error reading Debug Level configuration data.")
+                try:
+                    self.LogFileSize = config["LogFileSize"]
+                except Exception:
+                    print("Error reading Log File Size configuration data.")
+                try:
+                    self.LogBackups = config["LogBackups"]
+                except Exception:
+                    print("Error reading Log File Backups configuration data.")
+                try:
+                    self.TimeUTC = config["TimeUTC"]
+                except Exception:
+                    print("Error reading UTC Time configuration data.")
+                try:
+                    self.TripData = config["TripData"]
+                except Exception:
+                    print("Error reading Trip Data configuration data.")
+                try:
+                    self.SpdPlot = config["SpdPlot"]
+                except Exception:
+                    print("Error reading Speed Plot configuration data.")
+                try:
+                    self.EvPlot = config["EvPlot"]
+                except Exception:
+                    print("Error reading Event Plot configuration data.")
+                try:
+                    self.Channels = config["Channels"]
+                except Exception:
+                    print("Error reading Channels configuration data.")
+                try:
+                    self.EventTraces = config["EventTraces"]
+                except Exception:
+                    print("Error reading Event Traces configuration data.")
 
         except Exception:
             print("Error opening configuration file.")
