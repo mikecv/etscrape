@@ -1,0 +1,4846 @@
+20/07/2020 07:48:37 VERSION: 5.0.58.510 R 
+20/07/2020 07:48:37 4.14.108-ti-r119
+20/07/2020 07:48:37 NEW OS, DONOT access PCF directly
+20/07/2020 07:48:37 hwclock time: 1595231317
+20/07/2020 07:48:37 IOInit - NEW OS
+20/07/2020 07:48:37 created gpio INP 0 @GPIO: 66
+20/07/2020 07:48:37 created gpio INP 1 @GPIO: 67
+20/07/2020 07:48:37 created gpio INP 4 @GPIO: 45
+20/07/2020 07:48:37 created gpio INP 5 @GPIO: 44
+20/07/2020 07:48:37 created gpio INP 6 @GPIO: 23
+20/07/2020 07:48:37 created gpio INP 7 @GPIO: 26
+20/07/2020 07:48:37 created gpio INP 8 @GPIO: 51
+20/07/2020 07:48:37 created gpio INP 9 @GPIO: 61
+20/07/2020 07:48:37 created gpio OUT: 60
+20/07/2020 07:48:37 created gpio OUT: 46
+20/07/2020 07:48:37 created gpio OUT: 27
+20/07/2020 07:48:37 created gpio OUT: 65
+20/07/2020 07:48:37 created gpio OUT: 22
+20/07/2020 07:48:37 created gpio OUT: 115
+20/07/2020 07:48:37 created gpio OUT: 69
+20/07/2020 07:48:37 created gpio OUT: 68
+20/07/2020 07:48:37 created gpio OUT: 117
+20/07/2020 07:48:37 created gpio OUT: 59
+20/07/2020 07:48:37 created gpio OUT: 58
+20/07/2020 07:48:37 created gpio OUT: 52
+20/07/2020 07:48:37 created gpio OUT: 64
+20/07/2020 07:48:37 created gpio OUT: 47
+20/07/2020 07:48:37 created gpio OUT: 48
+20/07/2020 07:48:37 created gpio OUT: 49
+20/07/2020 07:48:37 created gpio OUT: 116
+20/07/2020 07:48:37 created gpio OUT: 53
+20/07/2020 07:48:37 created gpio OUT: 54
+20/07/2020 07:48:37 created gpio OUT: 55
+20/07/2020 07:48:37 created gpio OUT: 507
+20/07/2020 07:48:37 created gpio OUT: 508
+20/07/2020 07:48:37 created gpio OUT: 509
+20/07/2020 07:48:37 created gpio OUT: 510
+20/07/2020 07:48:37 created gpio OUT: 511
+20/07/2020 07:48:37 usr0 is heartbeat
+20/07/2020 07:48:37 usr1 is mmc0 (uSD card)
+20/07/2020 07:48:37 usr2 is mmc1(eMMC)
+20/07/2020 07:48:37 channel thread created
+20/07/2020 07:48:37 channel ch3 2 ch4 2
+20/07/2020 07:48:37 ch3 2 ch4 2
+20/07/2020 07:48:37 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 07:48:37 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:48:37 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:48:37 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+20/07/2020 07:48:37 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 07:48:37 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+20/07/2020 07:48:37 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+20/07/2020 07:48:37 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+20/07/2020 07:48:37 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+20/07/2020 07:48:37 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 07:48:37 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 07:48:37 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 07:48:37 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:48:37 wrote 0 to /sys/class/gpio/gpio48/value (O/P 15)
+20/07/2020 07:48:37 wrote 0 to /sys/class/gpio/gpio49/value (O/P 16)
+20/07/2020 07:48:37 OTA Version: version:3.0.0.6
+20/07/2020 07:48:37 wrote 1 to /sys/class/gpio/gpio59/value (O/P 10)
+20/07/2020 07:48:37 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+20/07/2020 07:48:38 channel state change 0 -> 1
+20/07/2020 07:48:38 Starting PRU
+20/07/2020 07:48:38 offline
+20/07/2020 07:48:38 PRU starting
+20/07/2020 07:48:38 i2c1 commands - to serialiser
+20/07/2020 07:48:38 Serialiser Serial Nr: 2280800404100061A485A000A00000EB
+20/07/2020 07:48:38 Serialiser Eeprom Serial Nr: 000774-AA
+20/07/2020 07:48:38 BLAll 2
+20/07/2020 07:48:38 BL set:2
+20/07/2020 07:48:38 set brightness to 2%
+20/07/2020 07:48:39 Opus FC (main) Started
+20/07/2020 07:48:39 ROOTFS Built 41449
+20/07/2020 07:48:39 Nr Langs to process: 18
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_ar
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_es
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_et
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_fr
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_de
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_hi
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_id
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_km
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_ko
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_lv
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_ms
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_ru
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_th
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_tl
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_uk
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_vi
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_zh
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 lang file: :Translations/OpusFcMain_en
+20/07/2020 07:48:39 Loaded translations
+20/07/2020 07:48:39 eeprom magic OK
+20/07/2020 07:48:39 Contructor PID2 108 108
+20/07/2020 07:48:39 MessageDialog GNSS 0
+20/07/2020 07:48:39 Duplicates Removed 1
+20/07/2020 07:48:39 thread gps_thread created
+20/07/2020 07:48:39 wrote 1 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 07:48:39 gps open 1
+20/07/2020 07:48:39 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+20/07/2020 07:48:39 gps task running
+20/07/2020 07:48:39 gps state change 1 -> 2
+20/07/2020 07:48:39 opened /dev/ttyS2 serial/USB OK
+20/07/2020 07:48:39 weightCountKg -1.000000
+20/07/2020 07:48:39 EXP 2066562957, 1593522957, 1595231319
+20/07/2020 07:48:39 GPS Serial Connected on /dev/ttyS2 (handle 13)
+20/07/2020 07:48:39 speedHzKmh 1.593248
+20/07/2020 07:48:39 speedHzRPM 30.864197
+20/07/2020 07:48:39 pru Waiting/Waiting
+20/07/2020 07:48:39 MessageDialog GNSS 0
+20/07/2020 07:48:39 Duplicates Removed 7
+20/07/2020 07:48:39 Splash GNSS 0
+20/07/2020 07:48:39 found /store/Service_active.xml
+20/07/2020 07:48:39 MessageDialog GNSS 0
+20/07/2020 07:48:39 settings ready
+20/07/2020 07:48:39 MessageDialog GNSS 0
+20/07/2020 07:48:39 BL dark 0
+20/07/2020 07:48:39 BL light 0
+20/07/2020 07:48:39 Starting Threads. Mayhem begins!
+20/07/2020 07:48:39 Main thread running
+20/07/2020 07:48:39 opusFc task run
+20/07/2020 07:48:39 FleetMessaging thread running
+20/07/2020 07:48:39 Beeper thread running
+20/07/2020 07:48:39 TriLed thread running
+20/07/2020 07:48:39 Theme thread running
+20/07/2020 07:48:39 Diagnostic thread running
+20/07/2020 07:48:39 Batttery thread running
+20/07/2020 07:48:39 Can thread running
+20/07/2020 07:48:39 triled run
+20/07/2020 07:48:39 New Operator file XML found
+20/07/2020 07:48:39 found Operators_active.xml
+20/07/2020 07:48:39 xml_parsing file: /store/Operators_active.xml
+20/07/2020 07:48:39 Key thread running
+20/07/2020 07:48:39 fleetmsg run
+20/07/2020 07:48:39 diags run
+20/07/2020 07:48:39 beeper run
+20/07/2020 07:48:39 GeoFence thread running
+20/07/2020 07:48:39 main.cpp Done
+20/07/2020 07:48:39 Geofence run
+20/07/2020 07:48:39 Operator file XML found
+20/07/2020 07:48:39 event GC
+20/07/2020 07:48:39 MessageDialog GNSS 0
+20/07/2020 07:48:39 Powerup - Done
+20/07/2020 07:48:40 PID3 108 114
+20/07/2020 07:48:40 WDOpen Success
+20/07/2020 07:48:40 WDT timeout is 30
+20/07/2020 07:48:40 Starting PRU
+20/07/2020 07:48:40 running
+20/07/2020 07:48:40 opening /dev/rpmsg_pru30
+20/07/2020 07:48:40 PRU Opened 39
+20/07/2020 07:48:40 Opened /dev/rpmsg_pru30
+20/07/2020 07:48:40 gps state change 2 -> 3
+20/07/2020 07:48:40 Battery free
+20/07/2020 07:48:40 keythread - init 1
+20/07/2020 07:48:40 keyscanner OK
+20/07/2020 07:48:40 keyscanner gpio ok
+20/07/2020 07:48:40 keyscanner UART
+20/07/2020 07:48:40 keythread - init SUCCESS
+20/07/2020 07:48:40 slotUpdate first call
+20/07/2020 07:48:41 bootstatus3 0
+20/07/2020 07:48:41 tempBootStatus 0
+20/07/2020 07:48:41 bootstatus 0
+20/07/2020 07:48:41 end of run()
+20/07/2020 07:48:41 channel setting: 3-freq:4-freq
+20/07/2020 07:48:41 Message <3-freq:4-freq>: Sent to PRU0
+20/07/2020 07:48:41 channel state change 1 -> 2
+20/07/2020 07:48:41 PRU: Set3F
+20/07/2020 07:48:41 PRU: Set4F
+20/07/2020 07:48:41 PRU: FreqInit
+20/07/2020 07:48:41 PRU Version: 103
+20/07/2020 07:48:41 sync new state entry
+20/07/2020 07:48:41 build time 1593494157
+20/07/2020 07:48:41 REC trip id 0
+20/07/2020 07:48:41 REC write time 1595231130
+20/07/2020 07:48:41 REC QNr 0
+20/07/2020 07:48:41 REC CkState 17
+20/07/2020 07:48:41 REC Main state 3
+20/07/2020 07:48:41 REC DrIdx 42
+20/07/2020 07:48:41 readData 1
+20/07/2020 07:48:41 thread comms_thread created
+20/07/2020 07:48:41 thread modem_thread created
+20/07/2020 07:48:41 last connect time read: 1595230869 1595230869
+20/07/2020 07:48:41 NET: get hw
+20/07/2020 07:48:41 MDM: open
+20/07/2020 07:48:41 thread net_thread created
+20/07/2020 07:48:41 modem state change 0 -> 1
+20/07/2020 07:48:41 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 07:48:41 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 07:48:41 MDM: turn on modem power
+20/07/2020 07:48:41 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+20/07/2020 07:48:41 thread interrupt_thread created
+20/07/2020 07:48:41 SerialNr: 9278
+20/07/2020 07:48:41 LoadDate: 250919
+20/07/2020 07:48:41 HWModel:  9072s_B
+20/07/2020 07:48:41 hwVersion is <9072s_B>
+20/07/2020 07:48:41 recovered EEtrip 0 time 1595231130 slot 0 saved time 268
+20/07/2020 07:48:41 FRIM: 180/65/6/4/0
+20/07/2020 07:48:41 LT 1595231130 0
+20/07/2020 07:48:41 recovered EEtrip 147660 time 1595230984 slot 1 saved time 122
+20/07/2020 07:48:41 FRIM: 84/17/4/4/0
+20/07/2020 07:48:41 recovered EEtrip 147660 time 1595231045 slot 2 saved time 183
+20/07/2020 07:48:41 FRIM: 132/30/4/4/0
+20/07/2020 07:48:41 recovered EEtrip 147660 time 1595231106 slot 3 saved time 244
+20/07/2020 07:48:41 FRIM: 171/52/4/4/0
+20/07/2020 07:48:41 recovered EEtrip 147567 time 1595227470 slot 4 saved time 305
+20/07/2020 07:48:41 FRIM: 273/11/4/4/0
+20/07/2020 07:48:41 recovered EEtrip 147567 time 1595227531 slot 5 saved time 366
+20/07/2020 07:48:41 FRIM: 320/25/4/4/0
+20/07/2020 07:48:41 recovered EEtrip 0 time 1595231130 slot 0
+20/07/2020 07:48:41 FRIM: 180/65/6/4/0
+20/07/2020 07:48:41 found /store/DisplayMessaging_active.xml
+20/07/2020 07:48:41 PRU version 103
+20/07/2020 07:48:41 Msg Dialog font Noto Sans
+20/07/2020 07:48:41 lang code: EN file: :Translations/OpusFcMain_en
+20/07/2020 07:48:41 lang file: :Translations/OpusFcMain_en
+20/07/2020 07:48:41 Removing translations
+20/07/2020 07:48:41 Installing translations
+20/07/2020 07:48:41 OpusFcMain change from 0 to 1
+20/07/2020 07:48:41 modem type 7
+20/07/2020 07:48:41 comms_start gsm
+20/07/2020 07:48:41 comms_enable
+20/07/2020 07:48:41 fleetmsg free
+20/07/2020 07:48:41 Theme free
+20/07/2020 07:48:41 THEME TIME Day1 Night2 7 0 1 light 255 0
+20/07/2020 07:48:41 Set Theme Day
+20/07/2020 07:48:41 diags free
+20/07/2020 07:48:41 Led free
+20/07/2020 07:48:41 CAN free
+20/07/2020 07:48:41 Geofence free, FC was reset 1
+20/07/2020 07:48:41 message dialog font set to: Noto Sans
+20/07/2020 07:48:41 Duplicates Removed 1
+20/07/2020 07:48:41 Received New Theme
+20/07/2020 07:48:41 gpio interrupts (P1-2) FF
+20/07/2020 07:48:41 eeprom 0, 180/65/6/4
+20/07/2020 07:48:41 Power loss time 1595231130
+20/07/2020 07:48:41 SWSTART OpusFC 5.0.58.510 R
+20/07/2020 07:48:41 startup human? 1
+20/07/2020 07:48:41 OpusFcMain change from 1 to 2
+20/07/2020 07:48:41 report initial input states?
+20/07/2020 07:48:41 report initial input states: YES
+20/07/2020 07:48:41 ign on, enable BackLight/Serialiser
+20/07/2020 07:48:42 Splash set font Noto Sans
+20/07/2020 07:48:43 splash font set Noto Sans
+20/07/2020 07:48:43 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 07:48:43 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:48:43 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:48:43 PSP 1
+20/07/2020 07:48:43 PSP 2
+20/07/2020 07:48:43 PSP 3
+20/07/2020 07:48:43 OpusFcMain change from 2 to 4
+20/07/2020 07:48:43 zone 1 read 4 points 8
+20/07/2020 07:48:43 zone 2 read 4 points 8
+20/07/2020 07:48:43 gps version is NO VERSION
+20/07/2020 07:48:43 max zones 100
+20/07/2020 07:48:43 Splash Radio Unknown
+20/07/2020 07:48:43 radio set Unknown <--
+20/07/2020 07:48:43 Settings: slotEsc
+20/07/2020 07:48:43 Wake
+20/07/2020 07:48:43 Wake ON
+20/07/2020 07:48:43 OpusFcMain change from 4 to 5
+20/07/2020 07:48:43 Key free
+20/07/2020 07:48:43 keythread - init 1
+20/07/2020 07:48:43 keyscanner OK
+20/07/2020 07:48:43 keyscanner gpio ok
+20/07/2020 07:48:43 keyscanner UART
+20/07/2020 07:48:43 keythread - init SUCCESS
+20/07/2020 07:48:43 start reader
+20/07/2020 07:48:43 ota 1593746147 - 2020-07-03 03:15:47Z
+20/07/2020 07:48:43 valid fleet? 9278
+20/07/2020 07:48:43 BLAll 2
+20/07/2020 07:48:43 BL set:2
+20/07/2020 07:48:43 set brightness to 2%
+20/07/2020 07:48:43 traction set 2 2
+20/07/2020 07:48:43 channel set 2 2
+20/07/2020 07:48:43 channel setting: 3-freq:4-freq
+20/07/2020 07:48:43 Message <3-freq:4-freq>: Sent to PRU0
+20/07/2020 07:48:43 OpusFcMain change from 5 to 6
+20/07/2020 07:48:43 gpio interrupts (P1-2) FB
+20/07/2020 07:48:43 card read
+20/07/2020 07:48:43 Uart rxfifo has 14 bytes waiting
+20/07/2020 07:48:43 vli 000a 10
+20/07/2020 07:48:43 vli matches
+20/07/2020 07:48:43 208 1664 0
+20/07/2020 07:48:43 CardReader version 0
+20/07/2020 07:48:43 Cklist free
+20/07/2020 07:48:43 splash enabled?:0
+20/07/2020 07:48:44 gpio interrupts (P1-2) FF
+20/07/2020 07:48:44 start wiegand
+20/07/2020 07:48:44 state timer started
+20/07/2020 07:48:44 geofence state change 0 -> 1
+20/07/2020 07:48:44 startup
+20/07/2020 07:48:44 setbool 0
+20/07/2020 07:48:44 CKL state change 0
+20/07/2020 07:48:44 checklist file detected
+20/07/2020 07:48:44 found Checklist_active.xml
+20/07/2020 07:48:44 xml_parsing
+20/07/2020 07:48:44 xml process checklist
+20/07/2020 07:48:44 xml process config/hdr
+20/07/2020 07:48:44 lastrun read (time/driver) 1595196602 42
+20/07/2020 07:48:44 CkList::Checklist init complete
+20/07/2020 07:48:44 OpusFcMain::Checklist init complete
+20/07/2020 07:48:44 CKL state change 1
+20/07/2020 07:48:44 CKL state change 17
+20/07/2020 07:48:44 geofence state change 1 -> 2
+20/07/2020 07:48:44 PRU: Set3F
+20/07/2020 07:48:44 PRU: Set4F
+20/07/2020 07:48:45 resetting baud
+20/07/2020 07:48:45 change baud to 115200
+20/07/2020 07:48:45 GPS close 0
+20/07/2020 07:48:45 opened /dev/ttyS2 serial/USB OK
+20/07/2020 07:48:45 GPS Serial Connected on /dev/ttyS2 at 115200
+20/07/2020 07:48:45 GPS Saved Database found
+20/07/2020 07:48:45 GPS Loading Saved Database
+20/07/2020 07:48:45 loaded 49 GNSS DB files
+20/07/2020 07:48:45 getting ver
+20/07/2020 07:48:46 traction/idle state seen
+20/07/2020 07:48:47 getting ver
+20/07/2020 07:48:47 gps rate set
+20/07/2020 07:48:47 gpio interrupts (P1-2) FE
+20/07/2020 07:48:47 KEYPRESS 2
+20/07/2020 07:48:47 gpio interrupts (P1-2) FE
+20/07/2020 07:48:47 gpio interrupts (P1-2) FF
+20/07/2020 07:48:47 gpio interrupts (P1-2) FE
+20/07/2020 07:48:47 KEYPRESS 4
+20/07/2020 07:48:48 gpio interrupts (P1-2) FF
+20/07/2020 07:48:48 GPS Ver [ROM CORE 3.01 (107888)] [00080000] (len)160
+20/07/2020 07:48:48 gpio interrupts (P1-2) FE
+20/07/2020 07:48:48 gpio interrupts (P1-2) FF
+20/07/2020 07:48:49 gpio interrupts (P1-2) FE
+20/07/2020 07:48:49 KEYPRESS 2
+20/07/2020 07:48:49 gpio interrupts (P1-2) FE
+20/07/2020 07:48:49 gpio interrupts (P1-2) FF
+20/07/2020 07:48:49 gpio interrupts (P1-2) FE
+20/07/2020 07:48:49 KEYPRESS 14
+20/07/2020 07:48:49 gpio interrupts (P1-2) FE
+20/07/2020 07:48:49 gpio interrupts (P1-2) FF
+20/07/2020 07:48:50 gpio interrupts (P1-2) FE
+20/07/2020 07:48:50 KEYPRESS 1
+20/07/2020 07:48:50 gpio interrupts (P1-2) FF
+20/07/2020 07:48:50 gpio interrupts (P1-2) FE
+20/07/2020 07:48:50 gpio interrupts (P1-2) FF
+20/07/2020 07:48:51 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 07:48:51 MDM:opened and closed /dev/ttyACM0
+20/07/2020 07:48:51 opened /dev/ttyACM2 serial/USB OK
+20/07/2020 07:48:51 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 07:48:51 Modem Serial Connected using /dev/ttyACM0 and /dev/ttyACM2
+20/07/2020 07:48:51 modem state change 1 -> 2
+20/07/2020 07:48:52 NET:modem is opened
+20/07/2020 07:48:53 ATE0V1
+20/07/2020 07:48:53 Duplicates Removed 1
+20/07/2020 07:48:53 OK
+20/07/2020 07:48:53 NET:modem is alive
+20/07/2020 07:48:53 ATE0V1
+20/07/2020 07:48:53 OK
+20/07/2020 07:48:53 AT+UUSBCONF?
+20/07/2020 07:48:53 +UUSBCONF: 0,"",,"0x1141"
+20/07/2020 07:48:53 OK
+20/07/2020 07:48:53 NET:USB Profile is 0 4417
+20/07/2020 07:48:53 AT+CGMM
+20/07/2020 07:48:53 TOBY-L280
+20/07/2020 07:48:53 MDM: HWType TOBY-L280
+20/07/2020 07:48:53 OK
+20/07/2020 07:48:53 AT+CGSN
+20/07/2020 07:48:53 358503060460855
+20/07/2020 07:48:53 MDM: IMEI 358503060460855
+20/07/2020 07:48:53 OK
+20/07/2020 07:48:53 AT+CIMI
+20/07/2020 07:48:53 505016000265969
+20/07/2020 07:48:53 MDM: IMSI 505016000265969
+20/07/2020 07:48:53 OK
+20/07/2020 07:48:53 AT+CCID
+20/07/2020 07:48:53 +CCID: 89610185001550901074
+20/07/2020 07:48:53 MDM: CCID 89610185001550901074
+20/07/2020 07:48:53 OK
+20/07/2020 07:48:53 AT+CSQ
+20/07/2020 07:48:53 +CSQ: 99,99
+20/07/2020 07:48:53 MODEM CSQ 99
+20/07/2020 07:48:53 OK
+20/07/2020 07:48:53 Comms Task Alive/Started, conn_retry 300
+20/07/2020 07:48:53 gsm starting
+20/07/2020 07:48:53 comms st 0 -> 1
+20/07/2020 07:48:53 modem is HL8/4G
+20/07/2020 07:48:53 imsi: 505016000265969 15, Auto 1
+20/07/2020 07:48:53 selected apn: telstra.internet (found? 1)
+20/07/2020 07:48:53 NET: enable
+20/07/2020 07:48:53 enable apn telstra.internet for HL8
+20/07/2020 07:48:53 comms st 1 -> 2
+20/07/2020 07:48:53 NS 1
+20/07/2020 07:48:53 imsi: 505016000265969 15, Auto 1
+20/07/2020 07:48:53 selected apn: telstra.internet (found? 1)
+20/07/2020 07:48:53 ICCID Check: 89610185001550901074 89610185001550901074
+20/07/2020 07:48:53 NS 1
+20/07/2020 07:48:54 Duplicates Removed 8
+20/07/2020 07:48:54 SPLASH 99
+20/07/2020 07:48:54 net state change 0 -> 1
+20/07/2020 07:48:54 modem open now
+20/07/2020 07:48:54 ATE0V1
+20/07/2020 07:48:54 OK
+20/07/2020 07:48:54 AT+CGMM
+20/07/2020 07:48:54 TOBY-L280
+20/07/2020 07:48:54 MDM: HWType TOBY-L280
+20/07/2020 07:48:54 OK
+20/07/2020 07:48:54 AT+CGSN
+20/07/2020 07:48:54 358503060460855
+20/07/2020 07:48:54 MDM: IMEI 358503060460855
+20/07/2020 07:48:54 OK
+20/07/2020 07:48:54 AT+CIMI
+20/07/2020 07:48:54 NS 1
+20/07/2020 07:48:54 505016000265969
+20/07/2020 07:48:54 MDM: IMSI 505016000265969
+20/07/2020 07:48:54 OK
+20/07/2020 07:48:54 AT+CCID
+20/07/2020 07:48:54 +CCID: 89610185001550901074
+20/07/2020 07:48:54 MDM: CCID 89610185001550901074
+20/07/2020 07:48:54 OK
+20/07/2020 07:48:54 AT+UPSND=0,8
+20/07/2020 07:48:54 +UPSND: 0,8,0
+20/07/2020 07:48:54 psd line 0
+20/07/2020 07:48:54 pad active #0 (NO)
+20/07/2020 07:48:54 OK
+20/07/2020 07:48:54 net state change 1 -> 2
+20/07/2020 07:48:54 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 07:48:54 NS 1
+20/07/2020 07:48:54 OK
+20/07/2020 07:48:54 NS 1
+20/07/2020 07:48:55 Duplicates Removed 9
+20/07/2020 07:48:55 AT+UPSDA=0,3
+20/07/2020 07:48:55 NS 1
+20/07/2020 07:48:57 Duplicates Removed 11
+20/07/2020 07:48:57 gpio interrupts (P1-2) FE
+20/07/2020 07:48:57 KEYPRESS 2
+20/07/2020 07:48:57 NS 1
+20/07/2020 07:48:57 gpio interrupts (P1-2) FF
+20/07/2020 07:48:57 NS 1
+20/07/2020 07:48:57 Duplicates Removed 1
+20/07/2020 07:48:57 gpio interrupts (P1-2) FE
+20/07/2020 07:48:57 NS 1
+20/07/2020 07:48:57 gpio interrupts (P1-2) FF
+20/07/2020 07:48:57 NS 1
+20/07/2020 07:48:58 Duplicates Removed 6
+20/07/2020 07:48:58 gpio interrupts (P1-2) FE
+20/07/2020 07:48:58 KEYPRESS 4
+20/07/2020 07:48:58 NS 1
+20/07/2020 07:48:58 gpio interrupts (P1-2) FF
+20/07/2020 07:48:58 NS 1
+20/07/2020 07:48:58 Duplicates Removed 5
+20/07/2020 07:48:58 gpio interrupts (P1-2) FE
+20/07/2020 07:48:58 KEYPRESS 1
+20/07/2020 07:48:58 NS 1
+20/07/2020 07:48:59 gpio interrupts (P1-2) FF
+20/07/2020 07:48:59 NS 1
+20/07/2020 07:48:59 gpio interrupts (P1-2) FE
+20/07/2020 07:48:59 NS 1
+20/07/2020 07:48:59 gpio interrupts (P1-2) FF
+20/07/2020 07:48:59 NS 1
+20/07/2020 07:48:59 Duplicates Removed 4
+20/07/2020 07:48:59 gpio interrupts (P1-2) FE
+20/07/2020 07:48:59 KEYPRESS 2
+20/07/2020 07:48:59 NS 1
+20/07/2020 07:48:59 gpio interrupts (P1-2) FF
+20/07/2020 07:48:59 NS 1
+20/07/2020 07:48:59 gpio interrupts (P1-2) FE
+20/07/2020 07:48:59 NS 1
+20/07/2020 07:49:00 gpio interrupts (P1-2) FF
+20/07/2020 07:49:00 NS 1
+20/07/2020 07:49:00 Duplicates Removed 4
+20/07/2020 07:49:00 gpio interrupts (P1-2) FE
+20/07/2020 07:49:00 KEYPRESS 14
+20/07/2020 07:49:00 NS 1
+20/07/2020 07:49:00 gpio interrupts (P1-2) FF
+20/07/2020 07:49:00 NS 1
+20/07/2020 07:49:00 Duplicates Removed 1
+20/07/2020 07:49:00 gpio interrupts (P1-2) FE
+20/07/2020 07:49:00 NS 1
+20/07/2020 07:49:00 gpio interrupts (P1-2) FF
+20/07/2020 07:49:00 NS 1
+20/07/2020 07:49:01 Duplicates Removed 3
+20/07/2020 07:49:01 gpio interrupts (P1-2) FE
+20/07/2020 07:49:01 KEYPRESS 1
+20/07/2020 07:49:01 messagedialog result 241291
+20/07/2020 07:49:01 pin check clear, found 42 (241291)
+20/07/2020 07:49:01 driver id 2500
+20/07/2020 07:49:01 license expiry - disabled
+20/07/2020 07:49:01 Bgnd set msg-day font Noto Sans
+20/07/2020 07:49:01 lang code: EN file: :Translations/OpusFcMain_en
+20/07/2020 07:49:01 lang file: :Translations/OpusFcMain_en
+20/07/2020 07:49:01 Removing translations
+20/07/2020 07:49:01 Installing translations
+20/07/2020 07:49:01 NS 1
+20/07/2020 07:49:01 show driver name KOTZ Lauren
+20/07/2020 07:49:01 OpusFcMain change from 6 to 8
+20/07/2020 07:49:01 slotMessageSignonResult 241291
+20/07/2020 07:49:01 message dialog font set to: Noto Sans
+20/07/2020 07:49:01 Duplicates Removed 1
+20/07/2020 07:49:01 SETT: driver role 0
+20/07/2020 07:49:01 NS 1
+20/07/2020 07:49:01 Duplicates Removed 1
+20/07/2020 07:49:01 pointsize is 17, labelsize is 461
+20/07/2020 07:49:01 gpio interrupts (P1-2) FE
+20/07/2020 07:49:01 Bgnd set msg-day font Noto Sans
+20/07/2020 07:49:01 lang code: EN file: :Translations/OpusFcMain_en
+20/07/2020 07:49:01 lang file: :Translations/OpusFcMain_en
+20/07/2020 07:49:01 Removing translations
+20/07/2020 07:49:01 Installing translations
+20/07/2020 07:49:01 Splash set font Noto Sans
+20/07/2020 07:49:01 message dialog font set to: Noto Sans
+20/07/2020 07:49:01 Duplicates Removed 1
+20/07/2020 07:49:01 splash font set Noto Sans
+20/07/2020 07:49:01 OpName pointsize is 16, labelsize is 240, height 23
+20/07/2020 07:49:01 Splash set font Noto Sans
+20/07/2020 07:49:01 splash font set Noto Sans
+20/07/2020 07:49:01 NS 1
+20/07/2020 07:49:01 gpio interrupts (P1-2) FF
+20/07/2020 07:49:01 NS 1
+20/07/2020 07:49:04 Duplicates Removed 27
+20/07/2020 07:49:04 messagedialog result 2
+20/07/2020 07:49:04 slotMessageSignonResult 2
+20/07/2020 07:49:04 NS 1
+20/07/2020 07:49:04 license expiry - disabled
+20/07/2020 07:49:04 OpusFcMain change from 8 to 11
+20/07/2020 07:49:04 NS 1
+20/07/2020 07:49:05 Duplicates Removed 5
+20/07/2020 07:49:05 init complete, qrysent 1 0
+20/07/2020 07:49:05 postStartCK cleared
+20/07/2020 07:49:05 Chklist required?
+20/07/2020 07:49:05 checklist file detectedx
+20/07/2020 07:49:05 Chklist required 0
+20/07/2020 07:49:05 OpusFcMain change from 11 to 15
+20/07/2020 07:49:05 NS 1
+20/07/2020 07:49:05 wrote 1 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 07:49:05 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:49:05 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:49:05 START Enabled
+20/07/2020 07:49:05 OpusFcMain change from 15 to 16
+20/07/2020 07:49:05 NS 1
+20/07/2020 07:49:05 Duplicates Removed 5
+20/07/2020 07:49:05 geofence state change 2 -> 3
+20/07/2020 07:49:05 ZoneID Change3 0 -> 0 (speed 0 -> 30)
+20/07/2020 07:49:05 opusMain::slotZoneSpeed: 30, -1, 1
+20/07/2020 07:49:05 NS 1
+20/07/2020 07:49:06 Duplicates Removed 7
+20/07/2020 07:49:06 SPLASH 0
+20/07/2020 07:49:06 NS 1
+20/07/2020 07:49:08 Duplicates Removed 16
+20/07/2020 07:49:08 messagedialog result 2
+20/07/2020 07:49:08 slotMessageSignonResult 2
+20/07/2020 07:49:08 NS 1
+20/07/2020 07:49:08 OpusFcMain change from 16 to 17
+20/07/2020 07:49:08 Cklist halt
+20/07/2020 07:49:08 splash enabled?:1
+20/07/2020 07:49:08 NS 1
+20/07/2020 07:49:08 Run state: role 0
+20/07/2020 07:49:08 wrote 1 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 07:49:08 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+20/07/2020 07:49:08 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+20/07/2020 07:49:08 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+20/07/2020 07:49:08 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+20/07/2020 07:49:08 wrote 1 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 07:49:08 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:49:08 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:49:08 OpusFcMain change from 17 to 18
+20/07/2020 07:49:08 Cklist halt
+20/07/2020 07:49:08 stop reader
+20/07/2020 07:49:08 wrote 1 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 07:49:08 NS 1
+20/07/2020 07:49:08 Duplicates Removed 1
+20/07/2020 07:49:08 CAN opened OK
+20/07/2020 07:49:08 splash enabled?:1
+20/07/2020 07:49:08 messagedialog result 3
+20/07/2020 07:49:08 slotMessageSignonResult 3
+20/07/2020 07:49:08 gpio interrupts (P1-2) FB
+20/07/2020 07:49:08 NS 1
+20/07/2020 07:49:09 Duplicates Removed 1
+20/07/2020 07:49:09 card read
+20/07/2020 07:49:09 Uart rxfifo has 14 bytes waiting
+20/07/2020 07:49:09 vli 000a 10
+20/07/2020 07:49:09 vli matches
+20/07/2020 07:49:09 208 1664 0
+20/07/2020 07:49:09 CardReader version 0
+20/07/2020 07:49:09 gps version is ROM CORE 3.01 (107888)
+20/07/2020 07:49:09 main state running
+20/07/2020 07:49:09 speed signal lost, clear values
+20/07/2020 07:49:09 NS 1
+20/07/2020 07:49:09 ICONS 65
+20/07/2020 07:49:09 gpio interrupts (P1-2) FF
+20/07/2020 07:49:09 NS 1
+20/07/2020 07:49:09 Duplicates Removed 1
+20/07/2020 07:49:09 updated battery state to 2
+20/07/2020 07:49:09 NS 1
+20/07/2020 07:49:10 Duplicates Removed 10
+20/07/2020 07:49:10 canSetFilter
+20/07/2020 07:49:10 NS 1
+20/07/2020 07:49:10 Duplicates Removed 1
+20/07/2020 07:49:10 impact value 2
+20/07/2020 07:49:10 Impact New Sensor - version: 02.00.00
+20/07/2020 07:49:10 ImpactVersion 02.00.00
+20/07/2020 07:49:10 NS 1
+20/07/2020 07:49:10 Duplicates Removed 2
+20/07/2020 07:49:10 ERROR
+20/07/2020 07:49:10 parse cme 0
+20/07/2020 07:49:11 NS 1
+20/07/2020 07:49:20 Duplicates Removed 98
+20/07/2020 07:49:20 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 07:49:20 OK
+20/07/2020 07:49:20 NS 1
+20/07/2020 07:49:21 Duplicates Removed 9
+20/07/2020 07:49:21 AT+UPSDA=0,3
+20/07/2020 07:49:21 NS 1
+20/07/2020 07:49:31 Duplicates Removed 97
+20/07/2020 07:49:31 speed signal lost, clear values
+20/07/2020 07:49:31 NS 1
+20/07/2020 07:49:35 Duplicates Removed 38
+20/07/2020 07:49:35 SaveTripData: 14/12/5/5/0 0 0/0/0/0/0
+20/07/2020 07:49:35 NS 1
+20/07/2020 07:49:37 Duplicates Removed 12
+20/07/2020 07:49:37 ERROR
+20/07/2020 07:49:37 parse cme 0
+20/07/2020 07:49:37 NS 1
+20/07/2020 07:49:47 Duplicates Removed 99
+20/07/2020 07:49:47 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 07:49:47 OK
+20/07/2020 07:49:47 NS 1
+20/07/2020 07:49:48 Duplicates Removed 9
+20/07/2020 07:49:48 AT+UPSDA=0,3
+20/07/2020 07:49:48 NS 1
+20/07/2020 07:49:59 Duplicates Removed 115
+20/07/2020 07:49:59 ERROR
+20/07/2020 07:49:59 parse cme 0
+20/07/2020 07:49:59 NS 1
+20/07/2020 07:50:04 Duplicates Removed 45
+20/07/2020 07:50:04 GPS Sat Found (NMEA)!!!!!!!!!
+20/07/2020 07:50:04 NS 1
+20/07/2020 07:50:05 Duplicates Removed 12
+20/07/2020 07:50:05 main - GNSS SAT state change 0->1
+20/07/2020 07:50:05 MessageDialog GNSS 1
+20/07/2020 07:50:05 Splash GNSS 1
+20/07/2020 07:50:05 NS 1
+20/07/2020 07:50:09 Duplicates Removed 40
+20/07/2020 07:50:09 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 07:50:09 OK
+20/07/2020 07:50:09 NS 1
+20/07/2020 07:50:10 Duplicates Removed 9
+20/07/2020 07:50:10 AT+UPSDA=0,3
+20/07/2020 07:50:10 NS 1
+20/07/2020 07:50:17 Duplicates Removed 67
+20/07/2020 07:50:17 main - GNSS SAT state change 1->0
+20/07/2020 07:50:17 NS 1
+20/07/2020 07:50:17 MessageDialog GNSS 0
+20/07/2020 07:50:17 Splash GNSS 0
+20/07/2020 07:50:17 NS 1
+20/07/2020 07:50:25 Duplicates Removed 76
+20/07/2020 07:50:25 ERROR
+20/07/2020 07:50:25 parse cme 0
+20/07/2020 07:50:25 NS 1
+20/07/2020 07:50:32 Duplicates Removed 71
+20/07/2020 07:50:32 speed signal lost, clear values
+20/07/2020 07:50:32 NS 1
+20/07/2020 07:50:33 Duplicates Removed 9
+20/07/2020 07:50:33 trip end 1
+20/07/2020 07:50:33 OpusFcMain change from 18 to 19
+20/07/2020 07:50:33 messagedialog result 3
+20/07/2020 07:50:33 slotMessageSignonResult 3
+20/07/2020 07:50:33 NS 1
+20/07/2020 07:50:33 Duplicates Removed 1
+20/07/2020 07:50:33 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 07:50:33 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:50:33 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:50:33 resetting cklist 1
+20/07/2020 07:50:33 Lift is 0
+20/07/2020 07:50:33 Adding TRIP
+20/07/2020 07:50:33 SaveTripData: 48/34/7/5/0 0 0/0/0/0/0
+20/07/2020 07:50:33 OpusFcMain change from 19 to 2
+20/07/2020 07:50:33 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 07:50:33 DecCL 3
+20/07/2020 07:50:33 splash enabled?:0
+20/07/2020 07:50:33 setting new cklist state (0) and qnr (0)
+20/07/2020 07:50:33 trip Zero
+20/07/2020 07:50:33 ZoneID Change 60 -> -1 (speed  -> 0)
+20/07/2020 07:50:33 Settings: slotEsc
+20/07/2020 07:50:33 NS 1
+20/07/2020 07:50:34 opusMain::slotZoneSpeed: 60, 0, 1
+20/07/2020 07:50:34 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 07:50:34 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:50:34 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:50:34 OFFWAIT:ign still off
+20/07/2020 07:50:34 OpusFcMain change from 2 to 3
+20/07/2020 07:50:34 Settings: slotEsc
+20/07/2020 07:50:34 NS 1
+20/07/2020 07:50:34 Duplicates Removed 1
+20/07/2020 07:50:34 startup human? 1
+20/07/2020 07:50:34 channel set 0 0
+20/07/2020 07:50:34 channel setting: 3-offf:4-offf
+20/07/2020 07:50:34 Message <3-offf:4-offf>: Sent to PRU0
+20/07/2020 07:50:34 BLAll 0
+20/07/2020 07:50:34 BL set:0
+20/07/2020 07:50:34 set brightness to 0%
+20/07/2020 07:50:34 event GC
+20/07/2020 07:50:34 BRAND is default
+20/07/2020 07:50:34 S0Sdiff 0
+20/07/2020 07:50:34 wakeup is -1
+20/07/2020 07:50:34 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+20/07/2020 07:50:34 Key halt
+20/07/2020 07:50:34 Settings: slotEsc
+20/07/2020 07:50:34 Duplicates Removed 1
+20/07/2020 07:50:34 NS 1
+20/07/2020 07:50:34 Duplicates Removed 1
+20/07/2020 07:50:34 geofence state change 3 -> 2
+20/07/2020 07:50:34 NS 1
+20/07/2020 07:50:35 Duplicates Removed 6
+20/07/2020 07:50:35 PRU: Set3O
+20/07/2020 07:50:35 PRU: Set4O
+20/07/2020 07:50:35 NS 1
+20/07/2020 07:50:35 Duplicates Removed 2
+20/07/2020 07:50:35 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 07:50:35 NS 1
+20/07/2020 07:50:35 OK
+20/07/2020 07:50:35 NS 1
+20/07/2020 07:50:36 Duplicates Removed 9
+20/07/2020 07:50:36 AT+UPSDA=0,3
+20/07/2020 07:50:36 NS 1
+20/07/2020 07:50:45 Duplicates Removed 85
+20/07/2020 07:50:45 report - time triggered (0)
+20/07/2020 07:50:45 NS 1
+20/07/2020 07:50:51 Duplicates Removed 62
+20/07/2020 07:50:51 ERROR
+20/07/2020 07:50:51 parse cme 0
+20/07/2020 07:50:51 NS 1
+20/07/2020 07:51:01 Duplicates Removed 99
+20/07/2020 07:51:01 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 07:51:01 OK
+20/07/2020 07:51:01 NS 1
+20/07/2020 07:51:02 Duplicates Removed 9
+20/07/2020 07:51:02 AT+UPSDA=0,3
+20/07/2020 07:51:02 NS 1
+20/07/2020 07:51:04 Duplicates Removed 20
+20/07/2020 07:51:04 WUD -1
+20/07/2020 07:51:04 WAKE time disabled
+20/07/2020 07:51:04 SHUTTING DOWN
+20/07/2020 07:51:04 killing comms
+20/07/2020 07:51:04 NS 1
+20/07/2020 07:51:05 Duplicates Removed 8
+20/07/2020 07:51:05 WD closed
+20/07/2020 07:51:05 imsi: 505016000265969 15, Auto 1
+20/07/2020 07:51:05 selected apn: telstra.internet (found? 1)
+20/07/2020 07:51:05 comms st 2 -> 5
+20/07/2020 07:51:05 comms st 5 -> 1
+20/07/2020 07:51:05 comms done
+20/07/2020 07:51:05 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 07:51:05 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:51:05 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:51:05 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+20/07/2020 07:51:05 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 07:51:05 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+20/07/2020 07:51:05 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+20/07/2020 07:51:05 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+20/07/2020 07:51:05 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+20/07/2020 07:51:05 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 07:51:05 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 07:51:05 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 07:51:05 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:51:05 wrote 0 to /sys/class/gpio/gpio48/value (O/P 15)
+20/07/2020 07:51:05 wrote 0 to /sys/class/gpio/gpio49/value (O/P 16)
+20/07/2020 07:51:10 shutdown timer set
+20/07/2020 07:55:32 OtaUpdater RUNNING
+20/07/2020 07:55:32 no file to update
+20/07/2020 07:55:32 Starting /store/FcMain -qws version:3.0.0.6  &
+20/07/2020 07:55:32 VERSION: 5.0.58.510 R 
+20/07/2020 07:55:32 4.14.108-ti-r119
+20/07/2020 07:55:32 NEW OS, DONOT access PCF directly
+20/07/2020 07:55:32 hwclock time: 1595231732
+20/07/2020 07:55:32 IOInit - NEW OS
+20/07/2020 07:55:32 created gpio INP 0 @GPIO: 66
+20/07/2020 07:55:32 created gpio INP 1 @GPIO: 67
+20/07/2020 07:55:32 created gpio INP 4 @GPIO: 45
+20/07/2020 07:55:32 created gpio INP 5 @GPIO: 44
+20/07/2020 07:55:32 created gpio INP 6 @GPIO: 23
+20/07/2020 07:55:32 created gpio INP 7 @GPIO: 26
+20/07/2020 07:55:32 created gpio INP 8 @GPIO: 51
+20/07/2020 07:55:32 created gpio INP 9 @GPIO: 61
+20/07/2020 07:55:32 created gpio OUT: 60
+20/07/2020 07:55:32 created gpio OUT: 46
+20/07/2020 07:55:32 created gpio OUT: 27
+20/07/2020 07:55:32 created gpio OUT: 65
+20/07/2020 07:55:32 created gpio OUT: 22
+20/07/2020 07:55:32 created gpio OUT: 115
+20/07/2020 07:55:32 created gpio OUT: 69
+20/07/2020 07:55:32 created gpio OUT: 68
+20/07/2020 07:55:32 created gpio OUT: 117
+20/07/2020 07:55:32 created gpio OUT: 59
+20/07/2020 07:55:32 created gpio OUT: 58
+20/07/2020 07:55:32 created gpio OUT: 52
+20/07/2020 07:55:32 created gpio OUT: 64
+20/07/2020 07:55:32 created gpio OUT: 47
+20/07/2020 07:55:32 created gpio OUT: 48
+20/07/2020 07:55:32 created gpio OUT: 49
+20/07/2020 07:55:32 created gpio OUT: 116
+20/07/2020 07:55:32 created gpio OUT: 53
+20/07/2020 07:55:32 created gpio OUT: 54
+20/07/2020 07:55:32 created gpio OUT: 55
+20/07/2020 07:55:32 created gpio OUT: 507
+20/07/2020 07:55:32 created gpio OUT: 508
+20/07/2020 07:55:32 created gpio OUT: 509
+20/07/2020 07:55:32 created gpio OUT: 510
+20/07/2020 07:55:32 created gpio OUT: 511
+20/07/2020 07:55:32 usr0 is heartbeat
+20/07/2020 07:55:32 usr1 is mmc0 (uSD card)
+20/07/2020 07:55:32 usr2 is mmc1(eMMC)
+20/07/2020 07:55:32 channel thread created
+20/07/2020 07:55:32 channel ch3 2 ch4 2
+20/07/2020 07:55:32 ch3 2 ch4 2
+20/07/2020 07:55:32 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 07:55:32 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:55:32 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:55:32 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+20/07/2020 07:55:32 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 07:55:32 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+20/07/2020 07:55:32 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+20/07/2020 07:55:32 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+20/07/2020 07:55:32 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+20/07/2020 07:55:32 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 07:55:32 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 07:55:32 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 07:55:32 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:55:32 wrote 0 to /sys/class/gpio/gpio48/value (O/P 15)
+20/07/2020 07:55:32 wrote 0 to /sys/class/gpio/gpio49/value (O/P 16)
+20/07/2020 07:55:32 OTA Version: version:3.0.0.6
+20/07/2020 07:55:32 wrote 1 to /sys/class/gpio/gpio59/value (O/P 10)
+20/07/2020 07:55:32 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+20/07/2020 07:55:33 channel state change 0 -> 1
+20/07/2020 07:55:33 Starting PRU
+20/07/2020 07:55:33 offline
+20/07/2020 07:55:33 PRU starting
+20/07/2020 07:55:33 i2c1 commands - to serialiser
+20/07/2020 07:55:33 Serialiser Serial Nr: 2280800404100061A485A000A00000EB
+20/07/2020 07:55:33 Serialiser Eeprom Serial Nr: 000774-AA
+20/07/2020 07:55:33 BLAll 2
+20/07/2020 07:55:33 BL set:2
+20/07/2020 07:55:33 set brightness to 2%
+20/07/2020 07:55:34 Opus FC (main) Started
+20/07/2020 07:55:34 ROOTFS Built 41449
+20/07/2020 07:55:34 Nr Langs to process: 18
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_ar
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_es
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_et
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_fr
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_de
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_hi
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_id
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_km
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_ko
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_lv
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_ms
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_ru
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_th
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_tl
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_uk
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_vi
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_zh
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 lang file: :Translations/OpusFcMain_en
+20/07/2020 07:55:34 Loaded translations
+20/07/2020 07:55:34 eeprom magic OK
+20/07/2020 07:55:34 Contructor PID2 108 108
+20/07/2020 07:55:34 MessageDialog GNSS 0
+20/07/2020 07:55:34 Duplicates Removed 1
+20/07/2020 07:55:34 thread gps_thread created
+20/07/2020 07:55:34 wrote 1 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 07:55:34 gps open 1
+20/07/2020 07:55:34 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+20/07/2020 07:55:34 gps task running
+20/07/2020 07:55:34 gps state change 1 -> 2
+20/07/2020 07:55:34 weightCountKg -1.000000
+20/07/2020 07:55:34 EXP 2066562957, 1593522957, 1595231734
+20/07/2020 07:55:34 opened /dev/ttyS2 serial/USB OK
+20/07/2020 07:55:34 GPS Serial Connected on /dev/ttyS2 (handle 13)
+20/07/2020 07:55:34 speedHzKmh 1.593248
+20/07/2020 07:55:34 speedHzRPM 30.864197
+20/07/2020 07:55:34 MessageDialog GNSS 0
+20/07/2020 07:55:34 Duplicates Removed 1
+20/07/2020 07:55:34 pru Waiting/Waiting
+20/07/2020 07:55:34 MessageDialog GNSS 0
+20/07/2020 07:55:34 Duplicates Removed 5
+20/07/2020 07:55:34 Splash GNSS 0
+20/07/2020 07:55:34 found /store/Service_active.xml
+20/07/2020 07:55:34 MessageDialog GNSS 0
+20/07/2020 07:55:34 settings ready
+20/07/2020 07:55:34 MessageDialog GNSS 0
+20/07/2020 07:55:34 BL dark 0
+20/07/2020 07:55:34 BL light 0
+20/07/2020 07:55:34 Starting Threads. Mayhem begins!
+20/07/2020 07:55:34 Main thread running
+20/07/2020 07:55:34 opusFc task run
+20/07/2020 07:55:34 FleetMessaging thread running
+20/07/2020 07:55:34 Beeper thread running
+20/07/2020 07:55:34 TriLed thread running
+20/07/2020 07:55:34 Theme thread running
+20/07/2020 07:55:34 Diagnostic thread running
+20/07/2020 07:55:34 Batttery thread running
+20/07/2020 07:55:34 fleetmsg run
+20/07/2020 07:55:34 New Operator file XML found
+20/07/2020 07:55:34 found Operators_active.xml
+20/07/2020 07:55:34 xml_parsing file: /store/Operators_active.xml
+20/07/2020 07:55:34 Can thread running
+20/07/2020 07:55:34 diags run
+20/07/2020 07:55:34 triled run
+20/07/2020 07:55:34 Key thread running
+20/07/2020 07:55:34 beeper run
+20/07/2020 07:55:34 GeoFence thread running
+20/07/2020 07:55:34 main.cpp Done
+20/07/2020 07:55:34 Geofence run
+20/07/2020 07:55:34 MessageDialog GNSS 0
+20/07/2020 07:55:34 Operator file XML found
+20/07/2020 07:55:34 event GC
+20/07/2020 07:55:34 Powerup - Done
+20/07/2020 07:55:34 PID3 108 114
+20/07/2020 07:55:34 WDOpen Success
+20/07/2020 07:55:34 WDT timeout is 30
+20/07/2020 07:55:35 gps state change 2 -> 3
+20/07/2020 07:55:35 Starting PRU
+20/07/2020 07:55:35 running
+20/07/2020 07:55:35 opening /dev/rpmsg_pru30
+20/07/2020 07:55:35 PRU Opened 32
+20/07/2020 07:55:35 Opened /dev/rpmsg_pru30
+20/07/2020 07:55:35 Battery free
+20/07/2020 07:55:35 keythread - init 1
+20/07/2020 07:55:35 keyscanner OK
+20/07/2020 07:55:35 keyscanner gpio ok
+20/07/2020 07:55:35 keyscanner UART
+20/07/2020 07:55:35 keythread - init SUCCESS
+20/07/2020 07:55:35 slotUpdate first call
+20/07/2020 07:55:36 bootstatus3 0
+20/07/2020 07:55:36 tempBootStatus 0
+20/07/2020 07:55:36 bootstatus 0
+20/07/2020 07:55:36 end of run()
+20/07/2020 07:55:36 channel setting: 3-freq:4-freq
+20/07/2020 07:55:36 Message <3-freq:4-freq>: Sent to PRU0
+20/07/2020 07:55:36 channel state change 1 -> 2
+20/07/2020 07:55:36 PRU: Set3F
+20/07/2020 07:55:36 PRU: Set4F
+20/07/2020 07:55:36 PRU: FreqInit
+20/07/2020 07:55:36 PRU Version: 103
+20/07/2020 07:55:36 sync new state entry
+20/07/2020 07:55:36 build time 1593494157
+20/07/2020 07:55:36 REC trip id 0
+20/07/2020 07:55:36 REC write time 1595231434
+20/07/2020 07:55:36 REC QNr 0
+20/07/2020 07:55:36 REC CkState 17
+20/07/2020 07:55:36 REC Main state 3
+20/07/2020 07:55:36 REC DrIdx 42
+20/07/2020 07:55:36 readData 1
+20/07/2020 07:55:36 thread comms_thread created
+20/07/2020 07:55:36 thread modem_thread created
+20/07/2020 07:55:36 last connect time read: 1595231321 1595231321
+20/07/2020 07:55:36 NET: get hw
+20/07/2020 07:55:36 MDM: open
+20/07/2020 07:55:36 thread net_thread created
+20/07/2020 07:55:36 modem state change 0 -> 1
+20/07/2020 07:55:36 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 07:55:36 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 07:55:36 MDM: turn on modem power
+20/07/2020 07:55:36 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+20/07/2020 07:55:36 thread interrupt_thread created
+20/07/2020 07:55:36 SerialNr: 9278
+20/07/2020 07:55:36 LoadDate: 250919
+20/07/2020 07:55:36 HWModel:  9072s_B
+20/07/2020 07:55:36 hwVersion is <9072s_B>
+20/07/2020 07:55:36 recovered EEtrip 0 time 1595231433 slot 0 saved time 119
+20/07/2020 07:55:36 FRIM: 48/34/7/5/0
+20/07/2020 07:55:36 LT 1595231433 0
+20/07/2020 07:55:36 recovered EEtrip 147660 time 1595230984 slot 1 saved time 122
+20/07/2020 07:55:36 FRIM: 84/17/4/4/0
+20/07/2020 07:55:36 recovered EEtrip 147660 time 1595231045 slot 2 saved time 183
+20/07/2020 07:55:36 FRIM: 132/30/4/4/0
+20/07/2020 07:55:36 recovered EEtrip 147660 time 1595231106 slot 3 saved time 244
+20/07/2020 07:55:36 FRIM: 171/52/4/4/0
+20/07/2020 07:55:36 recovered EEtrip 147567 time 1595227470 slot 4 saved time 305
+20/07/2020 07:55:36 FRIM: 273/11/4/4/0
+20/07/2020 07:55:36 recovered EEtrip 147567 time 1595227531 slot 5 saved time 366
+20/07/2020 07:55:36 FRIM: 320/25/4/4/0
+20/07/2020 07:55:36 recovered EEtrip 0 time 1595231433 slot 0
+20/07/2020 07:55:36 FRIM: 48/34/7/5/0
+20/07/2020 07:55:36 found /store/DisplayMessaging_active.xml
+20/07/2020 07:55:36 PRU version 103
+20/07/2020 07:55:36 Msg Dialog font Noto Sans
+20/07/2020 07:55:36 lang code: EN file: :Translations/OpusFcMain_en
+20/07/2020 07:55:36 lang file: :Translations/OpusFcMain_en
+20/07/2020 07:55:36 Removing translations
+20/07/2020 07:55:36 Installing translations
+20/07/2020 07:55:36 OpusFcMain change from 0 to 1
+20/07/2020 07:55:36 modem type 7
+20/07/2020 07:55:36 comms_start gsm
+20/07/2020 07:55:36 comms_enable
+20/07/2020 07:55:36 fleetmsg free
+20/07/2020 07:55:36 Theme free
+20/07/2020 07:55:36 THEME TIME Day1 Night2 7 0 1 light 255 0
+20/07/2020 07:55:36 Set Theme Day
+20/07/2020 07:55:36 diags free
+20/07/2020 07:55:36 Led free
+20/07/2020 07:55:36 CAN free
+20/07/2020 07:55:36 Geofence free, FC was reset 1
+20/07/2020 07:55:36 message dialog font set to: Noto Sans
+20/07/2020 07:55:36 Duplicates Removed 1
+20/07/2020 07:55:36 Received New Theme
+20/07/2020 07:55:36 gpio interrupts (P1-2) FF
+20/07/2020 07:55:36 eeprom 0, 48/34/7/5
+20/07/2020 07:55:36 Power loss time 1595231433
+20/07/2020 07:55:36 SWSTART OpusFC 5.0.58.510 R
+20/07/2020 07:55:36 startup human? 1
+20/07/2020 07:55:36 OpusFcMain change from 1 to 2
+20/07/2020 07:55:36 report initial input states?
+20/07/2020 07:55:36 report initial input states: YES
+20/07/2020 07:55:36 ign on, enable BackLight/Serialiser
+20/07/2020 07:55:37 Splash set font Noto Sans
+20/07/2020 07:55:38 splash font set Noto Sans
+20/07/2020 07:55:38 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 07:55:38 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:55:38 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:55:38 PSP 1
+20/07/2020 07:55:38 PSP 2
+20/07/2020 07:55:38 PSP 3
+20/07/2020 07:55:38 OpusFcMain change from 2 to 4
+20/07/2020 07:55:38 zone 1 read 4 points 8
+20/07/2020 07:55:38 zone 2 read 4 points 8
+20/07/2020 07:55:38 gps version is NO VERSION
+20/07/2020 07:55:38 max zones 100
+20/07/2020 07:55:38 Splash Radio Unknown
+20/07/2020 07:55:38 radio set Unknown <--
+20/07/2020 07:55:38 Settings: slotEsc
+20/07/2020 07:55:38 Wake
+20/07/2020 07:55:38 Wake ON
+20/07/2020 07:55:38 OpusFcMain change from 4 to 5
+20/07/2020 07:55:38 Key free
+20/07/2020 07:55:38 keythread - init 1
+20/07/2020 07:55:38 keyscanner OK
+20/07/2020 07:55:38 keyscanner gpio ok
+20/07/2020 07:55:38 keyscanner UART
+20/07/2020 07:55:38 keythread - init SUCCESS
+20/07/2020 07:55:38 start reader
+20/07/2020 07:55:38 ota 1593746147 - 2020-07-03 03:15:47Z
+20/07/2020 07:55:38 valid fleet? 9278
+20/07/2020 07:55:38 BLAll 2
+20/07/2020 07:55:38 BL set:2
+20/07/2020 07:55:38 set brightness to 2%
+20/07/2020 07:55:38 traction set 2 2
+20/07/2020 07:55:38 channel set 2 2
+20/07/2020 07:55:38 channel setting: 3-freq:4-freq
+20/07/2020 07:55:38 Message <3-freq:4-freq>: Sent to PRU0
+20/07/2020 07:55:38 OpusFcMain change from 5 to 6
+20/07/2020 07:55:38 gpio interrupts (P1-2) FB
+20/07/2020 07:55:38 card read
+20/07/2020 07:55:38 Uart rxfifo has 14 bytes waiting
+20/07/2020 07:55:38 vli 000a 10
+20/07/2020 07:55:38 vli matches
+20/07/2020 07:55:38 208 1664 0
+20/07/2020 07:55:38 CardReader version 0
+20/07/2020 07:55:38 Cklist free
+20/07/2020 07:55:38 splash enabled?:0
+20/07/2020 07:55:38 gpio interrupts (P1-2) FF
+20/07/2020 07:55:38 start wiegand
+20/07/2020 07:55:38 state timer started
+20/07/2020 07:55:38 geofence state change 0 -> 1
+20/07/2020 07:55:38 startup
+20/07/2020 07:55:38 setbool 0
+20/07/2020 07:55:38 CKL state change 0
+20/07/2020 07:55:38 checklist file detected
+20/07/2020 07:55:38 found Checklist_active.xml
+20/07/2020 07:55:38 xml_parsing
+20/07/2020 07:55:38 xml process checklist
+20/07/2020 07:55:38 xml process config/hdr
+20/07/2020 07:55:38 lastrun read (time/driver) 1595196602 42
+20/07/2020 07:55:38 CkList::Checklist init complete
+20/07/2020 07:55:39 OpusFcMain::Checklist init complete
+20/07/2020 07:55:39 CKL state change 1
+20/07/2020 07:55:39 CKL state change 17
+20/07/2020 07:55:39 geofence state change 1 -> 2
+20/07/2020 07:55:39 PRU: Set3F
+20/07/2020 07:55:39 PRU: Set4F
+20/07/2020 07:55:39 gpio interrupts (P1-2) FE
+20/07/2020 07:55:39 KEYPRESS 2
+20/07/2020 07:55:39 gpio interrupts (P1-2) FF
+20/07/2020 07:55:40 gpio interrupts (P1-2) FE
+20/07/2020 07:55:40 KEYPRESS 4
+20/07/2020 07:55:40 gpio interrupts (P1-2) FF
+20/07/2020 07:55:40 resetting baud
+20/07/2020 07:55:40 change baud to 115200
+20/07/2020 07:55:40 GPS close 0
+20/07/2020 07:55:40 opened /dev/ttyS2 serial/USB OK
+20/07/2020 07:55:40 GPS Serial Connected on /dev/ttyS2 at 115200
+20/07/2020 07:55:40 GPS Saved Database found
+20/07/2020 07:55:40 GPS Loading Saved Database
+20/07/2020 07:55:40 gpio interrupts (P1-2) FE
+20/07/2020 07:55:40 loaded 49 GNSS DB files
+20/07/2020 07:55:40 getting ver
+20/07/2020 07:55:40 gpio interrupts (P1-2) FF
+20/07/2020 07:55:41 gpio interrupts (P1-2) FE
+20/07/2020 07:55:41 KEYPRESS 1
+20/07/2020 07:55:41 gpio interrupts (P1-2) FF
+20/07/2020 07:55:41 gpio interrupts (P1-2) FE
+20/07/2020 07:55:41 gpio interrupts (P1-2) FF
+20/07/2020 07:55:41 traction/idle state seen
+20/07/2020 07:55:41 gpio interrupts (P1-2) FE
+20/07/2020 07:55:41 KEYPRESS 2
+20/07/2020 07:55:41 gpio interrupts (P1-2) FF
+20/07/2020 07:55:42 gpio interrupts (P1-2) FE
+20/07/2020 07:55:42 getting ver
+20/07/2020 07:55:42 gpio interrupts (P1-2) FF
+20/07/2020 07:55:42 gps rate set
+20/07/2020 07:55:42 gpio interrupts (P1-2) FE
+20/07/2020 07:55:42 KEYPRESS 14
+20/07/2020 07:55:42 gpio interrupts (P1-2) FF
+20/07/2020 07:55:42 gpio interrupts (P1-2) FE
+20/07/2020 07:55:42 gpio interrupts (P1-2) FF
+20/07/2020 07:55:43 GPS Ver [ROM CORE 3.01 (107888)] [00080000] (len)160
+20/07/2020 07:55:43 gpio interrupts (P1-2) FE
+20/07/2020 07:55:43 KEYPRESS 1
+20/07/2020 07:55:43 messagedialog result 241291
+20/07/2020 07:55:43 pin check clear, found 42 (241291)
+20/07/2020 07:55:43 driver id 2500
+20/07/2020 07:55:43 license expiry - disabled
+20/07/2020 07:55:43 Bgnd set msg-day font Noto Sans
+20/07/2020 07:55:43 lang code: EN file: :Translations/OpusFcMain_en
+20/07/2020 07:55:43 lang file: :Translations/OpusFcMain_en
+20/07/2020 07:55:43 Removing translations
+20/07/2020 07:55:43 Installing translations
+20/07/2020 07:55:43 show driver name KOTZ Lauren
+20/07/2020 07:55:43 OpusFcMain change from 6 to 8
+20/07/2020 07:55:43 slotMessageSignonResult 241291
+20/07/2020 07:55:43 Bgnd set msg-day font Noto Sans
+20/07/2020 07:55:43 lang code: EN file: :Translations/OpusFcMain_en
+20/07/2020 07:55:43 lang file: :Translations/OpusFcMain_en
+20/07/2020 07:55:43 Removing translations
+20/07/2020 07:55:43 Installing translations
+20/07/2020 07:55:43 message dialog font set to: Noto Sans
+20/07/2020 07:55:43 Duplicates Removed 1
+20/07/2020 07:55:43 SETT: driver role 0
+20/07/2020 07:55:43 pointsize is 17, labelsize is 461
+20/07/2020 07:55:43 message dialog font set to: Noto Sans
+20/07/2020 07:55:43 Duplicates Removed 1
+20/07/2020 07:55:43 gpio interrupts (P1-2) FE
+20/07/2020 07:55:43 Splash set font Noto Sans
+20/07/2020 07:55:43 Duplicates Removed 1
+20/07/2020 07:55:43 splash font set Noto Sans
+20/07/2020 07:55:43 OpName pointsize is 16, labelsize is 240, height 23
+20/07/2020 07:55:43 splash font set Noto Sans
+20/07/2020 07:55:43 gpio interrupts (P1-2) FF
+20/07/2020 07:55:45 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 07:55:45 MDM:opened and closed /dev/ttyACM0
+20/07/2020 07:55:45 opened /dev/ttyACM2 serial/USB OK
+20/07/2020 07:55:45 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 07:55:45 Modem Serial Connected using /dev/ttyACM0 and /dev/ttyACM2
+20/07/2020 07:55:45 modem state change 1 -> 2
+20/07/2020 07:55:46 NET:modem is opened
+20/07/2020 07:55:46 messagedialog result 2
+20/07/2020 07:55:46 slotMessageSignonResult 2
+20/07/2020 07:55:46 license expiry - disabled
+20/07/2020 07:55:46 OpusFcMain change from 8 to 11
+20/07/2020 07:55:47 init complete, qrysent 1 0
+20/07/2020 07:55:47 postStartCK cleared
+20/07/2020 07:55:47 Chklist required?
+20/07/2020 07:55:47 checklist file detectedx
+20/07/2020 07:55:47 Chklist required 0
+20/07/2020 07:55:47 OpusFcMain change from 11 to 15
+20/07/2020 07:55:47 ATE0V1
+20/07/2020 07:55:47 wrote 1 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 07:55:47 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:55:47 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:55:47 START Enabled
+20/07/2020 07:55:47 OpusFcMain change from 15 to 16
+20/07/2020 07:55:48 geofence state change 2 -> 3
+20/07/2020 07:55:48 ZoneID Change3 0 -> 0 (speed 0 -> 30)
+20/07/2020 07:55:48 opusMain::slotZoneSpeed: 30, -1, 1
+20/07/2020 07:55:50 ATE0V1
+20/07/2020 07:55:50 Duplicates Removed 1
+20/07/2020 07:55:50 OK
+20/07/2020 07:55:50 NET:modem is alive
+20/07/2020 07:55:50 ATE0V1
+20/07/2020 07:55:50 OK
+20/07/2020 07:55:50 AT+UUSBCONF?
+20/07/2020 07:55:50 +UUSBCONF: 0,"",,"0x1141"
+20/07/2020 07:55:50 OK
+20/07/2020 07:55:50 NET:USB Profile is 0 4417
+20/07/2020 07:55:50 AT+CGMM
+20/07/2020 07:55:50 TOBY-L280
+20/07/2020 07:55:50 MDM: HWType TOBY-L280
+20/07/2020 07:55:50 OK
+20/07/2020 07:55:50 AT+CGSN
+20/07/2020 07:55:50 358503060460855
+20/07/2020 07:55:50 MDM: IMEI 358503060460855
+20/07/2020 07:55:50 OK
+20/07/2020 07:55:50 AT+CIMI
+20/07/2020 07:55:50 505016000265969
+20/07/2020 07:55:50 MDM: IMSI 505016000265969
+20/07/2020 07:55:50 OK
+20/07/2020 07:55:50 AT+CCID
+20/07/2020 07:55:50 +CCID: 89610185001550901074
+20/07/2020 07:55:50 MDM: CCID 89610185001550901074
+20/07/2020 07:55:50 OK
+20/07/2020 07:55:50 AT+CSQ
+20/07/2020 07:55:50 +CSQ: 99,99
+20/07/2020 07:55:50 MODEM CSQ 99
+20/07/2020 07:55:50 OK
+20/07/2020 07:55:50 Comms Task Alive/Started, conn_retry 300
+20/07/2020 07:55:50 gsm starting
+20/07/2020 07:55:50 comms st 0 -> 1
+20/07/2020 07:55:50 modem is HL8/4G
+20/07/2020 07:55:50 imsi: 505016000265969 15, Auto 1
+20/07/2020 07:55:50 selected apn: telstra.internet (found? 1)
+20/07/2020 07:55:50 NET: enable
+20/07/2020 07:55:50 enable apn telstra.internet for HL8
+20/07/2020 07:55:50 comms st 1 -> 2
+20/07/2020 07:55:50 NS 1
+20/07/2020 07:55:50 imsi: 505016000265969 15, Auto 1
+20/07/2020 07:55:50 selected apn: telstra.internet (found? 1)
+20/07/2020 07:55:50 ICCID Check: 89610185001550901074 89610185001550901074
+20/07/2020 07:55:50 NS 1
+20/07/2020 07:55:50 Duplicates Removed 1
+20/07/2020 07:55:50 messagedialog result 2
+20/07/2020 07:55:50 slotMessageSignonResult 2
+20/07/2020 07:55:50 net state change 0 -> 1
+20/07/2020 07:55:50 modem open now
+20/07/2020 07:55:50 ATE0V1
+20/07/2020 07:55:50 OK
+20/07/2020 07:55:50 AT+CGMM
+20/07/2020 07:55:50 NS 1
+20/07/2020 07:55:50 TOBY-L280
+20/07/2020 07:55:50 MDM: HWType TOBY-L280
+20/07/2020 07:55:50 OK
+20/07/2020 07:55:50 AT+CGSN
+20/07/2020 07:55:50 358503060460855
+20/07/2020 07:55:50 MDM: IMEI 358503060460855
+20/07/2020 07:55:50 OK
+20/07/2020 07:55:50 AT+CIMI
+20/07/2020 07:55:50 505016000265969
+20/07/2020 07:55:50 MDM: IMSI 505016000265969
+20/07/2020 07:55:50 OK
+20/07/2020 07:55:50 AT+CCID
+20/07/2020 07:55:50 OpusFcMain change from 16 to 17
+20/07/2020 07:55:50 +CCID: 89610185001550901074
+20/07/2020 07:55:50 MDM: CCID 89610185001550901074
+20/07/2020 07:55:50 OK
+20/07/2020 07:55:50 AT+UPSND=0,8
+20/07/2020 07:55:50 Cklist halt
+20/07/2020 07:55:50 splash enabled?:1
+20/07/2020 07:55:50 +UPSND: 0,8,0
+20/07/2020 07:55:50 psd line 0
+20/07/2020 07:55:50 pad active #0 (NO)
+20/07/2020 07:55:50 OK
+20/07/2020 07:55:50 net state change 1 -> 2
+20/07/2020 07:55:50 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 07:55:50 OK
+20/07/2020 07:55:50 NS 1
+20/07/2020 07:55:50 Run state: role 0
+20/07/2020 07:55:50 wrote 1 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 07:55:50 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+20/07/2020 07:55:50 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+20/07/2020 07:55:50 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+20/07/2020 07:55:50 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+20/07/2020 07:55:50 wrote 1 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 07:55:50 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:55:50 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:55:50 OpusFcMain change from 17 to 18
+20/07/2020 07:55:50 Cklist halt
+20/07/2020 07:55:50 stop reader
+20/07/2020 07:55:50 wrote 1 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 07:55:50 NS 1
+20/07/2020 07:55:50 Duplicates Removed 1
+20/07/2020 07:55:50 CAN opened OK
+20/07/2020 07:55:50 splash enabled?:1
+20/07/2020 07:55:50 messagedialog result 3
+20/07/2020 07:55:50 slotMessageSignonResult 3
+20/07/2020 07:55:50 gpio interrupts (P1-2) FB
+20/07/2020 07:55:50 NS 1
+20/07/2020 07:55:51 Duplicates Removed 1
+20/07/2020 07:55:51 card read
+20/07/2020 07:55:51 Uart rxfifo has 14 bytes waiting
+20/07/2020 07:55:51 NS 1
+20/07/2020 07:55:51 vli 000a 10
+20/07/2020 07:55:51 vli matches
+20/07/2020 07:55:51 208 1664 0
+20/07/2020 07:55:51 CardReader version 0
+20/07/2020 07:55:51 gps version is ROM CORE 3.01 (107888)
+20/07/2020 07:55:51 main state running
+20/07/2020 07:55:51 speed signal lost, clear values
+20/07/2020 07:55:51 ICONS 65
+20/07/2020 07:55:51 NS 1
+20/07/2020 07:55:51 gpio interrupts (P1-2) FF
+20/07/2020 07:55:51 NS 1
+20/07/2020 07:55:51 updated battery state to 2
+20/07/2020 07:55:51 NS 1
+20/07/2020 07:55:51 Duplicates Removed 1
+20/07/2020 07:55:51 AT+UPSDA=0,3
+20/07/2020 07:55:51 NS 1
+20/07/2020 07:55:51 SPLASH 99
+20/07/2020 07:55:51 NS 1
+20/07/2020 07:55:52 Duplicates Removed 7
+20/07/2020 07:55:52 canSetFilter
+20/07/2020 07:55:52 NS 1
+20/07/2020 07:55:52 Duplicates Removed 1
+20/07/2020 07:55:52 impact value 2
+20/07/2020 07:55:52 Impact New Sensor - version: 02.00.00
+20/07/2020 07:55:52 ImpactVersion 02.00.00
+20/07/2020 07:55:52 NS 1
+20/07/2020 07:56:01 Duplicates Removed 88
+20/07/2020 07:56:01 SPLASH 0
+20/07/2020 07:56:01 NS 1
+20/07/2020 07:56:06 Duplicates Removed 49
+20/07/2020 07:56:06 ERROR
+20/07/2020 07:56:06 parse cme 0
+20/07/2020 07:56:06 NS 1
+20/07/2020 07:56:16 Duplicates Removed 98
+20/07/2020 07:56:16 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 07:56:16 OK
+20/07/2020 07:56:16 NS 1
+20/07/2020 07:56:17 Duplicates Removed 9
+20/07/2020 07:56:17 AT+UPSDA=0,3
+20/07/2020 07:56:17 NS 1
+20/07/2020 07:56:23 Duplicates Removed 59
+20/07/2020 07:56:23 speed signal lost, clear values
+20/07/2020 07:56:23 NS 1
+20/07/2020 07:56:30 Duplicates Removed 69
+20/07/2020 07:56:30 SaveTripData: 17/23/4/4/0 0 0/0/0/0/0
+20/07/2020 07:56:30 NS 1
+20/07/2020 07:56:32 Duplicates Removed 19
+20/07/2020 07:56:32 ERROR
+20/07/2020 07:56:32 parse cme 0
+20/07/2020 07:56:32 NS 1
+20/07/2020 07:56:42 Duplicates Removed 99
+20/07/2020 07:56:42 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 07:56:42 OK
+20/07/2020 07:56:42 NS 1
+20/07/2020 07:56:43 Duplicates Removed 9
+20/07/2020 07:56:43 AT+UPSDA=0,3
+20/07/2020 07:56:43 NS 1
+20/07/2020 07:56:53 Duplicates Removed 100
+20/07/2020 07:56:53 ERROR
+20/07/2020 07:56:53 parse cme 0
+20/07/2020 07:56:53 gpio interrupts (P1-2) FF
+20/07/2020 07:56:54 NS 1
+20/07/2020 07:56:54 keythread - init 1
+20/07/2020 07:56:54 keyscanner OK
+20/07/2020 07:56:54 keyscanner gpio ok
+20/07/2020 07:56:54 keyscanner UART
+20/07/2020 07:56:54 keythread - init SUCCESS
+20/07/2020 07:56:54 NS 1
+20/07/2020 07:57:03 Duplicates Removed 97
+20/07/2020 07:57:03 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 07:57:03 NS 1
+20/07/2020 07:57:03 OK
+20/07/2020 07:57:04 NS 1
+20/07/2020 07:57:04 Duplicates Removed 9
+20/07/2020 07:57:04 AT+UPSDA=0,3
+20/07/2020 07:57:05 NS 1
+20/07/2020 07:57:20 Duplicates Removed 148
+20/07/2020 07:57:20 ERROR
+20/07/2020 07:57:20 parse cme 0
+20/07/2020 07:57:20 NS 1
+20/07/2020 07:57:22 Duplicates Removed 26
+20/07/2020 07:57:22 speed signal lost, clear values
+20/07/2020 07:57:22 NS 1
+20/07/2020 07:57:30 Duplicates Removed 72
+20/07/2020 07:57:30 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 07:57:30 OK
+20/07/2020 07:57:30 NS 1
+20/07/2020 07:57:31 Duplicates Removed 9
+20/07/2020 07:57:31 AT+UPSDA=0,3
+20/07/2020 07:57:31 NS 1
+20/07/2020 07:57:31 Duplicates Removed 6
+20/07/2020 07:57:31 SaveTripData: 17/84/4/4/0 1 0/0/0/0/0
+20/07/2020 07:57:31 NS 1
+20/07/2020 07:57:34 Duplicates Removed 29
+20/07/2020 07:57:34 speed signal lost, clear values
+20/07/2020 07:57:34 NS 1
+20/07/2020 07:57:46 Duplicates Removed 112
+20/07/2020 07:57:46 ERROR
+20/07/2020 07:57:46 parse cme 0
+20/07/2020 07:57:46 NS 1
+20/07/2020 07:57:56 Duplicates Removed 99
+20/07/2020 07:57:56 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 07:57:56 OK
+20/07/2020 07:57:56 NS 1
+20/07/2020 07:57:57 Duplicates Removed 9
+20/07/2020 07:57:57 AT+UPSDA=0,3
+20/07/2020 07:57:57 NS 1
+20/07/2020 07:58:11 Duplicates Removed 136
+20/07/2020 07:58:11 ERROR
+20/07/2020 07:58:11 parse cme 0
+20/07/2020 07:58:11 NS 1
+20/07/2020 07:58:12 Duplicates Removed 16
+20/07/2020 07:58:12 speed signal lost, clear values
+20/07/2020 07:58:12 NS 1
+20/07/2020 07:58:17 Duplicates Removed 48
+20/07/2020 07:58:17 trip end 1
+20/07/2020 07:58:17 OpusFcMain change from 18 to 19
+20/07/2020 07:58:17 NS 1
+20/07/2020 07:58:17 messagedialog result 3
+20/07/2020 07:58:17 slotMessageSignonResult 3
+20/07/2020 07:58:17 NS 1
+20/07/2020 07:58:17 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 07:58:17 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:58:17 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:58:17 resetting cklist 1
+20/07/2020 07:58:17 Lift is 0
+20/07/2020 07:58:17 Adding TRIP
+20/07/2020 07:58:17 SaveTripData: 28/116/7/4/0 0 0/0/0/0/0
+20/07/2020 07:58:17 OpusFcMain change from 19 to 2
+20/07/2020 07:58:17 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 07:58:17 DecCL 3
+20/07/2020 07:58:17 splash enabled?:0
+20/07/2020 07:58:17 NS 1
+20/07/2020 07:58:17 setting new cklist state (0) and qnr (0)
+20/07/2020 07:58:17 Settings: slotEsc
+20/07/2020 07:58:17 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 07:58:17 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:58:17 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:58:17 OFFWAIT:ign still off
+20/07/2020 07:58:17 OpusFcMain change from 2 to 3
+20/07/2020 07:58:17 NS 1
+20/07/2020 07:58:17 Settings: slotEsc
+20/07/2020 07:58:18 NS 1
+20/07/2020 07:58:18 startup human? 1
+20/07/2020 07:58:18 channel set 0 0
+20/07/2020 07:58:18 channel setting: 3-offf:4-offf
+20/07/2020 07:58:18 Message <3-offf:4-offf>: Sent to PRU0
+20/07/2020 07:58:18 BLAll 0
+20/07/2020 07:58:18 BL set:0
+20/07/2020 07:58:18 set brightness to 0%
+20/07/2020 07:58:18 event GC
+20/07/2020 07:58:18 BRAND is default
+20/07/2020 07:58:18 S0Sdiff 0
+20/07/2020 07:58:18 wakeup is -1
+20/07/2020 07:58:18 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+20/07/2020 07:58:18 Key halt
+20/07/2020 07:58:18 Settings: slotEsc
+20/07/2020 07:58:18 Duplicates Removed 1
+20/07/2020 07:58:18 NS 1
+20/07/2020 07:58:18 PRU: Set3O
+20/07/2020 07:58:18 PRU: Set4O
+20/07/2020 07:58:18 NS 1
+20/07/2020 07:58:18 trip Zero
+20/07/2020 07:58:18 ZoneID Change 60 -> -1 (speed  -> 0)
+20/07/2020 07:58:18 opusMain::slotZoneSpeed: 60, 0, 1
+20/07/2020 07:58:18 NS 1
+20/07/2020 07:58:18 Duplicates Removed 4
+20/07/2020 07:58:18 geofence state change 3 -> 2
+20/07/2020 07:58:18 NS 1
+20/07/2020 07:58:21 Duplicates Removed 21
+20/07/2020 07:58:21 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 07:58:21 OK
+20/07/2020 07:58:21 NS 1
+20/07/2020 07:58:22 Duplicates Removed 9
+20/07/2020 07:58:22 AT+UPSDA=0,3
+20/07/2020 07:58:22 NS 1
+20/07/2020 07:58:24 Duplicates Removed 27
+20/07/2020 07:58:24 GPS Sat Found (NMEA)!!!!!!!!!
+20/07/2020 07:58:24 NS 1
+20/07/2020 07:58:30 Duplicates Removed 57
+20/07/2020 07:58:30 main - GNSS SAT state change 0->1
+20/07/2020 07:58:30 MessageDialog GNSS 1
+20/07/2020 07:58:30 Splash GNSS 1
+20/07/2020 07:58:30 NS 1
+20/07/2020 07:58:31 Duplicates Removed 8
+20/07/2020 07:58:31 ERROR
+20/07/2020 07:58:31 parse cme 0
+20/07/2020 07:58:31 NS 1
+20/07/2020 07:58:36 Duplicates Removed 50
+20/07/2020 07:58:36 main - GNSS SAT state change 1->0
+20/07/2020 07:58:36 MessageDialog GNSS 0
+20/07/2020 07:58:36 Splash GNSS 0
+20/07/2020 07:58:36 NS 1
+20/07/2020 07:58:41 Duplicates Removed 42
+20/07/2020 07:58:41 report - time triggered (0)
+20/07/2020 07:58:41 NS 1
+20/07/2020 07:58:41 Duplicates Removed 4
+20/07/2020 07:58:41 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 07:58:41 NS 1
+20/07/2020 07:58:41 OK
+20/07/2020 07:58:41 NS 1
+20/07/2020 07:58:42 Duplicates Removed 9
+20/07/2020 07:58:42 AT+UPSDA=0,3
+20/07/2020 07:58:42 NS 1
+20/07/2020 07:58:48 Duplicates Removed 59
+20/07/2020 07:58:48 WUD -1
+20/07/2020 07:58:48 WAKE time disabled
+20/07/2020 07:58:48 SHUTTING DOWN
+20/07/2020 07:58:48 killing comms
+20/07/2020 07:58:48 NS 1
+20/07/2020 07:58:49 Duplicates Removed 9
+20/07/2020 07:58:49 WD closed
+20/07/2020 07:58:49 imsi: 505016000265969 15, Auto 1
+20/07/2020 07:58:49 selected apn: telstra.internet (found? 1)
+20/07/2020 07:58:49 comms st 2 -> 5
+20/07/2020 07:58:49 comms st 5 -> 1
+20/07/2020 07:58:49 comms done
+20/07/2020 07:58:49 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 07:58:49 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:58:49 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:58:49 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+20/07/2020 07:58:49 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 07:58:49 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+20/07/2020 07:58:49 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+20/07/2020 07:58:49 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+20/07/2020 07:58:49 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+20/07/2020 07:58:49 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 07:58:49 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 07:58:49 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 07:58:49 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 07:58:49 wrote 0 to /sys/class/gpio/gpio48/value (O/P 15)
+20/07/2020 07:58:49 wrote 0 to /sys/class/gpio/gpio49/value (O/P 16)
+20/07/2020 07:58:54 shutdown timer set
+20/07/2020 09:08:37 OtaUpdater RUNNING
+20/07/2020 09:08:37 no file to update
+20/07/2020 09:08:37 Starting /store/FcMain -qws version:3.0.0.6  &
+20/07/2020 09:08:37 VERSION: 5.0.58.510 R 
+20/07/2020 09:08:37 4.14.108-ti-r119
+20/07/2020 09:08:37 NEW OS, DONOT access PCF directly
+20/07/2020 09:08:37 hwclock time: 1595236117
+20/07/2020 09:08:37 IOInit - NEW OS
+20/07/2020 09:08:37 created gpio INP 0 @GPIO: 66
+20/07/2020 09:08:37 created gpio INP 1 @GPIO: 67
+20/07/2020 09:08:37 created gpio INP 4 @GPIO: 45
+20/07/2020 09:08:37 created gpio INP 5 @GPIO: 44
+20/07/2020 09:08:37 created gpio INP 6 @GPIO: 23
+20/07/2020 09:08:37 created gpio INP 7 @GPIO: 26
+20/07/2020 09:08:37 created gpio INP 8 @GPIO: 51
+20/07/2020 09:08:37 created gpio INP 9 @GPIO: 61
+20/07/2020 09:08:37 created gpio OUT: 60
+20/07/2020 09:08:37 created gpio OUT: 46
+20/07/2020 09:08:37 created gpio OUT: 27
+20/07/2020 09:08:37 created gpio OUT: 65
+20/07/2020 09:08:37 created gpio OUT: 22
+20/07/2020 09:08:37 created gpio OUT: 115
+20/07/2020 09:08:37 created gpio OUT: 69
+20/07/2020 09:08:37 created gpio OUT: 68
+20/07/2020 09:08:37 created gpio OUT: 117
+20/07/2020 09:08:37 created gpio OUT: 59
+20/07/2020 09:08:37 created gpio OUT: 58
+20/07/2020 09:08:37 created gpio OUT: 52
+20/07/2020 09:08:37 created gpio OUT: 64
+20/07/2020 09:08:37 created gpio OUT: 47
+20/07/2020 09:08:37 created gpio OUT: 48
+20/07/2020 09:08:37 created gpio OUT: 49
+20/07/2020 09:08:37 created gpio OUT: 116
+20/07/2020 09:08:37 created gpio OUT: 53
+20/07/2020 09:08:37 created gpio OUT: 54
+20/07/2020 09:08:37 created gpio OUT: 55
+20/07/2020 09:08:37 created gpio OUT: 507
+20/07/2020 09:08:37 created gpio OUT: 508
+20/07/2020 09:08:37 created gpio OUT: 509
+20/07/2020 09:08:37 created gpio OUT: 510
+20/07/2020 09:08:37 created gpio OUT: 511
+20/07/2020 09:08:37 usr0 is heartbeat
+20/07/2020 09:08:37 usr1 is mmc0 (uSD card)
+20/07/2020 09:08:37 usr2 is mmc1(eMMC)
+20/07/2020 09:08:37 channel thread created
+20/07/2020 09:08:37 channel ch3 2 ch4 2
+20/07/2020 09:08:37 ch3 2 ch4 2
+20/07/2020 09:08:37 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 09:08:37 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:08:37 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:08:37 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+20/07/2020 09:08:37 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 09:08:37 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+20/07/2020 09:08:37 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+20/07/2020 09:08:37 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+20/07/2020 09:08:37 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+20/07/2020 09:08:37 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 09:08:37 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 09:08:37 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:08:37 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:08:37 wrote 0 to /sys/class/gpio/gpio48/value (O/P 15)
+20/07/2020 09:08:37 wrote 0 to /sys/class/gpio/gpio49/value (O/P 16)
+20/07/2020 09:08:37 OTA Version: version:3.0.0.6
+20/07/2020 09:08:37 wrote 1 to /sys/class/gpio/gpio59/value (O/P 10)
+20/07/2020 09:08:37 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+20/07/2020 09:08:38 channel state change 0 -> 1
+20/07/2020 09:08:38 Starting PRU
+20/07/2020 09:08:38 offline
+20/07/2020 09:08:38 PRU starting
+20/07/2020 09:08:38 i2c1 commands - to serialiser
+20/07/2020 09:08:38 Serialiser Serial Nr: 2280800404100061A485A000A00000EB
+20/07/2020 09:08:38 Serialiser Eeprom Serial Nr: 000774-AA
+20/07/2020 09:08:38 BLAll 2
+20/07/2020 09:08:38 BL set:2
+20/07/2020 09:08:38 set brightness to 2%
+20/07/2020 09:08:39 Opus FC (main) Started
+20/07/2020 09:08:39 ROOTFS Built 41449
+20/07/2020 09:08:39 Nr Langs to process: 18
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_ar
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_es
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_et
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_fr
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_de
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_hi
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_id
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_km
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_ko
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_lv
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_ms
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_ru
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_th
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_tl
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_uk
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_vi
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_zh
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 lang file: :Translations/OpusFcMain_en
+20/07/2020 09:08:39 Loaded translations
+20/07/2020 09:08:39 eeprom magic OK
+20/07/2020 09:08:39 Contructor PID2 108 108
+20/07/2020 09:08:39 MessageDialog GNSS 0
+20/07/2020 09:08:39 Duplicates Removed 1
+20/07/2020 09:08:39 thread gps_thread created
+20/07/2020 09:08:39 wrote 1 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:08:39 gps open 1
+20/07/2020 09:08:39 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+20/07/2020 09:08:39 gps task running
+20/07/2020 09:08:39 gps state change 1 -> 2
+20/07/2020 09:08:39 weightCountKg -1.000000
+20/07/2020 09:08:39 EXP 2066562957, 1593522957, 1595236119
+20/07/2020 09:08:39 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:08:39 GPS Serial Connected on /dev/ttyS2 (handle 13)
+20/07/2020 09:08:39 speedHzKmh 1.593248
+20/07/2020 09:08:39 speedHzRPM 30.864197
+20/07/2020 09:08:39 MessageDialog GNSS 0
+20/07/2020 09:08:39 pru Waiting/Waiting
+20/07/2020 09:08:39 MessageDialog GNSS 0
+20/07/2020 09:08:39 Duplicates Removed 6
+20/07/2020 09:08:39 Splash GNSS 0
+20/07/2020 09:08:39 found /store/Service_active.xml
+20/07/2020 09:08:39 MessageDialog GNSS 0
+20/07/2020 09:08:39 settings ready
+20/07/2020 09:08:39 MessageDialog GNSS 0
+20/07/2020 09:08:39 BL dark 0
+20/07/2020 09:08:39 BL light 0
+20/07/2020 09:08:39 Starting Threads. Mayhem begins!
+20/07/2020 09:08:39 Main thread running
+20/07/2020 09:08:39 opusFc task run
+20/07/2020 09:08:39 FleetMessaging thread running
+20/07/2020 09:08:39 Beeper thread running
+20/07/2020 09:08:39 TriLed thread running
+20/07/2020 09:08:39 Theme thread running
+20/07/2020 09:08:39 Diagnostic thread running
+20/07/2020 09:08:39 Batttery thread running
+20/07/2020 09:08:39 New Operator file XML found
+20/07/2020 09:08:39 found Operators_active.xml
+20/07/2020 09:08:39 xml_parsing file: /store/Operators_active.xml
+20/07/2020 09:08:39 fleetmsg run
+20/07/2020 09:08:39 Can thread running
+20/07/2020 09:08:39 diags run
+20/07/2020 09:08:39 triled run
+20/07/2020 09:08:39 beeper run
+20/07/2020 09:08:39 Key thread running
+20/07/2020 09:08:39 GeoFence thread running
+20/07/2020 09:08:39 main.cpp Done
+20/07/2020 09:08:39 Geofence run
+20/07/2020 09:08:39 Operator file XML found
+20/07/2020 09:08:39 event GC
+20/07/2020 09:08:39 MessageDialog GNSS 0
+20/07/2020 09:08:39 Powerup - Done
+20/07/2020 09:08:39 PID3 108 115
+20/07/2020 09:08:39 WDOpen Success
+20/07/2020 09:08:39 WDT timeout is 30
+20/07/2020 09:08:40 Starting PRU
+20/07/2020 09:08:40 running
+20/07/2020 09:08:40 gps state change 2 -> 3
+20/07/2020 09:08:40 opening /dev/rpmsg_pru30
+20/07/2020 09:08:40 PRU Opened 36
+20/07/2020 09:08:40 Opened /dev/rpmsg_pru30
+20/07/2020 09:08:40 Battery free
+20/07/2020 09:08:40 keythread - init 1
+20/07/2020 09:08:40 keyscanner OK
+20/07/2020 09:08:40 keyscanner gpio ok
+20/07/2020 09:08:40 keyscanner UART
+20/07/2020 09:08:40 keythread - init SUCCESS
+20/07/2020 09:08:40 slotUpdate first call
+20/07/2020 09:08:41 bootstatus3 0
+20/07/2020 09:08:41 tempBootStatus 0
+20/07/2020 09:08:41 bootstatus 0
+20/07/2020 09:08:41 end of run()
+20/07/2020 09:08:41 channel setting: 3-freq:4-freq
+20/07/2020 09:08:41 Message <3-freq:4-freq>: Sent to PRU0
+20/07/2020 09:08:41 channel state change 1 -> 2
+20/07/2020 09:08:41 PRU: Set3F
+20/07/2020 09:08:41 PRU: Set4F
+20/07/2020 09:08:41 PRU: FreqInit
+20/07/2020 09:08:41 PRU Version: 103
+20/07/2020 09:08:41 sync new state entry
+20/07/2020 09:08:41 build time 1593494157
+20/07/2020 09:08:41 REC trip id 0
+20/07/2020 09:08:41 REC write time 1595231897
+20/07/2020 09:08:41 REC QNr 0
+20/07/2020 09:08:41 REC CkState 17
+20/07/2020 09:08:41 REC Main state 3
+20/07/2020 09:08:41 REC DrIdx 42
+20/07/2020 09:08:41 readData 1
+20/07/2020 09:08:41 thread comms_thread created
+20/07/2020 09:08:41 thread modem_thread created
+20/07/2020 09:08:41 last connect time read: 1595231736 1595231736
+20/07/2020 09:08:41 NET: get hw
+20/07/2020 09:08:41 MDM: open
+20/07/2020 09:08:41 thread net_thread created
+20/07/2020 09:08:41 modem state change 0 -> 1
+20/07/2020 09:08:41 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 09:08:41 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 09:08:41 MDM: turn on modem power
+20/07/2020 09:08:41 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+20/07/2020 09:08:41 thread interrupt_thread created
+20/07/2020 09:08:41 SerialNr: 9278
+20/07/2020 09:08:41 LoadDate: 250919
+20/07/2020 09:08:41 HWModel:  9072s_B
+20/07/2020 09:08:41 hwVersion is <9072s_B>
+20/07/2020 09:08:41 recovered EEtrip 0 time 1595231897 slot 0 saved time 168
+20/07/2020 09:08:41 FRIM: 28/116/7/4/0
+20/07/2020 09:08:41 LT 1595231897 0
+20/07/2020 09:08:41 recovered EEtrip 147719 time 1595231851 slot 1 saved time 122
+20/07/2020 09:08:41 FRIM: 17/84/4/4/0
+20/07/2020 09:08:41 recovered EEtrip 147660 time 1595231045 slot 2 saved time 183
+20/07/2020 09:08:41 FRIM: 132/30/4/4/0
+20/07/2020 09:08:41 recovered EEtrip 147660 time 1595231106 slot 3 saved time 244
+20/07/2020 09:08:41 FRIM: 171/52/4/4/0
+20/07/2020 09:08:41 recovered EEtrip 147567 time 1595227470 slot 4 saved time 305
+20/07/2020 09:08:41 FRIM: 273/11/4/4/0
+20/07/2020 09:08:41 recovered EEtrip 147567 time 1595227531 slot 5 saved time 366
+20/07/2020 09:08:41 FRIM: 320/25/4/4/0
+20/07/2020 09:08:41 recovered EEtrip 0 time 1595231897 slot 0
+20/07/2020 09:08:41 FRIM: 28/116/7/4/0
+20/07/2020 09:08:41 found /store/DisplayMessaging_active.xml
+20/07/2020 09:08:41 PRU version 103
+20/07/2020 09:08:41 Msg Dialog font Noto Sans
+20/07/2020 09:08:41 lang code: EN file: :Translations/OpusFcMain_en
+20/07/2020 09:08:41 lang file: :Translations/OpusFcMain_en
+20/07/2020 09:08:41 Removing translations
+20/07/2020 09:08:41 Installing translations
+20/07/2020 09:08:41 OpusFcMain change from 0 to 1
+20/07/2020 09:08:41 modem type 7
+20/07/2020 09:08:41 comms_start gsm
+20/07/2020 09:08:41 comms_enable
+20/07/2020 09:08:41 fleetmsg free
+20/07/2020 09:08:41 Theme free
+20/07/2020 09:08:41 THEME TIME Day1 Night2 7 0 1 light 255 0
+20/07/2020 09:08:41 Set Theme Day
+20/07/2020 09:08:41 diags free
+20/07/2020 09:08:41 Led free
+20/07/2020 09:08:41 CAN free
+20/07/2020 09:08:41 Geofence free, FC was reset 1
+20/07/2020 09:08:41 message dialog font set to: Noto Sans
+20/07/2020 09:08:41 Duplicates Removed 1
+20/07/2020 09:08:41 Received New Theme
+20/07/2020 09:08:41 gpio interrupts (P1-2) FF
+20/07/2020 09:08:41 eeprom 0, 28/116/7/4
+20/07/2020 09:08:41 Power loss time 1595231897
+20/07/2020 09:08:41 SWSTART OpusFC 5.0.58.510 R
+20/07/2020 09:08:41 startup human? 1
+20/07/2020 09:08:41 OpusFcMain change from 1 to 2
+20/07/2020 09:08:41 report initial input states?
+20/07/2020 09:08:41 report initial input states: YES
+20/07/2020 09:08:41 ign on, enable BackLight/Serialiser
+20/07/2020 09:08:42 Splash set font Noto Sans
+20/07/2020 09:08:43 splash font set Noto Sans
+20/07/2020 09:08:43 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 09:08:43 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:08:43 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:08:43 PSP 1
+20/07/2020 09:08:43 PSP 2
+20/07/2020 09:08:43 PSP 3
+20/07/2020 09:08:43 OpusFcMain change from 2 to 4
+20/07/2020 09:08:43 zone 1 read 4 points 8
+20/07/2020 09:08:43 zone 2 read 4 points 8
+20/07/2020 09:08:43 gps version is NO VERSION
+20/07/2020 09:08:43 max zones 100
+20/07/2020 09:08:43 Splash Radio Unknown
+20/07/2020 09:08:43 radio set Unknown <--
+20/07/2020 09:08:43 Settings: slotEsc
+20/07/2020 09:08:43 Wake
+20/07/2020 09:08:43 Wake ON
+20/07/2020 09:08:43 OpusFcMain change from 4 to 5
+20/07/2020 09:08:43 Key free
+20/07/2020 09:08:43 keythread - init 1
+20/07/2020 09:08:43 keyscanner OK
+20/07/2020 09:08:43 keyscanner gpio ok
+20/07/2020 09:08:43 keyscanner UART
+20/07/2020 09:08:43 keythread - init SUCCESS
+20/07/2020 09:08:43 start reader
+20/07/2020 09:08:43 ota 1593746147 - 2020-07-03 03:15:47Z
+20/07/2020 09:08:43 valid fleet? 9278
+20/07/2020 09:08:43 BLAll 2
+20/07/2020 09:08:43 BL set:2
+20/07/2020 09:08:43 set brightness to 2%
+20/07/2020 09:08:43 traction set 2 2
+20/07/2020 09:08:43 channel set 2 2
+20/07/2020 09:08:43 channel setting: 3-freq:4-freq
+20/07/2020 09:08:43 Message <3-freq:4-freq>: Sent to PRU0
+20/07/2020 09:08:43 OpusFcMain change from 5 to 6
+20/07/2020 09:08:43 gpio interrupts (P1-2) FB
+20/07/2020 09:08:43 card read
+20/07/2020 09:08:43 Uart rxfifo has 14 bytes waiting
+20/07/2020 09:08:43 vli 000a 10
+20/07/2020 09:08:43 vli matches
+20/07/2020 09:08:43 208 1664 0
+20/07/2020 09:08:43 CardReader version 0
+20/07/2020 09:08:43 Cklist free
+20/07/2020 09:08:43 splash enabled?:0
+20/07/2020 09:08:43 gpio interrupts (P1-2) FF
+20/07/2020 09:08:43 start wiegand
+20/07/2020 09:08:43 state timer started
+20/07/2020 09:08:43 geofence state change 0 -> 1
+20/07/2020 09:08:43 startup
+20/07/2020 09:08:43 setbool 0
+20/07/2020 09:08:44 CKL state change 0
+20/07/2020 09:08:44 checklist file detected
+20/07/2020 09:08:44 found Checklist_active.xml
+20/07/2020 09:08:44 xml_parsing
+20/07/2020 09:08:44 xml process checklist
+20/07/2020 09:08:44 xml process config/hdr
+20/07/2020 09:08:44 lastrun read (time/driver) 1595196602 42
+20/07/2020 09:08:44 CkList::Checklist init complete
+20/07/2020 09:08:44 OpusFcMain::Checklist init complete
+20/07/2020 09:08:44 CKL state change 1
+20/07/2020 09:08:44 CKL state change 17
+20/07/2020 09:08:44 geofence state change 1 -> 2
+20/07/2020 09:08:44 PRU: Set3F
+20/07/2020 09:08:44 PRU: Set4F
+20/07/2020 09:08:45 gpio interrupts (P1-2) FE
+20/07/2020 09:08:45 KEYPRESS 2
+20/07/2020 09:08:45 gpio interrupts (P1-2) FF
+20/07/2020 09:08:45 gpio interrupts (P1-2) FE
+20/07/2020 09:08:45 gpio interrupts (P1-2) FF
+20/07/2020 09:08:45 gpio interrupts (P1) FE
+20/07/2020 09:08:45 keypad interrupt !!!!!!!!!!!
+20/07/2020 09:08:45 gpio interrupts (P1-2) FE
+20/07/2020 09:08:45 KEYPRESS 4
+20/07/2020 09:08:45 resetting baud
+20/07/2020 09:08:45 change baud to 115200
+20/07/2020 09:08:45 GPS close 0
+20/07/2020 09:08:45 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:08:45 GPS Serial Connected on /dev/ttyS2 at 115200
+20/07/2020 09:08:45 GPS Saved Database found
+20/07/2020 09:08:45 GPS Loading Saved Database
+20/07/2020 09:08:45 gpio interrupts (P1-2) FF
+20/07/2020 09:08:45 gpio interrupts (P1-2) FE
+20/07/2020 09:08:45 loaded 49 GNSS DB files
+20/07/2020 09:08:45 getting ver
+20/07/2020 09:08:45 gpio interrupts (P1-2) FF
+20/07/2020 09:08:46 gpio interrupts (P1-2) FE
+20/07/2020 09:08:46 KEYPRESS 1
+20/07/2020 09:08:46 gpio interrupts (P1-2) FF
+20/07/2020 09:08:46 gpio interrupts (P1-2) FE
+20/07/2020 09:08:46 Duplicates Removed 1
+20/07/2020 09:08:46 KEYPRESS 2
+20/07/2020 09:08:46 gpio interrupts (P1-2) FF
+20/07/2020 09:08:46 gpio interrupts (P1-2) FE
+20/07/2020 09:08:46 traction/idle state seen
+20/07/2020 09:08:46 gpio interrupts (P1-2) FF
+20/07/2020 09:08:47 gpio interrupts (P1-2) FE
+20/07/2020 09:08:47 KEYPRESS 14
+20/07/2020 09:08:47 keythread - init 1
+20/07/2020 09:08:47 keyscanner OK
+20/07/2020 09:08:47 keyscanner gpio ok
+20/07/2020 09:08:47 keyscanner UART
+20/07/2020 09:08:47 keythread - init SUCCESS
+20/07/2020 09:08:47 getting ver
+20/07/2020 09:08:47 gpio interrupts (P1-2) FE
+20/07/2020 09:08:47 gps rate set
+20/07/2020 09:08:47 gpio interrupts (P1-2) FF
+20/07/2020 09:08:47 gpio interrupts (P1-2) FE
+20/07/2020 09:08:47 KEYPRESS 1
+20/07/2020 09:08:47 messagedialog result 241291
+20/07/2020 09:08:47 pin check clear, found 42 (241291)
+20/07/2020 09:08:47 driver id 2500
+20/07/2020 09:08:47 license expiry - disabled
+20/07/2020 09:08:47 Bgnd set msg-day font Noto Sans
+20/07/2020 09:08:47 lang code: EN file: :Translations/OpusFcMain_en
+20/07/2020 09:08:47 lang file: :Translations/OpusFcMain_en
+20/07/2020 09:08:47 Removing translations
+20/07/2020 09:08:47 Installing translations
+20/07/2020 09:08:47 show driver name KOTZ Lauren
+20/07/2020 09:08:47 OpusFcMain change from 6 to 8
+20/07/2020 09:08:47 slotMessageSignonResult 241291
+20/07/2020 09:08:47 Bgnd set msg-day font Noto Sans
+20/07/2020 09:08:47 lang code: EN file: :Translations/OpusFcMain_en
+20/07/2020 09:08:47 lang file: :Translations/OpusFcMain_en
+20/07/2020 09:08:47 Removing translations
+20/07/2020 09:08:47 Installing translations
+20/07/2020 09:08:47 message dialog font set to: Noto Sans
+20/07/2020 09:08:47 Duplicates Removed 1
+20/07/2020 09:08:47 SETT: driver role 0
+20/07/2020 09:08:47 pointsize is 17, labelsize is 461
+20/07/2020 09:08:47 message dialog font set to: Noto Sans
+20/07/2020 09:08:47 Duplicates Removed 1
+20/07/2020 09:08:47 gpio interrupts (P1-2) FE
+20/07/2020 09:08:47 Splash set font Noto Sans
+20/07/2020 09:08:47 Duplicates Removed 1
+20/07/2020 09:08:47 splash font set Noto Sans
+20/07/2020 09:08:47 OpName pointsize is 16, labelsize is 240, height 23
+20/07/2020 09:08:47 splash font set Noto Sans
+20/07/2020 09:08:47 gpio interrupts (P1-2) FF
+20/07/2020 09:08:48 GPS Ver [ROM CORE 3.01 (107888)] [00080000] (len)160
+20/07/2020 09:08:49 gpio interrupts (P1-2) FF
+20/07/2020 09:08:49 keythread - init 1
+20/07/2020 09:08:49 keyscanner OK
+20/07/2020 09:08:49 keyscanner gpio ok
+20/07/2020 09:08:49 keyscanner UART
+20/07/2020 09:08:49 keythread - init SUCCESS
+20/07/2020 09:08:50 messagedialog result 2
+20/07/2020 09:08:50 slotMessageSignonResult 2
+20/07/2020 09:08:50 license expiry - disabled
+20/07/2020 09:08:50 OpusFcMain change from 8 to 11
+20/07/2020 09:08:51 init complete, qrysent 1 0
+20/07/2020 09:08:51 postStartCK cleared
+20/07/2020 09:08:51 Chklist required?
+20/07/2020 09:08:51 checklist file detectedx
+20/07/2020 09:08:51 Chklist required 0
+20/07/2020 09:08:51 OpusFcMain change from 11 to 15
+20/07/2020 09:08:51 wrote 1 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 09:08:51 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:08:51 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:08:51 START Enabled
+20/07/2020 09:08:51 OpusFcMain change from 15 to 16
+20/07/2020 09:08:51 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 09:08:51 MDM:opened and closed /dev/ttyACM0
+20/07/2020 09:08:51 opened /dev/ttyACM2 serial/USB OK
+20/07/2020 09:08:51 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 09:08:51 Modem Serial Connected using /dev/ttyACM0 and /dev/ttyACM2
+20/07/2020 09:08:51 modem state change 1 -> 2
+20/07/2020 09:08:52 geofence state change 2 -> 3
+20/07/2020 09:08:52 ZoneID Change3 0 -> 0 (speed 0 -> 30)
+20/07/2020 09:08:52 opusMain::slotZoneSpeed: 30, -1, 1
+20/07/2020 09:08:52 NET:modem is opened
+20/07/2020 09:08:53 ATE0V1
+20/07/2020 09:08:53 Duplicates Removed 1
+20/07/2020 09:08:53 OK
+20/07/2020 09:08:53 NET:modem is alive
+20/07/2020 09:08:53 ATE0V1
+20/07/2020 09:08:53 OK
+20/07/2020 09:08:53 AT+UUSBCONF?
+20/07/2020 09:08:53 +UUSBCONF: 0,"",,"0x1141"
+20/07/2020 09:08:53 OK
+20/07/2020 09:08:53 NET:USB Profile is 0 4417
+20/07/2020 09:08:53 AT+CGMM
+20/07/2020 09:08:53 TOBY-L280
+20/07/2020 09:08:53 MDM: HWType TOBY-L280
+20/07/2020 09:08:53 OK
+20/07/2020 09:08:53 AT+CGSN
+20/07/2020 09:08:53 358503060460855
+20/07/2020 09:08:53 MDM: IMEI 358503060460855
+20/07/2020 09:08:53 OK
+20/07/2020 09:08:53 AT+CIMI
+20/07/2020 09:08:53 505016000265969
+20/07/2020 09:08:53 MDM: IMSI 505016000265969
+20/07/2020 09:08:53 OK
+20/07/2020 09:08:53 AT+CCID
+20/07/2020 09:08:53 +CCID: 89610185001550901074
+20/07/2020 09:08:53 MDM: CCID 89610185001550901074
+20/07/2020 09:08:53 OK
+20/07/2020 09:08:53 AT+CSQ
+20/07/2020 09:08:53 +CSQ: 99,99
+20/07/2020 09:08:53 MODEM CSQ 99
+20/07/2020 09:08:53 OK
+20/07/2020 09:08:53 imsi: 505016000265969 15, Auto 1
+20/07/2020 09:08:53 selected apn: telstra.internet (found? 1)
+20/07/2020 09:08:53 ICCID Check: 89610185001550901074 89610185001550901074
+20/07/2020 09:08:53 Comms Task Alive/Started, conn_retry 300
+20/07/2020 09:08:53 gsm starting
+20/07/2020 09:08:53 comms st 0 -> 1
+20/07/2020 09:08:53 modem is HL8/4G
+20/07/2020 09:08:53 imsi: 505016000265969 15, Auto 1
+20/07/2020 09:08:53 selected apn: telstra.internet (found? 1)
+20/07/2020 09:08:53 NET: enable
+20/07/2020 09:08:53 enable apn telstra.internet for HL8
+20/07/2020 09:08:53 comms st 1 -> 2
+20/07/2020 09:08:53 NS 1
+20/07/2020 09:08:54 Duplicates Removed 9
+20/07/2020 09:08:54 net state change 0 -> 1
+20/07/2020 09:08:54 modem open now
+20/07/2020 09:08:54 ATE0V1
+20/07/2020 09:08:54 OK
+20/07/2020 09:08:54 AT+CGMM
+20/07/2020 09:08:54 TOBY-L280
+20/07/2020 09:08:54 MDM: HWType TOBY-L280
+20/07/2020 09:08:54 OK
+20/07/2020 09:08:54 AT+CGSN
+20/07/2020 09:08:54 358503060460855
+20/07/2020 09:08:54 MDM: IMEI 358503060460855
+20/07/2020 09:08:54 OK
+20/07/2020 09:08:54 AT+CIMI
+20/07/2020 09:08:54 messagedialog result 2
+20/07/2020 09:08:54 slotMessageSignonResult 2
+20/07/2020 09:08:54 505016000265969
+20/07/2020 09:08:54 MDM: IMSI 505016000265969
+20/07/2020 09:08:54 OK
+20/07/2020 09:08:54 AT+CCID
+20/07/2020 09:08:54 +CCID: 89610185001550901074
+20/07/2020 09:08:54 MDM: CCID 89610185001550901074
+20/07/2020 09:08:54 OK
+20/07/2020 09:08:54 AT+UPSND=0,8
+20/07/2020 09:08:54 NS 1
+20/07/2020 09:08:54 +UPSND: 0,8,0
+20/07/2020 09:08:54 psd line 0
+20/07/2020 09:08:54 pad active #0 (NO)
+20/07/2020 09:08:54 OK
+20/07/2020 09:08:54 net state change 1 -> 2
+20/07/2020 09:08:54 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:08:54 OK
+20/07/2020 09:08:54 OpusFcMain change from 16 to 17
+20/07/2020 09:08:54 Cklist halt
+20/07/2020 09:08:54 SPLASH 99
+20/07/2020 09:08:54 splash enabled?:1
+20/07/2020 09:08:54 NS 1
+20/07/2020 09:08:54 Run state: role 0
+20/07/2020 09:08:54 wrote 1 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 09:08:54 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+20/07/2020 09:08:54 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+20/07/2020 09:08:54 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+20/07/2020 09:08:54 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+20/07/2020 09:08:54 wrote 1 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 09:08:54 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:08:54 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:08:54 OpusFcMain change from 17 to 18
+20/07/2020 09:08:54 NS 1
+20/07/2020 09:08:54 Cklist halt
+20/07/2020 09:08:54 stop reader
+20/07/2020 09:08:54 wrote 1 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 09:08:54 NS 1
+20/07/2020 09:08:55 CAN opened OK
+20/07/2020 09:08:55 splash enabled?:1
+20/07/2020 09:08:55 messagedialog result 3
+20/07/2020 09:08:55 slotMessageSignonResult 3
+20/07/2020 09:08:55 NS 1
+20/07/2020 09:08:55 gpio interrupts (P1-2) FB
+20/07/2020 09:08:55 NS 1
+20/07/2020 09:08:55 Duplicates Removed 1
+20/07/2020 09:08:55 card read
+20/07/2020 09:08:55 Uart rxfifo has 14 bytes waiting
+20/07/2020 09:08:55 vli 000a 10
+20/07/2020 09:08:55 vli matches
+20/07/2020 09:08:55 208 1664 0
+20/07/2020 09:08:55 CardReader version 0
+20/07/2020 09:08:55 gps version is ROM CORE 3.01 (107888)
+20/07/2020 09:08:55 main state running
+20/07/2020 09:08:55 ICONS 65
+20/07/2020 09:08:55 NS 1
+20/07/2020 09:08:55 gpio interrupts (P1-2) FF
+20/07/2020 09:08:55 NS 1
+20/07/2020 09:08:55 updated battery state to 2
+20/07/2020 09:08:55 NS 1
+20/07/2020 09:08:55 Duplicates Removed 1
+20/07/2020 09:08:55 AT+UPSDA=0,3
+20/07/2020 09:08:55 NS 1
+20/07/2020 09:08:56 Duplicates Removed 8
+20/07/2020 09:08:56 canSetFilter
+20/07/2020 09:08:56 NS 1
+20/07/2020 09:08:56 Duplicates Removed 2
+20/07/2020 09:08:56 impact value 2
+20/07/2020 09:08:56 Impact New Sensor - version: 02.00.00
+20/07/2020 09:08:56 ImpactVersion 02.00.00
+20/07/2020 09:08:56 NS 1
+20/07/2020 09:09:06 Duplicates Removed 96
+20/07/2020 09:09:06 SPLASH 0
+20/07/2020 09:09:06 NS 1
+20/07/2020 09:09:10 Duplicates Removed 41
+20/07/2020 09:09:10 ERROR
+20/07/2020 09:09:10 parse cme 0
+20/07/2020 09:09:10 NS 1
+20/07/2020 09:09:20 Duplicates Removed 99
+20/07/2020 09:09:20 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:09:20 OK
+20/07/2020 09:09:20 NS 1
+20/07/2020 09:09:21 Duplicates Removed 9
+20/07/2020 09:09:21 AT+UPSDA=0,3
+20/07/2020 09:09:21 NS 1
+20/07/2020 09:09:33 Duplicates Removed 115
+20/07/2020 09:09:33 ERROR
+20/07/2020 09:09:33 parse cme 0
+20/07/2020 09:09:33 NS 1
+20/07/2020 09:09:35 Duplicates Removed 20
+20/07/2020 09:09:35 SaveTripData: 40/1/4/4/0 0 0/0/0/0/0
+20/07/2020 09:09:35 NS 1
+20/07/2020 09:09:43 Duplicates Removed 78
+20/07/2020 09:09:43 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:09:43 OK
+20/07/2020 09:09:43 NS 1
+20/07/2020 09:09:44 Duplicates Removed 9
+20/07/2020 09:09:44 AT+UPSDA=0,3
+20/07/2020 09:09:44 NS 1
+20/07/2020 09:09:53 Duplicates Removed 86
+20/07/2020 09:09:53 ERROR
+20/07/2020 09:09:53 parse cme 0
+20/07/2020 09:09:53 NS 1
+20/07/2020 09:10:03 Duplicates Removed 98
+20/07/2020 09:10:03 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:10:03 NS 1
+20/07/2020 09:10:03 OK
+20/07/2020 09:10:03 NS 1
+20/07/2020 09:10:04 Duplicates Removed 9
+20/07/2020 09:10:04 AT+UPSDA=0,3
+20/07/2020 09:10:04 NS 1
+20/07/2020 09:10:10 Duplicates Removed 60
+20/07/2020 09:10:10 speed signal lost, clear values
+20/07/2020 09:10:10 NS 1
+20/07/2020 09:10:18 Duplicates Removed 79
+20/07/2020 09:10:18 ERROR
+20/07/2020 09:10:18 parse cme 0
+20/07/2020 09:10:18 NS 1
+20/07/2020 09:10:28 Duplicates Removed 98
+20/07/2020 09:10:28 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:10:28 NS 1
+20/07/2020 09:10:28 OK
+20/07/2020 09:10:28 NS 1
+20/07/2020 09:10:29 Duplicates Removed 9
+20/07/2020 09:10:29 AT+UPSDA=0,3
+20/07/2020 09:10:29 NS 1
+20/07/2020 09:10:36 Duplicates Removed 69
+20/07/2020 09:10:36 SaveTripData: 69/33/4/4/0 1 0/0/0/0/0
+20/07/2020 09:10:36 NS 1
+20/07/2020 09:10:44 Duplicates Removed 73
+20/07/2020 09:10:44 ERROR
+20/07/2020 09:10:44 parse cme 0
+20/07/2020 09:10:44 NS 1
+20/07/2020 09:10:54 Duplicates Removed 98
+20/07/2020 09:10:54 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:10:54 NS 1
+20/07/2020 09:10:54 OK
+20/07/2020 09:10:54 NS 1
+20/07/2020 09:10:55 Duplicates Removed 9
+20/07/2020 09:10:55 AT+UPSDA=0,3
+20/07/2020 09:10:55 NS 1
+20/07/2020 09:10:59 Duplicates Removed 40
+20/07/2020 09:10:59 GPS Sat Found (NMEA)!!!!!!!!!
+20/07/2020 09:10:59 NS 1
+20/07/2020 09:10:59 Duplicates Removed 2
+20/07/2020 09:10:59 main - GNSS SAT state change 0->1
+20/07/2020 09:10:59 MessageDialog GNSS 1
+20/07/2020 09:10:59 Splash GNSS 1
+20/07/2020 09:10:59 NS 1
+20/07/2020 09:11:10 Duplicates Removed 105
+20/07/2020 09:11:10 ERROR
+20/07/2020 09:11:10 parse cme 0
+20/07/2020 09:11:10 NS 1
+20/07/2020 09:11:11 Duplicates Removed 13
+20/07/2020 09:11:11 main - GNSS SAT state change 1->0
+20/07/2020 09:11:11 MessageDialog GNSS 0
+20/07/2020 09:11:11 Splash GNSS 0
+20/07/2020 09:11:11 NS 1
+20/07/2020 09:11:15 Duplicates Removed 35
+20/07/2020 09:11:15 GPS Sat Found (NMEA)!!!!!!!!!
+20/07/2020 09:11:15 NS 1
+20/07/2020 09:11:17 Duplicates Removed 22
+20/07/2020 09:11:17 main - GNSS SAT state change 0->1
+20/07/2020 09:11:17 MessageDialog GNSS 1
+20/07/2020 09:11:17 Splash GNSS 1
+20/07/2020 09:11:17 NS 1
+20/07/2020 09:11:20 Duplicates Removed 25
+20/07/2020 09:11:20 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:11:20 OK
+20/07/2020 09:11:20 NS 1
+20/07/2020 09:11:21 Duplicates Removed 9
+20/07/2020 09:11:21 AT+UPSDA=0,3
+20/07/2020 09:11:21 NS 1
+20/07/2020 09:11:27 Duplicates Removed 65
+20/07/2020 09:11:27 ERROR
+20/07/2020 09:11:27 parse cme 0
+20/07/2020 09:11:28 NS 1
+20/07/2020 09:11:37 Duplicates Removed 96
+20/07/2020 09:11:37 SaveTripData: 69/94/4/4/0 2 0/0/0/0/0
+20/07/2020 09:11:37 NS 1
+20/07/2020 09:11:37 Duplicates Removed 1
+20/07/2020 09:11:37 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:11:37 OK
+20/07/2020 09:11:37 NS 1
+20/07/2020 09:11:38 Duplicates Removed 9
+20/07/2020 09:11:38 AT+UPSDA=0,3
+20/07/2020 09:11:38 NS 1
+20/07/2020 09:11:41 Duplicates Removed 27
+20/07/2020 09:11:41 main - GNSS SAT state change 1->0
+20/07/2020 09:11:41 MessageDialog GNSS 0
+20/07/2020 09:11:41 Splash GNSS 0
+20/07/2020 09:11:41 NS 1
+20/07/2020 09:11:48 Duplicates Removed 61
+20/07/2020 09:11:48 ERROR
+20/07/2020 09:11:48 parse cme 0
+20/07/2020 09:11:48 NS 1
+20/07/2020 09:11:58 Duplicates Removed 99
+20/07/2020 09:11:58 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:11:58 OK
+20/07/2020 09:11:58 NS 1
+20/07/2020 09:11:59 Duplicates Removed 9
+20/07/2020 09:11:59 AT+UPSDA=0,3
+20/07/2020 09:11:59 NS 1
+20/07/2020 09:12:13 Duplicates Removed 139
+20/07/2020 09:12:13 ERROR
+20/07/2020 09:12:13 parse cme 0
+20/07/2020 09:12:13 NS 1
+20/07/2020 09:12:23 Duplicates Removed 99
+20/07/2020 09:12:23 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:12:23 OK
+20/07/2020 09:12:23 NS 1
+20/07/2020 09:12:24 Duplicates Removed 9
+20/07/2020 09:12:24 AT+UPSDA=0,3
+20/07/2020 09:12:24 NS 1
+20/07/2020 09:12:35 Duplicates Removed 113
+20/07/2020 09:12:35 polling the MGA_DBD
+20/07/2020 09:12:35 NS 1
+20/07/2020 09:12:35 MGA_DBD Ephemeris
+20/07/2020 09:12:35 Duplicates Removed 10
+20/07/2020 09:12:35 NS 1
+20/07/2020 09:12:35 MGA_DBD Ephemeris
+20/07/2020 09:12:35 Duplicates Removed 4
+20/07/2020 09:12:35 MGA_DBD Almanac
+20/07/2020 09:12:35 Duplicates Removed 14
+20/07/2020 09:12:35 NS 1
+20/07/2020 09:12:35 MGA_DBD Almanac
+20/07/2020 09:12:36 Duplicates Removed 3
+20/07/2020 09:12:36 NS 1
+20/07/2020 09:12:36 MGA_DBD Almanac
+20/07/2020 09:12:36 Duplicates Removed 13
+20/07/2020 09:12:36 NS 1
+20/07/2020 09:12:37 Duplicates Removed 17
+20/07/2020 09:12:37 GPS Sat Found (NMEA)!!!!!!!!!
+20/07/2020 09:12:37 NS 1
+20/07/2020 09:12:38 Duplicates Removed 8
+20/07/2020 09:12:38 SaveTripData: 69/155/4/4/0 3 0/0/0/0/0
+20/07/2020 09:12:38 NS 1
+20/07/2020 09:12:39 Duplicates Removed 4
+20/07/2020 09:12:39 ERROR
+20/07/2020 09:12:39 parse cme 0
+20/07/2020 09:12:39 NS 1
+20/07/2020 09:12:41 Duplicates Removed 23
+20/07/2020 09:12:41 main - GNSS SAT state change 0->1
+20/07/2020 09:12:41 MessageDialog GNSS 1
+20/07/2020 09:12:41 NS 1
+20/07/2020 09:12:41 Splash GNSS 1
+20/07/2020 09:12:41 NS 1
+20/07/2020 09:12:49 Duplicates Removed 74
+20/07/2020 09:12:49 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:12:49 OK
+20/07/2020 09:12:49 NS 1
+20/07/2020 09:12:50 Duplicates Removed 9
+20/07/2020 09:12:50 AT+UPSDA=0,3
+20/07/2020 09:12:50 NS 1
+20/07/2020 09:12:53 Duplicates Removed 33
+20/07/2020 09:12:53 main - GNSS SAT state change 1->0
+20/07/2020 09:12:53 MessageDialog GNSS 0
+20/07/2020 09:12:53 Splash GNSS 0
+20/07/2020 09:12:53 NS 1
+20/07/2020 09:13:05 Duplicates Removed 115
+20/07/2020 09:13:05 ERROR
+20/07/2020 09:13:05 parse cme 0
+20/07/2020 09:13:05 NS 1
+20/07/2020 09:13:15 Duplicates Removed 99
+20/07/2020 09:13:15 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:13:15 OK
+20/07/2020 09:13:15 NS 1
+20/07/2020 09:13:16 Duplicates Removed 9
+20/07/2020 09:13:16 AT+UPSDA=0,3
+20/07/2020 09:13:16 NS 1
+20/07/2020 09:13:29 Duplicates Removed 125
+20/07/2020 09:13:29 ERROR
+20/07/2020 09:13:29 parse cme 0
+20/07/2020 09:13:29 NS 1
+20/07/2020 09:13:39 Duplicates Removed 98
+20/07/2020 09:13:39 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:13:39 OK
+20/07/2020 09:13:39 NS 1
+20/07/2020 09:13:39 Duplicates Removed 6
+20/07/2020 09:13:39 SaveTripData: 95/190/4/4/0 4 0/0/0/0/0
+20/07/2020 09:13:39 NS 1
+20/07/2020 09:13:40 Duplicates Removed 2
+20/07/2020 09:13:40 AT+UPSDA=0,3
+20/07/2020 09:13:40 NS 1
+20/07/2020 09:13:50 Duplicates Removed 102
+20/07/2020 09:13:50 ERROR
+20/07/2020 09:13:50 parse cme 0
+20/07/2020 09:13:50 NS 1
+20/07/2020 09:13:53 Duplicates Removed 28
+20/07/2020 09:13:53 GPS Reset
+20/07/2020 09:13:53 resetting gps resetTimer
+20/07/2020 09:13:53 NS 1
+20/07/2020 09:13:53 GPS Reset Handled
+20/07/2020 09:13:53 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:13:53 NS 1
+20/07/2020 09:13:53 Duplicates Removed 1
+20/07/2020 09:13:53 speed signal lost, clear values
+20/07/2020 09:13:53 NS 1
+20/07/2020 09:13:53 comms st 2 -> 7
+20/07/2020 09:13:53 wrote 1 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:13:54 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:13:54 GPS Serial Connected on /dev/ttyS2 (handle 13)
+20/07/2020 09:13:59 comms st 7 -> 0
+20/07/2020 09:13:59 Comms Task Alive/Started, conn_retry 300
+20/07/2020 09:13:59 gsm starting
+20/07/2020 09:13:59 comms st 0 -> 1
+20/07/2020 09:13:59 modem is HL8/4G
+20/07/2020 09:13:59 imsi: 505016000265969 15, Auto 1
+20/07/2020 09:13:59 selected apn: telstra.internet (found? 1)
+20/07/2020 09:13:59 NET: enable
+20/07/2020 09:13:59 enable apn telstra.internet for HL8
+20/07/2020 09:13:59 comms st 1 -> 2
+20/07/2020 09:13:59 NS 4
+20/07/2020 09:14:00 Duplicates Removed 6
+20/07/2020 09:14:00 net state change 2 -> 6
+20/07/2020 09:14:00 AT+CFUN=15
+20/07/2020 09:14:00 NS 4
+20/07/2020 09:14:00 OK
+20/07/2020 09:14:00 NS 4
+20/07/2020 09:14:00 resetting baud
+20/07/2020 09:14:00 change baud to 115200
+20/07/2020 09:14:00 GPS close 0
+20/07/2020 09:14:00 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:14:00 GPS Serial Connected on /dev/ttyS2 at 115200
+20/07/2020 09:14:00 GPS Saved Database found
+20/07/2020 09:14:00 GPS Loading Saved Database
+20/07/2020 09:14:00 loaded 49 GNSS DB files
+20/07/2020 09:14:00 NS 4
+20/07/2020 09:14:01 Duplicates Removed 8
+20/07/2020 09:14:01 MDM: close
+20/07/2020 09:14:01 modem state change 2 -> 98
+20/07/2020 09:14:01 resetting modem in lieu of power off
+20/07/2020 09:14:01 wrote 1 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 09:14:01 wrote 1 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 09:14:01 NS 0
+20/07/2020 09:14:01 comms st 2 -> 7
+20/07/2020 09:14:02 gps rate set
+20/07/2020 09:14:02 modem state change 98 -> 0
+20/07/2020 09:14:07 comms st 7 -> 0
+20/07/2020 09:14:07 Comms Task Alive/Started, conn_retry 300
+20/07/2020 09:14:07 gsm starting
+20/07/2020 09:14:07 waiting for modem to come up again
+20/07/2020 09:14:07 NET: get hw
+20/07/2020 09:14:07 MDM: open
+20/07/2020 09:14:07 modem state change 0 -> 1
+20/07/2020 09:14:07 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 09:14:07 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 09:14:07 MDM: turn on modem power
+20/07/2020 09:14:07 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+20/07/2020 09:14:11 net state change 6 -> 0
+20/07/2020 09:14:17 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 09:14:17 MDM:opened and closed /dev/ttyACM0
+20/07/2020 09:14:17 opened /dev/ttyACM2 serial/USB OK
+20/07/2020 09:14:17 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 09:14:17 Modem Serial Connected using /dev/ttyACM0 and /dev/ttyACM2
+20/07/2020 09:14:17 modem state change 1 -> 2
+20/07/2020 09:14:18 NET:modem is opened
+20/07/2020 09:14:19 ATE0V1
+20/07/2020 09:14:28 Duplicates Removed 4
+20/07/2020 09:14:28 OK
+20/07/2020 09:14:28 NET:modem is alive
+20/07/2020 09:14:28 ATE0V1
+20/07/2020 09:14:28 OK
+20/07/2020 09:14:28 AT+UUSBCONF?
+20/07/2020 09:14:28 +UUSBCONF: 0,"",,"0x1141"
+20/07/2020 09:14:28 OK
+20/07/2020 09:14:28 NET:USB Profile is 0 4417
+20/07/2020 09:14:28 AT+CGMM
+20/07/2020 09:14:28 TOBY-L280
+20/07/2020 09:14:28 MDM: HWType TOBY-L280
+20/07/2020 09:14:28 OK
+20/07/2020 09:14:28 AT+CGSN
+20/07/2020 09:14:28 358503060460855
+20/07/2020 09:14:28 MDM: IMEI 358503060460855
+20/07/2020 09:14:28 OK
+20/07/2020 09:14:28 AT+CIMI
+20/07/2020 09:14:28 505016000265969
+20/07/2020 09:14:28 MDM: IMSI 505016000265969
+20/07/2020 09:14:28 OK
+20/07/2020 09:14:28 AT+CCID
+20/07/2020 09:14:28 +CCID: 89610185001550901074
+20/07/2020 09:14:28 MDM: CCID 89610185001550901074
+20/07/2020 09:14:28 OK
+20/07/2020 09:14:28 AT+CSQ
+20/07/2020 09:14:28 +CSQ: 99,99
+20/07/2020 09:14:28 MODEM CSQ 99
+20/07/2020 09:14:28 OK
+20/07/2020 09:14:28 comms st 0 -> 1
+20/07/2020 09:14:28 modem is HL8/4G
+20/07/2020 09:14:28 imsi: 505016000265969 15, Auto 1
+20/07/2020 09:14:28 selected apn: telstra.internet (found? 1)
+20/07/2020 09:14:28 NET: enable
+20/07/2020 09:14:28 enable apn telstra.internet for HL8
+20/07/2020 09:14:28 comms st 1 -> 2
+20/07/2020 09:14:28 NS 1
+20/07/2020 09:14:28 Duplicates Removed 3
+20/07/2020 09:14:28 net state change 0 -> 1
+20/07/2020 09:14:28 modem open now
+20/07/2020 09:14:28 ATE0V1
+20/07/2020 09:14:28 OK
+20/07/2020 09:14:28 AT+CGMM
+20/07/2020 09:14:28 NS 1
+20/07/2020 09:14:28 TOBY-L280
+20/07/2020 09:14:28 MDM: HWType TOBY-L280
+20/07/2020 09:14:28 OK
+20/07/2020 09:14:28 AT+CGSN
+20/07/2020 09:14:28 358503060460855
+20/07/2020 09:14:28 MDM: IMEI 358503060460855
+20/07/2020 09:14:28 OK
+20/07/2020 09:14:28 AT+CIMI
+20/07/2020 09:14:28 505016000265969
+20/07/2020 09:14:28 MDM: IMSI 505016000265969
+20/07/2020 09:14:28 OK
+20/07/2020 09:14:28 AT+CCID
+20/07/2020 09:14:28 +CCID: 89610185001550901074
+20/07/2020 09:14:28 MDM: CCID 89610185001550901074
+20/07/2020 09:14:28 OK
+20/07/2020 09:14:28 AT+UPSND=0,8
+20/07/2020 09:14:28 +UPSND: 0,8,0
+20/07/2020 09:14:28 psd line 0
+20/07/2020 09:14:28 pad active #0 (NO)
+20/07/2020 09:14:28 OK
+20/07/2020 09:14:28 net state change 1 -> 2
+20/07/2020 09:14:28 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:14:28 OK
+20/07/2020 09:14:28 NS 1
+20/07/2020 09:14:28 SPLASH 99
+20/07/2020 09:14:28 NS 1
+20/07/2020 09:14:29 Duplicates Removed 8
+20/07/2020 09:14:29 AT+UPSDA=0,3
+20/07/2020 09:14:29 NS 1
+20/07/2020 09:14:40 Duplicates Removed 109
+20/07/2020 09:14:40 SaveTripData: 104/242/4/4/0 5 0/0/0/0/0
+20/07/2020 09:14:40 NS 1
+20/07/2020 09:14:44 Duplicates Removed 39
+20/07/2020 09:14:44 ERROR
+20/07/2020 09:14:44 parse cme 0
+20/07/2020 09:14:44 NS 1
+20/07/2020 09:14:48 Duplicates Removed 38
+20/07/2020 09:14:48 SPLASH 0
+20/07/2020 09:14:48 NS 1
+20/07/2020 09:14:54 Duplicates Removed 59
+20/07/2020 09:14:54 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:14:54 NS 1
+20/07/2020 09:14:54 OK
+20/07/2020 09:14:54 NS 1
+20/07/2020 09:14:55 Duplicates Removed 9
+20/07/2020 09:14:55 AT+UPSDA=0,3
+20/07/2020 09:14:55 NS 1
+20/07/2020 09:15:10 Duplicates Removed 148
+20/07/2020 09:15:10 ERROR
+20/07/2020 09:15:10 parse cme 0
+20/07/2020 09:15:10 NS 1
+20/07/2020 09:15:20 Duplicates Removed 99
+20/07/2020 09:15:20 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:15:20 OK
+20/07/2020 09:15:20 NS 1
+20/07/2020 09:15:21 Duplicates Removed 9
+20/07/2020 09:15:21 AT+UPSDA=0,3
+20/07/2020 09:15:21 NS 1
+20/07/2020 09:15:30 Duplicates Removed 88
+20/07/2020 09:15:30 speed signal lost, clear values
+20/07/2020 09:15:30 NS 1
+20/07/2020 09:15:34 Duplicates Removed 35
+20/07/2020 09:15:34 ERROR
+20/07/2020 09:15:34 parse cme 0
+20/07/2020 09:15:34 NS 1
+20/07/2020 09:15:41 Duplicates Removed 72
+20/07/2020 09:15:41 SaveTripData: 104/303/4/4/0 0 0/0/0/0/0
+20/07/2020 09:15:41 NS 1
+20/07/2020 09:15:44 Duplicates Removed 25
+20/07/2020 09:15:44 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:15:44 NS 1
+20/07/2020 09:15:44 OK
+20/07/2020 09:15:44 NS 1
+20/07/2020 09:15:45 Duplicates Removed 9
+20/07/2020 09:15:45 AT+UPSDA=0,3
+20/07/2020 09:15:45 NS 1
+20/07/2020 09:16:00 Duplicates Removed 149
+20/07/2020 09:16:00 ERROR
+20/07/2020 09:16:00 parse cme 0
+20/07/2020 09:16:00 NS 1
+20/07/2020 09:16:10 Duplicates Removed 98
+20/07/2020 09:16:10 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:16:10 OK
+20/07/2020 09:16:10 NS 1
+20/07/2020 09:16:11 Duplicates Removed 9
+20/07/2020 09:16:11 AT+UPSDA=0,3
+20/07/2020 09:16:11 NS 1
+20/07/2020 09:16:14 Duplicates Removed 31
+20/07/2020 09:16:14 speed signal lost, clear values
+20/07/2020 09:16:14 NS 1
+20/07/2020 09:16:26 Duplicates Removed 117
+20/07/2020 09:16:26 ERROR
+20/07/2020 09:16:26 parse cme 0
+20/07/2020 09:16:26 NS 1
+20/07/2020 09:16:36 Duplicates Removed 99
+20/07/2020 09:16:36 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:16:36 OK
+20/07/2020 09:16:36 NS 1
+20/07/2020 09:16:37 Duplicates Removed 9
+20/07/2020 09:16:37 AT+UPSDA=0,3
+20/07/2020 09:16:37 NS 1
+20/07/2020 09:16:42 Duplicates Removed 50
+20/07/2020 09:16:42 SaveTripData: 125/343/4/4/0 1 0/0/0/0/0
+20/07/2020 09:16:42 NS 1
+20/07/2020 09:16:51 Duplicates Removed 84
+20/07/2020 09:16:51 ERROR
+20/07/2020 09:16:51 parse cme 0
+20/07/2020 09:16:51 NS 1
+20/07/2020 09:17:01 Duplicates Removed 99
+20/07/2020 09:17:01 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:17:01 OK
+20/07/2020 09:17:01 NS 1
+20/07/2020 09:17:02 Duplicates Removed 9
+20/07/2020 09:17:02 AT+UPSDA=0,3
+20/07/2020 09:17:02 NS 1
+20/07/2020 09:17:13 Duplicates Removed 111
+20/07/2020 09:17:13 ERROR
+20/07/2020 09:17:13 parse cme 0
+20/07/2020 09:17:13 NS 1
+20/07/2020 09:17:23 Duplicates Removed 99
+20/07/2020 09:17:23 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:17:23 OK
+20/07/2020 09:17:23 NS 1
+20/07/2020 09:17:24 Duplicates Removed 9
+20/07/2020 09:17:24 AT+UPSDA=0,3
+20/07/2020 09:17:24 NS 1
+20/07/2020 09:17:39 Duplicates Removed 149
+20/07/2020 09:17:39 ERROR
+20/07/2020 09:17:39 parse cme 0
+20/07/2020 09:17:39 NS 1
+20/07/2020 09:17:43 Duplicates Removed 38
+20/07/2020 09:17:43 SaveTripData: 125/404/4/4/0 2 0/0/0/0/0
+20/07/2020 09:17:43 NS 1
+20/07/2020 09:17:49 Duplicates Removed 60
+20/07/2020 09:17:49 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:17:49 OK
+20/07/2020 09:17:49 NS 1
+20/07/2020 09:17:50 Duplicates Removed 9
+20/07/2020 09:17:50 AT+UPSDA=0,3
+20/07/2020 09:17:50 NS 1
+20/07/2020 09:18:05 Duplicates Removed 149
+20/07/2020 09:18:05 ERROR
+20/07/2020 09:18:05 parse cme 0
+20/07/2020 09:18:06 NS 1
+20/07/2020 09:18:15 Duplicates Removed 98
+20/07/2020 09:18:15 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:18:15 NS 1
+20/07/2020 09:18:15 OK
+20/07/2020 09:18:16 NS 1
+20/07/2020 09:18:17 Duplicates Removed 9
+20/07/2020 09:18:17 AT+UPSDA=0,3
+20/07/2020 09:18:17 NS 1
+20/07/2020 09:18:17 ERROR
+20/07/2020 09:18:17 parse cme 0
+20/07/2020 09:18:17 NS 1
+20/07/2020 09:18:27 Duplicates Removed 98
+20/07/2020 09:18:27 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:18:27 NS 1
+20/07/2020 09:18:27 OK
+20/07/2020 09:18:27 NS 1
+20/07/2020 09:18:28 Duplicates Removed 9
+20/07/2020 09:18:28 AT+UPSDA=0,3
+20/07/2020 09:18:28 NS 1
+20/07/2020 09:18:38 Duplicates Removed 105
+20/07/2020 09:18:38 ERROR
+20/07/2020 09:18:38 parse cme 0
+20/07/2020 09:18:38 NS 1
+20/07/2020 09:18:44 Duplicates Removed 57
+20/07/2020 09:18:44 SaveTripData: 125/465/4/4/0 3 0/0/0/0/0
+20/07/2020 09:18:44 NS 1
+20/07/2020 09:18:48 Duplicates Removed 40
+20/07/2020 09:18:48 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:18:48 OK
+20/07/2020 09:18:48 NS 1
+20/07/2020 09:18:49 Duplicates Removed 9
+20/07/2020 09:18:49 AT+UPSDA=0,3
+20/07/2020 09:18:49 NS 1
+20/07/2020 09:18:54 Duplicates Removed 44
+20/07/2020 09:18:54 GPS Reset
+20/07/2020 09:18:54 resetting gps resetTimer
+20/07/2020 09:18:54 NS 1
+20/07/2020 09:18:54 GPS Reset Handled
+20/07/2020 09:18:54 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:18:54 NS 1
+20/07/2020 09:18:54 Duplicates Removed 4
+20/07/2020 09:18:54 wrote 1 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:18:55 NS 1
+20/07/2020 09:18:55 Duplicates Removed 4
+20/07/2020 09:18:55 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:18:55 GPS Serial Connected on /dev/ttyS2 (handle 13)
+20/07/2020 09:18:55 NS 1
+20/07/2020 09:19:01 Duplicates Removed 61
+20/07/2020 09:19:01 resetting baud
+20/07/2020 09:19:01 change baud to 115200
+20/07/2020 09:19:01 GPS close 0
+20/07/2020 09:19:01 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:19:01 GPS Serial Connected on /dev/ttyS2 at 115200
+20/07/2020 09:19:01 GPS Saved Database found
+20/07/2020 09:19:01 GPS Loading Saved Database
+20/07/2020 09:19:01 NS 1
+20/07/2020 09:19:01 loaded 49 GNSS DB files
+20/07/2020 09:19:01 NS 1
+20/07/2020 09:19:03 Duplicates Removed 14
+20/07/2020 09:19:03 gps rate set
+20/07/2020 09:19:03 NS 1
+20/07/2020 09:19:04 Duplicates Removed 15
+20/07/2020 09:19:04 ERROR
+20/07/2020 09:19:04 parse cme 0
+20/07/2020 09:19:04 NS 1
+20/07/2020 09:19:13 Duplicates Removed 86
+20/07/2020 09:19:13 opusMain::slotGroundSpeedOverspeedEntryEvent: -1
+20/07/2020 09:19:13 NS 1
+20/07/2020 09:19:14 Duplicates Removed 12
+20/07/2020 09:19:14 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:19:14 OK
+20/07/2020 09:19:15 NS 1
+20/07/2020 09:19:15 Duplicates Removed 9
+20/07/2020 09:19:15 AT+UPSDA=0,3
+20/07/2020 09:19:16 NS 1
+20/07/2020 09:19:22 Duplicates Removed 66
+20/07/2020 09:19:22 opusMain::slotGroundSpeedOverspeedEvent: 147760, 9, 32.502262, 1
+20/07/2020 09:19:22 NS 1
+20/07/2020 09:19:28 Duplicates Removed 59
+20/07/2020 09:19:28 comms st 2 -> 7
+20/07/2020 09:19:29 ERROR
+20/07/2020 09:19:29 parse cme 0
+20/07/2020 09:19:34 comms st 7 -> 0
+20/07/2020 09:19:34 Comms Task Alive/Started, conn_retry 300
+20/07/2020 09:19:34 gsm starting
+20/07/2020 09:19:34 comms st 0 -> 1
+20/07/2020 09:19:34 modem is HL8/4G
+20/07/2020 09:19:34 imsi: 505016000265969 15, Auto 1
+20/07/2020 09:19:34 selected apn: telstra.internet (found? 1)
+20/07/2020 09:19:34 NET: enable
+20/07/2020 09:19:34 enable apn telstra.internet for HL8
+20/07/2020 09:19:34 comms st 1 -> 2
+20/07/2020 09:19:34 NS 4
+20/07/2020 09:19:39 Duplicates Removed 42
+20/07/2020 09:19:39 net state change 2 -> 6
+20/07/2020 09:19:39 AT+CFUN=15
+20/07/2020 09:19:39 NS 4
+20/07/2020 09:19:39 OK
+20/07/2020 09:19:39 NS 4
+20/07/2020 09:19:40 Duplicates Removed 9
+20/07/2020 09:19:40 MDM: close
+20/07/2020 09:19:40 modem state change 2 -> 98
+20/07/2020 09:19:40 resetting modem in lieu of power off
+20/07/2020 09:19:40 wrote 1 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 09:19:40 wrote 1 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 09:19:40 NS 0
+20/07/2020 09:19:40 comms st 2 -> 7
+20/07/2020 09:19:41 modem state change 98 -> 0
+20/07/2020 09:19:45 SaveTripData: 175/476/4/4/0 4 0/0/0/0/1
+20/07/2020 09:19:46 comms st 7 -> 0
+20/07/2020 09:19:46 Comms Task Alive/Started, conn_retry 300
+20/07/2020 09:19:46 gsm starting
+20/07/2020 09:19:46 waiting for modem to come up again
+20/07/2020 09:19:46 NET: get hw
+20/07/2020 09:19:46 MDM: open
+20/07/2020 09:19:46 modem state change 0 -> 1
+20/07/2020 09:19:46 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 09:19:46 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 09:19:46 MDM: turn on modem power
+20/07/2020 09:19:46 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+20/07/2020 09:19:48 speed signal lost, clear values
+20/07/2020 09:19:50 net state change 6 -> 0
+20/07/2020 09:19:55 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 09:19:55 MDM:opened and closed /dev/ttyACM0
+20/07/2020 09:19:55 opened /dev/ttyACM2 serial/USB OK
+20/07/2020 09:19:55 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 09:19:55 Modem Serial Connected using /dev/ttyACM0 and /dev/ttyACM2
+20/07/2020 09:19:55 modem state change 1 -> 2
+20/07/2020 09:19:56 NET:modem is opened
+20/07/2020 09:19:57 ATE0V1
+20/07/2020 09:20:06 Duplicates Removed 4
+20/07/2020 09:20:06 OK
+20/07/2020 09:20:06 NET:modem is alive
+20/07/2020 09:20:06 ATE0V1
+20/07/2020 09:20:06 OK
+20/07/2020 09:20:06 AT+UUSBCONF?
+20/07/2020 09:20:06 +UUSBCONF: 0,"",,"0x1141"
+20/07/2020 09:20:06 OK
+20/07/2020 09:20:06 NET:USB Profile is 0 4417
+20/07/2020 09:20:06 AT+CGMM
+20/07/2020 09:20:06 TOBY-L280
+20/07/2020 09:20:06 MDM: HWType TOBY-L280
+20/07/2020 09:20:06 OK
+20/07/2020 09:20:06 AT+CGSN
+20/07/2020 09:20:06 358503060460855
+20/07/2020 09:20:06 MDM: IMEI 358503060460855
+20/07/2020 09:20:06 OK
+20/07/2020 09:20:06 AT+CIMI
+20/07/2020 09:20:06 505016000265969
+20/07/2020 09:20:06 MDM: IMSI 505016000265969
+20/07/2020 09:20:06 OK
+20/07/2020 09:20:06 AT+CCID
+20/07/2020 09:20:06 +CCID: 89610185001550901074
+20/07/2020 09:20:06 MDM: CCID 89610185001550901074
+20/07/2020 09:20:06 OK
+20/07/2020 09:20:06 AT+CSQ
+20/07/2020 09:20:06 +CSQ: 99,99
+20/07/2020 09:20:06 MODEM CSQ 99
+20/07/2020 09:20:06 OK
+20/07/2020 09:20:06 comms st 0 -> 1
+20/07/2020 09:20:06 modem is HL8/4G
+20/07/2020 09:20:06 imsi: 505016000265969 15, Auto 1
+20/07/2020 09:20:06 selected apn: telstra.internet (found? 1)
+20/07/2020 09:20:06 NET: enable
+20/07/2020 09:20:06 enable apn telstra.internet for HL8
+20/07/2020 09:20:06 comms st 1 -> 2
+20/07/2020 09:20:06 NS 1
+20/07/2020 09:20:06 Duplicates Removed 4
+20/07/2020 09:20:06 SPLASH 99
+20/07/2020 09:20:06 NS 1
+20/07/2020 09:20:07 Duplicates Removed 3
+20/07/2020 09:20:07 net state change 0 -> 1
+20/07/2020 09:20:07 modem open now
+20/07/2020 09:20:07 ATE0V1
+20/07/2020 09:20:07 NS 1
+20/07/2020 09:20:07 OK
+20/07/2020 09:20:07 AT+CGMM
+20/07/2020 09:20:07 TOBY-L280
+20/07/2020 09:20:07 MDM: HWType TOBY-L280
+20/07/2020 09:20:07 OK
+20/07/2020 09:20:07 AT+CGSN
+20/07/2020 09:20:07 358503060460855
+20/07/2020 09:20:07 MDM: IMEI 358503060460855
+20/07/2020 09:20:07 OK
+20/07/2020 09:20:07 AT+CIMI
+20/07/2020 09:20:07 505016000265969
+20/07/2020 09:20:07 MDM: IMSI 505016000265969
+20/07/2020 09:20:07 OK
+20/07/2020 09:20:07 AT+CCID
+20/07/2020 09:20:07 +CCID: 89610185001550901074
+20/07/2020 09:20:07 MDM: CCID 89610185001550901074
+20/07/2020 09:20:07 OK
+20/07/2020 09:20:07 AT+UPSND=0,8
+20/07/2020 09:20:07 NS 1
+20/07/2020 09:20:07 +UPSND: 0,8,0
+20/07/2020 09:20:07 psd line 0
+20/07/2020 09:20:07 pad active #0 (NO)
+20/07/2020 09:20:07 OK
+20/07/2020 09:20:07 net state change 1 -> 2
+20/07/2020 09:20:07 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:20:07 OK
+20/07/2020 09:20:07 NS 1
+20/07/2020 09:20:08 Duplicates Removed 9
+20/07/2020 09:20:08 AT+UPSDA=0,3
+20/07/2020 09:20:08 NS 1
+20/07/2020 09:20:16 Duplicates Removed 84
+20/07/2020 09:20:16 GPS Sat Found (NMEA)!!!!!!!!!
+20/07/2020 09:20:16 NS 1
+20/07/2020 09:20:17 Duplicates Removed 8
+20/07/2020 09:20:17 main - GNSS SAT state change 0->1
+20/07/2020 09:20:17 MessageDialog GNSS 1
+20/07/2020 09:20:17 Splash GNSS 1
+20/07/2020 09:20:17 NS 1
+20/07/2020 09:20:23 Duplicates Removed 54
+20/07/2020 09:20:23 ERROR
+20/07/2020 09:20:23 parse cme 0
+20/07/2020 09:20:23 NS 1
+20/07/2020 09:20:30 Duplicates Removed 72
+20/07/2020 09:20:30 SPLASH 0
+20/07/2020 09:20:30 NS 1
+20/07/2020 09:20:33 Duplicates Removed 26
+20/07/2020 09:20:33 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:20:33 OK
+20/07/2020 09:20:33 NS 1
+20/07/2020 09:20:34 Duplicates Removed 9
+20/07/2020 09:20:34 AT+UPSDA=0,3
+20/07/2020 09:20:34 NS 1
+20/07/2020 09:20:35 Duplicates Removed 13
+20/07/2020 09:20:35 main - GNSS SAT state change 1->0
+20/07/2020 09:20:35 MessageDialog GNSS 0
+20/07/2020 09:20:35 Splash GNSS 0
+20/07/2020 09:20:35 NS 1
+20/07/2020 09:20:46 Duplicates Removed 108
+20/07/2020 09:20:46 SaveTripData: 186/526/4/4/0 5 0/0/0/0/1
+20/07/2020 09:20:46 NS 1
+20/07/2020 09:20:49 Duplicates Removed 26
+20/07/2020 09:20:49 ERROR
+20/07/2020 09:20:49 parse cme 0
+20/07/2020 09:20:49 NS 1
+20/07/2020 09:20:51 Duplicates Removed 22
+20/07/2020 09:20:51 speed signal lost, clear values
+20/07/2020 09:20:51 NS 1
+20/07/2020 09:20:59 Duplicates Removed 75
+20/07/2020 09:20:59 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:20:59 NS 1
+20/07/2020 09:20:59 OK
+20/07/2020 09:20:59 NS 1
+20/07/2020 09:21:00 Duplicates Removed 9
+20/07/2020 09:21:00 AT+UPSDA=0,3
+20/07/2020 09:21:00 NS 1
+20/07/2020 09:21:11 Duplicates Removed 107
+20/07/2020 09:21:11 ERROR
+20/07/2020 09:21:11 parse cme 0
+20/07/2020 09:21:11 NS 1
+20/07/2020 09:21:21 Duplicates Removed 99
+20/07/2020 09:21:21 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:21:21 OK
+20/07/2020 09:21:21 NS 1
+20/07/2020 09:21:22 Duplicates Removed 9
+20/07/2020 09:21:22 AT+UPSDA=0,3
+20/07/2020 09:21:22 NS 1
+20/07/2020 09:21:37 Duplicates Removed 149
+20/07/2020 09:21:37 ERROR
+20/07/2020 09:21:37 parse cme 0
+20/07/2020 09:21:37 NS 1
+20/07/2020 09:21:47 Duplicates Removed 98
+20/07/2020 09:21:47 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:21:47 NS 1
+20/07/2020 09:21:47 OK
+20/07/2020 09:21:47 NS 1
+20/07/2020 09:21:47 Duplicates Removed 1
+20/07/2020 09:21:47 SaveTripData: 186/587/4/4/0 0 0/0/0/0/1
+20/07/2020 09:21:47 NS 1
+20/07/2020 09:21:48 Duplicates Removed 7
+20/07/2020 09:21:48 AT+UPSDA=0,3
+20/07/2020 09:21:48 NS 1
+20/07/2020 09:22:03 Duplicates Removed 149
+20/07/2020 09:22:03 ERROR
+20/07/2020 09:22:03 parse cme 0
+20/07/2020 09:22:03 NS 1
+20/07/2020 09:22:13 Duplicates Removed 98
+20/07/2020 09:22:13 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:22:13 OK
+20/07/2020 09:22:13 NS 1
+20/07/2020 09:22:14 Duplicates Removed 9
+20/07/2020 09:22:14 AT+UPSDA=0,3
+20/07/2020 09:22:14 NS 1
+20/07/2020 09:22:28 Duplicates Removed 138
+20/07/2020 09:22:28 ERROR
+20/07/2020 09:22:28 parse cme 0
+20/07/2020 09:22:28 NS 1
+20/07/2020 09:22:38 Duplicates Removed 99
+20/07/2020 09:22:38 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:22:38 OK
+20/07/2020 09:22:38 NS 1
+20/07/2020 09:22:39 Duplicates Removed 9
+20/07/2020 09:22:39 AT+UPSDA=0,3
+20/07/2020 09:22:39 NS 1
+20/07/2020 09:22:48 Duplicates Removed 90
+20/07/2020 09:22:48 SaveTripData: 242/592/4/4/0 1 0/0/0/0/1
+20/07/2020 09:22:48 NS 1
+20/07/2020 09:22:52 Duplicates Removed 31
+20/07/2020 09:22:52 ERROR
+20/07/2020 09:22:52 parse cme 0
+20/07/2020 09:22:52 NS 1
+20/07/2020 09:23:02 Duplicates Removed 99
+20/07/2020 09:23:02 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:23:02 OK
+20/07/2020 09:23:02 NS 1
+20/07/2020 09:23:03 Duplicates Removed 9
+20/07/2020 09:23:03 AT+UPSDA=0,3
+20/07/2020 09:23:03 NS 1
+20/07/2020 09:23:18 Duplicates Removed 149
+20/07/2020 09:23:18 ERROR
+20/07/2020 09:23:18 parse cme 0
+20/07/2020 09:23:18 NS 1
+20/07/2020 09:23:28 Duplicates Removed 98
+20/07/2020 09:23:28 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:23:28 NS 1
+20/07/2020 09:23:28 OK
+20/07/2020 09:23:28 NS 1
+20/07/2020 09:23:29 Duplicates Removed 9
+20/07/2020 09:23:29 AT+UPSDA=0,3
+20/07/2020 09:23:29 NS 1
+20/07/2020 09:23:44 Duplicates Removed 149
+20/07/2020 09:23:44 ERROR
+20/07/2020 09:23:44 parse cme 0
+20/07/2020 09:23:44 NS 1
+20/07/2020 09:23:49 Duplicates Removed 52
+20/07/2020 09:23:49 SaveTripData: 303/592/4/4/0 2 0/0/0/0/1
+20/07/2020 09:23:49 NS 1
+20/07/2020 09:23:54 Duplicates Removed 45
+20/07/2020 09:23:54 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:23:54 OK
+20/07/2020 09:23:54 NS 1
+20/07/2020 09:23:55 Duplicates Removed 9
+20/07/2020 09:23:55 GPS Reset
+20/07/2020 09:23:55 resetting gps resetTimer
+20/07/2020 09:23:55 AT+UPSDA=0,3
+20/07/2020 09:23:55 NS 1
+20/07/2020 09:23:55 GPS Reset Handled
+20/07/2020 09:23:55 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:23:55 NS 1
+20/07/2020 09:23:55 Duplicates Removed 4
+20/07/2020 09:23:55 wrote 1 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:23:55 NS 1
+20/07/2020 09:23:56 Duplicates Removed 4
+20/07/2020 09:23:56 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:23:56 GPS Serial Connected on /dev/ttyS2 (handle 13)
+20/07/2020 09:23:56 NS 1
+20/07/2020 09:24:02 Duplicates Removed 61
+20/07/2020 09:24:02 resetting baud
+20/07/2020 09:24:02 change baud to 115200
+20/07/2020 09:24:02 GPS close 0
+20/07/2020 09:24:02 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:24:02 GPS Serial Connected on /dev/ttyS2 at 115200
+20/07/2020 09:24:02 GPS Saved Database found
+20/07/2020 09:24:02 GPS Loading Saved Database
+20/07/2020 09:24:02 NS 1
+20/07/2020 09:24:02 loaded 49 GNSS DB files
+20/07/2020 09:24:02 NS 1
+20/07/2020 09:24:04 Duplicates Removed 14
+20/07/2020 09:24:04 gps rate set
+20/07/2020 09:24:04 NS 1
+20/07/2020 09:24:10 Duplicates Removed 60
+20/07/2020 09:24:10 ERROR
+20/07/2020 09:24:10 parse cme 0
+20/07/2020 09:24:10 NS 1
+20/07/2020 09:24:20 Duplicates Removed 99
+20/07/2020 09:24:20 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:24:20 OK
+20/07/2020 09:24:20 NS 1
+20/07/2020 09:24:21 Duplicates Removed 9
+20/07/2020 09:24:21 AT+UPSDA=0,3
+20/07/2020 09:24:21 NS 1
+20/07/2020 09:24:36 Duplicates Removed 146
+20/07/2020 09:24:36 ERROR
+20/07/2020 09:24:36 parse cme 0
+20/07/2020 09:24:36 NS 1
+20/07/2020 09:24:42 Duplicates Removed 64
+20/07/2020 09:24:42 speed signal lost, clear values
+20/07/2020 09:24:42 NS 1
+20/07/2020 09:24:46 Duplicates Removed 33
+20/07/2020 09:24:46 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:24:46 NS 1
+20/07/2020 09:24:46 OK
+20/07/2020 09:24:46 NS 1
+20/07/2020 09:24:47 Duplicates Removed 9
+20/07/2020 09:24:47 AT+UPSDA=0,3
+20/07/2020 09:24:47 NS 1
+20/07/2020 09:24:50 Duplicates Removed 33
+20/07/2020 09:24:50 SaveTripData: 351/605/4/4/0 3 0/0/0/0/1
+20/07/2020 09:24:50 NS 1
+20/07/2020 09:25:02 Duplicates Removed 114
+20/07/2020 09:25:02 ERROR
+20/07/2020 09:25:02 parse cme 0
+20/07/2020 09:25:02 NS 1
+20/07/2020 09:25:06 Duplicates Removed 43
+20/07/2020 09:25:06 comms st 2 -> 7
+20/07/2020 09:25:12 net state change 2 -> 6
+20/07/2020 09:25:12 AT+CFUN=15
+20/07/2020 09:25:12 OK
+20/07/2020 09:25:12 comms st 7 -> 0
+20/07/2020 09:25:12 Comms Task Alive/Started, conn_retry 300
+20/07/2020 09:25:12 gsm starting
+20/07/2020 09:25:12 comms st 0 -> 1
+20/07/2020 09:25:12 modem is HL8/4G
+20/07/2020 09:25:12 imsi: 505016000265969 15, Auto 1
+20/07/2020 09:25:12 selected apn: telstra.internet (found? 1)
+20/07/2020 09:25:12 NET: enable
+20/07/2020 09:25:12 enable apn telstra.internet for HL8
+20/07/2020 09:25:12 comms st 1 -> 2
+20/07/2020 09:25:12 NS 4
+20/07/2020 09:25:13 Duplicates Removed 6
+20/07/2020 09:25:13 MDM: close
+20/07/2020 09:25:13 modem state change 2 -> 98
+20/07/2020 09:25:13 resetting modem in lieu of power off
+20/07/2020 09:25:13 wrote 1 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 09:25:13 wrote 1 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 09:25:13 NS 0
+20/07/2020 09:25:13 comms st 2 -> 7
+20/07/2020 09:25:14 modem state change 98 -> 0
+20/07/2020 09:25:14 GPS Sat Found (NMEA)!!!!!!!!!
+20/07/2020 09:25:17 main - GNSS SAT state change 0->1
+20/07/2020 09:25:17 MessageDialog GNSS 1
+20/07/2020 09:25:17 Splash GNSS 1
+20/07/2020 09:25:19 comms st 7 -> 0
+20/07/2020 09:25:19 Comms Task Alive/Started, conn_retry 300
+20/07/2020 09:25:19 gsm starting
+20/07/2020 09:25:19 waiting for modem to come up again
+20/07/2020 09:25:19 NET: get hw
+20/07/2020 09:25:19 MDM: open
+20/07/2020 09:25:19 modem state change 0 -> 1
+20/07/2020 09:25:19 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 09:25:19 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 09:25:19 MDM: turn on modem power
+20/07/2020 09:25:19 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+20/07/2020 09:25:23 net state change 6 -> 0
+20/07/2020 09:25:28 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 09:25:28 MDM:opened and closed /dev/ttyACM0
+20/07/2020 09:25:28 opened /dev/ttyACM2 serial/USB OK
+20/07/2020 09:25:28 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 09:25:28 Modem Serial Connected using /dev/ttyACM0 and /dev/ttyACM2
+20/07/2020 09:25:28 modem state change 1 -> 2
+20/07/2020 09:25:29 NET:modem is opened
+20/07/2020 09:25:30 ATE0V1
+20/07/2020 09:25:39 Duplicates Removed 4
+20/07/2020 09:25:39 OK
+20/07/2020 09:25:39 NET:modem is alive
+20/07/2020 09:25:39 ATE0V1
+20/07/2020 09:25:39 OK
+20/07/2020 09:25:39 AT+UUSBCONF?
+20/07/2020 09:25:39 +UUSBCONF: 0,"",,"0x1141"
+20/07/2020 09:25:39 OK
+20/07/2020 09:25:39 NET:USB Profile is 0 4417
+20/07/2020 09:25:39 AT+CGMM
+20/07/2020 09:25:39 TOBY-L280
+20/07/2020 09:25:39 MDM: HWType TOBY-L280
+20/07/2020 09:25:39 OK
+20/07/2020 09:25:39 AT+CGSN
+20/07/2020 09:25:39 358503060460855
+20/07/2020 09:25:39 MDM: IMEI 358503060460855
+20/07/2020 09:25:39 OK
+20/07/2020 09:25:39 AT+CIMI
+20/07/2020 09:25:39 505016000265969
+20/07/2020 09:25:39 MDM: IMSI 505016000265969
+20/07/2020 09:25:39 OK
+20/07/2020 09:25:39 AT+CCID
+20/07/2020 09:25:39 +CCID: 89610185001550901074
+20/07/2020 09:25:39 MDM: CCID 89610185001550901074
+20/07/2020 09:25:39 OK
+20/07/2020 09:25:39 AT+CSQ
+20/07/2020 09:25:39 +CSQ: 99,99
+20/07/2020 09:25:39 MODEM CSQ 99
+20/07/2020 09:25:39 OK
+20/07/2020 09:25:39 comms st 0 -> 1
+20/07/2020 09:25:39 modem is HL8/4G
+20/07/2020 09:25:39 imsi: 505016000265969 15, Auto 1
+20/07/2020 09:25:39 selected apn: telstra.internet (found? 1)
+20/07/2020 09:25:39 NET: enable
+20/07/2020 09:25:39 enable apn telstra.internet for HL8
+20/07/2020 09:25:39 comms st 1 -> 2
+20/07/2020 09:25:39 NS 1
+20/07/2020 09:25:39 Duplicates Removed 1
+20/07/2020 09:25:39 net state change 0 -> 1
+20/07/2020 09:25:39 modem open now
+20/07/2020 09:25:39 ATE0V1
+20/07/2020 09:25:39 OK
+20/07/2020 09:25:39 NS 1
+20/07/2020 09:25:39 AT+CGMM
+20/07/2020 09:25:39 TOBY-L280
+20/07/2020 09:25:39 MDM: HWType TOBY-L280
+20/07/2020 09:25:39 OK
+20/07/2020 09:25:39 AT+CGSN
+20/07/2020 09:25:39 358503060460855
+20/07/2020 09:25:39 MDM: IMEI 358503060460855
+20/07/2020 09:25:39 OK
+20/07/2020 09:25:39 AT+CIMI
+20/07/2020 09:25:39 505016000265969
+20/07/2020 09:25:39 MDM: IMSI 505016000265969
+20/07/2020 09:25:39 OK
+20/07/2020 09:25:39 AT+CCID
+20/07/2020 09:25:39 +CCID: 89610185001550901074
+20/07/2020 09:25:39 MDM: CCID 89610185001550901074
+20/07/2020 09:25:39 OK
+20/07/2020 09:25:39 AT+UPSND=0,8
+20/07/2020 09:25:39 NS 1
+20/07/2020 09:25:39 +UPSND: 0,8,0
+20/07/2020 09:25:39 psd line 0
+20/07/2020 09:25:39 pad active #0 (NO)
+20/07/2020 09:25:39 OK
+20/07/2020 09:25:39 net state change 1 -> 2
+20/07/2020 09:25:39 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:25:39 OK
+20/07/2020 09:25:39 NS 1
+20/07/2020 09:25:40 Duplicates Removed 9
+20/07/2020 09:25:40 AT+UPSDA=0,3
+20/07/2020 09:25:40 NS 1
+20/07/2020 09:25:43 Duplicates Removed 30
+20/07/2020 09:25:43 speed signal lost, clear values
+20/07/2020 09:25:43 NS 1
+20/07/2020 09:25:47 Duplicates Removed 39
+20/07/2020 09:25:47 main - GNSS SAT state change 1->0
+20/07/2020 09:25:47 MessageDialog GNSS 0
+20/07/2020 09:25:47 Splash GNSS 0
+20/07/2020 09:25:47 NS 1
+20/07/2020 09:25:51 Duplicates Removed 40
+20/07/2020 09:25:51 SaveTripData: 376/641/4/4/0 4 0/0/0/0/1
+20/07/2020 09:25:51 NS 1
+20/07/2020 09:25:55 Duplicates Removed 36
+20/07/2020 09:25:55 ERROR
+20/07/2020 09:25:55 parse cme 0
+20/07/2020 09:25:55 NS 1
+20/07/2020 09:26:05 Duplicates Removed 99
+20/07/2020 09:26:05 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:26:05 OK
+20/07/2020 09:26:05 NS 1
+20/07/2020 09:26:06 Duplicates Removed 9
+20/07/2020 09:26:06 AT+UPSDA=0,3
+20/07/2020 09:26:06 NS 1
+20/07/2020 09:26:21 Duplicates Removed 149
+20/07/2020 09:26:21 ERROR
+20/07/2020 09:26:21 parse cme 0
+20/07/2020 09:26:21 NS 1
+20/07/2020 09:26:31 Duplicates Removed 99
+20/07/2020 09:26:31 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:26:31 OK
+20/07/2020 09:26:31 NS 1
+20/07/2020 09:26:32 Duplicates Removed 9
+20/07/2020 09:26:32 AT+UPSDA=0,3
+20/07/2020 09:26:32 NS 1
+20/07/2020 09:26:47 Duplicates Removed 149
+20/07/2020 09:26:47 ERROR
+20/07/2020 09:26:47 parse cme 0
+20/07/2020 09:26:47 NS 1
+20/07/2020 09:26:52 Duplicates Removed 47
+20/07/2020 09:26:52 SaveTripData: 413/665/4/4/0 5 0/0/0/0/1
+20/07/2020 09:26:52 NS 1
+20/07/2020 09:26:57 Duplicates Removed 50
+20/07/2020 09:26:57 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:26:57 NS 1
+20/07/2020 09:26:57 OK
+20/07/2020 09:26:57 NS 1
+20/07/2020 09:26:58 Duplicates Removed 9
+20/07/2020 09:26:58 AT+UPSDA=0,3
+20/07/2020 09:26:58 NS 1
+20/07/2020 09:27:13 Duplicates Removed 149
+20/07/2020 09:27:13 ERROR
+20/07/2020 09:27:13 parse cme 0
+20/07/2020 09:27:14 NS 1
+20/07/2020 09:27:23 Duplicates Removed 98
+20/07/2020 09:27:23 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:27:23 OK
+20/07/2020 09:27:24 NS 1
+20/07/2020 09:27:24 Duplicates Removed 9
+20/07/2020 09:27:24 AT+UPSDA=0,3
+20/07/2020 09:27:25 NS 1
+20/07/2020 09:27:34 Duplicates Removed 92
+20/07/2020 09:27:34 impact value 9
+20/07/2020 09:27:34 NS 1
+20/07/2020 09:27:34 LOW
+20/07/2020 09:27:34 impact response 2
+20/07/2020 09:27:34 NS 1
+20/07/2020 09:27:40 Duplicates Removed 55
+20/07/2020 09:27:40 ERROR
+20/07/2020 09:27:40 parse cme 0
+20/07/2020 09:27:40 NS 1
+20/07/2020 09:27:41 Duplicates Removed 17
+20/07/2020 09:27:41 GPS Sat Found (NMEA)!!!!!!!!!
+20/07/2020 09:27:41 NS 1
+20/07/2020 09:27:47 Duplicates Removed 57
+20/07/2020 09:27:47 main - GNSS SAT state change 0->1
+20/07/2020 09:27:47 MessageDialog GNSS 1
+20/07/2020 09:27:47 NS 1
+20/07/2020 09:27:47 Splash GNSS 1
+20/07/2020 09:27:47 NS 1
+20/07/2020 09:27:50 Duplicates Removed 22
+20/07/2020 09:27:50 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:27:50 OK
+20/07/2020 09:27:50 NS 1
+20/07/2020 09:27:51 Duplicates Removed 9
+20/07/2020 09:27:51 AT+UPSDA=0,3
+20/07/2020 09:27:51 NS 1
+20/07/2020 09:27:53 Duplicates Removed 25
+20/07/2020 09:27:53 SaveTripData: 474/665/4/4/0 0 0/0/0/0/1
+20/07/2020 09:27:53 NS 1
+20/07/2020 09:27:59 Duplicates Removed 59
+20/07/2020 09:27:59 main - GNSS SAT state change 1->0
+20/07/2020 09:27:59 MessageDialog GNSS 0
+20/07/2020 09:27:59 Splash GNSS 0
+20/07/2020 09:27:59 NS 1
+20/07/2020 09:28:02 Duplicates Removed 28
+20/07/2020 09:28:02 speed signal lost, clear values
+20/07/2020 09:28:02 NS 1
+20/07/2020 09:28:06 Duplicates Removed 34
+20/07/2020 09:28:06 ERROR
+20/07/2020 09:28:06 parse cme 0
+20/07/2020 09:28:06 NS 1
+20/07/2020 09:28:16 Duplicates Removed 98
+20/07/2020 09:28:16 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:28:16 NS 1
+20/07/2020 09:28:16 OK
+20/07/2020 09:28:16 NS 1
+20/07/2020 09:28:17 Duplicates Removed 9
+20/07/2020 09:28:17 AT+UPSDA=0,3
+20/07/2020 09:28:17 NS 1
+20/07/2020 09:28:32 Duplicates Removed 149
+20/07/2020 09:28:32 ERROR
+20/07/2020 09:28:32 parse cme 0
+20/07/2020 09:28:32 NS 1
+20/07/2020 09:28:42 Duplicates Removed 98
+20/07/2020 09:28:42 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:28:42 OK
+20/07/2020 09:28:42 NS 1
+20/07/2020 09:28:43 Duplicates Removed 9
+20/07/2020 09:28:43 AT+UPSDA=0,3
+20/07/2020 09:28:43 NS 1
+20/07/2020 09:28:54 Duplicates Removed 114
+20/07/2020 09:28:54 SaveTripData: 484/716/4/4/0 1 0/0/0/0/1
+20/07/2020 09:28:54 NS 1
+20/07/2020 09:28:56 Duplicates Removed 14
+20/07/2020 09:28:56 GPS Reset
+20/07/2020 09:28:56 resetting gps resetTimer
+20/07/2020 09:28:56 GPS Reset Handled
+20/07/2020 09:28:56 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:28:56 NS 1
+20/07/2020 09:28:56 Duplicates Removed 4
+20/07/2020 09:28:56 wrote 1 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:28:56 NS 1
+20/07/2020 09:28:57 Duplicates Removed 4
+20/07/2020 09:28:57 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:28:57 GPS Serial Connected on /dev/ttyS2 (handle 13)
+20/07/2020 09:28:57 NS 1
+20/07/2020 09:28:58 Duplicates Removed 9
+20/07/2020 09:28:58 ERROR
+20/07/2020 09:28:58 parse cme 0
+20/07/2020 09:28:58 NS 1
+20/07/2020 09:29:03 Duplicates Removed 51
+20/07/2020 09:29:03 resetting baud
+20/07/2020 09:29:03 change baud to 115200
+20/07/2020 09:29:03 GPS close 0
+20/07/2020 09:29:03 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:29:03 GPS Serial Connected on /dev/ttyS2 at 115200
+20/07/2020 09:29:03 GPS Saved Database found
+20/07/2020 09:29:03 GPS Loading Saved Database
+20/07/2020 09:29:03 NS 1
+20/07/2020 09:29:03 loaded 49 GNSS DB files
+20/07/2020 09:29:03 NS 1
+20/07/2020 09:29:05 Duplicates Removed 14
+20/07/2020 09:29:05 gps rate set
+20/07/2020 09:29:05 NS 1
+20/07/2020 09:29:08 Duplicates Removed 31
+20/07/2020 09:29:08 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:29:08 OK
+20/07/2020 09:29:08 NS 1
+20/07/2020 09:29:09 Duplicates Removed 9
+20/07/2020 09:29:09 AT+UPSDA=0,3
+20/07/2020 09:29:09 NS 1
+20/07/2020 09:29:23 Duplicates Removed 142
+20/07/2020 09:29:23 ERROR
+20/07/2020 09:29:23 parse cme 0
+20/07/2020 09:29:23 NS 1
+20/07/2020 09:29:33 Duplicates Removed 99
+20/07/2020 09:29:33 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:29:33 OK
+20/07/2020 09:29:33 NS 1
+20/07/2020 09:29:34 Duplicates Removed 9
+20/07/2020 09:29:34 AT+UPSDA=0,3
+20/07/2020 09:29:34 NS 1
+20/07/2020 09:29:49 Duplicates Removed 149
+20/07/2020 09:29:49 ERROR
+20/07/2020 09:29:49 parse cme 0
+20/07/2020 09:29:50 NS 1
+20/07/2020 09:29:55 Duplicates Removed 56
+20/07/2020 09:29:55 SaveTripData: 545/716/4/4/0 2 0/0/0/0/1
+20/07/2020 09:29:55 NS 1
+20/07/2020 09:29:59 Duplicates Removed 41
+20/07/2020 09:29:59 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:30:00 NS 1
+20/07/2020 09:30:00 OK
+20/07/2020 09:30:00 NS 1
+20/07/2020 09:30:01 Duplicates Removed 9
+20/07/2020 09:30:01 AT+UPSDA=0,3
+20/07/2020 09:30:01 NS 1
+20/07/2020 09:30:16 Duplicates Removed 149
+20/07/2020 09:30:16 ERROR
+20/07/2020 09:30:16 parse cme 0
+20/07/2020 09:30:16 NS 1
+20/07/2020 09:30:20 Duplicates Removed 45
+20/07/2020 09:30:20 speed signal lost, clear values
+20/07/2020 09:30:20 NS 1
+20/07/2020 09:30:26 Duplicates Removed 52
+20/07/2020 09:30:26 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:30:26 OK
+20/07/2020 09:30:26 NS 1
+20/07/2020 09:30:27 Duplicates Removed 9
+20/07/2020 09:30:27 AT+UPSDA=0,3
+20/07/2020 09:30:27 NS 1
+20/07/2020 09:30:39 Duplicates Removed 125
+20/07/2020 09:30:39 comms st 2 -> 7
+20/07/2020 09:30:42 ERROR
+20/07/2020 09:30:42 parse cme 0
+20/07/2020 09:30:45 comms st 7 -> 0
+20/07/2020 09:30:45 Comms Task Alive/Started, conn_retry 300
+20/07/2020 09:30:45 gsm starting
+20/07/2020 09:30:45 comms st 0 -> 1
+20/07/2020 09:30:45 modem is HL8/4G
+20/07/2020 09:30:45 imsi: 505016000265969 15, Auto 1
+20/07/2020 09:30:45 selected apn: telstra.internet (found? 1)
+20/07/2020 09:30:45 NET: enable
+20/07/2020 09:30:45 enable apn telstra.internet for HL8
+20/07/2020 09:30:45 comms st 1 -> 2
+20/07/2020 09:30:45 NS 4
+20/07/2020 09:30:52 Duplicates Removed 63
+20/07/2020 09:30:52 net state change 2 -> 6
+20/07/2020 09:30:52 AT+CFUN=15
+20/07/2020 09:30:52 OK
+20/07/2020 09:30:52 NS 4
+20/07/2020 09:30:53 Duplicates Removed 9
+20/07/2020 09:30:53 MDM: close
+20/07/2020 09:30:53 modem state change 2 -> 98
+20/07/2020 09:30:53 resetting modem in lieu of power off
+20/07/2020 09:30:53 wrote 1 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 09:30:53 wrote 1 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 09:30:53 NS 0
+20/07/2020 09:30:53 comms st 2 -> 7
+20/07/2020 09:30:54 modem state change 98 -> 0
+20/07/2020 09:30:56 SaveTripData: 575/747/4/4/0 3 0/0/0/0/1
+20/07/2020 09:30:59 comms st 7 -> 0
+20/07/2020 09:30:59 Comms Task Alive/Started, conn_retry 300
+20/07/2020 09:30:59 gsm starting
+20/07/2020 09:30:59 waiting for modem to come up again
+20/07/2020 09:30:59 NET: get hw
+20/07/2020 09:30:59 MDM: open
+20/07/2020 09:30:59 modem state change 0 -> 1
+20/07/2020 09:30:59 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 09:30:59 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 09:30:59 MDM: turn on modem power
+20/07/2020 09:30:59 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+20/07/2020 09:31:03 net state change 6 -> 0
+20/07/2020 09:31:08 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 09:31:08 MDM:opened and closed /dev/ttyACM0
+20/07/2020 09:31:08 opened /dev/ttyACM2 serial/USB OK
+20/07/2020 09:31:08 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 09:31:08 Modem Serial Connected using /dev/ttyACM0 and /dev/ttyACM2
+20/07/2020 09:31:08 modem state change 1 -> 2
+20/07/2020 09:31:09 NET:modem is opened
+20/07/2020 09:31:10 ATE0V1
+20/07/2020 09:31:19 Duplicates Removed 4
+20/07/2020 09:31:19 OK
+20/07/2020 09:31:19 NET:modem is alive
+20/07/2020 09:31:19 ATE0V1
+20/07/2020 09:31:19 OK
+20/07/2020 09:31:19 AT+UUSBCONF?
+20/07/2020 09:31:19 +UUSBCONF: 0,"",,"0x1141"
+20/07/2020 09:31:19 OK
+20/07/2020 09:31:19 NET:USB Profile is 0 4417
+20/07/2020 09:31:19 AT+CGMM
+20/07/2020 09:31:19 TOBY-L280
+20/07/2020 09:31:19 MDM: HWType TOBY-L280
+20/07/2020 09:31:19 OK
+20/07/2020 09:31:19 AT+CGSN
+20/07/2020 09:31:19 358503060460855
+20/07/2020 09:31:19 MDM: IMEI 358503060460855
+20/07/2020 09:31:19 OK
+20/07/2020 09:31:19 AT+CIMI
+20/07/2020 09:31:19 505016000265969
+20/07/2020 09:31:19 MDM: IMSI 505016000265969
+20/07/2020 09:31:19 OK
+20/07/2020 09:31:19 AT+CCID
+20/07/2020 09:31:19 +CCID: 89610185001550901074
+20/07/2020 09:31:19 MDM: CCID 89610185001550901074
+20/07/2020 09:31:19 OK
+20/07/2020 09:31:19 AT+CSQ
+20/07/2020 09:31:19 +CSQ: 99,99
+20/07/2020 09:31:19 MODEM CSQ 99
+20/07/2020 09:31:19 OK
+20/07/2020 09:31:19 comms st 0 -> 1
+20/07/2020 09:31:19 modem is HL8/4G
+20/07/2020 09:31:19 imsi: 505016000265969 15, Auto 1
+20/07/2020 09:31:19 selected apn: telstra.internet (found? 1)
+20/07/2020 09:31:19 NET: enable
+20/07/2020 09:31:19 enable apn telstra.internet for HL8
+20/07/2020 09:31:19 comms st 1 -> 2
+20/07/2020 09:31:19 NS 1
+20/07/2020 09:31:19 Duplicates Removed 1
+20/07/2020 09:31:19 net state change 0 -> 1
+20/07/2020 09:31:19 modem open now
+20/07/2020 09:31:19 ATE0V1
+20/07/2020 09:31:19 OK
+20/07/2020 09:31:19 AT+CGMM
+20/07/2020 09:31:19 TOBY-L280
+20/07/2020 09:31:19 MDM: HWType TOBY-L280
+20/07/2020 09:31:19 OK
+20/07/2020 09:31:19 AT+CGSN
+20/07/2020 09:31:19 358503060460855
+20/07/2020 09:31:19 MDM: IMEI 358503060460855
+20/07/2020 09:31:19 OK
+20/07/2020 09:31:19 AT+CIMI
+20/07/2020 09:31:19 505016000265969
+20/07/2020 09:31:19 MDM: IMSI 505016000265969
+20/07/2020 09:31:19 OK
+20/07/2020 09:31:19 AT+CCID
+20/07/2020 09:31:19 +CCID: 89610185001550901074
+20/07/2020 09:31:19 MDM: CCID 89610185001550901074
+20/07/2020 09:31:19 OK
+20/07/2020 09:31:19 AT+UPSND=0,8
+20/07/2020 09:31:19 +UPSND: 0,8,0
+20/07/2020 09:31:19 psd line 0
+20/07/2020 09:31:19 pad active #0 (NO)
+20/07/2020 09:31:19 OK
+20/07/2020 09:31:19 net state change 1 -> 2
+20/07/2020 09:31:19 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:31:19 NS 1
+20/07/2020 09:31:19 OK
+20/07/2020 09:31:19 NS 1
+20/07/2020 09:31:20 Duplicates Removed 9
+20/07/2020 09:31:20 AT+UPSDA=0,3
+20/07/2020 09:31:20 NS 1
+20/07/2020 09:31:35 Duplicates Removed 148
+20/07/2020 09:31:35 ERROR
+20/07/2020 09:31:35 parse cme 0
+20/07/2020 09:31:35 NS 1
+20/07/2020 09:31:45 Duplicates Removed 99
+20/07/2020 09:31:45 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:31:45 OK
+20/07/2020 09:31:45 NS 1
+20/07/2020 09:31:46 Duplicates Removed 9
+20/07/2020 09:31:46 AT+UPSDA=0,3
+20/07/2020 09:31:46 NS 1
+20/07/2020 09:31:57 Duplicates Removed 111
+20/07/2020 09:31:57 SaveTripData: 636/747/4/4/0 4 0/0/0/0/1
+20/07/2020 09:31:57 NS 1
+20/07/2020 09:32:01 Duplicates Removed 37
+20/07/2020 09:32:01 ERROR
+20/07/2020 09:32:01 parse cme 0
+20/07/2020 09:32:01 NS 1
+20/07/2020 09:32:11 Duplicates Removed 99
+20/07/2020 09:32:11 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:32:11 OK
+20/07/2020 09:32:11 NS 1
+20/07/2020 09:32:12 Duplicates Removed 9
+20/07/2020 09:32:12 AT+UPSDA=0,3
+20/07/2020 09:32:12 NS 1
+20/07/2020 09:32:27 Duplicates Removed 149
+20/07/2020 09:32:27 ERROR
+20/07/2020 09:32:27 parse cme 0
+20/07/2020 09:32:27 NS 1
+20/07/2020 09:32:37 Duplicates Removed 98
+20/07/2020 09:32:37 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:32:37 OK
+20/07/2020 09:32:37 NS 1
+20/07/2020 09:32:38 Duplicates Removed 9
+20/07/2020 09:32:38 speed signal lost, clear values
+20/07/2020 09:32:38 NS 1
+20/07/2020 09:32:38 AT+UPSDA=0,3
+20/07/2020 09:32:38 NS 1
+20/07/2020 09:32:53 Duplicates Removed 148
+20/07/2020 09:32:53 speed signal lost, clear values
+20/07/2020 09:32:53 ERROR
+20/07/2020 09:32:53 parse cme 0
+20/07/2020 09:32:53 NS 1
+20/07/2020 09:32:58 Duplicates Removed 48
+20/07/2020 09:32:58 SaveTripData: 674/770/4/4/0 5 0/0/0/0/1
+20/07/2020 09:32:58 NS 1
+20/07/2020 09:33:03 Duplicates Removed 50
+20/07/2020 09:33:03 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:33:03 OK
+20/07/2020 09:33:03 NS 1
+20/07/2020 09:33:04 Duplicates Removed 9
+20/07/2020 09:33:04 AT+UPSDA=0,3
+20/07/2020 09:33:04 NS 1
+20/07/2020 09:33:19 Duplicates Removed 149
+20/07/2020 09:33:19 ERROR
+20/07/2020 09:33:19 parse cme 0
+20/07/2020 09:33:19 NS 1
+20/07/2020 09:33:29 Duplicates Removed 99
+20/07/2020 09:33:29 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:33:29 OK
+20/07/2020 09:33:30 NS 1
+20/07/2020 09:33:30 Duplicates Removed 9
+20/07/2020 09:33:30 AT+UPSDA=0,3
+20/07/2020 09:33:31 NS 1
+20/07/2020 09:33:46 Duplicates Removed 149
+20/07/2020 09:33:46 ERROR
+20/07/2020 09:33:46 parse cme 0
+20/07/2020 09:33:46 NS 1
+20/07/2020 09:33:49 Duplicates Removed 35
+20/07/2020 09:33:49 opusMain::slotGroundSpeedOverspeedEntryEvent: -1
+20/07/2020 09:33:49 NS 1
+20/07/2020 09:33:56 Duplicates Removed 62
+20/07/2020 09:33:56 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:33:56 NS 1
+20/07/2020 09:33:56 OK
+20/07/2020 09:33:56 NS 1
+20/07/2020 09:33:57 Duplicates Removed 9
+20/07/2020 09:33:57 AT+UPSDA=0,3
+20/07/2020 09:33:57 NS 1
+20/07/2020 09:33:57 Duplicates Removed 1
+20/07/2020 09:33:57 GPS Reset
+20/07/2020 09:33:57 resetting gps resetTimer
+20/07/2020 09:33:57 NS 1
+20/07/2020 09:33:57 GPS Reset Handled
+20/07/2020 09:33:57 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:33:57 NS 1
+20/07/2020 09:33:57 Duplicates Removed 2
+20/07/2020 09:33:57 opusMain::slotGroundSpeedOverspeedEvent: 147760, 8, 31.864960, 1
+20/07/2020 09:33:57 NS 1
+20/07/2020 09:33:57 Duplicates Removed 1
+20/07/2020 09:33:57 wrote 1 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:33:57 NS 1
+20/07/2020 09:33:58 Duplicates Removed 4
+20/07/2020 09:33:58 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:33:58 GPS Serial Connected on /dev/ttyS2 (handle 13)
+20/07/2020 09:33:58 NS 1
+20/07/2020 09:33:59 Duplicates Removed 12
+20/07/2020 09:33:59 SaveTripData: 695/810/4/4/0 0 0/0/0/0/1
+20/07/2020 09:33:59 NS 1
+20/07/2020 09:34:04 Duplicates Removed 48
+20/07/2020 09:34:04 resetting baud
+20/07/2020 09:34:04 change baud to 115200
+20/07/2020 09:34:04 GPS close 0
+20/07/2020 09:34:04 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:34:04 GPS Serial Connected on /dev/ttyS2 at 115200
+20/07/2020 09:34:04 GPS Saved Database found
+20/07/2020 09:34:04 GPS Loading Saved Database
+20/07/2020 09:34:04 NS 1
+20/07/2020 09:34:04 loaded 49 GNSS DB files
+20/07/2020 09:34:04 NS 1
+20/07/2020 09:34:06 Duplicates Removed 14
+20/07/2020 09:34:06 gps rate set
+20/07/2020 09:34:06 NS 1
+20/07/2020 09:34:12 Duplicates Removed 57
+20/07/2020 09:34:12 ERROR
+20/07/2020 09:34:12 parse cme 0
+20/07/2020 09:34:12 NS 1
+20/07/2020 09:34:22 Duplicates Removed 99
+20/07/2020 09:34:22 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:34:22 OK
+20/07/2020 09:34:22 NS 1
+20/07/2020 09:34:23 Duplicates Removed 9
+20/07/2020 09:34:23 AT+UPSDA=0,3
+20/07/2020 09:34:23 NS 1
+20/07/2020 09:34:38 Duplicates Removed 149
+20/07/2020 09:34:38 ERROR
+20/07/2020 09:34:38 parse cme 0
+20/07/2020 09:34:38 NS 1
+20/07/2020 09:34:48 Duplicates Removed 99
+20/07/2020 09:34:48 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:34:48 OK
+20/07/2020 09:34:48 NS 1
+20/07/2020 09:34:49 Duplicates Removed 9
+20/07/2020 09:34:49 AT+UPSDA=0,3
+20/07/2020 09:34:49 NS 1
+20/07/2020 09:35:00 Duplicates Removed 113
+20/07/2020 09:35:00 SaveTripData: 756/810/4/4/0 1 0/0/0/0/1
+20/07/2020 09:35:00 NS 1
+20/07/2020 09:35:04 Duplicates Removed 35
+20/07/2020 09:35:04 ERROR
+20/07/2020 09:35:04 parse cme 0
+20/07/2020 09:35:04 NS 1
+20/07/2020 09:35:14 Duplicates Removed 98
+20/07/2020 09:35:14 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:35:14 NS 1
+20/07/2020 09:35:14 OK
+20/07/2020 09:35:14 NS 1
+20/07/2020 09:35:15 Duplicates Removed 9
+20/07/2020 09:35:15 AT+UPSDA=0,3
+20/07/2020 09:35:15 NS 1
+20/07/2020 09:35:29 Duplicates Removed 137
+20/07/2020 09:35:29 ERROR
+20/07/2020 09:35:29 parse cme 0
+20/07/2020 09:35:29 NS 1
+20/07/2020 09:35:39 Duplicates Removed 98
+20/07/2020 09:35:39 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:35:39 NS 1
+20/07/2020 09:35:39 OK
+20/07/2020 09:35:39 NS 1
+20/07/2020 09:35:40 Duplicates Removed 9
+20/07/2020 09:35:40 AT+UPSDA=0,3
+20/07/2020 09:35:40 NS 1
+20/07/2020 09:35:46 Duplicates Removed 61
+20/07/2020 09:35:46 speed signal lost, clear values
+20/07/2020 09:35:46 NS 1
+20/07/2020 09:35:47 Duplicates Removed 10
+20/07/2020 09:35:47 trip end 1
+20/07/2020 09:35:47 OpusFcMain change from 18 to 19
+20/07/2020 09:35:47 messagedialog result 3
+20/07/2020 09:35:47 slotMessageSignonResult 3
+20/07/2020 09:35:47 NS 1
+20/07/2020 09:35:47 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 09:35:47 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:35:47 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:35:47 resetting cklist 1
+20/07/2020 09:35:47 Lift is 0
+20/07/2020 09:35:47 Adding TRIP
+20/07/2020 09:35:47 SaveTripData: 799/814/4/4/0 0 0/0/0/0/1
+20/07/2020 09:35:47 NS 1
+20/07/2020 09:35:47 OpusFcMain change from 19 to 2
+20/07/2020 09:35:47 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 09:35:47 DecCL 3
+20/07/2020 09:35:47 splash enabled?:0
+20/07/2020 09:35:47 setting new cklist state (0) and qnr (0)
+20/07/2020 09:35:47 Settings: slotEsc
+20/07/2020 09:35:48 NS 1
+20/07/2020 09:35:48 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 09:35:48 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:35:48 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:35:48 OFFWAIT:ign still off
+20/07/2020 09:35:48 OpusFcMain change from 2 to 3
+20/07/2020 09:35:48 Settings: slotEsc
+20/07/2020 09:35:48 NS 1
+20/07/2020 09:35:48 startup human? 1
+20/07/2020 09:35:48 channel set 0 0
+20/07/2020 09:35:48 channel setting: 3-offf:4-offf
+20/07/2020 09:35:48 Message <3-offf:4-offf>: Sent to PRU0
+20/07/2020 09:35:48 BLAll 0
+20/07/2020 09:35:48 BL set:0
+20/07/2020 09:35:48 set brightness to 0%
+20/07/2020 09:35:48 event GC
+20/07/2020 09:35:48 BRAND is default
+20/07/2020 09:35:48 S0Sdiff 0
+20/07/2020 09:35:48 wakeup is -1
+20/07/2020 09:35:48 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+20/07/2020 09:35:48 Key halt
+20/07/2020 09:35:48 Settings: slotEsc
+20/07/2020 09:35:48 Duplicates Removed 1
+20/07/2020 09:35:48 NS 1
+20/07/2020 09:35:48 Duplicates Removed 1
+20/07/2020 09:35:48 trip Zero
+20/07/2020 09:35:48 ZoneID Change 60 -> -1 (speed  -> 0)
+20/07/2020 09:35:48 opusMain::slotZoneSpeed: 60, 0, 1
+20/07/2020 09:35:48 NS 1
+20/07/2020 09:35:48 Duplicates Removed 4
+20/07/2020 09:35:48 geofence state change 3 -> 2
+20/07/2020 09:35:48 NS 1
+20/07/2020 09:35:49 Duplicates Removed 6
+20/07/2020 09:35:49 PRU: Set3O
+20/07/2020 09:35:49 PRU: Set4O
+20/07/2020 09:35:49 NS 1
+20/07/2020 09:35:50 Duplicates Removed 7
+20/07/2020 09:35:50 GPS Sat Found (NMEA)!!!!!!!!!
+20/07/2020 09:35:50 NS 1
+20/07/2020 09:35:53 Duplicates Removed 32
+20/07/2020 09:35:53 main - GNSS SAT state change 0->1
+20/07/2020 09:35:53 MessageDialog GNSS 1
+20/07/2020 09:35:53 Splash GNSS 1
+20/07/2020 09:35:53 NS 1
+20/07/2020 09:35:55 Duplicates Removed 17
+20/07/2020 09:35:55 ERROR
+20/07/2020 09:35:55 parse cme 0
+20/07/2020 09:35:55 NS 1
+20/07/2020 09:36:05 Duplicates Removed 98
+20/07/2020 09:36:05 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:36:05 NS 1
+20/07/2020 09:36:05 OK
+20/07/2020 09:36:05 NS 1
+20/07/2020 09:36:06 Duplicates Removed 9
+20/07/2020 09:36:06 AT+UPSDA=0,3
+20/07/2020 09:36:06 NS 1
+20/07/2020 09:36:10 Duplicates Removed 36
+20/07/2020 09:36:10 report - time triggered (0)
+20/07/2020 09:36:10 NS 1
+20/07/2020 09:36:11 Duplicates Removed 13
+20/07/2020 09:36:11 main - GNSS SAT state change 1->0
+20/07/2020 09:36:11 MessageDialog GNSS 0
+20/07/2020 09:36:11 Splash GNSS 0
+20/07/2020 09:36:11 NS 1
+20/07/2020 09:36:18 Duplicates Removed 70
+20/07/2020 09:36:18 WUD -1
+20/07/2020 09:36:18 WAKE time disabled
+20/07/2020 09:36:18 SHUTTING DOWN
+20/07/2020 09:36:18 killing comms
+20/07/2020 09:36:18 NS 1
+20/07/2020 09:36:19 Duplicates Removed 8
+20/07/2020 09:36:19 comms st 2 -> 7
+20/07/2020 09:36:19 WD closed
+20/07/2020 09:36:19 imsi: 505016000265969 15, Auto 1
+20/07/2020 09:36:19 selected apn: telstra.internet (found? 1)
+20/07/2020 09:36:21 ERROR
+20/07/2020 09:36:21 parse cme 0
+20/07/2020 09:36:25 comms st 7 -> 0
+20/07/2020 09:36:25 Comms Task Alive/Started, conn_retry 300
+20/07/2020 09:36:25 gsm starting
+20/07/2020 09:36:25 comms st 0 -> 1
+20/07/2020 09:36:25 comms done
+20/07/2020 09:36:25 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 09:36:25 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:36:25 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:36:25 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+20/07/2020 09:36:25 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 09:36:25 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+20/07/2020 09:36:25 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+20/07/2020 09:36:25 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+20/07/2020 09:36:25 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+20/07/2020 09:36:25 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 09:36:25 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 09:36:25 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:36:25 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:36:25 wrote 0 to /sys/class/gpio/gpio48/value (O/P 15)
+20/07/2020 09:36:25 wrote 0 to /sys/class/gpio/gpio49/value (O/P 16)
+20/07/2020 09:36:30 shutdown timer set
+20/07/2020 09:42:50 OtaUpdater RUNNING
+20/07/2020 09:42:50 no file to update
+20/07/2020 09:42:50 Starting /store/FcMain -qws version:3.0.0.6  &
+20/07/2020 09:42:50 VERSION: 5.0.58.510 R 
+20/07/2020 09:42:50 4.14.108-ti-r119
+20/07/2020 09:42:50 NEW OS, DONOT access PCF directly
+20/07/2020 09:42:50 hwclock time: 1595238170
+20/07/2020 09:42:50 IOInit - NEW OS
+20/07/2020 09:42:50 created gpio INP 0 @GPIO: 66
+20/07/2020 09:42:50 created gpio INP 1 @GPIO: 67
+20/07/2020 09:42:50 created gpio INP 4 @GPIO: 45
+20/07/2020 09:42:50 created gpio INP 5 @GPIO: 44
+20/07/2020 09:42:50 created gpio INP 6 @GPIO: 23
+20/07/2020 09:42:50 created gpio INP 7 @GPIO: 26
+20/07/2020 09:42:50 created gpio INP 8 @GPIO: 51
+20/07/2020 09:42:50 created gpio INP 9 @GPIO: 61
+20/07/2020 09:42:50 created gpio OUT: 60
+20/07/2020 09:42:50 created gpio OUT: 46
+20/07/2020 09:42:50 created gpio OUT: 27
+20/07/2020 09:42:50 created gpio OUT: 65
+20/07/2020 09:42:50 created gpio OUT: 22
+20/07/2020 09:42:50 created gpio OUT: 115
+20/07/2020 09:42:50 created gpio OUT: 69
+20/07/2020 09:42:50 created gpio OUT: 68
+20/07/2020 09:42:50 created gpio OUT: 117
+20/07/2020 09:42:50 created gpio OUT: 59
+20/07/2020 09:42:50 created gpio OUT: 58
+20/07/2020 09:42:50 created gpio OUT: 52
+20/07/2020 09:42:50 created gpio OUT: 64
+20/07/2020 09:42:50 created gpio OUT: 47
+20/07/2020 09:42:50 created gpio OUT: 48
+20/07/2020 09:42:50 created gpio OUT: 49
+20/07/2020 09:42:50 created gpio OUT: 116
+20/07/2020 09:42:50 created gpio OUT: 53
+20/07/2020 09:42:50 created gpio OUT: 54
+20/07/2020 09:42:50 created gpio OUT: 55
+20/07/2020 09:42:50 created gpio OUT: 507
+20/07/2020 09:42:50 created gpio OUT: 508
+20/07/2020 09:42:50 created gpio OUT: 509
+20/07/2020 09:42:50 created gpio OUT: 510
+20/07/2020 09:42:50 created gpio OUT: 511
+20/07/2020 09:42:50 usr0 is heartbeat
+20/07/2020 09:42:50 usr1 is mmc0 (uSD card)
+20/07/2020 09:42:50 usr2 is mmc1(eMMC)
+20/07/2020 09:42:50 channel thread created
+20/07/2020 09:42:50 channel ch3 2 ch4 2
+20/07/2020 09:42:50 ch3 2 ch4 2
+20/07/2020 09:42:50 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 09:42:50 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:42:50 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:42:50 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+20/07/2020 09:42:50 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 09:42:50 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+20/07/2020 09:42:50 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+20/07/2020 09:42:50 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+20/07/2020 09:42:50 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+20/07/2020 09:42:50 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 09:42:50 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 09:42:50 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:42:50 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:42:50 wrote 0 to /sys/class/gpio/gpio48/value (O/P 15)
+20/07/2020 09:42:50 wrote 0 to /sys/class/gpio/gpio49/value (O/P 16)
+20/07/2020 09:42:50 OTA Version: version:3.0.0.6
+20/07/2020 09:42:50 wrote 1 to /sys/class/gpio/gpio59/value (O/P 10)
+20/07/2020 09:42:50 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+20/07/2020 09:42:51 channel state change 0 -> 1
+20/07/2020 09:42:51 Starting PRU
+20/07/2020 09:42:51 offline
+20/07/2020 09:42:51 PRU starting
+20/07/2020 09:42:51 i2c1 commands - to serialiser
+20/07/2020 09:42:51 Serialiser Serial Nr: 2280800404100061A485A000A00000EB
+20/07/2020 09:42:51 Serialiser Eeprom Serial Nr: 000774-AA
+20/07/2020 09:42:51 BLAll 2
+20/07/2020 09:42:51 BL set:2
+20/07/2020 09:42:51 set brightness to 2%
+20/07/2020 09:42:52 Opus FC (main) Started
+20/07/2020 09:42:52 ROOTFS Built 41449
+20/07/2020 09:42:52 Nr Langs to process: 18
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_ar
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_es
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_et
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_fr
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_de
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_hi
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_id
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_km
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_ko
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_lv
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_ms
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_ru
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_th
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_tl
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_uk
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_vi
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_zh
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 lang file: :Translations/OpusFcMain_en
+20/07/2020 09:42:52 Loaded translations
+20/07/2020 09:42:52 eeprom magic OK
+20/07/2020 09:42:52 Contructor PID2 108 108
+20/07/2020 09:42:52 MessageDialog GNSS 0
+20/07/2020 09:42:52 Duplicates Removed 1
+20/07/2020 09:42:52 thread gps_thread created
+20/07/2020 09:42:52 wrote 1 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:42:52 gps open 1
+20/07/2020 09:42:52 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+20/07/2020 09:42:52 gps task running
+20/07/2020 09:42:52 gps state change 1 -> 2
+20/07/2020 09:42:52 weightCountKg -1.000000
+20/07/2020 09:42:52 EXP 2066562957, 1593522957, 1595238172
+20/07/2020 09:42:52 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:42:52 GPS Serial Connected on /dev/ttyS2 (handle 13)
+20/07/2020 09:42:52 speedHzKmh 1.593248
+20/07/2020 09:42:52 speedHzRPM 30.864197
+20/07/2020 09:42:52 MessageDialog GNSS 0
+20/07/2020 09:42:52 Duplicates Removed 1
+20/07/2020 09:42:52 pru Waiting/Waiting
+20/07/2020 09:42:52 MessageDialog GNSS 0
+20/07/2020 09:42:52 Duplicates Removed 5
+20/07/2020 09:42:52 Splash GNSS 0
+20/07/2020 09:42:52 found /store/Service_active.xml
+20/07/2020 09:42:52 MessageDialog GNSS 0
+20/07/2020 09:42:52 settings ready
+20/07/2020 09:42:52 MessageDialog GNSS 0
+20/07/2020 09:42:52 BL dark 0
+20/07/2020 09:42:52 BL light 0
+20/07/2020 09:42:52 Starting Threads. Mayhem begins!
+20/07/2020 09:42:52 Main thread running
+20/07/2020 09:42:52 opusFc task run
+20/07/2020 09:42:52 FleetMessaging thread running
+20/07/2020 09:42:52 Beeper thread running
+20/07/2020 09:42:52 TriLed thread running
+20/07/2020 09:42:52 Theme thread running
+20/07/2020 09:42:52 Diagnostic thread running
+20/07/2020 09:42:52 fleetmsg run
+20/07/2020 09:42:52 Batttery thread running
+20/07/2020 09:42:52 New Operator file XML found
+20/07/2020 09:42:52 found Operators_active.xml
+20/07/2020 09:42:52 xml_parsing file: /store/Operators_active.xml
+20/07/2020 09:42:52 Can thread running
+20/07/2020 09:42:52 diags run
+20/07/2020 09:42:52 triled run
+20/07/2020 09:42:52 Key thread running
+20/07/2020 09:42:52 beeper run
+20/07/2020 09:42:52 GeoFence thread running
+20/07/2020 09:42:52 main.cpp Done
+20/07/2020 09:42:52 Geofence run
+20/07/2020 09:42:52 Operator file XML found
+20/07/2020 09:42:52 event GC
+20/07/2020 09:42:52 MessageDialog GNSS 0
+20/07/2020 09:42:52 Powerup - Done
+20/07/2020 09:42:52 PID3 108 115
+20/07/2020 09:42:52 WDOpen Success
+20/07/2020 09:42:52 WDT timeout is 30
+20/07/2020 09:42:53 gps state change 2 -> 3
+20/07/2020 09:42:53 Starting PRU
+20/07/2020 09:42:53 running
+20/07/2020 09:42:53 opening /dev/rpmsg_pru30
+20/07/2020 09:42:53 PRU Opened 30
+20/07/2020 09:42:53 Opened /dev/rpmsg_pru30
+20/07/2020 09:42:53 Battery free
+20/07/2020 09:42:53 keythread - init 1
+20/07/2020 09:42:53 keyscanner OK
+20/07/2020 09:42:53 keyscanner gpio ok
+20/07/2020 09:42:53 keyscanner UART
+20/07/2020 09:42:53 keythread - init SUCCESS
+20/07/2020 09:42:53 slotUpdate first call
+20/07/2020 09:42:54 bootstatus3 0
+20/07/2020 09:42:54 tempBootStatus 0
+20/07/2020 09:42:54 bootstatus 0
+20/07/2020 09:42:54 end of run()
+20/07/2020 09:42:54 channel setting: 3-freq:4-freq
+20/07/2020 09:42:54 Message <3-freq:4-freq>: Sent to PRU0
+20/07/2020 09:42:54 channel state change 1 -> 2
+20/07/2020 09:42:54 PRU: Set3F
+20/07/2020 09:42:54 PRU: Set4F
+20/07/2020 09:42:54 PRU: FreqInit
+20/07/2020 09:42:54 PRU Version: 103
+20/07/2020 09:42:54 sync new state entry
+20/07/2020 09:42:54 build time 1593494157
+20/07/2020 09:42:54 REC trip id 0
+20/07/2020 09:42:54 REC write time 1595237748
+20/07/2020 09:42:54 REC QNr 0
+20/07/2020 09:42:54 REC CkState 17
+20/07/2020 09:42:54 REC Main state 3
+20/07/2020 09:42:54 REC DrIdx 42
+20/07/2020 09:42:54 readData 1
+20/07/2020 09:42:54 thread comms_thread created
+20/07/2020 09:42:54 thread modem_thread created
+20/07/2020 09:42:54 last connect time read: 1595236121 1595236121
+20/07/2020 09:42:54 NET: get hw
+20/07/2020 09:42:54 MDM: open
+20/07/2020 09:42:54 modem state change 0 -> 1
+20/07/2020 09:42:54 thread net_thread created
+20/07/2020 09:42:54 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 09:42:54 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 09:42:54 MDM: turn on modem power
+20/07/2020 09:42:54 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+20/07/2020 09:42:54 thread interrupt_thread created
+20/07/2020 09:42:54 SerialNr: 9278
+20/07/2020 09:42:54 LoadDate: 250919
+20/07/2020 09:42:54 HWModel:  9072s_B
+20/07/2020 09:42:54 hwVersion is <9072s_B>
+20/07/2020 09:42:54 recovered EEtrip 0 time 1595237747 slot 0 saved time 1633
+20/07/2020 09:42:54 FRIM: 799/814/4/4/0
+20/07/2020 09:42:54 LT 1595237747 0
+20/07/2020 09:42:54 recovered EEtrip 147760 time 1595237700 slot 1 saved time 1586
+20/07/2020 09:42:54 FRIM: 756/810/4/4/0
+20/07/2020 09:42:54 recovered EEtrip 147760 time 1595237395 slot 2 saved time 1281
+20/07/2020 09:42:54 FRIM: 545/716/4/4/0
+20/07/2020 09:42:54 recovered EEtrip 147760 time 1595237456 slot 3 saved time 1342
+20/07/2020 09:42:54 FRIM: 575/747/4/4/0
+20/07/2020 09:42:54 recovered EEtrip 147760 time 1595237517 slot 4 saved time 1403
+20/07/2020 09:42:54 FRIM: 636/747/4/4/0
+20/07/2020 09:42:54 recovered EEtrip 147760 time 1595237578 slot 5 saved time 1464
+20/07/2020 09:42:54 FRIM: 674/770/4/4/0
+20/07/2020 09:42:54 recovered EEtrip 0 time 1595237747 slot 0
+20/07/2020 09:42:54 FRIM: 799/814/4/4/0
+20/07/2020 09:42:54 found /store/DisplayMessaging_active.xml
+20/07/2020 09:42:54 PRU version 103
+20/07/2020 09:42:54 Msg Dialog font Noto Sans
+20/07/2020 09:42:54 lang code: EN file: :Translations/OpusFcMain_en
+20/07/2020 09:42:54 lang file: :Translations/OpusFcMain_en
+20/07/2020 09:42:54 Removing translations
+20/07/2020 09:42:54 Installing translations
+20/07/2020 09:42:54 OpusFcMain change from 0 to 1
+20/07/2020 09:42:54 modem type 7
+20/07/2020 09:42:54 comms_start gsm
+20/07/2020 09:42:54 comms_enable
+20/07/2020 09:42:54 fleetmsg free
+20/07/2020 09:42:54 Theme free
+20/07/2020 09:42:54 THEME TIME Day1 Night2 7 0 1 light 255 0
+20/07/2020 09:42:54 Set Theme Day
+20/07/2020 09:42:54 diags free
+20/07/2020 09:42:54 Led free
+20/07/2020 09:42:54 CAN free
+20/07/2020 09:42:54 Geofence free, FC was reset 1
+20/07/2020 09:42:54 message dialog font set to: Noto Sans
+20/07/2020 09:42:54 Duplicates Removed 1
+20/07/2020 09:42:54 Received New Theme
+20/07/2020 09:42:54 gpio interrupts (P1-2) FF
+20/07/2020 09:42:54 eeprom 0, 799/814/4/4
+20/07/2020 09:42:54 Power loss time 1595237747
+20/07/2020 09:42:54 SWSTART OpusFC 5.0.58.510 R
+20/07/2020 09:42:54 startup human? 1
+20/07/2020 09:42:54 OpusFcMain change from 1 to 2
+20/07/2020 09:42:54 report initial input states?
+20/07/2020 09:42:54 report initial input states: YES
+20/07/2020 09:42:54 ign on, enable BackLight/Serialiser
+20/07/2020 09:42:55 Splash set font Noto Sans
+20/07/2020 09:42:56 splash font set Noto Sans
+20/07/2020 09:42:56 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 09:42:56 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:42:56 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:42:56 PSP 1
+20/07/2020 09:42:56 PSP 2
+20/07/2020 09:42:56 PSP 3
+20/07/2020 09:42:56 OpusFcMain change from 2 to 4
+20/07/2020 09:42:56 zone 1 read 4 points 8
+20/07/2020 09:42:56 zone 2 read 4 points 8
+20/07/2020 09:42:56 gps version is NO VERSION
+20/07/2020 09:42:56 max zones 100
+20/07/2020 09:42:56 Splash Radio Unknown
+20/07/2020 09:42:56 radio set Unknown <--
+20/07/2020 09:42:56 Settings: slotEsc
+20/07/2020 09:42:56 Wake
+20/07/2020 09:42:56 Wake ON
+20/07/2020 09:42:56 OpusFcMain change from 4 to 5
+20/07/2020 09:42:56 Key free
+20/07/2020 09:42:56 keythread - init 1
+20/07/2020 09:42:56 keyscanner OK
+20/07/2020 09:42:56 keyscanner gpio ok
+20/07/2020 09:42:56 keyscanner UART
+20/07/2020 09:42:56 keythread - init SUCCESS
+20/07/2020 09:42:56 start reader
+20/07/2020 09:42:56 ota 1593746147 - 2020-07-03 03:15:47Z
+20/07/2020 09:42:56 valid fleet? 9278
+20/07/2020 09:42:56 BLAll 2
+20/07/2020 09:42:56 BL set:2
+20/07/2020 09:42:56 set brightness to 2%
+20/07/2020 09:42:56 traction set 2 2
+20/07/2020 09:42:56 channel set 2 2
+20/07/2020 09:42:56 channel setting: 3-freq:4-freq
+20/07/2020 09:42:56 Message <3-freq:4-freq>: Sent to PRU0
+20/07/2020 09:42:56 OpusFcMain change from 5 to 6
+20/07/2020 09:42:56 gpio interrupts (P1-2) FB
+20/07/2020 09:42:56 card read
+20/07/2020 09:42:56 Uart rxfifo has 14 bytes waiting
+20/07/2020 09:42:56 vli 000a 10
+20/07/2020 09:42:56 vli matches
+20/07/2020 09:42:56 208 1664 0
+20/07/2020 09:42:56 CardReader version 0
+20/07/2020 09:42:56 Cklist free
+20/07/2020 09:42:56 splash enabled?:0
+20/07/2020 09:42:56 gpio interrupts (P1-2) FF
+20/07/2020 09:42:56 start wiegand
+20/07/2020 09:42:56 state timer started
+20/07/2020 09:42:56 geofence state change 0 -> 1
+20/07/2020 09:42:56 startup
+20/07/2020 09:42:56 setbool 0
+20/07/2020 09:42:56 CKL state change 0
+20/07/2020 09:42:56 checklist file detected
+20/07/2020 09:42:56 found Checklist_active.xml
+20/07/2020 09:42:56 xml_parsing
+20/07/2020 09:42:56 xml process checklist
+20/07/2020 09:42:56 xml process config/hdr
+20/07/2020 09:42:56 lastrun read (time/driver) 1595196602 42
+20/07/2020 09:42:56 CkList::Checklist init complete
+20/07/2020 09:42:56 OpusFcMain::Checklist init complete
+20/07/2020 09:42:57 CKL state change 1
+20/07/2020 09:42:57 CKL state change 17
+20/07/2020 09:42:57 geofence state change 1 -> 2
+20/07/2020 09:42:57 PRU: Set3F
+20/07/2020 09:42:57 PRU: Set4F
+20/07/2020 09:42:58 gpio interrupts (P1-2) FE
+20/07/2020 09:42:58 KEYPRESS 4
+20/07/2020 09:42:58 gpio interrupts (P1-2) FE
+20/07/2020 09:42:58 gpio interrupts (P1-2) FF
+20/07/2020 09:42:58 resetting baud
+20/07/2020 09:42:58 change baud to 115200
+20/07/2020 09:42:58 GPS close 0
+20/07/2020 09:42:58 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:42:58 GPS Serial Connected on /dev/ttyS2 at 115200
+20/07/2020 09:42:58 GPS Saved Database found
+20/07/2020 09:42:58 GPS Loading Saved Database
+20/07/2020 09:42:58 loaded 49 GNSS DB files
+20/07/2020 09:42:58 getting ver
+20/07/2020 09:42:59 traction/idle state seen
+20/07/2020 09:43:00 getting ver
+20/07/2020 09:43:00 gps rate set
+20/07/2020 09:43:01 GPS Ver [ROM CORE 3.01 (107888)] [00080000] (len)160
+20/07/2020 09:43:03 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 09:43:03 MDM:opened and closed /dev/ttyACM0
+20/07/2020 09:43:03 opened /dev/ttyACM2 serial/USB OK
+20/07/2020 09:43:03 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 09:43:03 Modem Serial Connected using /dev/ttyACM0 and /dev/ttyACM2
+20/07/2020 09:43:03 modem state change 1 -> 2
+20/07/2020 09:43:04 NET:modem is opened
+20/07/2020 09:43:04 gpio interrupts (P1-2) FE
+20/07/2020 09:43:04 KEYPRESS 2
+20/07/2020 09:43:04 gpio interrupts (P1-2) FF
+20/07/2020 09:43:05 ATE0V1
+20/07/2020 09:43:05 gpio interrupts (P1-2) FE
+20/07/2020 09:43:05 KEYPRESS 4
+20/07/2020 09:43:05 gpio interrupts (P1-2) FE
+20/07/2020 09:43:05 gpio interrupts (P1-2) FF
+20/07/2020 09:43:06 gpio interrupts (P1-2) FE
+20/07/2020 09:43:06 KEYPRESS 1
+20/07/2020 09:43:06 gpio interrupts (P1-2) FF
+20/07/2020 09:43:06 gpio interrupts (P1-2) FE
+20/07/2020 09:43:06 gpio interrupts (P1-2) FF
+20/07/2020 09:43:06 gpio interrupts (P1-2) FE
+20/07/2020 09:43:06 KEYPRESS 2
+20/07/2020 09:43:07 gpio interrupts (P1-2) FF
+20/07/2020 09:43:07 gpio interrupts (P1-2) FE
+20/07/2020 09:43:07 gpio interrupts (P1-2) FF
+20/07/2020 09:43:07 gpio interrupts (P1-2) FE
+20/07/2020 09:43:07 KEYPRESS 14
+20/07/2020 09:43:07 gpio interrupts (P1-2) FF
+20/07/2020 09:43:07 gpio interrupts (P1-2) FE
+20/07/2020 09:43:08 ATE0V1
+20/07/2020 09:43:08 gpio interrupts (P1-2) FF
+20/07/2020 09:43:08 gpio interrupts (P1-2) FE
+20/07/2020 09:43:08 KEYPRESS 1
+20/07/2020 09:43:08 messagedialog result 241291
+20/07/2020 09:43:08 pin check clear, found 42 (241291)
+20/07/2020 09:43:08 driver id 2500
+20/07/2020 09:43:08 license expiry - disabled
+20/07/2020 09:43:08 Bgnd set msg-day font Noto Sans
+20/07/2020 09:43:08 lang code: EN file: :Translations/OpusFcMain_en
+20/07/2020 09:43:08 lang file: :Translations/OpusFcMain_en
+20/07/2020 09:43:08 Removing translations
+20/07/2020 09:43:08 Installing translations
+20/07/2020 09:43:08 show driver name KOTZ Lauren
+20/07/2020 09:43:08 OpusFcMain change from 6 to 8
+20/07/2020 09:43:08 slotMessageSignonResult 241291
+20/07/2020 09:43:08 message dialog font set to: Noto Sans
+20/07/2020 09:43:08 Duplicates Removed 1
+20/07/2020 09:43:08 SETT: driver role 0
+20/07/2020 09:43:08 pointsize is 17, labelsize is 461
+20/07/2020 09:43:08 gpio interrupts (P1-2) FF
+20/07/2020 09:43:08 Bgnd set msg-day font Noto Sans
+20/07/2020 09:43:08 lang code: EN file: :Translations/OpusFcMain_en
+20/07/2020 09:43:08 lang file: :Translations/OpusFcMain_en
+20/07/2020 09:43:08 Removing translations
+20/07/2020 09:43:08 Installing translations
+20/07/2020 09:43:08 Splash set font Noto Sans
+20/07/2020 09:43:08 message dialog font set to: Noto Sans
+20/07/2020 09:43:08 Duplicates Removed 1
+20/07/2020 09:43:08 splash font set Noto Sans
+20/07/2020 09:43:08 OpName pointsize is 16, labelsize is 240, height 23
+20/07/2020 09:43:08 Splash set font Noto Sans
+20/07/2020 09:43:08 splash font set Noto Sans
+20/07/2020 09:43:08 gpio interrupts (P1-2) FE
+20/07/2020 09:43:08 gpio interrupts (P1-2) FF
+20/07/2020 09:43:11 ATE0V1
+20/07/2020 09:43:11 modem bad data:
+20/07/2020 09:43:11 ATE0V1
+20/07/2020 09:43:11 OK
+20/07/2020 09:43:11 NET:modem is alive
+20/07/2020 09:43:11 ATE0V1
+20/07/2020 09:43:11 OK
+20/07/2020 09:43:11 AT+UUSBCONF?
+20/07/2020 09:43:11 +UUSBCONF: 0,"",,"0x1141"
+20/07/2020 09:43:11 OK
+20/07/2020 09:43:11 NET:USB Profile is 0 4417
+20/07/2020 09:43:11 AT+CGMM
+20/07/2020 09:43:11 TOBY-L280
+20/07/2020 09:43:11 MDM: HWType TOBY-L280
+20/07/2020 09:43:11 OK
+20/07/2020 09:43:11 AT+CGSN
+20/07/2020 09:43:11 358503060460855
+20/07/2020 09:43:11 MDM: IMEI 358503060460855
+20/07/2020 09:43:11 OK
+20/07/2020 09:43:11 AT+CIMI
+20/07/2020 09:43:11 505016000265969
+20/07/2020 09:43:11 MDM: IMSI 505016000265969
+20/07/2020 09:43:11 OK
+20/07/2020 09:43:11 AT+CCID
+20/07/2020 09:43:11 +CCID: 89610185001550901074
+20/07/2020 09:43:11 MDM: CCID 89610185001550901074
+20/07/2020 09:43:11 OK
+20/07/2020 09:43:11 AT+CSQ
+20/07/2020 09:43:11 +CSQ: 99,99
+20/07/2020 09:43:11 MODEM CSQ 99
+20/07/2020 09:43:11 OK
+20/07/2020 09:43:11 Comms Task Alive/Started, conn_retry 300
+20/07/2020 09:43:11 gsm starting
+20/07/2020 09:43:11 comms st 0 -> 1
+20/07/2020 09:43:11 modem is HL8/4G
+20/07/2020 09:43:11 imsi: 505016000265969 15, Auto 1
+20/07/2020 09:43:11 selected apn: telstra.internet (found? 1)
+20/07/2020 09:43:11 NET: enable
+20/07/2020 09:43:11 enable apn telstra.internet for HL8
+20/07/2020 09:43:11 comms st 1 -> 2
+20/07/2020 09:43:11 NS 1
+20/07/2020 09:43:11 imsi: 505016000265969 15, Auto 1
+20/07/2020 09:43:11 selected apn: telstra.internet (found? 1)
+20/07/2020 09:43:11 ICCID Check: 89610185001550901074 89610185001550901074
+20/07/2020 09:43:11 NS 1
+20/07/2020 09:43:11 Duplicates Removed 1
+20/07/2020 09:43:11 net state change 0 -> 1
+20/07/2020 09:43:11 modem open now
+20/07/2020 09:43:11 ATE0V1
+20/07/2020 09:43:11 OK
+20/07/2020 09:43:11 NS 1
+20/07/2020 09:43:11 AT+CGMM
+20/07/2020 09:43:11 TOBY-L280
+20/07/2020 09:43:11 MDM: HWType TOBY-L280
+20/07/2020 09:43:11 OK
+20/07/2020 09:43:11 AT+CGSN
+20/07/2020 09:43:11 358503060460855
+20/07/2020 09:43:11 MDM: IMEI 358503060460855
+20/07/2020 09:43:11 OK
+20/07/2020 09:43:11 AT+CIMI
+20/07/2020 09:43:11 messagedialog result 2
+20/07/2020 09:43:11 slotMessageSignonResult 2
+20/07/2020 09:43:11 505016000265969
+20/07/2020 09:43:11 MDM: IMSI 505016000265969
+20/07/2020 09:43:11 OK
+20/07/2020 09:43:11 AT+CCID
+20/07/2020 09:43:11 license expiry - disabled
+20/07/2020 09:43:11 OpusFcMain change from 8 to 11
+20/07/2020 09:43:11 +CCID: 89610185001550901074
+20/07/2020 09:43:11 MDM: CCID 89610185001550901074
+20/07/2020 09:43:11 OK
+20/07/2020 09:43:11 AT+UPSND=0,8
+20/07/2020 09:43:11 +UPSND: 0,8,0
+20/07/2020 09:43:11 psd line 0
+20/07/2020 09:43:11 pad active #0 (NO)
+20/07/2020 09:43:11 OK
+20/07/2020 09:43:11 net state change 1 -> 2
+20/07/2020 09:43:11 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:43:11 OK
+20/07/2020 09:43:11 SPLASH 99
+20/07/2020 09:43:11 NS 1
+20/07/2020 09:43:12 Duplicates Removed 5
+20/07/2020 09:43:12 init complete, qrysent 1 0
+20/07/2020 09:43:12 postStartCK cleared
+20/07/2020 09:43:12 Chklist required?
+20/07/2020 09:43:12 checklist file detectedx
+20/07/2020 09:43:12 shift change checklist trigger
+20/07/2020 09:43:12 Chklist required 1
+20/07/2020 09:43:12 OpusFcMain change from 11 to 12
+20/07/2020 09:43:12 NS 1
+20/07/2020 09:43:12 Duplicates Removed 1
+20/07/2020 09:43:12 set font Noto Sans
+20/07/2020 09:43:12 checklist ready
+20/07/2020 09:43:12 CKL state change 2
+20/07/2020 09:43:12 checklist file detectedx
+20/07/2020 09:43:12 cklist state not idle 2
+20/07/2020 09:43:12 checklist ready 3
+20/07/2020 09:43:12 OpusFcMain change from 12 to 13
+20/07/2020 09:43:12 CKL state change 3
+20/07/2020 09:43:12 message dialog font set to: Noto Sans
+20/07/2020 09:43:12 Duplicates Removed 6
+20/07/2020 09:43:12 NS 1
+20/07/2020 09:43:12 CKL state change 12
+20/07/2020 09:43:12 NS 1
+20/07/2020 09:43:12 AT+UPSDA=0,3
+20/07/2020 09:43:12 NS 1
+20/07/2020 09:43:13 Duplicates Removed 6
+20/07/2020 09:43:13 geofence state change 2 -> 3
+20/07/2020 09:43:13 ZoneID Change3 0 -> 0 (speed 0 -> 30)
+20/07/2020 09:43:13 opusMain::slotZoneSpeed: 30, -1, 1
+20/07/2020 09:43:13 NS 1
+20/07/2020 09:43:14 Duplicates Removed 10
+20/07/2020 09:43:14 CKL state change 5
+20/07/2020 09:43:14 Qnr=344
+20/07/2020 09:43:14 set font Noto Sans
+20/07/2020 09:43:14 Has GBF Pre-Start Checklist been completed
+20/07/2020 09:43:14 linewidth=2, pixelwidth=661, ave=17
+20/07/2020 09:43:14 message dialog font set to: Noto Sans
+20/07/2020 09:43:14 Duplicates Removed 6
+20/07/2020 09:43:14 NS 1
+20/07/2020 09:43:14 CKL state change 12
+20/07/2020 09:43:14 NS 1
+20/07/2020 09:43:15 Duplicates Removed 7
+20/07/2020 09:43:15 gpio interrupts (P1-2) FE
+20/07/2020 09:43:15 KEYPRESS 5
+20/07/2020 09:43:15 UiQ 1
+20/07/2020 09:43:15 NS 1
+20/07/2020 09:43:15 CKL state change 7
+20/07/2020 09:43:15 gpio interrupts (P1-2) FF
+20/07/2020 09:43:15 CKL state change 11
+20/07/2020 09:43:15 CKL state change 13
+20/07/2020 09:43:15 NS 1
+20/07/2020 09:43:15 CKL state change 12
+20/07/2020 09:43:15 NS 1
+20/07/2020 09:43:15 Duplicates Removed 1
+20/07/2020 09:43:15 gpio interrupts (P1-2) FE
+20/07/2020 09:43:15 NS 1
+20/07/2020 09:43:15 gpio interrupts (P1-2) FF
+20/07/2020 09:43:15 NS 1
+20/07/2020 09:43:17 Duplicates Removed 16
+20/07/2020 09:43:17 lastrun save (time/driver) 1595238195 42
+20/07/2020 09:43:17 CKL state change 16
+20/07/2020 09:43:17 OpusFcMain change from 13 to 17
+20/07/2020 09:43:17 CKL state change 17
+20/07/2020 09:43:17 NS 1
+20/07/2020 09:43:17 Run state: role 0
+20/07/2020 09:43:17 wrote 1 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 09:43:17 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+20/07/2020 09:43:17 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+20/07/2020 09:43:17 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+20/07/2020 09:43:17 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+20/07/2020 09:43:17 wrote 1 to /sys/class/gpio/gpio60/value (O/P 1)
+20/07/2020 09:43:17 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:43:17 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+20/07/2020 09:43:17 START Enabled
+20/07/2020 09:43:17 OpusFcMain change from 17 to 18
+20/07/2020 09:43:17 Cklist halt
+20/07/2020 09:43:17 stop reader
+20/07/2020 09:43:17 wrote 1 to /sys/class/gpio/gpio27/value (O/P 3)
+20/07/2020 09:43:17 NS 1
+20/07/2020 09:43:17 Duplicates Removed 1
+20/07/2020 09:43:17 CAN opened OK
+20/07/2020 09:43:17 splash enabled?:1
+20/07/2020 09:43:17 messagedialog result 3
+20/07/2020 09:43:17 slotMessageSignonResult 3
+20/07/2020 09:43:17 gpio interrupts (P1-2) FB
+20/07/2020 09:43:17 NS 1
+20/07/2020 09:43:18 Duplicates Removed 1
+20/07/2020 09:43:18 card read
+20/07/2020 09:43:18 Uart rxfifo has 14 bytes waiting
+20/07/2020 09:43:18 vli 000a 10
+20/07/2020 09:43:18 vli matches
+20/07/2020 09:43:18 208 1664 0
+20/07/2020 09:43:18 CardReader version 0
+20/07/2020 09:43:18 gps version is ROM CORE 3.01 (107888)
+20/07/2020 09:43:18 main state running
+20/07/2020 09:43:18 NS 1
+20/07/2020 09:43:18 speed signal lost, clear values
+20/07/2020 09:43:18 ICONS 65
+20/07/2020 09:43:18 gpio interrupts (P1-2) FF
+20/07/2020 09:43:18 NS 1
+20/07/2020 09:43:18 Duplicates Removed 1
+20/07/2020 09:43:18 updated battery state to 2
+20/07/2020 09:43:18 NS 1
+20/07/2020 09:43:19 Duplicates Removed 10
+20/07/2020 09:43:19 canSetFilter
+20/07/2020 09:43:19 NS 1
+20/07/2020 09:43:19 Duplicates Removed 1
+20/07/2020 09:43:19 impact value 2
+20/07/2020 09:43:19 Impact New Sensor - version: 02.00.00
+20/07/2020 09:43:19 ImpactVersion 02.00.00
+20/07/2020 09:43:19 SPLASH 0
+20/07/2020 09:43:19 NS 1
+20/07/2020 09:43:27 Duplicates Removed 79
+20/07/2020 09:43:27 ERROR
+20/07/2020 09:43:27 parse cme 0
+20/07/2020 09:43:27 NS 1
+20/07/2020 09:43:37 Duplicates Removed 98
+20/07/2020 09:43:37 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:43:37 NS 1
+20/07/2020 09:43:37 OK
+20/07/2020 09:43:37 NS 1
+20/07/2020 09:43:38 Duplicates Removed 9
+20/07/2020 09:43:38 AT+UPSDA=0,3
+20/07/2020 09:43:38 NS 1
+20/07/2020 09:43:48 Duplicates Removed 99
+20/07/2020 09:43:48 SaveTripData: 20/11/3/3/0 0 0/0/0/0/0
+20/07/2020 09:43:48 NS 1
+20/07/2020 09:43:53 Duplicates Removed 49
+20/07/2020 09:43:53 ERROR
+20/07/2020 09:43:53 parse cme 0
+20/07/2020 09:43:53 NS 1
+20/07/2020 09:44:03 Duplicates Removed 98
+20/07/2020 09:44:03 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:44:03 OK
+20/07/2020 09:44:03 NS 1
+20/07/2020 09:44:04 Duplicates Removed 9
+20/07/2020 09:44:04 AT+UPSDA=0,3
+20/07/2020 09:44:04 NS 1
+20/07/2020 09:44:19 Duplicates Removed 146
+20/07/2020 09:44:19 ERROR
+20/07/2020 09:44:19 parse cme 0
+20/07/2020 09:44:19 NS 1
+20/07/2020 09:44:29 Duplicates Removed 98
+20/07/2020 09:44:29 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:44:29 OK
+20/07/2020 09:44:29 NS 1
+20/07/2020 09:44:30 Duplicates Removed 9
+20/07/2020 09:44:30 AT+UPSDA=0,3
+20/07/2020 09:44:30 NS 1
+20/07/2020 09:44:45 Duplicates Removed 149
+20/07/2020 09:44:45 ERROR
+20/07/2020 09:44:45 parse cme 0
+20/07/2020 09:44:45 NS 1
+20/07/2020 09:44:49 Duplicates Removed 39
+20/07/2020 09:44:49 SaveTripData: 81/11/3/3/0 1 0/0/0/0/0
+20/07/2020 09:44:49 NS 1
+20/07/2020 09:44:55 Duplicates Removed 59
+20/07/2020 09:44:55 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:44:55 OK
+20/07/2020 09:44:55 NS 1
+20/07/2020 09:44:56 Duplicates Removed 9
+20/07/2020 09:44:56 AT+UPSDA=0,3
+20/07/2020 09:44:56 NS 1
+20/07/2020 09:45:11 Duplicates Removed 149
+20/07/2020 09:45:11 ERROR
+20/07/2020 09:45:11 parse cme 0
+20/07/2020 09:45:11 NS 1
+20/07/2020 09:45:21 Duplicates Removed 98
+20/07/2020 09:45:21 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:45:21 NS 1
+20/07/2020 09:45:21 OK
+20/07/2020 09:45:21 NS 1
+20/07/2020 09:45:22 Duplicates Removed 8
+20/07/2020 09:45:22 AT+UPSDA=0,3
+20/07/2020 09:45:22 NS 1
+20/07/2020 09:45:37 Duplicates Removed 149
+20/07/2020 09:45:37 ERROR
+20/07/2020 09:45:37 parse cme 0
+20/07/2020 09:45:37 NS 1
+20/07/2020 09:45:47 Duplicates Removed 99
+20/07/2020 09:45:47 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:45:47 OK
+20/07/2020 09:45:47 NS 1
+20/07/2020 09:45:48 Duplicates Removed 9
+20/07/2020 09:45:48 AT+UPSDA=0,3
+20/07/2020 09:45:48 NS 1
+20/07/2020 09:45:50 Duplicates Removed 17
+20/07/2020 09:45:50 SaveTripData: 142/11/3/3/0 2 0/0/0/0/0
+20/07/2020 09:45:50 NS 1
+20/07/2020 09:46:02 Duplicates Removed 115
+20/07/2020 09:46:02 ERROR
+20/07/2020 09:46:02 parse cme 0
+20/07/2020 09:46:02 NS 1
+20/07/2020 09:46:12 Duplicates Removed 99
+20/07/2020 09:46:12 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:46:12 OK
+20/07/2020 09:46:12 NS 1
+20/07/2020 09:46:13 Duplicates Removed 9
+20/07/2020 09:46:13 AT+UPSDA=0,3
+20/07/2020 09:46:13 NS 1
+20/07/2020 09:46:23 Duplicates Removed 103
+20/07/2020 09:46:23 ERROR
+20/07/2020 09:46:23 parse cme 0
+20/07/2020 09:46:23 NS 1
+20/07/2020 09:46:33 Duplicates Removed 99
+20/07/2020 09:46:33 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:46:34 OK
+20/07/2020 09:46:34 NS 1
+20/07/2020 09:46:35 Duplicates Removed 9
+20/07/2020 09:46:35 AT+UPSDA=0,3
+20/07/2020 09:46:35 NS 1
+20/07/2020 09:46:48 Duplicates Removed 135
+20/07/2020 09:46:48 polling the MGA_DBD
+20/07/2020 09:46:48 NS 1
+20/07/2020 09:46:48 MGA_DBD Ephemeris
+20/07/2020 09:46:48 Duplicates Removed 15
+20/07/2020 09:46:48 NS 1
+20/07/2020 09:46:48 MGA_DBD Almanac
+20/07/2020 09:46:48 Duplicates Removed 16
+20/07/2020 09:46:48 NS 1
+20/07/2020 09:46:49 MGA_DBD Almanac
+20/07/2020 09:46:49 Duplicates Removed 6
+20/07/2020 09:46:49 NS 1
+20/07/2020 09:46:49 MGA_DBD Almanac
+20/07/2020 09:46:49 Duplicates Removed 8
+20/07/2020 09:46:49 NS 1
+20/07/2020 09:46:50 Duplicates Removed 9
+20/07/2020 09:46:50 ERROR
+20/07/2020 09:46:50 parse cme 0
+20/07/2020 09:46:50 NS 1
+20/07/2020 09:46:51 Duplicates Removed 16
+20/07/2020 09:46:51 SaveTripData: 203/11/3/3/0 3 0/0/0/0/0
+20/07/2020 09:46:51 NS 1
+20/07/2020 09:47:00 Duplicates Removed 82
+20/07/2020 09:47:00 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:47:00 OK
+20/07/2020 09:47:00 NS 1
+20/07/2020 09:47:01 Duplicates Removed 9
+20/07/2020 09:47:01 AT+UPSDA=0,3
+20/07/2020 09:47:01 NS 1
+20/07/2020 09:47:16 Duplicates Removed 149
+20/07/2020 09:47:16 ERROR
+20/07/2020 09:47:16 parse cme 0
+20/07/2020 09:47:16 NS 1
+20/07/2020 09:47:26 Duplicates Removed 98
+20/07/2020 09:47:26 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:47:26 NS 1
+20/07/2020 09:47:26 OK
+20/07/2020 09:47:26 NS 1
+20/07/2020 09:47:27 Duplicates Removed 9
+20/07/2020 09:47:27 AT+UPSDA=0,3
+20/07/2020 09:47:27 NS 1
+20/07/2020 09:47:42 Duplicates Removed 149
+20/07/2020 09:47:42 ERROR
+20/07/2020 09:47:42 parse cme 0
+20/07/2020 09:47:42 NS 1
+20/07/2020 09:47:52 Duplicates Removed 98
+20/07/2020 09:47:52 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:47:52 OK
+20/07/2020 09:47:52 NS 1
+20/07/2020 09:47:52 Duplicates Removed 3
+20/07/2020 09:47:52 SaveTripData: 264/11/3/3/0 4 0/0/0/0/0
+20/07/2020 09:47:52 NS 1
+20/07/2020 09:47:53 Duplicates Removed 5
+20/07/2020 09:47:53 AT+UPSDA=0,3
+20/07/2020 09:47:53 NS 1
+20/07/2020 09:48:05 Duplicates Removed 123
+20/07/2020 09:48:05 ERROR
+20/07/2020 09:48:05 parse cme 0
+20/07/2020 09:48:05 NS 1
+20/07/2020 09:48:11 Duplicates Removed 58
+20/07/2020 09:48:11 comms st 2 -> 7
+20/07/2020 09:48:14 GPS Reset
+20/07/2020 09:48:14 resetting gps resetTimer
+20/07/2020 09:48:14 GPS Reset Handled
+20/07/2020 09:48:14 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:48:14 wrote 1 to /sys/class/gpio/gpio64/value (O/P 13)
+20/07/2020 09:48:15 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:48:15 GPS Serial Connected on /dev/ttyS2 (handle 13)
+20/07/2020 09:48:15 net state change 2 -> 6
+20/07/2020 09:48:15 AT+CFUN=15
+20/07/2020 09:48:15 OK
+20/07/2020 09:48:16 MDM: close
+20/07/2020 09:48:16 modem state change 2 -> 98
+20/07/2020 09:48:16 resetting modem in lieu of power off
+20/07/2020 09:48:16 wrote 1 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 09:48:16 wrote 1 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 09:48:17 comms st 7 -> 0
+20/07/2020 09:48:17 Comms Task Alive/Started, conn_retry 300
+20/07/2020 09:48:17 gsm starting
+20/07/2020 09:48:17 comms st 0 -> 1
+20/07/2020 09:48:17 modem is HL8/4G
+20/07/2020 09:48:17 imsi: 505016000265969 15, Auto 1
+20/07/2020 09:48:17 selected apn: telstra.internet (found? 1)
+20/07/2020 09:48:17 NET: enable
+20/07/2020 09:48:17 enable apn telstra.internet for HL8
+20/07/2020 09:48:17 comms st 1 -> 2
+20/07/2020 09:48:17 NS 1
+20/07/2020 09:48:17 modem state change 98 -> 0
+20/07/2020 09:48:17 NS 1
+20/07/2020 09:48:21 Duplicates Removed 37
+20/07/2020 09:48:21 resetting baud
+20/07/2020 09:48:21 change baud to 115200
+20/07/2020 09:48:21 GPS close 0
+20/07/2020 09:48:21 opened /dev/ttyS2 serial/USB OK
+20/07/2020 09:48:21 GPS Serial Connected on /dev/ttyS2 at 115200
+20/07/2020 09:48:21 GPS Saved Database found
+20/07/2020 09:48:21 GPS Loading Saved Database
+20/07/2020 09:48:21 loaded 49 GNSS DB files
+20/07/2020 09:48:21 NS 1
+20/07/2020 09:48:21 Duplicates Removed 1
+20/07/2020 09:48:21 net state change 6 -> 1
+20/07/2020 09:48:21 modem not open yet
+20/07/2020 09:48:21 MDM: open
+20/07/2020 09:48:21 modem state change 0 -> 1
+20/07/2020 09:48:21 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+20/07/2020 09:48:21 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+20/07/2020 09:48:21 MDM: turn on modem power
+20/07/2020 09:48:21 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+20/07/2020 09:48:21 NS 1
+20/07/2020 09:48:23 Duplicates Removed 12
+20/07/2020 09:48:23 gps rate set
+20/07/2020 09:48:23 NS 1
+20/07/2020 09:48:31 Duplicates Removed 85
+20/07/2020 09:48:31 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 09:48:31 MDM:opened and closed /dev/ttyACM0
+20/07/2020 09:48:31 opened /dev/ttyACM2 serial/USB OK
+20/07/2020 09:48:31 opened /dev/ttyACM0 serial/USB OK
+20/07/2020 09:48:31 Modem Serial Connected using /dev/ttyACM0 and /dev/ttyACM2
+20/07/2020 09:48:31 modem state change 1 -> 2
+20/07/2020 09:48:31 NS 1
+20/07/2020 09:48:34 Duplicates Removed 29
+20/07/2020 09:48:34 modem open now
+20/07/2020 09:48:34 ATE0V1
+20/07/2020 09:48:34 NS 1
+20/07/2020 09:48:40 Duplicates Removed 50
+20/07/2020 09:48:40 AT+CGMM
+20/07/2020 09:48:40 Duplicates Removed 1
+20/07/2020 09:48:40 MDM: HWType AT+CGMM
+20/07/2020 09:48:40 TOBY-L280
+20/07/2020 09:48:40 OK
+20/07/2020 09:48:40 AT+CGSN
+20/07/2020 09:48:40 Duplicates Removed 1
+20/07/2020 09:48:40 MDM: IMEI 
+20/07/2020 09:48:40 358503060460855
+20/07/2020 09:48:40 OK
+20/07/2020 09:48:40 NS 1
+20/07/2020 09:48:40 AT+CIMI
+20/07/2020 09:48:40 Duplicates Removed 1
+20/07/2020 09:48:40 MDM: IMSI 
+20/07/2020 09:48:40 505016000265969
+20/07/2020 09:48:40 OK
+20/07/2020 09:48:40 AT+CCID
+20/07/2020 09:48:40 Duplicates Removed 1
+20/07/2020 09:48:40 MDM: CCID 
+20/07/2020 09:48:40 +CCID: 89610185001550901074
+20/07/2020 09:48:40 OK
+20/07/2020 09:48:40 AT+UPSND=0,8
+20/07/2020 09:48:40 Duplicates Removed 1
+20/07/2020 09:48:40 +UPSND: 0,8,0
+20/07/2020 09:48:40 psd line 0
+20/07/2020 09:48:40 pad active #0 (NO)
+20/07/2020 09:48:40 OK
+20/07/2020 09:48:40 net state change 1 -> 2
+20/07/2020 09:48:40 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:48:40 Duplicates Removed 1
+20/07/2020 09:48:40 NS 1
+20/07/2020 09:48:40 OK
+20/07/2020 09:48:40 NS 1
+20/07/2020 09:48:41 Duplicates Removed 9
+20/07/2020 09:48:41 AT+UPSDA=0,3
+20/07/2020 09:48:41 Duplicates Removed 1
+20/07/2020 09:48:41 NS 1
+20/07/2020 09:48:47 Duplicates Removed 59
+20/07/2020 09:48:47 GPS Sat Found (NMEA)!!!!!!!!!
+20/07/2020 09:48:47 NS 1
+20/07/2020 09:48:48 Duplicates Removed 14
+20/07/2020 09:48:48 main - GNSS SAT state change 0->1
+20/07/2020 09:48:48 MessageDialog GNSS 1
+20/07/2020 09:48:48 NS 1
+20/07/2020 09:48:48 Splash GNSS 1
+20/07/2020 09:48:48 NS 1
+20/07/2020 09:48:53 Duplicates Removed 48
+20/07/2020 09:48:53 SaveTripData: 325/11/3/3/0 5 0/0/0/0/0
+20/07/2020 09:48:53 NS 1
+20/07/2020 09:48:56 Duplicates Removed 25
+20/07/2020 09:48:56 ERROR
+20/07/2020 09:48:56 parse cme 0
+20/07/2020 09:48:56 NS 1
+20/07/2020 09:49:06 Duplicates Removed 99
+20/07/2020 09:49:06 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:49:06 modem bad data:
+20/07/2020 09:49:06 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:49:06 OK
+20/07/2020 09:49:06 NS 1
+20/07/2020 09:49:06 Duplicates Removed 2
+20/07/2020 09:49:06 main - GNSS SAT state change 1->0
+20/07/2020 09:49:06 MessageDialog GNSS 0
+20/07/2020 09:49:06 NS 1
+20/07/2020 09:49:06 Splash GNSS 0
+20/07/2020 09:49:06 NS 1
+20/07/2020 09:49:07 Duplicates Removed 5
+20/07/2020 09:49:07 AT+UPSDA=0,3
+20/07/2020 09:49:07 Duplicates Removed 1
+20/07/2020 09:49:07 NS 1
+20/07/2020 09:49:09 Duplicates Removed 17
+20/07/2020 09:49:09 GPS Sat Found (NMEA)!!!!!!!!!
+20/07/2020 09:49:09 NS 1
+20/07/2020 09:49:12 Duplicates Removed 34
+20/07/2020 09:49:12 main - GNSS SAT state change 0->1
+20/07/2020 09:49:12 MessageDialog GNSS 1
+20/07/2020 09:49:12 Splash GNSS 1
+20/07/2020 09:49:12 NS 1
+20/07/2020 09:49:22 Duplicates Removed 96
+20/07/2020 09:49:22 ERROR
+20/07/2020 09:49:22 parse cme 0
+20/07/2020 09:49:22 NS 1
+20/07/2020 09:49:32 Duplicates Removed 98
+20/07/2020 09:49:32 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:49:32 NS 1
+20/07/2020 09:49:32 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:49:32 OK
+20/07/2020 09:49:32 NS 1
+20/07/2020 09:49:33 Duplicates Removed 9
+20/07/2020 09:49:33 AT+UPSDA=0,3
+20/07/2020 09:49:33 Duplicates Removed 1
+20/07/2020 09:49:33 NS 1
+20/07/2020 09:49:36 Duplicates Removed 31
+20/07/2020 09:49:36 main - GNSS SAT state change 1->0
+20/07/2020 09:49:36 MessageDialog GNSS 0
+20/07/2020 09:49:36 GPS Sat Found (NMEA)!!!!!!!!!
+20/07/2020 09:49:36 Splash GNSS 0
+20/07/2020 09:49:36 NS 1
+20/07/2020 09:49:46 Duplicates Removed 96
+20/07/2020 09:49:46 ERROR
+20/07/2020 09:49:46 parse cme 0
+20/07/2020 09:49:46 NS 1
+20/07/2020 09:49:54 Duplicates Removed 81
+20/07/2020 09:49:54 SaveTripData: 386/11/3/3/0 0 0/0/0/0/0
+20/07/2020 09:49:54 NS 1
+20/07/2020 09:49:56 Duplicates Removed 17
+20/07/2020 09:49:56 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:49:56 Duplicates Removed 1
+20/07/2020 09:49:56 OK
+20/07/2020 09:49:56 NS 1
+20/07/2020 09:49:57 Duplicates Removed 9
+20/07/2020 09:49:57 AT+UPSDA=0,3
+20/07/2020 09:49:57 Duplicates Removed 1
+20/07/2020 09:49:57 NS 1
+20/07/2020 09:50:12 Duplicates Removed 149
+20/07/2020 09:50:12 ERROR
+20/07/2020 09:50:12 parse cme 0
+20/07/2020 09:50:12 NS 1
+20/07/2020 09:50:22 Duplicates Removed 98
+20/07/2020 09:50:22 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:50:22 modem bad data:
+20/07/2020 09:50:22 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:50:22 NS 1
+20/07/2020 09:50:22 OK
+20/07/2020 09:50:22 NS 1
+20/07/2020 09:50:23 Duplicates Removed 9
+20/07/2020 09:50:23 AT+UPSDA=0,3
+20/07/2020 09:50:23 modem bad data:
+20/07/2020 09:50:23 AT+UPSDA=0
+20/07/2020 09:50:23 ,3
+20/07/2020 09:50:23 NS 1
+20/07/2020 09:50:38 Duplicates Removed 149
+20/07/2020 09:50:38 ERROR
+20/07/2020 09:50:38 parse cme 0
+20/07/2020 09:50:38 NS 1
+20/07/2020 09:50:48 Duplicates Removed 98
+20/07/2020 09:50:48 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:50:48 modem bad data:
+20/07/2020 09:50:48 AT+UPSD=0,1,"telstra.intern
+20/07/2020 09:50:48 et"
+20/07/2020 09:50:48 OK
+20/07/2020 09:50:48 NS 1
+20/07/2020 09:50:49 Duplicates Removed 9
+20/07/2020 09:50:49 AT+UPSDA=0,3
+20/07/2020 09:50:49 NS 1
+20/07/2020 09:50:49 modem bad data:
+20/07/2020 09:50:49 AT+UPS
+20/07/2020 09:50:49 DA=0,3
+20/07/2020 09:50:49 NS 1
+20/07/2020 09:50:55 Duplicates Removed 56
+20/07/2020 09:50:55 SaveTripData: 447/11/3/3/0 1 0/0/0/0/0
+20/07/2020 09:50:55 NS 1
+20/07/2020 09:51:01 Duplicates Removed 55
+20/07/2020 09:51:01 ERROR
+20/07/2020 09:51:01 parse cme 0
+20/07/2020 09:51:01 NS 1
+20/07/2020 09:51:11 Duplicates Removed 99
+20/07/2020 09:51:11 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:51:11 modem bad data:
+20/07/2020 09:51:11 AT+UPSD=0,1,"telst
+20/07/2020 09:51:11 ra.internet"
+20/07/2020 09:51:11 OK
+20/07/2020 09:51:11 NS 1
+20/07/2020 09:51:12 Duplicates Removed 9
+20/07/2020 09:51:12 AT+UPSDA=0,3
+20/07/2020 09:51:12 Duplicates Removed 1
+20/07/2020 09:51:12 NS 1
+20/07/2020 09:51:23 Duplicates Removed 107
+20/07/2020 09:51:23 ERROR
+20/07/2020 09:51:23 parse cme 0
+20/07/2020 09:51:23 NS 1
+20/07/2020 09:51:30 Duplicates Removed 74
+20/07/2020 09:51:30 GPS Sat Found (NMEA)!!!!!!!!!
+20/07/2020 09:51:30 main - GNSS SAT state change 0->1
+20/07/2020 09:51:30 MessageDialog GNSS 1
+20/07/2020 09:51:30 Splash GNSS 1
+20/07/2020 09:51:30 NS 1
+20/07/2020 09:51:33 Duplicates Removed 23
+20/07/2020 09:51:33 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:51:33 modem bad data:
+20/07/2020 09:51:33 AT+UPSD
+20/07/2020 09:51:33 NS 1
+20/07/2020 09:51:33 =0,1,"telstra.internet"
+20/07/2020 09:51:33 OK
+20/07/2020 09:51:33 NS 1
+20/07/2020 09:51:34 Duplicates Removed 9
+20/07/2020 09:51:34 AT+UPSDA=0,3
+20/07/2020 09:51:34 Duplicates Removed 1
+20/07/2020 09:51:34 NS 1
+20/07/2020 09:51:49 Duplicates Removed 149
+20/07/2020 09:51:49 ERROR
+20/07/2020 09:51:49 parse cme 0
+20/07/2020 09:51:49 NS 1
+20/07/2020 09:51:53 Duplicates Removed 41
+20/07/2020 09:51:53 TTFF 209
+20/07/2020 09:51:53 GPS Fix obtained*****************
+20/07/2020 09:51:53 NS 1
+20/07/2020 09:51:54 Duplicates Removed 11
+20/07/2020 09:51:54 main - GNSS SAT state change 1->2
+20/07/2020 09:51:54 MessageDialog GNSS 2
+20/07/2020 09:51:54 Splash GNSS 2
+20/07/2020 09:51:54 NS 1
+20/07/2020 09:51:56 Duplicates Removed 18
+20/07/2020 09:51:56 SaveTripData: 508/11/3/3/0 2 0/0/0/0/0
+20/07/2020 09:51:56 NS 1
+20/07/2020 09:51:56 ZoneID Change1 -1 -> 117 (speed 30 -> 30)
+20/07/2020 09:51:56 opusMain::slotZoneSpeed: 30, 117, 1
+20/07/2020 09:51:56 NS 1
+20/07/2020 09:51:57 Duplicates Removed 3
+20/07/2020 09:51:57 adjusting rtc 2- event
+20/07/2020 09:51:57 NS 1
+20/07/2020 09:51:59 Duplicates Removed 20
+20/07/2020 09:51:59 AT+UPSD=0,1,"telstra.internet"
+20/07/2020 09:51:59 modem bad data:
+20/07/2020 09:51:59 AT+
+20/07/2020 09:51:59 UPSD=0,1,"telstra.internet"
+20/07/2020 09:51:59 OK
+20/07/2020 09:51:59 NS 1
+20/07/2020 09:52:00 Duplicates Removed 9
+20/07/2020 09:52:00 AT+UPSDA=0,3
+20/07/2020 09:52:00 NS 1
+20/07/2020 09:52:00 modem bad data:
+20/07/2020 09:52:00 AT
+20/07/2020 09:52:00 +UPSDA=0,3
+20/07/2020 09:52:00 NS 1
+20/07/2020 09:52:01 Duplicates Removed 11
+20/07/2020 09:52:01 speed signal lost, clear values
+20/07/2020 09:52:01 NS 1
+20/07/2020 09:52:02 Duplicates Removed 4
+20/07/2020 09:52:02 OK
+20/07/2020 09:52:02 +UUPSDA: 0,"10.107.82.114"
+20/07/2020 09:52:02 AT+UPSND=0,8
+20/07/2020 09:52:02 Duplicates Removed 1
+20/07/2020 09:52:02 +UPSND: 0,8,1
+20/07/2020 09:52:02 psd line 1
+20/07/2020 09:52:02 pad active #1 (YES)
+20/07/2020 09:52:02 OK
+20/07/2020 09:52:02 AT+UPSND=0,0
+20/07/2020 09:52:02 Duplicates Removed 1
+20/07/2020 09:52:02 +UPSND: 0,0,"10.107.82.114"
+20/07/2020 09:52:02 OK
+20/07/2020 09:52:02 AT+CREG?
+20/07/2020 09:52:02 NS 1
+20/07/2020 09:52:02 AT+CREG?
+20/07/2020 09:52:02 +CREG: 0,1
+20/07/2020 09:52:02 OK
+20/07/2020 09:52:02 net state change 2 -> 3
+20/07/2020 09:52:02 AT+CGREG=1
+20/07/2020 09:52:02 Duplicates Removed 1
+20/07/2020 09:52:02 OK
+20/07/2020 09:52:02 AT+CREG=2
+20/07/2020 09:52:02 Duplicates Removed 1
+20/07/2020 09:52:02 OK
+20/07/2020 09:52:02 AT+CGREG?
+20/07/2020 09:52:02 Duplicates Removed 1
+20/07/2020 09:52:02 +CGREG: 1,1
+20/07/2020 09:52:02 OK
+20/07/2020 09:52:02 AT+COPS?
+20/07/2020 09:52:02 Duplicates Removed 1
+20/07/2020 09:52:02 NS 1
+20/07/2020 09:52:02 +COPS: 0,0,"Telstra #StaySafe",2
+20/07/2020 09:52:02 MDM: operator name Telstra #StaySafe
+20/07/2020 09:52:02 OK
+20/07/2020 09:52:02 NS 1
+20/07/2020 09:52:03 Duplicates Removed 9
+20/07/2020 09:52:03 AT+CSQ
+20/07/2020 09:52:03 Duplicates Removed 1
+20/07/2020 09:52:03 +CSQ: 5,3
+20/07/2020 09:52:03 MODEM CSQ 5
+20/07/2020 09:52:03 OK
+20/07/2020 09:52:03 net state change 3 -> 4
+20/07/2020 09:52:03 NS 2
+20/07/2020 09:52:03 comms st 2 -> 3
+20/07/2020 09:52:03 comms st 3 -> 4
+20/07/2020 09:52:03 connect 1 devices.earthtrack.rct.net.au, 2003
+20/07/2020 09:52:03 NET: connect
+20/07/2020 09:52:03 AT+UPSND=0,8
+20/07/2020 09:52:03 Duplicates Removed 1
+20/07/2020 09:52:03 +UPSND: 0,8,1
+20/07/2020 09:52:03 psd line 1
+20/07/2020 09:52:03 pad active #1 (YES)
+20/07/2020 09:52:03 OK
+20/07/2020 09:52:03 AT+USOCR=6
+20/07/2020 09:52:03 Duplicates Removed 1
+20/07/2020 09:52:03 +USOCR: 0
+20/07/2020 09:52:03 socket #0
+20/07/2020 09:52:03 OK
+20/07/2020 09:52:03 AT+USOCO=0,"devices.earthtrack.rct.net.au",2003
+20/07/2020 09:52:03 modem bad data:
+20/07/2020 09:52:03 AT+
+20/07/2020 09:52:03 USOCO=0,"devices.earthtrack.rct.net.au",2003
+20/07/2020 09:52:03 SPLASH 5
+20/07/2020 09:52:04 OK
+20/07/2020 09:52:04 +UUSORD: 0,16
+20/07/2020 09:52:05 AT+USODL=0
+20/07/2020 09:52:05 Duplicates Removed 1
+20/07/2020 09:52:05 CONNECT
+20/07/2020 09:52:05 Directlink CONNECT
+20/07/2020 09:52:05 modem state change 2 -> 3
+20/07/2020 09:52:05 net connected
+20/07/2020 09:52:05 chat connect
+20/07/2020 09:52:05 <220 earthtrack>
+20/07/2020 09:52:05 UNIT 9278
+20/07/2020 09:52:05 <333 CHAL 647CD0B2>
+20/07/2020 09:52:05 RESP 3CC8220C
+20/07/2020 09:52:05 <230 Auth OK>
+20/07/2020 09:52:05 last connect time written 1595238725
+20/07/2020 09:52:05 TIME
+20/07/2020 09:52:05 last connect time written 1595238725
+20/07/2020 09:52:05 <211 TIME 1595238732>
+20/07/2020 09:52:05 adjusting rtc - comms TIME
+20/07/2020 09:52:05 last connect time written 1595238725
+20/07/2020 09:52:05 EVCOUNT 1550
+20/07/2020 09:52:06 <252 Event OK>
+20/07/2020 09:52:06 TODO

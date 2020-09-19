@@ -40,7 +40,7 @@
         "TripTraceColour": "#000000",
         "EventFillColour": "#0000ff",
         "TripFillColour": "#ffff00",
-        "MaxTitleLineLength": 17
+        "MaxTitleLineLength": 12
     },
     "Channels": [
         {
@@ -94,20 +94,28 @@
             "Title": "Engine Overspeed"
         },
         {
-            "Event": "OILPRESSURE",
-            "Title": "Engine Oil Pressure Low"
+            "Event": "IMPACT",
+            "Title": "Vehicle Impact"
         },
         {
-            "Event": "INPUT",
-            "Channel": 1
+            "Event": "OVERSPEED",
+            "Title": "Vehicle Overspeed"
         },
         {
-            "Event": "INPUT",
-            "Channel": 3
+            "Event": "ENGINETEMP",
+            "Title": "Engine Temperature High"
         },
         {
-            "Event": "INPUT",
-            "Channel": 4
+            "Event": "ZONECHANGE",
+            "Title": "Zone Change"
+        },
+        {
+            "Event": "Battery Voltage",
+            "Title": "Battery Voltage"
+        },
+        {
+            "Event": "ZONEOVERSPEED",
+            "Title": "Zone Overspeed"
         }
     ]
 }

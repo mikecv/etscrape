@@ -54,15 +54,13 @@ from eventsChart import *
 #                       Change log scrolled to top to show most recent changes.
 #                       Cosmetic changes.
 # 0.9   MDC 16/09/2020  Configuration improvements.
+#                       Refactored event chart dialog to include default titles.
+#                       Added trip time to events chart title.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
-# Change chart event setting configuration to include default title.
-# Add horizontal grid lines on speed plot.
-# Add (day) on speed and event charts.
-# Look at adding date to speed and event charts so that available when saved.
 # *******************************************
 
 # Program version.
@@ -1935,7 +1933,7 @@ class EventsChartConfigDialog(QDialog):
         self.app = app
 
         # Event selection dropdown selection.
-        self.EventSelection = 0
+        selection = 0
 
         # Create list of event chart config items.
         self.plotCfg = []
@@ -1949,14 +1947,14 @@ class EventsChartConfigDialog(QDialog):
         self.plotCfg.append((self.EventCombo8, self.titleLineEdit8, self.channelLabel8, self.channelSpinBox8))
 
         # Connect to combo box to apply visibility according to event type.
-        self.plotCfg[0][0].currentIndexChanged.connect((lambda: self.eventSelected(0, self.EventSelection)))
-        self.plotCfg[1][0].currentIndexChanged.connect((lambda: self.eventSelected(1, self.EventSelection)))
-        self.plotCfg[2][0].currentIndexChanged.connect((lambda: self.eventSelected(2, self.EventSelection)))
-        self.plotCfg[3][0].currentIndexChanged.connect((lambda: self.eventSelected(3, self.EventSelection)))
-        self.plotCfg[4][0].currentIndexChanged.connect((lambda: self.eventSelected(4, self.EventSelection)))
-        self.plotCfg[5][0].currentIndexChanged.connect((lambda: self.eventSelected(5, self.EventSelection)))
-        self.plotCfg[6][0].currentIndexChanged.connect((lambda: self.eventSelected(6, self.EventSelection)))
-        self.plotCfg[7][0].currentIndexChanged.connect((lambda: self.eventSelected(7, self.EventSelection)))
+        self.plotCfg[0][0].currentIndexChanged.connect((lambda: self.eventSelected(0)))
+        self.plotCfg[1][0].currentIndexChanged.connect((lambda: self.eventSelected(1)))
+        self.plotCfg[2][0].currentIndexChanged.connect((lambda: self.eventSelected(2)))
+        self.plotCfg[3][0].currentIndexChanged.connect((lambda: self.eventSelected(3)))
+        self.plotCfg[4][0].currentIndexChanged.connect((lambda: self.eventSelected(4)))
+        self.plotCfg[5][0].currentIndexChanged.connect((lambda: self.eventSelected(5)))
+        self.plotCfg[6][0].currentIndexChanged.connect((lambda: self.eventSelected(6)))
+        self.plotCfg[7][0].currentIndexChanged.connect((lambda: self.eventSelected(7)))
 
         # Connect to combo box to apply visibility according to event type.
         self.plotCfg[0][3].valueChanged.connect((lambda: self.channelSelected(0)))
@@ -1981,13 +1979,14 @@ class EventsChartConfigDialog(QDialog):
         for idx, t in enumerate(self.config.EventTraces):
             try:
                 # Look for trace event in list of events.
-                self.EventSelection = self.eventOptions.index(t["Event"])
+                selection = self.eventOptions.index(t["Event"])
             except:
                 # If no match then use first 'event' which is a blank.
                 logger.warning("Event not in chart event list: {0:s}".format(t["Event"]))
-                self.EventSelection = 0
-            self.plotCfg[idx][0].setCurrentIndex(self.EventSelection)
-            logger.debug("Event selected item: {0:d}".format(self.EventSelection))
+                selection = 0
+
+            self.plotCfg[idx][0].setCurrentIndex(selection)
+            logger.debug("Event selected item: {0:d}".format(selection))
             if (self.plotCfg[idx][0].currentText() == ""):
                 self.plotCfg[idx][1].setEnabled(False)
                 self.plotCfg[idx][2].setEnabled(False)
@@ -2004,9 +2003,9 @@ class EventsChartConfigDialog(QDialog):
                 self.plotCfg[idx][2].setEnabled(False)
                 self.plotCfg[idx][3].setEnabled(False)
                 if self.config.EventTraces[idx]["Title"] != "":
-                    self.plotCfg[idx][1].setText(self.config.EventTraces[idx]["Title"]) # FIX
+                    self.plotCfg[idx][1].setText(self.config.EventTraces[idx]["Title"])
                 else:
-                    self.plotCfg[idx][1].setText(self.config.chartEvents[self.EventSelection]["Title"])
+                    self.plotCfg[idx][1].setText(self.config.chartEvents[selection]["Title"])
 
         # Connect to SAVE dialog button for processing.
         self.SaveDialogBtn.clicked.connect(self.saveEventsChartConfig)
@@ -2031,11 +2030,8 @@ class EventsChartConfigDialog(QDialog):
     # *******************************************
     # Event selection combo box selection changed.
     # *******************************************
-    def eventSelected(self, idx, sel):
+    def eventSelected(self, idx):
         logger.debug("User changed events trace event : {0:d}".format(idx))
-
-        # Default the title to the name of the event.
-        self.plotCfg[idx][1].setText(self.plotCfg[idx][0].currentText())
 
         # Set visibility and readonly status of selections according to event type.
         if (self.plotCfg[idx][0].currentText() != "INPUT"):
@@ -2043,8 +2039,8 @@ class EventsChartConfigDialog(QDialog):
             self.plotCfg[idx][2].setEnabled(False)
             self.plotCfg[idx][3].setEnabled(False)
 
-            # Default the title to the name of the event.
-            self.plotCfg[idx][1].setText(self.config.chartEvents[sel]["Title"]) # FIX
+            # Get the default name from the configuration table.
+            self.plotCfg[idx][1].setText(self.config.chartEvents[self.plotCfg[idx][0].currentIndex()]["Title"])
         else:
             self.plotCfg[idx][1].setEnabled(False)
             self.plotCfg[idx][2].setEnabled(True)
@@ -2226,6 +2222,8 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.9</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Refactored event chart dialog to include default title that is not just event name.</li>" \
+            "<li>Added trip start and end time to events chart plot title.</li>" \
             "<li>Improved configuration to preserve config as much as possible when upgrading.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.8</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\

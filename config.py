@@ -31,7 +31,16 @@ class Config():
             {"Event" : "Battery Voltage", "Title" : "Battery Voltage"},
             {"Event" : "ENGINEOVERSPEED", "Title" : "Engine Overspeed"},
             {"Event" : "ENGINETEMP", "Title" : "Engine Temperature High"},
-            {"Event" : "IMPACT", "Title" : "Vehicle Impact"}
+            {"Event" : "IMPACT", "Title" : "Vehicle Impact"},
+            {"Event" : "INPUT", "Title" : "Input"},
+            {"Event" : "LOWCOOLANT", "Title" : "Engine Coolant Level Low"},
+            {"Event" : "OFFSEAT", "Title" : "Operator Off Seat"},
+            {"Event" : "OILPRESSURE", "Title" : "Engine Oil Pressure Low"},
+            {"Event" : "OVERLOAD", "Title" : "Overload"},
+            {"Event" : "OVERSPEED", "Title" : "Vehicle Overspeed"},
+            {"Event" : "UNBUCKLED", "Title" : "Operator Unbuckled"},
+            {"Event" : "ZONECHANGE", "Title" : "Zone Change"},
+            {"Event" : "ZONEOVERSPEED", "Title" : "Zone Overspeed"}
             ]
 
         # Supported Events (for event filtering)
@@ -80,7 +89,7 @@ class Config():
             "TripTraceColour": "#000000",
             "EventFillColour": "#0000ff",
             "TripFillColour": "#ffff00",
-            "MaxTitleLineLength": 17
+            "MaxTitleLineLength": 12
         }
 
         # Input channel definitions.

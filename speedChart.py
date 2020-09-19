@@ -46,6 +46,7 @@ class SpeedCanvas(FigureCanvasQTAgg):
         # Setup plot labels.
         self.axes.set_xlabel("Time {0:s}".format(tzone(self.cfg.TimeUTC)), fontsize=self.cfg.SpdPlot["AxesTitleFontSize"])
         self.axes.set_ylabel("Speed", fontsize=self.cfg.SpdPlot["AxesTitleFontSize"])
+        self.axes.yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
 
     # *******************************************
     # Clear the figure.

@@ -1,0 +1,1759 @@
+25/03/2020 10:17:32 VERSION: 5.0.58.999 R 
+25/03/2020 10:17:32 4.14.108-ti-r119
+25/03/2020 10:17:32 NEW OS, DONOT access PCF directly
+25/03/2020 10:17:32 IOInit - NEW OS
+25/03/2020 10:17:32 created gpio INP 0 @GPIO: 66
+25/03/2020 10:17:32 created gpio INP 1 @GPIO: 67
+25/03/2020 10:17:32 created gpio INP 4 @GPIO: 45
+25/03/2020 10:17:32 created gpio INP 5 @GPIO: 44
+25/03/2020 10:17:32 created gpio INP 6 @GPIO: 23
+25/03/2020 10:17:32 created gpio INP 7 @GPIO: 26
+25/03/2020 10:17:32 created gpio INP 8 @GPIO: 51
+25/03/2020 10:17:32 created gpio INP 9 @GPIO: 61
+25/03/2020 10:17:32 created gpio OUT: 60
+25/03/2020 10:17:32 created gpio OUT: 46
+25/03/2020 10:17:32 created gpio OUT: 27
+25/03/2020 10:17:32 created gpio OUT: 65
+25/03/2020 10:17:32 created gpio OUT: 22
+25/03/2020 10:17:32 created gpio OUT: 115
+25/03/2020 10:17:32 created gpio OUT: 69
+25/03/2020 10:17:32 created gpio OUT: 68
+25/03/2020 10:17:32 created gpio OUT: 117
+25/03/2020 10:17:32 created gpio OUT: 59
+25/03/2020 10:17:32 created gpio OUT: 58
+25/03/2020 10:17:32 created gpio OUT: 52
+25/03/2020 10:17:32 created gpio OUT: 64
+25/03/2020 10:17:32 created gpio OUT: 47
+25/03/2020 10:17:32 created gpio OUT: 48
+25/03/2020 10:17:32 created gpio OUT: 49
+25/03/2020 10:17:32 created gpio OUT: 116
+25/03/2020 10:17:32 created gpio OUT: 53
+25/03/2020 10:17:32 created gpio OUT: 54
+25/03/2020 10:17:32 created gpio OUT: 55
+25/03/2020 10:17:32 created gpio OUT: 507
+25/03/2020 10:17:32 created gpio OUT: 508
+25/03/2020 10:17:32 created gpio OUT: 509
+25/03/2020 10:17:32 created gpio OUT: 510
+25/03/2020 10:17:32 created gpio OUT: 511
+25/03/2020 10:17:32 usr0 is heartbeat
+25/03/2020 10:17:32 usr1 is mmc0 (uSD card)
+25/03/2020 10:17:32 usr2 is mmc1(eMMC)
+25/03/2020 10:17:32 channel thread created
+25/03/2020 10:17:32 channel ch3 2 ch4 2
+25/03/2020 10:17:32 ch3 2 ch4 2
+25/03/2020 10:17:32 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+25/03/2020 10:17:32 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+25/03/2020 10:17:32 channel state change 0 -> 1
+25/03/2020 10:17:32 Starting PRU
+25/03/2020 10:17:32 offline
+25/03/2020 10:17:32 PRU starting
+25/03/2020 10:17:32 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+25/03/2020 10:17:32 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+25/03/2020 10:17:32 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+25/03/2020 10:17:32 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+25/03/2020 10:17:32 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+25/03/2020 10:17:32 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+25/03/2020 10:17:32 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+25/03/2020 10:17:32 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+25/03/2020 10:17:32 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+25/03/2020 10:17:32 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+25/03/2020 10:17:32 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+25/03/2020 10:17:32 wrote 0 to /sys/class/gpio/gpio48/value (O/P 15)
+25/03/2020 10:17:32 wrote 0 to /sys/class/gpio/gpio49/value (O/P 16)
+25/03/2020 10:17:32 OTA Version: version:3.0.0.6
+25/03/2020 10:17:32 wrote 1 to /sys/class/gpio/gpio59/value (O/P 10)
+25/03/2020 10:17:32 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+25/03/2020 10:17:33 i2c1 commands - to serialiser
+25/03/2020 10:17:33 pru Waiting/Waiting
+25/03/2020 10:17:33 Serialiser Serial Nr: 1A71021864100480A47DA000A000004F
+25/03/2020 10:17:33 Serialiser Eeprom Serial Nr: 000083-AA
+25/03/2020 10:17:33 BLAll 10
+25/03/2020 10:17:33 BL set:10
+25/03/2020 10:17:33 set brightness to 10%
+25/03/2020 10:17:34 Opus FC (main) Started
+25/03/2020 10:17:34 ROOTFS Built 41449
+25/03/2020 10:17:34 Nr Langs to process: 18
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_ar
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_es
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_et
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_fr
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_de
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_hi
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_id
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_km
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_ko
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_lv
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_ms
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_ru
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_th
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_tl
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_uk
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_vi
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_zh
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 lang file: :Translations/OpusFcMain_en
+25/03/2020 10:17:34 Loaded translations
+25/03/2020 10:17:34 eeprom magic OK
+25/03/2020 10:17:34 Contructor PID2 108 108
+25/03/2020 10:17:34 MessageDialog GNSS 0
+25/03/2020 10:17:34 Duplicates Removed 1
+25/03/2020 10:17:34 thread gps_thread created
+25/03/2020 10:17:34 wrote 1 to /sys/class/gpio/gpio64/value (O/P 13)
+25/03/2020 10:17:34 gps open 1
+25/03/2020 10:17:34 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+25/03/2020 10:17:34 Error opening OOS file No such file or directory
+25/03/2020 10:17:34 weightCountKg -1.000000
+25/03/2020 10:17:34 gps task running
+25/03/2020 10:17:34 gps state change 1 -> 2
+25/03/2020 10:17:34 speedHzKmh 1.477833
+25/03/2020 10:17:34 speedHzRPM 19.999998
+25/03/2020 10:17:34 opened /dev/ttyS2 serial/USB OK
+25/03/2020 10:17:34 GPS Serial Connected on /dev/ttyS2 (handle 14)
+25/03/2020 10:17:34 Starting PRU
+25/03/2020 10:17:34 running
+25/03/2020 10:17:34 opening /dev/rpmsg_pru30
+25/03/2020 10:17:34 PRU Opened 13
+25/03/2020 10:17:34 Opened /dev/rpmsg_pru30
+25/03/2020 10:17:34 MessageDialog GNSS 0
+25/03/2020 10:17:34 Duplicates Removed 7
+25/03/2020 10:17:34 Splash GNSS 0
+25/03/2020 10:17:34 found /store/Service_active.xml
+25/03/2020 10:17:34 xml_parsing file: /store/Service_active.xml
+25/03/2020 10:17:34 MessageDialog GNSS 0
+25/03/2020 10:17:35 settings ready
+25/03/2020 10:17:35 MessageDialog GNSS 0
+25/03/2020 10:17:35 BL dark 0
+25/03/2020 10:17:35 BL light 0
+25/03/2020 10:17:35 Starting Threads. Mayhem begins!
+25/03/2020 10:17:35 Main thread running
+25/03/2020 10:17:35 opusFc task run
+25/03/2020 10:17:35 FleetMessaging thread running
+25/03/2020 10:17:35 Beeper thread running
+25/03/2020 10:17:35 TriLed thread running
+25/03/2020 10:17:35 Theme thread running
+25/03/2020 10:17:35 fleetmsg run
+25/03/2020 10:17:35 diags run
+25/03/2020 10:17:35 Diagnostic thread running
+25/03/2020 10:17:35 Batttery thread running
+25/03/2020 10:17:35 New Operator file XML found
+25/03/2020 10:17:35 found Operators_active.xml
+25/03/2020 10:17:35 xml_parsing file: /store/Operators_active.xml
+25/03/2020 10:17:35 Can thread running
+25/03/2020 10:17:35 triled run
+25/03/2020 10:17:35 Key thread running
+25/03/2020 10:17:35 GeoFence thread running
+25/03/2020 10:17:35 main.cpp Done
+25/03/2020 10:17:35 beeper run
+25/03/2020 10:17:35 Geofence run
+25/03/2020 10:17:35 Operator file XML found
+25/03/2020 10:17:35 Powerup - Done
+25/03/2020 10:17:35 PID3 108 113
+25/03/2020 10:17:35 WDOpen Success
+25/03/2020 10:17:35 WDT timeout is 30
+25/03/2020 10:17:35 MessageDialog GNSS 0
+25/03/2020 10:17:35 Battery free
+25/03/2020 10:17:35 keythread - init 1
+25/03/2020 10:17:35 GPS PRT Config: length -> 20
+
+25/03/2020 10:17:35 | 01 00 00 00 d0 08 00 00 00 c2 01 00 03 00 03 00 | ................ |
+25/03/2020 10:17:35 | 00 00 00 00                                     | ....             |
+25/03/2020 10:17:35 keyscanner OK
+25/03/2020 10:17:35 keyscanner gpio ok
+25/03/2020 10:17:35 channel setting: 3-freq:4-freq
+25/03/2020 10:17:35 Message <3-freq:4-freq>: Sent to PRU0
+25/03/2020 10:17:35 channel state change 1 -> 2
+25/03/2020 10:17:35 PRU: Set3F
+25/03/2020 10:17:35 PRU: Set4F
+25/03/2020 10:17:35 PRU: FreqInit
+25/03/2020 10:17:35 PRU Version: 103
+25/03/2020 10:17:35 keyscanner UART
+25/03/2020 10:17:35 keythread - init SUCCESS
+25/03/2020 10:17:35 slotUpdate first call
+25/03/2020 10:17:35 gps state change 2 -> 3
+25/03/2020 10:17:36 bootstatus3 0
+25/03/2020 10:17:36 tempBootStatus 0
+25/03/2020 10:17:36 bootstatus 0
+25/03/2020 10:17:36 end of run()
+25/03/2020 10:17:36 sync new state entry
+25/03/2020 10:17:36 build time 1584661665
+25/03/2020 10:17:36 REC trip id 0
+25/03/2020 10:17:36 REC write time 1585114317
+25/03/2020 10:17:36 REC QNr 0
+25/03/2020 10:17:36 REC CkState 17
+25/03/2020 10:17:36 REC Main state 3
+25/03/2020 10:17:36 REC DrIdx 6
+25/03/2020 10:17:36 readData 1
+25/03/2020 10:17:36 thread comms_thread created
+25/03/2020 10:17:36 thread modem_thread created
+25/03/2020 10:17:36 last connect time read: 1585112558 1308004
+25/03/2020 10:17:36 NET: get hw
+25/03/2020 10:17:36 MDM: open
+25/03/2020 10:17:36 thread net_thread created
+25/03/2020 10:17:36 modem state change 0 -> 1
+25/03/2020 10:17:36 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+25/03/2020 10:17:36 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+25/03/2020 10:17:36 MDM: turn on modem power
+25/03/2020 10:17:36 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+25/03/2020 10:17:36 thread interrupt_thread created
+25/03/2020 10:17:36 SerialNr: 9218
+25/03/2020 10:17:36 LoadDate: 010919
+25/03/2020 10:17:36 HWModel:  9072s_A+
+25/03/2020 10:17:36 hwVersion is <9072s_A+>
+25/03/2020 10:17:36 recovered EEtrip 0 time 1585112517 slot 0 saved time 1826
+25/03/2020 10:17:36 FRIM: 461/0/129/53/0
+25/03/2020 10:17:36 LT 1585112517 0
+25/03/2020 10:17:36 recovered EEtrip 16003 time 1585112174 slot 1 saved time 1483
+25/03/2020 10:17:36 FRIM: 206/0/41/37/0
+25/03/2020 10:17:36 recovered EEtrip 16003 time 1585112235 slot 2 saved time 1544
+25/03/2020 10:17:36 FRIM: 267/0/41/37/0
+25/03/2020 10:17:36 recovered EEtrip 16003 time 1585112296 slot 3 saved time 1605
+25/03/2020 10:17:36 FRIM: 328/0/41/37/0
+25/03/2020 10:17:36 recovered EEtrip 16003 time 1585112357 slot 4 saved time 1666
+25/03/2020 10:17:36 FRIM: 358/0/72/37/0
+25/03/2020 10:17:36 recovered EEtrip 16003 time 1585112418 slot 5 saved time 1727
+25/03/2020 10:17:36 FRIM: 397/0/94/53/0
+25/03/2020 10:17:36 recovered EEtrip 0 time 1585112517 slot 0
+25/03/2020 10:17:36 FRIM: 461/0/129/53/0
+25/03/2020 10:17:36 found /store/OosFile_active.xml
+25/03/2020 10:17:36 found /store/DisplayMessaging_active.xml
+25/03/2020 10:17:36 xml_parsing file: /store/DisplayMessaging_active.xml
+25/03/2020 10:17:36 xml process daily
+25/03/2020 10:17:36 xml process impact
+25/03/2020 10:17:36 xml process license
+25/03/2020 10:17:36 PRU version 103
+25/03/2020 10:17:36 Msg Dialog font Noto Sans
+25/03/2020 10:17:36 lang code: EN file: :Translations/OpusFcMain_en
+25/03/2020 10:17:36 lang file: :Translations/OpusFcMain_en
+25/03/2020 10:17:36 Removing translations
+25/03/2020 10:17:36 Installing translations
+25/03/2020 10:17:36 getlicmsg langfound 0, lang reqd 0
+25/03/2020 10:17:36 GNSS S:0 U:0
+25/03/2020 10:17:36 GNSS S:0 (GP:0 GL:0 ) U:0 Hacc:-1 R:0
+25/03/2020 10:17:36 OpusFcMain change from 0 to 1
+25/03/2020 10:17:36 modem type 7
+25/03/2020 10:17:36 coms_start gsm
+25/03/2020 10:17:36 comms_enable
+25/03/2020 10:17:36 fleetmsg free
+25/03/2020 10:17:36 Theme free
+25/03/2020 10:17:36 THEME TIME Day1 Night2 7 0 1 light 255 0
+25/03/2020 10:17:36 Set Theme Day
+25/03/2020 10:17:36 diags free
+25/03/2020 10:17:36 Led free
+25/03/2020 10:17:36 CAN free
+25/03/2020 10:17:36 Geofence free, FC was reset 1
+25/03/2020 10:17:36 message dialog font set to: Noto Sans
+25/03/2020 10:17:36 Duplicates Removed 1
+25/03/2020 10:17:36 Received New Theme
+25/03/2020 10:17:36 gpio interrupts (P1) FF
+25/03/2020 10:17:36 eeprom 0, 461/0/129/53
+25/03/2020 10:17:36 Power loss time 1585112517
+25/03/2020 10:17:36 SWSTART OpusFC 5.0.58.999 R
+25/03/2020 10:17:36 startup human? 1
+25/03/2020 10:17:36 OpusFcMain change from 1 to 2
+25/03/2020 10:17:36 report initial input states?
+25/03/2020 10:17:36 report initial input states: YES
+25/03/2020 10:17:36 ign on, enable BackLight/Serialiser
+25/03/2020 10:17:37 brand 1 is Earthtrack, logo is /store/Earthtrack.png
+25/03/2020 10:17:37 brand 2 is Earthtrack, theme logo is /store/Earthtrack_light.png
+25/03/2020 10:17:37 brand 3 is :/Brands/brand/Earthtrack.png
+25/03/2020 10:17:37 Splash set font Noto Sans
+25/03/2020 10:17:38 splash font set Noto Sans
+25/03/2020 10:17:38 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+25/03/2020 10:17:38 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+25/03/2020 10:17:38 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+25/03/2020 10:17:38 PSP 1
+25/03/2020 10:17:38 PSP 2
+25/03/2020 10:17:38 PSP 3
+25/03/2020 10:17:38 OpusFcMain change from 2 to 4
+25/03/2020 10:17:38 zone 1 read 9 points 18
+25/03/2020 10:17:38 zone 2 read 4 points 8
+25/03/2020 10:17:38 zone 3 read 4 points 8
+25/03/2020 10:17:38 zone 4 read 4 points 8
+25/03/2020 10:17:38 zone 5 read 4 points 8
+25/03/2020 10:17:38 zone 6 read 4 points 8
+25/03/2020 10:17:38 zone 7 read 8 points 16
+25/03/2020 10:17:38 gps version is NO VERSION
+25/03/2020 10:17:38 max zones 100
+25/03/2020 10:17:38 updated battery state to 2
+25/03/2020 10:17:38 radio set Unknown <--
+25/03/2020 10:17:38 Settings: slotEsc
+25/03/2020 10:17:38 Wake
+25/03/2020 10:17:38 Wake ON
+25/03/2020 10:17:38 OpusFcMain change from 4 to 5
+25/03/2020 10:17:38 Key free
+25/03/2020 10:17:38 keythread - init 1
+25/03/2020 10:17:38 keyscanner OK
+25/03/2020 10:17:38 keyscanner gpio ok
+25/03/2020 10:17:38 keyscanner UART
+25/03/2020 10:17:38 keythread - init SUCCESS
+25/03/2020 10:17:38 start reader
+25/03/2020 10:17:38 ota 1584925437 - 2020-03-23 01:03:57Z
+25/03/2020 10:17:38 valid fleet? mick
+25/03/2020 10:17:38 BLAll 10
+25/03/2020 10:17:38 BL set:10
+25/03/2020 10:17:38 set brightness to 10%
+25/03/2020 10:17:38 traction set 2 2
+25/03/2020 10:17:38 channel set 2 2
+25/03/2020 10:17:38 channel setting: 3-freq:4-freq
+25/03/2020 10:17:38 Message <3-freq:4-freq>: Sent to PRU0
+25/03/2020 10:17:38 OpusFcMain change from 5 to 6
+25/03/2020 10:17:38 gpio interrupts (P1) FB
+25/03/2020 10:17:38 PRU: Set3F
+25/03/2020 10:17:38 PRU: Set4F
+25/03/2020 10:17:38 card read
+25/03/2020 10:17:38 Uart rxfifo has 14 bytes waiting
+25/03/2020 10:17:38 vli 000a 10
+25/03/2020 10:17:38 vli matches
+25/03/2020 10:17:38 208 1541 123
+25/03/2020 10:17:38 CardReader version 31582
+25/03/2020 10:17:38 Cklist free
+25/03/2020 10:17:38 splash enabled?:0
+25/03/2020 10:17:38 gpio interrupts (P1) FF
+25/03/2020 10:17:38 start wiegand
+25/03/2020 10:17:38 state timer started
+25/03/2020 10:17:38 geofence state change 0 -> 1
+25/03/2020 10:17:38 GeoFence::speed_limit_for_zone(0)
+25/03/2020 10:17:38 GeoFence::speed_limit_for_zone: in_zone = 0, fix_valid = 0
+25/03/2020 10:17:38 GeoFence::speed_limit_for_zone: not_found : no fix : result = 30
+25/03/2020 10:17:38 startup
+25/03/2020 10:17:38 setbool 0
+25/03/2020 10:17:39 opusMain::slotZoneSpeed: 30, 0, 0
+25/03/2020 10:17:39 CKL state change 0
+25/03/2020 10:17:39 checklist file detected
+25/03/2020 10:17:39 found Checklist_active.xml
+25/03/2020 10:17:39 xml_parsing
+25/03/2020 10:17:39 xml process checklist
+25/03/2020 10:17:39 xml process config/hdr
+25/03/2020 10:17:39 lastrun read (time/driver) 1585087096 6
+25/03/2020 10:17:39 CkList::Checklist init complete
+25/03/2020 10:17:39 OpusFcMain::Checklist init complete
+25/03/2020 10:17:39 CKL state change 1
+25/03/2020 10:17:39 CKL state change 17
+25/03/2020 10:17:39 geofence state change 1 -> 2
+25/03/2020 10:17:39 gpio interrupts (P1) FE
+25/03/2020 10:17:39 RELEASE 2
+25/03/2020 10:17:39 brand is Earthtrack, logo is /store/Earthtrack.png
+25/03/2020 10:17:39 gpio interrupts (P1) FF
+25/03/2020 10:17:39 gpio interrupts (P1) FE
+25/03/2020 10:17:40 gpio interrupts (P1) FF
+25/03/2020 10:17:40 gpio interrupts (P1) FE
+25/03/2020 10:17:40 RELEASE 3
+25/03/2020 10:17:40 gpio interrupts (P1) FF
+25/03/2020 10:17:40 gpio interrupts (P1) FE
+25/03/2020 10:17:40 gpio interrupts (P1) FF
+25/03/2020 10:17:40 resetting baud
+25/03/2020 10:17:40 change baud to 115200
+25/03/2020 10:17:40 GPS close 0
+25/03/2020 10:17:40 opened /dev/ttyS2 serial/USB OK
+25/03/2020 10:17:40 GPS Serial Connected on /dev/ttyS2 at 115200
+25/03/2020 10:17:40 GPS Saved Database found
+25/03/2020 10:17:40 GPS Loading Saved Database
+25/03/2020 10:17:40 loading file /store/gnss/01ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/02ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/03ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/04ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/05ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/06ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/07ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/08ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/09ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/10ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/11ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/12ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/13ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/14ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/15ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/16ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/17ephemeris, 64 bytes
+25/03/2020 10:17:40 loading file /store/gnss/18ephemeris, 64 bytes
+25/03/2020 10:17:40 loading file /store/gnss/19ephemeris, 64 bytes
+25/03/2020 10:17:40 loading file /store/gnss/20ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/21ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/22ephemeris, 84 bytes
+25/03/2020 10:17:40 loading file /store/gnss/23ephemeris, 56 bytes
+25/03/2020 10:17:40 loading file /store/gnss/24ephemeris, 56 bytes
+25/03/2020 10:17:40 loading file /store/gnss/25ephemeris, 56 bytes
+25/03/2020 10:17:40 loading file /store/gnss/26ephemeris, 56 bytes
+25/03/2020 10:17:40 loading file /store/gnss/27almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/28almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/29almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/30almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/31almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/32almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/33almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/34almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/35almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/36almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/37almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/38almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/39almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/40almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/41almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/42almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/43almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/44almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/45almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/46almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/47almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/48almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/49almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/50almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/51almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/52almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/53almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/54almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/55almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/56almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/57almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/58almanac, 36 bytes
+25/03/2020 10:17:40 loading file /store/gnss/59almanac, 36 bytes
+25/03/2020 10:17:40 loading file /store/gnss/60almanac, 36 bytes
+25/03/2020 10:17:40 loading file /store/gnss/61almanac, 36 bytes
+25/03/2020 10:17:40 loading file /store/gnss/62almanac, 36 bytes
+25/03/2020 10:17:40 loading file /store/gnss/63almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/64almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/65almanac, 52 bytes
+25/03/2020 10:17:40 loading file /store/gnss/66almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/67almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/68almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/69almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/70almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/71almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/72almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/73almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/74almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/75almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/76almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/77almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/78almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/79almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/80almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/81almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/82almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/83almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/84almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/85almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/86almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/87almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/88almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/89almanac, 44 bytes
+25/03/2020 10:17:40 loading file /store/gnss/90assistance, 120 bytes
+25/03/2020 10:17:40 loading file /store/gnss/91assistance, 28 bytes
+25/03/2020 10:17:40 loading file /store/gnss/92assistance, 44 bytes
+25/03/2020 10:17:40 GPS Sat Found (NMEA)!!!!!!!!!
+25/03/2020 10:17:40 gpio interrupts (P1) FE
+25/03/2020 10:17:40 RELEASE 15
+25/03/2020 10:17:41 getting ver
+25/03/2020 10:17:41 gpio interrupts (P1) FE
+25/03/2020 10:17:41 gpio interrupts (P1) FF
+25/03/2020 10:17:41 GPS Ver [ROM CORE 3.01 (107888)] [00080000] (len)160
+25/03/2020 10:17:41 gpio interrupts (P1) FE
+25/03/2020 10:17:41 RELEASE 14
+25/03/2020 10:17:41 gpio interrupts (P1) FE
+25/03/2020 10:17:41 gpio interrupts (P1) FF
+25/03/2020 10:17:41 gpio interrupts (P1) FE
+25/03/2020 10:17:41 RELEASE 15
+25/03/2020 10:17:41 traction/idle state seen
+25/03/2020 10:17:41 gpio interrupts (P1) FE
+25/03/2020 10:17:41 gpio interrupts (P1) FF
+25/03/2020 10:17:42 gpio interrupts (P1) FE
+25/03/2020 10:17:42 RELEASE 5
+25/03/2020 10:17:42 messagedialog result 230905
+25/03/2020 10:17:42 decoded 0x230905
+25/03/2020 10:17:42 driver id -151
+25/03/2020 10:17:42 license expiry - disabled
+25/03/2020 10:17:42 Bgnd set msg-day font Noto Sans
+25/03/2020 10:17:42 lang code: EN file: :Translations/OpusFcMain_en
+25/03/2020 10:17:42 lang file: :Translations/OpusFcMain_en
+25/03/2020 10:17:42 Removing translations
+25/03/2020 10:17:42 Installing translations
+25/03/2020 10:17:42 getlicmsg langfound 0, lang reqd 0
+25/03/2020 10:17:42 show driver name Mick T
+25/03/2020 10:17:42 OpusFcMain change from 6 to 8
+25/03/2020 10:17:42 message dialog font set to: Noto Sans
+25/03/2020 10:17:42 Duplicates Removed 1
+25/03/2020 10:17:42 SETT: driver role 5
+25/03/2020 10:17:42 pointsize is 17, labelsize is 461
+25/03/2020 10:17:42 gpio interrupts (P1) FE
+25/03/2020 10:17:42 Bgnd set msg-day font Noto Sans
+25/03/2020 10:17:42 lang code: EN file: :Translations/OpusFcMain_en
+25/03/2020 10:17:42 lang file: :Translations/OpusFcMain_en
+25/03/2020 10:17:42 Removing translations
+25/03/2020 10:17:42 Installing translations
+25/03/2020 10:17:42 getlicmsg langfound 0, lang reqd 0
+25/03/2020 10:17:42 Splash set font Noto Sans
+25/03/2020 10:17:42 message dialog font set to: Noto Sans
+25/03/2020 10:17:42 Duplicates Removed 1
+25/03/2020 10:17:42 splash font set Noto Sans
+25/03/2020 10:17:42 OpName pointsize is 16, labelsize is 240, height 23
+25/03/2020 10:17:42 Splash set font Noto Sans
+25/03/2020 10:17:42 splash font set Noto Sans
+25/03/2020 10:17:42 gpio interrupts (P1) FF
+25/03/2020 10:17:42 GNSS S:8 U:0
+25/03/2020 10:17:42 main - GNSS SAT state change 0->1
+25/03/2020 10:17:42 GNSS S:8 (GP:8 GL:0 ) U:0 Hacc:-1 R:0
+25/03/2020 10:17:42 MessageDialog GNSS 1
+25/03/2020 10:17:42 Splash GNSS 1
+25/03/2020 10:17:43 gps rate set
+25/03/2020 10:17:45 messagedialog result 2
+25/03/2020 10:17:45 OpusFcMain change from 8 to 11
+25/03/2020 10:17:45 init complete, qrysent 1 0
+25/03/2020 10:17:45 postStartCK cleared
+25/03/2020 10:17:45 Chklist required?
+25/03/2020 10:17:45 checklist file detectedx
+25/03/2020 10:17:45 Chklist required 0
+25/03/2020 10:17:45 OpusFcMain change from 11 to 15
+25/03/2020 10:17:45 wrote 1 to /sys/class/gpio/gpio60/value (O/P 1)
+25/03/2020 10:17:45 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+25/03/2020 10:17:45 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+25/03/2020 10:17:45 START Enabled
+25/03/2020 10:17:45 OpusFcMain change from 15 to 16
+25/03/2020 10:17:46 opened /dev/ttyACM0 serial/USB OK
+25/03/2020 10:17:46 MDM:opened and closed /dev/ttyACM0
+25/03/2020 10:17:46 opened /dev/ttyACM2 serial/USB OK
+25/03/2020 10:17:46 opened /dev/ttyACM0 serial/USB OK
+25/03/2020 10:17:46 Modem Serial Connected using /dev/ttyACM0 and /dev/ttyACM2
+25/03/2020 10:17:46 modem state change 1 -> 2
+25/03/2020 10:17:46 geofence state change 2 -> 3
+25/03/2020 10:17:47 NET:modem is opened
+25/03/2020 10:17:48 ATE0V1
+25/03/2020 10:17:48 GNSS S:22 U:0
+25/03/2020 10:17:48 time syncing: 1585131468
+25/03/2020 10:18:48 Updated hwclock
+25/03/2020 10:18:48 GNSS S:22 (GP:14 GL:8 ) U:0 Hacc:-1 R:0
+25/03/2020 10:18:48 messagedialog result 2
+25/03/2020 10:18:48 OpusFcMain change from 16 to 17
+25/03/2020 10:18:48 Cklist halt
+25/03/2020 10:18:48 splash enabled?:1
+25/03/2020 10:18:48 brand 1 is Earthtrack, logo is /store/Earthtrack.png
+25/03/2020 10:18:48 brand 2 is Earthtrack, theme logo is /store/Earthtrack_light.png
+25/03/2020 10:18:48 brand 3 is :/Brands/brand/Earthtrack.png
+25/03/2020 10:18:48 Bgnd set msg-day font Noto Sans
+25/03/2020 10:18:48 Swimming 5:15
+25/03/2020 10:18:48 linewidth=2, pixelwidth=226, ave=17
+25/03/2020 10:18:48 splash font set Noto Sans
+25/03/2020 10:18:48 daymsg [Swimming 5:15]
+25/03/2020 10:18:48 pointsize is 29, labelsize is 480
+25/03/2020 10:18:48 driver id2 -151
+25/03/2020 10:18:48 Run state: role 5
+25/03/2020 10:18:48 wrote 1 to /sys/class/gpio/gpio27/value (O/P 3)
+25/03/2020 10:18:48 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+25/03/2020 10:18:48 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+25/03/2020 10:18:48 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+25/03/2020 10:18:48 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+25/03/2020 10:18:48 wrote 1 to /sys/class/gpio/gpio60/value (O/P 1)
+25/03/2020 10:18:48 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+25/03/2020 10:18:48 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+25/03/2020 10:18:48 OpusFcMain change from 17 to 18
+25/03/2020 10:18:48 Cklist halt
+25/03/2020 10:18:48 stop reader
+25/03/2020 10:18:48 wrote 1 to /sys/class/gpio/gpio27/value (O/P 3)
+25/03/2020 10:18:48 CAN opened OK
+25/03/2020 10:18:48 splash enabled?:1
+25/03/2020 10:18:48 messagedialog result 3
+25/03/2020 10:18:48 gpio interrupts (P1) FB
+25/03/2020 10:18:48 card read
+25/03/2020 10:18:48 Uart rxfifo has 14 bytes waiting
+25/03/2020 10:18:48 vli 000a 10
+25/03/2020 10:18:48 vli matches
+25/03/2020 10:18:48 208 1541 123
+25/03/2020 10:18:48 CardReader version 31582
+25/03/2020 10:18:48 gps version is ROM CORE 3.01 (107888)
+25/03/2020 10:18:48 main state running
+25/03/2020 10:18:49 ATE0V1
+25/03/2020 10:18:49 Duplicates Removed 1
+25/03/2020 10:18:49 OK
+25/03/2020 10:18:49 NET:modem is alive
+25/03/2020 10:18:49 ATE0V1
+25/03/2020 10:18:49 OK
+25/03/2020 10:18:49 AT+UUSBCONF?
+25/03/2020 10:18:49 +UUSBCONF: 0,"",,"0x1141"
+25/03/2020 10:18:49 OK
+25/03/2020 10:18:49 NET:USB Profile is 0 4417
+25/03/2020 10:18:49 AT+CGMM
+25/03/2020 10:18:49 TOBY-L280
+25/03/2020 10:18:49 MDM: HWType TOBY-L280
+25/03/2020 10:18:49 OK
+25/03/2020 10:18:49 AT+CGSN
+25/03/2020 10:18:49 358503060477149
+25/03/2020 10:18:49 MDM: IMEI 358503060477149
+25/03/2020 10:18:49 OK
+25/03/2020 10:18:49 AT+CIMI
+25/03/2020 10:18:49 ICONS 6F
+25/03/2020 10:18:49 234500003592294
+25/03/2020 10:18:49 MDM: IMSI 234500003592294
+25/03/2020 10:18:49 OK
+25/03/2020 10:18:49 AT+CCID
+25/03/2020 10:18:49 +CCID: 8944502811185922949
+25/03/2020 10:18:49 MDM: CCID 8944502811185922949
+25/03/2020 10:18:49 OK
+25/03/2020 10:18:49 AT+CSQ
+25/03/2020 10:18:49 +CSQ: 31,4
+25/03/2020 10:18:49 OK
+25/03/2020 10:18:49 gpio interrupts (P1) FF
+25/03/2020 10:18:49 imsi: 234500003592294 15, Auto 1
+25/03/2020 10:18:49 selected apn: nextm2m (found? 1)
+25/03/2020 10:18:49 ICCID Check: 8944502811185922949 8944502811185922949
+25/03/2020 10:18:49 gsm starting
+25/03/2020 10:18:49 Comms Task Alive/Started, conn_retry 300
+25/03/2020 10:18:49 comms st 0 -> 1
+25/03/2020 10:18:49 modem is HL8/4G
+25/03/2020 10:18:49 imsi: 234500003592294 15, Auto 1
+25/03/2020 10:18:49 selected apn: nextm2m (found? 1)
+25/03/2020 10:18:49 NET: enable
+25/03/2020 10:18:49 enable apn nextm2m for HL8
+25/03/2020 10:18:49 comms st 1 -> 2
+25/03/2020 10:18:49 NS 1
+25/03/2020 10:18:50 Duplicates Removed 8
+25/03/2020 10:18:50 net state change 0 -> 1
+25/03/2020 10:18:50 modem open now
+25/03/2020 10:18:50 ATE0V1
+25/03/2020 10:18:50 OK
+25/03/2020 10:18:50 AT+CGMM
+25/03/2020 10:18:50 TOBY-L280
+25/03/2020 10:18:50 MDM: HWType TOBY-L280
+25/03/2020 10:18:50 OK
+25/03/2020 10:18:50 AT+CGSN
+25/03/2020 10:18:50 NS 1
+25/03/2020 10:18:50 358503060477149
+25/03/2020 10:18:50 MDM: IMEI 358503060477149
+25/03/2020 10:18:50 OK
+25/03/2020 10:18:50 AT+CIMI
+25/03/2020 10:18:50 234500003592294
+25/03/2020 10:18:50 MDM: IMSI 234500003592294
+25/03/2020 10:18:50 OK
+25/03/2020 10:18:50 AT+CCID
+25/03/2020 10:18:50 +CCID: 8944502811185922949
+25/03/2020 10:18:50 MDM: CCID 8944502811185922949
+25/03/2020 10:18:50 OK
+25/03/2020 10:18:50 AT+UPSND=0,8
+25/03/2020 10:18:50 +UPSND: 0,8,0
+25/03/2020 10:18:50 psd line 0
+25/03/2020 10:18:50 pad active #0 (NO)
+25/03/2020 10:18:50 OK
+25/03/2020 10:18:50 net state change 1 -> 2
+25/03/2020 10:18:50 AT+UPSD=0,1,"nextm2m"
+25/03/2020 10:18:50 OK
+25/03/2020 10:18:50 NS 1
+25/03/2020 10:18:50 Duplicates Removed 2
+25/03/2020 10:18:50 canSetFilter
+25/03/2020 10:18:50 NS 1
+25/03/2020 10:18:50 Duplicates Removed 1
+25/03/2020 10:18:50 impact value 2
+25/03/2020 10:18:50 Impact New Sensor - version: 02.00.00
+25/03/2020 10:18:50 ImpactVersion 02.00.00
+25/03/2020 10:18:50 NS 1
+25/03/2020 10:18:51 Duplicates Removed 4
+25/03/2020 10:18:51 AT+UPSDA=0,3
+25/03/2020 10:18:51 NS 1
+25/03/2020 10:18:52 Duplicates Removed 8
+25/03/2020 10:18:52 OK
+25/03/2020 10:18:52 +UUPSDA: 0,"10.48.0.57"
+25/03/2020 10:18:52 AT+UPSND=0,8
+25/03/2020 10:18:52 +UPSND: 0,8,1
+25/03/2020 10:18:52 psd line 1
+25/03/2020 10:18:52 pad active #1 (YES)
+25/03/2020 10:18:52 OK
+25/03/2020 10:18:52 AT+UPSND=0,0
+25/03/2020 10:18:52 +UPSND: 0,0,"10.48.0.57"
+25/03/2020 10:18:52 OK
+25/03/2020 10:18:52 AT+CREG?
+25/03/2020 10:18:52 NS 1
+25/03/2020 10:18:52 +CREG: 0,5
+25/03/2020 10:18:52 OK
+25/03/2020 10:18:52 net state change 2 -> 3
+25/03/2020 10:18:52 AT+CGREG=1
+25/03/2020 10:18:52 OK
+25/03/2020 10:18:52 AT+CREG=2
+25/03/2020 10:18:52 OK
+25/03/2020 10:18:52 AT+CGREG?
+25/03/2020 10:18:52 +CGREG: 1,4
+25/03/2020 10:18:52 OK
+25/03/2020 10:18:52 AT+COPS?
+25/03/2020 10:18:52 +COPS: 0,0,"Optus AU",7
+25/03/2020 10:18:52 MDM: operator name Optus AU
+25/03/2020 10:18:52 OK
+25/03/2020 10:18:52 NS 1
+25/03/2020 10:18:53 Duplicates Removed 9
+25/03/2020 10:18:53 AT+CSQ
+25/03/2020 10:18:53 +CSQ: 31,5
+25/03/2020 10:18:53 OK
+25/03/2020 10:18:53 net state change 3 -> 4
+25/03/2020 10:18:53 NS 2
+25/03/2020 10:18:53 comms st 2 -> 3
+25/03/2020 10:18:53 comms st 3 -> 4
+25/03/2020 10:18:53 connect 1 devices.earthtrack.rct.net.au, 2003
+25/03/2020 10:18:53 NET: connect
+25/03/2020 10:18:53 AT+UPSND=0,8
+25/03/2020 10:18:53 +UPSND: 0,8,1
+25/03/2020 10:18:53 psd line 1
+25/03/2020 10:18:53 pad active #1 (YES)
+25/03/2020 10:18:53 OK
+25/03/2020 10:18:53 AT+USOCR=6
+25/03/2020 10:18:53 +USOCR: 0
+25/03/2020 10:18:53 socket #0
+25/03/2020 10:18:53 OK
+25/03/2020 10:18:53 AT+USOCO=0,"devices.earthtrack.rct.net.au",2003
+25/03/2020 10:18:54 GNSS S:22 U:0
+25/03/2020 10:18:54 GNSS S:22 (GP:14 GL:8 ) U:0 Hacc:-1 R:31
+25/03/2020 10:18:54 OK
+25/03/2020 10:18:55 +UUSORD: 0,16
+25/03/2020 10:18:55 AT+USODL=0
+25/03/2020 10:18:55 CONNECT
+25/03/2020 10:18:55 Directlink CONNECT
+25/03/2020 10:18:55 modem state change 2 -> 3
+25/03/2020 10:18:55 net connected
+25/03/2020 10:18:55 chat connect
+25/03/2020 10:18:55 <220 earthtrack>
+25/03/2020 10:18:55 UNIT 9218
+25/03/2020 10:18:56 <333 CHAL 5730D41E>
+25/03/2020 10:18:56 RESP DB246AF6
+25/03/2020 10:18:57 <230 Auth OK>
+25/03/2020 10:18:57 last connect time written 1585131537
+25/03/2020 10:18:57 TIME
+25/03/2020 10:18:57 last connect time written 1585131537
+25/03/2020 10:18:58 <211 TIME 1585131538>
+25/03/2020 10:18:58 adjusting rtc - comms TIME
+25/03/2020 10:18:58 last connect time written 1585131538
+25/03/2020 10:18:58 EVCOUNT 4
+25/03/2020 10:18:59 <252 Event OK>
+25/03/2020 10:18:59 TODO
+25/03/2020 10:18:59 TTFF 25
+25/03/2020 10:18:59 GPS Fix obtained*****************
+25/03/2020 10:18:59 mga: updated hacc 10712
+25/03/2020 10:19:00 MDM:rssi 31
+25/03/2020 10:19:00 <125 TODO PUT_debuglog>
+25/03/2020 10:19:00 <225 Work list complete>
+25/03/2020 10:19:00 mga: updated hacc 10047
+25/03/2020 10:19:00 mga: updated hacc 9110
+25/03/2020 10:19:00 GNSS S:22 U:3
+25/03/2020 10:19:00 main - GNSS SAT state change 1->2
+25/03/2020 10:19:00 GNSS S:22 (GP:14 GL:8 ) U:3 Hacc:9110 R:31
+25/03/2020 10:19:00 PUT debuglog 166171 8B0C6846
+25/03/2020 10:19:00 MessageDialog GNSS 2
+25/03/2020 10:19:00 GeoFence::speed_limit_for_zone(206)
+25/03/2020 10:19:00 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:19:00 GeoFence::speed_limit_for_zone: in_zone : speed limit = 60
+25/03/2020 10:19:00 GeoFence::geofence_check() 1: 60, 206, 2
+25/03/2020 10:19:00 GeoFence::speed_limit_for_zone(206)
+25/03/2020 10:19:00 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:19:00 GeoFence::speed_limit_for_zone: in_zone : speed limit = 60
+25/03/2020 10:19:00 Splash GNSS 2
+25/03/2020 10:19:00 opusMain::slotZoneSpeed: 60, 206, 2
+25/03/2020 10:19:01 mga: updated hacc 7232
+25/03/2020 10:19:01 mga: updated hacc 6217
+25/03/2020 10:19:01 <151 FILE debuglog 166171>
+25/03/2020 10:19:01 Put /store/debuglog.tar.gz 166171
+25/03/2020 10:19:01 166107
+25/03/2020 10:19:01 159963
+25/03/2020 10:19:01 149979
+25/03/2020 10:19:01 139995
+25/03/2020 10:19:01 129947
+25/03/2020 10:19:02 mga: updated hacc 5512
+25/03/2020 10:19:02 mga: updated hacc 4895
+25/03/2020 10:19:03 mga: updated hacc 4425
+25/03/2020 10:19:03 119963
+25/03/2020 10:19:03 109979
+25/03/2020 10:19:03 mga: updated hacc 4118
+25/03/2020 10:19:04 mga: updated hacc 3880
+25/03/2020 10:19:04 99995
+25/03/2020 10:19:04 89947
+25/03/2020 10:19:04 mga: updated hacc 3717
+25/03/2020 10:19:04 79963
+25/03/2020 10:19:04 69979
+25/03/2020 10:19:04 59995
+25/03/2020 10:19:04 49947
+25/03/2020 10:19:05 mga: updated hacc 3571
+25/03/2020 10:19:05 mga: updated hacc 3443
+25/03/2020 10:19:05 39963
+25/03/2020 10:19:05 29979
+25/03/2020 10:19:06 19995
+25/03/2020 10:19:06 mga: updated hacc 3366
+25/03/2020 10:19:06 GNSS S:22 U:3
+25/03/2020 10:19:06 GNSS S:22 (GP:14 GL:8 ) U:3 Hacc:3366 R:31
+25/03/2020 10:19:06 mga: updated hacc 3273
+25/03/2020 10:19:07 mga: updated hacc 3207
+25/03/2020 10:19:07 9947
+25/03/2020 10:19:07 upload complete
+25/03/2020 10:19:07 mga: updated hacc 3138
+25/03/2020 10:19:08 mga: updated hacc 3067
+25/03/2020 10:19:08 mga: updated hacc 3001
+25/03/2020 10:19:08 <251 OK>
+25/03/2020 10:19:08 put list complete
+25/03/2020 10:19:08 EVENT 16012 1585131456 -319781494/1159579567/991/0/0 SWSTART OpusFC 5.0.58.999 R v:143
+25/03/2020 10:19:09 mga: updated hacc 2947
+25/03/2020 10:19:09 mga: updated hacc 2882
+25/03/2020 10:19:09 <252 Event OK>
+25/03/2020 10:19:09 EVENT 16013 1585112517 0/0/0/0/0 POWERDOWN v:131
+25/03/2020 10:19:10 mga: updated hacc 2808
+25/03/2020 10:19:10 mga: updated hacc 2736
+25/03/2020 10:19:10 <252 Event OK>
+25/03/2020 10:19:10 EVENT 16014 1585131458 0/0/0/0/0 ZONE_OK 7 100 FW=NO VERSION v:142
+25/03/2020 10:19:11 mga: updated hacc 2669
+25/03/2020 10:19:11 mga: updated hacc 2595
+25/03/2020 10:19:11 <252 Event OK>
+25/03/2020 10:19:11 EVENT 16015 1585131465 0/0/0/0/0 SIGNON -151 01b9edf4 OK 0 230905 0 v:142
+25/03/2020 10:19:12 mga: updated hacc 2516
+25/03/2020 10:19:12 GNSS S:22 U:3
+25/03/2020 10:19:12 GNSS S:22 (GP:14 GL:8 ) U:3 Hacc:2516 R:31
+25/03/2020 10:19:12 mga: updated hacc 2432
+25/03/2020 10:19:12 <252 Event OK>
+25/03/2020 10:19:12 QUIT
+25/03/2020 10:19:13 mga: updated hacc 2360
+25/03/2020 10:19:13 mga: updated hacc 2297
+25/03/2020 10:19:13 <221 Session ended - goodbye>
+25/03/2020 10:19:13 NET: disconnect
+25/03/2020 10:19:14 mga: updated hacc 2244
+25/03/2020 10:19:14 mga: updated hacc 2188
+25/03/2020 10:19:15 mga: updated hacc 2134
+25/03/2020 10:19:15 mga: updated hacc 2087
+25/03/2020 10:19:15 esc modem +++
+25/03/2020 10:19:15 modem state change 3 -> 2
+25/03/2020 10:19:15 DISCONNECT
+25/03/2020 10:19:15 Directlink DISCONNECT
+25/03/2020 10:19:15 OK
+25/03/2020 10:19:15 +UUSOCL: 0
+25/03/2020 10:19:15 socket closed
+25/03/2020 10:19:16 mga: updated hacc 2041
+25/03/2020 10:19:16 mga: updated hacc 2002
+25/03/2020 10:19:17 mga: updated hacc 1977
+25/03/2020 10:19:17 mga: updated hacc 1951
+25/03/2020 10:19:18 mga: updated hacc 1928
+25/03/2020 10:19:18 GNSS S:22 U:3
+25/03/2020 10:19:18 GNSS S:22 (GP:14 GL:8 ) U:3 Hacc:1928 R:31
+25/03/2020 10:19:18 mga: updated hacc 1906
+25/03/2020 10:19:19 mga: updated hacc 1887
+25/03/2020 10:19:19 mga: updated hacc 1870
+25/03/2020 10:19:20 mga: updated hacc 1855
+25/03/2020 10:19:20 mga: updated hacc 1841
+25/03/2020 10:19:21 mga: updated hacc 1828
+25/03/2020 10:19:21 comms chat disconnect 1
+25/03/2020 10:19:21 comms st 4 -> 3
+25/03/2020 10:19:21 mga: updated hacc 1816
+25/03/2020 10:19:22 mga: updated hacc 1804
+25/03/2020 10:19:22 mga: updated hacc 1793
+25/03/2020 10:19:23 mga: updated hacc 1782
+25/03/2020 10:19:23 mga: updated hacc 1771
+25/03/2020 10:19:24 mga: updated hacc 1761
+25/03/2020 10:19:24 GNSS S:22 U:3
+25/03/2020 10:19:24 GNSS S:22 (GP:14 GL:8 ) U:3 Hacc:1761 R:31
+25/03/2020 10:19:24 mga: updated hacc 1751
+25/03/2020 10:19:25 mga: updated hacc 1742
+25/03/2020 10:19:25 mga: updated hacc 1732
+25/03/2020 10:19:26 mga: updated hacc 1723
+25/03/2020 10:19:26 mga: updated hacc 1713
+25/03/2020 10:19:27 mga: updated hacc 1702
+25/03/2020 10:19:27 mga: updated hacc 1694
+25/03/2020 10:19:28 mga: updated hacc 1687
+25/03/2020 10:19:28 mga: updated hacc 1680
+25/03/2020 10:19:29 mga: updated hacc 1672
+25/03/2020 10:19:29 mga: updated hacc 1661
+25/03/2020 10:19:30 mga: updated hacc 1575
+25/03/2020 10:19:30 GNSS S:22 U:9
+25/03/2020 10:19:30 GNSS S:22 (GP:14 GL:8 ) U:9 Hacc:1575 R:31
+25/03/2020 10:19:30 SaveTripData: 24/0/21/16/0 0 0/0/0/0/0
+25/03/2020 10:19:30 mga: updated hacc 1512
+25/03/2020 10:19:31 mga: updated hacc 1467
+25/03/2020 10:19:31 mga: updated hacc 1427
+25/03/2020 10:19:32 mga: updated hacc 1386
+25/03/2020 10:19:32 mga: updated hacc 1364
+25/03/2020 10:19:33 mga: updated hacc 1339
+25/03/2020 10:19:33 mga: updated hacc 1311
+25/03/2020 10:19:34 mga: updated hacc 1289
+25/03/2020 10:19:34 mga: updated hacc 1261
+25/03/2020 10:19:34 +CREG: 5,"E86D","01A55F42",7
+25/03/2020 10:19:34 mdm RAT 7
+25/03/2020 10:19:34 radio set 4G <--
+25/03/2020 10:19:35 mga: updated hacc 1240
+25/03/2020 10:19:35 mga: updated hacc 1224
+25/03/2020 10:19:36 mga: updated hacc 1204
+25/03/2020 10:19:36 GNSS S:22 U:9
+25/03/2020 10:19:36 GNSS S:22 (GP:14 GL:8 ) U:9 Hacc:1204 R:31
+25/03/2020 10:19:36 mga: updated hacc 1185
+25/03/2020 10:19:37 mga: updated hacc 1170
+25/03/2020 10:19:37 mga: updated hacc 1159
+25/03/2020 10:19:38 mga: updated hacc 1145
+25/03/2020 10:19:38 mga: updated hacc 1133
+25/03/2020 10:19:39 mga: updated hacc 1119
+25/03/2020 10:19:39 mga: updated hacc 1105
+25/03/2020 10:19:40 mga: updated hacc 1093
+25/03/2020 10:19:40 mga: updated hacc 1078
+25/03/2020 10:19:41 mga: updated hacc 1062
+25/03/2020 10:19:41 mga: updated hacc 1050
+25/03/2020 10:19:42 mga: updated hacc 1039
+25/03/2020 10:19:42 GNSS S:22 U:10
+25/03/2020 10:19:42 GNSS S:22 (GP:14 GL:8 ) U:10 Hacc:1039 R:31
+25/03/2020 10:19:42 mga: updated hacc 1026
+25/03/2020 10:19:43 mga: updated hacc 1015
+25/03/2020 10:19:43 mga: updated hacc 1008
+25/03/2020 10:19:44 mga: updated hacc 1000
+25/03/2020 10:19:44 mga: updated hacc 994
+25/03/2020 10:19:45 mga: updated hacc 987
+25/03/2020 10:19:45 mga: updated hacc 980
+25/03/2020 10:19:46 mga: updated hacc 974
+25/03/2020 10:19:46 GeoFence::speed_limit_for_zone(207)
+25/03/2020 10:19:46 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:19:46 GeoFence::speed_limit_for_zone: in_zone : speed limit = 30
+25/03/2020 10:19:46 GeoFence::geofence_check() 1: 30, 207, 1
+25/03/2020 10:19:46 GeoFence::speed_limit_for_zone(207)
+25/03/2020 10:19:46 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:19:46 GeoFence::speed_limit_for_zone: in_zone : speed limit = 30
+25/03/2020 10:19:46 opusMain::slotZoneSpeed: 30, 207, 1
+25/03/2020 10:19:46 mga: updated hacc 969
+25/03/2020 10:19:47 mga: updated hacc 961
+25/03/2020 10:19:47 mga: updated hacc 955
+25/03/2020 10:19:48 mga: updated hacc 949
+25/03/2020 10:19:48 GNSS S:23 U:10
+25/03/2020 10:19:48 GNSS S:23 (GP:14 GL:9 ) U:10 Hacc:949 R:31
+25/03/2020 10:19:48 mga: updated hacc 942
+25/03/2020 10:19:49 mga: updated hacc 937
+25/03/2020 10:19:49 mga: updated hacc 928
+25/03/2020 10:19:50 mga: updated hacc 920
+25/03/2020 10:19:50 mga: updated hacc 915
+25/03/2020 10:19:51 mga: updated hacc 912
+25/03/2020 10:19:51 mga: updated hacc 911
+25/03/2020 10:19:52 mga: updated hacc 909
+25/03/2020 10:19:54 GNSS S:23 U:10
+25/03/2020 10:19:54 GNSS S:23 (GP:14 GL:9 ) U:10 Hacc:913 R:31
+25/03/2020 10:20:00 GNSS S:23 U:10
+25/03/2020 10:20:00 GNSS S:23 (GP:14 GL:9 ) U:10 Hacc:960 R:31
+25/03/2020 10:20:01 MDM:rssi 27
+25/03/2020 10:20:06 GNSS S:23 U:10
+25/03/2020 10:20:06 GNSS S:23 (GP:14 GL:9 ) U:10 Hacc:993 R:27
+25/03/2020 10:20:12 GNSS S:23 U:10
+25/03/2020 10:20:12 GNSS S:23 (GP:14 GL:9 ) U:10 Hacc:977 R:27
+25/03/2020 10:20:13 +CREG: 5,"E86D","01A38542",7
+25/03/2020 10:20:13 mdm RAT 7
+25/03/2020 10:20:18 GNSS S:23 U:10
+25/03/2020 10:20:18 GNSS S:23 (GP:14 GL:9 ) U:10 Hacc:937 R:27
+25/03/2020 10:20:18 opusMain::slotGroundSpeedOverspeedEvent: 16015, 25, 73.004959, 0
+25/03/2020 10:20:18 adjusting rtc 2- event
+25/03/2020 10:20:19 comms st 3 -> 4
+25/03/2020 10:20:19 connect 1 devices.earthtrack.rct.net.au, 2003
+25/03/2020 10:20:19 NET: connect
+25/03/2020 10:20:19 AT+UPSND=0,8
+25/03/2020 10:20:19 +UPSND: 0,8,1
+25/03/2020 10:20:19 psd line 1
+25/03/2020 10:20:19 pad active #1 (YES)
+25/03/2020 10:20:19 OK
+25/03/2020 10:20:19 AT+USOCR=6
+25/03/2020 10:20:19 +USOCR: 0
+25/03/2020 10:20:19 socket #0
+25/03/2020 10:20:19 OK
+25/03/2020 10:20:19 AT+USOCO=0,"devices.earthtrack.rct.net.au",2003
+25/03/2020 10:20:20 OK
+25/03/2020 10:20:20 +UUSORD: 0,16
+25/03/2020 10:20:21 AT+USODL=0
+25/03/2020 10:20:21 CONNECT
+25/03/2020 10:20:21 Directlink CONNECT
+25/03/2020 10:20:21 modem state change 2 -> 3
+25/03/2020 10:20:21 net connected
+25/03/2020 10:20:21 chat connect
+25/03/2020 10:20:21 <220 earthtrack>
+25/03/2020 10:20:21 UNIT 9218
+25/03/2020 10:20:22 <333 CHAL 5619301F>
+25/03/2020 10:20:22 RESP 44C41C9C
+25/03/2020 10:20:23 <230 Auth OK>
+25/03/2020 10:20:23 last connect time written 1585131623
+25/03/2020 10:20:23 EVCOUNT 1
+25/03/2020 10:20:23 mga: updated hacc 906
+25/03/2020 10:20:24 mga: updated hacc 903
+25/03/2020 10:20:24 GNSS S:23 U:10
+25/03/2020 10:20:24 GNSS S:23 (GP:14 GL:9 ) U:10 Hacc:903 R:27
+25/03/2020 10:20:24 <252 Event OK>
+25/03/2020 10:20:24 TODO
+25/03/2020 10:20:24 mga: updated hacc 901
+25/03/2020 10:20:25 mga: updated hacc 899
+25/03/2020 10:20:25 <226 Nothing to do>
+25/03/2020 10:20:25 EVENT 16016 1585131618 -319772963/1159534953/939/27/17 ZONEOVERSPEED 16015 25 73 1 v:142
+25/03/2020 10:20:25 mga: updated hacc 896
+25/03/2020 10:20:26 mga: updated hacc 894
+25/03/2020 10:20:26 GeoFence::speed_limit_for_zone(206)
+25/03/2020 10:20:26 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:20:26 GeoFence::speed_limit_for_zone: in_zone : speed limit = 60
+25/03/2020 10:20:26 GeoFence::geofence_check() 1: 60, 206, 2
+25/03/2020 10:20:26 GeoFence::speed_limit_for_zone(206)
+25/03/2020 10:20:26 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:20:26 GeoFence::speed_limit_for_zone: in_zone : speed limit = 60
+25/03/2020 10:20:26 opusMain::slotZoneSpeed: 60, 206, 2
+25/03/2020 10:20:26 mga: updated hacc 893
+25/03/2020 10:20:27 <252 Event OK>
+25/03/2020 10:20:27 QUIT
+25/03/2020 10:20:27 opusMain::slotGroundSpeedOverspeedEvent: 16015, 3, 53.054207, 0
+25/03/2020 10:20:27 adjusting rtc 2- event
+25/03/2020 10:20:28 <221 Session ended - goodbye>
+25/03/2020 10:20:28 NET: disconnect
+25/03/2020 10:20:30 GNSS S:23 U:10
+25/03/2020 10:20:30 GNSS S:23 (GP:14 GL:9 ) U:10 Hacc:894 R:27
+25/03/2020 10:20:30 esc modem +++
+25/03/2020 10:20:30 modem state change 3 -> 2
+25/03/2020 10:20:30 DISCONNECT
+25/03/2020 10:20:30 Directlink DISCONNECT
+25/03/2020 10:20:30 OK
+25/03/2020 10:20:30 +UUSOCL: 0
+25/03/2020 10:20:30 socket closed
+25/03/2020 10:20:30 mga: updated hacc 892
+25/03/2020 10:20:30 SaveTripData: 83/0/23/17/0 1 0/0/0/0/1
+25/03/2020 10:20:31 mga: updated hacc 891
+25/03/2020 10:20:31 mga: updated hacc 890
+25/03/2020 10:20:32 mga: updated hacc 889
+25/03/2020 10:20:32 MDM:rssi 25
+25/03/2020 10:20:33 mga: updated hacc 888
+25/03/2020 10:20:33 gpio interrupts (P1) 01
+25/03/2020 10:20:33 rdr/uart interrupt ##########
+25/03/2020 10:20:33 gpio interrupts (P1) FF
+25/03/2020 10:20:33 adjusting rtc 2- event
+25/03/2020 10:20:33 mga: updated hacc 887
+25/03/2020 10:20:34 mga: updated hacc 885
+25/03/2020 10:20:34 mga: updated hacc 882
+25/03/2020 10:20:35 mga: updated hacc 878
+25/03/2020 10:20:36 GNSS S:23 U:10
+25/03/2020 10:20:36 GNSS S:23 (GP:14 GL:9 ) U:10 Hacc:878 R:25
+25/03/2020 10:20:36 comms chat disconnect 1
+25/03/2020 10:20:36 comms st 4 -> 3
+25/03/2020 10:20:36 comms st 3 -> 4
+25/03/2020 10:20:36 connect 1 devices.earthtrack.rct.net.au, 2003
+25/03/2020 10:20:36 NET: connect
+25/03/2020 10:20:36 AT+UPSND=0,8
+25/03/2020 10:20:36 +UPSND: 0,8,1
+25/03/2020 10:20:36 psd line 1
+25/03/2020 10:20:36 pad active #1 (YES)
+25/03/2020 10:20:36 OK
+25/03/2020 10:20:36 AT+USOCR=6
+25/03/2020 10:20:36 +USOCR: 0
+25/03/2020 10:20:36 socket #0
+25/03/2020 10:20:36 OK
+25/03/2020 10:20:36 AT+USOCO=0,"devices.earthtrack.rct.net.au",2003
+25/03/2020 10:20:37 OK
+25/03/2020 10:20:38 +UUSORD: 0,16
+25/03/2020 10:20:38 AT+USODL=0
+25/03/2020 10:20:38 CONNECT
+25/03/2020 10:20:38 Directlink CONNECT
+25/03/2020 10:20:38 modem state change 2 -> 3
+25/03/2020 10:20:38 net connected
+25/03/2020 10:20:38 chat connect
+25/03/2020 10:20:38 <220 earthtrack>
+25/03/2020 10:20:38 UNIT 9218
+25/03/2020 10:20:38 GeoFence::speed_limit_for_zone(208)
+25/03/2020 10:20:38 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:20:38 GeoFence::speed_limit_for_zone: in_zone : speed limit = 30
+25/03/2020 10:20:38 GeoFence::geofence_check() 1: 30, 208, 1
+25/03/2020 10:20:38 GeoFence::speed_limit_for_zone(208)
+25/03/2020 10:20:38 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:20:38 GeoFence::speed_limit_for_zone: in_zone : speed limit = 30
+25/03/2020 10:20:38 opusMain::slotZoneSpeed: 30, 208, 1
+25/03/2020 10:20:38 opusMain::slotGroundSpeedOverspeedEvent: 16015, 7, 66.059143, 0
+25/03/2020 10:20:38 adjusting rtc 2- event
+25/03/2020 10:20:39 <333 CHAL C90D28E>
+25/03/2020 10:20:39 RESP 6A76FD1D
+25/03/2020 10:20:40 <230 Auth OK>
+25/03/2020 10:20:40 last connect time written 1585131640
+25/03/2020 10:20:40 EVCOUNT 3
+25/03/2020 10:20:40 <252 Event OK>
+25/03/2020 10:20:40 TODO
+25/03/2020 10:20:41 <226 Nothing to do>
+25/03/2020 10:20:41 EVENT 16017 1585131627 -319768313/1159529452/893/27/53 ZONEOVERSPEED 16015 3 53 1 v:141
+25/03/2020 10:20:42 GNSS S:23 U:12
+25/03/2020 10:20:42 GNSS S:23 (GP:14 GL:9 ) U:12 Hacc:904 R:25
+25/03/2020 10:20:43 <252 Event OK>
+25/03/2020 10:20:43 EVENT 16018 1585131633 -319762281/1159522367/888/25/65 ENGINEOVERSPEED 16015 9 2672 v:142
+25/03/2020 10:20:44 <252 Event OK>
+25/03/2020 10:20:44 EVENT 16019 1585131638 -319756360/1159515529/883/25/61 ZONEOVERSPEED 16015 7 66 1 v:142
+25/03/2020 10:20:45 mga: updated hacc 877
+25/03/2020 10:20:45 <252 Event OK>
+25/03/2020 10:20:45 QUIT
+25/03/2020 10:20:46 mga: updated hacc 875
+25/03/2020 10:20:46 mga: updated hacc 872
+25/03/2020 10:20:46 <221 Session ended - goodbye>
+25/03/2020 10:20:46 NET: disconnect
+25/03/2020 10:20:47 mga: updated hacc 871
+25/03/2020 10:20:47 mga: updated hacc 870
+25/03/2020 10:20:48 GNSS S:23 U:12
+25/03/2020 10:20:48 GNSS S:23 (GP:14 GL:9 ) U:12 Hacc:870 R:25
+25/03/2020 10:20:48 mga: updated hacc 869
+25/03/2020 10:20:48 mga: updated hacc 866
+25/03/2020 10:20:48 esc modem +++
+25/03/2020 10:20:48 modem state change 3 -> 2
+25/03/2020 10:20:48 DISCONNECT
+25/03/2020 10:20:48 Directlink DISCONNECT
+25/03/2020 10:20:48 OK
+25/03/2020 10:20:48 +UUSOCL: 0
+25/03/2020 10:20:48 socket closed
+25/03/2020 10:20:49 mga: updated hacc 864
+25/03/2020 10:20:50 +CREG: 5,"E86D","01A38541",7
+25/03/2020 10:20:50 mdm RAT 7
+25/03/2020 10:20:54 GNSS S:23 U:12
+25/03/2020 10:20:54 GNSS S:23 (GP:14 GL:9 ) U:12 Hacc:913 R:25
+25/03/2020 10:20:54 comms chat disconnect 1
+25/03/2020 10:20:54 comms st 4 -> 3
+25/03/2020 10:20:56 GeoFence::speed_limit_for_zone(206)
+25/03/2020 10:20:56 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:20:56 GeoFence::speed_limit_for_zone: in_zone : speed limit = 60
+25/03/2020 10:20:56 GeoFence::geofence_check() 1: 60, 206, 2
+25/03/2020 10:20:56 GeoFence::speed_limit_for_zone(206)
+25/03/2020 10:20:56 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:20:56 GeoFence::speed_limit_for_zone: in_zone : speed limit = 60
+25/03/2020 10:20:56 opusMain::slotZoneSpeed: 60, 206, 2
+25/03/2020 10:20:58 opusMain::slotGroundSpeedOverspeedEvent: 16015, 18, 60.147804, 0
+25/03/2020 10:20:58 adjusting rtc 2- event
+25/03/2020 10:20:58 comms st 3 -> 4
+25/03/2020 10:20:58 connect 1 devices.earthtrack.rct.net.au, 2003
+25/03/2020 10:20:58 NET: connect
+25/03/2020 10:20:58 AT+UPSND=0,8
+25/03/2020 10:20:58 +UPSND: 0,8,1
+25/03/2020 10:20:58 psd line 1
+25/03/2020 10:20:58 pad active #1 (YES)
+25/03/2020 10:20:58 OK
+25/03/2020 10:20:58 AT+USOCR=6
+25/03/2020 10:20:58 +USOCR: 0
+25/03/2020 10:20:58 socket #0
+25/03/2020 10:20:58 OK
+25/03/2020 10:20:58 AT+USOCO=0,"devices.earthtrack.rct.net.au",2003
+25/03/2020 10:20:59 OK
+25/03/2020 10:21:00 GNSS S:23 U:12
+25/03/2020 10:21:00 GNSS S:23 (GP:14 GL:9 ) U:12 Hacc:952 R:25
+25/03/2020 10:21:00 +UUSORD: 0,16
+25/03/2020 10:21:00 AT+USODL=0
+25/03/2020 10:21:00 CONNECT
+25/03/2020 10:21:00 Directlink CONNECT
+25/03/2020 10:21:00 modem state change 2 -> 3
+25/03/2020 10:21:00 net connected
+25/03/2020 10:21:00 chat connect
+25/03/2020 10:21:00 <220 earthtrack>
+25/03/2020 10:21:00 UNIT 9218
+25/03/2020 10:21:01 <333 CHAL 27F75801>
+25/03/2020 10:21:01 RESP C82F49EA
+25/03/2020 10:21:02 <230 Auth OK>
+25/03/2020 10:21:02 last connect time written 1585131662
+25/03/2020 10:21:02 EVCOUNT 1
+25/03/2020 10:21:03 <252 Event OK>
+25/03/2020 10:21:03 TODO
+25/03/2020 10:21:04 MDM:rssi 31
+25/03/2020 10:21:04 <226 Nothing to do>
+25/03/2020 10:21:04 EVENT 16020 1585131658 -319739756/1159495553/955/25/36 ZONEOVERSPEED 16015 18 60 1 v:142
+25/03/2020 10:21:06 GNSS S:23 U:12
+25/03/2020 10:21:06 GNSS S:23 (GP:14 GL:9 ) U:12 Hacc:895 R:31
+25/03/2020 10:21:06 <252 Event OK>
+25/03/2020 10:21:06 QUIT
+25/03/2020 10:21:07 <221 Session ended - goodbye>
+25/03/2020 10:21:07 NET: disconnect
+25/03/2020 10:21:09 esc modem +++
+25/03/2020 10:21:09 modem state change 3 -> 2
+25/03/2020 10:21:09 DISCONNECT
+25/03/2020 10:21:09 Directlink DISCONNECT
+25/03/2020 10:21:09 OK
+25/03/2020 10:21:09 +UUSOCL: 0
+25/03/2020 10:21:09 socket closed
+25/03/2020 10:21:12 GNSS S:23 U:12
+25/03/2020 10:21:12 GNSS S:23 (GP:14 GL:9 ) U:12 Hacc:883 R:31
+25/03/2020 10:21:14 mga: updated hacc 861
+25/03/2020 10:21:14 mga: updated hacc 857
+25/03/2020 10:21:15 mga: updated hacc 853
+25/03/2020 10:21:15 comms chat disconnect 1
+25/03/2020 10:21:15 comms st 4 -> 3
+25/03/2020 10:21:15 mga: updated hacc 848
+25/03/2020 10:21:16 mga: updated hacc 844
+25/03/2020 10:21:16 mga: updated hacc 841
+25/03/2020 10:21:17 mga: updated hacc 838
+25/03/2020 10:21:17 mga: updated hacc 836
+25/03/2020 10:21:18 GNSS S:23 U:12
+25/03/2020 10:21:18 GNSS S:23 (GP:14 GL:9 ) U:12 Hacc:836 R:31
+25/03/2020 10:21:18 mga: updated hacc 835
+25/03/2020 10:21:18 mga: updated hacc 831
+25/03/2020 10:21:19 mga: updated hacc 828
+25/03/2020 10:21:19 mga: updated hacc 824
+25/03/2020 10:21:20 mga: updated hacc 820
+25/03/2020 10:21:20 mga: updated hacc 819
+25/03/2020 10:21:21 mga: updated hacc 818
+25/03/2020 10:21:24 GNSS S:23 U:12
+25/03/2020 10:21:24 GNSS S:23 (GP:14 GL:9 ) U:12 Hacc:825 R:31
+25/03/2020 10:21:30 GNSS S:24 U:12
+25/03/2020 10:21:30 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:830 R:31
+25/03/2020 10:21:32 SaveTripData: 144/0/23/17/0 2 0/0/0/0/1
+25/03/2020 10:21:34 MDM:rssi 18
+25/03/2020 10:21:36 GNSS S:24 U:12
+25/03/2020 10:21:36 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:821 R:18
+25/03/2020 10:21:36 GeoFence::speed_limit_for_zone(209)
+25/03/2020 10:21:36 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:21:36 GeoFence::speed_limit_for_zone: in_zone : speed limit = 30
+25/03/2020 10:21:36 GeoFence::geofence_check() 1: 30, 209, 1
+25/03/2020 10:21:36 GeoFence::speed_limit_for_zone(209)
+25/03/2020 10:21:36 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:21:36 GeoFence::speed_limit_for_zone: in_zone : speed limit = 30
+25/03/2020 10:21:36 opusMain::slotZoneSpeed: 30, 209, 1
+25/03/2020 10:21:38 mga: updated hacc 817
+25/03/2020 10:21:42 GNSS S:24 U:12
+25/03/2020 10:21:42 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:830 R:18
+25/03/2020 10:21:48 GNSS S:24 U:12
+25/03/2020 10:21:48 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:886 R:18
+25/03/2020 10:21:54 GNSS S:24 U:12
+25/03/2020 10:21:54 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:922 R:18
+25/03/2020 10:21:58 GeoFence::speed_limit_for_zone(206)
+25/03/2020 10:21:58 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:21:58 GeoFence::speed_limit_for_zone: in_zone : speed limit = 60
+25/03/2020 10:21:58 GeoFence::geofence_check() 1: 60, 206, 2
+25/03/2020 10:21:58 GeoFence::speed_limit_for_zone(206)
+25/03/2020 10:21:58 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:21:58 GeoFence::speed_limit_for_zone: in_zone : speed limit = 60
+25/03/2020 10:21:58 opusMain::slotZoneSpeed: 60, 206, 2
+25/03/2020 10:22:00 opusMain::slotGroundSpeedOverspeedEvent: 16015, 22, 60.147804, 0
+25/03/2020 10:22:00 adjusting rtc 2- event
+25/03/2020 10:22:00 GNSS S:24 U:12
+25/03/2020 10:22:00 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:872 R:18
+25/03/2020 10:22:00 comms st 3 -> 4
+25/03/2020 10:22:00 connect 1 devices.earthtrack.rct.net.au, 2003
+25/03/2020 10:22:00 NET: connect
+25/03/2020 10:22:00 AT+UPSND=0,8
+25/03/2020 10:22:00 +UPSND: 0,8,1
+25/03/2020 10:22:00 psd line 1
+25/03/2020 10:22:00 pad active #1 (YES)
+25/03/2020 10:22:00 AT+USOCR=6
+25/03/2020 10:22:00 OK
+25/03/2020 10:22:00 +USOCR: 0
+25/03/2020 10:22:00 socket #0
+25/03/2020 10:22:00 OK
+25/03/2020 10:22:00 AT+USOCO=0,"devices.earthtrack.rct.net.au",2003
+25/03/2020 10:22:01 OK
+25/03/2020 10:22:02 +UUSORD: 0,16
+25/03/2020 10:22:02 AT+USODL=0
+25/03/2020 10:22:02 CONNECT
+25/03/2020 10:22:02 Directlink CONNECT
+25/03/2020 10:22:02 modem state change 2 -> 3
+25/03/2020 10:22:02 net connected
+25/03/2020 10:22:02 chat connect
+25/03/2020 10:22:02 <220 earthtrack>
+25/03/2020 10:22:02 UNIT 9218
+25/03/2020 10:22:03 <333 CHAL 372767DA>
+25/03/2020 10:22:03 RESP 4647BEB7
+25/03/2020 10:22:04 <230 Auth OK>
+25/03/2020 10:22:04 last connect time written 1585131724
+25/03/2020 10:22:04 EVCOUNT 1
+25/03/2020 10:22:05 <252 Event OK>
+25/03/2020 10:22:05 TODO
+25/03/2020 10:22:06 GNSS S:24 U:12
+25/03/2020 10:22:06 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:856 R:18
+25/03/2020 10:22:06 MDM:rssi 15
+25/03/2020 10:22:06 <226 Nothing to do>
+25/03/2020 10:22:06 EVENT 16021 1585131720 -319679391/1159427182/872/18/56 ZONEOVERSPEED 16015 22 60 1 v:141
+25/03/2020 10:22:08 <252 Event OK>
+25/03/2020 10:22:08 QUIT
+25/03/2020 10:22:09 <221 Session ended - goodbye>
+25/03/2020 10:22:09 NET: disconnect
+25/03/2020 10:22:11 esc modem +++
+25/03/2020 10:22:11 modem state change 3 -> 2
+25/03/2020 10:22:11 DISCONNECT
+25/03/2020 10:22:11 Directlink DISCONNECT
+25/03/2020 10:22:11 OK
+25/03/2020 10:22:11 +UUSOCL: 0
+25/03/2020 10:22:11 socket closed
+25/03/2020 10:22:12 GNSS S:24 U:12
+25/03/2020 10:22:12 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:852 R:15
+25/03/2020 10:22:17 comms chat disconnect 1
+25/03/2020 10:22:17 comms st 4 -> 3
+25/03/2020 10:22:18 GNSS S:24 U:12
+25/03/2020 10:22:18 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:841 R:15
+25/03/2020 10:22:21 opusMain::slotGroundSpeedOverspeedEvent: 16015, 12, 62.068989, 0
+25/03/2020 10:22:21 adjusting rtc 2- event
+25/03/2020 10:22:21 comms st 3 -> 4
+25/03/2020 10:22:21 connect 1 devices.earthtrack.rct.net.au, 2003
+25/03/2020 10:22:21 NET: connect
+25/03/2020 10:22:21 AT+UPSND=0,8
+25/03/2020 10:22:21 +UPSND: 0,8,1
+25/03/2020 10:22:21 psd line 1
+25/03/2020 10:22:21 pad active #1 (YES)
+25/03/2020 10:22:21 OK
+25/03/2020 10:22:21 AT+USOCR=6
+25/03/2020 10:22:21 +USOCR: 0
+25/03/2020 10:22:21 socket #0
+25/03/2020 10:22:21 OK
+25/03/2020 10:22:21 AT+USOCO=0,"devices.earthtrack.rct.net.au",2003
+25/03/2020 10:22:22 OK
+25/03/2020 10:22:23 +UUSORD: 0,16
+25/03/2020 10:22:23 AT+USODL=0
+25/03/2020 10:22:23 CONNECT
+25/03/2020 10:22:23 Directlink CONNECT
+25/03/2020 10:22:23 modem state change 2 -> 3
+25/03/2020 10:22:23 net connected
+25/03/2020 10:22:23 chat connect
+25/03/2020 10:22:23 <220 earthtrack>
+25/03/2020 10:22:23 UNIT 9218
+25/03/2020 10:22:24 GNSS S:24 U:12
+25/03/2020 10:22:24 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:824 R:15
+25/03/2020 10:22:24 <333 CHAL 19E0B28F>
+25/03/2020 10:22:24 RESP BB879222
+25/03/2020 10:22:25 <230 Auth OK>
+25/03/2020 10:22:25 last connect time written 1585131745
+25/03/2020 10:22:25 EVCOUNT 1
+25/03/2020 10:22:26 <252 Event OK>
+25/03/2020 10:22:26 TODO
+25/03/2020 10:22:27 <226 Nothing to do>
+25/03/2020 10:22:27 EVENT 16022 1585131741 -319657609/1159401520/828/15/59 ZONEOVERSPEED 16015 12 62 1 v:141
+25/03/2020 10:22:28 <252 Event OK>
+25/03/2020 10:22:28 QUIT
+25/03/2020 10:22:29 <221 Session ended - goodbye>
+25/03/2020 10:22:29 NET: disconnect
+25/03/2020 10:22:30 GNSS S:24 U:11
+25/03/2020 10:22:30 GNSS S:24 (GP:15 GL:9 ) U:11 Hacc:836 R:15
+25/03/2020 10:22:31 esc modem +++
+25/03/2020 10:22:31 modem state change 3 -> 2
+25/03/2020 10:22:31 DISCONNECT
+25/03/2020 10:22:31 Directlink DISCONNECT
+25/03/2020 10:22:31 OK
+25/03/2020 10:22:31 +UUSOCL: 0
+25/03/2020 10:22:31 socket closed
+25/03/2020 10:22:33 SaveTripData: 205/0/23/17/0 3 0/0/0/0/1
+25/03/2020 10:22:35 GPS debug on
+25/03/2020 10:22:35 CL ID 01 03
+25/03/2020 10:22:35 CL ID 01 02
+25/03/2020 10:22:35 CL ID 01 12
+25/03/2020 10:22:35 CL ID 01 21
+25/03/2020 10:22:35 NMEA: GNGGA,102235.50,3157.86795,S,11556.31610,E,2,12,0.73,13.4,M,-30.6,M,,0000*41
+25/03/2020 10:22:35 NMEA: GNGSA,A,3,04,09,03,16,06,07,30,50,02,,,,1.25,0.73,1.01*12
+25/03/2020 10:22:35 NMEA: GNGSA,A,3,77,79,78,,,,,,,,,,1.25,0.73,1.01*1F
+25/03/2020 10:22:35 NMEA: GPGSV,4,1,15,02,25,256,46,03,18,042,43,04,30,110,41,05,08,222,28*72
+25/03/2020 10:22:35 NMEA: GPGSV,4,2,15,06,34,291,46,07,81,272,45,09,57,144,50,16,13,136,35*72
+25/03/2020 10:22:35 NMEA: GPGSV,4,3,15,23,,,43,28,00,353,,30,46,308,50,40,16,286,*43
+25/03/2020 10:22:35 NMEA: GPGSV,4,4,15,41,39,309,47,42,41,046,40,50,51,020,43*4A
+25/03/2020 10:22:35 NMEA: GLGSV,3,1,09,67,41,090,,68,54,177,,69,15,221,27,77,31,147,30*61
+25/03/2020 10:22:35 NMEA: GLGSV,3,2,09,78,77,073,33,79,34,346,35,83,06,296,,84,10,242,*61
+25/03/2020 10:22:35 NMEA: GLGSV,3,3,09,,,,29*67
+25/03/2020 10:22:35 CL ID 01 03
+25/03/2020 10:22:35 CL ID 01 02
+25/03/2020 10:22:35 CL ID 01 12
+25/03/2020 10:22:35 CL ID 01 21
+25/03/2020 10:22:35 NMEA: GNGGA,102236.00,3157.86615,S,11556.31381,E,2,12,0.73,13.3,M,-30.6,M,,0000*44
+25/03/2020 10:22:35 NMEA: GNGSA,A,3,04,09,03,16,06,07,30,50,02,,,,1.25,0.73,1.01*12
+25/03/2020 10:22:35 NMEA: GNGSA,A,3,77,79,78,,,,,,,,,,1.25,0.73,1.01*1F
+25/03/2020 10:22:35 NMEA: GPGSV,4,1,15,02,25,256,39,03,18,042,43,04,30,110,39,05,08,222,29*74
+25/03/2020 10:22:35 NMEA: GPGSV,4,2,15,06,34,291,46,07,81,272,44,09,57,144,50,16,13,136,35*73
+25/03/2020 10:22:35 NMEA: GPGSV,4,3,15,23,,,42,28,00,353,,30,46,308,50,40,16,286,*42
+25/03/2020 10:22:35 NMEA: GPGSV,4,4,15,41,39,309,47,42,41,046,40,50,51,020,43*4A
+25/03/2020 10:22:35 NMEA: GLGSV,3,1,09,67,41,090,,68,54,177,,69,15,221,26,77,31,147,30*60
+25/03/2020 10:22:35 NMEA: GLGSV,3,2,09,78,77,073,33,79,34,346,33,83,06,296,,84,10,242,*67
+25/03/2020 10:22:35 NMEA: GLGSV,3,3,09,,,,34*6B
+25/03/2020 10:22:36 GNSS S:24 U:12
+25/03/2020 10:22:36 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:837 R:15
+25/03/2020 10:22:36 CL ID 01 03
+25/03/2020 10:22:36 CL ID 01 02
+25/03/2020 10:22:36 CL ID 01 12
+25/03/2020 10:22:36 CL ID 01 21
+25/03/2020 10:22:36 NMEA: GNGGA,102236.50,3157.86444,S,11556.31165,E,2,12,0.73,13.3,M,-30.6,M,,0000*4F
+25/03/2020 10:22:36 NMEA: GNGSA,A,3,04,09,03,16,06,07,30,50,02,,,,1.25,0.73,1.01*12
+25/03/2020 10:22:36 NMEA: GNGSA,A,3,77,79,78,,,,,,,,,,1.25,0.73,1.01*1F
+25/03/2020 10:22:36 NMEA: GPGSV,4,1,15,02,25,256,47,03,18,042,44,04,30,110,41,05,08,222,38*75
+25/03/2020 10:22:36 NMEA: GPGSV,4,2,15,06,34,291,46,07,81,272,44,09,57,144,50,16,13,136,36*70
+25/03/2020 10:22:36 NMEA: GPGSV,4,3,15,23,,,42,28,00,353,,30,46,308,50,40,16,286,*42
+25/03/2020 10:22:36 NMEA: GPGSV,4,4,15,41,39,309,47,42,41,046,38,50,51,020,43*45
+25/03/2020 10:22:36 NMEA: GLGSV,3,1,09,67,41,090,,68,54,177,,69,15,221,26,77,31,147,30*60
+25/03/2020 10:22:36 NMEA: GLGSV,3,2,09,78,77,073,33,79,34,346,33,83,06,296,,84,10,242,*67
+25/03/2020 10:22:36 NMEA: GLGSV,3,3,09,,,,33*6C
+25/03/2020 10:22:36 CL ID 01 03
+25/03/2020 10:22:36 CL ID 01 02
+25/03/2020 10:22:36 CL ID 01 12
+25/03/2020 10:22:36 CL ID 01 21
+25/03/2020 10:22:36 NMEA: GNGGA,102237.00,3157.86284,S,11556.30964,E,2,12,0.73,13.4,M,-30.6,M,,0000*4E
+25/03/2020 10:22:36 NMEA: GNGSA,A,3,04,09,03,16,06,07,30,50,02,,,,1.25,0.73,1.01*12
+25/03/2020 10:22:36 NMEA: GNGSA,A,3,77,79,78,,,,,,,,,,1.25,0.73,1.01*1F
+25/03/2020 10:22:36 NMEA: GPGSV,4,1,15,02,25,256,47,03,18,042,42,04,30,110,41,05,08,222,34*7F
+25/03/2020 10:22:36 NMEA: GPGSV,4,2,15,06,34,291,45,07,81,272,44,09,57,144,50,16,13,136,36*73
+25/03/2020 10:22:36 NMEA: GPGSV,4,3,15,23,,,44,28,00,353,,30,46,308,50,40,16,286,*44
+25/03/2020 10:22:36 NMEA: GPGSV,4,4,15,41,39,309,47,42,41,046,38,50,51,020,44*42
+25/03/2020 10:22:36 NMEA: GLGSV,3,1,09,67,41,090,,68,54,177,,69,15,221,26,77,31,147,29*68
+25/03/2020 10:22:36 NMEA: GLGSV,3,2,09,78,77,073,32,79,34,346,33,83,06,296,,84,10,242,*66
+25/03/2020 10:22:36 NMEA: GLGSV,3,3,09,,,,32*6D
+25/03/2020 10:22:36 MDM:rssi 0
+25/03/2020 10:22:37 GPS debug off
+25/03/2020 10:22:37 comms chat disconnect 1
+25/03/2020 10:22:37 comms st 4 -> 3
+25/03/2020 10:22:40 GeoFence::speed_limit_for_zone(210)
+25/03/2020 10:22:40 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:22:40 GeoFence::speed_limit_for_zone: in_zone : speed limit = 30
+25/03/2020 10:22:40 GeoFence::geofence_check() 1: 30, 210, 1
+25/03/2020 10:22:40 GeoFence::speed_limit_for_zone(210)
+25/03/2020 10:22:40 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:22:40 GeoFence::speed_limit_for_zone: in_zone : speed limit = 30
+25/03/2020 10:22:40 opusMain::slotZoneSpeed: 30, 210, 1
+25/03/2020 10:22:42 GNSS S:24 U:12
+25/03/2020 10:22:42 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:824 R:0
+25/03/2020 10:22:42 mga: updated hacc 816
+25/03/2020 10:22:43 mga: updated hacc 813
+25/03/2020 10:22:48 GNSS S:24 U:12
+25/03/2020 10:22:48 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:818 R:0
+25/03/2020 10:22:48 mga: updated hacc 806
+25/03/2020 10:22:49 mga: updated hacc 803
+25/03/2020 10:22:49 mga: updated hacc 801
+25/03/2020 10:22:50 mga: updated hacc 799
+25/03/2020 10:22:50 mga: updated hacc 798
+25/03/2020 10:22:51 mga: updated hacc 796
+25/03/2020 10:22:51 mga: updated hacc 795
+25/03/2020 10:22:54 GNSS S:24 U:12
+25/03/2020 10:22:54 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:808 R:0
+25/03/2020 10:23:00 GNSS S:24 U:11
+25/03/2020 10:23:00 GNSS S:24 (GP:15 GL:9 ) U:11 Hacc:818 R:0
+25/03/2020 10:23:06 GNSS S:24 U:12
+25/03/2020 10:23:06 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:836 R:0
+25/03/2020 10:23:07 MDM:rssi 14
+25/03/2020 10:23:12 GNSS S:23 U:12
+25/03/2020 10:23:12 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:886 R:14
+25/03/2020 10:23:18 GNSS S:23 U:12
+25/03/2020 10:23:18 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:807 R:14
+25/03/2020 10:23:20 mga: updated hacc 794
+25/03/2020 10:23:20 mga: updated hacc 793
+25/03/2020 10:23:21 mga: updated hacc 792
+25/03/2020 10:23:21 mga: updated hacc 788
+25/03/2020 10:23:22 adjusting rtc 2- event
+25/03/2020 10:23:22 comms st 3 -> 4
+25/03/2020 10:23:22 connect 1 devices.earthtrack.rct.net.au, 2003
+25/03/2020 10:23:22 NET: connect
+25/03/2020 10:23:22 AT+UPSND=0,8
+25/03/2020 10:23:22 +UPSND: 0,8,1
+25/03/2020 10:23:22 psd line 1
+25/03/2020 10:23:22 pad active #1 (YES)
+25/03/2020 10:23:22 OK
+25/03/2020 10:23:22 AT+USOCR=6
+25/03/2020 10:23:22 +USOCR: 0
+25/03/2020 10:23:22 socket #0
+25/03/2020 10:23:22 OK
+25/03/2020 10:23:22 AT+USOCO=0,"devices.earthtrack.rct.net.au",2003
+25/03/2020 10:23:23 OK
+25/03/2020 10:23:23 +CREG: 5,"E86D","01A43331",7
+25/03/2020 10:23:23 mdm RAT 7
+25/03/2020 10:23:24 +UUSORD: 0,16
+25/03/2020 10:23:24 GNSS S:23 U:12
+25/03/2020 10:23:24 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:887 R:14
+25/03/2020 10:23:24 AT+USODL=0
+25/03/2020 10:23:24 CONNECT
+25/03/2020 10:23:24 Directlink CONNECT
+25/03/2020 10:23:24 modem state change 2 -> 3
+25/03/2020 10:23:24 net connected
+25/03/2020 10:23:24 chat connect
+25/03/2020 10:23:24 <220 earthtrack>
+25/03/2020 10:23:24 UNIT 9218
+25/03/2020 10:23:25 <333 CHAL 208D631E>
+25/03/2020 10:23:25 RESP 28C78AD8
+25/03/2020 10:23:26 <230 Auth OK>
+25/03/2020 10:23:26 last connect time written 1585131806
+25/03/2020 10:23:26 EVCOUNT 1
+25/03/2020 10:23:27 <252 Event OK>
+25/03/2020 10:23:27 TODO
+25/03/2020 10:23:28 <226 Nothing to do>
+25/03/2020 10:23:28 EVENT 16023 1585131802 -319637824/1159377564/788/14/51 ENGINEOVERSPEED 16015 2 2288 v:141
+25/03/2020 10:23:28 gpio interrupts (P1) 01
+25/03/2020 10:23:28 rdr/uart interrupt ##########
+25/03/2020 10:23:28 gpio interrupts (P1) FF
+25/03/2020 10:23:28 <252 Event OK>
+25/03/2020 10:23:28 QUIT
+25/03/2020 10:23:29 <221 Session ended - goodbye>
+25/03/2020 10:23:29 NET: disconnect
+25/03/2020 10:23:30 GNSS S:23 U:12
+25/03/2020 10:23:30 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:985 R:14
+25/03/2020 10:23:31 esc modem +++
+25/03/2020 10:23:32 modem state change 3 -> 2
+25/03/2020 10:23:32 DISCONNECT
+25/03/2020 10:23:32 Directlink DISCONNECT
+25/03/2020 10:23:32 OK
+25/03/2020 10:23:32 +UUSOCL: 0
+25/03/2020 10:23:32 socket closed
+25/03/2020 10:23:34 SaveTripData: 233/0/56/33/0 4 0/0/0/0/1
+25/03/2020 10:23:35 GPS sat #0: GPS SV# 2 Health 1 Q:7
+25/03/2020 10:23:35 GPS sat #1: GPS SV# 3 Health 1 Q:6
+25/03/2020 10:23:35 GPS sat #2: GPS SV# 4 Health 1 Q:4
+25/03/2020 10:23:35 GPS sat #3: GPS SV# 5 Health 1 Q:5
+25/03/2020 10:23:35 GPS sat #4: GPS SV# 6 Health 1 Q:7
+25/03/2020 10:23:35 GPS sat #5: GPS SV# 7 Health 1 Q:7
+25/03/2020 10:23:35 GPS sat #6: GPS SV# 9 Health 1 Q:7
+25/03/2020 10:23:35 GPS sat #7: GPS SV# 16 Health 1 Q:4
+25/03/2020 10:23:35 GPS sat #8: GPS SV# 23 Health 0 Q:4
+25/03/2020 10:23:35 GPS sat #9: GPS SV# 28 Health 1 Q:1
+25/03/2020 10:23:35 GPS sat #10: GPS SV# 30 Health 1 Q:7
+25/03/2020 10:23:35 GPS sat #11: SBAS SV# 127 Health 0 Q:0
+25/03/2020 10:23:35 GPS sat #12: SBAS SV# 128 Health 0 Q:7
+25/03/2020 10:23:35 GPS sat #13: SBAS SV# 129 Health 0 Q:5
+25/03/2020 10:23:35 GPS sat #14: SBAS SV# 137 Health 0 Q:3
+25/03/2020 10:23:35 GPS sat #15: QZSS SV# 1 Health 1 Q:5
+25/03/2020 10:23:35 GPS sat #16: QZSS SV# 2 Health 1 Q:6
+25/03/2020 10:23:35 GPS sat #17: QZSS SV# 3 Health 1 Q:6
+25/03/2020 10:23:35 GPS sat #18: Glonass SV# 3 Health 1 Q:1
+25/03/2020 10:23:35 GPS sat #19: Glonass SV# 4 Health 1 Q:1
+25/03/2020 10:23:35 GPS sat #20: Glonass SV# 5 Health 1 Q:6
+25/03/2020 10:23:35 GPS sat #21: Glonass SV# 13 Health 1 Q:6
+25/03/2020 10:23:35 GPS sat #22: Glonass SV# 14 Health 1 Q:5
+25/03/2020 10:23:35 GPS sat #23: Glonass SV# 15 Health 1 Q:6
+25/03/2020 10:23:35 GPS sat #24: Glonass SV# 19 Health 1 Q:1
+25/03/2020 10:23:35 GPS sat #25: Glonass SV# 20 Health 1 Q:4
+25/03/2020 10:23:36 GNSS S:23 U:11
+25/03/2020 10:23:36 GNSS S:23 (GP:15 GL:8 ) U:11 Hacc:915 R:14
+25/03/2020 10:23:37 comms chat disconnect 1
+25/03/2020 10:23:37 comms st 4 -> 3
+25/03/2020 10:23:38 MDM:rssi 16
+25/03/2020 10:23:39 opusMain::slotGroundSpeedOverspeedEvent: 16015, 21, 52.315289, 0
+25/03/2020 10:23:39 adjusting rtc 2- event
+25/03/2020 10:23:40 comms st 3 -> 4
+25/03/2020 10:23:40 connect 1 devices.earthtrack.rct.net.au, 2003
+25/03/2020 10:23:40 NET: connect
+25/03/2020 10:23:40 AT+UPSND=0,8
+25/03/2020 10:23:40 +UPSND: 0,8,1
+25/03/2020 10:23:40 psd line 1
+25/03/2020 10:23:40 pad active #1 (YES)
+25/03/2020 10:23:40 OK
+25/03/2020 10:23:40 AT+USOCR=6
+25/03/2020 10:23:40 +USOCR: 0
+25/03/2020 10:23:40 socket #0
+25/03/2020 10:23:40 OK
+25/03/2020 10:23:40 AT+USOCO=0,"devices.earthtrack.rct.net.au",2003
+25/03/2020 10:23:41 OK
+25/03/2020 10:23:41 +UUSORD: 0,16
+25/03/2020 10:23:42 GNSS S:23 U:12
+25/03/2020 10:23:42 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:836 R:16
+25/03/2020 10:23:42 AT+USODL=0
+25/03/2020 10:23:42 CONNECT
+25/03/2020 10:23:42 Directlink CONNECT
+25/03/2020 10:23:42 modem state change 2 -> 3
+25/03/2020 10:23:42 net connected
+25/03/2020 10:23:42 chat connect
+25/03/2020 10:23:42 <220 earthtrack>
+25/03/2020 10:23:42 UNIT 9218
+25/03/2020 10:23:42 <333 CHAL 58D55B53>
+25/03/2020 10:23:42 RESP 76439024
+25/03/2020 10:23:43 <230 Auth OK>
+25/03/2020 10:23:43 last connect time written 1585131823
+25/03/2020 10:23:43 EVCOUNT 1
+25/03/2020 10:23:44 <252 Event OK>
+25/03/2020 10:23:44 TODO
+25/03/2020 10:23:45 <226 Nothing to do>
+25/03/2020 10:23:45 EVENT 16024 1585131819 -319624069/1159361222/857/16/21 ZONEOVERSPEED 16015 21 52 1 v:141
+25/03/2020 10:23:47 <252 Event OK>
+25/03/2020 10:23:47 QUIT
+25/03/2020 10:23:48 GNSS S:23 U:12
+25/03/2020 10:23:48 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:812 R:16
+25/03/2020 10:23:48 <221 Session ended - goodbye>
+25/03/2020 10:23:48 NET: disconnect
+25/03/2020 10:23:48 GeoFence::speed_limit_for_zone(206)
+25/03/2020 10:23:48 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:23:48 GeoFence::speed_limit_for_zone: in_zone : speed limit = 60
+25/03/2020 10:23:48 GeoFence::geofence_check() 1: 60, 206, 2
+25/03/2020 10:23:48 GeoFence::speed_limit_for_zone(206)
+25/03/2020 10:23:48 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:23:48 GeoFence::speed_limit_for_zone: in_zone : speed limit = 60
+25/03/2020 10:23:48 opusMain::slotZoneSpeed: 60, 206, 2
+25/03/2020 10:23:50 esc modem +++
+25/03/2020 10:23:50 modem state change 3 -> 2
+25/03/2020 10:23:50 DISCONNECT
+25/03/2020 10:23:50 Directlink DISCONNECT
+25/03/2020 10:23:50 OK
+25/03/2020 10:23:50 +UUSOCL: 0
+25/03/2020 10:23:50 socket closed
+25/03/2020 10:23:54 GNSS S:23 U:12
+25/03/2020 10:23:54 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:818 R:16
+25/03/2020 10:23:56 comms chat disconnect 1
+25/03/2020 10:23:56 comms st 4 -> 3
+25/03/2020 10:23:57 adjusting rtc 2- event
+25/03/2020 10:23:57 comms st 3 -> 4
+25/03/2020 10:23:57 connect 1 devices.earthtrack.rct.net.au, 2003
+25/03/2020 10:23:57 NET: connect
+25/03/2020 10:23:57 AT+UPSND=0,8
+25/03/2020 10:23:57 +UPSND: 0,8,1
+25/03/2020 10:23:57 psd line 1
+25/03/2020 10:23:57 pad active #1 (YES)
+25/03/2020 10:23:57 OK
+25/03/2020 10:23:57 AT+USOCR=6
+25/03/2020 10:23:57 +USOCR: 0
+25/03/2020 10:23:57 socket #0
+25/03/2020 10:23:57 OK
+25/03/2020 10:23:57 AT+USOCO=0,"devices.earthtrack.rct.net.au",2003
+25/03/2020 10:23:58 OK
+25/03/2020 10:23:58 +CREG: 5,"E86D","01A43333",7
+25/03/2020 10:23:58 mdm RAT 7
+25/03/2020 10:23:58 +UUSORD: 0,16
+25/03/2020 10:23:59 AT+USODL=0
+25/03/2020 10:23:59 CONNECT
+25/03/2020 10:23:59 Directlink CONNECT
+25/03/2020 10:23:59 modem state change 2 -> 3
+25/03/2020 10:23:59 net connected
+25/03/2020 10:23:59 chat connect
+25/03/2020 10:23:59 <220 earthtrack>
+25/03/2020 10:23:59 UNIT 9218
+25/03/2020 10:23:59 <333 CHAL 2F680A7F>
+25/03/2020 10:23:59 RESP 927BDEBF
+25/03/2020 10:24:00 GNSS S:23 U:12
+25/03/2020 10:24:00 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:880 R:16
+25/03/2020 10:24:00 <230 Auth OK>
+25/03/2020 10:24:00 last connect time written 1585131840
+25/03/2020 10:24:00 EVCOUNT 1
+25/03/2020 10:24:01 <252 Event OK>
+25/03/2020 10:24:01 TODO
+25/03/2020 10:24:02 <226 Nothing to do>
+25/03/2020 10:24:02 EVENT 16025 1585131837 -319614717/1159350142/837/16/61 ENGINEOVERSPEED 16015 5 2540 v:140
+25/03/2020 10:24:03 <252 Event OK>
+25/03/2020 10:24:03 QUIT
+25/03/2020 10:24:04 <221 Session ended - goodbye>
+25/03/2020 10:24:04 NET: disconnect
+25/03/2020 10:24:06 opusMain::slotGroundSpeedOverspeedEvent: 16015, 9, 61.773426, 0
+25/03/2020 10:24:06 adjusting rtc 2- event
+25/03/2020 10:24:06 GNSS S:23 U:12
+25/03/2020 10:24:06 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:934 R:16
+25/03/2020 10:24:06 esc modem +++
+25/03/2020 10:24:06 modem state change 3 -> 2
+25/03/2020 10:24:06 DISCONNECT
+25/03/2020 10:24:06 Directlink DISCONNECT
+25/03/2020 10:24:06 OK
+25/03/2020 10:24:06 +UUSOCL: 0
+25/03/2020 10:24:06 socket closed
+25/03/2020 10:24:07 +CREG: 5,"E86D","01A49031",7
+25/03/2020 10:24:07 mdm RAT 7
+25/03/2020 10:24:09 MDM:rssi 29
+25/03/2020 10:24:12 GNSS S:23 U:12
+25/03/2020 10:24:12 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:888 R:29
+25/03/2020 10:24:12 comms chat disconnect 1
+25/03/2020 10:24:12 comms st 4 -> 3
+25/03/2020 10:24:12 comms st 3 -> 4
+25/03/2020 10:24:12 connect 1 devices.earthtrack.rct.net.au, 2003
+25/03/2020 10:24:12 NET: connect
+25/03/2020 10:24:12 AT+UPSND=0,8
+25/03/2020 10:24:12 +UPSND: 0,8,1
+25/03/2020 10:24:12 psd line 1
+25/03/2020 10:24:12 pad active #1 (YES)
+25/03/2020 10:24:12 OK
+25/03/2020 10:24:12 AT+USOCR=6
+25/03/2020 10:24:12 +USOCR: 0
+25/03/2020 10:24:12 socket #0
+25/03/2020 10:24:12 OK
+25/03/2020 10:24:12 AT+USOCO=0,"devices.earthtrack.rct.net.au",2003
+25/03/2020 10:24:13 OK
+25/03/2020 10:24:13 +UUSORD: 0,16
+25/03/2020 10:24:14 AT+USODL=0
+25/03/2020 10:24:14 CONNECT
+25/03/2020 10:24:14 Directlink CONNECT
+25/03/2020 10:24:14 modem state change 2 -> 3
+25/03/2020 10:24:14 net connected
+25/03/2020 10:24:14 chat connect
+25/03/2020 10:24:14 <220 earthtrack>
+25/03/2020 10:24:14 UNIT 9218
+25/03/2020 10:24:15 <333 CHAL 6DD4BE9E>
+25/03/2020 10:24:15 RESP E9F9C148
+25/03/2020 10:24:15 <230 Auth OK>
+25/03/2020 10:24:15 last connect time written 1585131855
+25/03/2020 10:24:15 EVCOUNT 1
+25/03/2020 10:24:16 <252 Event OK>
+25/03/2020 10:24:16 TODO
+25/03/2020 10:24:17 <226 Nothing to do>
+25/03/2020 10:24:17 EVENT 16026 1585131846 -319605376/1159339293/934/16/58 ZONEOVERSPEED 16015 9 62 1 v:141
+25/03/2020 10:24:18 GNSS S:23 U:12
+25/03/2020 10:24:18 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:923 R:29
+25/03/2020 10:24:19 <252 Event OK>
+25/03/2020 10:24:19 QUIT
+25/03/2020 10:24:20 <221 Session ended - goodbye>
+25/03/2020 10:24:20 NET: disconnect
+25/03/2020 10:24:22 esc modem +++
+25/03/2020 10:24:22 modem state change 3 -> 2
+25/03/2020 10:24:22 DISCONNECT
+25/03/2020 10:24:22 Directlink DISCONNECT
+25/03/2020 10:24:22 OK
+25/03/2020 10:24:22 +UUSOCL: 0
+25/03/2020 10:24:22 socket closed
+25/03/2020 10:24:24 GNSS S:23 U:12
+25/03/2020 10:24:24 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:879 R:29
+25/03/2020 10:24:28 comms chat disconnect 1
+25/03/2020 10:24:28 comms st 4 -> 3
+25/03/2020 10:24:30 GNSS S:23 U:12
+25/03/2020 10:24:30 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:873 R:29
+25/03/2020 10:24:35 SaveTripData: 284/0/66/33/0 5 0/0/0/0/1
+25/03/2020 10:24:36 GNSS S:23 U:12
+25/03/2020 10:24:36 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:919 R:29
+25/03/2020 10:24:36 +CREG: 5,"E86D","01A49041",7
+25/03/2020 10:24:36 mdm RAT 7
+25/03/2020 10:24:40 MDM:rssi 24
+25/03/2020 10:24:42 GNSS S:23 U:12
+25/03/2020 10:24:42 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:966 R:24
+25/03/2020 10:24:48 GNSS S:23 U:12
+25/03/2020 10:24:48 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:1016 R:24
+25/03/2020 10:24:54 GNSS S:23 U:12
+25/03/2020 10:24:54 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:1063 R:24
+25/03/2020 10:25:00 GNSS S:23 U:12
+25/03/2020 10:25:00 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:1134 R:24
+25/03/2020 10:25:06 GNSS S:23 U:12
+25/03/2020 10:25:06 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:1175 R:24
+25/03/2020 10:25:11 MDM:rssi 28
+25/03/2020 10:25:12 GNSS S:23 U:12
+25/03/2020 10:25:12 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:1165 R:28
+25/03/2020 10:25:18 GNSS S:23 U:12
+25/03/2020 10:25:18 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:1104 R:28
+25/03/2020 10:25:24 GNSS S:23 U:12
+25/03/2020 10:25:24 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:1009 R:28
+25/03/2020 10:25:30 GNSS S:24 U:12
+25/03/2020 10:25:30 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:928 R:28
+25/03/2020 10:25:35 +CREG: 5,"E86D","01A49042",7
+25/03/2020 10:25:35 mdm RAT 7
+25/03/2020 10:25:36 GNSS S:23 U:12
+25/03/2020 10:25:36 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:896 R:28
+25/03/2020 10:25:36 SaveTripData: 302/0/109/49/0 0 0/0/0/0/1
+25/03/2020 10:25:42 GNSS S:24 U:12
+25/03/2020 10:25:42 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:876 R:28
+25/03/2020 10:25:42 MDM:rssi 31
+25/03/2020 10:25:48 GNSS S:24 U:12
+25/03/2020 10:25:48 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:844 R:31
+25/03/2020 10:25:54 GNSS S:24 U:12
+25/03/2020 10:25:54 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:835 R:31
+25/03/2020 10:26:00 GNSS S:24 U:12
+25/03/2020 10:26:00 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:818 R:31
+25/03/2020 10:26:06 GNSS S:24 U:12
+25/03/2020 10:26:06 GNSS S:24 (GP:15 GL:9 ) U:12 Hacc:793 R:31
+25/03/2020 10:26:07 GeoFence::speed_limit_for_zone(211)
+25/03/2020 10:26:07 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:26:07 GeoFence::speed_limit_for_zone: in_zone : speed limit = 30
+25/03/2020 10:26:07 GeoFence::geofence_check() 1: 30, 211, 1
+25/03/2020 10:26:07 GeoFence::speed_limit_for_zone(211)
+25/03/2020 10:26:07 GeoFence::speed_limit_for_zone: in_zone = 1, fix_valid = 1
+25/03/2020 10:26:07 GeoFence::speed_limit_for_zone: in_zone : speed limit = 30
+25/03/2020 10:26:07 opusMain::slotZoneSpeed: 30, 211, 1
+25/03/2020 10:26:12 adjusting rtc 2- event
+25/03/2020 10:26:12 GNSS S:23 U:12
+25/03/2020 10:26:12 GNSS S:23 (GP:15 GL:8 ) U:12 Hacc:815 R:31
+25/03/2020 10:26:12 comms st 3 -> 4
+25/03/2020 10:26:12 connect 1 devices.earthtrack.rct.net.au, 2003
+25/03/2020 10:26:12 NET: connect
+25/03/2020 10:26:12 AT+UPSND=0,8
+25/03/2020 10:26:12 +UPSND: 0,8,1
+25/03/2020 10:26:12 psd line 1
+25/03/2020 10:26:12 pad active #1 (YES)
+25/03/2020 10:26:12 OK
+25/03/2020 10:26:12 AT+USOCR=6
+25/03/2020 10:26:12 +USOCR: 0
+25/03/2020 10:26:12 socket #0
+25/03/2020 10:26:12 OK
+25/03/2020 10:26:12 AT+USOCO=0,"devices.earthtrack.rct.net.au",2003
+25/03/2020 10:26:13 OK
+25/03/2020 10:26:13 MDM:rssi 29
+25/03/2020 10:26:13 +UUSORD: 0,16
+25/03/2020 10:26:14 AT+USODL=0
+25/03/2020 10:26:14 CONNECT
+25/03/2020 10:26:14 Directlink CONNECT
+25/03/2020 10:26:14 modem state change 2 -> 3
+25/03/2020 10:26:14 net connected
+25/03/2020 10:26:14 chat connect
+25/03/2020 10:26:14 <220 earthtrack>
+25/03/2020 10:26:14 UNIT 9218
+25/03/2020 10:26:15 <333 CHAL 7A75BC>
+25/03/2020 10:26:15 RESP 0B7FB81B
+25/03/2020 10:26:15 <230 Auth OK>
+25/03/2020 10:26:15 last connect time written 1585131975
+25/03/2020 10:26:15 EVCOUNT 1
+25/03/2020 10:26:16 <252 Event OK>
+25/03/2020 10:26:16 TODO
+25/03/2020 10:26:17 adjusting rtc 2- event
