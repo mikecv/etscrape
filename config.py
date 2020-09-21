@@ -140,19 +140,19 @@ class Config():
                 try:
                     self.DebugLevel = config["DebugLevel"]
                 except Exception:
-                    print("Error reading Debug Level configuration data.")
+                    updateConfig = True
                 try:
                     self.LogFileSize = config["LogFileSize"]
                 except Exception:
-                    print("Error reading Log File Size configuration data.")
+                    updateConfig = True
                 try:
                     self.LogBackups = config["LogBackups"]
                 except Exception:
-                    print("Error reading Log File Backups configuration data.")
+                    updateConfig = True
                 try:
                     self.TimeUTC = config["TimeUTC"]
                 except Exception:
-                    print("Error reading UTC Time configuration data.")
+                    updateConfig = True
                 # *********************************************************
                 # Checking elements of TripData.
                 # *********************************************************
@@ -233,7 +233,6 @@ class Config():
                 except Exception:
                     self.TripData["InputEventColour"] = paramSaved
                     updateConfig = True
-                # *********************************************************
                 # Try setting ShowDebugEvents from user configuration (json).
                 try:
                     paramSaved = self.TripData["ShowDebugEvents"]
@@ -263,23 +262,134 @@ class Config():
                     self.TripData["BadRpmLimit"] = paramSaved
                     updateConfig = True
                 # *********************************************************
+                # Checking elements of SpdPlot from user configuration (json).
+                # *********************************************************
+                # Try setting DefaultLowLimit from user configuration (json).
                 try:
-                    self.SpdPlot = config["SpdPlot"]
+                    paramSaved = self.SpdPlot["DefaultLowLimit"]
+                    self.SpdPlot["DefaultLowLimit"] = config["SpdPlot"]["DefaultLowLimit"]
                 except Exception:
-                    print("Error reading Speed Plot configuration data.")
+                    self.SpdPlot["DefaultLowLimit"] = paramSaved
+                    updateConfig = True
+                # Try setting DefaultHiLimit from user configuration (json).
                 try:
-                    self.EvPlot = config["EvPlot"]
+                    paramSaved = self.SpdPlot["DefaultHiLimit"]
+                    self.SpdPlot["DefaultHiLimit"] = config["SpdPlot"]["DefaultHiLimit"]
                 except Exception:
-                    print("Error reading Event Plot configuration data.")
+                    self.SpdPlot["DefaultHiLimit"] = paramSaved
+                    updateConfig = True
+                 # Try setting SpeedColour from user configuration (json).
                 try:
+                    paramSaved = self.SpdPlot["SpeedColour"]
+                    self.SpdPlot["SpeedColour"] = config["SpdPlot"]["SpeedColour"]
+                except Exception:
+                    self.SpdPlot["SpeedColour"] = paramSaved
+                    updateConfig = True
+                 # Try setting ZoneColour from user configuration (json).
+                try:
+                    paramSaved = self.SpdPlot["ZoneColour"]
+                    self.SpdPlot["ZoneColour"] = config["SpdPlot"]["ZoneColour"]
+                except Exception:
+                    self.SpdPlot["ZoneColour"] = paramSaved
+                    updateConfig = True
+                 # Try setting AxesTitleFontSize from user configuration (json).
+                try:
+                    paramSaved = self.SpdPlot["AxesTitleFontSize"]
+                    self.SpdPlot["AxesTitleFontSize"] = config["SpdPlot"]["AxesTitleFontSize"]
+                except Exception:
+                    self.SpdPlot["AxesTitleFontSize"] = paramSaved
+                    updateConfig = True
+                 # Try setting PlotTitleFontSize from user configuration (json).
+                try:
+                    paramSaved = self.SpdPlot["PlotTitleFontSize"]
+                    self.SpdPlot["PlotTitleFontSize"] = config["SpdPlot"]["PlotTitleFontSize"]
+                except Exception:
+                    self.SpdPlot["PlotTitleFontSize"] = paramSaved
+                    updateConfig = True
+                # *********************************************************
+                # Checking elements of EvPlot.
+                # *********************************************************
+                # Try setting DefaultLowLimit from user configuration (json).
+                try:
+                    paramSaved = self.EvPlot["AxesTitleFontSize"]
+                    self.EvPlot["AxesTitleFontSize"] = config["EvPlot"]["AxesTitleFontSize"]
+                except Exception:
+                    self.EvPlot["AxesTitleFontSize"] = paramSaved
+                    updateConfig = True
+                # Try setting PlotTitleFontSize from user configuration (json).
+                try:
+                    paramSaved = self.EvPlot["PlotTitleFontSize"]
+                    self.EvPlot["PlotTitleFontSize"] = config["EvPlot"]["PlotTitleFontSize"]
+                except Exception:
+                    self.EvPlot["PlotTitleFontSize"] = paramSaved
+                    updateConfig = True
+                # Try setting AxisLabelFontSize from user configuration (json).
+                try:
+                    paramSaved = self.EvPlot["AxisLabelFontSize"]
+                    self.EvPlot["AxisLabelFontSize"] = config["EvPlot"]["AxisLabelFontSize"]
+                except Exception:
+                    self.EvPlot["AxisLabelFontSize"] = paramSaved
+                    updateConfig = True
+                # Try setting EventTraceColour from user configuration (json).
+                try:
+                    paramSaved = self.EvPlot["EventTraceColour"]
+                    self.EvPlot["EventTraceColour"] = config["EvPlot"]["EventTraceColour"]
+                except Exception:
+                    self.EvPlot["EventTraceColour"] = paramSaved
+                    updateConfig = True
+                # Try setting TripTraceColour from user configuration (json).
+                try:
+                    paramSaved = self.EvPlot["TripTraceColour"]
+                    self.EvPlot["TripTraceColour"] = config["EvPlot"]["TripTraceColour"]
+                except Exception:
+                    self.EvPlot["TripTraceColour"] = paramSaved
+                    updateConfig = True
+                # Try setting EventFillColour from user configuration (json).
+                try:
+                    paramSaved = self.EvPlot["EventFillColour"]
+                    self.EvPlot["EventFillColour"] = config["EvPlot"]["EventFillColour"]
+                except Exception:
+                    self.EvPlot["EventFillColour"] = paramSaved
+                    updateConfig = True
+                # Try setting TripFillColour from user configuration (json).
+                try:
+                    paramSaved = self.EvPlot["TripFillColour"]
+                    self.EvPlot["TripFillColour"] = config["EvPlot"]["TripFillColour"]
+                except Exception:
+                    self.EvPlot["TripFillColour"] = paramSaved
+                    updateConfig = True
+                # Try setting MaxTitleLineLength from user configuration (json).
+                try:
+                    paramSaved = self.EvPlot["MaxTitleLineLength"]
+                    self.EvPlot["MaxTitleLineLength"] = config["EvPlot"]["MaxTitleLineLength"]
+                except Exception:
+                    self.EvPlot["MaxTitleLineLength"] = paramSaved
+                    updateConfig = True
+                # *********************************************************
+                # Try setting Channels from user configuration (json).
+                # Accept unless there are not the right number of entries in the list.
+                try:
+                    paramSaved = self.Channels
                     self.Channels = config["Channels"]
+                    if len(self.Channels) != 10:
+                        self.Channels = paramSaved
+                        updateConfig = True
                 except Exception:
-                    print("Error reading Channels configuration data.")
+                    self.Channels = paramSaved
+                    updateConfig = True
+                # Try setting EventTraces from user configuration (json).
+                # Accept unless there are too many entries in the list.
                 try:
+                    paramSaved = self.EventTraces
                     self.EventTraces = config["EventTraces"]
+                    if len(self.EventTraces) > 8:
+                        self.EventTraces = paramSaved
+                        updateConfig = True
                 except Exception:
-                    print("Error reading Event Traces configuration data.")
+                    self.EventTraces = paramSaved
+                    updateConfig = True
 
+                # If required, i.e. couldn't update all data from user configuration, then save default.
                 if updateConfig:
                     print("Saving configuration file due to user changed parameter.")
                     self.saveConfig()
