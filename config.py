@@ -136,6 +136,7 @@ class Config():
 
                 # Update configuration values if possible.
                 # If not, just update with default + whatever values read.
+                updateConfig = False
                 try:
                     self.DebugLevel = config["DebugLevel"]
                 except Exception:
@@ -152,10 +153,116 @@ class Config():
                     self.TimeUTC = config["TimeUTC"]
                 except Exception:
                     print("Error reading UTC Time configuration data.")
+                # *********************************************************
+                # Checking elements of TripData.
+                # *********************************************************
+                # Try setting MinColumnWidth from user configuration (json).
                 try:
-                    self.TripData = config["TripData"]
+                    paramSaved = self.TripData["MinColumnWidth"]
+                    self.TripData["MinColumnWidth"] = config["TripData"]["MinColumnWidth"]
                 except Exception:
-                    print("Error reading Trip Data configuration data.")
+                    self.TripData["MinColumnWidth"] = paramSaved
+                    updateConfig = True
+                # Try setting DefaultColumn2Width from user configuration (json).
+                try:
+                    paramSaved = self.TripData["DefaultColumn2Width"]
+                    self.TripData["DefaultColumn2Width"] = config["TripData"]["DefaultColumn2Width"]
+                except Exception:
+                    self.TripData["DefaultColumn2Width"] = paramSaved
+                    updateConfig = True
+                # Try setting TripBackColour from user configuration (json).
+                try:
+                    paramSaved = self.TripData["TripBackColour"]
+                    self.TripData["TripBackColour"] = config["TripData"]["TripBackColour"]
+                except Exception:
+                    self.TripData["TripBackColour"] = paramSaved
+                    updateConfig = True
+                # Try setting TripBackColour from user configuration (json).
+                try:
+                    paramSaved = self.TripData["TripBackColour"]
+                    self.TripData["TripBackColour"] = config["TripData"]["TripBackColour"]
+                except Exception:
+                    self.TripData["TripBackColour"] = paramSaved
+                    updateConfig = True
+                # Try setting TripColour from user configuration (json).
+                try:
+                    paramSaved = self.TripData["TripColour"]
+                    self.TripData["TripColour"] = config["TripData"]["TripColour"]
+                except Exception:
+                    self.TripData["TripColour"] = paramSaved
+                    updateConfig = True
+                # Try setting EventColour from user configuration (json).
+                try:
+                    paramSaved = self.TripData["EventColour"]
+                    self.TripData["EventColour"] = config["TripData"]["EventColour"]
+                except Exception:
+                    self.TripData["EventColour"] = paramSaved
+                    updateConfig = True
+                # Try setting CommentColour from user configuration (json).
+                try:
+                    paramSaved = self.TripData["AlertColour"]
+                    self.TripData["AlertColour"] = config["TripData"]["AlertColour"]
+                except Exception:
+                    self.TripData["AlertColour"] = paramSaved
+                    updateConfig = True
+                # Try setting CommentColour from user configuration (json).
+                try:
+                    paramSaved = self.TripData["CommentColour"]
+                    self.TripData["CommentColour"] = config["TripData"]["CommentColour"]
+                except Exception:
+                    self.TripData["CommentColour"] = paramSaved
+                    updateConfig = True
+                # Try setting SummaryAlertColour from user configuration (json).
+                try:
+                    paramSaved = self.TripData["SummaryAlertColour"]
+                    self.TripData["SummaryAlertColour"] = config["TripData"]["SummaryAlertColour"]
+                except Exception:
+                    self.TripData["SummaryAlertColour"] = paramSaved
+                    updateConfig = True
+                # Try setting OtherEventColour from user configuration (json).
+                try:
+                    paramSaved = self.TripData["OtherEventColour"]
+                    self.TripData["OtherEventColour"] = config["TripData"]["OtherEventColour"]
+                except Exception:
+                    self.TripData["OtherEventColour"] = paramSaved
+                    updateConfig = True
+                # Try setting InputEventColour from user configuration (json).
+                try:
+                    paramSaved = self.TripData["InputEventColour"]
+                    self.TripData["InputEventColour"] = config["TripData"]["InputEventColour"]
+                except Exception:
+                    self.TripData["InputEventColour"] = paramSaved
+                    updateConfig = True
+                # *********************************************************
+                # Try setting ShowDebugEvents from user configuration (json).
+                try:
+                    paramSaved = self.TripData["ShowDebugEvents"]
+                    self.TripData["ShowDebugEvents"] = config["TripData"]["ShowDebugEvents"]
+                except Exception:
+                    self.TripData["ShowDebugEvents"] = paramSaved
+                    updateConfig = True
+                # Try setting ShowOutOfTripEvents from user configuration (json).
+                try:
+                    paramSaved = self.TripData["ShowOutOfTripEvents"]
+                    self.TripData["ShowOutOfTripEvents"] = config["TripData"]["ShowOutOfTripEvents"]
+                except Exception:
+                    self.TripData["ShowOutOfTripEvents"] = paramSaved
+                    updateConfig = True
+                # Try setting BadSpeedLimit from user configuration (json).
+                try:
+                    paramSaved = self.TripData["BadSpeedLimit"]
+                    self.TripData["BadSpeedLimit"] = config["TripData"]["BadSpeedLimit"]
+                except Exception:
+                    self.TripData["BadSpeedLimit"] = paramSaved
+                    updateConfig = True
+                # Try setting BadRpmLimit from user configuration (json).
+                try:
+                    paramSaved = self.TripData["BadRpmLimit"]
+                    self.TripData["BadRpmLimit"] = config["TripData"]["BadRpmLimit"]
+                except Exception:
+                    self.TripData["BadRpmLimit"] = paramSaved
+                    updateConfig = True
+                # *********************************************************
                 try:
                     self.SpdPlot = config["SpdPlot"]
                 except Exception:
@@ -173,11 +280,16 @@ class Config():
                 except Exception:
                     print("Error reading Event Traces configuration data.")
 
+                if updateConfig:
+                    print("Saving configuration file due to user changed parameter.")
+                    self.saveConfig()
+
         except Exception:
             print("Error opening configuration file.")
             # Create default configuration file.
+            print("Saving default configuration data.")
             self.saveConfig()
-
+        
     # *******************************************
     # Save Json configuration file.
     # *******************************************
