@@ -56,15 +56,18 @@ from eventsChart import *
 # 0.9   MDC 16/09/2020  Configuration improvements.
 #                       Refactored event chart dialog to include default titles.
 #                       Added trip time to events chart title.
+# 0.10  MDC 02/10/2020  Fixed bug in display of driver ID.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
+# Add SIGNON event to filter list.
+# Add free text to filter list.
 # *******************************************
 
 # Program version.
-progVersion = "0.9"
+progVersion = "0.10"
 
 # Create configuration values class object.
 config = Config()
@@ -1185,9 +1188,9 @@ class UI(QMainWindow):
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
             if event.driverId == "*":
-                eventList.append(("Driver ID", "{0:s}".format(event.driverId), True))
+                eventList.append(("Driver ID", "{0:d} (UNKNOWN)".format(int(event.driverId)), (int(event.driverId) == -12)))
             else:
-                eventList.append(("Driver ID", "{0:d} (BYPASS)".format(int(event.driverId)), (int(event.driverId) == -12)))
+                eventList.append(("Driver ID", "{0:s}".format(event.driverId), True))
             eventList.append(("Card ID", "{0:d}".format(event.cardId), False))
             eventList.append(("Result", "{0:s}".format(event.result), False))
             eventList.append(("Bits Read", "{0:d}".format(event.bitsRead), False))
@@ -2220,6 +2223,9 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.10</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Fixed bug in display of driver ID in SIGNON event.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.9</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Refactored event chart dialog to include default title that is not just event name.</li>" \
