@@ -62,8 +62,6 @@ from eventsChart import *
 # *******************************************
 # TODO List
 #
-# Add SIGNON event to filter list.
-# Add free text to filter list.
 # *******************************************
 
 # Program version.
@@ -1188,9 +1186,9 @@ class UI(QMainWindow):
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
             if event.driverId == "*":
-                eventList.append(("Driver ID", "{0:d} (UNKNOWN)".format(int(event.driverId)), (int(event.driverId) == -12)))
+                eventList.append(("Driver ID", "{0:s} (UNKNOWN)".format(event.driverId), True))
             else:
-                eventList.append(("Driver ID", "{0:s}".format(event.driverId), True))
+                eventList.append(("Driver ID", "{0:d}".format(int(event.driverId)), (int(event.driverId) == -12)))
             eventList.append(("Card ID", "{0:d}".format(event.cardId), False))
             eventList.append(("Result", "{0:s}".format(event.result), False))
             eventList.append(("Bits Read", "{0:d}".format(event.bitsRead), False))
