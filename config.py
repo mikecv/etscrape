@@ -10,7 +10,7 @@ class Config():
     def __init__(self):
 
         # Version of configuration.
-        self.ConfigVersion = 8
+        self.ConfigVersion = 9
 
         # Logger configuration values
         self.DebugLevel = 20
@@ -19,10 +19,6 @@ class Config():
 
         # Application general configuration
         self.TimeUTC = 1
-
-        # Supported Events (for events chart)
-        self.events = ["ENGINEOVERSPEED", "ENGINETEMP", "IMPACT", "INPUT", "LOWCOOLANT",
-            "OFFSEAT", "OILPRESSURE" , "OVERLOAD", "OVERSPEED", "UNBUCKLED", "ZONECHANGE", "ZONEOVERSPEED"]
 
         # Supported Events (for events chart)
         self.chartEvents = [
@@ -44,7 +40,7 @@ class Config():
             ]
 
         # Supported Events (for event filtering)
-        self.filterEvents = ["CHECKLIST", "CRITICALOUTPUTSET", "DEBUG", "Time1H", "Time1H INV", "Time1H (BAD)",
+        self.filterEvents = ["CHECKLIST", "CLFAIL", "CRITICALOUTPUTSET", "DEBUG", "Time1H", "Time1H INV", "Time1H (BAD)",
             "ENGINEOVERSPEED", "ENGINETEMP", "IMPACT", "LOWCOOLANT", "OFFSEAT", "OILPRESSURE",
             "OVERLOAD", "OVERSPEED", "POWER", "TRIPLOAD", "UNBUCKLED", "XSIDLE", "ZONECHANGE", "ZONEOVERSPEED"]
 

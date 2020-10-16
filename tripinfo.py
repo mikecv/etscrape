@@ -51,6 +51,7 @@ class Event():
         self.maxG2 = 0.0
         self.severity = ""
         self.failedQ = 0
+        self.failedQNo = 0
         self.chkVersion = 0
         self.chkType = ""
         self.maxIdle = 0
@@ -529,6 +530,29 @@ class Trip():
                         # Increment event counters.
                         self.numOperatorEvents += 1
                         self.numChecklist += 1
+
+                        # Add event to list of events.
+                        self.events.append(event)
+                # =============================================================================
+                # CLFAIL event
+                # =============================================================================
+                elif event.event == "CLFAIL":
+                    specPatern = re.compile(r'([0-9]+) ([0-9]+) v:([0-9]+)$')
+                    sp = re.search(specPatern, eventSpecifics)
+                    if sp:
+                        event.signOnId = int(sp.group(1))
+                        event.failedQNo = int(sp.group(2))
+
+                        # Read battery voltage from event header.
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            event.battery = int(sp.group(3)) / 10.0
+                            # And add to battery level list.
+                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                            # Check for negative battery voltage condition.
+                            if event.battery < 0:
+                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Add event to list of events.
                         self.events.append(event)

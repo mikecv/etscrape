@@ -58,6 +58,7 @@ from eventsChart import *
 #                       Added trip time to events chart title.
 # 0.10  MDC 02/10/2020  Fixed bug in display of driver ID.
 # 0.11  MDC 16/10/2020  Fixed bug with parsing trip data hex data.
+#                       Added support for CLFAIL - checklist fail event.
 # *******************************************
 
 # *******************************************
@@ -1036,6 +1037,9 @@ class UI(QMainWindow):
                 else:
                     chkType = "?"
                 xf.write("\tChecklist Type    : {0:s}\n".format(chkType))
+            elif ev.event == "CLFAIL":
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tFailed Question   : {0:d}\n".format(ev.failedQNo))
             elif ev.event == "XSIDLESTART":
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
             elif ev.event == "XSIDLE":
@@ -1270,6 +1274,10 @@ class UI(QMainWindow):
             else:
                 chkType = "?"
             eventList.append(("Checklist Type", "{0:s}".format(chkType), (chkType == "?")))
+        elif event.event == "CLFAIL":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Failed Question", "{0:d}".format(event.failedQNo), False))
         elif event.event == "XSIDLESTART":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
@@ -2224,6 +2232,7 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.11</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Added support for checklist failed event CLFAIL.</li>" \
             "<li>Fixed bug in parsing of SIGNON event; accept hex strings in capitals or lower case characters.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.10</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
