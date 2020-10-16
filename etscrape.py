@@ -57,6 +57,7 @@ from eventsChart import *
 #                       Refactored event chart dialog to include default titles.
 #                       Added trip time to events chart title.
 # 0.10  MDC 02/10/2020  Fixed bug in display of driver ID.
+# 0.11  MDC 16/10/2020  Fixed bug with parsing trip data hex data.
 # *******************************************
 
 # *******************************************
@@ -65,7 +66,7 @@ from eventsChart import *
 # *******************************************
 
 # Program version.
-progVersion = "0.10"
+progVersion = "0.11"
 
 # Create configuration values class object.
 config = Config()
@@ -484,9 +485,9 @@ class UI(QMainWindow):
             # Save controller ID.
             self.controllerID = int(cid.group(3))
             self.ctrlLbl.setText(str(self.controllerID))
-            logger.debug("Detected Controller ID : {0:d}".format(self.controllerID))
+            logger.info("Detected Controller ID : {0:d}".format(self.controllerID))
         else:
-            logger.debug("No Controller ID for trip.")
+            logger.warning("No Controller ID for trip.")
 
         # Look for all trips in the log file.
         self.numTrips = 0
@@ -507,7 +508,7 @@ class UI(QMainWindow):
             self.numTrips += 1
         
         # Total trips in file.
-        logger.debug("Trips in file : {0:d}".format(self.numTrips))
+        logger.info("Trips in file : {0:d}".format(self.numTrips))
 
         # Update last trip to end of file.
         if (self.numTrips > 0):
@@ -2221,6 +2222,9 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.11</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Fixed bug in parsing of SIGNON event; accept hex strings in capitals or lower case characters.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.10</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Fixed bug in display of driver ID in SIGNON event.</li></ul><br>")

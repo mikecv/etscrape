@@ -193,8 +193,7 @@ class Trip():
         if su:
             # Break out some of the event data explicitly.
             eventSpecifics = su.group(11)
-
-            specPatern = re.compile(r'([-\*\+0-9]+) ([0-9a-f]+) (.+?) ([0-9]+) ([0-9]+) (.+?) v:([0-9]+)$')
+            specPatern = re.compile(r'([-\*\+0-9]+) ([0-9a-fA-F]+) (.+?) ([0-9]+) ([0-9]+) (.+?) v:([0-9]+)$')
             sp = re.search(specPatern, eventSpecifics)
             if sp:
                 # Create event object.
