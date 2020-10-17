@@ -21,6 +21,8 @@ class Event():
         self.isInput = False
         # Indicate if 'debug' event.
         self.isDebug = False
+        # Indicate if 'report' event.
+        self.isReport = False
         # Indicate if out of trip event.
         self.isOutOfTrip = False
 
@@ -690,7 +692,8 @@ class Trip():
                             if event.battery < 0:
                                 event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
-                        # Increment event counters.
+                        # Indicate event is Report event to control presentation format.
+                        event.isReport = True
                         self.numReportEvents += 1
 
                         # Add event to list of events.

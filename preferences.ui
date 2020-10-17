@@ -251,19 +251,19 @@
      <x>280</x>
      <y>10</y>
      <width>260</width>
-     <height>410</height>
+     <height>450</height>
     </rect>
    </property>
    <property name="minimumSize">
     <size>
      <width>260</width>
-     <height>410</height>
+     <height>450</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
      <width>260</width>
-     <height>410</height>
+     <height>450</height>
     </size>
    </property>
    <property name="title">
@@ -534,7 +534,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>258</y>
+      <y>280</y>
       <width>181</width>
       <height>19</height>
      </rect>
@@ -547,7 +547,7 @@
     <property name="geometry">
      <rect>
       <x>201</x>
-      <y>258</y>
+      <y>280</y>
       <width>50</width>
       <height>19</height>
      </rect>
@@ -566,7 +566,7 @@
     <property name="geometry">
      <rect>
       <x>214</x>
-      <y>279</y>
+      <y>301</y>
       <width>21</width>
       <height>19</height>
      </rect>
@@ -579,7 +579,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>279</y>
+      <y>301</y>
       <width>181</width>
       <height>19</height>
      </rect>
@@ -592,7 +592,7 @@
     <property name="geometry">
      <rect>
       <x>214</x>
-      <y>299</y>
+      <y>321</y>
       <width>21</width>
       <height>19</height>
      </rect>
@@ -605,7 +605,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>299</y>
+      <y>321</y>
       <width>181</width>
       <height>19</height>
      </rect>
@@ -618,7 +618,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>319</y>
+      <y>341</y>
       <width>181</width>
       <height>19</height>
      </rect>
@@ -631,7 +631,7 @@
     <property name="geometry">
      <rect>
       <x>214</x>
-      <y>319</y>
+      <y>341</y>
       <width>21</width>
       <height>19</height>
      </rect>
@@ -644,7 +644,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>339</y>
+      <y>381</y>
       <width>181</width>
       <height>19</height>
      </rect>
@@ -657,7 +657,7 @@
     <property name="geometry">
      <rect>
       <x>214</x>
-      <y>339</y>
+      <y>381</y>
       <width>21</width>
       <height>19</height>
      </rect>
@@ -670,7 +670,7 @@
     <property name="geometry">
      <rect>
       <x>9</x>
-      <y>359</y>
+      <y>401</y>
       <width>181</width>
       <height>19</height>
      </rect>
@@ -683,7 +683,7 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>359</y>
+      <y>401</y>
       <width>50</width>
       <height>19</height>
      </rect>
@@ -702,7 +702,7 @@
     <property name="geometry">
      <rect>
       <x>201</x>
-      <y>380</y>
+      <y>422</y>
       <width>50</width>
       <height>19</height>
      </rect>
@@ -721,7 +721,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>380</y>
+      <y>422</y>
       <width>181</width>
       <height>19</height>
      </rect>
@@ -792,6 +792,61 @@
     </property>
     <property name="text">
      <string>Default Width Column 2</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="reportEventColVal">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>258</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_35">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>258</y>
+      <width>181</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Report Event Text Colour</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="showReportVal">
+    <property name="geometry">
+     <rect>
+      <x>214</x>
+      <y>361</y>
+      <width>21</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_36">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>361</y>
+      <width>181</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Show Report Events</string>
     </property>
    </widget>
   </widget>

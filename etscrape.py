@@ -59,6 +59,7 @@ from eventsChart import *
 # 0.10  MDC 02/10/2020  Fixed bug in display of driver ID.
 # 0.11  MDC 16/10/2020  Fixed bug with parsing trip data hex data.
 #                       Added support for CLFAIL - checklist fail event.
+#                       Added show/hide REPORT events menu option functionality.
 # *******************************************
 
 # *******************************************
@@ -116,12 +117,14 @@ class UI(QMainWindow):
         self.actionShowInputEvents.setChecked(config.TripData["ShowInputEvents"])
         self.actionShowOtherEvents.setChecked(config.TripData["ShowOtherEvents"])
         self.actionShowDebugEvents.setChecked(config.TripData["ShowDebugEvents"])
+        self.actionShowReportEvents.setChecked(config.TripData["ShowReportEvents"])
         self.actionShowOutOfTripEvents.setChecked(config.TripData["ShowOutOfTripEvents"])
 
         # Attach to the show menu items.
         self.actionShowInputEvents.triggered.connect(self.showHideInputEvents)
         self.actionShowOtherEvents.triggered.connect(self.showHideOtherEvents)
         self.actionShowDebugEvents.triggered.connect(self.showHideDebugEvents)
+        self.actionShowReportEvents.triggered.connect(self.showHideReportEvents)
         self.actionShowOutOfTripEvents.triggered.connect(self.showHideOutOfTripEvents)
 
         # Attach to Set Event Filter menu item.
@@ -346,7 +349,7 @@ class UI(QMainWindow):
     # Callback function for show/hide input events menu checkbox.
     # *******************************************
     def showHideInputEvents(self):
-        logger.debug("User set show event menu state: {0:b}".format(self.actionShowInputEvents.isChecked()))
+        logger.debug("User set show Input event menu state: {0:b}".format(self.actionShowInputEvents.isChecked()))
 
         # If we have trips clear them and add them again.
         # will lose collapse/expand state though.
@@ -356,7 +359,7 @@ class UI(QMainWindow):
     # Callback function for show/hide other events menu checkbox.
     # *******************************************
     def showHideOtherEvents(self):
-        logger.debug("User set show event menu state: {0:b}".format(self.actionShowOtherEvents.isChecked()))
+        logger.debug("User set show Other event menu state: {0:b}".format(self.actionShowOtherEvents.isChecked()))
 
         # If we have trips clear them and add them again.
         # will lose collapse/expand state though.
@@ -366,7 +369,17 @@ class UI(QMainWindow):
     # Callback function for show/hide debug events menu checkbox.
     # *******************************************
     def showHideDebugEvents(self):
-        logger.debug("User set show event menu state: {0:b}".format(self.actionShowDebugEvents.isChecked()))
+        logger.debug("User set show Debug event menu state: {0:b}".format(self.actionShowDebugEvents.isChecked()))
+
+        # If we have trips clear them and add them again.
+        # will lose collapse/expand state though.
+        self.rerenderTripData()
+
+    # *******************************************
+    # Callback function for show/hide report events menu checkbox.
+    # *******************************************
+    def showHideReportEvents(self):
+        logger.debug("User set show Report event menu state: {0:b}".format(self.actionShowDebugEvents.isChecked()))
 
         # If we have trips clear them and add them again.
         # will lose collapse/expand state though.
@@ -376,7 +389,7 @@ class UI(QMainWindow):
     # Callback function for show/hide out of trip events menu checkbox.
     # *******************************************
     def showHideOutOfTripEvents(self):
-        logger.debug("User set show event menu state: {0:b}".format(self.actionShowOutOfTripEvents.isChecked()))
+        logger.debug("User set show Out of Trip event menu state: {0:b}".format(self.actionShowOutOfTripEvents.isChecked()))
 
         # If we have trips clear them and add them again.
         # will lose collapse/expand state though.
@@ -631,6 +644,9 @@ class UI(QMainWindow):
                     elif ev.isDebug:
                         eventLevel.setFont(0, fontPlain)
                         eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["DebugEventColour"])))
+                    elif ev.isReport:
+                        eventLevel.setFont(0, fontPlain)
+                        eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["ReportEventColour"])))
                     else:
                         eventLevel.setFont(0, fontBold)
                         eventLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["EventColour"])))
@@ -675,9 +691,11 @@ class UI(QMainWindow):
                                 tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
                             elif (ev.isDebug and (self.actionShowDebugEvents.isChecked())):
                                 tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
+                            elif (ev.isReport and (self.actionShowReportEvents.isChecked())):
+                                tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
                             elif (ev.isOther and (self.actionShowOtherEvents.isChecked())):
                                 tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
-                            elif ((not ev.isInput) and (not ev.isOther) and (not ev.isDebug)):
+                            elif ((not ev.isInput) and (not ev.isOther) and (not ev.isDebug) and (not ev.isReport)):
                                 tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
 
                 # Hide input events if not configured to do so.
@@ -690,6 +708,10 @@ class UI(QMainWindow):
 
                 # Hide debug events if not configured to do so.
                 if (ev.isDebug and (not self.actionShowDebugEvents.isChecked())):
+                    eventLevel.setHidden(True)
+
+                # Hide report events if not configured to do so.
+                if (ev.isReport and (not self.actionShowReportEvents.isChecked())):
                     eventLevel.setHidden(True)
 
                 # Hide out of trip events if not configured to do so.
@@ -1543,12 +1565,15 @@ class PreferencesDialog(QDialog):
         self.inputEventColVal.clicked.connect(lambda: self.getColour(self.inputEventColVal))
         self.debugEventColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.TripData["DebugEventColour"]))
         self.debugEventColVal.clicked.connect(lambda: self.getColour(self.debugEventColVal))
+        self.reportEventColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.TripData["ReportEventColour"]))
+        self.reportEventColVal.clicked.connect(lambda: self.getColour(self.reportEventColVal))
         # Validate tempMsgMsecVal 1 to 60.
         self.tempMsgMsecVal.setValidator(self.regexValidator('^([0-9]|([1-5][0-9])|60)$'))
         self.tempMsgMsecVal.setText(str(int(self.config.TripData["TmpStatusMessagesMsec"] / 1000)))
         self.showOtherVal.setChecked(self.app.actionShowOtherEvents.isChecked())
         self.showInputVal.setChecked(self.app.actionShowInputEvents.isChecked())
         self.showDebugVal.setChecked(self.app.actionShowDebugEvents.isChecked())
+        self.showReportVal.setChecked(self.app.actionShowReportEvents.isChecked())
         self.showOutOfTripVal.setChecked(self.app.actionShowOutOfTripEvents.isChecked())
         # Validate speedAlertLimVal 1 to 160.
         self.speedAlertLimVal.setValidator(self.regexValidator('^(([1-9][0-9])|(1[0-5][0-9])|160)$'))
@@ -1764,6 +1789,14 @@ class PreferencesDialog(QDialog):
             logger.debug("Change to debug event text colour: {0:s}".format(self.config.TripData["DebugEventColour"]))
             prefChanged = True
             rerender = True
+        # Report event text colour.
+        col = self.reportEventColVal.palette().button().color().name()
+        if col != self.config.TripData["ReportEventColour"]:
+            # Set the configuration value.
+            self.config.TripData["ReportEventColour"] = col
+            logger.debug("Change to report event text colour: {0:s}".format(self.config.TripData["ReportEventColour"]))
+            prefChanged = True
+            rerender = True
         # Temporary status message timeout.
         val = int(self.tempMsgMsecVal.text()) * 1000
         if val != self.config.TripData["TmpStatusMessagesMsec"]:
@@ -1799,6 +1832,16 @@ class PreferencesDialog(QDialog):
             logger.debug("Change to show debug events: {0:d}".format(self.config.TripData["ShowDebugEvents"]))
             # Update menu item.
             self.app.actionShowDebugEvents.setChecked(val)
+            prefChanged = True
+            rerender = True
+        # Show report events.
+        val = self.showReportVal.isChecked()
+        if val != self.app.actionShowReportEvents.isChecked():
+            # Set the configuration value.
+            self.config.TripData["ShowReportEvents"] = int(val)
+            logger.debug("Change to show report events: {0:d}".format(self.config.TripData["ShowReportEvents"]))
+            # Update menu item.
+            self.app.actionShowReportEvents.setChecked(val)
             prefChanged = True
             rerender = True
         # Show out of trip events.
@@ -2233,6 +2276,7 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.11</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added support for checklist failed event CLFAIL.</li>" \
+            "<li>Added menu option to show/hide REPORT events, along with change to preferences dialog to set REPORT event colour.</li>" \
             "<li>Fixed bug in parsing of SIGNON event; accept hex strings in capitals or lower case characters.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.10</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\

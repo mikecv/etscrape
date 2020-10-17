@@ -1,5 +1,5 @@
 {
-    "ConfigVersion": 8,
+    "ConfigVersion": 10,
     "DebugLevel": 20,
     "LogFileSize": 100000,
     "LogBackups": 3,
@@ -11,15 +11,17 @@
         "TripColour": "#000000",
         "EventColour": "#0000ff",
         "AlertColour": "#ff0000",
-        "CommentColour": "#ff0000",
+        "CommentColour": "#550000",
         "SummaryAlertColour": "#0000ff",
         "OtherEventColour": "#99990c",
-        "InputEventColour": "#ffbf00",
+        "InputEventColour": "#aa5500",
         "DebugEventColour": "#00fa9a",
+        "ReportEventColour": "#320096",
         "TmpStatusMessagesMsec": 10000,
-        "ShowOtherEvents": 1,
+        "ShowOtherEvents": 0,
         "ShowInputEvents": 1,
         "ShowDebugEvents": 1,
+        "ShowReportEvents": 0,
         "ShowOutOfTripEvents": 0,
         "BadSpeedLimit": 100,
         "BadRpmLimit": 5200
@@ -94,28 +96,20 @@
             "Title": "Engine Overspeed"
         },
         {
-            "Event": "IMPACT",
-            "Title": "Vehicle Impact"
+            "Event": "OILPRESSURE",
+            "Title": "Engine Oil Pressure Low"
         },
         {
-            "Event": "OVERSPEED",
-            "Title": "Vehicle Overspeed"
+            "Event": "INPUT",
+            "Channel": 1
         },
         {
-            "Event": "ENGINETEMP",
-            "Title": "Engine Temperature High"
+            "Event": "INPUT",
+            "Channel": 3
         },
         {
-            "Event": "ZONECHANGE",
-            "Title": "Zone Change"
-        },
-        {
-            "Event": "Battery Voltage",
-            "Title": "Battery Voltage"
-        },
-        {
-            "Event": "ZONEOVERSPEED",
-            "Title": "Zone Overspeed"
+            "Event": "INPUT",
+            "Channel": 4
         }
     ]
 }

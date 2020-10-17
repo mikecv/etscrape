@@ -10,7 +10,7 @@ class Config():
     def __init__(self):
 
         # Version of configuration.
-        self.ConfigVersion = 9
+        self.ConfigVersion = 10
 
         # Logger configuration values
         self.DebugLevel = 20
@@ -52,15 +52,17 @@ class Config():
             "TripColour" : "#000000",
             "EventColour" : "#0000ff",
             "AlertColour" : "#ff0000",
-            "CommentColour" : "#ff0000",
+            "CommentColour" : "#550000",
             "SummaryAlertColour" : "#0000ff",
             "OtherEventColour" : "#99990c",
-            "InputEventColour" : "#ffbf00",
+            "InputEventColour" : "#aa5500",
             "DebugEventColour" : "#00fa9a",
+            "ReportEventColour" : "#320096",
             "TmpStatusMessagesMsec" : 10000,
-            "ShowOtherEvents" : 1,
+            "ShowOtherEvents" : 0,
             "ShowInputEvents" : 1,
             "ShowDebugEvents" : 1,
+            "ShowReportEvents" : 0,
             "ShowOutOfTripEvents" : 0,
             "BadSpeedLimit" : 100,
             "BadRpmLimit" : 5200

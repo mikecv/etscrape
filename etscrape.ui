@@ -1502,6 +1502,7 @@ color: rgb(0, 85, 255);</string>
     <addaction name="actionShowOtherEvents"/>
     <addaction name="actionShowInputEvents"/>
     <addaction name="actionShowDebugEvents"/>
+    <addaction name="actionShowReportEvents"/>
     <addaction name="actionShowOutOfTripEvents"/>
     <addaction name="separator"/>
     <addaction name="actionSetEventFilter"/>
@@ -1700,6 +1701,14 @@ border-color: rgb(0, 170, 255);</string>
   <action name="actionExportFilteredTrips">
    <property name="text">
     <string>All Trips (Filtered)</string>
+   </property>
+  </action>
+  <action name="actionShowReportEvents">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Report Events</string>
    </property>
   </action>
  </widget>
