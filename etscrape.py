@@ -60,6 +60,7 @@ from eventsChart import *
 # 0.11  MDC 16/10/2020  Fixed bug with parsing trip data hex data.
 #                       Added support for CLFAIL - checklist fail event.
 #                       Added show/hide REPORT events menu option functionality.
+# 0.12  MDC 20/10/2020  Cosmetic improvements.
 # *******************************************
 
 # *******************************************
@@ -68,7 +69,7 @@ from eventsChart import *
 # *******************************************
 
 # Program version.
-progVersion = "0.11"
+progVersion = "0.12"
 
 # Create configuration values class object.
 config = Config()
@@ -994,7 +995,7 @@ class UI(QMainWindow):
             if (ev.event == "SIGNON"):
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tDriver ID         : {0:s}\n".format(ev.driverId))
-                xf.write("\tCard ID           : {0:d}\n".format(ev.cardId))
+                xf.write("\tCard ID           : {0:d} (0x{0:0X})\n".format(ev.cardId))
                 xf.write("\tResult            : {0:s}\n".format(ev.result))
                 xf.write("\tBits Read         : {0:d}\n".format(ev.bitsRead))
                 xf.write("\tKeyboard          : {0:s}\n".format(ev.keyboard))
@@ -1216,7 +1217,7 @@ class UI(QMainWindow):
                 eventList.append(("Driver ID", "{0:s} (UNKNOWN)".format(event.driverId), True))
             else:
                 eventList.append(("Driver ID", "{0:d}".format(int(event.driverId)), (int(event.driverId) == -12)))
-            eventList.append(("Card ID", "{0:d}".format(event.cardId), False))
+            eventList.append(("Card ID", "{0:d} (0x{0:0X})".format(event.cardId), False))
             eventList.append(("Result", "{0:s}".format(event.result), False))
             eventList.append(("Bits Read", "{0:d}".format(event.bitsRead), False))
             eventList.append(("Keyboard", "{0:s}".format(event.keyboard), False))
@@ -2273,6 +2274,9 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.12</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Added card ID display in HEX.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.11</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added support for checklist failed event CLFAIL.</li>" \
