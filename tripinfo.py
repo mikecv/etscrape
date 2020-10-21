@@ -196,8 +196,8 @@ class Trip():
         if su:
             # Break out some of the event data explicitly.
             eventSpecifics = su.group(11)
-            specPatern = re.compile(r'([-\*\+0-9]+) ([0-9a-fA-F]+) (.+?) ([0-9]+) ([0-9]+) (.+?) v:([0-9]+)$')
-            sp = re.search(specPatern, eventSpecifics)
+            specPattern = re.compile(r'([-\*\+0-9]+) ([0-9a-fA-F]+) (.+?) ([0-9]+) ([0-9]+) (.+?)$')
+            sp = re.search(specPattern, eventSpecifics)
             if sp:
                 # Create event object.
                 # Initialised with event type and time as in all events.
@@ -230,13 +230,19 @@ class Trip():
                 # Read battery voltage from event header.
                 # But only if still collecting extra data, i.e. trip has not ended.
                 if not self.stopExtraData:
-                    event.battery = int(sp.group(7)) / 10.0
-                    # And add to battery level list.
-                    self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                    # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                    voltPattern = re.compile(r'(.+?) v:([0-9]+)$')
+                    vp = re.search(voltPattern, sp.group(6))
+                    if vp:
+                        # Extract battery voltage.
+                        event.battery = int(vp.group(2)) / 10.0
 
-                    # Check for negative battery voltage condition.
-                    if event.battery < 0:
-                        event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                        # And add to battery level list.
+                        self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                        # Check for negative battery voltage condition.
+                        if event.battery < 0:
+                            event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                 # Increment event counters.
                 self.numTripEvents += 1
@@ -281,8 +287,8 @@ class Trip():
                 # OVERSPEED event
                 # =============================================================================
                 if event.event == "OVERSPEED":
-                    specPatern = re.compile(r'([0-9]+) ([0-9]+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'([0-9]+) ([0-9]+)(.*)$')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.signOnId = int(sp.group(1))
                         event.duration = int(sp.group(2))
@@ -290,14 +296,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            # Read battery voltage from event header.
-                            event.battery = int(sp.group(3)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(3))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numVehicleEvents += 1
@@ -309,8 +318,8 @@ class Trip():
                 # ZONEOVERSPEED event
                 # =============================================================================
                 elif event.event == "ZONEOVERSPEED":
-                    specPatern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+)(.*)$')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.signOnId = int(sp.group(1))
                         event.duration = int(sp.group(2))
@@ -320,14 +329,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            # Read battery voltage from event header.
-                            event.battery = int(sp.group(5)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(5))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numVehicleEvents += 1
@@ -339,8 +351,8 @@ class Trip():
                 # ENGINEOVERSPEED event
                 # =============================================================================
                 elif event.event == "ENGINEOVERSPEED":
-                    specPatern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) v:([0-9]+)$')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.signOnId = int(sp.group(1))
                         event.duration = int(sp.group(2))
@@ -367,8 +379,8 @@ class Trip():
                 # LOWCOOLANT, OILPRESSURE, ENGINETEMP, OFFSEAT, OVERLOAD event (all the same format)
                 # =============================================================================
                 elif event.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP", "OFFSEAT", "OVERLOAD"}:
-                    specPatern = re.compile(r'([0-9]+) ([0-9]+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'([0-9]+) ([0-9]+)(.*)$')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.signOnId = int(sp.group(1))
                         event.duration = int(sp.group(2))
@@ -376,13 +388,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp.group(3)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(3))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(3)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numVehicleEvents += 1
@@ -399,8 +415,8 @@ class Trip():
                 # UNBUCKLED event
                 # =============================================================================
                 elif event.event == "UNBUCKLED":
-                    specPatern = re.compile(r'([0-9]+) ([0-9]+) ([DP]) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'([0-9]+) ([0-9]+) ([DP])(.*)$')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.signOnId = int(sp.group(1))
                         event.duration = int(sp.group(2))
@@ -409,13 +425,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp.group(4)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(4))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numOperatorEvents += 1
@@ -430,8 +450,8 @@ class Trip():
                 # ZONECHANGE event
                 # =============================================================================
                 elif event.event == "ZONECHANGE":
-                    specPatern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+)(.*)$')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.signOnId = int(sp.group(1))
                         event.fromZone = int(sp.group(2))
@@ -441,13 +461,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp.group(5)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(5))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numOperatorEvents += 1
@@ -470,8 +494,8 @@ class Trip():
                 # IMPACT event
                 # =============================================================================
                 elif event.event == "IMPACT":
-                    specPatern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([\-a-zA-Z]+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([\-a-zA-Z]+)(.*)$')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.signOnId = int(sp.group(1))
                         event.fwdG = int(sp.group(2)) / 10.0
@@ -485,13 +509,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp.group(9)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(9))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numVehicleEvents += 1
@@ -508,8 +536,8 @@ class Trip():
                 # CHECKLIST event
                 # =============================================================================
                 elif event.event == "CHECKLIST":
-                    specPatern = re.compile(r'([0-9]+) (OK|CANCEL|NOFILE) ([0-9]+) ([0-9]+) ([0-9]+) ([\-a-zA-Z]+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'([0-9]+) (OK|CANCEL|NOFILE) ([0-9]+) ([0-9]+) ([0-9]+) ([\-a-zA-Z]+)(.*)$')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.signOnId = int(sp.group(1))
                         event.result = sp.group(2)
@@ -521,13 +549,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp.group(7)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(7))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numOperatorEvents += 1
@@ -539,8 +571,8 @@ class Trip():
                 # CLFAIL event
                 # =============================================================================
                 elif event.event == "CLFAIL":
-                    specPatern = re.compile(r'([0-9]+) ([0-9]+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'([0-9]+) ([0-9]+)(.*)$')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.signOnId = int(sp.group(1))
                         event.failedQNo = int(sp.group(2))
@@ -548,13 +580,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp.group(3)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(3))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Add event to list of events.
                         self.events.append(event)
@@ -562,21 +598,25 @@ class Trip():
                 # XSIDLESTART event
                 # =============================================================================
                 elif event.event == "XSIDLESTART":
-                    specPatern = re.compile(r'([0-9]+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'([0-9]+)(.*)$')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.signOnId = int(sp.group(1))
 
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp.group(2)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(2))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numVehicleEvents += 1
@@ -589,10 +629,10 @@ class Trip():
                 # Need to check for longest search string first.
                 # =============================================================================
                 elif event.event == "XSIDLE":
-                    specPatern1 = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) v:([0-9]+)$')
-                    specPatern2 = re.compile(r'([0-9]+) ([0-9]+) v:([0-9]+)$')
-                    sp1 = re.search(specPatern1, eventSpecifics)
-                    sp2 = re.search(specPatern2, eventSpecifics)
+                    specPattern1 = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+)(.*)$')
+                    specPattern2 = re.compile(r'([0-9]+) ([0-9]+)(.*)$')
+                    sp1 = re.search(specPattern1, eventSpecifics)
+                    sp2 = re.search(specPattern2, eventSpecifics)
                     # Check for extended XSIDLE event with added event reason.
                     if sp1:
                         event.signOnId = int(sp1.group(1))
@@ -602,13 +642,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp1.group(4)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp1.group(4))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numVehicleEvents += 1
@@ -623,13 +667,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp2.group(3)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp2.group(3))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numVehicleEvents += 1
@@ -648,8 +696,8 @@ class Trip():
                 # =============================================================================
                 elif event.event == "SERVICE":
 
-                    specPatern = re.compile(r'([0-9]+)')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'([0-9]+)')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.serviceId = int(sp.group(1))
 
@@ -670,8 +718,8 @@ class Trip():
                 # REPORT event.
                 # *********************************************************************************************************************************************
                 elif event.event == "REPORT":   
-                    specPatern = re.compile(r'(\*|[0-9]+) ([0-9]+) ([0-9]+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'(\*|[0-9]+) ([0-9]+) ([0-9]+)(.*)$')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         # Check for bad sign-on ID, i.e. "*".
                         if (sp.group(1) == "*"):
@@ -684,13 +732,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp.group(4)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(4))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Indicate event is Report event to control presentation format.
                         event.isReport = True
@@ -702,8 +754,8 @@ class Trip():
                 # CRITICALOUTPUTSET event.
                 # *********************************************************************************************************************************************
                 elif event.event == "CRITICALOUTPUTSET":   
-                    specPatern = re.compile(r'([0-9]+) ([0-9]+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'([0-9]+) ([0-9]+)(.*)$')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.signOnId = int(sp.group(1))
                         event.criticalOutput = int(sp.group(2))
@@ -711,13 +763,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp.group(3)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(3))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Add event to list of events.
                         self.events.append(event)
@@ -725,8 +781,8 @@ class Trip():
                 # INPUT event.
                 # *********************************************************************************************************************************************
                 elif event.event == "INPUT":   
-                    specPatern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+)(.*)$')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.inputNo = int(sp.group(1))
                         event.inputState = int(sp.group(2))
@@ -737,13 +793,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp.group(4)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(4))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # For input events add the input number to the alert field.
                         # This is useful for looking for particular inputs when the events column is collapsed.
@@ -759,8 +819,8 @@ class Trip():
                 # *********************************************************************************************************************************************
                 elif event.event == "DEBUG":   
 
-                    specPatern = re.compile(r'(.+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'(.+)$')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
 
                         # Debug information.
@@ -775,17 +835,21 @@ class Trip():
 
                         elif "Time(BAD)" in event.debugInfo:
                             event.alertText = appendAlertText(event.alertText, "BAD time detected.")
+                        elif "v:" in event.debugInfo:
+                            # Read battery voltage from event header.
+                            # But only if still collecting extra data, i.e. trip has not ended.
+                            if not self.stopExtraData:
+                                # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                                voltPattern = re.compile(r'.*v:([0-9]+)$')
+                                vp = re.search(voltPattern, event.debugInfo)
+                                if vp:
+                                    event.battery = int(vp.group(1)) / 10.0
+                                    # And add to battery level list.
+                                    self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                        # Read battery voltage from event header.
-                        # But only if still collecting extra data, i.e. trip has not ended.
-                        if not self.stopExtraData:
-                            event.battery = int(sp.group(2)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
-
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                    # Check for negative battery voltage condition.
+                                    if event.battery < 0:
+                                        event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Indicate event is Debug event to control presentation format.
                         event.isDebug = True
@@ -797,8 +861,8 @@ class Trip():
                 # POWER event.
                 # *********************************************************************************************************************************************
                 elif event.event == "POWER":
-                    specPatern = re.compile(r'([0-9]+) ([ _A-Z]+) ([0-9]+) v:([0-9]+)$')
-                    sp = re.search(specPatern, eventSpecifics)
+                    specPattern = re.compile(r'([0-9]+) ([ _A-Z]+) ([0-9]+)(.*)$')
+                    sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.signOnId = int(sp.group(3))
                         event.voltage = int(sp.group(1)) / 10.0
@@ -808,13 +872,20 @@ class Trip():
                         if event.batteryState != "OK":
                             event.alertText = appendAlertText(event.alertText, "Battery not OK.")
 
-
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp.group(4)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(4))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Add event to list of events.
                         self.events.append(event)
@@ -828,10 +899,10 @@ class Trip():
                     self.tripEnd = int(su.group(4))
                     self.logger.debug("Detected trip end at {0:s}".format(datetime.fromtimestamp(self.tripEnd).strftime('%d/%m/%Y %H:%M:%S')))
 
-                    specPatern1 = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) v:([0-9]+)$')
-                    specPatern2 = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) v:([0-9]+)$')
-                    sp1 = re.search(specPatern1, eventSpecifics)
-                    sp2 = re.search(specPatern2, eventSpecifics)
+                    specPattern1 = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+)(.*)$')
+                    specPattern2 = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+)(.*)$')
+                    sp1 = re.search(specPattern1, eventSpecifics)
+                    sp2 = re.search(specPattern2, eventSpecifics)
                     # Check TRIP event with on seat time.
                     if sp1:
                         event.signOnId = int(sp1.group(1))
@@ -844,13 +915,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp1.group(7)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp1.group(7))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numTripEvents += 1
@@ -866,13 +941,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp2.group(6)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp2.group(6))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numTripEvents += 1
@@ -928,8 +1007,8 @@ class Trip():
                             eventSpecifics = su.group(6)
 
                             if su.group(5) == "TRIPSUMMARY":
-                                specPatern = re.compile(r'([0-9]+)')
-                                sp = re.search(specPatern, eventSpecifics)
+                                specPattern = re.compile(r'([0-9]+)')
+                                sp = re.search(specPattern, eventSpecifics)
                                 if sp:
                                     event.signOnId = int(sp.group(1))
 
@@ -939,8 +1018,8 @@ class Trip():
                                     # Add event to list of events.
                                     self.events.append(event)
                             elif su.group(5) == "TRIPLOAD":
-                                specPatern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+)')
-                                sp = re.search(specPatern, eventSpecifics)
+                                specPattern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+)')
+                                sp = re.search(specPattern, eventSpecifics)
                                 if sp:
                                     event.signOnId = int(sp.group(1))
                                     event.travelLoaded = int(sp.group(2))

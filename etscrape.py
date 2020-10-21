@@ -61,6 +61,7 @@ from eventsChart import *
 #                       Added support for CLFAIL - checklist fail event.
 #                       Added show/hide REPORT events menu option functionality.
 # 0.12  MDC 20/10/2020  Cosmetic improvements.
+#                       Added support for event strings not including battery voltage.
 # *******************************************
 
 # *******************************************
@@ -2276,6 +2277,7 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.12</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Fixed bug parsing event strings that don't end in battery voltage.</li>" \
             "<li>Added card ID display in HEX.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.11</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
