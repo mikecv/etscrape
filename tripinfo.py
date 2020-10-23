@@ -361,13 +361,17 @@ class Trip():
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:
-                            event.battery = int(sp.group(4)) / 10.0
-                            # And add to battery level list.
-                            self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(4))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
-                            # Check for negative battery voltage condition.
-                            if event.battery < 0:
-                                event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
                         # Increment event counters.
                         self.numVehicleEvents += 1
@@ -394,7 +398,7 @@ class Trip():
                             if vp:
                                 event.battery = int(vp.group(1)) / 10.0
                                 # And add to battery level list.
-                                self.batteryLevel.append(BatteryInfo(int(su.group(3)), event.battery))
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
 
                                 # Check for negative battery voltage condition.
                                 if event.battery < 0:
