@@ -1,0 +1,3008 @@
+15/09/2020 03:22:32 VERSION: 5.0.2.1 R 
+15/09/2020 03:22:32 4.14.108-ti-r119
+15/09/2020 03:22:32 NEW OS, DONOT access PCF directly
+15/09/2020 03:22:32 Image file: 1.0.20Image
+15/09/2020 03:22:32 OS Release Version: 1.0.20
+15/09/2020 03:22:32 hwclock time: 1600140152
+15/09/2020 03:22:32 IOInit - NEW OS
+15/09/2020 03:22:32 created gpio INP 0 @GPIO: 66
+15/09/2020 03:22:32 created gpio INP 1 @GPIO: 67
+15/09/2020 03:22:32 created gpio INP 4 @GPIO: 45
+15/09/2020 03:22:32 created gpio INP 5 @GPIO: 44
+15/09/2020 03:22:32 created gpio INP 6 @GPIO: 23
+15/09/2020 03:22:32 created gpio INP 7 @GPIO: 26
+15/09/2020 03:22:32 created gpio INP 8 @GPIO: 51
+15/09/2020 03:22:32 created gpio INP 9 @GPIO: 61
+15/09/2020 03:22:32 created gpio 0 OUT: 60
+15/09/2020 03:22:32 created gpio 1 OUT: 46
+15/09/2020 03:22:32 created gpio 2 OUT: 27
+15/09/2020 03:22:32 created gpio 3 OUT: 65
+15/09/2020 03:22:32 created gpio 4 OUT: 22
+15/09/2020 03:22:32 created gpio 5 OUT: 115
+15/09/2020 03:22:32 created gpio 6 OUT: 69
+15/09/2020 03:22:32 created gpio 7 OUT: 68
+15/09/2020 03:22:32 created gpio 8 OUT: 117
+15/09/2020 03:22:32 created gpio 9 OUT: 59
+15/09/2020 03:22:32 created gpio 10 OUT: 58
+15/09/2020 03:22:32 created gpio 11 OUT: 52
+15/09/2020 03:22:32 created gpio 12 OUT: 64
+15/09/2020 03:22:32 created gpio 13 OUT: 47
+15/09/2020 03:22:32 created gpio 14 OUT: 48
+15/09/2020 03:22:32 created gpio 15 OUT: 49
+15/09/2020 03:22:32 created gpio 16 OUT: 116
+15/09/2020 03:22:32 created gpio 17 OUT: 53
+15/09/2020 03:22:32 created gpio 18 OUT: 54
+15/09/2020 03:22:32 created gpio 19 OUT: 55
+15/09/2020 03:22:32 created gpio 20 OUT: 507
+15/09/2020 03:22:32 created gpio 21 OUT: 508
+15/09/2020 03:22:32 created gpio 22 OUT: 509
+15/09/2020 03:22:32 created gpio 23 OUT: 510
+15/09/2020 03:22:32 created gpio 24 OUT: 511
+15/09/2020 03:22:32 ioInitialise(): skipping input index 25 [487]
+15/09/2020 03:22:32 usr0 is heartbeat
+15/09/2020 03:22:32 usr1 is mmc0 (uSD card)
+15/09/2020 03:22:32 usr2 is mmc1(eMMC)
+15/09/2020 03:22:32 channel thread created
+15/09/2020 03:22:32 channel ch3 2 ch4 2
+15/09/2020 03:22:32 ch3 2 ch4 2
+15/09/2020 03:22:32 BLAll 100
+15/09/2020 03:22:32 BL set:100
+15/09/2020 03:22:32 set brightness to 100%
+15/09/2020 03:22:32 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+15/09/2020 03:22:32 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:22:32 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:22:32 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+15/09/2020 03:22:32 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+15/09/2020 03:22:32 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+15/09/2020 03:22:32 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+15/09/2020 03:22:32 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+15/09/2020 03:22:32 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+15/09/2020 03:22:32 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+15/09/2020 03:22:32 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+15/09/2020 03:22:32 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+15/09/2020 03:22:32 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:22:32 wrote 0 to /sys/class/gpio/gpio48/value (O/P 15)
+15/09/2020 03:22:32 wrote 0 to /sys/class/gpio/gpio49/value (O/P 16)
+15/09/2020 03:22:32 wrote 0 to /sys/class/gpio/gpio511/value (O/P 25)
+15/09/2020 03:22:32 OTA Version: version:3.0.0.6
+15/09/2020 03:22:32 wrote 1 to /sys/class/gpio/gpio59/value (O/P 10)
+15/09/2020 03:22:32 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+15/09/2020 03:22:32 wrote 1 to /sys/class/gpio/gpio511/value (O/P 25)
+15/09/2020 03:22:33 channel state change 0 -> 1
+15/09/2020 03:22:33 Starting PRU
+15/09/2020 03:22:33 offline
+15/09/2020 03:22:33 PRU starting
+15/09/2020 03:22:33 i2c1 commands - to serialiser
+15/09/2020 03:22:33 Serialiser Serial Nr: 1A71021864100480CCA6A000A000001D
+15/09/2020 03:22:33 Display model AA
+15/09/2020 03:22:33 Serialiser Eeprom Serial Nr: 000804-AA
+15/09/2020 03:22:33 wrote 1 to /sys/class/gpio/gpio511/value (O/P 25)
+15/09/2020 03:22:33 BLAll 100
+15/09/2020 03:22:33 BL set:100
+15/09/2020 03:22:33 set brightness to 100%
+15/09/2020 03:22:33 clear Interrupts
+15/09/2020 03:22:33 pcf IS open 3
+15/09/2020 03:22:34 FC (main) Started
+15/09/2020 03:22:34 ROOTFS Built 41449
+15/09/2020 03:22:34 Nr Langs to process: 18
+15/09/2020 03:22:34 lang file: :Translations/FcMain_ar
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_es
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_et
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_fr
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_de
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_hi
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_id
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_km
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_ko
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_lv
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_ms
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_ru
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_th
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_tl
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_uk
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_vi
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_zh
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 lang file: :Translations/FcMain_en
+15/09/2020 03:22:34 Loaded translations
+15/09/2020 03:22:34 eeprom magic OK
+15/09/2020 03:22:34 Contructor PID2 109 109
+15/09/2020 03:22:34 MessageDialog GNSS 0
+15/09/2020 03:22:34 Duplicates Removed 1
+15/09/2020 03:22:34 thread gps_thread created
+15/09/2020 03:22:34 wrote 1 to /sys/class/gpio/gpio64/value (O/P 13)
+15/09/2020 03:22:34 gps open 1
+15/09/2020 03:22:34 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+15/09/2020 03:22:34 gps task running
+15/09/2020 03:22:34 gps state change 1 -> 2
+15/09/2020 03:22:34 opened /dev/ttyS2 serial/USB OK
+15/09/2020 03:22:34 GPS Serial Connected on /dev/ttyS2 (handle 12)
+15/09/2020 03:22:34 NEW speedHzKmh 0.200000
+15/09/2020 03:22:34 NEW speedHzRPM 12.500000
+15/09/2020 03:22:34 weightCountKg 0.000000
+15/09/2020 03:22:34 weightZeroCount 0.000000
+15/09/2020 03:22:34 weightZero 0.000000
+15/09/2020 03:22:34 speedHzKmh 0.200000
+15/09/2020 03:22:34 speedHzRPM 12.500000
+15/09/2020 03:22:34 EXP 2073098026, 1600058026, 1600140154
+15/09/2020 03:22:34 Critical::setCriticalOutputNotify()
+15/09/2020 03:22:34 ioSetStartNotify()
+15/09/2020 03:22:34 pru Waiting/Waiting
+15/09/2020 03:22:34 MessageDialog GNSS 0
+15/09/2020 03:22:35 Duplicates Removed 7
+15/09/2020 03:22:35 Splash GNSS 0
+15/09/2020 03:22:35 found /store/Service_active.xml
+15/09/2020 03:22:35 xml_parsing file: /store/Service_active.xml
+15/09/2020 03:22:35 MessageDialog GNSS 0
+15/09/2020 03:22:35 settings ready
+15/09/2020 03:22:35 MessageDialog GNSS 0
+15/09/2020 03:22:35 Read : rc = -1 data = 0x0000 string = 
+15/09/2020 03:22:35 light sensor present: 0
+15/09/2020 03:22:35 Starting Threads. Mayhem begins!
+15/09/2020 03:22:35 Can thread running
+15/09/2020 03:22:35 Main thread running
+15/09/2020 03:22:35 FleetMessaging thread running
+15/09/2020 03:22:35 fleetmsg run
+15/09/2020 03:22:35 opusFc task run
+15/09/2020 03:22:35 Beeper thread running
+15/09/2020 03:22:35 TriLed thread running
+15/09/2020 03:22:35 Theme thread running
+15/09/2020 03:22:35 Diagnostic thread running
+15/09/2020 03:22:35 Batttery thread running
+15/09/2020 03:22:35 Key thread running
+15/09/2020 03:22:35 beeper run
+15/09/2020 03:22:35 GeoFence thread running
+15/09/2020 03:22:35 main.cpp Done
+15/09/2020 03:22:35 New Operator file XML found
+15/09/2020 03:22:35 found Operators_active.xml
+15/09/2020 03:22:35 Geofence run
+15/09/2020 03:22:35 triled run
+15/09/2020 03:22:35 diags run
+15/09/2020 03:22:35 xml_parsing file: /store/Operators_active.xml
+15/09/2020 03:22:35 MessageDialog GNSS 0
+15/09/2020 03:22:35 Operator file XML found
+15/09/2020 03:22:35 Powerup - Done
+15/09/2020 03:22:35 PID3 109 117
+15/09/2020 03:22:35 WDOpen Success
+15/09/2020 03:22:35 WDT timeout is 30
+15/09/2020 03:22:35 Starting PRU
+15/09/2020 03:22:35 running
+15/09/2020 03:22:35 opening /dev/rpmsg_pru30
+15/09/2020 03:22:35 PRU Opened 38
+15/09/2020 03:22:35 Opened /dev/rpmsg_pru30
+15/09/2020 03:22:35 gps state change 2 -> 3
+15/09/2020 03:22:35 Battery free
+15/09/2020 03:22:35 keythread - init 1
+15/09/2020 03:22:35 keyscanner OK
+15/09/2020 03:22:35 keyscanner gpio ok
+15/09/2020 03:22:35 keyscanner UART
+15/09/2020 03:22:35 keythread - init SUCCESS
+15/09/2020 03:22:35 set theme Day
+15/09/2020 03:22:35 slotUpdate first call
+15/09/2020 03:22:36 bootstatus3 0
+15/09/2020 03:22:36 tempBootStatus 0
+15/09/2020 03:22:36 bootstatus 0
+15/09/2020 03:22:36 end of run()
+15/09/2020 03:22:36 channel setting: 3-freq:4-freq
+15/09/2020 03:22:36 Message <3-freq:4-freq>: Sent to PRU0
+15/09/2020 03:22:36 channel state change 1 -> 2
+15/09/2020 03:22:36 PRU: Set3F
+15/09/2020 03:22:36 PRU: Set4F
+15/09/2020 03:22:36 PRU: FreqInit
+15/09/2020 03:22:36 PRU Version: 104
+15/09/2020 03:22:36 sync new state entry
+15/09/2020 03:22:36 build time 1600029226
+15/09/2020 03:22:36 REC trip id 0
+15/09/2020 03:22:36 REC write time 1600139593
+15/09/2020 03:22:36 REC QNr 0
+15/09/2020 03:22:36 REC CkState 17
+15/09/2020 03:22:36 REC Main state 3
+15/09/2020 03:22:36 REC DrIdx 9
+15/09/2020 03:22:36 readData 1
+15/09/2020 03:22:36 thread comms_thread created
+15/09/2020 03:22:36 thread modem_thread created
+15/09/2020 03:22:36 last connect time read: 1600139595 1600139595
+15/09/2020 03:22:36 NET: get hw
+15/09/2020 03:22:36 MDM: open
+15/09/2020 03:22:36 thread net_thread created
+15/09/2020 03:22:36 modem state change 0 -> 1
+15/09/2020 03:22:36 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+15/09/2020 03:22:36 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+15/09/2020 03:22:36 MDM: turn on modem power
+15/09/2020 03:22:36 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+15/09/2020 03:22:37 thread interrupt_thread created
+15/09/2020 03:22:37 SerialNr: 10247
+15/09/2020 03:22:37 LoadDate: 160120
+15/09/2020 03:22:37 HWModel:  9072s_C
+15/09/2020 03:22:37 hwVersion is <9072s_C>
+15/09/2020 03:22:37 recovered EEtrip 0 time 1600139593 slot 0 saved time 328
+15/09/2020 03:22:37 FRIM: 302/0/0/0/0
+15/09/2020 03:22:37 LT 1600139593 0
+15/09/2020 03:22:37 recovered EEtrip 8157 time 1600139387 slot 1 saved time 122
+15/09/2020 03:22:37 FRIM: 96/0/0/0/0
+15/09/2020 03:22:37 recovered EEtrip 8157 time 1600139448 slot 2 saved time 183
+15/09/2020 03:22:37 FRIM: 157/0/0/0/0
+15/09/2020 03:22:37 recovered EEtrip 8157 time 1600139509 slot 3 saved time 244
+15/09/2020 03:22:37 FRIM: 218/0/0/0/0
+15/09/2020 03:22:37 recovered EEtrip 8157 time 1600139570 slot 4 saved time 305
+15/09/2020 03:22:37 FRIM: 279/0/0/0/0
+15/09/2020 03:22:37 recovered EEtrip 8149 time 1600138861 slot 5 saved time 947
+15/09/2020 03:22:37 FRIM: 182/0/0/0/0
+15/09/2020 03:22:37 recovered EEtrip 0 time 1600139593 slot 0
+15/09/2020 03:22:37 FRIM: 302/0/0/0/0
+15/09/2020 03:22:37 found /store/DisplayMessaging_active.xml
+15/09/2020 03:22:37 xml_parsing file: /store/DisplayMessaging_active.xml
+15/09/2020 03:22:37 xml process daily
+15/09/2020 03:22:37 xml process impact
+15/09/2020 03:22:37 xml process license
+15/09/2020 03:22:37 Msg Dialog font Noto Sans
+15/09/2020 03:22:37 lang code: EN file: :Translations/FcMain_en
+15/09/2020 03:22:37 lang file: :Translations/FcMain_en
+15/09/2020 03:22:37 Removing translations
+15/09/2020 03:22:37 Installing translations
+15/09/2020 03:22:37 getlicmsg langfound 0, lang reqd 0
+15/09/2020 03:22:37 FcMain change from 0 to 1
+15/09/2020 03:22:37 modem type 7
+15/09/2020 03:22:37 comms_start gsm
+15/09/2020 03:22:37 comms_enable
+15/09/2020 03:22:37 fleetmsg free
+15/09/2020 03:22:37 Theme free
+15/09/2020 03:22:37 diags free
+15/09/2020 03:22:37 Led free
+15/09/2020 03:22:37 CAN free
+15/09/2020 03:22:37 VDIOpen
+15/09/2020 03:22:37 wrote 1 to /sys/class/gpio/gpio27/value (O/P 3)
+15/09/2020 03:22:37 CAN opened OK
+15/09/2020 03:22:37 Geofence free, FC was reset 1
+15/09/2020 03:22:37 brand 1 is Brand-Earthtrack, logo is /store/Brand-Earthtrack.png
+15/09/2020 03:22:37 brand 2 is Brand-Earthtrack, theme logo is /store/Brand-Earthtrack_light.png
+15/09/2020 03:22:37 brand 3 is :/Brands/brand/Brand-Earthtrack.png
+15/09/2020 03:22:38 INTB: 0
+15/09/2020 03:22:38 gpio interrupts (P1-2) FF
+15/09/2020 03:22:38 eeprom 0, 302/0/0/0
+15/09/2020 03:22:38 Power loss time 1600139593
+15/09/2020 03:22:38 SWSTART OpusFC 5.0.2.1 R
+15/09/2020 03:22:38 startup human? 1
+15/09/2020 03:22:38 FcMain change from 1 to 2
+15/09/2020 03:22:38 report initial input states?
+15/09/2020 03:22:38 report initial input states: YES
+15/09/2020 03:22:38 ign on, enable BackLight/Serialiser
+15/09/2020 03:22:38 zone 1 read 4 points 8
+15/09/2020 03:22:38 zone 2 read 5 points 10
+15/09/2020 03:22:38 zone 3 read 6 points 12
+15/09/2020 03:22:38 gps version is NO VERSION
+15/09/2020 03:22:38 max zones 100
+15/09/2020 03:22:38 Splash set font Noto Sans
+15/09/2020 03:22:38 Splash Radio Unknown
+15/09/2020 03:22:38 radio set Unknown <--
+15/09/2020 03:22:38 splash font set Noto Sans
+15/09/2020 03:22:38 geofence state change 0 -> 1
+15/09/2020 03:22:38 startup
+15/09/2020 03:22:38 START Enabled - callback
+15/09/2020 03:22:38 StartOutputStateChange 0
+15/09/2020 03:22:38 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+15/09/2020 03:22:38 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:22:38 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:22:38 PSP 1
+15/09/2020 03:22:38 PSP 2
+15/09/2020 03:22:38 PSP 3
+15/09/2020 03:22:38 FcMain change from 2 to 4
+15/09/2020 03:22:38 Settings: slotEsc
+15/09/2020 03:22:39 Wake
+15/09/2020 03:22:39 Wake ON
+15/09/2020 03:22:39 FcMain change from 4 to 5
+15/09/2020 03:22:39 Key free
+15/09/2020 03:22:39 keythread - init 1
+15/09/2020 03:22:39 keyscanner OK
+15/09/2020 03:22:39 keyscanner gpio ok
+15/09/2020 03:22:39 keyscanner UART
+15/09/2020 03:22:39 keythread - init SUCCESS
+15/09/2020 03:22:39 slotStartReading (1)**********
+15/09/2020 03:22:39 start HID reader
+15/09/2020 03:22:39 PRU version 104
+15/09/2020 03:22:39 ota 1599811537 - 2020-09-11 08:05:37Z
+15/09/2020 03:22:39 valid fleet? 10247
+15/09/2020 03:22:39 BLAll 100
+15/09/2020 03:22:39 BL set:100
+15/09/2020 03:22:39 set brightness to 100%
+15/09/2020 03:22:39 traction set 2 2
+15/09/2020 03:22:39 channel set 2 2
+15/09/2020 03:22:39 channel setting: 3-freq:4-freq
+15/09/2020 03:22:39 Message <3-freq:4-freq>: Sent to PRU0
+15/09/2020 03:22:39 FcMain change from 5 to 6
+15/09/2020 03:22:39 INTB: 1
+15/09/2020 03:22:39 gpio interrupts (P1-2) FB
+15/09/2020 03:22:39 card read
+15/09/2020 03:22:39 Uart rxfifo has 14 bytes waiting
+15/09/2020 03:22:39 PRU: Set3F
+15/09/2020 03:22:39 PRU: Set4F
+15/09/2020 03:22:39 vli 000a 10
+15/09/2020 03:22:39 vli matches
+15/09/2020 03:22:39 208 1664 0
+15/09/2020 03:22:39 CardReader version 0
+15/09/2020 03:22:39 Cklist free
+15/09/2020 03:22:39 splash enabled?:0
+15/09/2020 03:22:39 INTB: 1
+15/09/2020 03:22:39 gpio interrupts (P1-2) FF
+15/09/2020 03:22:39 start rfid checking
+15/09/2020 03:22:39 start wiegand
+15/09/2020 03:22:39 traction change from 0 to 1
+15/09/2020 03:22:39 state timer started
+15/09/2020 03:22:39 geofence state change 1 -> 2
+15/09/2020 03:22:39 setbool 0
+15/09/2020 03:22:39 CKL state change 0
+15/09/2020 03:22:39 checklist file detected
+15/09/2020 03:22:39 found Checklist_active.xml
+15/09/2020 03:22:39 xml_parsing
+15/09/2020 03:22:39 xml process checklist
+15/09/2020 03:22:39 xml process config/hdr
+15/09/2020 03:22:39 lastrun read (time/driver) 1600055718 9
+15/09/2020 03:22:39 CkList::Checklist init complete
+15/09/2020 03:22:39 FcMain::Checklist init complete
+15/09/2020 03:22:39 CKL state change 1
+15/09/2020 03:22:39 CKL state change 17
+15/09/2020 03:22:39 brand is Brand-Earthtrack, logo is /store/Brand-Earthtrack.png
+15/09/2020 03:22:41 resetting baud
+15/09/2020 03:22:41 change baud to 115200
+15/09/2020 03:22:41 GPS close 0
+15/09/2020 03:22:41 opened /dev/ttyS2 serial/USB OK
+15/09/2020 03:22:41 GPS Serial Connected on /dev/ttyS2 at 115200
+15/09/2020 03:22:41 GPS Saved Database found
+15/09/2020 03:22:41 GPS Loading Saved Database
+15/09/2020 03:22:41 traction/idle state seen
+15/09/2020 03:22:41 loaded 84 GNSS DB files
+15/09/2020 03:22:41 getting ver
+15/09/2020 03:22:42 INTB: 1
+15/09/2020 03:22:42 gpio interrupts (P1-2) FE
+15/09/2020 03:22:42 KEYPRESS 5
+15/09/2020 03:22:42 INTB: 1
+15/09/2020 03:22:42 gpio interrupts (P1-2) FE
+15/09/2020 03:22:42 INTB: 0
+15/09/2020 03:22:42 gpio interrupts (P1-2) FF
+15/09/2020 03:22:42 INTB: 1
+15/09/2020 03:22:42 gpio interrupts (P1-2) FE
+15/09/2020 03:22:42 KEYPRESS 5
+15/09/2020 03:22:42 INTB: 1
+15/09/2020 03:22:42 gpio interrupts (P1-2) FF
+15/09/2020 03:22:43 INTB: 1
+15/09/2020 03:22:43 gpio interrupts (P1-2) FE
+15/09/2020 03:22:43 INTB: 1
+15/09/2020 03:22:43 gpio interrupts (P1-2) FE
+15/09/2020 03:22:43 KEYPRESS 5
+15/09/2020 03:22:43 getting ver
+15/09/2020 03:22:43 INTB: 1
+15/09/2020 03:22:43 gpio interrupts (P1-2) FE
+15/09/2020 03:22:43 gps rate set
+15/09/2020 03:22:43 INTB: 1
+15/09/2020 03:22:43 gpio interrupts (P1-2) FF
+15/09/2020 03:22:43 INTB: 1
+15/09/2020 03:22:43 gpio interrupts (P1-2) FE
+15/09/2020 03:22:43 KEYPRESS 5
+15/09/2020 03:22:43 INTB: 1
+15/09/2020 03:22:43 gpio interrupts (P1-2) FE
+15/09/2020 03:22:43 INTB: 1
+15/09/2020 03:22:43 gpio interrupts (P1-2) FE
+15/09/2020 03:22:43 KEYPRESS 5
+15/09/2020 03:22:43 INTB: 0
+15/09/2020 03:22:43 gpio interrupts (P1-2) FE
+15/09/2020 03:22:43 INTB: 1
+15/09/2020 03:22:43 gpio interrupts (P1-2) FF
+15/09/2020 03:22:43 INTB: 1
+15/09/2020 03:22:43 gpio interrupts (P1-2) FE
+15/09/2020 03:22:43 KEYPRESS 5
+15/09/2020 03:22:43 messagedialog result 555555
+15/09/2020 03:22:43 pin check clear, found 9 (555555)
+15/09/2020 03:22:43 driver id -100
+15/09/2020 03:22:43 checking license expiry
+15/09/2020 03:22:43 Bgnd set msg-day font Noto Sans
+15/09/2020 03:22:43 lang code: EN file: :Translations/FcMain_en
+15/09/2020 03:22:43 lang file: :Translations/FcMain_en
+15/09/2020 03:22:43 Removing translations
+15/09/2020 03:22:43 Installing translations
+15/09/2020 03:22:43 getlicmsg langfound 0, lang reqd 0
+15/09/2020 03:22:43 show driver name Commissioning Pin
+15/09/2020 03:22:43 FcMain change from 6 to 8
+15/09/2020 03:22:43 slotMessageSignonResult 555555
+15/09/2020 03:22:43 stop rfid checking
+15/09/2020 03:22:43 SETT: driver role 5
+15/09/2020 03:22:43 font is Noto Sans
+15/09/2020 03:22:44 INTB: 1
+15/09/2020 03:22:44 gpio interrupts (P1-2) FE
+15/09/2020 03:22:44 Splash set font Noto Sans
+15/09/2020 03:22:44 splash font set Noto Sans
+15/09/2020 03:22:44 OpName pointsize is 16, labelsize is 240, height 23
+15/09/2020 03:22:44 GPS Sat Found (NMEA)!!!!!!!!!
+15/09/2020 03:22:44 GPS Ver [ROM CORE 3.01 (107888)] [00080000] (len)160
+15/09/2020 03:22:44 Duplicates Removed 1
+15/09/2020 03:22:44 INTB: 1
+15/09/2020 03:22:44 gpio interrupts (P1-2) FF
+15/09/2020 03:22:44 GPS Sat Found (NMEA)!!!!!!!!!
+15/09/2020 03:22:46 opened /dev/ttyACM0 serial/USB OK
+15/09/2020 03:22:46 MDM:opened and closed /dev/ttyACM0
+15/09/2020 03:22:46 opened /dev/ttyACM2 serial/USB OK
+15/09/2020 03:22:46 opened /dev/ttyACM0 serial/USB OK
+15/09/2020 03:22:46 Modem Serial Connected using /dev/ttyACM0 and /dev/ttyACM2
+15/09/2020 03:22:46 modem state change 1 -> 2
+15/09/2020 03:22:46 NET:modem is opened
+15/09/2020 03:22:46 messagedialog result 2
+15/09/2020 03:22:46 slotMessageSignonResult 2
+15/09/2020 03:22:47 Bgnd set msg-day font Noto Sans
+15/09/2020 03:22:47 lang code: EN file: :Translations/FcMain_en
+15/09/2020 03:22:47 lang file: :Translations/FcMain_en
+15/09/2020 03:22:47 Removing translations
+15/09/2020 03:22:47 Installing translations
+15/09/2020 03:22:47 getlicmsg langfound 0, lang reqd 0
+15/09/2020 03:22:47 stop rfid checking
+15/09/2020 03:22:47 FcMain change from 8 to 11
+15/09/2020 03:22:47 Splash set font Noto Sans
+15/09/2020 03:22:47 splash font set Noto Sans
+15/09/2020 03:22:47 init complete, qrysent 1 0
+15/09/2020 03:22:47 dvrs 9 9
+15/09/2020 03:22:47 postStartCK cleared
+15/09/2020 03:22:47 Chklist required?
+15/09/2020 03:22:47 checklist file detectedx
+15/09/2020 03:22:47 shift change checklist trigger
+15/09/2020 03:22:47 Chklist required 1
+15/09/2020 03:22:47 FcMain change from 11 to 12
+15/09/2020 03:22:47 set font Noto Sans
+15/09/2020 03:22:47 checklist ready
+15/09/2020 03:22:47 CKL state change 2
+15/09/2020 03:22:47 checklist file detectedx
+15/09/2020 03:22:47 cklist state not idle 2
+15/09/2020 03:22:47 checklist ready 3 (dvr 0)
+15/09/2020 03:22:47 FcMain change from 12 to 13
+15/09/2020 03:22:47 CKL state change 3
+15/09/2020 03:22:47 ATE0V1
+15/09/2020 03:22:47 CKL state change 12
+15/09/2020 03:22:48 geofence state change 2 -> 3
+15/09/2020 03:22:48 ZoneID Change3 0 -> 0 (speed 0 -> 20)
+15/09/2020 03:22:48 fcMain::slotZoneSpeed: 20, -1, 1
+15/09/2020 03:22:48 FcMain - GNSS SAT state change 0->1
+15/09/2020 03:22:48 MessageDialog GNSS 1
+15/09/2020 03:22:48 Splash GNSS 1
+15/09/2020 03:22:49 CKL state change 5
+15/09/2020 03:22:49 Qnr=488
+15/09/2020 03:22:49 set font Noto Sans
+15/09/2020 03:22:49 Are your tyres inflated correctly 
+15/09/2020 03:22:49 linewidth=2, pixelwidth=492, ave=17
+15/09/2020 03:22:49 CKL state change 12
+15/09/2020 03:22:50 ATE0V1
+15/09/2020 03:22:50 Duplicates Removed 1
+15/09/2020 03:22:50 OK
+15/09/2020 03:22:50 NET:modem is alive
+15/09/2020 03:22:50 ATE0V1
+15/09/2020 03:22:50 OK
+15/09/2020 03:22:50 AT+UUSBCONF?
+15/09/2020 03:22:50 +UUSBCONF: 0,"",,"0x1141"
+15/09/2020 03:22:50 OK
+15/09/2020 03:22:50 NET:USB Profile is 0 4417
+15/09/2020 03:22:50 AT+CGMM
+15/09/2020 03:22:50 TOBY-L280
+15/09/2020 03:22:50 MDM: HWType TOBY-L280
+15/09/2020 03:22:50 OK
+15/09/2020 03:22:50 AT+CGSN
+15/09/2020 03:22:50 358503060992436
+15/09/2020 03:22:50 MDM: IMEI 358503060992436
+15/09/2020 03:22:50 OK
+15/09/2020 03:22:50 AT+CIMI
+15/09/2020 03:22:50 234500003998781
+15/09/2020 03:22:50 MDM: IMSI 234500003998781
+15/09/2020 03:22:50 OK
+15/09/2020 03:22:50 AT+CCID
+15/09/2020 03:22:50 +CCID: 8944500602199987818
+15/09/2020 03:22:50 MDM: CCID 8944500602199987818
+15/09/2020 03:22:50 OK
+15/09/2020 03:22:50 AT+CSQ
+15/09/2020 03:22:50 +CSQ: 31,5
+15/09/2020 03:22:50 MODEM CSQ 31
+15/09/2020 03:22:50 OK
+15/09/2020 03:22:50 Comms Task Alive/Started, conn_retry 300
+15/09/2020 03:22:50 gsm starting
+15/09/2020 03:22:50 comms st 0 -> 1
+15/09/2020 03:22:50 modem is HL8/4G
+15/09/2020 03:22:50 imsi: 234500003998781 15, Auto 1
+15/09/2020 03:22:50 selected apn: nextm2m (found? 1)
+15/09/2020 03:22:50 NET: enable
+15/09/2020 03:22:50 enable apn nextm2m for HL8
+15/09/2020 03:22:50 comms st 1 -> 2
+15/09/2020 03:22:50 NS 1
+15/09/2020 03:22:50 imsi: 234500003998781 15, Auto 1
+15/09/2020 03:22:50 selected apn: nextm2m (found? 1)
+15/09/2020 03:22:50 ICCID Check: 8944500602199987818 8944500602199987818
+15/09/2020 03:22:50 INTB: 1
+15/09/2020 03:22:50 gpio interrupts (P1-2) FE
+15/09/2020 03:22:50 KEYPRESS 3
+15/09/2020 03:22:50 UiQ 2
+15/09/2020 03:22:50 NS 1
+15/09/2020 03:22:50 CKL state change 6
+15/09/2020 03:22:50 INTB: 1
+15/09/2020 03:22:50 gpio interrupts (P1-2) FF
+15/09/2020 03:22:50 CKL state change 12
+15/09/2020 03:22:50 net state change 0 -> 1
+15/09/2020 03:22:50 modem open now
+15/09/2020 03:22:50 ATE0V1
+15/09/2020 03:22:50 NS 1
+15/09/2020 03:22:51 OK
+15/09/2020 03:22:51 AT+CGMM
+15/09/2020 03:22:51 TOBY-L280
+15/09/2020 03:22:51 MDM: HWType TOBY-L280
+15/09/2020 03:22:51 OK
+15/09/2020 03:22:51 AT+CGSN
+15/09/2020 03:22:51 358503060992436
+15/09/2020 03:22:51 MDM: IMEI 358503060992436
+15/09/2020 03:22:51 OK
+15/09/2020 03:22:51 AT+CIMI
+15/09/2020 03:22:51 234500003998781
+15/09/2020 03:22:51 MDM: IMSI 234500003998781
+15/09/2020 03:22:51 OK
+15/09/2020 03:22:51 AT+CCID
+15/09/2020 03:22:51 +CCID: 8944500602199987818
+15/09/2020 03:22:51 MDM: CCID 8944500602199987818
+15/09/2020 03:22:51 OK
+15/09/2020 03:22:51 AT+UPSND=0,8
+15/09/2020 03:22:51 +UPSND: 0,8,0
+15/09/2020 03:22:51 psd line 0
+15/09/2020 03:22:51 pad active #0 (NO)
+15/09/2020 03:22:51 OK
+15/09/2020 03:22:51 INTB: 1
+15/09/2020 03:22:51 gpio interrupts (P1-2) FE
+15/09/2020 03:22:51 net state change 1 -> 2
+15/09/2020 03:22:51 AT+UPSD=0,1,"nextm2m"
+15/09/2020 03:22:51 OK
+15/09/2020 03:22:51 NS 1
+15/09/2020 03:22:51 INTB: 1
+15/09/2020 03:22:51 gpio interrupts (P1-2) FF
+15/09/2020 03:22:51 NS 1
+15/09/2020 03:22:52 Duplicates Removed 8
+15/09/2020 03:22:52 AT+UPSDA=0,3
+15/09/2020 03:22:52 NS 1
+15/09/2020 03:22:52 Duplicates Removed 6
+15/09/2020 03:22:52 INTB: 1
+15/09/2020 03:22:52 gpio interrupts (P1-2) FE
+15/09/2020 03:22:52 KEYPRESS 5
+15/09/2020 03:22:52 DecCL 1
+15/09/2020 03:22:52 DecCL 3
+15/09/2020 03:22:52 NS 1
+15/09/2020 03:22:52 CKL state change 11
+15/09/2020 03:22:52 OK
+15/09/2020 03:22:52 +UUPSDA: 0,"10.48.54.82"
+15/09/2020 03:22:52 AT+UPSND=0,8
+15/09/2020 03:22:52 +UPSND: 0,8,1
+15/09/2020 03:22:52 psd line 1
+15/09/2020 03:22:52 pad active #1 (YES)
+15/09/2020 03:22:52 OK
+15/09/2020 03:22:52 AT+UPSND=0,0
+15/09/2020 03:22:52 +UPSND: 0,0,"10.48.54.82"
+15/09/2020 03:22:52 OK
+15/09/2020 03:22:52 INTB: 1
+15/09/2020 03:22:52 gpio interrupts (P1-2) FE
+15/09/2020 03:22:52 AT+CREG?
+15/09/2020 03:22:52 CKL state change 13
+15/09/2020 03:22:52 +CREG: 0,5
+15/09/2020 03:22:52 OK
+15/09/2020 03:22:52 net state change 2 -> 3
+15/09/2020 03:22:52 AT+CGREG=1
+15/09/2020 03:22:52 OK
+15/09/2020 03:22:52 AT+CREG=2
+15/09/2020 03:22:52 NS 1
+15/09/2020 03:22:52 CKL state change 12
+15/09/2020 03:22:52 OK
+15/09/2020 03:22:52 AT+CGREG?
+15/09/2020 03:22:52 +CGREG: 1,4
+15/09/2020 03:22:52 OK
+15/09/2020 03:22:52 AT+COPS?
+15/09/2020 03:22:52 INTB: 1
+15/09/2020 03:22:52 +COPS: 0,0,"Optus AU",7
+15/09/2020 03:22:52 MDM: operator name Optus AU
+15/09/2020 03:22:52 OK
+15/09/2020 03:22:52 gpio interrupts (P1-2) FF
+15/09/2020 03:22:53 NS 1
+15/09/2020 03:22:53 Duplicates Removed 9
+15/09/2020 03:22:53 AT+CSQ
+15/09/2020 03:22:53 +CSQ: 31,5
+15/09/2020 03:22:53 MODEM CSQ 31
+15/09/2020 03:22:53 OK
+15/09/2020 03:22:54 net state change 3 -> 4
+15/09/2020 03:22:54 NS 2
+15/09/2020 03:22:54 comms st 2 -> 3
+15/09/2020 03:22:54 comms st 3 -> 4
+15/09/2020 03:22:54 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:22:54 NET: connect
+15/09/2020 03:22:54 AT+UPSND=0,8
+15/09/2020 03:22:54 +UPSND: 0,8,1
+15/09/2020 03:22:54 psd line 1
+15/09/2020 03:22:54 pad active #1 (YES)
+15/09/2020 03:22:54 OK
+15/09/2020 03:22:54 AT+USOCR=6
+15/09/2020 03:22:54 +USOCR: 0
+15/09/2020 03:22:54 socket #0
+15/09/2020 03:22:54 OK
+15/09/2020 03:22:54 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:22:55 OK
+15/09/2020 03:22:55 CKL state change 16
+15/09/2020 03:22:55 FcMain change from 13 to 17
+15/09/2020 03:22:55 CKL state change 17
+15/09/2020 03:22:56 Run state: role 5
+15/09/2020 03:22:56 START Enabled - callback
+15/09/2020 03:22:56 StartOutputStateChange 1
+15/09/2020 03:22:56 wrote 1 to /sys/class/gpio/gpio60/value (O/P 1)
+15/09/2020 03:22:56 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:22:56 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:22:56 START Enabled
+15/09/2020 03:22:56 FcMain change from 17 to 18
+15/09/2020 03:22:56 Cklist halt
+15/09/2020 03:22:56 slotStartReading (0)**********
+15/09/2020 03:22:56 stop HID reader
+15/09/2020 03:22:56 splash enabled?:1
+15/09/2020 03:22:56 brand 1 is Brand-Earthtrack, logo is /store/Brand-Earthtrack.png
+15/09/2020 03:22:56 brand 2 is Brand-Earthtrack, theme logo is /store/Brand-Earthtrack_light.png
+15/09/2020 03:22:56 brand 3 is :/Brands/brand/Brand-Earthtrack.png
+15/09/2020 03:22:56 messagedialog result 3
+15/09/2020 03:22:56 slotMessageSignonResult 3
+15/09/2020 03:22:56 +UUSORD: 0,16
+15/09/2020 03:22:56 ICONS ED
+15/09/2020 03:22:56 INTB: 1
+15/09/2020 03:22:56 gpio interrupts (P1-2) FB
+15/09/2020 03:22:56 AT+USODL=0
+15/09/2020 03:22:56 CONNECT
+15/09/2020 03:22:56 Directlink CONNECT
+15/09/2020 03:22:56 modem state change 2 -> 3
+15/09/2020 03:22:56 net connected
+15/09/2020 03:22:56 chat connect
+15/09/2020 03:22:56 <220 earthtrack>
+15/09/2020 03:22:56 UNIT 10247
+15/09/2020 03:22:56 card read
+15/09/2020 03:22:56 Uart rxfifo has 14 bytes waiting
+15/09/2020 03:22:56 vli 000a 10
+15/09/2020 03:22:56 vli matches
+15/09/2020 03:22:56 208 1664 0
+15/09/2020 03:22:56 CardReader version 0
+15/09/2020 03:22:56 Bgnd set msg-day font Noto Sans
+15/09/2020 03:22:56 Tuesday Tuesday Tuesday Tuesday Tuesday Tuesday
+15/09/2020 03:22:56 linewidth=2, pixelwidth=778, ave=17
+15/09/2020 03:22:56 splash font set Noto Sans
+15/09/2020 03:22:56 daymsg [Tuesday Tuesday
+Tuesday Tuesday
+Tuesday Tuesday]
+15/09/2020 03:22:56 pointsize is 18, labelsize is 480
+15/09/2020 03:22:56 gps version is ROM CORE 3.01 (107888)
+15/09/2020 03:22:56 main state running
+15/09/2020 03:22:56 INTB: 1
+15/09/2020 03:22:56 gpio interrupts (P1-2) FF
+15/09/2020 03:22:56 updated battery state to 2
+15/09/2020 03:22:57 <333 CHAL 5D849E65>
+15/09/2020 03:22:57 RESP C7B5046E
+15/09/2020 03:22:57 <230 Auth OK>
+15/09/2020 03:22:57 last connect time written 1600140177
+15/09/2020 03:22:57 TIME
+15/09/2020 03:22:57 last connect time written 1600140177
+15/09/2020 03:22:58 <211 TIME 1600140185>
+15/09/2020 03:22:58 adjusting rtc - comms TIME
+15/09/2020 03:22:58 last connect time written 1600140178
+15/09/2020 03:22:58 EVCOUNT 5
+15/09/2020 03:22:59 <252 Event OK>
+15/09/2020 03:22:59 TODO
+15/09/2020 03:23:00 MDM:rssi 31
+15/09/2020 03:23:00 <125 TODO CONFIG>
+15/09/2020 03:23:00 <125 TODO GETXML 5000 ZONE >
+15/09/2020 03:23:00 TODO Get file:ZONE=5000 bytes
+15/09/2020 03:23:00 <225 Work list complete>
+15/09/2020 03:23:00 GETXML
+15/09/2020 03:23:01 <151 FILE Zone 543>
+15/09/2020 03:23:01 Get file:/store/Zone , 543 bytes
+15/09/2020 03:23:01 get, crc 385C7921
+15/09/2020 03:23:01 <351 Transfer complete>
+15/09/2020 03:23:01 GOT Zone 543 385C7921
+15/09/2020 03:23:02 <250 Download OK>
+15/09/2020 03:23:02 zone 1 read 4 points 8
+15/09/2020 03:23:02 zone 2 read 5 points 10
+15/09/2020 03:23:02 zone 3 read 7 points 14
+15/09/2020 03:23:02 gps version is ROM CORE 3.01 (107888)
+15/09/2020 03:23:02 CONFIG
+15/09/2020 03:23:03 <141 CONF IMPACT_F 1>
+15/09/2020 03:23:03 <141 CONF IMPACT_B 1>
+15/09/2020 03:23:03 <141 CONF IMPACT_L 1>
+15/09/2020 03:23:03 <141 CONF IMPACT_R 1>
+15/09/2020 03:23:03 <141 CONF IDLEMAX 300>
+15/09/2020 03:23:03 <141 CONF BATT_HIGH 132>
+15/09/2020 03:23:03 <141 CONF CO_XSIDLE 0>
+15/09/2020 03:23:03 <141 CONF HWCONFIG 551>
+15/09/2020 03:23:03 <141 CONF BATT_CRITLOW 105>
+15/09/2020 03:23:03 <141 CONF ZONE_DEBUG 1>
+15/09/2020 03:23:03 <141 CONF GEOFENCE 1>
+15/09/2020 03:23:03 <141 CONF HARNESS_TYPE 2>
+15/09/2020 03:23:03 <141 CONF FECONFIG 64367>
+15/09/2020 03:23:03 <141 CONF CO_IGN_OFF 1>
+15/09/2020 03:23:03 <141 CONF BYPASS 4>
+15/09/2020 03:23:03 <141 CONF XSIDLE_METHOD 1>
+15/09/2020 03:23:03 <141 CONF BATT_INPUT 1>
+15/09/2020 03:23:03 <141 CONF CKL_BYPASS 2>
+15/09/2020 03:23:03 <141 CONF ITS 0>
+15/09/2020 03:23:03 <141 CONF BRAND Brand-Earthtrack>
+15/09/2020 03:23:03 <141 CONF SOFTKEYPAD 1>
+15/09/2020 03:23:03 <141 CONF IMPACT_WARN_LVL 8>
+15/09/2020 03:23:03 <141 CONF IMPACT_CRIT_LVL 13>
+15/09/2020 03:23:03 <141 CONF BUCKLE_DEBOUNCE 2>
+15/09/2020 03:23:03 <141 CONF SYSTEM_METRIC 1>
+15/09/2020 03:23:03 <141 CONF DISPLAY_OFFSET 480>
+15/09/2020 03:23:03 <141 CONF SPEED_ALERT 1>
+15/09/2020 03:23:03 <141 CONF CO_START_DELAY 60>
+15/09/2020 03:23:03 <141 CONF CO_RUN_TIME 60>
+15/09/2020 03:23:03 <141 CONF CO_BUZZER_TIME 10>
+15/09/2020 03:23:03 <141 CONF CO_IMPACT 0>
+15/09/2020 03:23:03 <141 CONF CO_CHECKLIST 0>
+15/09/2020 03:23:03 <141 CONF SPEED_DEBOUNCE 2>
+15/09/2020 03:23:03 <141 CONF SPEED_MAX 60>
+15/09/2020 03:23:03 <141 CONF IN1EVENT 0>
+15/09/2020 03:23:03 <141 CONF IN1LOGIC 0>
+15/09/2020 03:23:03 <141 CONF IN1MODE 1>
+15/09/2020 03:23:03 <141 CONF IN3EVENT 0>
+15/09/2020 03:23:03 <141 CONF IN3LOGIC 1>
+15/09/2020 03:23:03 <141 CONF IN3MODE 2>
+15/09/2020 03:23:03 <141 CONF IN4EVENT 0>
+15/09/2020 03:23:03 <141 CONF IN4LOGIC 1>
+15/09/2020 03:23:03 <141 CONF IN4MODE 2>
+15/09/2020 03:23:03 <141 CONF IN5EVENT 0>
+15/09/2020 03:23:03 <141 CONF IN5LOGIC 0>
+15/09/2020 03:23:03 <141 CONF IN5MODE 1>
+15/09/2020 03:23:03 <141 CONF IN6EVENT 0>
+15/09/2020 03:23:03 <141 CONF IN6LOGIC 0>
+15/09/2020 03:23:03 <141 CONF IN6MODE 1>
+15/09/2020 03:23:03 <141 CONF IN7EVENT 0>
+15/09/2020 03:23:03 <141 CONF IN7LOGIC 0>
+15/09/2020 03:23:03 <141 CONF IN7MODE 1>
+15/09/2020 03:23:03 <141 CONF IN8EVENT 0>
+15/09/2020 03:23:03 <141 CONF IN8LOGIC 1>
+15/09/2020 03:23:03 <141 CONF IN8MODE 1>
+15/09/2020 03:23:03 <141 CONF IN3FREQTHR 5>
+15/09/2020 03:23:03 <141 CONF IN4FREQTHR 5>
+15/09/2020 03:23:03 <141 CONF ENGINE_SPEED_MAX 1400>
+15/09/2020 03:23:03 <241 Config complete>
+15/09/2020 03:23:03 EVENT 8165 1600140158 -319776056/1159582871/3431/0/26 SWSTART OpusFC 5.0.2.1 R v:123
+15/09/2020 03:23:04 <252 Event OK>
+15/09/2020 03:23:04 EVENT 8166 1600140158 0/0/0/0/0 INPUT 2 0 0 v:123
+15/09/2020 03:23:05 TTFF 21
+15/09/2020 03:23:05 GPS Fix obtained*****************
+15/09/2020 03:23:05 <252 Event OK>
+15/09/2020 03:23:05 EVENT 8167 1600140158 0/0/0/0/0 ZONE_OK 3 100 FW=NO VERSION v:123
+15/09/2020 03:23:06 <252 Event OK>
+15/09/2020 03:23:06 EVENT 8168 1600140167 0/0/0/0/0 SIGNON -100 03555554 OK_CL 26 555555 0 v:123
+15/09/2020 03:23:06 FcMain - GNSS SAT state change 1->2
+15/09/2020 03:23:06 MessageDialog GNSS 2
+15/09/2020 03:23:06 Splash GNSS 2
+15/09/2020 03:23:07 <252 Event OK>
+15/09/2020 03:23:07 EVENT 8169 1600140172 0/0/0/31/0 CHECKLIST 8168 CANCEL 0 5 608 B v:123
+15/09/2020 03:23:08 ZoneID Change1 -1 -> 216 (speed 20 -> 40)
+15/09/2020 03:23:08 fcMain::slotZoneSpeed: 40, 216, 2
+15/09/2020 03:23:09 <252 Event OK>
+15/09/2020 03:23:09 EVENT 8170 1600140182 0/0/0/31/11 ZONE_OK 3 100 FW=ROM CORE 3.01 (107888) v:123
+15/09/2020 03:23:10 <252 Event OK>
+15/09/2020 03:23:10 EVENT 8171 1600140183 0/0/0/31/11 CONFIG v:123
+15/09/2020 03:23:10 <252 Event OK>
+15/09/2020 03:23:10 QUIT
+15/09/2020 03:23:11 <221 Session ended - goodbye>
+15/09/2020 03:23:11 NET: disconnect
+15/09/2020 03:23:13 esc modem +++
+15/09/2020 03:23:14 modem state change 3 -> 2
+15/09/2020 03:23:14 DISCONNECT
+15/09/2020 03:23:14 Directlink DISCONNECT
+15/09/2020 03:23:14 OK
+15/09/2020 03:23:14 +UUSOCL: 0
+15/09/2020 03:23:14 socket closed
+15/09/2020 03:23:19 comms chat disconnect 1
+15/09/2020 03:23:19 comms st 4 -> 3
+15/09/2020 03:23:19 comms st 3 -> 4
+15/09/2020 03:23:19 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:23:19 NET: connect
+15/09/2020 03:23:19 AT+UPSND=0,8
+15/09/2020 03:23:19 +UPSND: 0,8,1
+15/09/2020 03:23:19 psd line 1
+15/09/2020 03:23:19 pad active #1 (YES)
+15/09/2020 03:23:19 OK
+15/09/2020 03:23:19 AT+USOCR=6
+15/09/2020 03:23:20 +USOCR: 0
+15/09/2020 03:23:20 socket #0
+15/09/2020 03:23:20 OK
+15/09/2020 03:23:20 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:23:21 OK
+15/09/2020 03:23:22 +UUSORD: 0,16
+15/09/2020 03:23:22 AT+USODL=0
+15/09/2020 03:23:22 CONNECT
+15/09/2020 03:23:22 Directlink CONNECT
+15/09/2020 03:23:22 modem state change 2 -> 3
+15/09/2020 03:23:22 net connected
+15/09/2020 03:23:22 chat connect
+15/09/2020 03:23:22 PUTing config_audit
+15/09/2020 03:23:22 <220 earthtrack>
+15/09/2020 03:23:22 UNIT 10247
+15/09/2020 03:23:23 <333 CHAL 64F6B2A4>
+15/09/2020 03:23:23 RESP B9044EEC
+15/09/2020 03:23:24 <230 Auth OK>
+15/09/2020 03:23:24 last connect time written 1600140204
+15/09/2020 03:23:24 TIME
+15/09/2020 03:23:24 last connect time written 1600140204
+15/09/2020 03:23:25 <211 TIME 1600140211>
+15/09/2020 03:23:25 adjusting rtc - comms TIME
+15/09/2020 03:23:25 last connect time written 1600140205
+15/09/2020 03:23:25 EVCOUNT 0
+15/09/2020 03:23:26 <252 Event OK>
+15/09/2020 03:23:26 TODO
+15/09/2020 03:23:26 GndSPD 11.0 (55.0 Hz)
+15/09/2020 03:23:27 <226 Nothing to do>
+15/09/2020 03:23:27 PUT config_audit 2050 725C4D7A
+15/09/2020 03:23:28 <151 FILE config_audit 2050>
+15/09/2020 03:23:28 Put /store/config_audit 2050
+15/09/2020 03:23:28 upload complete
+15/09/2020 03:23:30 GNSS S:23 (GP:14 GL:9 BD:0 GA:0) U:9 Hacc:1725 R:31
+15/09/2020 03:23:30 SaveTripData: 35/0/0/0/0 0 0/0/0/0/0
+15/09/2020 03:23:30 <200 OK>
+15/09/2020 03:23:30 QUIT
+15/09/2020 03:23:31 <221 Session ended - goodbye>
+15/09/2020 03:23:31 NET: disconnect
+15/09/2020 03:23:33 esc modem +++
+15/09/2020 03:23:33 modem state change 3 -> 2
+15/09/2020 03:23:33 DISCONNECT
+15/09/2020 03:23:33 Directlink DISCONNECT
+15/09/2020 03:23:33 OK
+15/09/2020 03:23:33 +UUSOCL: 0
+15/09/2020 03:23:33 socket closed
+15/09/2020 03:23:39 comms chat disconnect 1
+15/09/2020 03:23:39 comms st 4 -> 3
+15/09/2020 03:23:49 +CREG: 5,"E86D","01A55F42",7
+15/09/2020 03:23:49 mdm RAT 7
+15/09/2020 03:23:49 Splash Radio 4G
+15/09/2020 03:23:49 radio set 4G <--
+15/09/2020 03:23:54 fcMain::slotGroundSpeedOverspeedEntryEvent: 216
+15/09/2020 03:23:57 GndSPD 42.0 (210.0 Hz)
+15/09/2020 03:24:02 MDM:rssi 30
+15/09/2020 03:24:28 GndSPD 42.0 (210.0 Hz)
+15/09/2020 03:24:31 SaveTripData: 96/0/0/0/0 1 0/0/0/0/0
+15/09/2020 03:24:33 MDM:rssi 31
+15/09/2020 03:24:36 adjusting rtc 2- event
+15/09/2020 03:24:36 ZoneID Change1 216 -> 214 (speed 40 -> 20)
+15/09/2020 03:24:36 fcMain::slotZoneSpeed: 20, 214, 1
+15/09/2020 03:24:36 fcMain::slotGroundSpeedOverspeedEvent: 8168, 41, 42.000000, 2
+15/09/2020 03:24:36 adjusting rtc 2- event
+15/09/2020 03:24:36 GNSS S:24 (GP:14 GL:10 BD:0 GA:0) U:11 Hacc:1837 R:31
+15/09/2020 03:24:36 comms st 3 -> 4
+15/09/2020 03:24:36 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:24:36 NET: connect
+15/09/2020 03:24:36 AT+UPSND=0,8
+15/09/2020 03:24:36 +UPSND: 0,8,1
+15/09/2020 03:24:36 psd line 1
+15/09/2020 03:24:36 pad active #1 (YES)
+15/09/2020 03:24:36 OK
+15/09/2020 03:24:36 AT+USOCR=6
+15/09/2020 03:24:37 +USOCR: 0
+15/09/2020 03:24:37 socket #0
+15/09/2020 03:24:37 OK
+15/09/2020 03:24:37 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:24:37 OK
+15/09/2020 03:24:38 fcMain::slotGroundSpeedOverspeedEntryEvent: 214
+15/09/2020 03:24:38 +UUSORD: 0,16
+15/09/2020 03:24:38 AT+USODL=0
+15/09/2020 03:24:38 CONNECT
+15/09/2020 03:24:38 Directlink CONNECT
+15/09/2020 03:24:38 modem state change 2 -> 3
+15/09/2020 03:24:38 net connected
+15/09/2020 03:24:38 chat connect
+15/09/2020 03:24:38 <220 earthtrack>
+15/09/2020 03:24:38 UNIT 10247
+15/09/2020 03:24:39 <333 CHAL 4952BE26>
+15/09/2020 03:24:39 RESP 483E33DD
+15/09/2020 03:24:40 <230 Auth OK>
+15/09/2020 03:24:40 last connect time written 1600140280
+15/09/2020 03:24:40 TIME
+15/09/2020 03:24:40 last connect time written 1600140280
+15/09/2020 03:24:41 <211 TIME 1600140288>
+15/09/2020 03:24:41 adjusting rtc - comms TIME
+15/09/2020 03:24:41 last connect time written 1600140281
+15/09/2020 03:24:41 EVCOUNT 2
+15/09/2020 03:24:42 <252 Event OK>
+15/09/2020 03:24:42 TODO
+15/09/2020 03:24:43 <226 Nothing to do>
+15/09/2020 03:24:43 EVENT 8172 1600140276 -319776492/1159579238/1875/31/42 ZONECHANGE 8168 216 214 1 v:123
+15/09/2020 03:24:44 <252 Event OK>
+15/09/2020 03:24:44 EVENT 8173 1600140276 -319776492/1159579238/1875/31/42 ZONEOVERSPEED 8168 41 42 2 v:123
+15/09/2020 03:24:47 <252 Event OK>
+15/09/2020 03:24:47 QUIT
+15/09/2020 03:24:48 <221 Session ended - goodbye>
+15/09/2020 03:24:48 NET: disconnect
+15/09/2020 03:24:50 esc modem +++
+15/09/2020 03:24:50 modem state change 3 -> 2
+15/09/2020 03:24:50 DISCONNECT
+15/09/2020 03:24:50 Directlink DISCONNECT
+15/09/2020 03:24:50 OK
+15/09/2020 03:24:50 +UUSOCL: 0
+15/09/2020 03:24:50 socket closed
+15/09/2020 03:24:55 comms chat disconnect 1
+15/09/2020 03:24:55 comms st 4 -> 3
+15/09/2020 03:24:59 GndSPD 42.0 (210.0 Hz)
+15/09/2020 03:25:04 MDM:rssi 26
+15/09/2020 03:25:30 GndSPD 42.0 (210.0 Hz)
+15/09/2020 03:25:32 SaveTripData: 157/0/0/0/0 2 0/0/0/0/1
+15/09/2020 03:25:35 MDM:rssi 28
+15/09/2020 03:25:38 adjusting rtc 2- event
+15/09/2020 03:25:38 ZoneID Change2 214 -> 0 (speed 20 -> 60)
+15/09/2020 03:25:38 fcMain::slotZoneSpeed: 60, 0, 1
+15/09/2020 03:25:38 fcMain::slotGroundSpeedOverspeedEvent: 8168, 59, 42.000000, 1
+15/09/2020 03:25:38 adjusting rtc 2- event
+15/09/2020 03:25:38 comms st 3 -> 4
+15/09/2020 03:25:38 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:25:38 NET: connect
+15/09/2020 03:25:38 AT+UPSND=0,8
+15/09/2020 03:25:38 +UPSND: 0,8,1
+15/09/2020 03:25:38 psd line 1
+15/09/2020 03:25:38 pad active #1 (YES)
+15/09/2020 03:25:38 OK
+15/09/2020 03:25:38 AT+USOCR=6
+15/09/2020 03:25:39 +USOCR: 0
+15/09/2020 03:25:39 socket #0
+15/09/2020 03:25:39 OK
+15/09/2020 03:25:39 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:25:40 OK
+15/09/2020 03:25:40 +UUSORD: 0,16
+15/09/2020 03:25:41 AT+USODL=0
+15/09/2020 03:25:41 CONNECT
+15/09/2020 03:25:41 Directlink CONNECT
+15/09/2020 03:25:41 modem state change 2 -> 3
+15/09/2020 03:25:41 net connected
+15/09/2020 03:25:41 chat connect
+15/09/2020 03:25:41 <220 earthtrack>
+15/09/2020 03:25:41 UNIT 10247
+15/09/2020 03:25:41 <333 CHAL 5882CDFF>
+15/09/2020 03:25:41 RESP 42C79D59
+15/09/2020 03:25:42 GNSS S:24 (GP:14 GL:10 BD:0 GA:0) U:10 Hacc:3979 R:28
+15/09/2020 03:25:42 <230 Auth OK>
+15/09/2020 03:25:42 last connect time written 1600140342
+15/09/2020 03:25:42 TIME
+15/09/2020 03:25:42 last connect time written 1600140342
+15/09/2020 03:25:43 <211 TIME 1600140350>
+15/09/2020 03:25:43 adjusting rtc - comms TIME
+15/09/2020 03:25:43 last connect time written 1600140343
+15/09/2020 03:25:43 EVCOUNT 2
+15/09/2020 03:25:44 <252 Event OK>
+15/09/2020 03:25:44 TODO
+15/09/2020 03:25:45 <226 Nothing to do>
+15/09/2020 03:25:45 EVENT 8174 1600140338 -319774612/1159582301/3935/28/42 ZONECHANGE 8168 214 0 0 v:123
+15/09/2020 03:25:46 <252 Event OK>
+15/09/2020 03:25:46 EVENT 8175 1600140338 -319774612/1159582301/3935/28/42 ZONEOVERSPEED 8168 59 42 1 v:123
+15/09/2020 03:25:48 <252 Event OK>
+15/09/2020 03:25:48 QUIT
+15/09/2020 03:25:49 <221 Session ended - goodbye>
+15/09/2020 03:25:49 NET: disconnect
+15/09/2020 03:25:51 esc modem +++
+15/09/2020 03:25:51 modem state change 3 -> 2
+15/09/2020 03:25:51 DISCONNECT
+15/09/2020 03:25:51 Directlink DISCONNECT
+15/09/2020 03:25:51 OK
+15/09/2020 03:25:51 +UUSOCL: 0
+15/09/2020 03:25:51 socket closed
+15/09/2020 03:25:56 comms chat disconnect 1
+15/09/2020 03:25:56 comms st 4 -> 3
+15/09/2020 03:25:57 ZoneID Change1 0 -> 214 (speed 60 -> 20)
+15/09/2020 03:25:57 fcMain::slotZoneSpeed: 20, 214, 1
+15/09/2020 03:25:59 fcMain::slotGroundSpeedOverspeedEntryEvent: 214
+15/09/2020 03:26:01 GndSPD 42.0 (210.0 Hz)
+15/09/2020 03:26:06 MDM:rssi 29
+15/09/2020 03:26:32 GndSPD 20.0 (100.0 Hz)
+15/09/2020 03:26:33 fcMain::slotGroundSpeedOverspeedEvent: 8168, 34, 42.000000, 1
+15/09/2020 03:26:33 adjusting rtc 2- event
+15/09/2020 03:26:33 SaveTripData: 218/0/0/0/0 3 0/0/0/0/1
+15/09/2020 03:26:33 comms st 3 -> 4
+15/09/2020 03:26:33 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:26:33 NET: connect
+15/09/2020 03:26:33 AT+UPSND=0,8
+15/09/2020 03:26:33 +UPSND: 0,8,1
+15/09/2020 03:26:33 psd line 1
+15/09/2020 03:26:33 pad active #1 (YES)
+15/09/2020 03:26:33 OK
+15/09/2020 03:26:33 AT+USOCR=6
+15/09/2020 03:26:34 +USOCR: 0
+15/09/2020 03:26:34 socket #0
+15/09/2020 03:26:34 OK
+15/09/2020 03:26:34 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:26:35 OK
+15/09/2020 03:26:36 +UUSORD: 0,16
+15/09/2020 03:26:36 AT+USODL=0
+15/09/2020 03:26:36 CONNECT
+15/09/2020 03:26:36 Directlink CONNECT
+15/09/2020 03:26:36 modem state change 2 -> 3
+15/09/2020 03:26:36 net connected
+15/09/2020 03:26:36 chat connect
+15/09/2020 03:26:36 <220 earthtrack>
+15/09/2020 03:26:36 UNIT 10247
+15/09/2020 03:26:37 <333 CHAL 51A22F82>
+15/09/2020 03:26:37 RESP CD2F59DF
+15/09/2020 03:26:37 MDM:rssi 30
+15/09/2020 03:26:38 <230 Auth OK>
+15/09/2020 03:26:38 last connect time written 1600140398
+15/09/2020 03:26:38 TIME
+15/09/2020 03:26:38 last connect time written 1600140398
+15/09/2020 03:26:38 <211 TIME 1600140405>
+15/09/2020 03:26:38 adjusting rtc - comms TIME
+15/09/2020 03:26:38 last connect time written 1600140398
+15/09/2020 03:26:38 EVCOUNT 1
+15/09/2020 03:26:39 <252 Event OK>
+15/09/2020 03:26:39 TODO
+15/09/2020 03:26:40 <226 Nothing to do>
+15/09/2020 03:26:40 EVENT 8176 1600140393 -319774550/1159581805/2190/29/20 ZONEOVERSPEED 8168 34 42 1 v:123
+15/09/2020 03:26:42 <252 Event OK>
+15/09/2020 03:26:42 QUIT
+15/09/2020 03:26:43 <221 Session ended - goodbye>
+15/09/2020 03:26:43 NET: disconnect
+15/09/2020 03:26:45 esc modem +++
+15/09/2020 03:26:45 modem state change 3 -> 2
+15/09/2020 03:26:45 DISCONNECT
+15/09/2020 03:26:45 Directlink DISCONNECT
+15/09/2020 03:26:45 OK
+15/09/2020 03:26:45 +UUSOCL: 0
+15/09/2020 03:26:45 socket closed
+15/09/2020 03:26:48 GNSS S:24 (GP:14 GL:10 BD:0 GA:0) U:12 Hacc:2532 R:30
+15/09/2020 03:26:51 comms chat disconnect 1
+15/09/2020 03:26:51 comms st 4 -> 3
+15/09/2020 03:27:03 GndSPD 18.0 (90.0 Hz)
+15/09/2020 03:27:10 fcMain::slotGroundSpeedOverspeedEntryEvent: 214
+15/09/2020 03:27:28 adjusting rtc 2- event
+15/09/2020 03:27:28 ZoneID Change2 214 -> 0 (speed 20 -> 60)
+15/09/2020 03:27:28 fcMain::slotZoneSpeed: 60, 0, 1
+15/09/2020 03:27:28 fcMain::slotGroundSpeedOverspeedEvent: 8168, 18, 44.000000, 1
+15/09/2020 03:27:28 adjusting rtc 2- event
+15/09/2020 03:27:28 comms st 3 -> 4
+15/09/2020 03:27:28 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:27:28 NET: connect
+15/09/2020 03:27:28 AT+UPSND=0,8
+15/09/2020 03:27:29 +UPSND: 0,8,1
+15/09/2020 03:27:29 psd line 1
+15/09/2020 03:27:29 pad active #1 (YES)
+15/09/2020 03:27:29 OK
+15/09/2020 03:27:29 AT+USOCR=6
+15/09/2020 03:27:29 +USOCR: 0
+15/09/2020 03:27:29 socket #0
+15/09/2020 03:27:29 OK
+15/09/2020 03:27:29 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:27:30 OK
+15/09/2020 03:27:31 +UUSORD: 0,16
+15/09/2020 03:27:31 AT+USODL=0
+15/09/2020 03:27:31 CONNECT
+15/09/2020 03:27:31 Directlink CONNECT
+15/09/2020 03:27:31 modem state change 2 -> 3
+15/09/2020 03:27:31 net connected
+15/09/2020 03:27:31 chat connect
+15/09/2020 03:27:31 <220 earthtrack>
+15/09/2020 03:27:31 UNIT 10247
+15/09/2020 03:27:32 <333 CHAL 1CD43E4D>
+15/09/2020 03:27:32 RESP 1A1C092A
+15/09/2020 03:27:33 <230 Auth OK>
+15/09/2020 03:27:33 last connect time written 1600140453
+15/09/2020 03:27:33 TIME
+15/09/2020 03:27:33 last connect time written 1600140453
+15/09/2020 03:27:33 <211 TIME 1600140460>
+15/09/2020 03:27:33 adjusting rtc - comms TIME
+15/09/2020 03:27:33 last connect time written 1600140453
+15/09/2020 03:27:33 EVCOUNT 2
+15/09/2020 03:27:34 GndSPD 44.0 (220.0 Hz)
+15/09/2020 03:27:34 SaveTripData: 279/0/0/0/0 4 0/0/0/0/1
+15/09/2020 03:27:34 <252 Event OK>
+15/09/2020 03:27:34 TODO
+15/09/2020 03:27:35 <226 Nothing to do>
+15/09/2020 03:27:35 EVENT 8177 1600140448 -319774526/1159582102/3722/30/44 ZONECHANGE 8168 214 0 0 v:124
+15/09/2020 03:27:35 polling the MGA_DBD
+15/09/2020 03:27:35 MGA_DBD Ephemeris
+15/09/2020 03:27:35 Duplicates Removed 17
+15/09/2020 03:27:35 MGA_DBD Almanac
+15/09/2020 03:27:36 Duplicates Removed 61
+15/09/2020 03:27:36 MGA_DBD Assistance
+15/09/2020 03:27:36 Duplicates Removed 2
+15/09/2020 03:27:36 <252 Event OK>
+15/09/2020 03:27:36 EVENT 8178 1600140448 -319774526/1159582102/3722/30/44 ZONEOVERSPEED 8168 18 44 1 v:123
+15/09/2020 03:27:38 <252 Event OK>
+15/09/2020 03:27:38 QUIT
+15/09/2020 03:27:39 <221 Session ended - goodbye>
+15/09/2020 03:27:39 NET: disconnect
+15/09/2020 03:27:41 esc modem +++
+15/09/2020 03:27:41 modem state change 3 -> 2
+15/09/2020 03:27:41 DISCONNECT
+15/09/2020 03:27:41 Directlink DISCONNECT
+15/09/2020 03:27:41 OK
+15/09/2020 03:27:41 +UUSOCL: 0
+15/09/2020 03:27:41 socket closed
+15/09/2020 03:27:43 ZoneID Change1 0 -> 214 (speed 60 -> 20)
+15/09/2020 03:27:43 fcMain::slotZoneSpeed: 20, 214, 1
+15/09/2020 03:27:45 fcMain::slotGroundSpeedOverspeedEntryEvent: 214
+15/09/2020 03:27:46 comms chat disconnect 1
+15/09/2020 03:27:46 comms st 4 -> 3
+15/09/2020 03:27:54 GNSS S:24 (GP:14 GL:10 BD:0 GA:0) U:11 Hacc:3296 R:30
+15/09/2020 03:28:05 GndSPD 44.0 (220.0 Hz)
+15/09/2020 03:28:10 MDM:rssi 27
+15/09/2020 03:28:35 SaveTripData: 340/0/0/0/0 5 0/0/0/0/1
+15/09/2020 03:28:36 GndSPD 44.0 (220.0 Hz)
+15/09/2020 03:28:41 MDM:rssi 29
+15/09/2020 03:28:52 adjusting rtc 2- event
+15/09/2020 03:28:52 ZoneID Change1 214 -> 216 (speed 20 -> 40)
+15/09/2020 03:28:52 fcMain::slotZoneSpeed: 40, 216, 2
+15/09/2020 03:28:52 fcMain::slotGroundSpeedOverspeedEvent: 8168, 66, 44.000000, 1
+15/09/2020 03:28:52 adjusting rtc 2- event
+15/09/2020 03:28:52 comms st 3 -> 4
+15/09/2020 03:28:52 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:28:52 NET: connect
+15/09/2020 03:28:52 AT+UPSND=0,8
+15/09/2020 03:28:52 +UPSND: 0,8,1
+15/09/2020 03:28:52 psd line 1
+15/09/2020 03:28:52 pad active #1 (YES)
+15/09/2020 03:28:52 OK
+15/09/2020 03:28:53 AT+USOCR=6
+15/09/2020 03:28:53 +USOCR: 0
+15/09/2020 03:28:53 socket #0
+15/09/2020 03:28:53 OK
+15/09/2020 03:28:53 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:28:53 OK
+15/09/2020 03:28:54 fcMain::slotGroundSpeedOverspeedEntryEvent: 216
+15/09/2020 03:28:54 +UUSORD: 0,16
+15/09/2020 03:28:54 AT+USODL=0
+15/09/2020 03:28:54 CONNECT
+15/09/2020 03:28:54 Directlink CONNECT
+15/09/2020 03:28:54 modem state change 2 -> 3
+15/09/2020 03:28:55 net connected
+15/09/2020 03:28:55 chat connect
+15/09/2020 03:28:55 <220 earthtrack>
+15/09/2020 03:28:55 UNIT 10247
+15/09/2020 03:28:55 <333 CHAL 67F2134B>
+15/09/2020 03:28:55 RESP 95188C81
+15/09/2020 03:28:56 <230 Auth OK>
+15/09/2020 03:28:56 last connect time written 1600140536
+15/09/2020 03:28:56 TIME
+15/09/2020 03:28:56 last connect time written 1600140536
+15/09/2020 03:28:57 <211 TIME 1600140544>
+15/09/2020 03:28:57 adjusting rtc - comms TIME
+15/09/2020 03:28:57 last connect time written 1600140537
+15/09/2020 03:28:57 EVCOUNT 2
+15/09/2020 03:28:58 <252 Event OK>
+15/09/2020 03:28:58 TODO
+15/09/2020 03:28:59 <226 Nothing to do>
+15/09/2020 03:28:59 EVENT 8179 1600140532 -319776787/1159579484/4000/29/44 ZONECHANGE 8168 214 216 2 v:123
+15/09/2020 03:29:00 <252 Event OK>
+15/09/2020 03:29:00 EVENT 8180 1600140532 -319776787/1159579484/4000/29/44 ZONEOVERSPEED 8168 66 44 1 v:123
+15/09/2020 03:29:00 GNSS S:24 (GP:14 GL:10 BD:0 GA:0) U:12 Hacc:3724 R:29
+15/09/2020 03:29:02 <252 Event OK>
+15/09/2020 03:29:02 QUIT
+15/09/2020 03:29:03 <221 Session ended - goodbye>
+15/09/2020 03:29:03 NET: disconnect
+15/09/2020 03:29:05 esc modem +++
+15/09/2020 03:29:05 modem state change 3 -> 2
+15/09/2020 03:29:05 DISCONNECT
+15/09/2020 03:29:05 Directlink DISCONNECT
+15/09/2020 03:29:05 OK
+15/09/2020 03:29:05 +UUSOCL: 0
+15/09/2020 03:29:05 socket closed
+15/09/2020 03:29:07 GndSPD 44.0 (220.0 Hz)
+15/09/2020 03:29:11 comms chat disconnect 1
+15/09/2020 03:29:11 comms st 4 -> 3
+15/09/2020 03:29:12 MDM:rssi 0
+15/09/2020 03:29:16 fcMain::slotGroundSpeedOverspeedEvent: 8168, 22, 44.000000, 2
+15/09/2020 03:29:16 adjusting rtc 2- event
+15/09/2020 03:29:16 comms st 3 -> 4
+15/09/2020 03:29:16 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:29:16 NET: connect
+15/09/2020 03:29:16 AT+UPSND=0,8
+15/09/2020 03:29:16 +UPSND: 0,8,1
+15/09/2020 03:29:16 psd line 1
+15/09/2020 03:29:16 pad active #1 (YES)
+15/09/2020 03:29:16 OK
+15/09/2020 03:29:16 AT+USOCR=6
+15/09/2020 03:29:17 +USOCR: 0
+15/09/2020 03:29:17 socket #0
+15/09/2020 03:29:17 OK
+15/09/2020 03:29:17 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:29:17 OK
+15/09/2020 03:29:18 +UUSORD: 0,16
+15/09/2020 03:29:18 AT+USODL=0
+15/09/2020 03:29:18 CONNECT
+15/09/2020 03:29:18 Directlink CONNECT
+15/09/2020 03:29:18 modem state change 2 -> 3
+15/09/2020 03:29:18 net connected
+15/09/2020 03:29:18 chat connect
+15/09/2020 03:29:18 <220 earthtrack>
+15/09/2020 03:29:18 UNIT 10247
+15/09/2020 03:29:19 <333 CHAL 14CB8A48>
+15/09/2020 03:29:19 RESP 025B5323
+15/09/2020 03:29:20 <230 Auth OK>
+15/09/2020 03:29:20 last connect time written 1600140560
+15/09/2020 03:29:20 TIME
+15/09/2020 03:29:20 last connect time written 1600140560
+15/09/2020 03:29:21 <211 TIME 1600140568>
+15/09/2020 03:29:21 adjusting rtc - comms TIME
+15/09/2020 03:29:21 last connect time written 1600140561
+15/09/2020 03:29:21 EVCOUNT 1
+15/09/2020 03:29:22 <252 Event OK>
+15/09/2020 03:29:22 TODO
+15/09/2020 03:29:23 <226 Nothing to do>
+15/09/2020 03:29:23 EVENT 8181 1600140556 -319777293/1159579274/3129/0/36 ZONEOVERSPEED 8168 22 44 2 v:123
+15/09/2020 03:29:24 <252 Event OK>
+15/09/2020 03:29:24 QUIT
+15/09/2020 03:29:25 <221 Session ended - goodbye>
+15/09/2020 03:29:25 NET: disconnect
+15/09/2020 03:29:27 esc modem +++
+15/09/2020 03:29:27 modem state change 3 -> 2
+15/09/2020 03:29:27 DISCONNECT
+15/09/2020 03:29:27 Directlink DISCONNECT
+15/09/2020 03:29:27 OK
+15/09/2020 03:29:27 +UUSOCL: 0
+15/09/2020 03:29:27 socket closed
+15/09/2020 03:29:33 comms chat disconnect 1
+15/09/2020 03:29:33 comms st 4 -> 3
+15/09/2020 03:29:36 SaveTripData: 401/0/0/0/0 0 0/0/0/0/1
+15/09/2020 03:29:38 GndSPD 36.0 (180.0 Hz)
+15/09/2020 03:29:41 trip end 1
+15/09/2020 03:29:41 START Enabled - callback
+15/09/2020 03:29:41 StartOutputStateChange 0
+15/09/2020 03:29:41 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+15/09/2020 03:29:41 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:29:41 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:29:41 FcMain change from 18 to 19
+15/09/2020 03:29:41 messagedialog result 3
+15/09/2020 03:29:41 slotMessageSignonResult 3
+15/09/2020 03:29:41 START Enabled - callback
+15/09/2020 03:29:41 StartOutputStateChange 0
+15/09/2020 03:29:41 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+15/09/2020 03:29:41 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:29:41 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:29:41 resetting cklist 1
+15/09/2020 03:29:41 Adding TRIP
+15/09/2020 03:29:41 adjusting rtc 2- event
+15/09/2020 03:29:41 comms st 3 -> 4
+15/09/2020 03:29:41 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:29:41 NET: connect
+15/09/2020 03:29:41 AT+UPSND=0,8
+15/09/2020 03:29:41 SaveTripData: 406/0/0/0/0 0 0/0/0/0/1
+15/09/2020 03:29:41 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+15/09/2020 03:29:41 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+15/09/2020 03:29:41 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+15/09/2020 03:29:41 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+15/09/2020 03:29:41 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+15/09/2020 03:29:41 +UPSND: 0,8,1
+15/09/2020 03:29:41 psd line 1
+15/09/2020 03:29:41 pad active #1 (YES)
+15/09/2020 03:29:41 OK
+15/09/2020 03:29:41 AT+USOCR=6
+15/09/2020 03:29:42 adjusting rtc 2- event
+15/09/2020 03:29:42 FcMain change from 19 to 2
+15/09/2020 03:29:42 +USOCR: 0
+15/09/2020 03:29:42 socket #0
+15/09/2020 03:29:42 OK
+15/09/2020 03:29:42 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:29:42 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+15/09/2020 03:29:42 CAN closed OK
+15/09/2020 03:29:42 DecCL 3
+15/09/2020 03:29:42 splash enabled?:0
+15/09/2020 03:29:42 setting new cklist state (0) and qnr (0)
+15/09/2020 03:29:42 Settings: slotEsc
+15/09/2020 03:29:42 START Enabled - callback
+15/09/2020 03:29:42 StartOutputStateChange 0
+15/09/2020 03:29:42 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+15/09/2020 03:29:42 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:29:42 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:29:42 OFFWAIT:ign still off
+15/09/2020 03:29:42 FcMain change from 2 to 3
+15/09/2020 03:29:42 Settings: slotEsc
+15/09/2020 03:29:42 startup human? 1
+15/09/2020 03:29:42 channel set 0 0
+15/09/2020 03:29:42 channel setting: 3-offf:4-offf
+15/09/2020 03:29:42 Message <3-offf:4-offf>: Sent to PRU0
+15/09/2020 03:29:42 BLAll 0
+15/09/2020 03:29:42 BL set:0
+15/09/2020 03:29:42 set brightness to 0%
+15/09/2020 03:29:42 brand 1 is /store/Brand-Earthtrack.png
+15/09/2020 03:29:42 brand 2 is :/Brands/brand/Brand-Earthtrack.png
+15/09/2020 03:29:42 brand is /store/Brand-Earthtrack.png, resource logo is :/Brands/brand/Brand-Earthtrack.png
+15/09/2020 03:29:42 S0Sdiff 0
+15/09/2020 03:29:42 wakeup is -1
+15/09/2020 03:29:42 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+15/09/2020 03:29:42 CriticalOutputStateChange 0
+15/09/2020 03:29:42 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+15/09/2020 03:29:42 Key halt
+15/09/2020 03:29:42 Settings: slotEsc
+15/09/2020 03:29:42 Duplicates Removed 1
+15/09/2020 03:29:42 PRU: Set3O
+15/09/2020 03:29:42 PRU: Set4O
+15/09/2020 03:29:42 trip Zero
+15/09/2020 03:29:42 ZoneID Change 60 -> 216 (speed  -> 216)
+15/09/2020 03:29:42 fcMain::slotZoneSpeed: 60, 0, 1
+15/09/2020 03:29:42 geofence state change 3 -> 2
+15/09/2020 03:29:42 OK
+15/09/2020 03:29:43 MDM:rssi 30
+15/09/2020 03:29:43 +UUSORD: 0,16
+15/09/2020 03:29:43 AT+USODL=0
+15/09/2020 03:29:43 CONNECT
+15/09/2020 03:29:43 Directlink CONNECT
+15/09/2020 03:29:43 modem state change 2 -> 3
+15/09/2020 03:29:43 net connected
+15/09/2020 03:29:43 chat connect
+15/09/2020 03:29:43 <220 earthtrack>
+15/09/2020 03:29:43 UNIT 10247
+15/09/2020 03:29:44 <333 CHAL C9B02C5>
+15/09/2020 03:29:44 RESP 02B4E4CD
+15/09/2020 03:29:45 <230 Auth OK>
+15/09/2020 03:29:45 last connect time written 1600140585
+15/09/2020 03:29:45 TIME
+15/09/2020 03:29:45 last connect time written 1600140585
+15/09/2020 03:29:46 report - time triggered (0)
+15/09/2020 03:29:46 adjusting rtc 2- event
+15/09/2020 03:29:46 <211 TIME 1600140593>
+15/09/2020 03:29:46 adjusting rtc - comms TIME
+15/09/2020 03:29:46 last connect time written 1600140586
+15/09/2020 03:29:46 EVCOUNT 3
+15/09/2020 03:29:47 <252 Event OK>
+15/09/2020 03:29:47 TODO
+15/09/2020 03:29:48 <226 Nothing to do>
+15/09/2020 03:29:48 EVENT 8182 1600140581 -319777249/1159579329/2614/0/36 TRIP 8168 406 0 0 0 406 v:123
+15/09/2020 03:29:49 <252 Event OK>
+15/09/2020 03:29:49 EVENT 8183 1600140581 -319777249/1159579329/2614/0/36 TRIPSUMMARY 8168 v:123
+15/09/2020 03:29:50 <252 Event OK>
+15/09/2020 03:29:50 EVENT 8184 1600140586 -319777240/1159579292/2586/30/36 REPORT * 0 212 v:123
+15/09/2020 03:29:51 <252 Event OK>
+15/09/2020 03:29:51 QUIT
+15/09/2020 03:29:52 <221 Session ended - goodbye>
+15/09/2020 03:29:52 NET: disconnect
+15/09/2020 03:29:54 esc modem +++
+15/09/2020 03:29:54 modem state change 3 -> 2
+15/09/2020 03:29:54 DISCONNECT
+15/09/2020 03:29:54 Directlink DISCONNECT
+15/09/2020 03:29:54 OK
+15/09/2020 03:29:54 +UUSOCL: 0
+15/09/2020 03:29:54 socket closed
+15/09/2020 03:30:00 comms chat disconnect 1
+15/09/2020 03:30:00 comms st 4 -> 3
+15/09/2020 03:30:06 GNSS S:24 (GP:14 GL:10 BD:0 GA:0) U:9 Hacc:2801 R:30
+15/09/2020 03:30:14 MDM:rssi 29
+15/09/2020 03:30:45 MDM:rssi 31
+15/09/2020 03:30:59 ign on, enable BackLight/Serialiser
+15/09/2020 03:30:59 PSP 1
+15/09/2020 03:30:59 PSP 2
+15/09/2020 03:30:59 PSP 3
+15/09/2020 03:30:59 FcMain change from 3 to 4
+15/09/2020 03:30:59 Wake
+15/09/2020 03:30:59 Wake ON
+15/09/2020 03:30:59 FcMain change from 4 to 5
+15/09/2020 03:30:59 Key free
+15/09/2020 03:30:59 keythread - init 1
+15/09/2020 03:30:59 keyscanner OK
+15/09/2020 03:30:59 keyscanner gpio ok
+15/09/2020 03:30:59 keyscanner UART
+15/09/2020 03:30:59 keythread - init SUCCESS
+15/09/2020 03:30:59 slotStartReading (1)**********
+15/09/2020 03:30:59 start HID reader
+15/09/2020 03:31:00 PRU version 104
+15/09/2020 03:31:00 ota 1599811537 - 2020-09-11 08:05:37Z
+15/09/2020 03:31:00 valid fleet? 10247
+15/09/2020 03:31:00 BLAll 100
+15/09/2020 03:31:00 BL set:100
+15/09/2020 03:31:00 set brightness to 100%
+15/09/2020 03:31:00 traction set 2 2
+15/09/2020 03:31:00 channel set 2 2
+15/09/2020 03:31:00 channel setting: 3-freq:4-freq
+15/09/2020 03:31:00 Message <3-freq:4-freq>: Sent to PRU0
+15/09/2020 03:31:00 FcMain change from 5 to 6
+15/09/2020 03:31:00 PRU: Set3F
+15/09/2020 03:31:00 PRU: Set4F
+15/09/2020 03:31:00 INTB: 1
+15/09/2020 03:31:00 gpio interrupts (P1-2) FB
+15/09/2020 03:31:00 card read
+15/09/2020 03:31:00 Uart rxfifo has 14 bytes waiting
+15/09/2020 03:31:00 vli 000a 10
+15/09/2020 03:31:00 vli matches
+15/09/2020 03:31:00 208 1664 0
+15/09/2020 03:31:00 CardReader version 0
+15/09/2020 03:31:00 Cklist free
+15/09/2020 03:31:00 splash enabled?:0
+15/09/2020 03:31:00 INTB: 1
+15/09/2020 03:31:00 gpio interrupts (P1-2) FF
+15/09/2020 03:31:00 start rfid checking
+15/09/2020 03:31:00 start wiegand
+15/09/2020 03:31:00 traction change from 0 to 1
+15/09/2020 03:31:00 state timer started
+15/09/2020 03:31:00 setbool 0
+15/09/2020 03:31:00 comms st 3 -> 4
+15/09/2020 03:31:00 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:31:00 NET: connect
+15/09/2020 03:31:00 AT+UPSND=0,8
+15/09/2020 03:31:00 +UPSND: 0,8,1
+15/09/2020 03:31:00 psd line 1
+15/09/2020 03:31:00 pad active #1 (YES)
+15/09/2020 03:31:00 OK
+15/09/2020 03:31:00 AT+USOCR=6
+15/09/2020 03:31:01 +USOCR: 0
+15/09/2020 03:31:01 socket #0
+15/09/2020 03:31:01 OK
+15/09/2020 03:31:01 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:31:02 traction/idle state seen
+15/09/2020 03:31:09 INTB: 1
+15/09/2020 03:31:09 gpio interrupts (P1-2) FE
+15/09/2020 03:31:09 KEYPRESS 5
+15/09/2020 03:31:09 INTB: 1
+15/09/2020 03:31:09 gpio interrupts (P1-2) FE
+15/09/2020 03:31:09 INTB: 1
+15/09/2020 03:31:09 gpio interrupts (P1-2) FE
+15/09/2020 03:31:09 KEYPRESS 5
+15/09/2020 03:31:09 INTB: 1
+15/09/2020 03:31:09 gpio interrupts (P1-2) FE
+15/09/2020 03:31:09 INTB: 0
+15/09/2020 03:31:09 gpio interrupts (P1-2) FF
+15/09/2020 03:31:09 INTB: 1
+15/09/2020 03:31:09 gpio interrupts (P1-2) FE
+15/09/2020 03:31:09 KEYPRESS 5
+15/09/2020 03:31:09 INTB: 1
+15/09/2020 03:31:09 gpio interrupts (P1-2) FF
+15/09/2020 03:31:09 INTB: 1
+15/09/2020 03:31:09 gpio interrupts (P1-2) FE
+15/09/2020 03:31:09 KEYPRESS 5
+15/09/2020 03:31:10 INTB: 1
+15/09/2020 03:31:10 gpio interrupts (P1-2) FE
+15/09/2020 03:31:10 INTB: 1
+15/09/2020 03:31:10 gpio interrupts (P1-2) FE
+15/09/2020 03:31:10 KEYPRESS 5
+15/09/2020 03:31:10 INTB: 1
+15/09/2020 03:31:10 gpio interrupts (P1-2) FE
+15/09/2020 03:31:10 INTB: 1
+15/09/2020 03:31:10 gpio interrupts (P1-2) FF
+15/09/2020 03:31:10 INTB: 1
+15/09/2020 03:31:10 gpio interrupts (P1-2) FE
+15/09/2020 03:31:10 KEYPRESS 5
+15/09/2020 03:31:10 messagedialog result 555555
+15/09/2020 03:31:10 pin check clear, found 9 (555555)
+15/09/2020 03:31:10 driver id -100
+15/09/2020 03:31:10 checking license expiry
+15/09/2020 03:31:10 Bgnd set msg-day font Noto Sans
+15/09/2020 03:31:10 lang code: EN file: :Translations/FcMain_en
+15/09/2020 03:31:10 lang file: :Translations/FcMain_en
+15/09/2020 03:31:10 Removing translations
+15/09/2020 03:31:10 Installing translations
+15/09/2020 03:31:10 getlicmsg langfound 0, lang reqd 0
+15/09/2020 03:31:10 show driver name Commissioning Pin
+15/09/2020 03:31:10 FcMain change from 6 to 8
+15/09/2020 03:31:10 slotMessageSignonResult 555555
+15/09/2020 03:31:10 stop rfid checking
+15/09/2020 03:31:10 SETT: driver role 5
+15/09/2020 03:31:10 font is Noto Sans
+15/09/2020 03:31:10 INTB: 1
+15/09/2020 03:31:10 gpio interrupts (P1-2) FE
+15/09/2020 03:31:10 Splash set font Noto Sans
+15/09/2020 03:31:10 splash font set Noto Sans
+15/09/2020 03:31:10 OpName pointsize is 16, labelsize is 240, height 23
+15/09/2020 03:31:10 INTB: 0
+15/09/2020 03:31:10 gpio interrupts (P1-2) FF
+15/09/2020 03:31:12 GNSS S:25 (GP:15 GL:10 BD:0 GA:0) U:10 Hacc:4421 R:31
+15/09/2020 03:31:13 messagedialog result 2
+15/09/2020 03:31:13 slotMessageSignonResult 2
+15/09/2020 03:31:13 Bgnd set msg-day font Noto Sans
+15/09/2020 03:31:13 lang code: EN file: :Translations/FcMain_en
+15/09/2020 03:31:13 lang file: :Translations/FcMain_en
+15/09/2020 03:31:13 Removing translations
+15/09/2020 03:31:13 Installing translations
+15/09/2020 03:31:13 getlicmsg langfound 0, lang reqd 0
+15/09/2020 03:31:13 stop rfid checking
+15/09/2020 03:31:13 FcMain change from 8 to 11
+15/09/2020 03:31:13 Splash set font Noto Sans
+15/09/2020 03:31:13 splash font set Noto Sans
+15/09/2020 03:31:14 init complete, qrysent 1 0
+15/09/2020 03:31:14 dvrs 9 9
+15/09/2020 03:31:14 postStartCK cleared
+15/09/2020 03:31:14 Chklist required?
+15/09/2020 03:31:14 checklist file detectedx
+15/09/2020 03:31:14 shift change checklist trigger
+15/09/2020 03:31:14 Chklist required 1
+15/09/2020 03:31:14 FcMain change from 11 to 12
+15/09/2020 03:31:14 adjusting rtc 2- event
+15/09/2020 03:31:14 set font Noto Sans
+15/09/2020 03:31:14 checklist ready
+15/09/2020 03:31:14 CKL state change 2
+15/09/2020 03:31:14 checklist file detectedx
+15/09/2020 03:31:14 cklist state not idle 2
+15/09/2020 03:31:14 checklist ready 3 (dvr 0)
+15/09/2020 03:31:14 FcMain change from 12 to 13
+15/09/2020 03:31:14 CKL state change 3
+15/09/2020 03:31:14 CKL state change 12
+15/09/2020 03:31:15 geofence state change 2 -> 3
+15/09/2020 03:31:15 INTB: 1
+15/09/2020 03:31:15 gpio interrupts (P1-2) FE
+15/09/2020 03:31:15 KEYPRESS 3
+15/09/2020 03:31:15 INTB: 0
+15/09/2020 03:31:15 gpio interrupts (P1-2) FE
+15/09/2020 03:31:15 INTB: 1
+15/09/2020 03:31:15 gpio interrupts (P1-2) FF
+15/09/2020 03:31:16 CKL state change 5
+15/09/2020 03:31:16 Qnr=488
+15/09/2020 03:31:16 set font Noto Sans
+15/09/2020 03:31:16 Are your tyres inflated correctly 
+15/09/2020 03:31:16 linewidth=2, pixelwidth=492, ave=17
+15/09/2020 03:31:16 CKL state change 12
+15/09/2020 03:31:19 INTB: 1
+15/09/2020 03:31:19 gpio interrupts (P1-2) FE
+15/09/2020 03:31:19 KEYPRESS 3
+15/09/2020 03:31:19 UiQ 2
+15/09/2020 03:31:19 CKL state change 6
+15/09/2020 03:31:19 INTB: 1
+15/09/2020 03:31:19 gpio interrupts (P1-2) FE
+15/09/2020 03:31:19 CKL state change 12
+15/09/2020 03:31:19 INTB: 1
+15/09/2020 03:31:19 gpio interrupts (P1-2) FF
+15/09/2020 03:31:20 INTB: 1
+15/09/2020 03:31:20 gpio interrupts (P1-2) FE
+15/09/2020 03:31:20 KEYPRESS 5
+15/09/2020 03:31:20 DecCL 1
+15/09/2020 03:31:20 DecCL 3
+15/09/2020 03:31:20 CKL state change 11
+15/09/2020 03:31:20 INTB: 1
+15/09/2020 03:31:20 gpio interrupts (P1-2) FF
+15/09/2020 03:31:20 CKL state change 13
+15/09/2020 03:31:20 adjusting rtc 2- event
+15/09/2020 03:31:20 CKL state change 12
+15/09/2020 03:31:20 INTB: 1
+15/09/2020 03:31:20 gpio interrupts (P1-2) FE
+15/09/2020 03:31:20 INTB: 1
+15/09/2020 03:31:20 gpio interrupts (P1-2) FF
+15/09/2020 03:31:22 ERROR
+15/09/2020 03:31:22 parse cme 0
+15/09/2020 03:31:22 AT+USOER
+15/09/2020 03:31:22 +UUSOCL: 0
+15/09/2020 03:31:22 socket closed
+15/09/2020 03:31:22 AT+UPSDA=0,4
+15/09/2020 03:31:22 +USOER: 110
+15/09/2020 03:31:22 OK
+15/09/2020 03:31:22 disconnect
+15/09/2020 03:31:22 NET: disconnect
+15/09/2020 03:31:23 OK
+15/09/2020 03:31:23 +UUPSDD: 0
+15/09/2020 03:31:23 CKL state change 16
+15/09/2020 03:31:23 FcMain change from 13 to 17
+15/09/2020 03:31:23 CKL state change 17
+15/09/2020 03:31:23 Run state: role 5
+15/09/2020 03:31:23 START Enabled - callback
+15/09/2020 03:31:23 StartOutputStateChange 1
+15/09/2020 03:31:23 wrote 1 to /sys/class/gpio/gpio60/value (O/P 1)
+15/09/2020 03:31:23 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:31:23 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:31:23 START Enabled
+15/09/2020 03:31:23 SaveTripData: 0/0/0/0/0 3 0/0/0/0/0
+15/09/2020 03:31:23 FcMain change from 17 to 18
+15/09/2020 03:31:23 Cklist halt
+15/09/2020 03:31:23 slotStartReading (0)**********
+15/09/2020 03:31:23 stop HID reader
+15/09/2020 03:31:23 wrote 1 to /sys/class/gpio/gpio27/value (O/P 3)
+15/09/2020 03:31:23 CAN opened OK
+15/09/2020 03:31:23 splash enabled?:1
+15/09/2020 03:31:23 brand 1 is Brand-Earthtrack, logo is /store/Brand-Earthtrack.png
+15/09/2020 03:31:23 brand 2 is Brand-Earthtrack, theme logo is /store/Brand-Earthtrack_light.png
+15/09/2020 03:31:23 brand 3 is :/Brands/brand/Brand-Earthtrack.png
+15/09/2020 03:31:23 messagedialog result 3
+15/09/2020 03:31:23 slotMessageSignonResult 3
+15/09/2020 03:31:23 INTB: 1
+15/09/2020 03:31:23 gpio interrupts (P1-2) FB
+15/09/2020 03:31:23 card read
+15/09/2020 03:31:23 Uart rxfifo has 14 bytes waiting
+15/09/2020 03:31:23 vli 000a 10
+15/09/2020 03:31:23 vli matches
+15/09/2020 03:31:23 208 1664 0
+15/09/2020 03:31:23 CardReader version 0
+15/09/2020 03:31:23 gps version is ROM CORE 3.01 (107888)
+15/09/2020 03:31:23 main state running
+15/09/2020 03:31:23 GndSPD 2.8 (14.0 Hz)
+15/09/2020 03:31:23 ICONS ED
+15/09/2020 03:31:23 INTB: 0
+15/09/2020 03:31:23 gpio interrupts (P1-2) FF
+15/09/2020 03:31:24 connect 1 failed, waiting 10 secs
+15/09/2020 03:31:34 trying to connect (2) devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:31:34 NET: connect
+15/09/2020 03:31:34 AT+UPSND=0,8
+15/09/2020 03:31:34 +UPSND: 0,8,0
+15/09/2020 03:31:34 psd line 0
+15/09/2020 03:31:34 pad active #0 (NO)
+15/09/2020 03:31:34 OK
+15/09/2020 03:31:34 AT+UPSDA=0,3
+15/09/2020 03:31:35 OK
+15/09/2020 03:31:35 +UUPSDA: 0,"10.48.190.141"
+15/09/2020 03:31:35 AT+UPSND=0,8
+15/09/2020 03:31:35 +UPSND: 0,8,1
+15/09/2020 03:31:35 psd line 1
+15/09/2020 03:31:35 pad active #1 (YES)
+15/09/2020 03:31:35 OK
+15/09/2020 03:31:35 AT+USOCR=6
+15/09/2020 03:31:35 +USOCR: 0
+15/09/2020 03:31:35 socket #0
+15/09/2020 03:31:35 OK
+15/09/2020 03:31:35 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:31:36 OK
+15/09/2020 03:31:37 +UUSORD: 0,16
+15/09/2020 03:31:37 AT+USODL=0
+15/09/2020 03:31:37 CONNECT
+15/09/2020 03:31:37 Directlink CONNECT
+15/09/2020 03:31:37 modem state change 2 -> 3
+15/09/2020 03:31:37 net connected
+15/09/2020 03:31:37 chat connect
+15/09/2020 03:31:37 <220 earthtrack>
+15/09/2020 03:31:37 UNIT 10247
+15/09/2020 03:31:38 <333 CHAL 1CDCF521>
+15/09/2020 03:31:38 RESP 1BB17F34
+15/09/2020 03:31:39 <230 Auth OK>
+15/09/2020 03:31:39 last connect time written 1600140699
+15/09/2020 03:31:39 TIME
+15/09/2020 03:31:39 last connect time written 1600140699
+15/09/2020 03:31:40 <211 TIME 1600140707>
+15/09/2020 03:31:40 adjusting rtc - comms TIME
+15/09/2020 03:31:40 last connect time written 1600140700
+15/09/2020 03:31:40 EVCOUNT 2
+15/09/2020 03:31:41 <252 Event OK>
+15/09/2020 03:31:41 TODO
+15/09/2020 03:31:42 <226 Nothing to do>
+15/09/2020 03:31:42 EVENT 8185 1600140674 -319773528/1159583022/4354/31/36 SIGNON -100 03555554 OK_CL 26 555555 0 v:123
+15/09/2020 03:31:43 <252 Event OK>
+15/09/2020 03:31:43 EVENT 8186 1600140680 -319773606/1159583014/4193/31/36 CHECKLIST 8185 CANCEL 0 6 608 B v:123
+15/09/2020 03:31:45 <252 Event OK>
+15/09/2020 03:31:45 QUIT
+15/09/2020 03:31:46 <221 Session ended - goodbye>
+15/09/2020 03:31:46 NET: disconnect
+15/09/2020 03:31:48 esc modem +++
+15/09/2020 03:31:48 modem state change 3 -> 2
+15/09/2020 03:31:48 DISCONNECT
+15/09/2020 03:31:48 Directlink DISCONNECT
+15/09/2020 03:31:48 OK
+15/09/2020 03:31:48 +UUSOCL: 0
+15/09/2020 03:31:48 socket closed
+15/09/2020 03:31:54 GndSPD 2.8 (14.0 Hz)
+15/09/2020 03:31:54 comms chat disconnect 1
+15/09/2020 03:31:54 comms st 4 -> 3
+15/09/2020 03:32:18 MDM:rssi 29
+15/09/2020 03:32:18 GNSS S:26 (GP:15 GL:11 BD:0 GA:0) U:10 Hacc:3861 R:29
+15/09/2020 03:32:23 SaveTripData: 60/0/0/0/0 4 0/0/0/0/0
+15/09/2020 03:32:25 GndSPD 15.8 (79.0 Hz)
+15/09/2020 03:32:49 MDM:rssi 30
+15/09/2020 03:32:52 fcMain::slotGroundSpeedOverspeedEntryEvent: 0
+15/09/2020 03:32:56 GndSPD 65.8 (329.0 Hz)
+15/09/2020 03:33:05 gpio interrupts (P1) 3F
+15/09/2020 03:33:20 MDM:rssi 29
+15/09/2020 03:33:24 GNSS S:26 (GP:15 GL:11 BD:0 GA:0) U:11 Hacc:2861 R:29
+15/09/2020 03:33:24 SaveTripData: 121/0/0/0/0 5 0/0/0/0/0
+15/09/2020 03:33:27 GndSPD 56.0 (280.0 Hz)
+15/09/2020 03:33:28 fcMain::slotGroundSpeedOverspeedEvent: 8185, 36, 66.040001, 1
+15/09/2020 03:33:28 adjusting rtc 2- event
+15/09/2020 03:33:28 comms st 3 -> 4
+15/09/2020 03:33:28 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:33:28 NET: connect
+15/09/2020 03:33:28 AT+UPSND=0,8
+15/09/2020 03:33:28 +UPSND: 0,8,1
+15/09/2020 03:33:28 psd line 1
+15/09/2020 03:33:28 pad active #1 (YES)
+15/09/2020 03:33:28 OK
+15/09/2020 03:33:29 AT+USOCR=6
+15/09/2020 03:33:29 +USOCR: 0
+15/09/2020 03:33:29 socket #0
+15/09/2020 03:33:29 OK
+15/09/2020 03:33:29 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:33:29 OK
+15/09/2020 03:33:30 +UUSORD: 0,16
+15/09/2020 03:33:30 AT+USODL=0
+15/09/2020 03:33:30 CONNECT
+15/09/2020 03:33:30 Directlink CONNECT
+15/09/2020 03:33:30 modem state change 2 -> 3
+15/09/2020 03:33:31 net connected
+15/09/2020 03:33:31 chat connect
+15/09/2020 03:33:31 <220 earthtrack>
+15/09/2020 03:33:31 UNIT 10247
+15/09/2020 03:33:32 <333 CHAL 3D975878>
+15/09/2020 03:33:32 RESP 492700DF
+15/09/2020 03:33:33 <230 Auth OK>
+15/09/2020 03:33:33 last connect time written 1600140813
+15/09/2020 03:33:33 TIME
+15/09/2020 03:33:33 last connect time written 1600140813
+15/09/2020 03:33:33 <211 TIME 1600140820>
+15/09/2020 03:33:33 adjusting rtc - comms TIME
+15/09/2020 03:33:33 last connect time written 1600140813
+15/09/2020 03:33:33 EVCOUNT 1
+15/09/2020 03:33:34 <252 Event OK>
+15/09/2020 03:33:34 TODO
+15/09/2020 03:33:35 <226 Nothing to do>
+15/09/2020 03:33:35 EVENT 8187 1600140808 -319774327/1159582803/2982/29/56 OVERSPEED 8185 36 v:123
+15/09/2020 03:33:38 <252 Event OK>
+15/09/2020 03:33:38 QUIT
+15/09/2020 03:33:39 <221 Session ended - goodbye>
+15/09/2020 03:33:39 NET: disconnect
+15/09/2020 03:33:41 esc modem +++
+15/09/2020 03:33:41 modem state change 3 -> 2
+15/09/2020 03:33:41 DISCONNECT
+15/09/2020 03:33:41 Directlink DISCONNECT
+15/09/2020 03:33:41 OK
+15/09/2020 03:33:41 +UUSOCL: 0
+15/09/2020 03:33:41 socket closed
+15/09/2020 03:33:46 comms chat disconnect 1
+15/09/2020 03:33:46 comms st 4 -> 3
+15/09/2020 03:33:58 GndSPD 70.0 (350.0 Hz)
+15/09/2020 03:33:59 fcMain::slotGroundSpeedOverspeedEntryEvent: 0
+15/09/2020 03:34:22 MDM:rssi 31
+15/09/2020 03:34:25 SaveTripData: 182/0/0/0/0 0 0/0/0/0/1
+15/09/2020 03:34:29 GndSPD 70.0 (350.0 Hz)
+15/09/2020 03:34:30 GNSS S:26 (GP:15 GL:11 BD:0 GA:0) U:8 Hacc:2839 R:31
+15/09/2020 03:34:49 ZoneID Change1 0 -> 216 (speed 60 -> 40)
+15/09/2020 03:34:49 fcMain::slotZoneSpeed: 40, 216, 2
+15/09/2020 03:34:49 fcMain::slotGroundSpeedOverspeedEvent: 8185, 49, 70.099998, 1
+15/09/2020 03:34:49 comms st 3 -> 4
+15/09/2020 03:34:49 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:34:49 NET: connect
+15/09/2020 03:34:49 AT+UPSND=0,8
+15/09/2020 03:34:49 +UPSND: 0,8,1
+15/09/2020 03:34:49 psd line 1
+15/09/2020 03:34:49 pad active #1 (YES)
+15/09/2020 03:34:49 OK
+15/09/2020 03:34:50 AT+USOCR=6
+15/09/2020 03:34:50 +USOCR: 0
+15/09/2020 03:34:50 socket #0
+15/09/2020 03:34:50 OK
+15/09/2020 03:34:50 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:34:50 OK
+15/09/2020 03:34:51 +UUSORD: 0,16
+15/09/2020 03:34:51 fcMain::slotGroundSpeedOverspeedEntryEvent: 216
+15/09/2020 03:34:51 AT+USODL=0
+15/09/2020 03:34:51 CONNECT
+15/09/2020 03:34:51 Directlink CONNECT
+15/09/2020 03:34:51 modem state change 2 -> 3
+15/09/2020 03:34:51 net connected
+15/09/2020 03:34:51 chat connect
+15/09/2020 03:34:51 <220 earthtrack>
+15/09/2020 03:34:51 UNIT 10247
+15/09/2020 03:34:52 <333 CHAL C312DB0>
+15/09/2020 03:34:52 RESP E4F7AC16
+15/09/2020 03:34:53 MDM:rssi 30
+15/09/2020 03:34:53 <230 Auth OK>
+15/09/2020 03:34:53 last connect time written 1600140893
+15/09/2020 03:34:53 TIME
+15/09/2020 03:34:53 last connect time written 1600140893
+15/09/2020 03:34:54 <211 TIME 1600140901>
+15/09/2020 03:34:54 adjusting rtc - comms TIME
+15/09/2020 03:34:54 last connect time written 1600140894
+15/09/2020 03:34:54 EVCOUNT 2
+15/09/2020 03:34:55 <252 Event OK>
+15/09/2020 03:34:55 TODO
+15/09/2020 03:34:55 adjusting rtc 2- event
+15/09/2020 03:34:55 ZoneID Change1 216 -> 215 (speed 40 -> 20)
+15/09/2020 03:34:55 fcMain::slotZoneSpeed: 20, 215, 1
+15/09/2020 03:34:55 fcMain::slotGroundSpeedOverspeedEvent: 8185, 4, 70.080002, 2
+15/09/2020 03:34:55 adjusting rtc 2- event
+15/09/2020 03:34:56 <226 Nothing to do>
+15/09/2020 03:34:56 EVENT 8188 1600140889 -319776088/1159584134/5382/31/70 ZONECHANGE 8185 0 216 2 v:123
+15/09/2020 03:34:57 <252 Event OK>
+15/09/2020 03:34:57 EVENT 8189 1600140889 -319776088/1159584134/5382/31/70 OVERSPEED 8185 49 v:123
+15/09/2020 03:34:57 fcMain::slotGroundSpeedOverspeedEntryEvent: 215
+15/09/2020 03:34:59 <252 Event OK>
+15/09/2020 03:34:59 EVENT 8190 1600140895 -319777305/1159584069/6011/30/70 ZONECHANGE 8185 216 215 1 v:123
+15/09/2020 03:35:00 <252 Event OK>
+15/09/2020 03:35:00 EVENT 8191 1600140895 -319777305/1159584069/6011/30/70 ZONEOVERSPEED 8185 4 70 2 v:123
+15/09/2020 03:35:00 GndSPD 69.8 (349.0 Hz)
+15/09/2020 03:35:02 <252 Event OK>
+15/09/2020 03:35:02 QUIT
+15/09/2020 03:35:03 <221 Session ended - goodbye>
+15/09/2020 03:35:03 NET: disconnect
+15/09/2020 03:35:05 esc modem +++
+15/09/2020 03:35:05 modem state change 3 -> 2
+15/09/2020 03:35:05 DISCONNECT
+15/09/2020 03:35:05 Directlink DISCONNECT
+15/09/2020 03:35:05 OK
+15/09/2020 03:35:05 +UUSOCL: 0
+15/09/2020 03:35:05 socket closed
+15/09/2020 03:35:10 comms chat disconnect 1
+15/09/2020 03:35:10 comms st 4 -> 3
+15/09/2020 03:35:14 adjusting rtc 2- event
+15/09/2020 03:35:14 ZoneID Change1 215 -> 216 (speed 20 -> 40)
+15/09/2020 03:35:14 fcMain::slotZoneSpeed: 40, 216, 2
+15/09/2020 03:35:14 fcMain::slotGroundSpeedOverspeedEvent: 8185, 17, 70.060005, 1
+15/09/2020 03:35:14 adjusting rtc 2- event
+15/09/2020 03:35:14 comms st 3 -> 4
+15/09/2020 03:35:14 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:35:14 NET: connect
+15/09/2020 03:35:14 AT+UPSND=0,8
+15/09/2020 03:35:14 +UPSND: 0,8,1
+15/09/2020 03:35:14 psd line 1
+15/09/2020 03:35:14 pad active #1 (YES)
+15/09/2020 03:35:14 OK
+15/09/2020 03:35:14 AT+USOCR=6
+15/09/2020 03:35:15 +USOCR: 0
+15/09/2020 03:35:15 socket #0
+15/09/2020 03:35:15 OK
+15/09/2020 03:35:15 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:35:15 OK
+15/09/2020 03:35:16 +UUSORD: 0,16
+15/09/2020 03:35:16 fcMain::slotGroundSpeedOverspeedEntryEvent: 216
+15/09/2020 03:35:16 AT+USODL=0
+15/09/2020 03:35:16 CONNECT
+15/09/2020 03:35:16 Directlink CONNECT
+15/09/2020 03:35:16 modem state change 2 -> 3
+15/09/2020 03:35:16 net connected
+15/09/2020 03:35:16 chat connect
+15/09/2020 03:35:16 <220 earthtrack>
+15/09/2020 03:35:16 UNIT 10247
+15/09/2020 03:35:17 adjusting rtc 2- event
+15/09/2020 03:35:17 ZoneID Change1 216 -> 215 (speed 40 -> 20)
+15/09/2020 03:35:17 fcMain::slotZoneSpeed: 20, 215, 1
+15/09/2020 03:35:17 fcMain::slotGroundSpeedOverspeedEvent: 8185, 0, 70.100006, 2
+15/09/2020 03:35:17 adjusting rtc 2- event
+15/09/2020 03:35:17 <333 CHAL 2F453D34>
+15/09/2020 03:35:17 RESP C6391FEC
+15/09/2020 03:35:18 <230 Auth OK>
+15/09/2020 03:35:18 last connect time written 1600140918
+15/09/2020 03:35:18 TIME
+15/09/2020 03:35:18 last connect time written 1600140918
+15/09/2020 03:35:19 fcMain::slotGroundSpeedOverspeedEntryEvent: 215
+15/09/2020 03:35:19 <211 TIME 1600140926>
+15/09/2020 03:35:19 adjusting rtc - comms TIME
+15/09/2020 03:35:19 last connect time written 1600140919
+15/09/2020 03:35:19 EVCOUNT 4
+15/09/2020 03:35:20 <252 Event OK>
+15/09/2020 03:35:20 TODO
+15/09/2020 03:35:21 <226 Nothing to do>
+15/09/2020 03:35:21 EVENT 8192 1600140914 -319779905/1159584090/6955/30/70 ZONECHANGE 8185 215 216 2 v:123
+15/09/2020 03:35:22 <252 Event OK>
+15/09/2020 03:35:22 EVENT 8193 1600140914 -319779905/1159584090/6955/30/70 ZONEOVERSPEED 8185 17 70 1 v:123
+15/09/2020 03:35:24 <252 Event OK>
+15/09/2020 03:35:24 EVENT 8194 1600140917 -319779904/1159584207/6876/30/70 ZONECHANGE 8185 216 215 1 v:123
+15/09/2020 03:35:24 MDM:rssi 31
+15/09/2020 03:35:25 <252 Event OK>
+15/09/2020 03:35:25 EVENT 8195 1600140917 -319779904/1159584207/6876/30/70 ZONEOVERSPEED 8185 0 70 2 v:123
+15/09/2020 03:35:26 <504 Bad Event>
+15/09/2020 03:35:26 QUIT
+15/09/2020 03:35:26 SaveTripData: 243/0/0/0/0 1 0/0/0/0/1
+15/09/2020 03:35:27 <221 Session ended - goodbye>
+15/09/2020 03:35:27 NET: disconnect
+15/09/2020 03:35:29 esc modem +++
+15/09/2020 03:35:29 modem state change 3 -> 2
+15/09/2020 03:35:29 DISCONNECT
+15/09/2020 03:35:29 Directlink DISCONNECT
+15/09/2020 03:35:29 OK
+15/09/2020 03:35:29 +UUSOCL: 0
+15/09/2020 03:35:29 socket closed
+15/09/2020 03:35:31 GndSPD 70.0 (350.0 Hz)
+15/09/2020 03:35:32 adjusting rtc 2- event
+15/09/2020 03:35:32 ZoneID Change1 215 -> 216 (speed 20 -> 40)
+15/09/2020 03:35:32 fcMain::slotZoneSpeed: 40, 216, 2
+15/09/2020 03:35:32 fcMain::slotGroundSpeedOverspeedEvent: 8185, 12, 70.060005, 1
+15/09/2020 03:35:32 adjusting rtc 2- event
+15/09/2020 03:35:34 fcMain::slotGroundSpeedOverspeedEntryEvent: 216
+15/09/2020 03:35:34 comms chat disconnect 1
+15/09/2020 03:35:34 comms st 4 -> 3
+15/09/2020 03:35:34 comms st 3 -> 4
+15/09/2020 03:35:34 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:35:34 NET: connect
+15/09/2020 03:35:34 AT+UPSND=0,8
+15/09/2020 03:35:34 +UPSND: 0,8,1
+15/09/2020 03:35:34 psd line 1
+15/09/2020 03:35:34 pad active #1 (YES)
+15/09/2020 03:35:34 OK
+15/09/2020 03:35:34 AT+USOCR=6
+15/09/2020 03:35:35 +USOCR: 0
+15/09/2020 03:35:35 socket #0
+15/09/2020 03:35:35 OK
+15/09/2020 03:35:35 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:35:35 OK
+15/09/2020 03:35:35 adjusting rtc 2- event
+15/09/2020 03:35:35 ZoneID Change2 216 -> 0 (speed 40 -> 60)
+15/09/2020 03:35:35 fcMain::slotZoneSpeed: 60, 0, 1
+15/09/2020 03:35:35 fcMain::slotGroundSpeedOverspeedEvent: 8185, 1, 70.020004, 2
+15/09/2020 03:35:35 adjusting rtc 2- event
+15/09/2020 03:35:36 +UUSORD: 0,16
+15/09/2020 03:35:36 GNSS S:26 (GP:15 GL:11 BD:0 GA:0) U:10 Hacc:5257 R:31
+15/09/2020 03:35:36 AT+USODL=0
+15/09/2020 03:35:36 CONNECT
+15/09/2020 03:35:36 Directlink CONNECT
+15/09/2020 03:35:36 modem state change 2 -> 3
+15/09/2020 03:35:36 net connected
+15/09/2020 03:35:36 chat connect
+15/09/2020 03:35:36 <220 earthtrack>
+15/09/2020 03:35:36 UNIT 10247
+15/09/2020 03:35:37 fcMain::slotGroundSpeedOverspeedEntryEvent: 0
+15/09/2020 03:35:37 <333 CHAL 102E3222>
+15/09/2020 03:35:37 RESP FBA5A492
+15/09/2020 03:35:38 <230 Auth OK>
+15/09/2020 03:35:38 last connect time written 1600140938
+15/09/2020 03:35:38 TIME
+15/09/2020 03:35:38 last connect time written 1600140938
+15/09/2020 03:35:39 <211 TIME 1600140946>
+15/09/2020 03:35:39 adjusting rtc - comms TIME
+15/09/2020 03:35:39 last connect time written 1600140939
+15/09/2020 03:35:39 EVCOUNT 4
+15/09/2020 03:35:40 <252 Event OK>
+15/09/2020 03:35:40 TODO
+15/09/2020 03:35:41 <226 Nothing to do>
+15/09/2020 03:35:41 EVENT 8196 1600140932 -319779506/1159586355/5568/31/70 ZONECHANGE 8185 215 216 2 v:123
+15/09/2020 03:35:42 <252 Event OK>
+15/09/2020 03:35:42 EVENT 8197 1600140932 -319779506/1159586355/5568/31/70 ZONEOVERSPEED 8185 12 70 1 v:123
+15/09/2020 03:35:43 <252 Event OK>
+15/09/2020 03:35:43 EVENT 8198 1600140935 -319779446/1159586765/5309/31/70 ZONECHANGE 8185 216 0 0 v:123
+15/09/2020 03:35:44 <252 Event OK>
+15/09/2020 03:35:44 EVENT 8199 1600140935 -319779446/1159586765/5309/31/70 ZONEOVERSPEED 8185 1 70 2 v:123
+15/09/2020 03:35:46 <252 Event OK>
+15/09/2020 03:35:46 QUIT
+15/09/2020 03:35:46 INTB: 1
+15/09/2020 03:35:46 gpio interrupts (P1-2) FF
+15/09/2020 03:35:46 keythread - init 1
+15/09/2020 03:35:46 keyscanner OK
+15/09/2020 03:35:46 keyscanner gpio ok
+15/09/2020 03:35:46 keyscanner UART
+15/09/2020 03:35:46 keythread - init SUCCESS
+15/09/2020 03:35:46 <221 Session ended - goodbye>
+15/09/2020 03:35:46 NET: disconnect
+15/09/2020 03:35:48 adjusting rtc 2- event
+15/09/2020 03:35:48 esc modem +++
+15/09/2020 03:35:48 ZoneID Change1 0 -> 216 (speed 60 -> 40)
+15/09/2020 03:35:48 fcMain::slotZoneSpeed: 40, 216, 2
+15/09/2020 03:35:48 modem state change 3 -> 2
+15/09/2020 03:35:48 DISCONNECT
+15/09/2020 03:35:48 Directlink DISCONNECT
+15/09/2020 03:35:48 OK
+15/09/2020 03:35:48 +UUSOCL: 0
+15/09/2020 03:35:48 socket closed
+15/09/2020 03:35:48 fcMain::slotGroundSpeedOverspeedEvent: 8185, 11, 70.080002, 1
+15/09/2020 03:35:48 adjusting rtc 2- event
+15/09/2020 03:35:50 fcMain::slotGroundSpeedOverspeedEntryEvent: 216
+15/09/2020 03:35:54 comms chat disconnect 1
+15/09/2020 03:35:54 comms st 4 -> 3
+15/09/2020 03:35:54 comms st 3 -> 4
+15/09/2020 03:35:54 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:35:54 NET: connect
+15/09/2020 03:35:54 AT+UPSND=0,8
+15/09/2020 03:35:54 +UPSND: 0,8,1
+15/09/2020 03:35:54 psd line 1
+15/09/2020 03:35:54 pad active #1 (YES)
+15/09/2020 03:35:54 OK
+15/09/2020 03:35:54 AT+USOCR=6
+15/09/2020 03:35:55 +USOCR: 0
+15/09/2020 03:35:55 socket #0
+15/09/2020 03:35:55 OK
+15/09/2020 03:35:55 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:35:55 OK
+15/09/2020 03:35:56 +UUSORD: 0,16
+15/09/2020 03:35:56 AT+USODL=0
+15/09/2020 03:35:57 CONNECT
+15/09/2020 03:35:57 Directlink CONNECT
+15/09/2020 03:35:57 modem state change 2 -> 3
+15/09/2020 03:35:57 net connected
+15/09/2020 03:35:57 chat connect
+15/09/2020 03:35:57 <220 earthtrack>
+15/09/2020 03:35:57 UNIT 10247
+15/09/2020 03:35:57 <333 CHAL 25B7834B>
+15/09/2020 03:35:57 RESP 2568E1E3
+15/09/2020 03:35:58 <230 Auth OK>
+15/09/2020 03:35:58 last connect time written 1600140958
+15/09/2020 03:35:58 TIME
+15/09/2020 03:35:58 last connect time written 1600140958
+15/09/2020 03:35:59 <211 TIME 1600140966>
+15/09/2020 03:35:59 adjusting rtc - comms TIME
+15/09/2020 03:35:59 last connect time written 1600140959
+15/09/2020 03:35:59 EVCOUNT 2
+15/09/2020 03:36:00 <252 Event OK>
+15/09/2020 03:36:00 TODO
+15/09/2020 03:36:01 <226 Nothing to do>
+15/09/2020 03:36:01 EVENT 8200 1600140948 -319780116/1159586958/5152/31/70 ZONECHANGE 8185 0 216 2 v:123
+15/09/2020 03:36:02 <252 Event OK>
+15/09/2020 03:36:02 EVENT 8201 1600140948 -319780116/1159586958/5152/31/70 OVERSPEED 8185 11 v:123
+15/09/2020 03:36:02 GndSPD 70.0 (350.0 Hz)
+15/09/2020 03:36:03 <252 Event OK>
+15/09/2020 03:36:04 QUIT
+15/09/2020 03:36:05 <221 Session ended - goodbye>
+15/09/2020 03:36:05 NET: disconnect
+15/09/2020 03:36:07 esc modem +++
+15/09/2020 03:36:07 modem state change 3 -> 2
+15/09/2020 03:36:07 DISCONNECT
+15/09/2020 03:36:07 Directlink DISCONNECT
+15/09/2020 03:36:07 OK
+15/09/2020 03:36:07 +UUSOCL: 0
+15/09/2020 03:36:07 socket closed
+15/09/2020 03:36:12 comms chat disconnect 1
+15/09/2020 03:36:12 comms st 4 -> 3
+15/09/2020 03:36:20 fcMain::slotGroundSpeedOverspeedEvent: 8185, 30, 70.100006, 2
+15/09/2020 03:36:20 adjusting rtc 2- event
+15/09/2020 03:36:20 comms st 3 -> 4
+15/09/2020 03:36:20 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:36:20 NET: connect
+15/09/2020 03:36:20 AT+UPSND=0,8
+15/09/2020 03:36:20 +UPSND: 0,8,1
+15/09/2020 03:36:20 psd line 1
+15/09/2020 03:36:20 pad active #1 (YES)
+15/09/2020 03:36:20 OK
+15/09/2020 03:36:20 AT+USOCR=6
+15/09/2020 03:36:21 +USOCR: 0
+15/09/2020 03:36:21 socket #0
+15/09/2020 03:36:21 OK
+15/09/2020 03:36:21 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:36:21 OK
+15/09/2020 03:36:22 +UUSORD: 0,16
+15/09/2020 03:36:22 AT+USODL=0
+15/09/2020 03:36:22 CONNECT
+15/09/2020 03:36:22 Directlink CONNECT
+15/09/2020 03:36:22 modem state change 2 -> 3
+15/09/2020 03:36:22 net connected
+15/09/2020 03:36:22 chat connect
+15/09/2020 03:36:22 <220 earthtrack>
+15/09/2020 03:36:22 UNIT 10247
+15/09/2020 03:36:24 <333 CHAL 7412BA87>
+15/09/2020 03:36:24 RESP E5CBCCCB
+15/09/2020 03:36:24 <230 Auth OK>
+15/09/2020 03:36:24 last connect time written 1600140984
+15/09/2020 03:36:24 TIME
+15/09/2020 03:36:24 last connect time written 1600140984
+15/09/2020 03:36:25 <211 TIME 1600140992>
+15/09/2020 03:36:25 adjusting rtc - comms TIME
+15/09/2020 03:36:25 last connect time written 1600140985
+15/09/2020 03:36:25 EVCOUNT 1
+15/09/2020 03:36:26 <252 Event OK>
+15/09/2020 03:36:26 TODO
+15/09/2020 03:36:27 <226 Nothing to do>
+15/09/2020 03:36:27 EVENT 8202 1600140980 -319780326/1159587024/3869/31/35 ZONEOVERSPEED 8185 30 70 2 v:123
+15/09/2020 03:36:27 SaveTripData: 304/0/0/0/0 2 0/0/0/0/1
+15/09/2020 03:36:28 <252 Event OK>
+15/09/2020 03:36:28 QUIT
+15/09/2020 03:36:29 <221 Session ended - goodbye>
+15/09/2020 03:36:29 NET: disconnect
+15/09/2020 03:36:31 esc modem +++
+15/09/2020 03:36:31 modem state change 3 -> 2
+15/09/2020 03:36:31 DISCONNECT
+15/09/2020 03:36:31 Directlink DISCONNECT
+15/09/2020 03:36:31 OK
+15/09/2020 03:36:31 +UUSOCL: 0
+15/09/2020 03:36:31 socket closed
+15/09/2020 03:36:33 GndSPD 34.0 (170.0 Hz)
+15/09/2020 03:36:37 comms chat disconnect 1
+15/09/2020 03:36:37 comms st 4 -> 3
+15/09/2020 03:36:42 GNSS S:26 (GP:15 GL:11 BD:0 GA:0) U:11 Hacc:3082 R:31
+15/09/2020 03:36:43 adjusting rtc 2- event
+15/09/2020 03:36:43 ZoneID Change2 216 -> 0 (speed 40 -> 60)
+15/09/2020 03:36:43 fcMain::slotZoneSpeed: 60, 0, 1
+15/09/2020 03:36:43 comms st 3 -> 4
+15/09/2020 03:36:43 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:36:43 NET: connect
+15/09/2020 03:36:43 AT+UPSND=0,8
+15/09/2020 03:36:43 +UPSND: 0,8,1
+15/09/2020 03:36:43 psd line 1
+15/09/2020 03:36:43 pad active #1 (YES)
+15/09/2020 03:36:43 OK
+15/09/2020 03:36:43 AT+USOCR=6
+15/09/2020 03:36:44 +USOCR: 0
+15/09/2020 03:36:44 socket #0
+15/09/2020 03:36:44 OK
+15/09/2020 03:36:44 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:36:44 OK
+15/09/2020 03:36:45 +UUSORD: 0,16
+15/09/2020 03:36:45 AT+USODL=0
+15/09/2020 03:36:45 CONNECT
+15/09/2020 03:36:45 Directlink CONNECT
+15/09/2020 03:36:45 modem state change 2 -> 3
+15/09/2020 03:36:45 net connected
+15/09/2020 03:36:45 chat connect
+15/09/2020 03:36:45 <220 earthtrack>
+15/09/2020 03:36:45 UNIT 10247
+15/09/2020 03:36:46 <333 CHAL 1C73200C>
+15/09/2020 03:36:46 RESP 8FB14EA4
+15/09/2020 03:36:47 <230 Auth OK>
+15/09/2020 03:36:47 last connect time written 1600141007
+15/09/2020 03:36:47 TIME
+15/09/2020 03:36:47 last connect time written 1600141007
+15/09/2020 03:36:48 <211 TIME 1600141015>
+15/09/2020 03:36:48 adjusting rtc - comms TIME
+15/09/2020 03:36:48 last connect time written 1600141008
+15/09/2020 03:36:48 EVCOUNT 1
+15/09/2020 03:36:49 <252 Event OK>
+15/09/2020 03:36:49 TODO
+15/09/2020 03:36:50 <226 Nothing to do>
+15/09/2020 03:36:50 EVENT 8203 1600141003 -319780359/1159587106/3082/31/34 ZONECHANGE 8185 216 0 0 v:123
+15/09/2020 03:36:51 <252 Event OK>
+15/09/2020 03:36:51 QUIT
+15/09/2020 03:36:52 <221 Session ended - goodbye>
+15/09/2020 03:36:52 NET: disconnect
+15/09/2020 03:36:54 esc modem +++
+15/09/2020 03:36:54 modem state change 3 -> 2
+15/09/2020 03:36:54 DISCONNECT
+15/09/2020 03:36:54 Directlink DISCONNECT
+15/09/2020 03:36:54 OK
+15/09/2020 03:36:54 +UUSOCL: 0
+15/09/2020 03:36:54 socket closed
+15/09/2020 03:36:56 adjusting rtc 2- event
+15/09/2020 03:36:56 ZoneID Change1 0 -> 216 (speed 60 -> 40)
+15/09/2020 03:36:56 fcMain::slotZoneSpeed: 40, 216, 2
+15/09/2020 03:36:59 comms chat disconnect 1
+15/09/2020 03:36:59 comms st 4 -> 3
+15/09/2020 03:36:59 comms st 3 -> 4
+15/09/2020 03:36:59 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:36:59 NET: connect
+15/09/2020 03:36:59 AT+UPSND=0,8
+15/09/2020 03:36:59 +UPSND: 0,8,1
+15/09/2020 03:36:59 psd line 1
+15/09/2020 03:36:59 pad active #1 (YES)
+15/09/2020 03:36:59 OK
+15/09/2020 03:36:59 AT+USOCR=6
+15/09/2020 03:37:00 +USOCR: 0
+15/09/2020 03:37:00 socket #0
+15/09/2020 03:37:00 OK
+15/09/2020 03:37:00 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:37:00 OK
+15/09/2020 03:37:01 +UUSORD: 0,16
+15/09/2020 03:37:01 AT+USODL=0
+15/09/2020 03:37:01 CONNECT
+15/09/2020 03:37:01 Directlink CONNECT
+15/09/2020 03:37:01 modem state change 2 -> 3
+15/09/2020 03:37:01 net connected
+15/09/2020 03:37:01 chat connect
+15/09/2020 03:37:01 <220 earthtrack>
+15/09/2020 03:37:01 UNIT 10247
+15/09/2020 03:37:02 <333 CHAL 23994CF0>
+15/09/2020 03:37:02 RESP 8E23E60A
+15/09/2020 03:37:03 <230 Auth OK>
+15/09/2020 03:37:03 last connect time written 1600141023
+15/09/2020 03:37:03 TIME
+15/09/2020 03:37:03 last connect time written 1600141023
+15/09/2020 03:37:04 GndSPD 34.0 (170.0 Hz)
+15/09/2020 03:37:04 <211 TIME 1600141031>
+15/09/2020 03:37:04 adjusting rtc - comms TIME
+15/09/2020 03:37:04 last connect time written 1600141024
+15/09/2020 03:37:04 EVCOUNT 1
+15/09/2020 03:37:05 <252 Event OK>
+15/09/2020 03:37:05 TODO
+15/09/2020 03:37:06 <226 Nothing to do>
+15/09/2020 03:37:06 EVENT 8204 1600141016 -319780447/1159587092/2375/31/34 ZONECHANGE 8185 0 216 2 v:123
+15/09/2020 03:37:07 <252 Event OK>
+15/09/2020 03:37:07 QUIT
+15/09/2020 03:37:08 <221 Session ended - goodbye>
+15/09/2020 03:37:08 NET: disconnect
+15/09/2020 03:37:10 esc modem +++
+15/09/2020 03:37:10 modem state change 3 -> 2
+15/09/2020 03:37:10 DISCONNECT
+15/09/2020 03:37:10 Directlink DISCONNECT
+15/09/2020 03:37:10 OK
+15/09/2020 03:37:10 +UUSOCL: 0
+15/09/2020 03:37:10 socket closed
+15/09/2020 03:37:10 trip end 1
+15/09/2020 03:37:10 START Enabled - callback
+15/09/2020 03:37:10 StartOutputStateChange 0
+15/09/2020 03:37:10 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+15/09/2020 03:37:10 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:37:10 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:37:10 FcMain change from 18 to 19
+15/09/2020 03:37:10 messagedialog result 3
+15/09/2020 03:37:10 slotMessageSignonResult 3
+15/09/2020 03:37:10 START Enabled - callback
+15/09/2020 03:37:10 StartOutputStateChange 0
+15/09/2020 03:37:10 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+15/09/2020 03:37:10 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:37:10 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:37:10 resetting cklist 1
+15/09/2020 03:37:10 Adding TRIP
+15/09/2020 03:37:10 adjusting rtc 2- event
+15/09/2020 03:37:10 SaveTripData: 347/0/0/0/0 0 0/0/0/0/1
+15/09/2020 03:37:10 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+15/09/2020 03:37:10 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+15/09/2020 03:37:10 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+15/09/2020 03:37:10 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+15/09/2020 03:37:10 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+15/09/2020 03:37:10 adjusting rtc 2- event
+15/09/2020 03:37:10 FcMain change from 19 to 2
+15/09/2020 03:37:10 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+15/09/2020 03:37:10 CAN closed OK
+15/09/2020 03:37:10 DecCL 3
+15/09/2020 03:37:10 splash enabled?:0
+15/09/2020 03:37:10 setting new cklist state (0) and qnr (0)
+15/09/2020 03:37:10 trip Zero
+15/09/2020 03:37:10 ZoneID Change 60 -> 216 (speed  -> 216)
+15/09/2020 03:37:10 Settings: slotEsc
+15/09/2020 03:37:10 fcMain::slotZoneSpeed: 60, 0, 1
+15/09/2020 03:37:10 START Enabled - callback
+15/09/2020 03:37:10 StartOutputStateChange 0
+15/09/2020 03:37:10 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+15/09/2020 03:37:10 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:37:10 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:37:10 OFFWAIT:ign still off
+15/09/2020 03:37:10 FcMain change from 2 to 3
+15/09/2020 03:37:10 Settings: slotEsc
+15/09/2020 03:37:11 startup human? 1
+15/09/2020 03:37:11 channel set 0 0
+15/09/2020 03:37:11 channel setting: 3-offf:4-offf
+15/09/2020 03:37:11 Message <3-offf:4-offf>: Sent to PRU0
+15/09/2020 03:37:11 BLAll 0
+15/09/2020 03:37:11 BL set:0
+15/09/2020 03:37:11 set brightness to 0%
+15/09/2020 03:37:11 brand 1 is /store/Brand-Earthtrack.png
+15/09/2020 03:37:11 brand 2 is :/Brands/brand/Brand-Earthtrack.png
+15/09/2020 03:37:11 brand is /store/Brand-Earthtrack.png, resource logo is :/Brands/brand/Brand-Earthtrack.png
+15/09/2020 03:37:11 S0Sdiff 0
+15/09/2020 03:37:11 wakeup is -1
+15/09/2020 03:37:11 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+15/09/2020 03:37:11 CriticalOutputStateChange 0
+15/09/2020 03:37:11 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+15/09/2020 03:37:11 Key halt
+15/09/2020 03:37:11 Settings: slotEsc
+15/09/2020 03:37:11 Duplicates Removed 1
+15/09/2020 03:37:11 PRU: Set3O
+15/09/2020 03:37:11 PRU: Set4O
+15/09/2020 03:37:11 geofence state change 3 -> 2
+15/09/2020 03:37:15 comms chat disconnect 1
+15/09/2020 03:37:15 comms st 4 -> 3
+15/09/2020 03:37:15 comms st 3 -> 4
+15/09/2020 03:37:15 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:37:15 NET: connect
+15/09/2020 03:37:15 AT+UPSND=0,8
+15/09/2020 03:37:15 +UPSND: 0,8,1
+15/09/2020 03:37:15 psd line 1
+15/09/2020 03:37:15 pad active #1 (YES)
+15/09/2020 03:37:15 OK
+15/09/2020 03:37:15 AT+USOCR=6
+15/09/2020 03:37:16 +USOCR: 0
+15/09/2020 03:37:16 socket #0
+15/09/2020 03:37:16 OK
+15/09/2020 03:37:16 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:37:16 OK
+15/09/2020 03:37:17 +UUSORD: 0,16
+15/09/2020 03:37:17 AT+USODL=0
+15/09/2020 03:37:17 CONNECT
+15/09/2020 03:37:17 Directlink CONNECT
+15/09/2020 03:37:17 modem state change 2 -> 3
+15/09/2020 03:37:17 net connected
+15/09/2020 03:37:17 chat connect
+15/09/2020 03:37:17 <220 earthtrack>
+15/09/2020 03:37:17 UNIT 10247
+15/09/2020 03:37:18 <333 CHAL AA46D17>
+15/09/2020 03:37:18 RESP 7369423E
+15/09/2020 03:37:19 <230 Auth OK>
+15/09/2020 03:37:19 last connect time written 1600141039
+15/09/2020 03:37:19 TIME
+15/09/2020 03:37:19 last connect time written 1600141039
+15/09/2020 03:37:20 <211 TIME 1600141047>
+15/09/2020 03:37:20 adjusting rtc - comms TIME
+15/09/2020 03:37:20 last connect time written 1600141040
+15/09/2020 03:37:20 EVCOUNT 2
+15/09/2020 03:37:21 <252 Event OK>
+15/09/2020 03:37:21 TODO
+15/09/2020 03:37:22 <226 Nothing to do>
+15/09/2020 03:37:22 EVENT 8205 1600141030 -319780556/1159587104/2406/31/34 TRIP 8185 347 0 0 0 347 v:123
+15/09/2020 03:37:23 <252 Event OK>
+15/09/2020 03:37:23 EVENT 8206 1600141030 -319780556/1159587104/2406/31/34 TRIPSUMMARY 8185 v:123
+15/09/2020 03:37:25 <252 Event OK>
+15/09/2020 03:37:25 QUIT
+15/09/2020 03:37:26 <221 Session ended - goodbye>
+15/09/2020 03:37:26 NET: disconnect
+15/09/2020 03:37:28 esc modem +++
+15/09/2020 03:37:28 modem state change 3 -> 2
+15/09/2020 03:37:28 DISCONNECT
+15/09/2020 03:37:28 Directlink DISCONNECT
+15/09/2020 03:37:28 OK
+15/09/2020 03:37:28 +UUSOCL: 0
+15/09/2020 03:37:28 socket closed
+15/09/2020 03:37:33 comms chat disconnect 1
+15/09/2020 03:37:33 comms st 4 -> 3
+15/09/2020 03:37:48 GNSS S:26 (GP:15 GL:11 BD:0 GA:0) U:8 Hacc:4335 R:31
+15/09/2020 03:41:19 OtaUpdater RUNNING
+15/09/2020 03:41:19 no file to update
+15/09/2020 03:41:19 Starting /store/FcMain -qws version:3.0.0.6  &
+15/09/2020 03:41:19 VERSION: 5.0.2.1 R 
+15/09/2020 03:41:19 4.14.108-ti-r119
+15/09/2020 03:41:19 NEW OS, DONOT access PCF directly
+15/09/2020 03:41:19 Image file: 1.0.20Image
+15/09/2020 03:41:19 OS Release Version: 1.0.20
+15/09/2020 03:41:19 hwclock time: 1600141279
+15/09/2020 03:41:19 IOInit - NEW OS
+15/09/2020 03:41:19 created gpio INP 0 @GPIO: 66
+15/09/2020 03:41:19 created gpio INP 1 @GPIO: 67
+15/09/2020 03:41:19 created gpio INP 4 @GPIO: 45
+15/09/2020 03:41:19 created gpio INP 5 @GPIO: 44
+15/09/2020 03:41:19 created gpio INP 6 @GPIO: 23
+15/09/2020 03:41:19 created gpio INP 7 @GPIO: 26
+15/09/2020 03:41:19 created gpio INP 8 @GPIO: 51
+15/09/2020 03:41:19 created gpio INP 9 @GPIO: 61
+15/09/2020 03:41:19 created gpio 0 OUT: 60
+15/09/2020 03:41:19 created gpio 1 OUT: 46
+15/09/2020 03:41:19 created gpio 2 OUT: 27
+15/09/2020 03:41:19 created gpio 3 OUT: 65
+15/09/2020 03:41:19 created gpio 4 OUT: 22
+15/09/2020 03:41:19 created gpio 5 OUT: 115
+15/09/2020 03:41:19 created gpio 6 OUT: 69
+15/09/2020 03:41:19 created gpio 7 OUT: 68
+15/09/2020 03:41:19 created gpio 8 OUT: 117
+15/09/2020 03:41:19 created gpio 9 OUT: 59
+15/09/2020 03:41:19 created gpio 10 OUT: 58
+15/09/2020 03:41:19 created gpio 11 OUT: 52
+15/09/2020 03:41:19 created gpio 12 OUT: 64
+15/09/2020 03:41:19 created gpio 13 OUT: 47
+15/09/2020 03:41:19 created gpio 14 OUT: 48
+15/09/2020 03:41:19 created gpio 15 OUT: 49
+15/09/2020 03:41:19 created gpio 16 OUT: 116
+15/09/2020 03:41:19 created gpio 17 OUT: 53
+15/09/2020 03:41:19 created gpio 18 OUT: 54
+15/09/2020 03:41:19 created gpio 19 OUT: 55
+15/09/2020 03:41:19 created gpio 20 OUT: 507
+15/09/2020 03:41:19 created gpio 21 OUT: 508
+15/09/2020 03:41:19 created gpio 22 OUT: 509
+15/09/2020 03:41:20 created gpio 23 OUT: 510
+15/09/2020 03:41:20 created gpio 24 OUT: 511
+15/09/2020 03:41:20 ioInitialise(): skipping input index 25 [487]
+15/09/2020 03:41:20 usr0 is heartbeat
+15/09/2020 03:41:20 usr1 is mmc0 (uSD card)
+15/09/2020 03:41:20 usr2 is mmc1(eMMC)
+15/09/2020 03:41:20 channel thread created
+15/09/2020 03:41:20 channel ch3 2 ch4 2
+15/09/2020 03:41:20 ch3 2 ch4 2
+15/09/2020 03:41:20 BLAll 100
+15/09/2020 03:41:20 BL set:100
+15/09/2020 03:41:20 set brightness to 100%
+15/09/2020 03:41:20 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+15/09/2020 03:41:20 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:41:20 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:41:20 wrote 0 to /sys/class/gpio/gpio46/value (O/P 2)
+15/09/2020 03:41:20 wrote 0 to /sys/class/gpio/gpio27/value (O/P 3)
+15/09/2020 03:41:20 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+15/09/2020 03:41:20 wrote 0 to /sys/class/gpio/gpio115/value (O/P 6)
+15/09/2020 03:41:20 wrote 0 to /sys/class/gpio/gpio69/value (O/P 7)
+15/09/2020 03:41:20 wrote 0 to /sys/class/gpio/gpio68/value (O/P 8)
+15/09/2020 03:41:20 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+15/09/2020 03:41:20 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+15/09/2020 03:41:20 wrote 0 to /sys/class/gpio/gpio64/value (O/P 13)
+15/09/2020 03:41:20 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:41:20 wrote 0 to /sys/class/gpio/gpio48/value (O/P 15)
+15/09/2020 03:41:20 wrote 0 to /sys/class/gpio/gpio49/value (O/P 16)
+15/09/2020 03:41:20 wrote 0 to /sys/class/gpio/gpio511/value (O/P 25)
+15/09/2020 03:41:20 OTA Version: version:3.0.0.6
+15/09/2020 03:41:20 wrote 1 to /sys/class/gpio/gpio59/value (O/P 10)
+15/09/2020 03:41:20 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+15/09/2020 03:41:20 wrote 1 to /sys/class/gpio/gpio511/value (O/P 25)
+15/09/2020 03:41:21 channel state change 0 -> 1
+15/09/2020 03:41:21 Starting PRU
+15/09/2020 03:41:21 offline
+15/09/2020 03:41:21 PRU starting
+15/09/2020 03:41:21 i2c1 commands - to serialiser
+15/09/2020 03:41:21 Serialiser Serial Nr: 1A71021864100480CCA6A000A000001D
+15/09/2020 03:41:21 Display model AA
+15/09/2020 03:41:21 Serialiser Eeprom Serial Nr: 000804-AA
+15/09/2020 03:41:21 wrote 1 to /sys/class/gpio/gpio511/value (O/P 25)
+15/09/2020 03:41:21 BLAll 100
+15/09/2020 03:41:21 BL set:100
+15/09/2020 03:41:21 set brightness to 100%
+15/09/2020 03:41:21 clear Interrupts
+15/09/2020 03:41:21 pcf IS open 3
+15/09/2020 03:41:21 FC (main) Started
+15/09/2020 03:41:21 ROOTFS Built 41449
+15/09/2020 03:41:21 Nr Langs to process: 18
+15/09/2020 03:41:21 lang file: :Translations/FcMain_ar
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_es
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_et
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_fr
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_de
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_hi
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_id
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_km
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_ko
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_lv
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_ms
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_ru
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_th
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_tl
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_uk
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_vi
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_zh
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 lang file: :Translations/FcMain_en
+15/09/2020 03:41:21 Loaded translations
+15/09/2020 03:41:21 eeprom magic OK
+15/09/2020 03:41:21 Contructor PID2 109 109
+15/09/2020 03:41:21 MessageDialog GNSS 0
+15/09/2020 03:41:21 Duplicates Removed 1
+15/09/2020 03:41:21 thread gps_thread created
+15/09/2020 03:41:21 wrote 1 to /sys/class/gpio/gpio64/value (O/P 13)
+15/09/2020 03:41:21 gps open 1
+15/09/2020 03:41:21 wrote 0 to /sys/class/gpio/gpio65/value (O/P 4)
+15/09/2020 03:41:21 gps task running
+15/09/2020 03:41:21 gps state change 1 -> 2
+15/09/2020 03:41:21 NEW speedHzKmh 0.200000
+15/09/2020 03:41:22 NEW speedHzRPM 12.500000
+15/09/2020 03:41:22 weightCountKg 0.000000
+15/09/2020 03:41:22 weightZeroCount 0.000000
+15/09/2020 03:41:22 weightZero 0.000000
+15/09/2020 03:41:22 speedHzKmh 0.200000
+15/09/2020 03:41:22 speedHzRPM 12.500000
+15/09/2020 03:41:22 opened /dev/ttyS2 serial/USB OK
+15/09/2020 03:41:22 GPS Serial Connected on /dev/ttyS2 (handle 12)
+15/09/2020 03:41:22 EXP 2073098026, 1600058026, 1600141282
+15/09/2020 03:41:22 Critical::setCriticalOutputNotify()
+15/09/2020 03:41:22 ioSetStartNotify()
+15/09/2020 03:41:22 MessageDialog GNSS 0
+15/09/2020 03:41:22 pru Waiting/Waiting
+15/09/2020 03:41:22 MessageDialog GNSS 0
+15/09/2020 03:41:22 Duplicates Removed 6
+15/09/2020 03:41:22 Splash GNSS 0
+15/09/2020 03:41:22 found /store/Service_active.xml
+15/09/2020 03:41:22 xml_parsing file: /store/Service_active.xml
+15/09/2020 03:41:22 MessageDialog GNSS 0
+15/09/2020 03:41:22 settings ready
+15/09/2020 03:41:22 MessageDialog GNSS 0
+15/09/2020 03:41:22 Read : rc = -1 data = 0x0000 string = 
+15/09/2020 03:41:22 light sensor present: 0
+15/09/2020 03:41:22 Starting Threads. Mayhem begins!
+15/09/2020 03:41:22 Can thread running
+15/09/2020 03:41:22 Main thread running
+15/09/2020 03:41:22 FleetMessaging thread running
+15/09/2020 03:41:22 beeper run
+15/09/2020 03:41:22 fleetmsg run
+15/09/2020 03:41:22 opusFc task run
+15/09/2020 03:41:22 Beeper thread running
+15/09/2020 03:41:22 TriLed thread running
+15/09/2020 03:41:22 Theme thread running
+15/09/2020 03:41:22 Diagnostic thread running
+15/09/2020 03:41:22 Batttery thread running
+15/09/2020 03:41:22 Key thread running
+15/09/2020 03:41:22 GeoFence thread running
+15/09/2020 03:41:22 main.cpp Done
+15/09/2020 03:41:22 New Operator file XML found
+15/09/2020 03:41:22 found Operators_active.xml
+15/09/2020 03:41:22 xml_parsing file: /store/Operators_active.xml
+15/09/2020 03:41:22 diags run
+15/09/2020 03:41:22 triled run
+15/09/2020 03:41:22 Geofence run
+15/09/2020 03:41:22 Operator file XML found
+15/09/2020 03:41:22 Powerup - Done
+15/09/2020 03:41:22 MessageDialog GNSS 0
+15/09/2020 03:41:22 PID3 109 117
+15/09/2020 03:41:22 WDOpen Success
+15/09/2020 03:41:22 WDT timeout is 30
+15/09/2020 03:41:23 Starting PRU
+15/09/2020 03:41:23 running
+15/09/2020 03:41:23 gps state change 2 -> 3
+15/09/2020 03:41:23 opening /dev/rpmsg_pru30
+15/09/2020 03:41:23 PRU Opened 37
+15/09/2020 03:41:23 Opened /dev/rpmsg_pru30
+15/09/2020 03:41:23 Battery free
+15/09/2020 03:41:23 keythread - init 1
+15/09/2020 03:41:23 keyscanner OK
+15/09/2020 03:41:23 keyscanner gpio ok
+15/09/2020 03:41:23 keyscanner UART
+15/09/2020 03:41:23 keythread - init SUCCESS
+15/09/2020 03:41:23 set theme Day
+15/09/2020 03:41:23 slotUpdate first call
+15/09/2020 03:41:23 bootstatus3 0
+15/09/2020 03:41:23 tempBootStatus 0
+15/09/2020 03:41:23 bootstatus 0
+15/09/2020 03:41:23 end of run()
+15/09/2020 03:41:24 channel setting: 3-freq:4-freq
+15/09/2020 03:41:24 Message <3-freq:4-freq>: Sent to PRU0
+15/09/2020 03:41:24 channel state change 1 -> 2
+15/09/2020 03:41:24 PRU: Set3F
+15/09/2020 03:41:24 PRU: Set4F
+15/09/2020 03:41:24 PRU: FreqInit
+15/09/2020 03:41:24 PRU Version: 104
+15/09/2020 03:41:24 sync new state entry
+15/09/2020 03:41:24 build time 1600029226
+15/09/2020 03:41:24 REC trip id 0
+15/09/2020 03:41:24 REC write time 1600141090
+15/09/2020 03:41:24 REC QNr 0
+15/09/2020 03:41:24 REC CkState 17
+15/09/2020 03:41:24 REC Main state 3
+15/09/2020 03:41:24 REC DrIdx 9
+15/09/2020 03:41:24 readData 1
+15/09/2020 03:41:24 thread comms_thread created
+15/09/2020 03:41:24 thread modem_thread created
+15/09/2020 03:41:24 last connect time read: 1600141040 1600141040
+15/09/2020 03:41:24 NET: get hw
+15/09/2020 03:41:24 MDM: open
+15/09/2020 03:41:24 thread net_thread created
+15/09/2020 03:41:24 modem state change 0 -> 1
+15/09/2020 03:41:24 wrote 0 to /sys/class/gpio/gpio58/value (O/P 11)
+15/09/2020 03:41:24 wrote 0 to /sys/class/gpio/gpio52/value (O/P 12)
+15/09/2020 03:41:24 MDM: turn on modem power
+15/09/2020 03:41:24 wrote 1 to /sys/class/gpio/gpio117/value (O/P 9)
+15/09/2020 03:41:24 thread interrupt_thread created
+15/09/2020 03:41:24 SerialNr: 10247
+15/09/2020 03:41:24 LoadDate: 160120
+15/09/2020 03:41:24 HWModel:  9072s_C
+15/09/2020 03:41:24 hwVersion is <9072s_C>
+15/09/2020 03:41:24 recovered EEtrip 0 time 1600141030 slot 0 saved time 881
+15/09/2020 03:41:24 FRIM: 347/0/0/0/0
+15/09/2020 03:41:24 LT 1600141030 0
+15/09/2020 03:41:24 recovered EEtrip 8185 time 1600140926 slot 1 saved time 777
+15/09/2020 03:41:24 FRIM: 243/0/0/0/0
+15/09/2020 03:41:24 recovered EEtrip 8185 time 1600140987 slot 2 saved time 838
+15/09/2020 03:41:24 FRIM: 304/0/0/0/0
+15/09/2020 03:41:24 recovered EEtrip 8185 time 1600140683 slot 3 saved time 533
+15/09/2020 03:41:24 FRIM: 0/0/0/0/0
+15/09/2020 03:41:24 recovered EEtrip 8185 time 1600140743 slot 4 saved time 594
+15/09/2020 03:41:24 FRIM: 60/0/0/0/0
+15/09/2020 03:41:24 recovered EEtrip 8185 time 1600140804 slot 5 saved time 655
+15/09/2020 03:41:24 FRIM: 121/0/0/0/0
+15/09/2020 03:41:24 recovered EEtrip 0 time 1600141030 slot 0
+15/09/2020 03:41:24 FRIM: 347/0/0/0/0
+15/09/2020 03:41:24 found /store/DisplayMessaging_active.xml
+15/09/2020 03:41:24 xml_parsing file: /store/DisplayMessaging_active.xml
+15/09/2020 03:41:24 xml process daily
+15/09/2020 03:41:24 xml process impact
+15/09/2020 03:41:24 xml process license
+15/09/2020 03:41:24 Msg Dialog font Noto Sans
+15/09/2020 03:41:24 lang code: EN file: :Translations/FcMain_en
+15/09/2020 03:41:24 lang file: :Translations/FcMain_en
+15/09/2020 03:41:24 Removing translations
+15/09/2020 03:41:24 Installing translations
+15/09/2020 03:41:24 getlicmsg langfound 0, lang reqd 0
+15/09/2020 03:41:24 FcMain change from 0 to 1
+15/09/2020 03:41:24 modem type 7
+15/09/2020 03:41:24 comms_start gsm
+15/09/2020 03:41:24 comms_enable
+15/09/2020 03:41:24 fleetmsg free
+15/09/2020 03:41:24 Theme free
+15/09/2020 03:41:24 diags free
+15/09/2020 03:41:24 Led free
+15/09/2020 03:41:24 CAN free
+15/09/2020 03:41:24 VDIOpen
+15/09/2020 03:41:24 wrote 1 to /sys/class/gpio/gpio27/value (O/P 3)
+15/09/2020 03:41:24 CAN opened OK
+15/09/2020 03:41:24 Geofence free, FC was reset 1
+15/09/2020 03:41:25 brand 1 is Brand-Earthtrack, logo is /store/Brand-Earthtrack.png
+15/09/2020 03:41:25 brand 2 is Brand-Earthtrack, theme logo is /store/Brand-Earthtrack_light.png
+15/09/2020 03:41:25 brand 3 is :/Brands/brand/Brand-Earthtrack.png
+15/09/2020 03:41:25 INTB: 0
+15/09/2020 03:41:25 gpio interrupts (P1-2) FF
+15/09/2020 03:41:25 eeprom 0, 347/0/0/0
+15/09/2020 03:41:25 Power loss time 1600141030
+15/09/2020 03:41:25 SWSTART OpusFC 5.0.2.1 R
+15/09/2020 03:41:25 startup human? 1
+15/09/2020 03:41:25 FcMain change from 1 to 2
+15/09/2020 03:41:25 report initial input states?
+15/09/2020 03:41:25 report initial input states: YES
+15/09/2020 03:41:25 ign on, enable BackLight/Serialiser
+15/09/2020 03:41:25 zone 1 read 4 points 8
+15/09/2020 03:41:25 zone 2 read 5 points 10
+15/09/2020 03:41:25 zone 3 read 7 points 14
+15/09/2020 03:41:25 gps version is NO VERSION
+15/09/2020 03:41:25 max zones 100
+15/09/2020 03:41:26 Splash set font Noto Sans
+15/09/2020 03:41:26 Splash Radio Unknown
+15/09/2020 03:41:26 radio set Unknown <--
+15/09/2020 03:41:26 splash font set Noto Sans
+15/09/2020 03:41:26 geofence state change 0 -> 1
+15/09/2020 03:41:26 startup
+15/09/2020 03:41:26 START Enabled - callback
+15/09/2020 03:41:26 StartOutputStateChange 0
+15/09/2020 03:41:26 wrote 0 to /sys/class/gpio/gpio60/value (O/P 1)
+15/09/2020 03:41:26 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:41:26 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:41:26 PSP 1
+15/09/2020 03:41:26 PSP 2
+15/09/2020 03:41:26 PSP 3
+15/09/2020 03:41:26 FcMain change from 2 to 4
+15/09/2020 03:41:26 Settings: slotEsc
+15/09/2020 03:41:26 Wake
+15/09/2020 03:41:26 Wake ON
+15/09/2020 03:41:26 FcMain change from 4 to 5
+15/09/2020 03:41:26 Key free
+15/09/2020 03:41:26 keythread - init 1
+15/09/2020 03:41:26 keyscanner OK
+15/09/2020 03:41:26 keyscanner gpio ok
+15/09/2020 03:41:26 keyscanner UART
+15/09/2020 03:41:26 keythread - init SUCCESS
+15/09/2020 03:41:26 slotStartReading (1)**********
+15/09/2020 03:41:26 start HID reader
+15/09/2020 03:41:26 PRU version 104
+15/09/2020 03:41:26 ota 1599811537 - 2020-09-11 08:05:37Z
+15/09/2020 03:41:26 valid fleet? 10247
+15/09/2020 03:41:26 BLAll 100
+15/09/2020 03:41:26 BL set:100
+15/09/2020 03:41:26 set brightness to 100%
+15/09/2020 03:41:26 traction set 2 2
+15/09/2020 03:41:26 channel set 2 2
+15/09/2020 03:41:26 channel setting: 3-freq:4-freq
+15/09/2020 03:41:26 Message <3-freq:4-freq>: Sent to PRU0
+15/09/2020 03:41:26 FcMain change from 5 to 6
+15/09/2020 03:41:26 INTB: 1
+15/09/2020 03:41:26 gpio interrupts (P1-2) FB
+15/09/2020 03:41:26 PRU: Set3F
+15/09/2020 03:41:26 PRU: Set4F
+15/09/2020 03:41:26 card read
+15/09/2020 03:41:26 Uart rxfifo has 14 bytes waiting
+15/09/2020 03:41:26 vli 000a 10
+15/09/2020 03:41:26 vli matches
+15/09/2020 03:41:26 208 1664 0
+15/09/2020 03:41:26 CardReader version 0
+15/09/2020 03:41:26 Cklist free
+15/09/2020 03:41:26 splash enabled?:0
+15/09/2020 03:41:26 INTB: 0
+15/09/2020 03:41:26 gpio interrupts (P1-2) FF
+15/09/2020 03:41:26 start rfid checking
+15/09/2020 03:41:26 start wiegand
+15/09/2020 03:41:26 traction change from 0 to 1
+15/09/2020 03:41:26 state timer started
+15/09/2020 03:41:26 geofence state change 1 -> 2
+15/09/2020 03:41:26 setbool 0
+15/09/2020 03:41:26 CKL state change 0
+15/09/2020 03:41:26 checklist file detected
+15/09/2020 03:41:26 found Checklist_active.xml
+15/09/2020 03:41:26 xml_parsing
+15/09/2020 03:41:26 xml process checklist
+15/09/2020 03:41:26 xml process config/hdr
+15/09/2020 03:41:26 lastrun read (time/driver) 1600055718 9
+15/09/2020 03:41:26 CkList::Checklist init complete
+15/09/2020 03:41:26 FcMain::Checklist init complete
+15/09/2020 03:41:26 CKL state change 1
+15/09/2020 03:41:26 CKL state change 17
+15/09/2020 03:41:27 brand is Brand-Earthtrack, logo is /store/Brand-Earthtrack.png
+15/09/2020 03:41:28 resetting baud
+15/09/2020 03:41:28 change baud to 115200
+15/09/2020 03:41:28 GPS close 0
+15/09/2020 03:41:28 opened /dev/ttyS2 serial/USB OK
+15/09/2020 03:41:28 GPS Serial Connected on /dev/ttyS2 at 115200
+15/09/2020 03:41:28 GPS Saved Database found
+15/09/2020 03:41:28 GPS Loading Saved Database
+15/09/2020 03:41:28 loaded 83 GNSS DB files
+15/09/2020 03:41:28 getting ver
+15/09/2020 03:41:29 traction/idle state seen
+15/09/2020 03:41:30 getting ver
+15/09/2020 03:41:30 gps rate set
+15/09/2020 03:41:31 GPS Sat Found (NMEA)!!!!!!!!!
+15/09/2020 03:41:31 GPS Ver [ROM CORE 3.01 (107888)] [00080000] (len)160
+15/09/2020 03:41:32 Duplicates Removed 1
+15/09/2020 03:41:32 GPS Sat Found (NMEA)!!!!!!!!!
+15/09/2020 03:41:33 opened /dev/ttyACM0 serial/USB OK
+15/09/2020 03:41:33 MDM:opened and closed /dev/ttyACM0
+15/09/2020 03:41:33 opened /dev/ttyACM2 serial/USB OK
+15/09/2020 03:41:33 opened /dev/ttyACM0 serial/USB OK
+15/09/2020 03:41:33 Modem Serial Connected using /dev/ttyACM0 and /dev/ttyACM2
+15/09/2020 03:41:33 modem state change 1 -> 2
+15/09/2020 03:41:34 NET:modem is opened
+15/09/2020 03:41:34 INTB: 1
+15/09/2020 03:41:34 gpio interrupts (P1-2) FE
+15/09/2020 03:41:34 KEYPRESS 5
+15/09/2020 03:41:34 INTB: 1
+15/09/2020 03:41:34 gpio interrupts (P1-2) FE
+15/09/2020 03:41:34 INTB: 1
+15/09/2020 03:41:34 gpio interrupts (P1-2) FF
+15/09/2020 03:41:35 ATE0V1
+15/09/2020 03:41:35 INTB: 1
+15/09/2020 03:41:35 gpio interrupts (P1-2) FE
+15/09/2020 03:41:35 KEYPRESS 5
+15/09/2020 03:41:35 INTB: 1
+15/09/2020 03:41:35 gpio interrupts (P1-2) FF
+15/09/2020 03:41:35 INTB: 1
+15/09/2020 03:41:35 gpio interrupts (P1-2) FE
+15/09/2020 03:41:35 KEYPRESS 5
+15/09/2020 03:41:35 INTB: 0
+15/09/2020 03:41:35 gpio interrupts (P1-2) FF
+15/09/2020 03:41:35 FcMain - GNSS SAT state change 0->1
+15/09/2020 03:41:35 MessageDialog GNSS 1
+15/09/2020 03:41:35 Splash GNSS 1
+15/09/2020 03:41:35 INTB: 1
+15/09/2020 03:41:35 gpio interrupts (P1-2) FE
+15/09/2020 03:41:35 KEYPRESS 5
+15/09/2020 03:41:35 INTB: 1
+15/09/2020 03:41:35 gpio interrupts (P1-2) FE
+15/09/2020 03:41:35 INTB: 1
+15/09/2020 03:41:35 gpio interrupts (P1-2) FF
+15/09/2020 03:41:36 INTB: 1
+15/09/2020 03:41:36 gpio interrupts (P1-2) FE
+15/09/2020 03:41:36 KEYPRESS 5
+15/09/2020 03:41:36 INTB: 1
+15/09/2020 03:41:36 gpio interrupts (P1-2) FE
+15/09/2020 03:41:36 INTB: 1
+15/09/2020 03:41:36 gpio interrupts (P1-2) FF
+15/09/2020 03:41:36 INTB: 1
+15/09/2020 03:41:36 gpio interrupts (P1-2) FE
+15/09/2020 03:41:36 KEYPRESS 5
+15/09/2020 03:41:36 messagedialog result 555555
+15/09/2020 03:41:36 pin check clear, found 9 (555555)
+15/09/2020 03:41:36 driver id -100
+15/09/2020 03:41:36 checking license expiry
+15/09/2020 03:41:36 Bgnd set msg-day font Noto Sans
+15/09/2020 03:41:36 lang code: EN file: :Translations/FcMain_en
+15/09/2020 03:41:36 lang file: :Translations/FcMain_en
+15/09/2020 03:41:36 Removing translations
+15/09/2020 03:41:36 Installing translations
+15/09/2020 03:41:36 getlicmsg langfound 0, lang reqd 0
+15/09/2020 03:41:36 show driver name Commissioning Pin
+15/09/2020 03:41:36 FcMain change from 6 to 8
+15/09/2020 03:41:36 slotMessageSignonResult 555555
+15/09/2020 03:41:36 stop rfid checking
+15/09/2020 03:41:36 SETT: driver role 5
+15/09/2020 03:41:36 font is Noto Sans
+15/09/2020 03:41:36 INTB: 1
+15/09/2020 03:41:36 gpio interrupts (P1-2) FE
+15/09/2020 03:41:36 Splash set font Noto Sans
+15/09/2020 03:41:36 splash font set Noto Sans
+15/09/2020 03:41:36 OpName pointsize is 16, labelsize is 240, height 23
+15/09/2020 03:41:36 INTB: 0
+15/09/2020 03:41:36 gpio interrupts (P1-2) FF
+15/09/2020 03:41:37 ATE0V1
+15/09/2020 03:41:37 Duplicates Removed 1
+15/09/2020 03:41:37 OK
+15/09/2020 03:41:37 NET:modem is alive
+15/09/2020 03:41:37 ATE0V1
+15/09/2020 03:41:37 OK
+15/09/2020 03:41:37 AT+UUSBCONF?
+15/09/2020 03:41:37 +UUSBCONF: 0,"",,"0x1141"
+15/09/2020 03:41:37 OK
+15/09/2020 03:41:37 NET:USB Profile is 0 4417
+15/09/2020 03:41:37 AT+CGMM
+15/09/2020 03:41:37 TOBY-L280
+15/09/2020 03:41:37 MDM: HWType TOBY-L280
+15/09/2020 03:41:37 OK
+15/09/2020 03:41:37 AT+CGSN
+15/09/2020 03:41:37 358503060992436
+15/09/2020 03:41:37 MDM: IMEI 358503060992436
+15/09/2020 03:41:37 OK
+15/09/2020 03:41:37 AT+CIMI
+15/09/2020 03:41:37 234500003998781
+15/09/2020 03:41:37 MDM: IMSI 234500003998781
+15/09/2020 03:41:37 OK
+15/09/2020 03:41:37 AT+CCID
+15/09/2020 03:41:37 +CCID: 8944500602199987818
+15/09/2020 03:41:37 MDM: CCID 8944500602199987818
+15/09/2020 03:41:37 OK
+15/09/2020 03:41:37 AT+CSQ
+15/09/2020 03:41:37 +CSQ: 31,5
+15/09/2020 03:41:37 MODEM CSQ 31
+15/09/2020 03:41:37 OK
+15/09/2020 03:41:37 Comms Task Alive/Started, conn_retry 300
+15/09/2020 03:41:37 gsm starting
+15/09/2020 03:41:37 comms st 0 -> 1
+15/09/2020 03:41:37 modem is HL8/4G
+15/09/2020 03:41:37 imsi: 234500003998781 15, Auto 1
+15/09/2020 03:41:37 selected apn: nextm2m (found? 1)
+15/09/2020 03:41:37 NET: enable
+15/09/2020 03:41:37 enable apn nextm2m for HL8
+15/09/2020 03:41:37 comms st 1 -> 2
+15/09/2020 03:41:37 NS 1
+15/09/2020 03:41:37 imsi: 234500003998781 15, Auto 1
+15/09/2020 03:41:37 selected apn: nextm2m (found? 1)
+15/09/2020 03:41:37 ICCID Check: 8944500602199987818 8944500602199987818
+15/09/2020 03:41:37 NS 1
+15/09/2020 03:41:38 Duplicates Removed 3
+15/09/2020 03:41:38 net state change 0 -> 1
+15/09/2020 03:41:38 modem open now
+15/09/2020 03:41:38 ATE0V1
+15/09/2020 03:41:38 NS 1
+15/09/2020 03:41:38 OK
+15/09/2020 03:41:38 AT+CGMM
+15/09/2020 03:41:38 TOBY-L280
+15/09/2020 03:41:38 MDM: HWType TOBY-L280
+15/09/2020 03:41:38 OK
+15/09/2020 03:41:38 AT+CGSN
+15/09/2020 03:41:38 358503060992436
+15/09/2020 03:41:38 MDM: IMEI 358503060992436
+15/09/2020 03:41:38 OK
+15/09/2020 03:41:38 AT+CIMI
+15/09/2020 03:41:38 234500003998781
+15/09/2020 03:41:38 MDM: IMSI 234500003998781
+15/09/2020 03:41:38 OK
+15/09/2020 03:41:38 AT+CCID
+15/09/2020 03:41:38 +CCID: 8944500602199987818
+15/09/2020 03:41:38 MDM: CCID 8944500602199987818
+15/09/2020 03:41:38 OK
+15/09/2020 03:41:38 AT+UPSND=0,8
+15/09/2020 03:41:38 NS 1
+15/09/2020 03:41:38 +UPSND: 0,8,0
+15/09/2020 03:41:38 psd line 0
+15/09/2020 03:41:38 pad active #0 (NO)
+15/09/2020 03:41:38 OK
+15/09/2020 03:41:38 net state change 1 -> 2
+15/09/2020 03:41:38 AT+UPSD=0,1,"nextm2m"
+15/09/2020 03:41:38 OK
+15/09/2020 03:41:38 NS 1
+15/09/2020 03:41:39 Duplicates Removed 9
+15/09/2020 03:41:39 AT+UPSDA=0,3
+15/09/2020 03:41:39 NS 1
+15/09/2020 03:41:39 messagedialog result 2
+15/09/2020 03:41:39 slotMessageSignonResult 2
+15/09/2020 03:41:39 NS 1
+15/09/2020 03:41:39 Bgnd set msg-day font Noto Sans
+15/09/2020 03:41:39 lang code: EN file: :Translations/FcMain_en
+15/09/2020 03:41:39 lang file: :Translations/FcMain_en
+15/09/2020 03:41:39 Removing translations
+15/09/2020 03:41:39 Installing translations
+15/09/2020 03:41:39 getlicmsg langfound 0, lang reqd 0
+15/09/2020 03:41:39 stop rfid checking
+15/09/2020 03:41:39 FcMain change from 8 to 11
+15/09/2020 03:41:39 Splash set font Noto Sans
+15/09/2020 03:41:39 splash font set Noto Sans
+15/09/2020 03:41:39 NS 1
+15/09/2020 03:41:40 Duplicates Removed 5
+15/09/2020 03:41:40 init complete, qrysent 1 0
+15/09/2020 03:41:40 dvrs 9 9
+15/09/2020 03:41:40 postStartCK cleared
+15/09/2020 03:41:40 Chklist required?
+15/09/2020 03:41:40 checklist file detectedx
+15/09/2020 03:41:40 shift change checklist trigger
+15/09/2020 03:41:40 Chklist required 1
+15/09/2020 03:41:40 FcMain change from 11 to 12
+15/09/2020 03:41:40 NS 1
+15/09/2020 03:41:40 OK
+15/09/2020 03:41:40 +UUPSDA: 0,"10.48.173.238"
+15/09/2020 03:41:40 AT+UPSND=0,8
+15/09/2020 03:41:40 set font Noto Sans
+15/09/2020 03:41:40 checklist ready
+15/09/2020 03:41:40 CKL state change 2
+15/09/2020 03:41:40 checklist file detectedx
+15/09/2020 03:41:40 cklist state not idle 2
+15/09/2020 03:41:40 checklist ready 3 (dvr 0)
+15/09/2020 03:41:40 FcMain change from 12 to 13
+15/09/2020 03:41:40 +UPSND: 0,8,1
+15/09/2020 03:41:40 psd line 1
+15/09/2020 03:41:40 pad active #1 (YES)
+15/09/2020 03:41:40 OK
+15/09/2020 03:41:40 NS 1
+15/09/2020 03:41:40 AT+UPSND=0,0
+15/09/2020 03:41:40 CKL state change 3
+15/09/2020 03:41:40 +UPSND: 0,0,"10.48.173.238"
+15/09/2020 03:41:40 OK
+15/09/2020 03:41:40 AT+CREG?
+15/09/2020 03:41:40 +CREG: 0,5
+15/09/2020 03:41:40 OK
+15/09/2020 03:41:40 net state change 2 -> 3
+15/09/2020 03:41:40 AT+CGREG=1
+15/09/2020 03:41:40 CKL state change 12
+15/09/2020 03:41:40 OK
+15/09/2020 03:41:40 AT+CREG=2
+15/09/2020 03:41:40 OK
+15/09/2020 03:41:40 AT+CGREG?
+15/09/2020 03:41:40 NS 1
+15/09/2020 03:41:40 +CGREG: 1,4
+15/09/2020 03:41:40 OK
+15/09/2020 03:41:40 AT+COPS?
+15/09/2020 03:41:40 +COPS: 0,0,"Optus AU",7
+15/09/2020 03:41:40 MDM: operator name Optus AU
+15/09/2020 03:41:40 OK
+15/09/2020 03:41:40 NS 1
+15/09/2020 03:41:40 TTFF 9
+15/09/2020 03:41:40 GPS Fix obtained*****************
+15/09/2020 03:41:40 NS 1
+15/09/2020 03:41:41 Duplicates Removed 4
+15/09/2020 03:41:41 geofence state change 2 -> 3
+15/09/2020 03:41:41 ZoneID Change3 0 -> 0 (speed 0 -> 20)
+15/09/2020 03:41:41 fcMain::slotZoneSpeed: 20, -1, 1
+15/09/2020 03:41:41 NS 1
+15/09/2020 03:41:41 Duplicates Removed 3
+15/09/2020 03:41:41 AT+CSQ
+15/09/2020 03:41:41 +CSQ: 31,5
+15/09/2020 03:41:41 MODEM CSQ 31
+15/09/2020 03:41:41 OK
+15/09/2020 03:41:41 net state change 3 -> 4
+15/09/2020 03:41:41 NS 2
+15/09/2020 03:41:41 comms st 2 -> 3
+15/09/2020 03:41:41 comms st 3 -> 4
+15/09/2020 03:41:41 connect 1 devices.earthtrack.test.rct.net.au, 2004
+15/09/2020 03:41:41 NET: connect
+15/09/2020 03:41:41 AT+UPSND=0,8
+15/09/2020 03:41:41 +UPSND: 0,8,1
+15/09/2020 03:41:41 psd line 1
+15/09/2020 03:41:41 pad active #1 (YES)
+15/09/2020 03:41:41 OK
+15/09/2020 03:41:41 AT+USOCR=6
+15/09/2020 03:41:41 +USOCR: 0
+15/09/2020 03:41:41 socket #0
+15/09/2020 03:41:41 OK
+15/09/2020 03:41:41 AT+USOCO=0,"devices.earthtrack.test.rct.net.au",2004
+15/09/2020 03:41:41 FcMain - GNSS SAT state change 1->2
+15/09/2020 03:41:41 MessageDialog GNSS 2
+15/09/2020 03:41:41 Splash GNSS 2
+15/09/2020 03:41:42 CKL state change 5
+15/09/2020 03:41:42 Qnr=488
+15/09/2020 03:41:42 set font Noto Sans
+15/09/2020 03:41:42 Are your tyres inflated correctly 
+15/09/2020 03:41:42 linewidth=2, pixelwidth=492, ave=17
+15/09/2020 03:41:42 CKL state change 12
+15/09/2020 03:41:43 OK
+15/09/2020 03:41:43 INTB: 1
+15/09/2020 03:41:43 gpio interrupts (P1-2) FE
+15/09/2020 03:41:43 KEYPRESS 3
+15/09/2020 03:41:43 UiQ 2
+15/09/2020 03:41:43 CKL state change 6
+15/09/2020 03:41:43 INTB: 1
+15/09/2020 03:41:43 gpio interrupts (P1-2) FF
+15/09/2020 03:41:43 CKL state change 12
+15/09/2020 03:41:43 INTB: 1
+15/09/2020 03:41:43 gpio interrupts (P1-2) FE
+15/09/2020 03:41:43 INTB: 1
+15/09/2020 03:41:43 gpio interrupts (P1-2) FF
+15/09/2020 03:41:43 +UUSORD: 0,16
+15/09/2020 03:41:44 AT+USODL=0
+15/09/2020 03:41:44 CONNECT
+15/09/2020 03:41:44 Directlink CONNECT
+15/09/2020 03:41:44 modem state change 2 -> 3
+15/09/2020 03:41:44 net connected
+15/09/2020 03:41:44 chat connect
+15/09/2020 03:41:44 <220 earthtrack>
+15/09/2020 03:41:44 UNIT 10247
+15/09/2020 03:41:44 ZoneID Change2 -1 -> 0 (speed 20 -> 60)
+15/09/2020 03:41:44 fcMain::slotZoneSpeed: 60, 0, 1
+15/09/2020 03:41:44 INTB: 1
+15/09/2020 03:41:44 gpio interrupts (P1-2) FE
+15/09/2020 03:41:44 KEYPRESS 5
+15/09/2020 03:41:44 DecCL 1
+15/09/2020 03:41:44 DecCL 3
+15/09/2020 03:41:44 CKL state change 11
+15/09/2020 03:41:44 INTB: 1
+15/09/2020 03:41:44 gpio interrupts (P1-2) FE
+15/09/2020 03:41:44 CKL state change 13
+15/09/2020 03:41:44 adjusting rtc 2- event
+15/09/2020 03:41:44 CKL state change 12
+15/09/2020 03:41:44 INTB: 1
+15/09/2020 03:41:44 gpio interrupts (P1-2) FF
+15/09/2020 03:41:44 <333 CHAL 3761EF92>
+15/09/2020 03:41:44 RESP 5CEFFB29
+15/09/2020 03:41:45 <230 Auth OK>
+15/09/2020 03:41:46 last connect time written 1600141305
+15/09/2020 03:41:46 TIME
+15/09/2020 03:41:46 last connect time written 1600141306
+15/09/2020 03:41:46 <211 TIME 1600141313>
+15/09/2020 03:41:46 adjusting rtc - comms TIME
+15/09/2020 03:41:46 last connect time written 1600141306
+15/09/2020 03:41:46 EVCOUNT 5
+15/09/2020 03:41:47 CKL state change 16
+15/09/2020 03:41:47 FcMain change from 13 to 17
+15/09/2020 03:41:47 CKL state change 17
+15/09/2020 03:41:47 Run state: role 5
+15/09/2020 03:41:47 START Enabled - callback
+15/09/2020 03:41:47 StartOutputStateChange 1
+15/09/2020 03:41:47 wrote 1 to /sys/class/gpio/gpio60/value (O/P 1)
+15/09/2020 03:41:47 wrote 1 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:41:47 wrote 0 to /sys/class/gpio/gpio47/value (O/P 14)
+15/09/2020 03:41:47 START Enabled
+15/09/2020 03:41:47 FcMain change from 17 to 18
+15/09/2020 03:41:47 Cklist halt
+15/09/2020 03:41:47 slotStartReading (0)**********
+15/09/2020 03:41:47 stop HID reader
+15/09/2020 03:41:47 splash enabled?:1
+15/09/2020 03:41:47 brand 1 is Brand-Earthtrack, logo is /store/Brand-Earthtrack.png
+15/09/2020 03:41:47 brand 2 is Brand-Earthtrack, theme logo is /store/Brand-Earthtrack_light.png
+15/09/2020 03:41:47 brand 3 is :/Brands/brand/Brand-Earthtrack.png
+15/09/2020 03:41:47 messagedialog result 3
+15/09/2020 03:41:47 slotMessageSignonResult 3
+15/09/2020 03:41:47 INTB: 0
+15/09/2020 03:41:47 gpio interrupts (P1-2) FB
+15/09/2020 03:41:47 <252 Event OK>
+15/09/2020 03:41:47 TODO
+15/09/2020 03:41:47 card read
+15/09/2020 03:41:47 Uart rxfifo has 14 bytes waiting
+15/09/2020 03:41:47 vli 000a 10
+15/09/2020 03:41:47 vli matches
+15/09/2020 03:41:47 208 1664 0
+15/09/2020 03:41:47 CardReader version 0
+15/09/2020 03:41:47 ICONS ED
+15/09/2020 03:41:47 Bgnd set msg-day font Noto Sans
+15/09/2020 03:41:47 Tuesday Tuesday Tuesday Tuesday Tuesday Tuesday
+15/09/2020 03:41:47 linewidth=2, pixelwidth=778, ave=17
+15/09/2020 03:41:47 gps version is ROM CORE 3.01 (107888)
+15/09/2020 03:41:47 main state running
+15/09/2020 03:41:47 INTB: 1
+15/09/2020 03:41:47 gpio interrupts (P1-2) FF
+15/09/2020 03:41:47 splash font set Noto Sans
+15/09/2020 03:41:47 daymsg [Tuesday Tuesday
+Tuesday Tuesday
+Tuesday Tuesday]
+15/09/2020 03:41:48 pointsize is 18, labelsize is 480
+15/09/2020 03:41:48 updated battery state to 2

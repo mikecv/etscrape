@@ -355,6 +355,8 @@ class EventCanvas(FigureCanvasQTAgg):
                                 tListPassenger.append(tripStartTime)
                                 eListPassenger.append(0)
                                 traceStarted = True
+                                finalState = 0
+                                finalStatePassenger = 0
                             # Found a matching event for this trace.
                             # Add start of event to trace. Event is at the end of events for events with a duration.
                             if ev.seatOwner == "D":
@@ -367,18 +369,16 @@ class EventCanvas(FigureCanvasQTAgg):
                                 eList.append(1)
                                 tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
                                 eList.append(0)
-                                finalState = 0
                             else:
                                 tListPassenger.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
                                 eListPassenger.append(0)
                                 tListPassenger.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
-                                eListPassenger.append(0.75)
+                                eListPassenger.append(0.5)
                                 # Add end of event to trace.
                                 tListPassenger.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
-                                eListPassenger.append(0.75)
+                                eListPassenger.append(0.5)
                                 tListPassenger.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
                                 eListPassenger.append(0)
-                                finalStatePassenger = 0
                         else:
                             # Event is not special, i.e. not INPUT, IMPACT, or ZONECHANGE event.
                             # Check if we need to start the trace.
@@ -402,11 +402,14 @@ class EventCanvas(FigureCanvasQTAgg):
 
                 # End trace with final state value to end of plot (if event trace was started that is).
                 if traceStarted:
-                    tList.append(tripEndTime)
-                    eList.append(finalState)
                     if t["Event"] == "UNBUCKLED":
+                        tList.append(tripEndTime)
+                        eList.append(finalState)
                         tListPassenger.append(tripEndTime)
                         eListPassenger.append(finalStatePassenger)
+                    else:
+                        tList.append(tripEndTime)
+                        eList.append(finalState)
     
             else:
                 # Special vehicle event.

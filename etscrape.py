@@ -62,13 +62,14 @@ from eventsChart import *
 #                       Added show/hide REPORT events menu option functionality.
 # 0.12  MDC 20/10/2020  Cosmetic improvements.
 #                       Added support for event strings not including battery voltage.
+#                       Added extra trace in UNBUCKLED event chart (for Passenger).
 # *******************************************
 
 # *******************************************
 # TODO List
 #
 # Make changes of viewing inputs just changing visibility and not regenerating all lines.
-# Add Xtra event colours in preferences.
+# Fix bug in preferences when selecting colour and selecting cancel on colour chart - sets to black.
 # *******************************************
 
 # Program version.
@@ -1609,6 +1610,10 @@ class PreferencesDialog(QDialog):
         self.eventLineColVal.clicked.connect(lambda: self.getColour(self.eventLineColVal))
         self.eventFillColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.EvPlot["EventFillColour"]))
         self.eventFillColVal.clicked.connect(lambda: self.getColour(self.eventFillColVal))
+        self.eventLineXtraColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.EvPlot["EventTraceColourXtra"]))
+        self.eventLineXtraColVal.clicked.connect(lambda: self.getColour(self.eventLineXtraColVal))
+        self.eventFillXtraColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.EvPlot["EventFillColourXtra"]))
+        self.eventFillXtraColVal.clicked.connect(lambda: self.getColour(self.eventFillXtraColVal))
         self.tripLineColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.EvPlot["TripTraceColour"]))
         self.tripLineColVal.clicked.connect(lambda: self.getColour(self.tripLineColVal))
         self.tripFillColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.EvPlot["TripFillColour"]))
@@ -1793,7 +1798,7 @@ class PreferencesDialog(QDialog):
             logger.debug("Change to debug event text colour: {0:s}".format(self.config.TripData["DebugEventColour"]))
             prefChanged = True
             rerender = True
-        # Report event text colour.
+        # Report event text colour.Xtra
         col = self.reportEventColVal.palette().button().color().name()
         if col != self.config.TripData["ReportEventColour"]:
             # Set the configuration value.
@@ -1936,6 +1941,20 @@ class PreferencesDialog(QDialog):
             # Set the configuration value.
             self.config.EvPlot["EventFillColour"] = col
             logger.debug("Change to event plot fill colour: {0:s}".format(self.config.EvPlot["EventFillColour"]))
+            prefChanged = True
+        # Event trace line colour (Extra).
+        col = self.eventLineXtraColVal.palette().button().color().name()
+        if col != self.config.EvPlot["EventTraceColourXtra"]:
+            # Set the configuration value.
+            self.config.EvPlot["EventTraceColourXtra"] = col
+            logger.debug("Change to event plot line colour (Extra): {0:s}".format(self.config.EvPlot["EventTraceColourXtra"]))
+            prefChanged = True
+        # Event trace fill colour (Extra).
+        col = self.eventFillXtraColVal.palette().button().color().name()
+        if col != self.config.EvPlot["EventFillColourXtra"]:
+            # Set the configuration value.
+            self.config.EvPlot["EventFillColourXtra"] = col
+            logger.debug("Change to event plot fill colour (Extra): {0:s}".format(self.config.EvPlot["EventFillColourXtra"]))
             prefChanged = True
         # Trip trace line colour.
         col = self.tripLineColVal.palette().button().color().name()
