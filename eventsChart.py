@@ -210,6 +210,8 @@ class EventCanvas(FigureCanvasQTAgg):
             t = self.cfg.EventTraces[idx]
             tList = []
             eList = []
+            tListPassenger = []
+            eListPassenger = []
 
             # Initilise list of special markers for zero duration INPUT events.
             # Need to keep track of points where zero duration INPUT events occur.
@@ -341,6 +343,42 @@ class EventCanvas(FigureCanvasQTAgg):
                             eList.append(0)
                             markerIdx += 1
                             finalState = 0
+                        # Event is an UNBUCKLED event.
+                        # Show extra trace for passenger (together with operator).
+                        elif ev.event == "UNBUCKLED":
+                            # Check if we need to start the traces.
+                            if traceStarted == False:
+                                # Start traces with start of trip.
+                                # Create an additional trace for the passenger, the original one can be for the Operator (Driver).
+                                tList.append(tripStartTime)
+                                eList.append(0)
+                                tListPassenger.append(tripStartTime)
+                                eListPassenger.append(0)
+                                traceStarted = True
+                            # Found a matching event for this trace.
+                            # Add start of event to trace. Event is at the end of events for events with a duration.
+                            if ev.seatOwner == "D":
+                                tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
+                                eList.append(0)
+                                tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
+                                eList.append(1)
+                                # Add end of event to trace.
+                                tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                                eList.append(1)
+                                tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                                eList.append(0)
+                                finalState = 0
+                            else:
+                                tListPassenger.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
+                                eListPassenger.append(0)
+                                tListPassenger.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
+                                eListPassenger.append(0.75)
+                                # Add end of event to trace.
+                                tListPassenger.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                                eListPassenger.append(0.75)
+                                tListPassenger.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                                eListPassenger.append(0)
+                                finalStatePassenger = 0
                         else:
                             # Event is not special, i.e. not INPUT, IMPACT, or ZONECHANGE event.
                             # Check if we need to start the trace.
@@ -366,6 +404,10 @@ class EventCanvas(FigureCanvasQTAgg):
                 if traceStarted:
                     tList.append(tripEndTime)
                     eList.append(finalState)
+                    if t["Event"] == "UNBUCKLED":
+                        tListPassenger.append(tripEndTime)
+                        eListPassenger.append(finalStatePassenger)
+    
             else:
                 # Special vehicle event.
                 if t["Event"] == "Vehicle Speed":
@@ -412,7 +454,16 @@ class EventCanvas(FigureCanvasQTAgg):
             self.traces[self.numEvCharts - idx][0].set_markevery(nullMarkers)
 
             # Set up shading etc for plots, special for vehicle speed plots.
-            if t["Event"] == "Vehicle Speed":
+            # Also an extra trace for unbuckled events.
+            if t["Event"] == "UNBUCKLED":
+                lineP, = self.traces[self.numEvCharts - idx][1].plot_date([], [], color=self.cfg.EvPlot["EventTraceColourXtra"], linestyle='solid', marker=None, linewidth=1)
+                lineP.set_xdata(tListPassenger.copy())
+                lineP.set_ydata(eListPassenger.copy())
+                # Fill in the event bars for primary trace (Operator).
+                self.traces[self.numEvCharts - idx][1].fill_between(self.traces[self.numEvCharts - idx][0].get_xdata(), self.traces[self.numEvCharts - idx][0].get_ydata(), 0, color=self.cfg.EvPlot["EventFillColour"], alpha=0.35)
+                # Fill in the event bars for secondary trace (Passenger).
+                self.traces[self.numEvCharts - idx][1].fill_between(lineP.get_xdata(), lineP.get_ydata(), 0, color=self.cfg.EvPlot["EventFillColourXtra"], alpha=0.35)
+            elif t["Event"] == "Vehicle Speed":
                 # Work out y-axis labels (5) for speed range.
                 yinc = ceil(maxSpeed / 4.0)
                 ymax = yinc * 5
@@ -453,6 +504,10 @@ class EventCanvas(FigureCanvasQTAgg):
             elif t["Event"] == "ZONECHANGE":
                 self.traces[self.numEvCharts - idx][1].set_yticks([0.5, 1.0])
                 self.traces[self.numEvCharts - idx][1].set_yticklabels(["Slow", "Fast"], color='cornflowerblue')
+                self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
+            elif t["Event"] == "UNBUCKLED":
+                self.traces[self.numEvCharts - idx][1].set_yticks([0.5, 1.0])
+                self.traces[self.numEvCharts - idx][1].set_yticklabels(["(P)", "(O)"], color='cornflowerblue')
                 self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
 
         # Draw plot.

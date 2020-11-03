@@ -10,7 +10,7 @@ class Config():
     def __init__(self):
 
         # Version of configuration.
-        self.ConfigVersion = 10
+        self.ConfigVersion = 11
 
         # Logger configuration values
         self.DebugLevel = 20
@@ -34,7 +34,7 @@ class Config():
             {"Event" : "OILPRESSURE", "Title" : "Engine Oil Pressure Low"},
             {"Event" : "OVERLOAD", "Title" : "Overload"},
             {"Event" : "OVERSPEED", "Title" : "Vehicle Overspeed"},
-            {"Event" : "UNBUCKLED", "Title" : "Operator Unbuckled"},
+            {"Event" : "UNBUCKLED", "Title" : "Unbuckled"},
             {"Event" : "ZONECHANGE", "Title" : "Zone Change"},
             {"Event" : "ZONEOVERSPEED", "Title" : "Zone Overspeed"}
             ]
@@ -87,7 +87,9 @@ class Config():
             "TripTraceColour": "#000000",
             "EventFillColour": "#0000ff",
             "TripFillColour": "#ffff00",
-            "MaxTitleLineLength": 12
+            "MaxTitleLineLength": 12,
+            "EventTraceColourXtra": "#DF7401",
+            "EventFillColourXtra": "#DF7401"
         }
 
         # Input channel definitions.
@@ -362,6 +364,20 @@ class Config():
                     self.EvPlot["MaxTitleLineLength"] = config["EvPlot"]["MaxTitleLineLength"]
                 except Exception:
                     self.EvPlot["MaxTitleLineLength"] = paramSaved
+                    updateConfig = True
+                # Try setting EventTraceColourXtra from user configuration (json).
+                try:
+                    paramSaved = self.EvPlot["EventTraceColourXtra"]
+                    self.EvPlot["EventTraceColourXtra"] = config["EvPlot"]["EventTraceColourXtra"]
+                except Exception:
+                    self.EvPlot["EventTraceColourXtra"] = paramSaved
+                    updateConfig = True
+                # Try setting EventFillColourXtra from user configuration (json).
+                try:
+                    paramSaved = self.EvPlot["EventFillColourXtra"]
+                    self.EvPlot["EventFillColourXtra"] = config["EvPlot"]["EventFillColourXtra"]
+                except Exception:
+                    self.EvPlot["EventFillColourXtra"] = paramSaved
                     updateConfig = True
                 # *********************************************************
                 # Try setting Channels from user configuration (json).

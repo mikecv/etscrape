@@ -67,6 +67,8 @@ from eventsChart import *
 # *******************************************
 # TODO List
 #
+# Make changes of viewing inputs just changing visibility and not regenerating all lines.
+# Add Xtra event colours in preferences.
 # *******************************************
 
 # Program version.
@@ -2277,6 +2279,7 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.12</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Changed event traces for UNBUCKLED event to show separate lines for Operator and Passenger events.</li>" \
             "<li>Fixed bug parsing event strings that don't end in battery voltage.</li>" \
             "<li>Added card ID display in HEX.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.11</b></h2>")

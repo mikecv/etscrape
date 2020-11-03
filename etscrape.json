@@ -1,5 +1,5 @@
 {
-    "ConfigVersion": 10,
+    "ConfigVersion": 11,
     "DebugLevel": 20,
     "LogFileSize": 100000,
     "LogBackups": 3,
@@ -42,7 +42,9 @@
         "TripTraceColour": "#000000",
         "EventFillColour": "#0000ff",
         "TripFillColour": "#ffff00",
-        "MaxTitleLineLength": 12
+        "MaxTitleLineLength": 12,
+        "EventTraceColourXtra": "#DF7401",
+        "EventFillColourXtra": "#DF7401"
     },
     "Channels": [
         {
@@ -92,12 +94,12 @@
             "Title": "Vehicle Speed"
         },
         {
-            "Event": "ENGINEOVERSPEED",
-            "Title": "Engine Overspeed"
+            "Event": "Battery Voltage",
+            "Title": "Battery Voltage"
         },
         {
-            "Event": "OILPRESSURE",
-            "Title": "Engine Oil Pressure Low"
+            "Event": "UNBUCKLED",
+            "Title": "Unbuckled"
         },
         {
             "Event": "INPUT",
