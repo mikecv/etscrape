@@ -63,6 +63,7 @@ from eventsChart import *
 # 0.12  MDC 20/10/2020  Cosmetic improvements.
 #                       Added support for event strings not including battery voltage.
 #                       Added extra trace in UNBUCKLED event chart (for Passenger).
+#                       Added support for Smartrack UNBUCKLED event.
 # *******************************************
 
 # *******************************************
@@ -70,6 +71,7 @@ from eventsChart import *
 #
 # Make changes of viewing inputs just changing visibility and not regenerating all lines.
 # Fix bug in preferences when selecting colour and selecting cancel on colour chart - sets to black.
+# Check if REPORT and XSIDLE events have current speed, could be added to speed plot.
 # *******************************************
 
 # Program version.
@@ -2299,6 +2301,7 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.12</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Changed event traces for UNBUCKLED event to show separate lines for Operator and Passenger events.</li>" \
+            "<li>Added support for Smartrack UNBUCKLED event; forced Seat Owner to D and zero duration.</li>" \
             "<li>Fixed bug parsing event strings that don't end in battery voltage.</li>" \
             "<li>Added card ID display in HEX.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.11</b></h2>")

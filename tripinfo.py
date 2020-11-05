@@ -419,7 +419,10 @@ class Trip():
                 # UNBUCKLED event
                 # =============================================================================
                 elif event.event == "UNBUCKLED":
+                    # Need to cater for Smartrack UNBUCKLED events, which have the same name but different format.
                     specPattern = re.compile(r'([0-9]+) ([0-9]+) ([DP])(.*)$')
+                    specPatternST = re.compile(r'([0-9]+) (.*)$')
+
                     sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.signOnId = int(sp.group(1))
@@ -450,6 +453,36 @@ class Trip():
 
                         # Add event to list of events.
                         self.events.append(event)
+                    else:
+                        sp = re.search(specPatternST, eventSpecifics)
+                        if sp:
+                            event.signOnId = int(sp.group(1))
+
+                            # Read battery voltage from event header.
+                            # But only if still collecting extra data, i.e. trip has not ended.
+                            if not self.stopExtraData:
+                                # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                                # Note that Smartrack has floats instead of integers for battery voltage.
+                                voltPattern = re.compile(r'.*v:([.0-9]+)$')
+                                vp = re.search(voltPattern, sp.group(2))
+                                if vp:
+                                    event.battery = float(vp.group(1))
+                                    # And add to battery level list.
+                                    self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                                    # Check for negative battery voltage condition.
+                                    if event.battery < 0:
+                                        event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+
+                            # Smartrack unbuckled event so assume Operator (Driver) is the owner.
+                            event.seatOwner = "D"
+
+                            # Increment event counters.
+                            self.numUnbuckled_O += 1
+
+                            # Add event to list of events.
+                            self.events.append(event)
+
                 # =============================================================================
                 # ZONECHANGE event
                 # =============================================================================
