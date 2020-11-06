@@ -64,6 +64,7 @@ from eventsChart import *
 #                       Added support for event strings not including battery voltage.
 #                       Added extra trace in UNBUCKLED event chart (for Passenger).
 #                       Added support for Smartrack UNBUCKLED event.
+#                       Fixed bug in parsing SIGNON event introduced by developer changes.
 # *******************************************
 
 # *******************************************
@@ -2303,6 +2304,7 @@ class ChangeLogDialog(QDialog):
             "<li>Changed event traces for UNBUCKLED event to show separate lines for Operator and Passenger events.</li>" \
             "<li>Added support for Smartrack UNBUCKLED event; forced Seat Owner to D and zero duration.</li>" \
             "<li>Fixed bug parsing event strings that don't end in battery voltage.</li>" \
+            "<li>Fixed bug parsing SIGNON events as RSSI field just changed to include negative sign.</li>" \
             "<li>Added card ID display in HEX.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.11</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
