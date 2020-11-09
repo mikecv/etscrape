@@ -220,6 +220,9 @@ class Trip():
                 event.keyboard = sp.group(5)
                 event.cardReader = sp.group(6)
 
+                # Diagnostics to indicate sign-on ID. Useful for reference to log file.
+                self.logger.debug("Trip signon ID {0:d}".format(event.signOnId))
+
                 # Check for Bypass condition; indicated by driver ID of -12.
                 if event.driverId == "-12":
                     event.alertText = appendAlertText(event.alertText, "Bypass detected.")
@@ -253,7 +256,7 @@ class Trip():
             # **************************************************************
             # Look for specific events other than the SIGNON event.
             # **************************************************************
-            patternData = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,2}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT ([0-9]+) ([0-9]+) (.+)/(.+)/(.+)/([0-9]+)/([0-9]+) ([ _A-Z]+) (.+)$', re.MULTILINE)
+            patternData = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,2}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT ([0-9]+) ([0-9]+) (.+)/(.+)/(.+)/([-0-9]+)/([0-9]+) ([_a-zA-Z]+) (.+)$', re.MULTILINE)
             for su in re.finditer(patternData, self.logBuf):
 
                 # Found trip event.

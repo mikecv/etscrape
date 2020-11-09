@@ -156,9 +156,15 @@ class EventCanvas(FigureCanvasQTAgg):
                     break
             endEvent = idx
 
-        # Look for last event in the trip (so far) and make this the end of the trip.
+        # Look for last event in the trip (so far) and make this is the end of the trip.
         tripEndTime = timeTZ(self.data.tripLog[No-1].events[endEvent].serverTime, self.cfg.TimeUTC)
         tripDuration = self.data.tripLog[No-1].events[endEvent].serverTime - self.data.tripLog[No-1].tripStart
+
+        # Check for bad trips, i.e. were trip duration is negative.
+        # If encountered just set duration to 0.
+        if self.data.tripLog[No-1].events[endEvent].serverTime < self.data.tripLog[No-1].tripStart:
+            self.logger.warning("Trip duration negative. Start time: {0:d}, Duration:{1}".format(self.data.tripLog[No-1].tripStart, self.data.tripLog[No-1].events[endEvent].serverTime))
+            tripDuration = 0
 
         # Create start/end of chart. Make a bit wider than the trip.
         # Add 10% or some arbitrary time, whichever is less, to the trip.
