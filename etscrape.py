@@ -65,6 +65,8 @@ from eventsChart import *
 #                       Added extra trace in UNBUCKLED event chart (for Passenger).
 #                       Added support for Smartrack UNBUCKLED event.
 #                       Fixed bug in parsing SIGNON event introduced by developer changes.
+#                       Fixed bug in dealing with trips of negative duration.
+#                       Changed TRIPSUMMARY and TRIPLOAD function to both appear as in trip.
 # *******************************************
 
 # *******************************************
@@ -72,7 +74,6 @@ from eventsChart import *
 #
 # Make changes of viewing inputs just changing visibility and not regenerating all lines.
 # Fix bug in preferences when selecting colour and selecting cancel on colour chart - sets to black.
-# Check if REPORT and XSIDLE events have current speed, could be added to speed plot.
 # *******************************************
 
 # Program version.
@@ -2304,7 +2305,10 @@ class ChangeLogDialog(QDialog):
             "<li>Changed event traces for UNBUCKLED event to show separate lines for Operator and Passenger events.</li>" \
             "<li>Added support for Smartrack UNBUCKLED event; forced Seat Owner to D and zero duration.</li>" \
             "<li>Fixed bug parsing event strings that don't end in battery voltage.</li>" \
+            "<li>Changed so that TRIPSUMMARY and TRIPLOAD can both and together be associated with a trip, and treated as IN trip, i.e. not out of trip events.</li>" \
             "<li>Fixed bug parsing SIGNON events as RSSI field just changed to include negative sign.</li>" \
+            "<li>Fixed bug in dealing with trips with negative duration.</li>" \
+            "<li>Added TRIPSUMMARY to event filter list as not necessarily present for ST trips.</li>" \
             "<li>Added card ID display in HEX.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.11</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\

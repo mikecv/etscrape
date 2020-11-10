@@ -148,6 +148,7 @@ class Trip():
         self.tripStart = 0
         self.tripEnd = 0
         self.signOnId = 0
+        self.tripTrip = False
 
         # Trip in alert.
         # Used by trip data display.
@@ -252,6 +253,9 @@ class Trip():
 
                 # Add event to list of events.
                 self.events.append(event)
+
+                # Initialise trip not ended, in TRIP event not reached.
+                self.tripTrip = False
 
             # **************************************************************
             # Look for specific events other than the SIGNON event.
@@ -1027,60 +1031,14 @@ class Trip():
                         # Add event to list of events.
                         self.events.append(event)
 
-                        # *********************************************************************************************************************************************
-                        # Look for trip summary type event. These occurs after the TRIP event but are only generated if events occurred during the trip.
-                        # Doing this event separately as it a different format to the other event messages.
-                        # *********************************************************************************************************************************************
-                        patternSummary = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,22}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT ([0-9]+) ([0-9]+) .+ (TRIP[A-Z]+) (.+)$', re.MULTILINE)
-                        su = re.search(patternSummary, self.logBuf)
-                        if su:
-                            # Initialised with event type and time as in all events.
-                            event = Event(su.group(5), int(su.group(4)))
-                            self.logger.debug("Detected trip summary {0:s} at {1:s}".format(su.group(5), datetime.fromtimestamp(int(su.group(4))).strftime('%d/%m/%Y %H:%M:%S')))
-
-                            # Check for event time in the past.
-                            if int(su.group(4)) < self.lastTime:
-                                event.alertText = appendAlertText(event.alertText, "Event time reversal.")
-                            self.lastTime = int(su.group(4))
-
-                            # Break out some of the event data explicitly.
-                            eventSpecifics = su.group(6)
-
-                            if su.group(5) == "TRIPSUMMARY":
-                                specPattern = re.compile(r'([0-9]+)')
-                                sp = re.search(specPattern, eventSpecifics)
-                                if sp:
-                                    event.signOnId = int(sp.group(1))
-
-                                    # Increment event counters.
-                                    self.numTripEvents += 1
-
-                                    # Add event to list of events.
-                                    self.events.append(event)
-                            elif su.group(5) == "TRIPLOAD":
-                                specPattern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+)')
-                                sp = re.search(specPattern, eventSpecifics)
-                                if sp:
-                                    event.signOnId = int(sp.group(1))
-                                    event.travelLoaded = int(sp.group(2))
-                                    event.travelUnloaded = int(sp.group(3))
-                                    event.idleLoaded = int(sp.group(4))
-                                    event.idleUnloaded = int(sp.group(5))
-                                    event.liftCount = int(sp.group(6))
-                                    event.cumWeight = int(sp.group(7))
-
-                                    # Increment event counters.
-                                    self.numTripEvents += 1
-
-                                    # Add event to list of events.
-                                    self.events.append(event)
-
+                        # Set TRIP event reached flag. Used so that we can look for TRIPSUMMARY and/or TRIPLOAD events.
+                        self.tripTrip = True
                 # *********************************************************************************************************************************************
                 # Other events
                 # Only event names checked, parameter details ignored.
                 # *********************************************************************************************************************************************
                 else:
-                    # Don't include SIGNON, TRIP, and TRIPSUMMARY as they are detected separately.
+                    # Don't include SIGNON, TRIP, TRIPSUMMARY, and TRIPLOAD as they are detected separately.
                     if event.event not in ["SIGNON", "TRIP", "TRIPSUMMARY", "TRIPLOAD"]:
 
                         # Indicate that event is OTHER event, i.e. not supported (yet).
@@ -1091,6 +1049,47 @@ class Trip():
 
                         # Add event to list of events.
                         self.events.append(event)
+                # *********************************************************************************************************************************************
+                # Look for trip summary type events. These occurs after the TRIP event but are only generated if events occurred during the trip.
+                # Doing these events separately as they are different format to the OTHER event messages.
+                # *********************************************************************************************************************************************
+                if self.tripTrip == True:
+                    if event.event == "TRIPSUMMARY":
+                        specPattern = re.compile(r'([0-9]+)')
+                        sp = re.search(specPattern, eventSpecifics)
+                        if sp:
+                            event.signOnId = int(sp.group(1))
+
+                            # Increment event counters.
+                            self.numTripEvents += 1
+
+                            # Normally this event would be tagged "out of trip" as occurred after TRIP event.
+                            # Treat it specially as part of the trip, really.
+                            event.isOutOfTrip = False
+
+                            # Add event to list of events.
+                            self.events.append(event)
+                    elif event.event == "TRIPLOAD":
+                        specPattern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+)')
+                        sp = re.search(specPattern, eventSpecifics)
+                        if sp:
+                            event.signOnId = int(sp.group(1))
+                            event.travelLoaded = int(sp.group(2))
+                            event.travelUnloaded = int(sp.group(3))
+                            event.idleLoaded = int(sp.group(4))
+                            event.idleUnloaded = int(sp.group(5))
+                            event.liftCount = int(sp.group(6))
+                            event.cumWeight = int(sp.group(7))
+
+                            # Increment event counters.
+                            self.numTripEvents += 1
+
+                            # Normally this event would be tagged "out of trip" as occurred after TRIP event.
+                            # Treat it specially as part of the trip, really.
+                            event.isOutOfTrip = False
+
+                            # Add event to list of events.
+                            self.events.append(event)
 
     # *******************************************
     # Check if speed time already in speed log.

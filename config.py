@@ -42,7 +42,7 @@ class Config():
         # Supported Events (for event filtering)
         self.filterEvents = ["CHECKLIST", "CLFAIL", "CRITICALOUTPUTSET", "DEBUG", "Time1H", "Time1H INV", "Time1H (BAD)",
             "ENGINEOVERSPEED", "ENGINETEMP", "IMPACT", "LOWCOOLANT", "OFFSEAT", "OILPRESSURE",
-            "OVERLOAD", "OVERSPEED", "POWER", "TRIPLOAD", "UNBUCKLED", "XSIDLE", "ZONECHANGE", "ZONEOVERSPEED"]
+            "OVERLOAD", "OVERSPEED", "POWER", "TRIPLOAD", "TRIPSUMMARY", "UNBUCKLED", "XSIDLE", "ZONECHANGE", "ZONEOVERSPEED"]
 
         # Trip related data.
         self.TripData = {
