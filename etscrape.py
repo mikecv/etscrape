@@ -67,13 +67,12 @@ from eventsChart import *
 #                       Fixed bug in parsing SIGNON event introduced by developer changes.
 #                       Fixed bug in dealing with trips of negative duration.
 #                       Changed TRIPSUMMARY and TRIPLOAD function to both appear as in trip.
+#                       Fixed preferences when selecting colours (and cancelling out of dialog).
 # *******************************************
 
 # *******************************************
 # TODO List
 #
-# Make changes of viewing inputs just changing visibility and not regenerating all lines.
-# Fix bug in preferences when selecting colour and selecting cancel on colour chart - sets to black.
 # *******************************************
 
 # Program version.
@@ -1648,8 +1647,11 @@ class PreferencesDialog(QDialog):
     # Set the QPushButton colour to the colour selected.
     # *******************************************
     def getColour(self, colVar):
-        colName = QColorDialog.getColor().name()
-        colVar.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(colName))
+        colCode = QColorDialog.getColor()
+        # Check if colour selected and not cancelled out of colour dialog.
+        if colCode.isValid():
+            colName = colCode.name()
+            colVar.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(colName))
 
     # *******************************************
     # Displays a "Preferences" dialog box.
@@ -2307,6 +2309,7 @@ class ChangeLogDialog(QDialog):
             "<li>Fixed bug parsing event strings that don't end in battery voltage.</li>" \
             "<li>Changed so that TRIPSUMMARY and TRIPLOAD can both and together be associated with a trip, and treated as IN trip, i.e. not out of trip events.</li>" \
             "<li>Fixed bug parsing SIGNON events as RSSI field just changed to include negative sign.</li>" \
+            "<li>Fixed preferences when selecting colours (and cancelling out of dialog).</li>" \
             "<li>Fixed bug in dealing with trips with negative duration.</li>" \
             "<li>Added TRIPSUMMARY to event filter list as not necessarily present for ST trips.</li>" \
             "<li>Added card ID display in HEX.</li></ul><br>")
