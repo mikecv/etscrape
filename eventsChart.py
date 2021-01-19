@@ -28,7 +28,6 @@ class EventCanvas(FigureCanvasQTAgg):
 
         # Set fig date/time formating for x-axis.
         self.fig.autofmt_xdate()
-        self.xfmt = dates.DateFormatter('%H:%M:%S')
 
         # Create the axes for the plot.
         self.createAxes()
@@ -59,8 +58,6 @@ class EventCanvas(FigureCanvasQTAgg):
         axes.set_xlabel("Time {0:s}".format(tzone(self.cfg.TimeUTC)), fontsize=self.cfg.EvPlot["AxesTitleFontSize"])
         # Set axis label font.
         axes.tick_params(labelsize=self.cfg.EvPlot["AxisLabelFontSize"])
-        # Set date/time format for x-axis.
-        axes.xaxis.set_major_formatter(self.xfmt)
         # Add axis to list of axes.
         self.traces.append((line, axes))
 
@@ -87,8 +84,6 @@ class EventCanvas(FigureCanvasQTAgg):
                 axes.set_ylabel(splitTitle, rotation=0, horizontalalignment='right', verticalalignment='center', fontsize=self.cfg.EvPlot["AxesTitleFontSize"])
             # Set axis label font.
             axes.tick_params(labelsize=self.cfg.EvPlot["AxisLabelFontSize"])
-            # Set date/time format for x-axis.
-            axes.xaxis.set_major_formatter(self.xfmt)
             # Add axis to list of axes.
             self.traces.append((line, axes))
 

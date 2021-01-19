@@ -683,6 +683,9 @@ class Trip():
                         event.maxIdle = int(sp1.group(2))
                         event.xsidleReason = int(sp1.group(3))
 
+                        # For charting of XSIDLE like other duration based events copy the max idle time to event duration.
+                        event.duration = event.maxIdle
+
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.
                         if not self.stopExtraData:

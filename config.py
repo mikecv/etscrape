@@ -35,6 +35,7 @@ class Config():
             {"Event" : "OVERLOAD", "Title" : "Overload"},
             {"Event" : "OVERSPEED", "Title" : "Vehicle Overspeed"},
             {"Event" : "UNBUCKLED", "Title" : "Unbuckled"},
+            {"Event" : "XSIDLE", "Title" : "Excess Idle"},
             {"Event" : "ZONECHANGE", "Title" : "Zone Change"},
             {"Event" : "ZONEOVERSPEED", "Title" : "Zone Overspeed"}
             ]

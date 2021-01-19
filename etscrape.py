@@ -68,6 +68,8 @@ from eventsChart import *
 #                       Fixed bug in dealing with trips of negative duration.
 #                       Changed TRIPSUMMARY and TRIPLOAD function to both appear as in trip.
 #                       Fixed preferences when selecting colours (and cancelling out of dialog).
+# 0.13  MDC 19/01/2021  Support for XSIDLE in charts.
+#                       Reverted time format to default, to show trips lasting more than one day.
 # *******************************************
 
 # *******************************************
@@ -76,7 +78,7 @@ from eventsChart import *
 # *******************************************
 
 # Program version.
-progVersion = "0.12"
+progVersion = "0.13"
 
 # Create configuration values class object.
 config = Config()
@@ -2302,6 +2304,10 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.13</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Added support for the plotting of XSIDLE events.</li>" \
+            "<li>Reverted chart time scale to be auto-format to handle very long trips.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.12</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Changed event traces for UNBUCKLED event to show separate lines for Operator and Passenger events.</li>" \
