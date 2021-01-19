@@ -70,6 +70,7 @@ from eventsChart import *
 #                       Fixed preferences when selecting colours (and cancelling out of dialog).
 # 0.13  MDC 19/01/2021  Support for XSIDLE in charts.
 #                       Reverted time format to default, to show trips lasting more than one day.
+#                       Made About Box date variable outside of UI.
 # *******************************************
 
 # *******************************************
@@ -79,6 +80,9 @@ from eventsChart import *
 
 # Program version.
 progVersion = "0.13"
+
+# Program date (for About dialog).
+progDate = "2020/21"
 
 # Create configuration values class object.
 config = Config()
@@ -1442,7 +1446,7 @@ class UI(QMainWindow):
         logger.debug("User selected About menu control.")
 
         # Create about dialog.        
-        AboutDialog(progVersion)
+        AboutDialog(progVersion, progDate)
 
     # *******************************************
     # Change Log control selected.
@@ -2257,16 +2261,16 @@ class EventFilterSetDialog(QDialog):
 # About dialog class.
 # *******************************************
 class AboutDialog(QDialog):
-    def __init__(self, version):
+    def __init__(self, version, aboutDate):
         super(AboutDialog, self).__init__()
         uic.loadUi(res_path("about.ui"), self)
 
-        self.showAbout(version)
+        self.showAbout(version, aboutDate)
 
     # *******************************************
     # Displays an "About" dialog box.
     # *******************************************
-    def showAbout(self, version):
+    def showAbout(self, version, aboutDate):
         # Set dialog window icon.
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(res_path("./resources/about.png")))
@@ -2274,6 +2278,9 @@ class AboutDialog(QDialog):
 
         # Update version information.
         self.versionLbl.setText("Version : {0:s}".format(version))
+
+        # Update program date information.
+        self.dateLbl.setText("(MDC : {0:s})".format(aboutDate))
 
         # Update dialog icon.
         self.aboutIcon.setPixmap(QtGui.QPixmap(res_path("./resources/about.png")))

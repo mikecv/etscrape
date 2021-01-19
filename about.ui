@@ -75,7 +75,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="dateLbl">
    <property name="geometry">
     <rect>
      <x>200</x>
