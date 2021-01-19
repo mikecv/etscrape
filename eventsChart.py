@@ -132,6 +132,8 @@ class EventCanvas(FigureCanvasQTAgg):
         tripTime = "{0:s}".format(unixTimeString(tObj.tripStart, self.cfg.TimeUTC))
         if tObj.tripEnd != 0:
             tripTime = "{0:s}  to  {1:s}".format(tripTime, unixTimeString(tObj.tripEnd, self.cfg.TimeUTC))
+        else:
+            tripTime = "{0:s}  to  {1:s}".format(tripTime, "(Trip not ended)")
         self.fig.suptitle("Controller {0:d} Trip {1:d} [{2:d}]\n{3:s}".format(self.data.controllerID, No, tObj.signOnId, tripTime), y=1.0, fontsize=self.cfg.EvPlot["PlotTitleFontSize"])
 
         # Get start and end trip times to use for all event plots.
