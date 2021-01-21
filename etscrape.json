@@ -1,6 +1,6 @@
 {
     "ConfigVersion": 11,
-    "DebugLevel": 20,
+    "DebugLevel": 10,
     "LogFileSize": 100000,
     "LogBackups": 3,
     "TimeUTC": 1,
@@ -98,20 +98,8 @@
             "Title": "Battery Voltage"
         },
         {
-            "Event": "UNBUCKLED",
-            "Title": "Unbuckled"
-        },
-        {
-            "Event": "INPUT",
-            "Channel": 1
-        },
-        {
-            "Event": "INPUT",
-            "Channel": 3
-        },
-        {
-            "Event": "INPUT",
-            "Channel": 4
+            "Event": "IMPACT",
+            "Title": "Vehicle Impact"
         }
     ]
 }

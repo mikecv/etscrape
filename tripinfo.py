@@ -78,6 +78,7 @@ class Event():
         self.cumWeight = 0
         self.battery = 0.0
         self.voltage = 0.0
+        self.oosReason = 0
         self.batteryState = ""
 
 # *******************************************
@@ -260,7 +261,7 @@ class Trip():
             # **************************************************************
             # Look for specific events other than the SIGNON event.
             # **************************************************************
-            patternData = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,2}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT ([0-9]+) ([0-9]+) (.+)/(.+)/(.+)/([-0-9]+)/([0-9]+) ([_a-zA-Z]+) (.+)$', re.MULTILINE)
+            patternData = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,2}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT ([0-9]+) ([0-9]+) (.+)/(.+)/(.+)/([-0-9]+)/([0-9]+) ([ _a-zA-Z]+) (.+)$', re.MULTILINE)
             for su in re.finditer(patternData, self.logBuf):
 
                 # Found trip event.
@@ -821,6 +822,37 @@ class Trip():
                                 # Check for negative battery voltage condition.
                                 if event.battery < 0:
                                     event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+
+                        # Add event to list of events.
+                        self.events.append(event)
+                # =============================================================================
+                # OOS PM/UPM event
+                # =============================================================================
+                elif ((event.event == "OOS PM") or (event.event == "OOS UPM")):
+
+                    specPattern = re.compile(r'([0-9]+) ([0-9]+)(.*)$')
+                    sp = re.search(specPattern, eventSpecifics)
+                    if sp:
+                        event.signOnId = int(sp.group(1))
+                        event.oosReason = int(sp.group(2))
+
+                        # Read battery voltage from event header.
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(3))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+
+                        # Increment event counters.
+                        self.numVehicleEvents += 1
 
                         # Add event to list of events.
                         self.events.append(event)

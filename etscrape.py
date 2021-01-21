@@ -71,6 +71,8 @@ from eventsChart import *
 # 0.13  MDC 19/01/2021  Support for XSIDLE in charts.
 #                       Reverted time format to default, to show trips lasting more than one day.
 #                       Made About Box date variable outside of UI.
+#                       Added OOS UPM / PM trip event.
+#                       Updated report export fields.
 # *******************************************
 
 # *******************************************
@@ -1006,6 +1008,8 @@ class UI(QMainWindow):
             xf.write("{0:s}\n".format(ev.event))
             xf.write("\tTime              : {0:s}\n".format(unixTimeString(ev.serverTime, config.TimeUTC)))
             if (ev.event == "SIGNON"):
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tDriver ID         : {0:s}\n".format(ev.driverId))
                 xf.write("\tCard ID           : {0:d} (0x{0:0X})\n".format(ev.cardId))
@@ -1014,21 +1018,31 @@ class UI(QMainWindow):
                 xf.write("\tKeyboard          : {0:s}\n".format(ev.keyboard))
                 xf.write("\tCard Reader       : {0:s}\n".format(ev.cardReader))
             elif (ev.event == "OVERSPEED"):
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
             elif (ev.event == "ZONEOVERSPEED"):
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
-                xf.write("\tMax Speed         : {0:d}\n".format(ev.maxSpeed))
+                xf.write("\tMaximum Speed     : {0:d}\n".format(ev.maxSpeed))
                 xf.write("\tZone Output       : {0:d}\n".format(ev.zoneOutput))
             elif (ev.event == "ENGINEOVERSPEED"):
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
-                xf.write("\tMax RPM           : {0:d}\n".format(ev.maxRPM))
+                xf.write("\tMaximum RPM       : {0:d}\n".format(ev.maxRPM))
             elif ev.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP"}:
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
             elif ev.event == "UNBUCKLED":
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
                 if ev.seatOwner == "D":
@@ -1039,11 +1053,15 @@ class UI(QMainWindow):
                     seatOwner = "?"
                 xf.write("\tSeat Owner        : {0:s}\n".format(seatOwner))
             elif ev.event == "ZONECHANGE":
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tFrom Zone         : {0:d}\n".format(ev.fromZone))
                 xf.write("\tTo Zone           : {0:d}\n".format(ev.toZone))
                 xf.write("\tZone Output       : {0:d}\n".format(ev.zoneOutput))
             elif ev.event == "IMPACT":
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tForward G         : {0:0.1f}\n".format(ev.fwdG))
                 xf.write("\tReverse G         : {0:0.1f}\n".format(ev.revG))
@@ -1059,6 +1077,8 @@ class UI(QMainWindow):
                     severity = "Low"
                 xf.write("\tSeverity          : {0:s}\n".format(severity))
             elif ev.event == "CHECKLIST":
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tResult            : {0:s}\n".format(ev.result))
                 xf.write("\tFailed Questions  : {0:d}\n".format(ev.failedQ))
@@ -1074,28 +1094,52 @@ class UI(QMainWindow):
                     chkType = "?"
                 xf.write("\tChecklist Type    : {0:s}\n".format(chkType))
             elif ev.event == "CLFAIL":
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tFailed Question   : {0:d}\n".format(ev.failedQNo))
             elif ev.event == "XSIDLESTART":
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
             elif ev.event == "XSIDLE":
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tMaximum Idle Time : {0:s}\n".format(str(timedelta(seconds=ev.maxIdle))))
                 xf.write("\tIdle Reason       : {0:d}\n".format(ev.xsidleReason))
             elif ev.event == "SERVICE":
                 xf.write("\tService ID        : {0:d}\n".format(ev.serviceId))
             elif ev.event == "REPORT":
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tReport Speed      : {0:d}\n".format(ev.speed))
                 xf.write("\tDirection         : {0:d}\n".format(ev.direction))
-            elif ev.event == "INPUT":
+            elif ev.event == "CRITICALOUTPUTSET":
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tCritical Output   : {0:d}\n".format(ev.criticalOutput))
+            elif ((ev.event == "OOS PM") or (ev.event == "OOS UPM")):
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tOOS Reason        : {0:d}\n".format(ev.oosReason))
+            elif ev.event == "INPUT":
                 xf.write("\tInput             : {0:d} - {1:s}\n".format(ev.inputNo, config.Channels[ev.inputNo - 1]["Name"]))
                 xf.write("\tState             : {0:d}\n".format(ev.inputState))
                 xf.write("\tActive Time       : {0:s}\n".format(str(timedelta(seconds=ev.activeTime))))
+            elif ev.event == "POWER":
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
+                xf.write("\tBattery State     : {0:s}\n".format(ev.batteryState))
             elif ev.event == "DEBUG":
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
                 xf.write("\tDetails           : {0:s}\n".format(ev.debugInfo))
             elif ev.event == "TRIP":
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
                 xf.write("\tTime Forward      : {0:s}\n".format(str(timedelta(seconds=ev.timeFwd))))
                 xf.write("\tTime Reverse      : {0:s}\n".format(str(timedelta(seconds=ev.timeRev))))
@@ -1104,8 +1148,16 @@ class UI(QMainWindow):
                 xf.write("\tTime on Seat      : {0:s}\n".format(str(timedelta(seconds=ev.timeOnSeat))))
             elif ev.event == "TRIPSUMMARY":
                 xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+            elif ev.event == "TRIPLOAD":
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tTravel Loaded     : {0:d}\n".format(str(timedelta(seconds=ev.travelLoaded))))
+                xf.write("\tTravel Unloaded   : {0:d}\n".format(str(timedelta(seconds=ev.travelUnloaded))))
+                xf.write("\tIdle Loaded       : {0:d}\n".format(str(timedelta(seconds=ev.idleLoaded))))
+                xf.write("\tIdle Unloaded     : {0:d}\n".format(str(timedelta(seconds=ev.idleUnloaded))))
+                xf.write("\tLift Count        : {0:d}\n".format(ev.liftCount))
+                xf.write("\tCummulative Lift  : {0:d}\n".format(ev.cumWeight))
         xf.write("===================================================\n\n")
-                
+
     # *******************************************
     # Toolbar to collapse all trip data.
     # *******************************************
@@ -1321,7 +1373,7 @@ class UI(QMainWindow):
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Max Idle Time", "{0:s}".format(str(timedelta(seconds=event.maxIdle))), (event.maxIdle == 0)))
-            eventList.append(("Idle Reason", "{0:d}".format(event.xsidleReason), False))
+            eventList.append(("Max Idle Reason", "{0:s}".format(event.xsidleReason), False))
         elif event.event == "CONFIG":
             pass
         elif event.event == "SERVICE":
@@ -1329,7 +1381,6 @@ class UI(QMainWindow):
         elif event.event == "POWERDOWN":
             pass
         elif event.event == "REPORT":
-            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             if (event.signOnId == -1):
                 eventList.append(("Sign-on ID", "{0:s}".format("*"), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             else:
@@ -1341,9 +1392,11 @@ class UI(QMainWindow):
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Critical Output Set", "{0:d}".format(event.criticalOutput), False))
-        elif event.event == "INPUT":
+        elif ((event.event == "OOS PM") or (event.event == "OOS UPM")):
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("OOS Reason", "{0:d}".format(event.oosReason), False))
+        elif event.event == "INPUT":
             eventList.append(("Input", "{0:d} - {1:s}".format(event.inputNo, config.Channels[event.inputNo - 1]["Name"]), ((event.inputNo < 1) or (event.inputNo > 10))))
             eventList.append(("State", "{0:d}".format(event.inputState), ((event.inputState < 0) or (event.inputState > 1))))
             eventList.append(("Active Time", "{0:s}".format(str(timedelta(seconds=event.activeTime))), False))
@@ -2314,6 +2367,7 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.13</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added support for the plotting of XSIDLE events.</li>" \
+            "<li>Updated export report fields.</li>" \
             "<li>Reverted chart time scale to be auto-format to handle very long trips.</li></ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.12</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
