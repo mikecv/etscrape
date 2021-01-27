@@ -198,7 +198,7 @@ class Trip():
         if su:
             # Break out some of the event data explicitly.
             eventSpecifics = su.group(11)
-            specPattern = re.compile(r'([-\*\+0-9]+) ([0-9a-fA-F]+) (.+?) ([0-9]+) ([0-9]+) (.+?)$')
+            specPattern = re.compile(r'([-\*\+0-9]+) ([0-9a-fA-F]+) (.+?) ([0-9]+) ([0-9]+) ([0-9]+) (.+?)$')
             sp = re.search(specPattern, eventSpecifics)
             if sp:
                 # Create event object.
@@ -236,11 +236,11 @@ class Trip():
                 # But only if still collecting extra data, i.e. trip has not ended.
                 if not self.stopExtraData:
                     # The voltage at end of event strings appears to be optional, so need to check if it exists.
-                    voltPattern = re.compile(r'(.+?) v:([0-9]+)$')
-                    vp = re.search(voltPattern, sp.group(6))
+                    voltPattern = re.compile(r'v:([0-9]+)$')
+                    vp = re.search(voltPattern, sp.group(7))
                     if vp:
                         # Extract battery voltage.
-                        event.battery = int(vp.group(2)) / 10.0
+                        event.battery = int(vp.group(1)) / 10.0
 
                         # And add to battery level list.
                         self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
@@ -806,7 +806,7 @@ class Trip():
                     sp = re.search(specPattern, eventSpecifics)
                     if sp:
                         event.signOnId = int(sp.group(1))
-                        event.criticalOutput = int(sp.group(2))
+                        event.speed = int(sp.group(2))
 
                         # Read battery voltage from event header.
                         # But only if still collecting extra data, i.e. trip has not ended.

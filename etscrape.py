@@ -73,6 +73,7 @@ from eventsChart import *
 #                       Made About Box date variable outside of UI.
 #                       Added OOS UPM / PM trip event.
 #                       Updated report export fields.
+# 0.14  MDC  32/02/2021 Fixed battery voltage and card reader values on SIGNON event.
 # *******************************************
 
 # *******************************************
@@ -81,7 +82,7 @@ from eventsChart import *
 # *******************************************
 
 # Program version.
-progVersion = "0.13"
+progVersion = "0.14"
 
 # Program date (for About dialog).
 progDate = "2020/21"
@@ -1373,7 +1374,7 @@ class UI(QMainWindow):
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Max Idle Time", "{0:s}".format(str(timedelta(seconds=event.maxIdle))), (event.maxIdle == 0)))
-            eventList.append(("Max Idle Reason", "{0:s}".format(event.xsidleReason), False))
+            eventList.append(("Max Idle Reason", "{0:d}".format(event.xsidleReason), False))
         elif event.event == "CONFIG":
             pass
         elif event.event == "SERVICE":
@@ -2364,11 +2365,16 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.14</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Fixed SIGNON event where battery voltage was not parsed properly.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.13</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added support for the plotting of XSIDLE events.</li>" \
             "<li>Updated export report fields.</li>" \
-            "<li>Reverted chart time scale to be auto-format to handle very long trips.</li></ul><br>")
+            "<li>Reverted chart time scale to be auto-format to handle very long trips.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.12</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Changed event traces for UNBUCKLED event to show separate lines for Operator and Passenger events.</li>" \
@@ -2379,26 +2385,31 @@ class ChangeLogDialog(QDialog):
             "<li>Fixed preferences when selecting colours (and cancelling out of dialog).</li>" \
             "<li>Fixed bug in dealing with trips with negative duration.</li>" \
             "<li>Added TRIPSUMMARY to event filter list as not necessarily present for ST trips.</li>" \
-            "<li>Added card ID display in HEX.</li></ul><br>")
+            "<li>Added card ID display in HEX.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.11</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added support for checklist failed event CLFAIL.</li>" \
             "<li>Added menu option to show/hide REPORT events, along with change to preferences dialog to set REPORT event colour.</li>" \
-            "<li>Fixed bug in parsing of SIGNON event; accept hex strings in capitals or lower case characters.</li></ul><br>")
+            "<li>Fixed bug in parsing of SIGNON event; accept hex strings in capitals or lower case characters.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.10</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
-            "<li>Fixed bug in display of driver ID in SIGNON event.</li></ul><br>")
+            "<li>Fixed bug in display of driver ID in SIGNON event.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.9</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Refactored event chart dialog to include default title that is not just event name.</li>" \
             "<li>Added trip start and end time to events chart plot title.</li>" \
-            "<li>Improved configuration to preserve config as much as possible when upgrading.</li></ul><br>")
+            "<li>Improved configuration to preserve config as much as possible when upgrading.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.8</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Fixed sharing of x axis of event chart so that all plots scale together.</li>" \
             "<li>Changed filter to look at first 2 columns, not just the first; allows filtering on DEBUB event variations.</li>" \
             "<li>Scrolled change log to top so that changes for most recent version visible.</li>" \
-            "<li>Cosmetic changes to About dialog.</li></ul><br>")
+            "<li>Cosmetic changes to About dialog.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.7</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added battery voltage from event messages to trip data display, and also to event plots.</li>" \
@@ -2414,7 +2425,8 @@ class ChangeLogDialog(QDialog):
             "<li>Added 'Time on Seat' parameter to TRIP event for compatibility with Smartrack.</li>" \
             "<li>Fixed bugs with validating preferences integer entry; not ideal but workable.</li>" \
             "<li>Changed application icon to be a scraper; changed the About icon size to be a bit larger to suit icon aspect.</li>" \
-            "<li>Reduced size of markers on speed plot on main application window.</li></ul><br>")
+            "<li>Reduced size of markers on speed plot on main application window.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.6</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added trace alignment toolbar button to events plot. Alignment after panning and zooming.</li>" \
@@ -2423,7 +2435,8 @@ class ChangeLogDialog(QDialog):
             "<li>Added ZONECHANGE event to events chart configuration, and plotting of zone change events.</li>" \
             "<li>Fixed bug when saving changes to events chart config when no selected trip.</li>" \
             "<li>Changed x-axis tick labels to time only to improve readability.</li>" \
-            "<li>Fixed width of Summary Pane to accommodate long time strings.</li></ul><br>")
+            "<li>Fixed width of Summary Pane to accommodate long time strings.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.5</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added modal events chart dialog selectable from the main menu. \
@@ -2442,7 +2455,8 @@ class ChangeLogDialog(QDialog):
             "<li>Looked at updating plots after pan/zoom. Still require to change currently selected trip to reset plot.</li>" \
             "<li>Speed plots show time according to the current timezone. Plots regenerate if visible when time zone preference changed.</li>" \
             "<li>Fixed bug in preferences dialog code not setting trip event alert colour correctly.</li>" \
-            "<li>Refactored speed plot class and method names.</ul><br>")
+            "<li>Refactored speed plot class and method names.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.4</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Fixed zone change line in speed plot which was inadvertantly broken in previous release.</li>" \
@@ -2459,7 +2473,8 @@ class ChangeLogDialog(QDialog):
             "<li>Removed video file from help page as not compliant with all browsers.</li>" \
             "<li>Added Added DEBUG totals to Trip Summary pane; \
                 changed so that summary totals always updated even if event type not shown.</li>" \
-            "<li>Added rerendering of trip data if UI changes were made to preferences so would apply straight away.</ul><br>")
+            "<li>Added rerendering of trip data if UI changes were made to preferences so would apply straight away.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.3</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added menu items to export data for the selected trip or for all trips to a file.</li>" \
@@ -2476,7 +2491,8 @@ class ChangeLogDialog(QDialog):
             "<li>Don't plot post trip speed points as detracts from trip events.</li>" \
             "<li>Set empty speed plot pane visible at start to highlight trip data area.</li>" \
             "<li>Made speed and tacho high limits configuration values.</li>" \
-            "<li>Fixed bug with wait cursor if log contains no trips.</li></ul><br>")
+            "<li>Fixed bug with wait cursor if log contains no trips.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.2</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>" \
             "<li>Added plot of speed data.</li>" \
@@ -2498,12 +2514,14 @@ class ChangeLogDialog(QDialog):
             "<li>Refactored configuration file format; additional parameters added.</li>" \
             "<li>Set trip data tree to use alternate row colours to improve readability.</li>" \
             "<li>Show wait cursor when opening log files as large files can take time to load.</li>" \
-            "<li>Cosmetic changes to improve readability.</li></ul><br>")
+            "<li>Cosmetic changes to improve readability.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.1</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>" \
             "<li>Initial draft release.</li>" \
             "<li>Parses log files and displays event data.</li>" \
-            "<li>Not all event types supported.</li></ul>")
+            "<li>Not all event types supported.</li>" \
+            "</ul>")
 
         # Scroll to top so that changes for most recent version are visible.
         self.changeLogText.moveCursor(QtGui.QTextCursor.Start)

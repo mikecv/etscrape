@@ -94,12 +94,20 @@
             "Title": "Vehicle Speed"
         },
         {
-            "Event": "Battery Voltage",
-            "Title": "Battery Voltage"
+            "Event": "INPUT",
+            "Channel": 3
         },
         {
-            "Event": "IMPACT",
-            "Title": "Vehicle Impact"
+            "Event": "UNBUCKLED",
+            "Title": "Unbuckled"
+        },
+        {
+            "Event": "INPUT",
+            "Channel": 5
+        },
+        {
+            "Event": "INPUT",
+            "Channel": 6
         }
     ]
 }
