@@ -21,12 +21,11 @@ class SpeedCanvas(FigureCanvasQTAgg):
         # Create Matplotlib figure.
         self.fig = Figure(figsize=(width, height), dpi=dpi)
 
-        # Set fig date/time formating for x-axis.
-        self.fig.autofmt_xdate()
-        self.xfmt = dates.DateFormatter('%H:%M:%S')
-
         # Keep layout tight so that it fits into the frame nicely.
         self.fig.set_tight_layout(True)
+
+        # Set fig date/time formating for x-axis.
+        self.fig.autofmt_xdate()
 
         # Create the axes for the plot.
         self.createAxes()
@@ -40,8 +39,6 @@ class SpeedCanvas(FigureCanvasQTAgg):
         self.axes = self.fig.add_subplot(111)
         self.line, = self.axes.plot_date([], [], color=self.cfg.SpdPlot["SpeedColour"], marker='.', linestyle='solid', linewidth=1)
         self.zone, = self.axes.plot_date([], [], color=self.cfg.SpdPlot["ZoneColour"], marker=None, linestyle='dashed', linewidth=1)
-        # Set date/time format for x-axis.
-        self.axes.xaxis.set_major_formatter(self.xfmt)
 
         # Setup plot labels.
         self.axes.set_xlabel("Time {0:s}".format(tzone(self.cfg.TimeUTC)), fontsize=self.cfg.SpdPlot["AxesTitleFontSize"])

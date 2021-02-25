@@ -27,8 +27,8 @@
         "BadRpmLimit": 5200
     },
     "SpdPlot": {
-        "DefaultLowLimit": 30,
-        "DefaultHiLimit": 60,
+        "DefaultLowLimit": 15,
+        "DefaultHiLimit": 30,
         "SpeedColour": "#0000ff",
         "ZoneColour": "#aa007f",
         "AxesTitleFontSize": 7,
@@ -90,24 +90,12 @@
     ],
     "EventTraces": [
         {
+            "Event": "Battery Voltage",
+            "Title": "Battery Voltage"
+        },
+        {
             "Event": "Vehicle Speed",
             "Title": "Vehicle Speed"
-        },
-        {
-            "Event": "INPUT",
-            "Channel": 3
-        },
-        {
-            "Event": "UNBUCKLED",
-            "Title": "Unbuckled"
-        },
-        {
-            "Event": "INPUT",
-            "Channel": 5
-        },
-        {
-            "Event": "INPUT",
-            "Channel": 6
         }
     ]
 }

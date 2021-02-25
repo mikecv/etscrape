@@ -281,9 +281,11 @@ class Trip():
                     # Don't get speed from POWERDOWN event as these events occur out of order.
                     if su.group(10) != "POWERDOWN": 
                         # If speedlog already has speed for this time then skip, else append to list.
-                        if self.checkForSpeedTime(int(su.group(4))) == False:
-                            self.speedLog.append(SpeedInfo(int(su.group(4)), int(su.group(9))))
-                            self.logger.debug("Logged speed: {0:d}, at {1:s}".format(int(su.group(9)), datetime.fromtimestamp(int(su.group(4))).strftime('%d/%m/%Y %H:%M:%S')))
+                        # If event is REPORT then don't log speed as speed in other field (with direction).
+                        if su.group(10) != "REPORT":
+                            if self.checkForSpeedTime(int(su.group(4))) == False:
+                                self.speedLog.append(SpeedInfo(int(su.group(4)), int(su.group(9))))
+                                self.logger.debug("Logged speed: {0:d}, at {1:s}".format(int(su.group(9)), datetime.fromtimestamp(int(su.group(4))).strftime('%d/%m/%Y %H:%M:%S')))
 
                 # Check if out of trip event, i.e. end trip time > 0.
                 if self.tripEnd > 0:

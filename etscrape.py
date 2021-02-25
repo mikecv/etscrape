@@ -74,6 +74,8 @@ from eventsChart import *
 #                       Added OOS UPM / PM trip event.
 #                       Updated report export fields.
 # 0.14  MDC  32/02/2021 Fixed battery voltage and card reader values on SIGNON event.
+#                       Made date/time formatting in scripts generic.
+#                       Changed reporting of speed for Report event to use speed/direction fields.
 # *******************************************
 
 # *******************************************
@@ -1815,7 +1817,7 @@ class PreferencesDialog(QDialog):
             # Set the configuration value.
             self.config.TripData["EventColour"] = col
             logger.debug("Change to event text colour: {0:s}".format(self.config.TripData["EventColour"]))
-            prefChanged = TruezoneLineColVal
+            prefChanged = True
         # Trip alert colour.
         col = self.alertColVal.palette().button().color().name()
         if col != self.config.TripData["AlertColour"]:
@@ -2368,6 +2370,8 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.14</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Fixed SIGNON event where battery voltage was not parsed properly.</li>" \
+            "<li>Change date and time formatting in charts to be generic (automatic).</li>" \
+            "<li>Changed reporting of speed for Report event to use speed/direction fields.</li>" \
             "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.13</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
