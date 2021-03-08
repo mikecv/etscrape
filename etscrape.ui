@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1120</width>
-    <height>823</height>
+    <height>873</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,40 +26,10 @@
    <property name="minimumSize">
     <size>
      <width>1120</width>
-     <height>740</height>
+     <height>790</height>
     </size>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0" rowspan="2">
-     <widget class="QFrame" name="TripDataframe">
-      <property name="minimumSize">
-       <size>
-        <width>645</width>
-        <height>500</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="acceptDrops">
-       <bool>false</bool>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout"/>
-       </item>
-      </layout>
-     </widget>
-    </item>
     <item row="2" column="0" colspan="2">
      <widget class="QFrame" name="Chartframe">
       <property name="sizePolicy">
@@ -127,7 +97,7 @@
       </layout>
      </widget>
     </item>
-    <item row="0" column="1" rowspan="2">
+    <item row="0" column="1">
      <widget class="QFrame" name="TripSummaryframe">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -138,7 +108,7 @@
       <property name="minimumSize">
        <size>
         <width>410</width>
-        <height>500</height>
+        <height>550</height>
        </size>
       </property>
       <property name="maximumSize">
@@ -1096,7 +1066,7 @@
        <property name="geometry">
         <rect>
          <x>190</x>
-         <y>490</y>
+         <y>510</y>
          <width>150</width>
          <height>20</height>
         </rect>
@@ -1122,7 +1092,7 @@
        <property name="geometry">
         <rect>
          <x>4</x>
-         <y>490</y>
+         <y>510</y>
          <width>181</width>
          <height>20</height>
         </rect>
@@ -1210,7 +1180,7 @@ color: rgb(0, 85, 255);</string>
        <property name="geometry">
         <rect>
          <x>190</x>
-         <y>430</y>
+         <y>450</y>
          <width>150</width>
          <height>20</height>
         </rect>
@@ -1236,7 +1206,7 @@ color: rgb(0, 85, 255);</string>
        <property name="geometry">
         <rect>
          <x>4</x>
-         <y>430</y>
+         <y>450</y>
          <width>181</width>
          <height>20</height>
         </rect>
@@ -1268,7 +1238,7 @@ color: rgb(0, 85, 255);</string>
        <property name="geometry">
         <rect>
          <x>4</x>
-         <y>450</y>
+         <y>470</y>
          <width>181</width>
          <height>20</height>
         </rect>
@@ -1300,7 +1270,7 @@ color: rgb(0, 85, 255);</string>
        <property name="geometry">
         <rect>
          <x>190</x>
-         <y>450</y>
+         <y>470</y>
          <width>150</width>
          <height>20</height>
         </rect>
@@ -1402,7 +1372,7 @@ color: rgb(0, 85, 255);</string>
        <property name="geometry">
         <rect>
          <x>190</x>
-         <y>470</y>
+         <y>490</y>
          <width>150</width>
          <height>20</height>
         </rect>
@@ -1428,7 +1398,7 @@ color: rgb(0, 85, 255);</string>
        <property name="geometry">
         <rect>
          <x>4</x>
-         <y>470</y>
+         <y>490</y>
          <width>181</width>
          <height>20</height>
         </rect>
@@ -1457,6 +1427,91 @@ color: rgb(0, 85, 255);</string>
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
+      <widget class="QLabel" name="ZoneTransitionLbl">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>430</y>
+         <width>150</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_22">
+       <property name="geometry">
+        <rect>
+         <x>4</x>
+         <y>430</y>
+         <width>181</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Zone Transition : </string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QFrame" name="TripDataframe">
+      <property name="minimumSize">
+       <size>
+        <width>645</width>
+        <height>550</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="acceptDrops">
+       <bool>false</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <layout class="QVBoxLayout" name="verticalLayout"/>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>
