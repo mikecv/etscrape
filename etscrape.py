@@ -76,11 +76,18 @@ from eventsChart import *
 # 0.14  MDC  32/02/2021 Fixed battery voltage and card reader values on SIGNON event.
 #                       Made date/time formatting in scripts generic.
 #                       Changed reporting of speed for Report event to use speed/direction fields.
+#                       Adding support for zone transition event.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
+# Add zone transition event to trip event scraping. DONE.
+# Add zone transition event to trip data screen. DONE.
+# Add zone transition event to trip data totals - new category.
+# Add zone transition event to charts.
+# Add zone transition event to report exports. DONE except for totaliser.
+# Update help information.
 # *******************************************
 
 # Program version.
@@ -1002,6 +1009,7 @@ class UI(QMainWindow):
         xf.write("Impact High                  : {0:d}\n".format(ti.numImpact_M))
         xf.write("Impact Low                   : {0:d}\n".format(ti.numImpact_L))
         xf.write("Zone change                  : {0:d}\n".format(ti.numZoneChange))
+        xf.write("Zone transition              : {0:d}\n".format(-99))
         xf.write("Checklist                    : {0:d}\n".format(ti.numChecklist))
         xf.write("===================================================\n")
         xf.write("===================================================\n")
@@ -1062,6 +1070,15 @@ class UI(QMainWindow):
                 xf.write("\tFrom Zone         : {0:d}\n".format(ev.fromZone))
                 xf.write("\tTo Zone           : {0:d}\n".format(ev.toZone))
                 xf.write("\tZone Output       : {0:d}\n".format(ev.zoneOutput))
+            elif ev.event == "ZONETRANSITION":
+                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tFrom Zone         : {0:d}\n".format(ev.fromZone))
+                xf.write("\tTo Zone           : {0:d}\n".format(ev.toZone))
+                xf.write("\tFrom Zone Output  : {0:d}\n".format(ev.fromZoneOutput))
+                xf.write("\tTo Zone Output    : {0:d}\n".format(ev.toZoneOutput))
+                xf.write("\tTransition        : {0:s}\n".format(ev.transition))
             elif ev.event == "IMPACT":
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
@@ -1331,7 +1348,16 @@ class UI(QMainWindow):
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("From Zone", "{0:d}".format(event.fromZone), False))
             eventList.append(("To Zone", "{0:d}".format(event.toZone), False))
-            eventList.append(("Zone Output", "{0:d}".format(event.zoneOutput), False))
+            eventList.append(("Zone Output", "{0:d}".format(event.zoneOutput), (event.zoneOutput > 1)))
+        elif event.event == "ZONETRANSITION":
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
+            eventList.append(("From Zone", "{0:d}".format(event.fromZone), False))
+            eventList.append(("To Zone", "{0:d}".format(event.toZone), False))
+            eventList.append(("From Zone Output", "{0:d}".format(event.fromZoneOutput), (event.fromZoneOutput > 4)))
+            eventList.append(("To Zone Output", "{0:d}".format(event.toZoneOutput), (event.toZoneOutput > 4)))
+            eventList.append(("Transition", "{0:s}".format(event.transition), False))
         elif event.event == "IMPACT":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
@@ -2369,6 +2395,7 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.14</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Added support for ZONETRANSITION events.</li>" \
             "<li>Fixed SIGNON event where battery voltage was not parsed properly.</li>" \
             "<li>Change date and time formatting in charts to be generic (automatic).</li>" \
             "<li>Changed reporting of speed for Report event to use speed/direction fields.</li>" \

@@ -80,6 +80,9 @@ class Event():
         self.voltage = 0.0
         self.oosReason = 0
         self.batteryState = ""
+        self.fromZoneOutput = 0
+        self.toZoneOutput = 0
+        self.transition = ""
 
 # *******************************************
 # Speed Info class.
@@ -179,6 +182,7 @@ class Trip():
         self.numUnbuckled_O = 0
         self.numUnbuckled_P = 0
         self.numZoneChange = 0
+        self.numTransition = 0
 
         # Track last time to check if event time going backwards.
         self.lastTime = 0
@@ -534,6 +538,41 @@ class Trip():
                             self.firstFromZone = event.fromZone
 
                         self.zoneXings.append(ZoneInfo(int(su.group(4)), event.fromZone, event.toZone, event.zoneOutput))
+
+                        # Add event to list of events.
+                        self.events.append(event)
+                # =============================================================================
+                # ZONETRANSITION event
+                # =============================================================================
+                elif event.event == "ZONETRANSITION":
+                    specPattern = re.compile(r'([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) (ENTRY|EXIT) (.*)$')
+
+                    sp = re.search(specPattern, eventSpecifics)
+                    if sp:
+                        event.signOnId = int(sp.group(1))
+                        event.fromZone = int(sp.group(2))
+                        event.toZone = int(sp.group(3))
+                        event.fromZoneOutput = int(sp.group(4))
+                        event.toZoneOutput = int(sp.group(5))
+                        event.transition = sp.group(6)
+
+                        # Read battery voltage from event header.
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'.*v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(7))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+
+                        # Increment event counters.
+                        self.numTransition += 1
 
                         # Add event to list of events.
                         self.events.append(event)

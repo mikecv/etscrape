@@ -292,12 +292,11 @@ class EventCanvas(FigureCanvasQTAgg):
                                 markerIdx += 1
                                 traceStarted = True
                             # Found a matching event for this trace.
-                            # Add start of event to trace. Event is at the end of events for events with a duration.
-                            tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
+                            tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
                             eList.append(0)
                             markerIdx += 1
-                            tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
-                            # Set the height of the trace according to the severity (3 levels)
+                            tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                            # Set the height of the trace according to the severity (3 levels).
                             if ev.severity == 'C':
                                 tLevel = 1.0
                             elif ev.severity == 'W':
@@ -315,6 +314,38 @@ class EventCanvas(FigureCanvasQTAgg):
                             eList.append(0)
                             markerIdx += 1
                             finalState = 0
+
+                        # Event is a ZONETRANSITION event.
+                        # Show ENTRY or EXIT type of transition on trace.
+                        elif ev.event == "ZONETRANSITION":
+                            if traceStarted == False:
+                                # Start trace with start of trip.
+                                tList.append(tripStartTime)
+                                eList.append(0)
+                                markerIdx += 1
+                                traceStarted = True
+                            # Found a matching event for this trace.
+                            tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                            eList.append(0)
+                            markerIdx += 1
+                            tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                            # Set the height of the trace according to the type of transition (2 levels).
+                            if ev.transition == 'ENTRY':
+                                tLevel = 1.0
+                            else:
+                                tLevel = 0.5
+                            eList.append(tLevel)
+                            markerIdx += 1
+                            nullMarkers.append(markerIdx - 1)
+                            # Add end of event to trace.
+                            tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                            eList.append(tLevel)
+                            markerIdx += 1
+                            tList.append(timeTZ(ev.serverTime, self.cfg.TimeUTC))
+                            eList.append(0)
+                            markerIdx += 1
+                            finalState = 0
+
                         # Event is a ZONECHANGE event.
                         # Show zone output on trace.
                         elif ev.event == "ZONECHANGE":
@@ -506,6 +537,11 @@ class EventCanvas(FigureCanvasQTAgg):
             if t["Event"] == "IMPACT":
                 self.traces[self.numEvCharts - idx][1].set_yticks([0.2, 0.6, 1.0])
                 self.traces[self.numEvCharts - idx][1].set_yticklabels(["Lo", "Med", "Hi"], color='cornflowerblue')
+                self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
+                self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
+            elif t["Event"] == "ZONETRANSITION":
+                self.traces[self.numEvCharts - idx][1].set_yticks([0.5, 1.0])
+                self.traces[self.numEvCharts - idx][1].set_yticklabels(["Entry", "Exit"], color='cornflowerblue')
                 self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
             elif t["Event"] == "ZONECHANGE":
                 self.traces[self.numEvCharts - idx][1].set_yticks([0.5, 1.0])
