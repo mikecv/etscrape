@@ -75,16 +75,25 @@ class SpeedCanvas(FigureCanvasQTAgg):
     # *******************************************
     def updatePlotData(self, No):
         # Add trip number as the plot title.
-        self.axes.set_title("Trip {0:d} [{1:d}]".format(No, self.data.tripLog[No-1].signOnId), fontsize=self.cfg.SpdPlot["PlotTitleFontSize"])
+        if self.data.isZoner == False:
+            self.axes.set_title("Trip {0:d} [{1:d}]".format(No, self.data.tripLog[No-1].tripStartId), fontsize=self.cfg.SpdPlot["PlotTitleFontSize"])
+        else:
+            self.axes.set_title("Ignition Cycle {0:d}".format(No), fontsize=self.cfg.SpdPlot["PlotTitleFontSize"])
 
         tList = []
         sList = []
 
         # Update speed data.
-        for sl in self.data.tripLog[No-1].speedLog:
-            # Format time axis list in the correct timezone for display.
-            tList.append(timeTZ(sl.time, self.cfg.TimeUTC))
-            sList.append(sl.speed)
+        if self.data.isZoner == False:
+            for sl in self.data.tripLog[No-1].speedLog:
+                # Format time axis list in the correct timezone for display.
+                tList.append(timeTZ(sl.time, self.cfg.TimeUTC))
+                sList.append(sl.speed)
+        else:
+            for sl in self.data.zoneXLog[No-1].speedLog:
+                # Format time axis list in the correct timezone for display.
+                tList.append(timeTZ(sl.time, self.cfg.TimeUTC))
+                sList.append(sl.speed)
 
         # Clear old plot data.
         self.line.set_xdata([])
@@ -108,8 +117,12 @@ class SpeedCanvas(FigureCanvasQTAgg):
         tList = []
         zList = []
 
-        # Update zone data.
-        for zl in self.data.tripLog[No-1].zoneXings:
+        if self.data.isZoner == False:
+            tObj = self.data.tripLog[No-1]
+        else:
+            tObj = self.data.zoneXLog[No-1]
+
+        for zl in tObj.zoneXings:
             # Format time axis list in the correct timezone for display.
             tList.append(timeTZ(zl.time, self.cfg.TimeUTC))
             if zl.zoneOutput == 1:

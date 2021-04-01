@@ -128,39 +128,47 @@ class EventCanvas(FigureCanvasQTAgg):
 
         # Add trip number as the plot title.
         # Include trip start and end time as second line to the title.
-        tObj = self.data.tripLog[No-1]
+        if self.data.isZoner == False:
+            tObj = self.data.tripLog[No-1]
+        else:
+            tObj = self.data.zoneXLog[No-1]
+
         tripTime = "{0:s}".format(unixTimeString(tObj.tripStart, self.cfg.TimeUTC))
         if tObj.tripEnd != 0:
             tripTime = "{0:s}  to  {1:s}".format(tripTime, unixTimeString(tObj.tripEnd, self.cfg.TimeUTC))
         else:
             tripTime = "{0:s}  to  {1:s}".format(tripTime, "(Trip not ended)")
-        self.fig.suptitle("Controller {0:d} Trip {1:d} [{2:d}]\n{3:s}".format(self.data.controllerID, No, tObj.signOnId, tripTime), y=1.0, fontsize=self.cfg.EvPlot["PlotTitleFontSize"])
+        if self.data.isZoner == False:
+            self.fig.suptitle("Controller {0:d} Trip {1:d} [{2:d}]\n{3:s}".format(self.data.controllerID, No, tObj.tripStartId, tripTime), y=1.0, fontsize=self.cfg.EvPlot["PlotTitleFontSize"])
+        else:
+            self.fig.suptitle("Controller {0:d} Ignition Cycle {1:d}\n{2:s}".format(self.data.controllerID, No, tripTime), y=1.0, fontsize=self.cfg.EvPlot["PlotTitleFontSize"])
 
         # Get start and end trip times to use for all event plots.
         # Trip start will correspond to SIGNON event.
-        tripStartTime = timeTZ(self.data.tripLog[No-1].tripStart, self.cfg.TimeUTC)
+        tripStartTime = timeTZ(tObj.tripStart, self.cfg.TimeUTC)
+
         # Trip end will correspond to TRIP event if one is included.
         # Look for TRIP event as we don't want to report after that.
         endEvent = 0
         tripEnded = False
         tripJustSignon = False
-        if len(self.data.tripLog[No-1].events) == 1:
+        if len(tObj.events) == 1:
             tripJustSignon = True
         else:
-            for idx, ev in enumerate(self.data.tripLog[No-1].events):
+            for idx, ev in enumerate(tObj.events):
                 if ev.event == "TRIP":
                     tripEnded = True
                     break
             endEvent = idx
 
         # Look for last event in the trip (so far) and make this is the end of the trip.
-        tripEndTime = timeTZ(self.data.tripLog[No-1].events[endEvent].serverTime, self.cfg.TimeUTC)
-        tripDuration = self.data.tripLog[No-1].events[endEvent].serverTime - self.data.tripLog[No-1].tripStart
+        tripEndTime = timeTZ(tObj.events[endEvent].serverTime, self.cfg.TimeUTC)
+        tripDuration = tObj.events[endEvent].serverTime - tObj.tripStart
 
         # Check for bad trips, i.e. were trip duration is negative.
         # If encountered just set duration to 0.
-        if self.data.tripLog[No-1].events[endEvent].serverTime < self.data.tripLog[No-1].tripStart:
-            self.logger.warning("Trip duration negative. Start time: {0:d}, Duration:{1}".format(self.data.tripLog[No-1].tripStart, self.data.tripLog[No-1].events[endEvent].serverTime))
+        if tObj.events[endEvent].serverTime < tObj.tripStart:
+            self.logger.warning("Trip duration negative. Start time: {0:d}, Duration:{1}".format(tObj.tripStart, tObj.events[endEvent].serverTime))
             tripDuration = 0
 
         # Create start/end of chart. Make a bit wider than the trip.
@@ -170,8 +178,8 @@ class EventCanvas(FigureCanvasQTAgg):
             plotEntre = 60
 
         # Plot start and end time.
-        self.plotStartTime = timeTZ((self.data.tripLog[No-1].tripStart - plotEntre), self.cfg.TimeUTC)
-        self.plotEndTime = timeTZ((self.data.tripLog[No-1].events[endEvent].serverTime + plotEntre), self.cfg.TimeUTC)
+        self.plotStartTime = timeTZ((tObj.tripStart - plotEntre), self.cfg.TimeUTC)
+        self.plotEndTime = timeTZ((tObj.events[endEvent].serverTime + plotEntre), self.cfg.TimeUTC)
 
         # Create data for trip trace.
         tList = []
@@ -231,7 +239,7 @@ class EventCanvas(FigureCanvasQTAgg):
             # Don't need to check for 'special' "Vehicle" events as not real events.
             if (t["Event"] != "Vehicle Speed") and (t["Event"] != "Battery Voltage"):
                 # See if any matching events for the trip.
-                for ev in self.data.tripLog[No-1].events[0:endEvent]:
+                for ev in tObj.events[0:endEvent]:
                     if t["Event"] == ev.event:
                         # Check if INPUT event as treated differently.
                         if ev.isInput:
@@ -450,7 +458,7 @@ class EventCanvas(FigureCanvasQTAgg):
                 if t["Event"] == "Vehicle Speed":
                     # Update speed data.
                     maxSpeed = 0
-                    for sl in self.data.tripLog[No-1].speedLog:
+                    for sl in tObj.speedLog:
                         # Format time axis list in the correct timezone for display.
                         tList.append(timeTZ(sl.time, self.cfg.TimeUTC))
                         eList.append(sl.speed)

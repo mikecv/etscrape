@@ -1,5 +1,5 @@
 {
-    "ConfigVersion": 11,
+    "ConfigVersion": 12,
     "DebugLevel": 10,
     "LogFileSize": 100000,
     "LogBackups": 3,
@@ -27,10 +27,10 @@
         "BadRpmLimit": 5200
     },
     "SpdPlot": {
-        "DefaultLowLimit": 15,
-        "DefaultHiLimit": 30,
+        "DefaultLowLimit": 30,
+        "DefaultHiLimit": 60,
         "SpeedColour": "#0000ff",
-        "ZoneColour": "#aa007f",
+        "ZoneColour": "#ff0000",
         "AxesTitleFontSize": 7,
         "PlotTitleFontSize": 10
     },
@@ -43,8 +43,8 @@
         "EventFillColour": "#0000ff",
         "TripFillColour": "#ffff00",
         "MaxTitleLineLength": 12,
-        "EventTraceColourXtra": "#ff6720",
-        "EventFillColourXtra": "#ff621a"
+        "EventTraceColourXtra": "#DF7401",
+        "EventFillColourXtra": "#DF7401"
     },
     "Channels": [
         {
@@ -90,12 +90,28 @@
     ],
     "EventTraces": [
         {
-            "Event": "Battery Voltage",
-            "Title": "Battery Voltage"
-        },
-        {
             "Event": "Vehicle Speed",
             "Title": "Vehicle Speed"
+        },
+        {
+            "Event": "ENGINEOVERSPEED",
+            "Title": "Engine Overspeed"
+        },
+        {
+            "Event": "OILPRESSURE",
+            "Title": "Engine Oil Pressure Low"
+        },
+        {
+            "Event": "INPUT",
+            "Channel": 1
+        },
+        {
+            "Event": "INPUT",
+            "Channel": 3
+        },
+        {
+            "Event": "INPUT",
+            "Channel": 4
         }
     ]
 }

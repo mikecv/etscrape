@@ -82,6 +82,9 @@ from eventsChart import *
 # *******************************************
 # TODO List
 #
+# Zoners do not have signon events so no trips, need to plot in context of power cycles.
+# Bad SIGNON event 11/09/2020 07:49:47 EVENT 8034 1599810580 0/0/0/29/0 SIGNON * 0 NOCARD 26 1301DE 000478 v:145. 
+# Look at feasibilty of zone change plot. May need to change as for Zoner have 4 zone outputs.
 # Add zone transition event to trip event scraping. DONE.
 # Add zone transition event to trip data screen. DONE.
 # Add zone transition event to trip data totals - new category.
@@ -212,9 +215,13 @@ class UI(QMainWindow):
 
         # Flag indicating no data to show.
         # And flag indicating no trip selected.
+        # Use these same variables for ignition cycles (Zoner) as well as actual trips.
         self.haveTrips = False
         self.numTrips = 0
         self.selectedTrip = 0
+
+        # Flags to indicate controller is a Zoner
+        self.isZoner = False
 
         # Initialise flags indicating that event filter is applied.
         # Also initialise the current event filter.
@@ -497,6 +504,9 @@ class UI(QMainWindow):
         # Clear trip data to show.
         self.haveTrips = False
 
+        # Initialise to not a Zoner.
+        self.isZoner = False
+
         # Disable expand / collapse buttons.
         self.actionCollapseAllLevels.setEnabled(False)
         self.actionExpandAllLevels.setEnabled(False)
@@ -527,11 +537,12 @@ class UI(QMainWindow):
             self.ctrlLbl.setText(str(self.controllerID))
             logger.info("Detected Controller ID : {0:d}".format(self.controllerID))
         else:
-            logger.warning("No Controller ID for trip.")
+            logger.warning("No Controller ID for trip / ignition cycle.")
 
-        # Look for all trips in the log file.
+        # Look for all trips / ignition cycles in the log file.
         self.numTrips = 0
         self.tripLog = []
+        self.zoneXLog = []
 
         # Look for all the trip starts and capture individual buffers.
         patternStart = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,2}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT .+ (SIGNON).?')
@@ -585,18 +596,72 @@ class UI(QMainWindow):
             # Populate trip data.
             self.populateTrips()
         else:
-            # Revert to the normal cursor.
-            QApplication.restoreOverrideCursor()
+            # No trips detected but maybe this is a ZONER (which don't have signon records).
+            # Look for any zone transition events.
+            # Note that could still be a Zoner even if no zone transition events recorded; just don't Know.
+            patternStart = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,2}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT .+ (HARDWARE IGN_ON).?')
+            for st in re.finditer(patternStart, self.logData):
+                edge = st.start(0)
+                if (self.numTrips == 0):
+                    prevStart = edge
+                else:
+                    self.zoneXLog.append(ZoneX(config, logger, self.logData[prevStart:edge]))
+                    prevStart = edge
 
-            # Show pop-up indicating no trip data found in log file.
-            showPopup("Trip", "Log file contains no trip information.", "(No trip start \"SIGNON\" events encountered)")
+                # Increment number of Zoner ignition cycles.
+                self.numTrips += 1
 
-            # Need to get plots to starting states.
-            self.eventsChart.fig.resetFigure()
-            self.spdFig.resetFigure()
+            # Update last ignition cycle time to end of file.
+            if (self.numTrips > 0):
 
-            # Clear the controller ID as no longer relevant.
-            self.ctrlLbl.setText("[  -  ]")
+                # Indicate that log file is from a Zoner.
+                self.isZoner = True
+
+                self.zoneXLog.append(ZoneX(config, logger, self.logData[prevStart:len(self.logData)]))
+
+                # Extract data from all ignition cycles.
+                for t in self.zoneXLog:
+                    t.extractZoneData()
+
+                # Set flag indicating we have trip data to show.
+                self.haveTrips = True
+
+                # Set first trip as selected trip.
+                self.selectedTrip = 1
+
+                # Update prev/next button states.
+                self.updateTripBtnState()
+
+                # Total ignition cycles (at least ON) in file.
+                logger.info("Zoner ignition cycles in file : {0:d}".format(self.numTrips))
+
+                # Enable expand / collapse buttons.
+                self.actionCollapseAllLevels.setEnabled(True)
+                self.actionExpandAllLevels.setEnabled(True)
+
+                # Enable the export menu.
+                self.actionExportCurrentTrip.setEnabled(True)
+                self.actionExportAllTrips.setEnabled(True)
+                self.actionExportFilteredTrips.setEnabled(self.eventFilterApplied)
+
+                # Enable show events chart window.
+                self.actionShowEventsChart.setEnabled(True)
+
+                # Populate trip data.
+                self.populateTrips()
+            else:
+                # Revert to the normal cursor.
+                QApplication.restoreOverrideCursor()
+
+                # Show pop-up indicating no trip data found in log file.
+                showPopup("Trip", "Log file contains no trip information.")
+
+                # Need to get plots to starting states.
+                self.eventsChart.fig.resetFigure()
+                self.spdFig.resetFigure()
+
+                # Clear the controller ID as no longer relevant.
+                self.ctrlLbl.setText("")
 
         # Revert to the normal cursor.
         QApplication.restoreOverrideCursor()                       
@@ -621,15 +686,25 @@ class UI(QMainWindow):
         fontPlain = QtGui.QFont()
         fontPlain.setBold(False)
 
+        # Reference appropriate trip or ignition cycle event log.
+        if self.isZoner == False:
+            tLog = self.tripLog
+        else:
+            tLog = self.zoneXLog
+
         # Populate trip titles.
-        for idx, t in enumerate(self.tripLog):
+        for idx, t in enumerate(tLog):
 
             # Initialise trip in alert flag.
             t.tripInAlert = False
 
             # Add top levels to trees.
             # Label trips with trip number (including signon ID) and time.
-            tripNum = "Trip {0:d} [ID {1:d}]".format((idx+1), t.signOnId)
+            if self.isZoner == False:
+                tripNum = "Trip {0:d} [ID {1:d}]".format((idx+1), t.tripStartId)
+            else:
+                tripNum = "Ignition Cycle {0:d}".format(idx+1)
+
             # Need to check that the trip was ended.
             if t.tripEnd > 0:
                 tripTime = "{0:s}  to  {1:s}".format(unixTimeString(t.tripStart, config.TimeUTC), unixTimeString(t.tripEnd, config.TimeUTC))
@@ -768,7 +843,7 @@ class UI(QMainWindow):
     # Trip item selected.
     # *******************************************
     def tripItemSelected(self):
-        # Same original selected trip to check if it changed.
+        # Save original selected trip to check if it changed.
         originalTrip = self.selectedTrip
 
         # Determine trip details selected.
@@ -781,14 +856,17 @@ class UI(QMainWindow):
                 node = node.parent()
             # Extract the trip number from the column 0 text.
             trip = node.text(0)
-            patternTrip = re.compile(r'Trip ([0-9]+) \[')
+            if self.isZoner == False:
+                patternTrip = re.compile(r'Trip ([0-9]+) \[')
+            else:
+                patternTrip = re.compile(r'Ignition Cycle ([0-9]+)')
             t = re.search(patternTrip, trip)
             if t:
                 self.selectedTrip = int(t.group(1))
             else:
                 # Error if trip number not found.
                 # Set selected trip to 0 which will cause a termination.
-                logger.error("No trip number found.")
+                logger.error("No trip or ignition cycle number found.")
                 self.selectedTrip = 0
         except:
             # Return the selection to the original trip, as no other trip.
@@ -811,34 +889,48 @@ class UI(QMainWindow):
     # Update trip summary information for selected trip.
     # *******************************************
     def updateTripSummary(self, t):
-        ti = self.tripLog[t-1]
+        if self.isZoner == False:
+            ti = self.tripLog[t-1]
+        else:
+            ti = self.zoneXLog[t-1]
+
         # Trip information.
         self.TripNoLbl.setText("{0:d}".format(t))
-        self.TripIdLbl.setText("[{0:d}]".format(ti.signOnId))
+        if self.isZoner == False:
+            self.TripIdLbl.setText("[{0:d}]".format(ti.tripStartId))
+        else:
+            self.TripIdLbl.setText("")
         self.StartTimeLbl.setText("{0:s}".format(unixTimeString(ti.tripStart, config.TimeUTC)))
         self.EndTimeLbl.setText("{0:s}".format(unixTimeString(ti.tripEnd, config.TimeUTC)))
         if ti.tripEnd > 0:
             self.TripDurationLbl.setText("{0:s}".format(secsToTime(ti.tripEnd - ti.tripStart)))
         else:
-            self.TripDurationLbl.setText("Trip not ended.")
+            if self.isZoner == False:
+                self.TripDurationLbl.setText("Trip not ended.")
+            else:
+                self.TripDurationLbl.setText("Ignition cycle not ended.")
 
         # Event counts.
         # Vehicle events.
-        self.VehicleEventsLbl.setText("{0:d}".format(ti.numVehicleEvents))
-        self.updateSummaryCount(self.VehicleOverspeedLbl, ti.numOverspeed)
-        self.updateSummaryCount(self.ZoneOverspeedLbl, ti.numZoneOverspeed)
-        self.updateSummaryCount(self.EngineOverspeedLbl, ti.numEngineOverspeed)
-        self.updateSummaryCount(self.LowCoolantLbl, ti.numLowCoolant)
-        self.updateSummaryCount(self.LowOilPressureLbl, ti.numOilPressure)
-        self.updateSummaryCount(self.HighTemperatureLbl, ti.numEngineTemperature)
-        self.updateSummaryCount(self.HiImpactLbl, ti.numImpact_H)
-        self.updateSummaryCount(self.MidImpactLbl, ti.numImpact_M)
-        self.updateSummaryCount(self.LoImpactLbl, ti.numImpact_L)
+        if self.isZoner == False:
+            self.VehicleEventsLbl.setText("{0:d}".format(ti.numVehicleEvents))
+            self.updateSummaryCount(self.VehicleOverspeedLbl, ti.numOverspeed)
+            self.updateSummaryCount(self.ZoneOverspeedLbl, ti.numZoneOverspeed)
+            self.updateSummaryCount(self.EngineOverspeedLbl, ti.numEngineOverspeed)
+            self.updateSummaryCount(self.LowCoolantLbl, ti.numLowCoolant)
+            self.updateSummaryCount(self.LowOilPressureLbl, ti.numOilPressure)
+            self.updateSummaryCount(self.HighTemperatureLbl, ti.numEngineTemperature)
+            self.updateSummaryCount(self.HiImpactLbl, ti.numImpact_H)
+            self.updateSummaryCount(self.MidImpactLbl, ti.numImpact_M)
+            self.updateSummaryCount(self.LoImpactLbl, ti.numImpact_L)
         # Operator events.
-        self.OperatorEventsLbl.setText("{0:d}".format(ti.numOperatorEvents))
-        self.updateSummaryCount(self.UnbuckledOpLbl, ti.numUnbuckled_O)
-        self.updateSummaryCount(self.UnbuckledPassLbl, ti.numUnbuckled_P)
-        self.updateSummaryCount(self.ChecklistLbl, ti.numChecklist)
+        if self.isZoner == False:
+            self.updateSummaryCount(self.OperatorEventsLbl, ti.numOperatorEvents)
+            self.updateSummaryCount(self.UnbuckledOpLbl, ti.numUnbuckled_O)
+            self.updateSummaryCount(self.UnbuckledPassLbl, ti.numUnbuckled_P)
+            self.updateSummaryCount(self.ChecklistLbl, ti.numChecklist)
+        else:
+            self.updateSummaryCount(self.ZoneTransitionLbl, ti.numTransition)
         self.updateSummaryCount(self.ZoneChangeLbl, ti.numZoneChange)
         # Trip events.
         self.TripEventsLbl.setText("{0:d}".format(ti.numTripEvents))
@@ -981,7 +1073,7 @@ class UI(QMainWindow):
     # *******************************************
     def exportTrip(self, xf, ti):
         # Export trip data to file.
-        logger.debug("Exporting trip report for Trip ID: {0:d}".format(ti.signOnId))
+        logger.debug("Exporting trip report for Trip ID: {0:d}".format(ti.tripStartId))
         xf.write("===================================================\n")
         xf.write("              ____  ____  ____  ____ \n")
         xf.write("             (_  _)(  _ \(_  _)(  _ \\\n")
@@ -990,7 +1082,7 @@ class UI(QMainWindow):
         xf.write("                                     \n")
         xf.write("===================================================\n")
         xf.write("Controller ID  : {0:d}\n".format(self.controllerID))
-        xf.write("Signon ID      : {0:d}\n".format(ti.signOnId))
+        xf.write("Signon ID      : {0:d}\n".format(ti.tripStartId))
         xf.write("Start time     : {0:s}\n".format(unixTimeString(ti.tripStart, config.TimeUTC)))
         xf.write("End time       : {0:s}\n".format(unixTimeString(ti.tripEnd, config.TimeUTC)))
         xf.write("===================================================\n")
@@ -1021,7 +1113,7 @@ class UI(QMainWindow):
             if (ev.event == "SIGNON"):
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tDriver ID         : {0:s}\n".format(ev.driverId))
                 xf.write("\tCard ID           : {0:d} (0x{0:0X})\n".format(ev.cardId))
                 xf.write("\tResult            : {0:s}\n".format(ev.result))
@@ -1031,30 +1123,30 @@ class UI(QMainWindow):
             elif (ev.event == "OVERSPEED"):
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
             elif (ev.event == "ZONEOVERSPEED"):
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
                 xf.write("\tMaximum Speed     : {0:d}\n".format(ev.maxSpeed))
                 xf.write("\tZone Output       : {0:d}\n".format(ev.zoneOutput))
             elif (ev.event == "ENGINEOVERSPEED"):
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
                 xf.write("\tMaximum RPM       : {0:d}\n".format(ev.maxRPM))
             elif ev.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP"}:
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
             elif ev.event == "UNBUCKLED":
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
                 if ev.seatOwner == "D":
                     seatOwner = "Operator"
@@ -1066,14 +1158,14 @@ class UI(QMainWindow):
             elif ev.event == "ZONECHANGE":
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tFrom Zone         : {0:d}\n".format(ev.fromZone))
                 xf.write("\tTo Zone           : {0:d}\n".format(ev.toZone))
                 xf.write("\tZone Output       : {0:d}\n".format(ev.zoneOutput))
             elif ev.event == "ZONETRANSITION":
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tFrom Zone         : {0:d}\n".format(ev.fromZone))
                 xf.write("\tTo Zone           : {0:d}\n".format(ev.toZone))
                 xf.write("\tFrom Zone Output  : {0:d}\n".format(ev.fromZoneOutput))
@@ -1082,7 +1174,7 @@ class UI(QMainWindow):
             elif ev.event == "IMPACT":
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tForward G         : {0:0.1f}\n".format(ev.fwdG))
                 xf.write("\tReverse G         : {0:0.1f}\n".format(ev.revG))
                 xf.write("\tLeft G            : {0:0.1f}\n".format(ev.leftG))
@@ -1099,7 +1191,7 @@ class UI(QMainWindow):
             elif ev.event == "CHECKLIST":
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tResult            : {0:s}\n".format(ev.result))
                 xf.write("\tFailed Questions  : {0:d}\n".format(ev.failedQ))
                 xf.write("\tTime Taken        : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
@@ -1116,34 +1208,34 @@ class UI(QMainWindow):
             elif ev.event == "CLFAIL":
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tFailed Question   : {0:d}\n".format(ev.failedQNo))
             elif ev.event == "XSIDLESTART":
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
             elif ev.event == "XSIDLE":
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tMaximum Idle Time : {0:s}\n".format(str(timedelta(seconds=ev.maxIdle))))
                 xf.write("\tIdle Reason       : {0:d}\n".format(ev.xsidleReason))
             elif ev.event == "SERVICE":
                 xf.write("\tService ID        : {0:d}\n".format(ev.serviceId))
             elif ev.event == "REPORT":
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tReport Speed      : {0:d}\n".format(ev.speed))
                 xf.write("\tDirection         : {0:d}\n".format(ev.direction))
             elif ev.event == "CRITICALOUTPUTSET":
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tCritical Output   : {0:d}\n".format(ev.criticalOutput))
             elif ((ev.event == "OOS PM") or (ev.event == "OOS UPM")):
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tOOS Reason        : {0:d}\n".format(ev.oosReason))
             elif ev.event == "INPUT":
                 xf.write("\tInput             : {0:d} - {1:s}\n".format(ev.inputNo, config.Channels[ev.inputNo - 1]["Name"]))
@@ -1160,16 +1252,16 @@ class UI(QMainWindow):
             elif ev.event == "TRIP":
                 xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tTime Forward      : {0:s}\n".format(str(timedelta(seconds=ev.timeFwd))))
                 xf.write("\tTime Reverse      : {0:s}\n".format(str(timedelta(seconds=ev.timeRev))))
                 xf.write("\tTime Idle         : {0:s}\n".format(str(timedelta(seconds=ev.timeIdle))))
                 xf.write("\tMax Idle Time     : {0:s}\n".format(str(timedelta(seconds=ev.maxIdle))))
                 xf.write("\tTime on Seat      : {0:s}\n".format(str(timedelta(seconds=ev.timeOnSeat))))
             elif ev.event == "TRIPSUMMARY":
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
             elif ev.event == "TRIPLOAD":
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.signOnId))
+                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tTravel Loaded     : {0:d}\n".format(str(timedelta(seconds=ev.travelLoaded))))
                 xf.write("\tTravel Unloaded   : {0:d}\n".format(str(timedelta(seconds=ev.travelUnloaded))))
                 xf.write("\tIdle Loaded       : {0:d}\n".format(str(timedelta(seconds=ev.idleLoaded))))
@@ -1297,7 +1389,7 @@ class UI(QMainWindow):
         if event.event == "SIGNON":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), False))
             if event.driverId == "*":
                 eventList.append(("Driver ID", "{0:s} (UNKNOWN)".format(event.driverId), True))
             else:
@@ -1309,30 +1401,30 @@ class UI(QMainWindow):
             eventList.append(("Card Reader", "{0:s}".format(event.cardReader), False))
         elif event.event == "OVERSPEED":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
         elif event.event == "ZONEOVERSPEED":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
             eventList.append(("Maximum Speed", "{0:d}".format(event.maxSpeed), (event.maxSpeed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Zone Output", "{0:d}".format(event.zoneOutput),(event.zoneOutput == 0)))
         elif event.event == "ENGINEOVERSPEED":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
             eventList.append(("Maximum RPM", "{0:d}".format(event.maxRPM), (event.maxRPM >= config.TripData["BadRpmLimit"])))
         elif event.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP", "OFFSEAT", "OVERLOAD"}:
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
         elif event.event == "UNBUCKLED":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
             if event.seatOwner == "D":
@@ -1344,23 +1436,21 @@ class UI(QMainWindow):
             eventList.append(("Seat Owner", "{0:s}".format(seatOwner), (seatOwner == "?")))
         elif event.event == "ZONECHANGE":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("From Zone", "{0:d}".format(event.fromZone), False))
             eventList.append(("To Zone", "{0:d}".format(event.toZone), False))
-            eventList.append(("Zone Output", "{0:d}".format(event.zoneOutput), (event.zoneOutput > 1)))
+            eventList.append(("Zone Output", "{0:d}".format(event.zoneOutput), (event.zoneOutput > 4)))
         elif event.event == "ZONETRANSITION":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("From Zone", "{0:d}".format(event.fromZone), False))
             eventList.append(("To Zone", "{0:d}".format(event.toZone), False))
-            eventList.append(("From Zone Output", "{0:d}".format(event.fromZoneOutput), (event.fromZoneOutput > 4)))
             eventList.append(("To Zone Output", "{0:d}".format(event.toZoneOutput), (event.toZoneOutput > 4)))
             eventList.append(("Transition", "{0:s}".format(event.transition), False))
         elif event.event == "IMPACT":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Forward G", "{0:0.1f}".format(event.fwdG), False))
             eventList.append(("Reverse G", "{0:0.1f}".format(event.revG), False))
@@ -1377,7 +1467,7 @@ class UI(QMainWindow):
             eventList.append(("Severity", "{0:s}".format(severity), False))
         elif event.event == "CHECKLIST":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
             eventList.append(("Result", "{0:s}".format(event.result), False))
             eventList.append(("Failed Questions", "{0:d}".format(event.failedQ), False))
             eventList.append(("Time Taken", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
@@ -1393,14 +1483,14 @@ class UI(QMainWindow):
             eventList.append(("Checklist Type", "{0:s}".format(chkType), (chkType == "?")))
         elif event.event == "CLFAIL":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
             eventList.append(("Failed Question", "{0:d}".format(event.failedQNo), False))
         elif event.event == "XSIDLESTART":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), False))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), False))
         elif event.event == "XSIDLE":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
             eventList.append(("Max Idle Time", "{0:s}".format(str(timedelta(seconds=event.maxIdle))), (event.maxIdle == 0)))
             eventList.append(("Max Idle Reason", "{0:d}".format(event.xsidleReason), False))
         elif event.event == "CONFIG":
@@ -1410,27 +1500,27 @@ class UI(QMainWindow):
         elif event.event == "POWERDOWN":
             pass
         elif event.event == "REPORT":
-            if (event.signOnId == -1):
-                eventList.append(("Sign-on ID", "{0:s}".format("*"), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            if (event.tripStartId == -1):
+                eventList.append(("Sign-on ID", "{0:s}".format("*"), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
             else:
-                eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+                eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
             eventList.append(("Report Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Direction", "{0:d}".format(event.direction), ((event.direction < 0) or (event.direction > 359))))
         elif event.event == "CRITICALOUTPUTSET":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), (event.tripStartId != trip.tripStartId)))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Critical Output Set", "{0:d}".format(event.criticalOutput), False))
         elif ((event.event == "OOS PM") or (event.event == "OOS UPM")):
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), ((event.signOnId != trip.signOnId) and (not event.isOutOfTrip))))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
             eventList.append(("OOS Reason", "{0:d}".format(event.oosReason), False))
         elif event.event == "INPUT":
             eventList.append(("Input", "{0:d} - {1:s}".format(event.inputNo, config.Channels[event.inputNo - 1]["Name"]), ((event.inputNo < 1) or (event.inputNo > 10))))
             eventList.append(("State", "{0:d}".format(event.inputState), ((event.inputState < 0) or (event.inputState > 1))))
             eventList.append(("Active Time", "{0:s}".format(str(timedelta(seconds=event.activeTime))), False))
         elif event.event == "POWER":
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), (event.tripStartId != trip.tripStartId)))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.voltage), (event.voltage < 0)))
             eventList.append(("Battery State", "{0:s}".format(event.batteryState), (event.batteryState != "OK")))
@@ -1439,16 +1529,16 @@ class UI(QMainWindow):
             eventList.append(("Details", "{0:s}".format(event.debugInfo), ("Time1H" in event.debugInfo)))
         elif event.event == "TRIP":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), (event.tripStartId != trip.tripStartId)))
             eventList.append(("Time Forward", "{0:s}".format(str(timedelta(seconds=event.timeFwd))), False))
             eventList.append(("Time Reverse", "{0:s}".format(str(timedelta(seconds=event.timeRev))), False))
             eventList.append(("Time Idle", "{0:s}".format(str(timedelta(seconds=event.timeIdle))), False))
             eventList.append(("Max Idle Time", "{0:s}".format(str(timedelta(seconds=event.maxIdle))), False))
             eventList.append(("Time on Seat", "{0:s}".format(str(timedelta(seconds=event.timeOnSeat))), False))
         elif event.event == "TRIPSUMMARY":
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), (event.tripStartId != trip.tripStartId)))
         elif event.event == "TRIPLOAD":
-            eventList.append(("Sign-on ID", "{0:d}".format(event.signOnId), (event.signOnId != trip.signOnId)))
+            eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), (event.tripStartId != trip.tripStartId)))
             eventList.append(("Travel Time Loaded", "{0:s}".format(str(timedelta(seconds=event.travelLoaded))), False))
             eventList.append(("Travel Time Unloaded", "{0:s}".format(str(timedelta(seconds=event.travelUnloaded))), False))
             eventList.append(("Idle Time Loaded", "{0:s}".format(str(timedelta(seconds=event.idleLoaded))), False))
