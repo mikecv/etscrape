@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>560</width>
-    <height>580</height>
+    <height>600</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,13 +22,13 @@
   <property name="minimumSize">
    <size>
     <width>560</width>
-    <height>580</height>
+    <height>600</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>560</width>
-    <height>580</height>
+    <height>600</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -40,19 +40,19 @@
      <x>10</x>
      <y>115</y>
      <width>265</width>
-     <height>165</height>
+     <height>245</height>
     </rect>
    </property>
    <property name="minimumSize">
     <size>
      <width>265</width>
-     <height>165</height>
+     <height>245</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
      <width>265</width>
-     <height>165</height>
+     <height>245</height>
     </size>
    </property>
    <property name="title">
@@ -68,10 +68,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>Default Slow Zone Speed Limit</string>
+     <string>Zone Output 1 Speed Limit</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lowSpeedVal">
+   <widget class="QLineEdit" name="output1SpeedVal">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -100,10 +100,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>Default Fast Zone Speed Limit</string>
+     <string>Zone Output 2 Speed Limit</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="highSpeedVal">
+   <widget class="QLineEdit" name="output2SpeedVal">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -126,7 +126,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>79</y>
+      <y>150</y>
       <width>191</width>
       <height>20</height>
      </rect>
@@ -139,7 +139,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>100</y>
+      <y>171</y>
       <width>191</width>
       <height>20</height>
      </rect>
@@ -152,7 +152,7 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>100</y>
+      <y>171</y>
       <width>51</width>
       <height>19</height>
      </rect>
@@ -168,7 +168,7 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>79</y>
+      <y>150</y>
       <width>51</width>
       <height>19</height>
      </rect>
@@ -184,7 +184,7 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>142</y>
+      <y>213</y>
       <width>51</width>
       <height>19</height>
      </rect>
@@ -203,7 +203,7 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>121</y>
+      <y>192</y>
       <width>51</width>
       <height>19</height>
      </rect>
@@ -222,7 +222,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>121</y>
+      <y>192</y>
       <width>191</width>
       <height>20</height>
      </rect>
@@ -235,13 +235,109 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>141</y>
+      <y>212</y>
       <width>191</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
      <string>Plot Title Text Font Size</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_39">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>79</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Zone Output 3 Speed Limit</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="output3SpeedVal">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>80</y>
+      <width>51</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string extracomment="Debug level (0-100)"/>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="maxLength">
+     <number>3</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_40">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>101</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Zone Output 4 Speed Limit</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="output4SpeedVal">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>102</y>
+      <width>51</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string extracomment="Debug level (0-100)"/>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="maxLength">
+     <number>3</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_41">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>122</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Open (No Zone) Speed Limit</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="openSpeedVal">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>123</y>
+      <width>51</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string extracomment="Debug level (0-100)"/>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="maxLength">
+     <number>3</number>
     </property>
    </widget>
   </widget>
@@ -853,22 +949,22 @@
   <widget class="QGroupBox" name="localeBox">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>500</y>
-     <width>265</width>
-     <height>70</height>
+     <x>280</x>
+     <y>466</y>
+     <width>260</width>
+     <height>65</height>
     </rect>
    </property>
    <property name="minimumSize">
     <size>
-     <width>265</width>
-     <height>70</height>
+     <width>260</width>
+     <height>65</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
-     <width>265</width>
-     <height>70</height>
+     <width>260</width>
+     <height>65</height>
     </size>
    </property>
    <property name="title">
@@ -878,8 +974,8 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>40</y>
-      <width>191</width>
+      <y>30</y>
+      <width>181</width>
       <height>19</height>
      </rect>
     </property>
@@ -890,8 +986,8 @@
    <widget class="QCheckBox" name="utcVal">
     <property name="geometry">
      <rect>
-      <x>224</x>
-      <y>40</y>
+      <x>213</x>
+      <y>30</y>
       <width>21</width>
       <height>19</height>
      </rect>
@@ -1026,7 +1122,7 @@
    <property name="geometry">
     <rect>
      <x>440</x>
-     <y>530</y>
+     <y>550</y>
      <width>90</width>
      <height>28</height>
     </rect>
@@ -1042,7 +1138,7 @@
    <property name="geometry">
     <rect>
      <x>330</x>
-     <y>530</y>
+     <y>550</y>
      <width>90</width>
      <height>28</height>
     </rect>
@@ -1055,7 +1151,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>286</y>
+     <y>364</y>
      <width>265</width>
      <height>210</height>
     </rect>

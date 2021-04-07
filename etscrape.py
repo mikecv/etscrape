@@ -83,6 +83,7 @@ from eventsChart import *
 # *******************************************
 # TODO List
 #
+# New speed limit parameters outputxSpeedVal and openSpeedVal.
 # Other events for zoners is not right as HARDWARE IGN_ON should not be other event. DONE.
 # Setting event filter doesn't work for zoners. DONE.
 # Zoners do not have signon events so no trips, need to plot in context of power cycles.
