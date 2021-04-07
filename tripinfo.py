@@ -1586,7 +1586,7 @@ class ZoneX():
                 # *********************************************************************************************************************************************
                 else:
                     # Don't include SIGNON, TRIP, TRIPSUMMARY, and TRIPLOAD as they are detected separately.
-                    if event.event not in ["HARDWARE IGN_OFF", "HARDWARE IGN_OFF"]:
+                    if event.event not in ["HARDWARE IGN_ON", "HARDWARE IGN_OFF"]:
 
                         # Indicate that event is OTHER event, i.e. not supported (yet).
                         event.isOther = True

@@ -77,19 +77,24 @@ from eventsChart import *
 #                       Made date/time formatting in scripts generic.
 #                       Changed reporting of speed for Report event to use speed/direction fields.
 #                       Adding support for zone transition event.
+#                       Changed speed plot to support 4 speed zones + open speed zone.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
+# Other events for zoners is not right as HARDWARE IGN_ON should not be other event. DONE.
+# Setting event filter doesn't work for zoners. DONE.
 # Zoners do not have signon events so no trips, need to plot in context of power cycles.
 # Bad SIGNON event 11/09/2020 07:49:47 EVENT 8034 1599810580 0/0/0/29/0 SIGNON * 0 NOCARD 26 1301DE 000478 v:145. 
-# Look at feasibilty of zone change plot. May need to change as for Zoner have 4 zone outputs.
+# Look at feasibilty of zone change plot. May need to change as for Zoner have 4 zone outputs. DONE.
+# Update preferences to set 4 speed zone + open speed zone speeds.
 # Add zone transition event to trip event scraping. DONE.
 # Add zone transition event to trip data screen. DONE.
-# Add zone transition event to trip data totals - new category.
+# Add zone transition event to trip data totals - new category. DONE.
 # Add zone transition event to charts.
 # Add zone transition event to report exports. DONE except for totaliser.
+# Add report export for Zoners.
 # Update help information.
 # *******************************************
 
@@ -611,6 +616,9 @@ class UI(QMainWindow):
                 # Increment number of Zoner ignition cycles.
                 self.numTrips += 1
 
+            # Total ignition cycles (at least ON) in file.
+            logger.info("Zoner ignition cycles in file : {0:d}".format(self.numTrips))
+
             # Update last ignition cycle time to end of file.
             if (self.numTrips > 0):
 
@@ -632,8 +640,8 @@ class UI(QMainWindow):
                 # Update prev/next button states.
                 self.updateTripBtnState()
 
-                # Total ignition cycles (at least ON) in file.
-                logger.info("Zoner ignition cycles in file : {0:d}".format(self.numTrips))
+                # Enable event filter button.
+                self.actionEventFilter.setEnabled(True)
 
                 # Enable expand / collapse buttons.
                 self.actionCollapseAllLevels.setEnabled(True)
@@ -713,7 +721,10 @@ class UI(QMainWindow):
             else:
                 tripTime = "{0:s}".format(unixTimeString(t.tripStart, config.TimeUTC))
                 logger.debug("Adding trip: {0:d}, occurred: {1:s}".format(idx+1, tripTime))
-                tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime, "No trip end."])
+                if self.isZoner == False:
+                    tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime, "No trip end."])
+                else:
+                    tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime, "No ignition cycle end."])
                 tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
                 tripLevel.setForeground(1, QtGui.QBrush(QtGui.QColor(config.TripData["TripColour"])))
                 tripLevel.setForeground(2, QtGui.QBrush(QtGui.QColor(config.TripData["CommentColour"])))
@@ -1039,15 +1050,28 @@ class UI(QMainWindow):
                         filterEvent = "N/A"
                     else:
                         filterEvent = self.currentEventFilter
-                    xf.write("===================================================\n")
-                    xf.write(" This trip export has event filtering applied.\n")
-                    xf.write(" Includes trips with event : {0:s}\n".format(filterEvent))
-                    xf.write(" For trips in alert : {0}\n".format(self.currentEventAlertFilter))
-                    xf.write(" Includes {0:d} of {1:d} trips.\n".format(self.numFilteredTripsIn, self.numTrips))
-                    xf.write("===================================================\n")
-    
+                    if self.isZoner == False:
+                        xf.write("===================================================\n")
+                        xf.write(" This export has event filtering applied.\n")
+                        xf.write(" Includes trips with event : {0:s}\n".format(filterEvent))
+                        xf.write(" For trips in alert : {0}\n".format(self.currentEventAlertFilter))
+                        xf.write(" Includes {0:d} of {1:d} trips.\n".format(self.numFilteredTripsIn, self.numTrips))
+                        xf.write("===================================================\n")
+                    else:
+                        xf.write("===================================================\n")
+                        xf.write(" This export has event filtering applied.\n")
+                        xf.write(" Includes ignition cycles with event : {0:s}\n".format(filterEvent))
+                        xf.write(" For ignition cycles in alert : {0}\n".format(self.currentEventAlertFilter))
+                        xf.write(" Includes {0:d} of {1:d} ignition cycles.\n".format(self.numFilteredTripsIn, self.numTrips))
+                        xf.write("===================================================\n")
+        
                 # Cycle through each trip and export.
-                for tidx, t in enumerate(self.tripLog):
+                if self.isZoner == False:
+                    tLog = self.tripLog
+                else:
+                    tLog = self.zoneXLog
+
+                for tidx, t in enumerate(tLog):
 
                     # If exporting filtered trips then need to check for anything to filter.
                     if filtered:
@@ -1089,20 +1113,23 @@ class UI(QMainWindow):
         xf.write("===================================================\n")
         xf.write("EVENTS (TOTALS)\n")
         xf.write("===================================================\n")
-        xf.write("Vehicle overspeed            : {0:d}\n".format(ti.numOverspeed))
-        xf.write("Zone overspeed               : {0:d}\n".format(ti.numZoneOverspeed))
-        xf.write("Engine overspeed             : {0:d}\n".format(ti.numEngineOverspeed))
-        xf.write("Engine coolant level low     : {0:d}\n".format(ti.numLowCoolant))
-        xf.write("Engine oil pressure low      : {0:d}\n".format(ti.numOilPressure))
-        xf.write("Engine temperature high      : {0:d}\n".format(ti.numEngineTemperature))
-        xf.write("Seatbelt unbuckled operator  : {0:d}\n".format(ti.numUnbuckled_O))
-        xf.write("Seatbelt unbuckled passenger : {0:d}\n".format(ti.numUnbuckled_P))
-        xf.write("Impact Critical              : {0:d}\n".format(ti.numImpact_H))
-        xf.write("Impact High                  : {0:d}\n".format(ti.numImpact_M))
-        xf.write("Impact Low                   : {0:d}\n".format(ti.numImpact_L))
-        xf.write("Zone change                  : {0:d}\n".format(ti.numZoneChange))
-        xf.write("Zone transition              : {0:d}\n".format(-99))
-        xf.write("Checklist                    : {0:d}\n".format(ti.numChecklist))
+        if self.isZoner == False:
+            xf.write("Vehicle overspeed            : {0:d}\n".format(ti.numOverspeed))
+            xf.write("Zone overspeed               : {0:d}\n".format(ti.numZoneOverspeed))
+            xf.write("Engine overspeed             : {0:d}\n".format(ti.numEngineOverspeed))
+            xf.write("Engine coolant level low     : {0:d}\n".format(ti.numLowCoolant))
+            xf.write("Engine oil pressure low      : {0:d}\n".format(ti.numOilPressure))
+            xf.write("Engine temperature high      : {0:d}\n".format(ti.numEngineTemperature))
+            xf.write("Seatbelt unbuckled operator  : {0:d}\n".format(ti.numUnbuckled_O))
+            xf.write("Seatbelt unbuckled passenger : {0:d}\n".format(ti.numUnbuckled_P))
+            xf.write("Impact Critical              : {0:d}\n".format(ti.numImpact_H))
+            xf.write("Impact High                  : {0:d}\n".format(ti.numImpact_M))
+            xf.write("Impact Low                   : {0:d}\n".format(ti.numImpact_L))
+            xf.write("Zone change                  : {0:d}\n".format(ti.numZoneChange))
+            xf.write("Checklist                    : {0:d}\n".format(ti.numChecklist))
+        else:
+            xf.write("Zone change                  : {0:d}\n".format(ti.numZoneChange))
+            xf.write("Zone transition              : {0:d}\n".format(ti.numTransition))
         xf.write("===================================================\n")
         xf.write("===================================================\n")
         xf.write("EVENTS (DETAILS)\n")
@@ -1111,91 +1138,90 @@ class UI(QMainWindow):
             xf.write("{0:s}\n".format(ev.event))
             xf.write("\tTime              : {0:s}\n".format(unixTimeString(ev.serverTime, config.TimeUTC)))
             if (ev.event == "SIGNON"):
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tDriver ID         : {0:s}\n".format(ev.driverId))
-                xf.write("\tCard ID           : {0:d} (0x{0:0X})\n".format(ev.cardId))
-                xf.write("\tResult            : {0:s}\n".format(ev.result))
-                xf.write("\tBits Read         : {0:d}\n".format(ev.bitsRead))
-                xf.write("\tKeyboard          : {0:s}\n".format(ev.keyboard))
-                xf.write("\tCard Reader       : {0:s}\n".format(ev.cardReader))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tDriver ID            : {0:s}\n".format(ev.driverId))
+                xf.write("\tCard ID              : {0:d} (0x{0:0X})\n".format(ev.cardId))
+                xf.write("\tResult               : {0:s}\n".format(ev.result))
+                xf.write("\tBits Read            : {0:d}\n".format(ev.bitsRead))
+                xf.write("\tKeyboard             : {0:s}\n".format(ev.keyboard))
+                xf.write("\tCard Reader          : {0:s}\n".format(ev.cardReader))
             elif (ev.event == "OVERSPEED"):
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tDuration             : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
             elif (ev.event == "ZONEOVERSPEED"):
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
-                xf.write("\tMaximum Speed     : {0:d}\n".format(ev.maxSpeed))
-                xf.write("\tZone Output       : {0:d}\n".format(ev.zoneOutput))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tDuration             : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
+                xf.write("\tMaximum Speed        : {0:d}\n".format(ev.maxSpeed))
+                xf.write("\tZone Output          : {0:d}\n".format(ev.zoneOutput))
             elif (ev.event == "ENGINEOVERSPEED"):
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
-                xf.write("\tMaximum RPM       : {0:d}\n".format(ev.maxRPM))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tDuration             : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
+                xf.write("\tMaximum RPM          : {0:d}\n".format(ev.maxRPM))
             elif ev.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP"}:
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tDuration             : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
             elif ev.event == "UNBUCKLED":
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tDuration          : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tDuration             : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
                 if ev.seatOwner == "D":
                     seatOwner = "Operator"
                 elif ev.seatOwner == "P":
                     seatOwner = "Passenger"
                 else:
                     seatOwner = "?"
-                xf.write("\tSeat Owner        : {0:s}\n".format(seatOwner))
+                xf.write("\tSeat Owner           : {0:s}\n".format(seatOwner))
             elif ev.event == "ZONECHANGE":
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tFrom Zone         : {0:d}\n".format(ev.fromZone))
-                xf.write("\tTo Zone           : {0:d}\n".format(ev.toZone))
-                xf.write("\tZone Output       : {0:d}\n".format(ev.zoneOutput))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tFrom Zone            : {0:d}\n".format(ev.fromZone))
+                xf.write("\tTo Zone              : {0:d}\n".format(ev.toZone))
+                xf.write("\tZone Output          : {0:d}\n".format(ev.zoneOutput))
             elif ev.event == "ZONETRANSITION":
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tFrom Zone         : {0:d}\n".format(ev.fromZone))
-                xf.write("\tTo Zone           : {0:d}\n".format(ev.toZone))
-                xf.write("\tFrom Zone Output  : {0:d}\n".format(ev.fromZoneOutput))
-                xf.write("\tTo Zone Output    : {0:d}\n".format(ev.toZoneOutput))
-                xf.write("\tTransition        : {0:s}\n".format(ev.transition))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tFrom Zone            : {0:d}\n".format(ev.fromZone))
+                xf.write("\tTo Zone              : {0:d}\n".format(ev.toZone))
+                xf.write("\tTo Zone Output       : {0:d}\n".format(ev.toZoneOutput))
+                xf.write("\tTransition           : {0:s}\n".format(ev.transition))
             elif ev.event == "IMPACT":
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tForward G         : {0:0.1f}\n".format(ev.fwdG))
-                xf.write("\tReverse G         : {0:0.1f}\n".format(ev.revG))
-                xf.write("\tLeft G            : {0:0.1f}\n".format(ev.leftG))
-                xf.write("\tRight G           : {0:0.1f}\n".format(ev.rightG))
-                xf.write("\tMax G (1)         : {0:0.1f}\n".format(ev.maxG1))
-                xf.write("\tMax G (2)         : {0:0.1f}\n".format(ev.maxG2))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tForward G            : {0:0.1f}\n".format(ev.fwdG))
+                xf.write("\tReverse G            : {0:0.1f}\n".format(ev.revG))
+                xf.write("\tLeft G               : {0:0.1f}\n".format(ev.leftG))
+                xf.write("\tRight G              : {0:0.1f}\n".format(ev.rightG))
+                xf.write("\tMax G (1)            : {0:0.1f}\n".format(ev.maxG1))
+                xf.write("\tMax G (2)            : {0:0.1f}\n".format(ev.maxG2))
                 if ev.severity == "C":
                     severity = "High"
                 elif ev.severity == "W":
                     severity = "Medium"
                 elif ev.severity == "-":
                     severity = "Low"
-                xf.write("\tSeverity          : {0:s}\n".format(severity))
+                xf.write("\tSeverity             : {0:s}\n".format(severity))
             elif ev.event == "CHECKLIST":
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tResult            : {0:s}\n".format(ev.result))
-                xf.write("\tFailed Questions  : {0:d}\n".format(ev.failedQ))
-                xf.write("\tTime Taken        : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
-                xf.write("\tChecklist Version : {0:d}\n".format(ev.failedQ))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tResult               : {0:s}\n".format(ev.result))
+                xf.write("\tFailed Questions     : {0:d}\n".format(ev.failedQ))
+                xf.write("\tTime Taken           : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
+                xf.write("\tChecklist Version    : {0:d}\n".format(ev.failedQ))
                 if ev.chkType == "F":
                     chkType = "Full"
                 elif ev.chkType == "P":
@@ -1204,70 +1230,70 @@ class UI(QMainWindow):
                     chkType = "Bypass"
                 else:
                     chkType = "?"
-                xf.write("\tChecklist Type    : {0:s}\n".format(chkType))
+                xf.write("\tChecklist Type       : {0:s}\n".format(chkType))
             elif ev.event == "CLFAIL":
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tFailed Question   : {0:d}\n".format(ev.failedQNo))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tFailed Question      : {0:d}\n".format(ev.failedQNo))
             elif ev.event == "XSIDLESTART":
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
             elif ev.event == "XSIDLE":
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tMaximum Idle Time : {0:s}\n".format(str(timedelta(seconds=ev.maxIdle))))
-                xf.write("\tIdle Reason       : {0:d}\n".format(ev.xsidleReason))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tMaximum Idle Time    : {0:s}\n".format(str(timedelta(seconds=ev.maxIdle))))
+                xf.write("\tIdle Reason          : {0:d}\n".format(ev.xsidleReason))
             elif ev.event == "SERVICE":
-                xf.write("\tService ID        : {0:d}\n".format(ev.serviceId))
+                xf.write("\tService ID           : {0:d}\n".format(ev.serviceId))
             elif ev.event == "REPORT":
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tReport Speed      : {0:d}\n".format(ev.speed))
-                xf.write("\tDirection         : {0:d}\n".format(ev.direction))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tReport Speed         : {0:d}\n".format(ev.speed))
+                xf.write("\tDirection            : {0:d}\n".format(ev.direction))
             elif ev.event == "CRITICALOUTPUTSET":
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tCritical Output   : {0:d}\n".format(ev.criticalOutput))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tCritical Output      : {0:d}\n".format(ev.criticalOutput))
             elif ((ev.event == "OOS PM") or (ev.event == "OOS UPM")):
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tOOS Reason        : {0:d}\n".format(ev.oosReason))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tOOS Reason           : {0:d}\n".format(ev.oosReason))
             elif ev.event == "INPUT":
-                xf.write("\tInput             : {0:d} - {1:s}\n".format(ev.inputNo, config.Channels[ev.inputNo - 1]["Name"]))
-                xf.write("\tState             : {0:d}\n".format(ev.inputState))
-                xf.write("\tActive Time       : {0:s}\n".format(str(timedelta(seconds=ev.activeTime))))
+                xf.write("\tInput                : {0:d} - {1:s}\n".format(ev.inputNo, config.Channels[ev.inputNo - 1]["Name"]))
+                xf.write("\tState                : {0:d}\n".format(ev.inputState))
+                xf.write("\tActive Time          : {0:s}\n".format(str(timedelta(seconds=ev.activeTime))))
             elif ev.event == "POWER":
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tBattery State     : {0:s}\n".format(ev.batteryState))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tBattery State        : {0:s}\n".format(ev.batteryState))
             elif ev.event == "DEBUG":
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tDetails           : {0:s}\n".format(ev.debugInfo))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tDetails              : {0:s}\n".format(ev.debugInfo))
             elif ev.event == "TRIP":
-                xf.write("\tBattery Voltage   : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tCurrent Speed     : {0:d}\n".format(ev.speed))
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tTime Forward      : {0:s}\n".format(str(timedelta(seconds=ev.timeFwd))))
-                xf.write("\tTime Reverse      : {0:s}\n".format(str(timedelta(seconds=ev.timeRev))))
-                xf.write("\tTime Idle         : {0:s}\n".format(str(timedelta(seconds=ev.timeIdle))))
-                xf.write("\tMax Idle Time     : {0:s}\n".format(str(timedelta(seconds=ev.maxIdle))))
-                xf.write("\tTime on Seat      : {0:s}\n".format(str(timedelta(seconds=ev.timeOnSeat))))
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tTime Forward         : {0:s}\n".format(str(timedelta(seconds=ev.timeFwd))))
+                xf.write("\tTime Reverse         : {0:s}\n".format(str(timedelta(seconds=ev.timeRev))))
+                xf.write("\tTime Idle            : {0:s}\n".format(str(timedelta(seconds=ev.timeIdle))))
+                xf.write("\tMax Idle Time        : {0:s}\n".format(str(timedelta(seconds=ev.maxIdle))))
+                xf.write("\tTime on Seat         : {0:s}\n".format(str(timedelta(seconds=ev.timeOnSeat))))
             elif ev.event == "TRIPSUMMARY":
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
             elif ev.event == "TRIPLOAD":
-                xf.write("\tSign-on ID        : {0:d}\n".format(ev.tripStartId))
-                xf.write("\tTravel Loaded     : {0:d}\n".format(str(timedelta(seconds=ev.travelLoaded))))
-                xf.write("\tTravel Unloaded   : {0:d}\n".format(str(timedelta(seconds=ev.travelUnloaded))))
-                xf.write("\tIdle Loaded       : {0:d}\n".format(str(timedelta(seconds=ev.idleLoaded))))
-                xf.write("\tIdle Unloaded     : {0:d}\n".format(str(timedelta(seconds=ev.idleUnloaded))))
-                xf.write("\tLift Count        : {0:d}\n".format(ev.liftCount))
-                xf.write("\tCummulative Lift  : {0:d}\n".format(ev.cumWeight))
+                xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
+                xf.write("\tTravel Loaded        : {0:d}\n".format(str(timedelta(seconds=ev.travelLoaded))))
+                xf.write("\tTravel Unloaded      : {0:d}\n".format(str(timedelta(seconds=ev.travelUnloaded))))
+                xf.write("\tIdle Loaded          : {0:d}\n".format(str(timedelta(seconds=ev.idleLoaded))))
+                xf.write("\tIdle Unloaded        : {0:d}\n".format(str(timedelta(seconds=ev.idleUnloaded))))
+                xf.write("\tLift Count           : {0:d}\n".format(ev.liftCount))
+                xf.write("\tCummulative Lift     : {0:d}\n".format(ev.cumWeight))
         xf.write("===================================================\n\n")
 
     # *******************************************
@@ -1345,7 +1371,7 @@ class UI(QMainWindow):
 
             # Check if there are any entries visible after filtering, if not advise user.
             if self.numFilteredTripsIn == 0:
-                showPopup("Filter", "No Trip/Event matching filter criteria.", "(Change filter settings)")
+                showPopup("Filter", "No events matching filter criteria.", "(Change filter settings)")
 
         else:
             # Need to clear the filter, i.e. show all items.

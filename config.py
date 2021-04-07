@@ -72,13 +72,15 @@ class Config():
         }
 
         # Speed plot data.
+        # Zone speeds are open speed followed by 4 speed zones.
         self.SpdPlot = {
             "DefaultLowLimit": 30,
             "DefaultHiLimit": 60,
             "SpeedColour": "#0000ff",
             "ZoneColour": "#ff0000",
             "AxesTitleFontSize": 7,
-            "PlotTitleFontSize": 10
+            "PlotTitleFontSize": 10,
+            "zoneSpeed" : [60, 10, 20, 30, 40]
         }
 
         # Event plot data.

@@ -125,15 +125,10 @@ class SpeedCanvas(FigureCanvasQTAgg):
         for zl in tObj.zoneXings:
             # Format time axis list in the correct timezone for display.
             tList.append(timeTZ(zl.time, self.cfg.TimeUTC))
-            if zl.zoneOutput == 1:
-                # Slow zone.
-                zList.append(self.cfg.SpdPlot["DefaultLowLimit"])
-            elif zl.zoneOutput == 2:
-                # Fast zone.
-                zList.append(self.cfg.SpdPlot["DefaultHiLimit"])
-            else:
-                # Open zone.
-                zList.append(0)
+            # Plot the zone change trace.
+            # There are 4 speed zones plus one open speed zone.
+            # Speed zone 0 is the open speed zone, followed by the 4 speed zones.
+            zList.append(self.cfg.SpdPlot["zoneSpeed"][zl.zoneOutput])
 
         # Clear old zone data.
         self.zone.set_xdata([])
