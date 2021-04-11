@@ -78,18 +78,19 @@ from eventsChart import *
 #                       Changed reporting of speed for Report event to use speed/direction fields.
 #                       Adding support for zone transition event.
 #                       Changed speed plot to support 4 speed zones + open speed zone.
+#                       Fixed preferences dialog, apply button.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
-# New speed limit parameters outputxSpeedVal and openSpeedVal.
+# New speed limit parameters outputxSpeedVal and openSpeedVal. DONE.
 # Other events for zoners is not right as HARDWARE IGN_ON should not be other event. DONE.
 # Setting event filter doesn't work for zoners. DONE.
 # Zoners do not have signon events so no trips, need to plot in context of power cycles.
 # Bad SIGNON event 11/09/2020 07:49:47 EVENT 8034 1599810580 0/0/0/29/0 SIGNON * 0 NOCARD 26 1301DE 000478 v:145. 
 # Look at feasibilty of zone change plot. May need to change as for Zoner have 4 zone outputs. DONE.
-# Update preferences to set 4 speed zone + open speed zone speeds.
+# Update preferences to set 4 speed zone + open speed zone speeds. DONE.
 # Add zone transition event to trip event scraping. DONE.
 # Add zone transition event to trip data screen. DONE.
 # Add zone transition event to trip data totals - new category. DONE.
@@ -1797,11 +1798,28 @@ class PreferencesDialog(QDialog):
 
         # Speed plot values.
         # Validate lowSpeedVal 1 to 160.
-        self.lowSpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
-        self.lowSpeedVal.setText(str(self.config.SpdPlot["DefaultLowLimit"]))
+        # self.lowSpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
+        # self.lowSpeedVal.setText(str(self.config.SpdPlot["DefaultLowLimit"]))
+
+
+        self.openSpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
+        self.openSpeedVal.setText(str(self.config.SpdPlot["zoneSpeed"][0]))
+        self.output1SpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
+        self.output1SpeedVal.setText(str(self.config.SpdPlot["zoneSpeed"][1]))
+        self.output2SpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
+        self.output2SpeedVal.setText(str(self.config.SpdPlot["zoneSpeed"][2]))
+        self.output3SpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
+        self.output3SpeedVal.setText(str(self.config.SpdPlot["zoneSpeed"][3]))
+        self.output4SpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
+        self.output4SpeedVal.setText(str(self.config.SpdPlot["zoneSpeed"][4]))
+
+
+
         # Validate highSpeedVal 1 to 160.
-        self.highSpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
-        self.highSpeedVal.setText(str(self.config.SpdPlot["DefaultHiLimit"]))
+        # self.highSpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
+        # self.highSpeedVal.setText(str(self.config.SpdPlot["DefaultHiLimit"]))
+
+        # Speed line colours.
         self.speedLineColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.SpdPlot["SpeedColour"]))
         self.speedLineColVal.clicked.connect(lambda: self.getColour(self.speedLineColVal))
         self.zoneLineColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.SpdPlot["ZoneColour"]))
@@ -2093,19 +2111,51 @@ class PreferencesDialog(QDialog):
         ###########################
         # Speed Plot Data
         ###########################
-        # Default slow zone speed limit.
-        val = int(self.lowSpeedVal.text())
-        if val != self.config.SpdPlot["DefaultLowLimit"]:
+        # # Default slow zone speed limit.
+        # val = int(self.lowSpeedVal.text())
+        # if val != self.config.SpdPlot["DefaultLowLimit"]:
+        #     # Set the configuration value.
+        #     self.config.SpdPlot["DefaultLowLimit"] = val
+        #     logger.debug("Change to default slow zone speed limit: {0:d}".format(self.config.SpdPlot["DefaultLowLimit"]))
+        #     prefChanged = True
+        # # Default fast zone speed limit.
+        # val = int(self.highSpeedVal.text())
+        # if val != self.config.SpdPlot["DefaultHiLimit"]:
+        #     # Set the configuration value.
+        #     self.config.SpdPlot["DefaultHiLimit"] = val
+        #     logger.debug("Change to default fast zone speed limit: {0:d}".format(self.config.SpdPlot["DefaultHiLimit"]))
+        #     prefChanged = True
+        # Open (zone 0) speed limits.
+        val = int(self.openSpeedVal.text())
+        if val != self.config.SpdPlot["zoneSpeed"][1]:
             # Set the configuration value.
-            self.config.SpdPlot["DefaultLowLimit"] = val
-            logger.debug("Change to default slow zone speed limit: {0:d}".format(self.config.SpdPlot["DefaultLowLimit"]))
+            self.config.SpdPlot["zoneSpeed"][0] = val
+            logger.debug("Change to open speed limit: {0:d}".format(self.config.SpdPlot["zoneSpeed"][0]))
             prefChanged = True
-        # Default fast zone speed limit.
-        val = int(self.highSpeedVal.text())
-        if val != self.config.SpdPlot["DefaultHiLimit"]:
+        # Zone speed limits.
+        val = int(self.output1SpeedVal.text())
+        if val != self.config.SpdPlot["zoneSpeed"][1]:
             # Set the configuration value.
-            self.config.SpdPlot["DefaultHiLimit"] = val
-            logger.debug("Change to default fast zone speed limit: {0:d}".format(self.config.SpdPlot["DefaultHiLimit"]))
+            self.config.SpdPlot["zoneSpeed"][1] = val
+            logger.debug("Change to zone 1 speed limit: {0:d}".format(self.config.SpdPlot["zoneSpeed"][1]))
+            prefChanged = True
+        val = int(self.output2SpeedVal.text())
+        if val != self.config.SpdPlot["zoneSpeed"][2]:
+            # Set the configuration value.
+            self.config.SpdPlot["zoneSpeed"][2] = val
+            logger.debug("Change to zone 2 speed limit: {0:d}".format(self.config.SpdPlot["zoneSpeed"][2]))
+            prefChanged = True
+        val = int(self.output3SpeedVal.text())
+        if val != self.config.SpdPlot["zoneSpeed"][3]:
+            # Set the configuration value.
+            self.config.SpdPlot["zoneSpeed"][3] = val
+            logger.debug("Change to zone 3 speed limit: {0:d}".format(self.config.SpdPlot["zoneSpeed"][3]))
+            prefChanged = True
+        val = int(self.output4SpeedVal.text())
+        if val != self.config.SpdPlot["zoneSpeed"][4]:
+            # Set the configuration value.
+            self.config.SpdPlot["zoneSpeed"][4] = val
+            logger.debug("Change to zone 4 speed limit: {0:d}".format(self.config.SpdPlot["zoneSpeed"][4]))
             prefChanged = True
         # Speed line colour.
         col = self.speedLineColVal.palette().button().color().name()
@@ -2196,9 +2246,6 @@ class PreferencesDialog(QDialog):
             logger.debug("Change to event plot title text font size: {0:d}".format(self.config.EvPlot["PlotTitleFontSize"]))
             prefChanged = True
 
-        # Cancel, so close dialog.
-        self.close()
-
         # Save the configuration values (if changed).
         if prefChanged:
             logger.debug("Changes saved to preferences.")
@@ -2207,6 +2254,9 @@ class PreferencesDialog(QDialog):
         # Rerender display if UI preference changed.
         if rerender:
             self.app.rerenderTripData()
+
+        # Close dialog.
+        self.close()
 
 # *******************************************
 # Events Chart Config dialog class.
@@ -2516,6 +2566,8 @@ class ChangeLogDialog(QDialog):
             "<li>Fixed SIGNON event where battery voltage was not parsed properly.</li>" \
             "<li>Change date and time formatting in charts to be generic (automatic).</li>" \
             "<li>Changed reporting of speed for Report event to use speed/direction fields.</li>" \
+            "<li>Fixed bug with edit preference dialog and applying changes.</li>" \
+            "<li>Added INPUT event to event filtering options.</li>" \
             "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.13</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\

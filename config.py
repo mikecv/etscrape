@@ -10,7 +10,7 @@ class Config():
     def __init__(self):
 
         # Version of configuration.
-        self.ConfigVersion = 12
+        self.ConfigVersion = 13
 
         # Logger configuration values
         self.DebugLevel = 20
@@ -43,7 +43,7 @@ class Config():
 
         # Supported Events (for event filtering)
         self.filterEvents = ["CHECKLIST", "CLFAIL", "CRITICALOUTPUTSET", "DEBUG", "Time1H", "Time1H INV", "Time1H (BAD)",
-            "ENGINEOVERSPEED", "ENGINETEMP", "IMPACT", "LOWCOOLANT", "OFFSEAT", "OILPRESSURE",
+            "ENGINEOVERSPEED", "ENGINETEMP", "IMPACT", "INPUT", "LOWCOOLANT", "OFFSEAT", "OILPRESSURE",
             "OVERLOAD", "OVERSPEED", "POWER", "TRIPLOAD", "TRIPSUMMARY", "UNBUCKLED", "XSIDLE",
             "ZONECHANGE", "ZONETRANSITION", "ZONEOVERSPEED"]
 
@@ -74,8 +74,6 @@ class Config():
         # Speed plot data.
         # Zone speeds are open speed followed by 4 speed zones.
         self.SpdPlot = {
-            "DefaultLowLimit": 30,
-            "DefaultHiLimit": 60,
             "SpeedColour": "#0000ff",
             "ZoneColour": "#ff0000",
             "AxesTitleFontSize": 7,
@@ -269,42 +267,38 @@ class Config():
                 # *********************************************************
                 # Checking elements of SpdPlot from user configuration (json).
                 # *********************************************************
-                # Try setting DefaultLowLimit from user configuration (json).
+                # Try setting zone speed limits (including open) from user configuration (json).
                 try:
-                    paramSaved = self.SpdPlot["DefaultLowLimit"]
-                    self.SpdPlot["DefaultLowLimit"] = config["SpdPlot"]["DefaultLowLimit"]
+                    paramSaved = self.SpdPlot["zoneSpeed"]
+                    self.SpdPlot["zoneSpeed"] = config["SpdPlot"]["zoneSpeed"]
+                    if len(self.SpdPlot["zoneSpeed"]) != 5:
+                        self.SpdPlot["zoneSpeed"] = paramSaved
+                        updateConfig = True
                 except Exception:
-                    self.SpdPlot["DefaultLowLimit"] = paramSaved
+                    self.SpdPlot["zoneSpeed"] = paramSaved
                     updateConfig = True
-                # Try setting DefaultHiLimit from user configuration (json).
-                try:
-                    paramSaved = self.SpdPlot["DefaultHiLimit"]
-                    self.SpdPlot["DefaultHiLimit"] = config["SpdPlot"]["DefaultHiLimit"]
-                except Exception:
-                    self.SpdPlot["DefaultHiLimit"] = paramSaved
-                    updateConfig = True
-                 # Try setting SpeedColour from user configuration (json).
+                # Try setting SpeedColour from user configuration (json).
                 try:
                     paramSaved = self.SpdPlot["SpeedColour"]
                     self.SpdPlot["SpeedColour"] = config["SpdPlot"]["SpeedColour"]
                 except Exception:
                     self.SpdPlot["SpeedColour"] = paramSaved
                     updateConfig = True
-                 # Try setting ZoneColour from user configuration (json).
+                # Try setting ZoneColour from user configuration (json).
                 try:
                     paramSaved = self.SpdPlot["ZoneColour"]
                     self.SpdPlot["ZoneColour"] = config["SpdPlot"]["ZoneColour"]
                 except Exception:
                     self.SpdPlot["ZoneColour"] = paramSaved
                     updateConfig = True
-                 # Try setting AxesTitleFontSize from user configuration (json).
+                # Try setting AxesTitleFontSize from user configuration (json).
                 try:
                     paramSaved = self.SpdPlot["AxesTitleFontSize"]
                     self.SpdPlot["AxesTitleFontSize"] = config["SpdPlot"]["AxesTitleFontSize"]
                 except Exception:
                     self.SpdPlot["AxesTitleFontSize"] = paramSaved
                     updateConfig = True
-                 # Try setting PlotTitleFontSize from user configuration (json).
+                # Try setting PlotTitleFontSize from user configuration (json).
                 try:
                     paramSaved = self.SpdPlot["PlotTitleFontSize"]
                     self.SpdPlot["PlotTitleFontSize"] = config["SpdPlot"]["PlotTitleFontSize"]
