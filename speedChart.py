@@ -122,11 +122,12 @@ class SpeedCanvas(FigureCanvasQTAgg):
         else:
             tObj = self.data.zoneXLog[No-1]
 
+        # Add zone crossings.
         for zl in tObj.zoneXings:
             # Format time axis list in the correct timezone for display.
             tList.append(timeTZ(zl.time, self.cfg.TimeUTC))
             # Plot the zone change trace.
-            # There are 4 speed zones plus one open speed zone.
+            # There are 4 speed zones plus one open speed zone (at the start).
             # Speed zone 0 is the open speed zone, followed by the 4 speed zones.
             zList.append(self.cfg.SpdPlot["zoneSpeed"][zl.zoneOutput])
 

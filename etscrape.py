@@ -78,25 +78,12 @@ from eventsChart import *
 #                       Changed reporting of speed for Report event to use speed/direction fields.
 #                       Adding support for zone transition event.
 #                       Changed speed plot to support 4 speed zones + open speed zone.
+#                       Changed chart for ZONECHANGE event to support 4 speed zones + open speed zone.
 #                       Fixed preferences dialog, apply button.
 # *******************************************
 
 # *******************************************
 # TODO List
-#
-# New speed limit parameters outputxSpeedVal and openSpeedVal. DONE.
-# Other events for zoners is not right as HARDWARE IGN_ON should not be other event. DONE.
-# Setting event filter doesn't work for zoners. DONE.
-# Zoners do not have signon events so no trips, need to plot in context of power cycles.
-# Bad SIGNON event 11/09/2020 07:49:47 EVENT 8034 1599810580 0/0/0/29/0 SIGNON * 0 NOCARD 26 1301DE 000478 v:145. 
-# Look at feasibilty of zone change plot. May need to change as for Zoner have 4 zone outputs. DONE.
-# Update preferences to set 4 speed zone + open speed zone speeds. DONE.
-# Add zone transition event to trip event scraping. DONE.
-# Add zone transition event to trip data screen. DONE.
-# Add zone transition event to trip data totals - new category. DONE.
-# Add zone transition event to charts.
-# Add zone transition event to report exports. DONE except for totaliser.
-# Add report export for Zoners.
 # Update help information.
 # *******************************************
 
@@ -1010,7 +997,10 @@ class UI(QMainWindow):
                 xf = open(filenames[0], "w")
 
                 # Export selected trip.
-                self.exportTrip(xf, self.tripLog[self.selectedTrip - 1])
+                if self.isZoner == False:
+                    self.exportTrip(xf, self.tripLog[self.selectedTrip - 1])
+                else:
+                    self.exportTrip(xf, self.zoneXLog[self.selectedTrip - 1])
 
                 logger.info("Opened and wrote export file : {0:s}".format(filenames[0]))
                 self.showTempStatusMsg("{0:s}".format(filenames[0]), config.TripData["TmpStatusMessagesMsec"])
@@ -1101,11 +1091,17 @@ class UI(QMainWindow):
         # Export trip data to file.
         logger.debug("Exporting trip report for Trip ID: {0:d}".format(ti.tripStartId))
         xf.write("===================================================\n")
-        xf.write("              ____  ____  ____  ____ \n")
-        xf.write("             (_  _)(  _ \(_  _)(  _ \\\n")
-        xf.write("               )(   )   / _)(_  )___/\n")
-        xf.write("              (__) (_)\_)(____)(__)  \n")
-        xf.write("                                     \n")
+        if self.isZoner == False:
+            xf.write("              ____  ____  ____  ____ \n")
+            xf.write("             (_  _)(  _ \(_  _)(  _ \\\n")
+            xf.write("               )(   )   / _)(_  )___/\n")
+            xf.write("              (__) (_)\_)(____)(__)  \n")
+            xf.write("                                     \n")
+        else:
+            xf.write("           ____  _____  _  _  ____  ____ \n")
+            xf.write("          (_   )(  _  )( \( )( ___)(  _ \\\n")
+            xf.write("           / /_  )(_)(  )  (  )__)  )   /\n")
+            xf.write("          (____)(_____)(_)\_)(____)(_)\_)\n")
         xf.write("===================================================\n")
         xf.write("Controller ID  : {0:d}\n".format(self.controllerID))
         xf.write("Signon ID      : {0:d}\n".format(ti.tripStartId))
@@ -1138,7 +1134,7 @@ class UI(QMainWindow):
         xf.write("===================================================\n")
         for ev in ti.events:
             xf.write("{0:s}\n".format(ev.event))
-            xf.write("\tTime              : {0:s}\n".format(unixTimeString(ev.serverTime, config.TimeUTC)))
+            xf.write("\tTime                 : {0:s}\n".format(unixTimeString(ev.serverTime, config.TimeUTC)))
             if (ev.event == "SIGNON"):
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
@@ -2563,9 +2559,12 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.14</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added support for ZONETRANSITION events.</li>" \
+            "<li>Changed chart for ZONECHANGE even to support 4 zone outputs plus 1 open output..</li>" \
+            "<li>Updated report exports to handle Zoners as well.</li>" \
             "<li>Fixed SIGNON event where battery voltage was not parsed properly.</li>" \
             "<li>Change date and time formatting in charts to be generic (automatic).</li>" \
             "<li>Changed reporting of speed for Report event to use speed/direction fields.</li>" \
+            "<li>Fixed bug displaying data and charts for trips with no events other than the SIGNON event.</li>" \
             "<li>Fixed bug with edit preference dialog and applying changes.</li>" \
             "<li>Added INPUT event to event filtering options.</li>" \
             "</ul><br>")

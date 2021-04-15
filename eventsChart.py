@@ -151,9 +151,9 @@ class EventCanvas(FigureCanvasQTAgg):
         # Look for TRIP event as we don't want to report after that.
         endEvent = 0
         tripEnded = False
-        tripJustSignon = False
-        if len(tObj.events) == 1:
-            tripJustSignon = True
+        if len(tObj.events) == 0:
+            # If trip does not have any events other than sign-on then nothing to plot so return.
+            return
         else:
             for idx, ev in enumerate(tObj.events):
                 if ev.event == "TRIP":
@@ -369,9 +369,11 @@ class EventCanvas(FigureCanvasQTAgg):
                             eList.append(0)
                             markerIdx += 1
                             tList.append(timeTZ((ev.serverTime - ev.duration), self.cfg.TimeUTC))
-                            # Set the height of the trace according to the zone output (2 levels)
-                            if ev.zoneOutput == 1:
-                                tLevel = 0.5
+                            # Set the height of the trace according to the zone output (5 levels, 4 zones plus 1 open zone)
+                            if ev.zoneOutput > 0:
+                                tLevel = ev.zoneOutput * 0.2
+                            # if ev.zoneOutput == 1:
+                            #     tLevel = 0.5
                             else:
                                 tLevel = 1.0
                             eList.append(tLevel)
@@ -552,8 +554,8 @@ class EventCanvas(FigureCanvasQTAgg):
                 self.traces[self.numEvCharts - idx][1].set_yticklabels(["Entry", "Exit"], color='cornflowerblue')
                 self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
             elif t["Event"] == "ZONECHANGE":
-                self.traces[self.numEvCharts - idx][1].set_yticks([0.5, 1.0])
-                self.traces[self.numEvCharts - idx][1].set_yticklabels(["Slow", "Fast"], color='cornflowerblue')
+                self.traces[self.numEvCharts - idx][1].set_yticks([0.2, 0.4, 0.6, 0.8, 1.0])
+                self.traces[self.numEvCharts - idx][1].set_yticklabels(["ZO-1", "ZO-2", "ZO-3", "ZO-4", "Open Zone"], color='cornflowerblue')
                 self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
             elif t["Event"] == "UNBUCKLED":
                 self.traces[self.numEvCharts - idx][1].set_yticks([0.5, 1.0])

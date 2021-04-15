@@ -99,24 +99,12 @@
             "Title": "Vehicle Speed"
         },
         {
-            "Event": "ENGINEOVERSPEED",
-            "Title": "Engine Overspeed"
+            "Event": "ZONECHANGE",
+            "Title": "Zone Change"
         },
         {
-            "Event": "OILPRESSURE",
-            "Title": "Engine Oil Pressure Low"
-        },
-        {
-            "Event": "INPUT",
-            "Channel": 1
-        },
-        {
-            "Event": "INPUT",
-            "Channel": 3
-        },
-        {
-            "Event": "INPUT",
-            "Channel": 4
+            "Event": "ZONETRANSITION",
+            "Title": "Zone Transition"
         }
     ]
 }
