@@ -209,7 +209,7 @@ class UI(QMainWindow):
 
         # Flag indicating no data to show.
         # And flag indicating no trip selected.
-        # Use these same variables for ignition cycles (Zoner) as well as actual trips.
+        # Use these same variables for power cycles (Zoner) as well as actual trips.
         self.haveTrips = False
         self.numTrips = 0
         self.selectedTrip = 0
@@ -531,9 +531,9 @@ class UI(QMainWindow):
             self.ctrlLbl.setText(str(self.controllerID))
             logger.info("Detected Controller ID : {0:d}".format(self.controllerID))
         else:
-            logger.warning("No Controller ID for trip / ignition cycle.")
+            logger.warning("No Controller ID for trip / power cycle.")
 
-        # Look for all trips / ignition cycles in the log file.
+        # Look for all trips / power cycles in the log file.
         self.numTrips = 0
         self.tripLog = []
         self.zoneXLog = []
@@ -602,13 +602,13 @@ class UI(QMainWindow):
                     self.zoneXLog.append(ZoneX(config, logger, self.logData[prevStart:edge]))
                     prevStart = edge
 
-                # Increment number of Zoner ignition cycles.
+                # Increment number of Zoner power cycles.
                 self.numTrips += 1
 
-            # Total ignition cycles (at least ON) in file.
-            logger.info("Zoner ignition cycles in file : {0:d}".format(self.numTrips))
+            # Total power cycles (at least ON) in file.
+            logger.info("Zoner power cycles in file : {0:d}".format(self.numTrips))
 
-            # Update last ignition cycle time to end of file.
+            # Update last power cycle time to end of file.
             if (self.numTrips > 0):
 
                 # Indicate that log file is from a Zoner.
@@ -616,7 +616,7 @@ class UI(QMainWindow):
 
                 self.zoneXLog.append(ZoneX(config, logger, self.logData[prevStart:len(self.logData)]))
 
-                # Extract data from all ignition cycles.
+                # Extract data from all power cycles.
                 for t in self.zoneXLog:
                     t.extractZoneData()
 
@@ -672,7 +672,10 @@ class UI(QMainWindow):
 
         # Define a tree widget for trip data.
         self.tripDataTree = QTreeWidget()
-        self.tripDataTree.setHeaderLabels(['Trip Data', '', ''])
+        if self.isZoner == False:
+            self.tripDataTree.setHeaderLabels(['Trip Data', '', ''])
+        else:
+            self.tripDataTree.setHeaderLabels(['Power Cycle Data', '', ''])
         self.tripDataTree.header().setMinimumSectionSize(config.TripData["MinColumnWidth"])
         self.tripDataTree.header().resizeSection(1, config.TripData["DefaultColumn2Width"])
         self.tripDataTree.header().setSectionResizeMode(QHeaderView.Interactive)
@@ -683,7 +686,7 @@ class UI(QMainWindow):
         fontPlain = QtGui.QFont()
         fontPlain.setBold(False)
 
-        # Reference appropriate trip or ignition cycle event log.
+        # Reference appropriate trip or power cycle event log.
         if self.isZoner == False:
             tLog = self.tripLog
         else:
@@ -700,20 +703,20 @@ class UI(QMainWindow):
             if self.isZoner == False:
                 tripNum = "Trip {0:d} [ID {1:d}]".format((idx+1), t.tripStartId)
             else:
-                tripNum = "Ignition Cycle {0:d}".format(idx+1)
+                tripNum = "Power Cycle {0:d}".format(idx+1)
 
             # Need to check that the trip was ended.
             if t.tripEnd > 0:
                 tripTime = "{0:s}  to  {1:s}".format(unixTimeString(t.tripStart, config.TimeUTC), unixTimeString(t.tripEnd, config.TimeUTC))
-                logger.debug("Adding trip: {0:d}, occurred: {1:s}".format(idx+1, tripTime))
+                logger.debug("Adding trip / power cycle: {0:d}, occurred: {1:s}".format(idx+1, tripTime))
                 tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime])
             else:
                 tripTime = "{0:s}".format(unixTimeString(t.tripStart, config.TimeUTC))
-                logger.debug("Adding trip: {0:d}, occurred: {1:s}".format(idx+1, tripTime))
+                logger.debug("Adding trip / power cycle: {0:d}, occurred: {1:s}".format(idx+1, tripTime))
                 if self.isZoner == False:
                     tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime, "No trip end."])
                 else:
-                    tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime, "No ignition cycle end."])
+                    tripLevel = QTreeWidgetItem(self.tripDataTree, [tripNum, tripTime, "No power cycle end."])
                 tripLevel.setForeground(0, QtGui.QBrush(QtGui.QColor(config.TripData["AlertColour"])))
                 tripLevel.setForeground(1, QtGui.QBrush(QtGui.QColor(config.TripData["TripColour"])))
                 tripLevel.setForeground(2, QtGui.QBrush(QtGui.QColor(config.TripData["CommentColour"])))
@@ -859,14 +862,14 @@ class UI(QMainWindow):
             if self.isZoner == False:
                 patternTrip = re.compile(r'Trip ([0-9]+) \[')
             else:
-                patternTrip = re.compile(r'Ignition Cycle ([0-9]+)')
+                patternTrip = re.compile(r'power cycle ([0-9]+)')
             t = re.search(patternTrip, trip)
             if t:
                 self.selectedTrip = int(t.group(1))
             else:
                 # Error if trip number not found.
                 # Set selected trip to 0 which will cause a termination.
-                logger.error("No trip or ignition cycle number found.")
+                logger.error("No trip or power cycle number found.")
                 self.selectedTrip = 0
         except:
             # Return the selection to the original trip, as no other trip.
@@ -908,7 +911,7 @@ class UI(QMainWindow):
             if self.isZoner == False:
                 self.TripDurationLbl.setText("Trip not ended.")
             else:
-                self.TripDurationLbl.setText("Ignition cycle not ended.")
+                self.TripDurationLbl.setText("power cycle not ended.")
 
         # Event counts.
         # Vehicle events.
@@ -1052,9 +1055,9 @@ class UI(QMainWindow):
                     else:
                         xf.write("===================================================\n")
                         xf.write(" This export has event filtering applied.\n")
-                        xf.write(" Includes ignition cycles with event : {0:s}\n".format(filterEvent))
-                        xf.write(" For ignition cycles in alert : {0}\n".format(self.currentEventAlertFilter))
-                        xf.write(" Includes {0:d} of {1:d} ignition cycles.\n".format(self.numFilteredTripsIn, self.numTrips))
+                        xf.write(" Includes power cycles with event : {0:s}\n".format(filterEvent))
+                        xf.write(" For power cycles in alert : {0}\n".format(self.currentEventAlertFilter))
+                        xf.write(" Includes {0:d} of {1:d} power cycles.\n".format(self.numFilteredTripsIn, self.numTrips))
                         xf.write("===================================================\n")
         
                 # Cycle through each trip and export.

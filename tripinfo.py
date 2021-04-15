@@ -187,7 +187,7 @@ class Trip():
         # Track last time to check if event time going backwards.
         self.lastTime = 0
 
-        # Track first from zone.
+        # Track first from zone and zone transition.
         self.firstFromZone = None
 
         # Initialise flag to stop collecting extra data past end of trip.
@@ -1196,11 +1196,11 @@ class ZoneX():
         self.batteryLevel = []
 
     # *******************************************
-    # Extract ignition cycle data from buffer snippet.
+    # Extract power cycle data from buffer snippet.
     # *******************************************
     def extractZoneData(self):
 
-        # Ignition cycle timing.
+        # power cycle timing.
         # Not trips but use same variables to make reporting easier.
         self.tripStart = 0
         self.tripEnd = 0
@@ -1249,7 +1249,7 @@ class ZoneX():
                 # Initialised with event type and time as in all events.
                 event = Event(su.group(10), int(su.group(4)))
                 self.tripStart = int(su.group(4))
-                self.logger.debug("Detected ignition ON at: {0:s}".format(datetime.fromtimestamp(self.tripStart).strftime('%d/%m/%Y %H:%M:%S')))
+                self.logger.debug("Detected power ON at: {0:s}".format(datetime.fromtimestamp(self.tripStart).strftime('%d/%m/%Y %H:%M:%S')))
 
                 # Initialise last time to start of trip.
                 self.lastTime = self.tripStart
@@ -1280,11 +1280,11 @@ class ZoneX():
                 # Add event to list of events.
                 self.events.append(event)
 
-                # Initialise ignition cycle not ended.
+                # Initialise power cycle not ended.
                 self.ignCycleOpen = False
 
             # **************************************************************
-            # Look for specific events other than the hardware ignition cycle event.
+            # Look for specific events other than the hardware power cycle event.
             # **************************************************************
             patternData = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,2}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT ([0-9]+) ([0-9]+) (.+)/(.+)/(.+)/([-0-9]+)/([0-9]+) ([ _a-zA-Z]+) (.+)$', re.MULTILINE)
             for su in re.finditer(patternData, self.logBuf):
@@ -1552,12 +1552,12 @@ class ZoneX():
                         # Add event to list of events.
                         self.events.append(event)
                 # *********************************************************************************************************************************************
-                # Ignition off event
+                # Power off event
                 # *********************************************************************************************************************************************
                 elif event.event == "HARDWARE IGN_OFF":   
 
                     self.tripEnd = int(su.group(4))
-                    self.logger.debug("Detected ignition OFF at: {0:s}".format(datetime.fromtimestamp(self.tripEnd).strftime('%d/%m/%Y %H:%M:%S')))
+                    self.logger.debug("Detected power OFF at: {0:s}".format(datetime.fromtimestamp(self.tripEnd).strftime('%d/%m/%Y %H:%M:%S')))
 
                     specPattern = re.compile(r'(.+?)$')
                     sp = re.search(specPattern, eventSpecifics)
