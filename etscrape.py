@@ -80,15 +80,17 @@ from eventsChart import *
 #                       Changed speed plot to support 4 speed zones + open speed zone.
 #                       Changed chart for ZONECHANGE event to support 4 speed zones + open speed zone.
 #                       Fixed preferences dialog, apply button.
+# 0.15  MDC 20/05/2021  Fixed bug in selecting and moving between 'trips' for zoners.
 # *******************************************
 
 # *******************************************
 # TODO List
-# Update help information.
+#
+# Add indication of firmware version to status bar.
 # *******************************************
 
 # Program version.
-progVersion = "0.14"
+progVersion = "0.15"
 
 # Program date (for About dialog).
 progDate = "2020/21"
@@ -239,7 +241,10 @@ class UI(QMainWindow):
         # Disable show events chart window.
         self.actionShowEventsChart.setEnabled(False)
 
-        # Show trip controller ID.
+        # Show firware version (if known).
+        self.showFirmwareVersion()
+
+        # Show trip controller ID (if known).
         self.showControllerStatus()
 
         # Show epoch selection.
@@ -471,6 +476,18 @@ class UI(QMainWindow):
             self.statusBar().addPermanentWidget(self.ctrlLbl)
 
     # *******************************************
+    # Show firmware version on status bar.
+    # *******************************************
+    def showFirmwareVersion(self):
+            boldFont=QtGui.QFont()
+            boldFont.setBold(True)
+            self.fwLbl = QLabel()
+            self.fwLbl.setStyleSheet("color: black; ")
+            self.fwLbl.setFont(boldFont)
+            self.fwLbl.setText("[  -  ]")
+            self.statusBar().addPermanentWidget(self.fwLbl)
+
+    # *******************************************
     # Clear loaded trips.
     # *******************************************
     def clearTrips(self):
@@ -651,7 +668,7 @@ class UI(QMainWindow):
                 QApplication.restoreOverrideCursor()
 
                 # Show pop-up indicating no trip data found in log file.
-                showPopup("Trip", "Log file contains no trip information.")
+                showPopup("Trip", "Log file contains no trip or power cycle event data.")
 
                 # Need to get plots to starting states.
                 self.eventsChart.fig.resetFigure()
@@ -862,7 +879,7 @@ class UI(QMainWindow):
             if self.isZoner == False:
                 patternTrip = re.compile(r'Trip ([0-9]+) \[')
             else:
-                patternTrip = re.compile(r'power cycle ([0-9]+)')
+                patternTrip = re.compile(r'Power Cycle ([0-9]+)')
             t = re.search(patternTrip, trip)
             if t:
                 self.selectedTrip = int(t.group(1))
@@ -910,8 +927,6 @@ class UI(QMainWindow):
         else:
             if self.isZoner == False:
                 self.TripDurationLbl.setText("Trip not ended.")
-            else:
-                self.TripDurationLbl.setText("power cycle not ended.")
 
         # Event counts.
         # Vehicle events.
@@ -2559,6 +2574,10 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.15</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Fixed bug when selecting or moving between power cycles in Zoner logs.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.14</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added support for ZONETRANSITION events.</li>" \
