@@ -86,7 +86,6 @@ from eventsChart import *
 # *******************************************
 # TODO List
 #
-# Add indication of firmware version to status bar.
 # *******************************************
 
 # Program version.
@@ -545,10 +544,26 @@ class UI(QMainWindow):
         if cid:
             # Save controller ID.
             self.controllerID = int(cid.group(3))
-            self.ctrlLbl.setText(str(self.controllerID))
+            self.ctrlLbl.setText(f'[{self.controllerID}]')
             logger.info("Detected Controller ID : {0:d}".format(self.controllerID))
         else:
             logger.warning("No Controller ID for trip / power cycle.")
+
+        # Look for controller firmware version.
+        # Only read first instance in log; assume consistant; eill not be so if firware change mid log.
+        cntrlFirmware = re.compile(r'([0-9]{1,2}/[0-9]{2}/[0-9]{4}) ([0-9]{1,2}:[0-9]{2}:[0-9]{2}) .*?\,*?EVENT ([0-9]+) ([0-9]+) (.+)/(.+)/(.+)/([-0-9]+)/([0-9]+) SWSTART (.+) ([.0-9]+.+) v(.+)$', re.MULTILINE)
+
+        cfw = re.search(cntrlFirmware, self.logData)
+        if cfw:
+            print(cfw.group(0))
+            print(cfw.group(11))
+
+            # Save firmware version.
+            self.firmwareVersion = cfw.group(11)
+            self.fwLbl.setText(f'[{self.firmwareVersion}]')
+            logger.info("Detected controller firmware version : {0:s}".format(self.firmwareVersion))
+        else:
+            logger.warning("No controller firmware version for trip / power cycle.")
 
         # Look for all trips / power cycles in the log file.
         self.numTrips = 0
@@ -1283,6 +1298,9 @@ class UI(QMainWindow):
                 xf.write("\tInput                : {0:d} - {1:s}\n".format(ev.inputNo, config.Channels[ev.inputNo - 1]["Name"]))
                 xf.write("\tState                : {0:d}\n".format(ev.inputState))
                 xf.write("\tActive Time          : {0:s}\n".format(str(timedelta(seconds=ev.activeTime))))
+            elif "SWSTART" in ev.event:
+                xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tFirmware Version     : {0:S}\n".format(ev.firmware))
             elif ev.event == "POWER":
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
@@ -1561,6 +1579,9 @@ class UI(QMainWindow):
             eventList.append(("Input", "{0:d} - {1:s}".format(event.inputNo, config.Channels[event.inputNo - 1]["Name"]), ((event.inputNo < 1) or (event.inputNo > 10))))
             eventList.append(("State", "{0:d}".format(event.inputState), ((event.inputState < 0) or (event.inputState > 1))))
             eventList.append(("Active Time", "{0:s}".format(str(timedelta(seconds=event.activeTime))), False))
+        elif "SWSTART" in event.event:
+            eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
+            eventList.append(("Firmware Version", "{0:s}".format(event.firmware), False))
         elif event.event == "POWER":
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), (event.tripStartId != trip.tripStartId)))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
@@ -2125,21 +2146,6 @@ class PreferencesDialog(QDialog):
         ###########################
         # Speed Plot Data
         ###########################
-        # # Default slow zone speed limit.
-        # val = int(self.lowSpeedVal.text())
-        # if val != self.config.SpdPlot["DefaultLowLimit"]:
-        #     # Set the configuration value.
-        #     self.config.SpdPlot["DefaultLowLimit"] = val
-        #     logger.debug("Change to default slow zone speed limit: {0:d}".format(self.config.SpdPlot["DefaultLowLimit"]))
-        #     prefChanged = True
-        # # Default fast zone speed limit.
-        # val = int(self.highSpeedVal.text())
-        # if val != self.config.SpdPlot["DefaultHiLimit"]:
-        #     # Set the configuration value.
-        #     self.config.SpdPlot["DefaultHiLimit"] = val
-        #     logger.debug("Change to default fast zone speed limit: {0:d}".format(self.config.SpdPlot["DefaultHiLimit"]))
-        #     prefChanged = True
-        # Open (zone 0) speed limits.
         val = int(self.openSpeedVal.text())
         if val != self.config.SpdPlot["zoneSpeed"][1]:
             # Set the configuration value.
@@ -2577,6 +2583,8 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.15</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Fixed bug when selecting or moving between power cycles in Zoner logs.</li>" \
+            "<li>Added indication of controller firmware version to status bar (only first instance).</li>" \
+            "<li>Minor reformatting of status var values.</li>" \
             "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.14</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\

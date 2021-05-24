@@ -83,6 +83,7 @@ class Event():
         self.batteryState = ""
         self.toZoneOutput = 0
         self.transition = ""
+        self.firmware = ""
 
 # *******************************************
 # Speed Info class.
@@ -763,6 +764,36 @@ class Trip():
 
                         # Indicate that event is OTHER event.
                         # The event is supported, but still considered other.
+                        event.isOther = True
+
+                        # Add event to list of events.
+                        self.events.append(event)
+                # *********************************************************************************************************************************************
+                # SWSTART event.
+                # *********************************************************************************************************************************************
+                elif "SWSTART" in event.event:   
+
+                    specPattern = re.compile(r'([.0-9]+)(.*) (v.*)$')
+                    sp = re.search(specPattern, eventSpecifics)
+                    if sp:
+                        # Save the software version.
+                        event.firmware = f'{sp.group(1)} {sp.group(2)}'
+                        # Read battery voltage from event header.
+                        # But only if still collecting extra data, i.e. trip has not ended.
+                        if not self.stopExtraData:
+                            # The voltage at end of event strings appears to be optional, so need to check if it exists.
+                            voltPattern = re.compile(r'v:([0-9]+)$')
+                            vp = re.search(voltPattern, sp.group(3))
+                            if vp:
+                                event.battery = int(vp.group(1)) / 10.0
+                                # And add to battery level list.
+                                self.batteryLevel.append(BatteryInfo(int(su.group(4)), event.battery))
+
+                                # Check for negative battery voltage condition.
+                                if event.battery < 0:
+                                    event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
+
+                        # Indicate event is Other event.
                         event.isOther = True
 
                         # Add event to list of events.
