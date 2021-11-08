@@ -34,6 +34,7 @@ class Config():
             {"Event" : "OILPRESSURE", "Title" : "Engine Oil Pressure Low"},
             {"Event" : "OVERLOAD", "Title" : "Overload"},
             {"Event" : "OVERSPEED", "Title" : "Vehicle Overspeed"},
+            {"Event" : "RSSI", "Title" : "RSSI"},
             {"Event" : "UNBUCKLED", "Title" : "Unbuckled"},
             {"Event" : "XSIDLE", "Title" : "Excess Idle"},
             {"Event" : "ZONECHANGE", "Title" : "Zone Change"},

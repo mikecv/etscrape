@@ -85,6 +85,9 @@ class Event():
         self.transition = ""
         self.firmware = ""
 
+        # Add RSSI for diagnostics.
+        self.rssi = 0
+
 # *******************************************
 # Speed Info class.
 # *******************************************
@@ -104,6 +107,16 @@ class BatteryInfo():
 
         self.time = eTime
         self.battery = eBattery
+
+# *******************************************
+# RSSI Info class.
+# *******************************************
+class RssiInfo():
+    # Initializer / Instance Attributes
+    def __init__(self, eTime, eRssi):
+
+        self.time = eTime
+        self.rssi = eRssi
 
 # *******************************************
 # Zone Crossing Info class.
@@ -138,6 +151,9 @@ class Trip():
     
         # Speed data.
         self.speedLog = []
+
+        # RSSI data.
+        self.rssiLog = []
 
         # Zone crossings.
         self.zoneXings = []
@@ -254,6 +270,13 @@ class Trip():
                         if event.battery < 0:
                             event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
+                # Add RSSI diagnostics.
+                event.rssi = int(su.group(8))
+                if event.rssi < 50:
+                    self.rssiLog.append(RssiInfo(int(su.group(4)), event.rssi))
+                else:
+                    event.alertText = appendAlertText(event.alertText, "Unreasonable RSSI value.")
+
                 # Increment event counters.
                 self.numTripEvents += 1
 
@@ -291,6 +314,12 @@ class Trip():
                             if self.checkForSpeedTime(int(su.group(4))) == False:
                                 self.speedLog.append(SpeedInfo(int(su.group(4)), int(su.group(9))))
                                 self.logger.debug("Logged speed: {0:d}, at {1:s}".format(int(su.group(9)), datetime.fromtimestamp(int(su.group(4))).strftime('%d/%m/%Y %H:%M:%S')))
+
+                event.rssi = int(su.group(8))
+                if event.rssi < 50:
+                    self.rssiLog.append(RssiInfo(int(su.group(4)), event.rssi))
+                else:
+                    event.alertText = appendAlertText(event.alertText, "Unreasonable RSSI value.")
 
                 # Check if out of trip event, i.e. end trip time > 0.
                 if self.tripEnd > 0:

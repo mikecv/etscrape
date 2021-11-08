@@ -99,12 +99,12 @@
             "Title": "Vehicle Speed"
         },
         {
-            "Event": "ZONECHANGE",
-            "Title": "Zone Change"
+            "Event": "RSSI",
+            "Title": "RSSI"
         },
         {
-            "Event": "ZONETRANSITION",
-            "Title": "Zone Transition"
+            "Event": "Battery Voltage",
+            "Title": "Battery Voltage"
         }
     ]
 }

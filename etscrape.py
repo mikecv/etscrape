@@ -81,15 +81,18 @@ from eventsChart import *
 #                       Changed chart for ZONECHANGE event to support 4 speed zones + open speed zone.
 #                       Fixed preferences dialog, apply button.
 # 0.15  MDC 20/05/2021  Fixed bug in selecting and moving between 'trips' for zoners.
+# 0.16  MDC 04/06/2021  Adding RSSI reporting from events functionality.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
+# Fix bug with [markers] list; needs to be trimmed for zooming.
+# Fix bug with Show Input Events flag; seemed to get set after loading a file.
 # *******************************************
 
 # Program version.
-progVersion = "0.15"
+progVersion = "0.16"
 
 # Program date (for About dialog).
 progDate = "2020/21"
@@ -555,9 +558,6 @@ class UI(QMainWindow):
 
         cfw = re.search(cntrlFirmware, self.logData)
         if cfw:
-            print(cfw.group(0))
-            print(cfw.group(11))
-
             # Save firmware version.
             self.firmwareVersion = cfw.group(11)
             self.fwLbl.setText(f'[{self.firmwareVersion}]')
@@ -2580,6 +2580,10 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.16</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Added plotting of RSSI from debuglog. Only gets RSSI values from events.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.15</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Fixed bug when selecting or moving between power cycles in Zoner logs.</li>" \
