@@ -27,6 +27,7 @@ class Config():
             {"Event" : "Battery Voltage", "Title" : "Battery Voltage"},
             {"Event" : "ENGINEOVERSPEED", "Title" : "Engine Overspeed"},
             {"Event" : "ENGINETEMP", "Title" : "Engine Temperature High"},
+            {"Event" : "GNSS Error", "Title" : "GNSS Error (m)"},
             {"Event" : "IMPACT", "Title" : "Vehicle Impact"},
             {"Event" : "INPUT", "Title" : "Input"},
             {"Event" : "LOWCOOLANT", "Title" : "Engine Coolant Level Low"},

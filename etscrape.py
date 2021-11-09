@@ -82,6 +82,7 @@ from eventsChart import *
 #                       Fixed preferences dialog, apply button.
 # 0.15  MDC 20/05/2021  Fixed bug in selecting and moving between 'trips' for zoners.
 # 0.16  MDC 04/06/2021  Adding RSSI reporting from events functionality.
+# 0.17  MDC 09/11/2021  Added reporting of GPS positional information.
 # *******************************************
 
 # *******************************************
@@ -92,7 +93,7 @@ from eventsChart import *
 # *******************************************
 
 # Program version.
-progVersion = "0.16"
+progVersion = "0.17"
 
 # Program date (for About dialog).
 progDate = "2020/21"
@@ -165,6 +166,15 @@ class UI(QMainWindow):
 
         # Attach to the Export report for all filtered trips menu item.
         self.actionExportFilteredTrips.triggered.connect(lambda: self.exportAllTrips(True))
+
+        # Attach to the Export GNSS log for current trip menu item.
+        self.actionGnssCurrentTrip.triggered.connect(self.gnssCurrentTrip)
+
+        # Attach to the Export GNSS logs for all trips menu item.
+        self.actionAllGnssTrips.triggered.connect(lambda: self.gnssAllTrips(False))
+
+        # Attach to the Export GNSS logs for all filtered trips menu item.
+        self.actionAllGnssFilteredTrips.triggered.connect(lambda: self.gnssAllTrips(True))
 
         # Attach to the edit preferences menu item.
         self.actionPreferences.triggered.connect(self.editPreferences)
@@ -239,6 +249,9 @@ class UI(QMainWindow):
         self.actionExportCurrentTrip.setEnabled(False)
         self.actionExportAllTrips.setEnabled(False)
         self.actionExportFilteredTrips.setEnabled(False)
+        self.actionGnssCurrentTrip.setEnabled(False)
+        self.actionAllGnssTrips.setEnabled(False)
+        self.actionAllGnssFilteredTrips.setEnabled(False)
 
         # Disable show events chart window.
         self.actionShowEventsChart.setEnabled(False)
@@ -532,6 +545,9 @@ class UI(QMainWindow):
         self.actionExportCurrentTrip.setEnabled(False)
         self.actionExportAllTrips.setEnabled(False)
         self.actionExportFilteredTrips.setEnabled(False)
+        self.actionGnssCurrentTrip.setEnabled(False)
+        self.actionAllGnssTrips.setEnabled(False)
+        self.actionAllGnssFilteredTrips.setEnabled(False)
 
         # Disable show events chart window.
         self.actionShowEventsChart.setEnabled(False)
@@ -615,6 +631,9 @@ class UI(QMainWindow):
             self.actionExportCurrentTrip.setEnabled(True)
             self.actionExportAllTrips.setEnabled(True)
             self.actionExportFilteredTrips.setEnabled(self.eventFilterApplied)
+            self.actionGnssCurrentTrip.setEnabled(True)
+            self.actionAllGnssTrips.setEnabled(True)
+            self.actionAllGnssFilteredTrips.setEnabled(self.eventFilterApplied)
 
             # Enable show events chart window.
             self.actionShowEventsChart.setEnabled(True)
@@ -672,6 +691,9 @@ class UI(QMainWindow):
                 self.actionExportCurrentTrip.setEnabled(True)
                 self.actionExportAllTrips.setEnabled(True)
                 self.actionExportFilteredTrips.setEnabled(self.eventFilterApplied)
+                self.actionGnssCurrentTrip.setEnabled(True)
+                self.actionAllGnssTrips.setEnabled(True)
+                self.actionAllGnssFilteredTrips.setEnabled(True)
 
                 # Enable show events chart window.
                 self.actionShowEventsChart.setEnabled(True)
@@ -1300,7 +1322,7 @@ class UI(QMainWindow):
                 xf.write("\tActive Time          : {0:s}\n".format(str(timedelta(seconds=ev.activeTime))))
             elif "SWSTART" in ev.event:
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
-                xf.write("\tFirmware Version     : {0:S}\n".format(ev.firmware))
+                xf.write("\tFirmware Version     : {0:s}\n".format(ev.firmware))
             elif ev.event == "POWER":
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
@@ -1329,6 +1351,121 @@ class UI(QMainWindow):
                 xf.write("\tLift Count           : {0:d}\n".format(ev.liftCount))
                 xf.write("\tCummulative Lift     : {0:d}\n".format(ev.cumWeight))
         xf.write("===================================================\n\n")
+
+    # *******************************************
+    # Callback function for export GNSS logs for all trips menu selection.
+    # *******************************************
+    def gnssAllTrips(self, filtered):
+        logger.debug("User selected Export GNSS Logs for all trips menu item.")
+
+        # Configure and launch file selection dialog.
+        dialog = QFileDialog(self)
+        dialog.setFileMode(QFileDialog.AnyFile)
+        dialog.setNameFilter("*.txt")
+        dialog.setDefaultSuffix('.txt')
+        dialog.setViewMode(QFileDialog.List)
+        dialog.setAcceptMode(QFileDialog.AcceptSave)
+
+        # If returned filename then open/create.
+        if dialog.exec_():
+            filenames = dialog.selectedFiles()
+
+            # If have a filename then open.
+            if filenames[0] != "":
+                # Open file for writing
+                xf = open(filenames[0], "w")
+
+                # Change to wait cursor as exporting a lot of files may take a while.
+                QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+        
+                # Cycle through each trip and export.
+                if self.isZoner == False:
+                    tLog = self.tripLog
+                else:
+                    tLog = self.zoneXLog
+
+                for tidx, t in enumerate(tLog):
+
+                    # If exporting filtered trips then need to check for anything to filter.
+                    if filtered:
+                        # Check if anything to filter.
+                        if not self.tripDataTree.topLevelItem(tidx).isHidden():
+                        # Export GNSS log for trip.
+                            self.exportGnssLog(xf, t)
+                    else:
+                        # Export GNSS log for trip.
+                        self.exportGnssLog(xf, t)
+
+                # Retore the wait cursor now that export complete.
+                QApplication.restoreOverrideCursor()
+
+                logger.info("Opened and wrote GNSS Log file : {0:s}".format(filenames[0]))
+                self.showTempStatusMsg("{0:s}".format(filenames[0]), config.TripData["TmpStatusMessagesMsec"])
+
+                # Close file after writing.
+                xf.close()
+
+    # *******************************************
+    # Callback function for export GNSS Log for current trip menu selection.
+    # *******************************************
+    def gnssCurrentTrip(self):
+        logger.debug("User selected Export GNSS Log for current trip report menu item.")
+
+        # Configure and launch file selection dialog.
+        dialog = QFileDialog(self)
+        dialog.setFileMode(QFileDialog.AnyFile)
+        dialog.setNameFilter("*.txt")
+        dialog.setDefaultSuffix('.txt')
+        dialog.setViewMode(QFileDialog.List)
+        dialog.setAcceptMode(QFileDialog.AcceptSave)
+
+        # If returned filename then open/create.
+        if dialog.exec_():
+            filenames = dialog.selectedFiles()
+
+            # If have a filename then open.
+            if filenames[0] != "":
+                # Open file for writing
+                xf = open(filenames[0], "w")
+
+                # Export GNSS Log for selected trip.
+                self.exportGnssLog(xf, self.tripLog[self.selectedTrip - 1])
+
+                logger.info("Opened and wrote export GNSS Log file : {0:s}".format(filenames[0]))
+                self.showTempStatusMsg("{0:s}".format(filenames[0]), config.TripData["TmpStatusMessagesMsec"])
+
+                # Close file after writing.
+                xf.close()
+
+    # *******************************************
+    # Export GNSS Log for nominated trip.
+    # *******************************************
+    def exportGnssLog(self, xf, ti):
+        # Export GNSS Log for trip to file.
+        logger.debug("Exporting GNSS Log for Trip ID: {0:d}".format(ti.tripStartId))
+
+        # Export GNSS log.
+        # First check if there are any valid points in the trip.
+        validData = False
+        for gd in ti.gnssLog:
+            # Check for null gnss data, i.e. 0,0 in log.
+            if (gd.latitude != 0.0) and (gd.longitude != 0.0):
+                validData = True
+                break
+
+        # If we have a trip with some valid data export it.
+        if validData == True:
+            # Export header row.
+            started = False
+            xf.write(f'type,latitude,longitude,name\n')
+            for gd in ti.gnssLog:
+                # Check for null gnss data, i.e. 0,0 in log.
+                if (gd.latitude != 0.0) and (gd.longitude != 0.0):
+                    if started == False:
+                        xf.write(f'W,{gd.latitude},{gd.longitude},Trip:{ti.tripStartId}\n')
+                        started = True
+                    else:
+                        xf.write(f'T,{gd.latitude},{gd.longitude},Trip:{ti.tripStartId}\n')
 
     # *******************************************
     # Toolbar to collapse all trip data.
@@ -2580,6 +2717,11 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.17</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Added reporting of GNSS position.</li>" \
+            "<li>Fixed bug in trip export for zoners.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.16</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added plotting of RSSI from debuglog. Only gets RSSI values from events.</li>" \

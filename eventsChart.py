@@ -237,8 +237,7 @@ class EventCanvas(FigureCanvasQTAgg):
             preInputTime = 0
 
             # Don't need to check for 'special' "Vehicle" events as not real events.
-            # if (t["Event"] != "Vehicle Speed") and (t["Event"] != "Battery Voltage") and (t["Event"] != "RSSI"):
-            if (t["Event"] != "Vehicle Speed") and (t["Event"] != "Battery Voltage") and (t["Event"] != "RSSI"):
+            if (t["Event"] != "Vehicle Speed") and (t["Event"] != "Battery Voltage") and (t["Event"] != "RSSI") and (t["Event"] != "GNSS Error"):
                 # See if any matching events for the trip.
                 for ev in tObj.events[0:endEvent]:
                     if t["Event"] == ev.event:
@@ -454,8 +453,7 @@ class EventCanvas(FigureCanvasQTAgg):
                         eListPassenger.append(finalStatePassenger)
                     else:
                         tList.append(tripEndTime)
-                        eList.append(finalState)
-    
+                        eList.append(finalState)   
             else:
                 # Special vehicle event.
                 if t["Event"] == "Vehicle Speed":
@@ -487,6 +485,19 @@ class EventCanvas(FigureCanvasQTAgg):
                         # Format time axis list in the correct timezone for display.
                         tList.append(timeTZ(rl.time, self.cfg.TimeUTC))
                         eList.append(rl.rssi)
+                elif t["Event"] == "GNSS Error":
+                    # Update GNSS error data.
+                    minError = 100.0
+                    maxError = 0.0
+                    for gl in self.data.tripLog[No-1].gnssLog:
+                        # Format time axis list in the correct timezone for display.
+                        tList.append(timeTZ(gl.time, self.cfg.TimeUTC))
+                        eList.append(gl.error)
+                        # Get GNSS Error for plot limits.
+                        if gl.error > maxError:
+                            maxError = gl.error
+                        if gl.error < minError:
+                            minError = gl.error
 
             # Clear old plot data.
             self.traces[self.numEvCharts - idx][0].set_xdata([])
@@ -547,7 +558,7 @@ class EventCanvas(FigureCanvasQTAgg):
                 self.traces[self.numEvCharts - idx][1].set_yticklabels(yLabels, color='cornflowerblue')
                 self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
             elif t["Event"] == "RSSI":
-                # Work out y-axis labels (5) for RSSI  range.
+                # Work out y-axis labels (5) for RSSI range.
                 yinc = ceil(30 / 4.0)
                 ymax = yinc * 5
                 yticks = []
@@ -557,6 +568,21 @@ class EventCanvas(FigureCanvasQTAgg):
                     yLabels.append("{0:d}".format(tck * yinc))
                 # Set y axis limits and labels.
                 self.traces[self.numEvCharts - idx][1].set_ylim([0, ymax])
+                self.traces[self.numEvCharts - idx][1].set_yticks(yticks)
+                self.traces[self.numEvCharts - idx][1].set_yticklabels(yLabels, color='cornflowerblue')
+                self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')
+            elif t["Event"] == "GNSS Error":
+                # Work out y-axis labels (5) for GNSS Error range.
+                ymin = max(minError - 0.25, 0)
+                ymax = maxError + 0.25
+                yinc = (ymax - ymin) / 4.0
+                yticks = []
+                yLabels = []
+                for tck in range(0, 5):
+                    yticks.append(ymin + (tck * yinc))
+                    yLabels.append("{0:2.2f}".format(ymin + (tck * yinc)))
+                # Set y axis limits and labels.
+                self.traces[self.numEvCharts - idx][1].set_ylim([ymin, ymax])
                 self.traces[self.numEvCharts - idx][1].set_yticks(yticks)
                 self.traces[self.numEvCharts - idx][1].set_yticklabels(yLabels, color='cornflowerblue')
                 self.traces[self.numEvCharts - idx][1].yaxis.grid(which='major', linestyle='-', linewidth='0.5', color='lightsteelblue')

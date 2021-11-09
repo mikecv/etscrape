@@ -1522,7 +1522,7 @@ color: rgb(0, 85, 255);</string>
      <x>0</x>
      <y>0</y>
      <width>1120</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1537,8 +1537,17 @@ color: rgb(0, 85, 255);</string>
      <addaction name="actionExportAllTrips"/>
      <addaction name="actionExportFilteredTrips"/>
     </widget>
+    <widget class="QMenu" name="menuExport_GNSS_Log">
+     <property name="title">
+      <string>Export GNSS Log</string>
+     </property>
+     <addaction name="actionGnssCurrentTrip"/>
+     <addaction name="actionAllGnssTrips"/>
+     <addaction name="actionAllGnssFilteredTrips"/>
+    </widget>
     <addaction name="actionLoadLog"/>
     <addaction name="menuExport_Report"/>
+    <addaction name="menuExport_GNSS_Log"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -1764,6 +1773,21 @@ border-color: rgb(0, 170, 255);</string>
    </property>
    <property name="text">
     <string>Show Report Events</string>
+   </property>
+  </action>
+  <action name="actionGnssCurrentTrip">
+   <property name="text">
+    <string>Currently Selected Trip</string>
+   </property>
+  </action>
+  <action name="actionAllGnssTrips">
+   <property name="text">
+    <string>All Trips</string>
+   </property>
+  </action>
+  <action name="actionAllGnssFilteredTrips">
+   <property name="text">
+    <string>All Trips (Filtered)</string>
    </property>
   </action>
  </widget>

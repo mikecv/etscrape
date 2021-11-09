@@ -1,6 +1,6 @@
 {
     "ConfigVersion": 13,
-    "DebugLevel": 20,
+    "DebugLevel": 10,
     "LogFileSize": 100000,
     "LogBackups": 3,
     "TimeUTC": 1,
@@ -105,6 +105,10 @@
         {
             "Event": "Battery Voltage",
             "Title": "Battery Voltage"
+        },
+        {
+            "Event": "GNSS Error",
+            "Title": "GNSS Error (m)"
         }
     ]
 }

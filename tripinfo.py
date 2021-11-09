@@ -88,6 +88,23 @@ class Event():
         # Add RSSI for diagnostics.
         self.rssi = 0
 
+        # Add machine position for diagnostics.
+        self.lat = 0.0
+        self.long = 0.0
+        self.posErr = 0.0
+
+# *******************************************
+# GNNS Position Info class.
+# *******************************************
+class GnssInfo():
+    # Initializer / Instance Attributes
+    def __init__(self, eTime, eLat, eLong, eErr):
+
+        self.time = eTime
+        self.latitude = eLat
+        self.longitude = eLong
+        self.error = eErr
+
 # *******************************************
 # Speed Info class.
 # *******************************************
@@ -151,6 +168,9 @@ class Trip():
     
         # Speed data.
         self.speedLog = []
+
+        # GNSS data.
+        self.gnssLog = []
 
         # RSSI data.
         self.rssiLog = []
@@ -277,6 +297,12 @@ class Trip():
                 else:
                     event.alertText = appendAlertText(event.alertText, "Unreasonable RSSI value.")
 
+                # Add GNSS location.
+                event.lat = int(su.group(5)) / 1e7
+                event.long = int(su.group(6)) / 1e7
+                event.posErr = int(su.group(7)) / 1e3
+                self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr))
+
                 # Increment event counters.
                 self.numTripEvents += 1
 
@@ -320,6 +346,12 @@ class Trip():
                     self.rssiLog.append(RssiInfo(int(su.group(4)), event.rssi))
                 else:
                     event.alertText = appendAlertText(event.alertText, "Unreasonable RSSI value.")
+
+                # Add GNSS location.
+                event.lat = int(su.group(5)) / 1e7
+                event.long = int(su.group(6)) / 1e7
+                event.posErr = int(su.group(7)) / 1e3
+                self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr))
 
                 # Check if out of trip event, i.e. end trip time > 0.
                 if self.tripEnd > 0:
@@ -1249,6 +1281,12 @@ class ZoneX():
         # Speed data.
         self.speedLog = []
 
+        # GNSS data.
+        self.gnssLog = []
+
+        # RSSI data.
+        self.rssiLog = []
+
         # Zone crossings.
         self.zoneXings = []
 
@@ -1334,6 +1372,19 @@ class ZoneX():
                         if event.battery < 0:
                             event.alertText = appendAlertText(event.alertText, "Battery voltage negative.")
 
+                # Add RSSI diagnostics.
+                event.rssi = int(su.group(8))
+                if event.rssi < 50:
+                    self.rssiLog.append(RssiInfo(int(su.group(4)), event.rssi))
+                else:
+                    event.alertText = appendAlertText(event.alertText, "Unreasonable RSSI value.")
+
+                # Add GNSS location.
+                event.lat = int(su.group(5)) / 1e7
+                event.long = int(su.group(6)) / 1e7
+                event.posErr = int(su.group(7)) / 1e3
+                self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr))
+
                 # Increment event counters.
                 self.numTripEvents += 1
 
@@ -1371,6 +1422,18 @@ class ZoneX():
                             if self.checkForSpeedTime(int(su.group(4))) == False:
                                 self.speedLog.append(SpeedInfo(int(su.group(4)), int(su.group(9))))
                                 self.logger.debug("Logged speed: {0:d}, at {1:s}".format(int(su.group(9)), datetime.fromtimestamp(int(su.group(4))).strftime('%d/%m/%Y %H:%M:%S')))
+
+                        event.rssi = int(su.group(8))
+                        if event.rssi < 50:
+                            self.rssiLog.append(RssiInfo(int(su.group(4)), event.rssi))
+                        else:
+                            event.alertText = appendAlertText(event.alertText, "Unreasonable RSSI value.")
+
+                        # Add GNSS location.
+                        event.lat = int(su.group(5)) / 1e7
+                        event.long = int(su.group(6)) / 1e7
+                        event.posErr = int(su.group(7)) / 1e3
+                        self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr))
 
                 # Break out some of the event data explicitly.
                 eventSpecifics = su.group(11)
