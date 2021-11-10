@@ -109,6 +109,10 @@
         {
             "Event": "GNSS Error",
             "Title": "GNSS Error (m)"
+        },
+        {
+            "Event": "ZONETRANSITION",
+            "Title": "Zone Transition"
         }
     ]
 }

@@ -90,6 +90,11 @@ from eventsChart import *
 #
 # Fix bug with [markers] list; needs to be trimmed for zooming.
 # Fix bug with Show Input Events flag; seemed to get set after loading a file.
+# Add RSSI to trip exports.
+# Fix RSSI low warning message; make critical level configurable.
+# Add lat/long to events in display.
+# Add GNSS lat/long/error to trip exports.
+# Update help for: zoners, RSSI charts, exporting GNSS logs.
 # *******************************************
 
 # Program version.
@@ -1361,8 +1366,8 @@ class UI(QMainWindow):
         # Configure and launch file selection dialog.
         dialog = QFileDialog(self)
         dialog.setFileMode(QFileDialog.AnyFile)
-        dialog.setNameFilter("*.txt")
-        dialog.setDefaultSuffix('.txt')
+        dialog.setNameFilter("*.csv")
+        dialog.setDefaultSuffix('.csv')
         dialog.setViewMode(QFileDialog.List)
         dialog.setAcceptMode(QFileDialog.AcceptSave)
 
@@ -1391,10 +1396,10 @@ class UI(QMainWindow):
                         # Check if anything to filter.
                         if not self.tripDataTree.topLevelItem(tidx).isHidden():
                         # Export GNSS log for trip.
-                            self.exportGnssLog(xf, t)
+                            self.exportGnssLog(xf, t, (tidx+1))
                     else:
                         # Export GNSS log for trip.
-                        self.exportGnssLog(xf, t)
+                        self.exportGnssLog(xf, t, (tidx+1))
 
                 # Retore the wait cursor now that export complete.
                 QApplication.restoreOverrideCursor()
@@ -1414,8 +1419,8 @@ class UI(QMainWindow):
         # Configure and launch file selection dialog.
         dialog = QFileDialog(self)
         dialog.setFileMode(QFileDialog.AnyFile)
-        dialog.setNameFilter("*.txt")
-        dialog.setDefaultSuffix('.txt')
+        dialog.setNameFilter("*.csv")
+        dialog.setDefaultSuffix('.csv')
         dialog.setViewMode(QFileDialog.List)
         dialog.setAcceptMode(QFileDialog.AcceptSave)
 
@@ -1428,8 +1433,13 @@ class UI(QMainWindow):
                 # Open file for writing
                 xf = open(filenames[0], "w")
 
+                if self.isZoner == False:
+                    tLog = self.tripLog
+                else:
+                    tLog = self.zoneXLog
+
                 # Export GNSS Log for selected trip.
-                self.exportGnssLog(xf, self.tripLog[self.selectedTrip - 1])
+                self.exportGnssLog(xf, tLog[self.selectedTrip - 1], 1)
 
                 logger.info("Opened and wrote export GNSS Log file : {0:s}".format(filenames[0]))
                 self.showTempStatusMsg("{0:s}".format(filenames[0]), config.TripData["TmpStatusMessagesMsec"])
@@ -1440,7 +1450,7 @@ class UI(QMainWindow):
     # *******************************************
     # Export GNSS Log for nominated trip.
     # *******************************************
-    def exportGnssLog(self, xf, ti):
+    def exportGnssLog(self, xf, ti, tNo):
         # Export GNSS Log for trip to file.
         logger.debug("Exporting GNSS Log for Trip ID: {0:d}".format(ti.tripStartId))
 
@@ -1457,15 +1467,22 @@ class UI(QMainWindow):
         if validData == True:
             # Export header row.
             started = False
-            xf.write(f'type,latitude,longitude,name\n')
+            idx = 1
+            xf.write(f'gv_track_number,trackpoint,type,time,latitude,longitude,name,symbol\n')
+            if self.isZoner == True:
+                usName = f'Zoner:{self.controllerID}'
+            else:
+                usName = f'Trip:{ti.tripStartId}'
             for gd in ti.gnssLog:
                 # Check for null gnss data, i.e. 0,0 in log.
                 if (gd.latitude != 0.0) and (gd.longitude != 0.0):
                     if started == False:
-                        xf.write(f'W,{gd.latitude},{gd.longitude},Trip:{ti.tripStartId}\n')
+                        xf.write(f'{tNo},{idx},T,{timeTZ(gd.time, config.TimeUTC)},{gd.latitude},{gd.longitude},{usName}\n')
+                        xf.write(f'{tNo},{idx},W,,{gd.latitude},{gd.longitude},{usName},circle\n')
                         started = True
                     else:
-                        xf.write(f'T,{gd.latitude},{gd.longitude},Trip:{ti.tripStartId}\n')
+                        xf.write(f'{tNo},{idx},T,{timeTZ(gd.time, config.TimeUTC)},{gd.latitude},{gd.longitude}\n')
+                    idx += 1
 
     # *******************************************
     # Toolbar to collapse all trip data.

@@ -470,7 +470,7 @@ class EventCanvas(FigureCanvasQTAgg):
                     # Update battery voltage data.
                     minBattery = 100.0
                     maxBattery = 0.0
-                    for bl in self.data.tripLog[No-1].batteryLevel:
+                    for bl in tObj.batteryLevel:
                         # Format time axis list in the correct timezone for display.
                         tList.append(timeTZ(bl.time, self.cfg.TimeUTC))
                         eList.append(bl.battery)
@@ -481,7 +481,7 @@ class EventCanvas(FigureCanvasQTAgg):
                             minBattery = bl.battery
                 elif t["Event"] == "RSSI":
                     # Update RSSI data.
-                    for rl in self.data.tripLog[No-1].rssiLog:
+                    for rl in tObj.rssiLog:
                         # Format time axis list in the correct timezone for display.
                         tList.append(timeTZ(rl.time, self.cfg.TimeUTC))
                         eList.append(rl.rssi)
@@ -489,7 +489,7 @@ class EventCanvas(FigureCanvasQTAgg):
                     # Update GNSS error data.
                     minError = 100.0
                     maxError = 0.0
-                    for gl in self.data.tripLog[No-1].gnssLog:
+                    for gl in tObj.gnssLog:
                         # Format time axis list in the correct timezone for display.
                         tList.append(timeTZ(gl.time, self.cfg.TimeUTC))
                         eList.append(gl.error)
