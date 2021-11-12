@@ -17,14 +17,14 @@
   <a href="speedPlot.html">Speed Plot</a>
   <a href="eventsChart.html">Event Traces Chart</a>
   <a href="eventFilter.html">Event Filtering</a>
-  <a href="gnssLogExport.html">GNSS Log Export</a>
+  <a href="tripLogExport.html">Trip Log Export</a>
   <a href="appConfiguration.html">Application Configuration</a>
   <a href="appLogging.html">Application Logging</a>
 </div>
 
 <a name="top"></a>
 
-<h1>Trip Log Export</h1>
+<h1>GNSS Log Export</h1>
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 
 <script>
@@ -37,32 +37,26 @@ function closeNav() {
 }
 </script>
 
-<p>The application allows exporting of trip events for the currently selected trip, all trips in the log file,
+<p>The application allows exporting of the GNSS log for the currently selected trip, all trips in the log file,
 or all filtered trips (refer to <a href="eventFilter.html">Event Filtering</a>).
 The export options are available from the application menu if a log file is loaded,
 with the exception of the &#34;All trips (filtered)&#34; option which is only available if a filter has been applied.
-Once selected, a file selection dialog is presented allowing the user to select the file or files to export to.</p>
+Once selected, a file selection dialog is presented allowing the user to select the file to export to.</p>
 
-<img src="./exportMenu.png" alt="Export menu">
+<img src="./gnssExportMenu.png" alt="GNSS Export menu">
 
-<p>Exporting is in plain text and mostly reflects the data presented on the Trip Data and Trip Summary panes;
-trip speed data is not exported other than as part of event information.</p>
+<p>Exporting is in plain text (.csv) and is essentially a list of GNSS coordinates reported in all events
+in a trip or trips. The exception being that if the GNSS location in an event is lat/long 0/0 the coordinate
+is not reported as this is the default reported when there is no GNSS information</p>
 
-<p>If exporting data for all trips is selected, all trips are exported to a single file.</p>
+<p>If exporting GNSS data for all trips is selected, all trips are exported to a single file.</p>
 
 <p>If exporting data for all filtered trips is selected, all trips matching the filter are exported to a single file.
 Note that trips mathcing the filter are always displayed in the Trip Data pane when the filter is applied.</p>
 
-<p>For each trip the export consists of a header that includes the trip time, contoller ID, and sign-on ID,
-followed by a summary table of events in the trip, and then followed by each of the events in the trip.
-Note that all events are included in the export regardless of whether or not they are currently shown in the Trip Data pane.</p>
+<p>....</p>
 
-<img src="./exportFile.png" alt="Export file structure">
-
-<p>When the export is of filtered trips the export file includes a preamble indicating the filtering applied,
-and the number of trips (out of the total number of trips) included in the export.</p>
-
-<img src="./filteredExport.png" alt="Filtered export preamble">
+<img src="./gnssExportCsv.png" alt="GNSS log file (.csv) structure">
   
 <br>
 <br>
