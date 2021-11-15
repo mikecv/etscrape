@@ -54,9 +54,28 @@ is not reported as this is the default reported when there is no GNSS informatio
 <p>If exporting data for all filtered trips is selected, all trips matching the filter are exported to a single file.
 Note that trips mathcing the filter are always displayed in the Trip Data pane when the filter is applied.</p>
 
-<p>....</p>
+<p>An excerpt of a GNSS log .csv export for all trips is shown below.
+Note that where a trip does not have any GNSS entries, that trip is not included in the export.</p>
 
-<img src="./gnssExportCsv.png" alt="GNSS log file (.csv) structure">
+<img src="./gnssExportCsv.png" alt="GNSS log file (.csv) example">
+
+<p>In the .csv log above there is a title row at the start of each trip.
+Also, there is a <i>name</i> filed in the title, which for a Fleet Controller is the trip ID, and for
+a Zoner is the Fleet ID of the controller.</p>
+
+<h2>Plotting the GNSS Log Export</h2>
+<p>The format of the GNSS log includes the time and latitude / longitude coordinates.
+The log export can be plotted using third party online tools, for example, GPSVisuliser <a href="https://www.gpsvisualizer.com">https://www.gpsvisualizer.com</a>".
+Using GPSVisuliser for the .csv GNSS log file above results in the following plot.</p>
+
+<img src="./gnssLogPlot.png" alt="Sample GNSS log plot from https://www.gpsvisualizer.com/map_input?form=leaflet">
+
+<p>Note in the sample plot above the legend, where individual tracks are shown for each trip.
+Note that for Zoners only a single track is shown.</p>
+
+<p>In the sample plot each track is assigned a different (random) colour, with a pin shown at the start of each track.
+Note that if tracks are turned off using the legend that the track pin, which is a waypoint for the track, is still displayed.
+</p>
   
 <br>
 <br>

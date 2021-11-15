@@ -292,16 +292,18 @@ class Trip():
 
                 # Add RSSI diagnostics.
                 event.rssi = int(su.group(8))
-                if event.rssi < 50:
-                    self.rssiLog.append(RssiInfo(int(su.group(4)), event.rssi))
+                if (event.rssi > 0) and (event.rssi < self.cfg.TripData["RssiErrorLimit"]):
+                    event.alertText = appendAlertText(event.alertText, "RSSI below threshold.")
                 else:
-                    event.alertText = appendAlertText(event.alertText, "Unreasonable RSSI value.")
+                    self.rssiLog.append(RssiInfo(int(su.group(4)), event.rssi))
 
                 # Add GNSS location.
                 event.lat = int(su.group(5)) / 1e7
                 event.long = int(su.group(6)) / 1e7
                 event.posErr = int(su.group(7)) / 1e3
                 self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr))
+                if event.posErr > self.cfg.TripData["GnssErrorLimit"]:
+                    event.alertText = appendAlertText(event.alertText, "GNSS error greater than threshold.")
 
                 # Increment event counters.
                 self.numTripEvents += 1
@@ -341,17 +343,20 @@ class Trip():
                                 self.speedLog.append(SpeedInfo(int(su.group(4)), int(su.group(9))))
                                 self.logger.debug("Logged speed: {0:d}, at {1:s}".format(int(su.group(9)), datetime.fromtimestamp(int(su.group(4))).strftime('%d/%m/%Y %H:%M:%S')))
 
+                # Add RSSI diagnostics.
                 event.rssi = int(su.group(8))
-                if event.rssi < 50:
-                    self.rssiLog.append(RssiInfo(int(su.group(4)), event.rssi))
+                if (event.rssi > 0) and (event.rssi < self.cfg.TripData["RssiErrorLimit"]):
+                    event.alertText = appendAlertText(event.alertText, "RSSI below threshold.")
                 else:
-                    event.alertText = appendAlertText(event.alertText, "Unreasonable RSSI value.")
+                    self.rssiLog.append(RssiInfo(int(su.group(4)), event.rssi))
 
                 # Add GNSS location.
                 event.lat = int(su.group(5)) / 1e7
                 event.long = int(su.group(6)) / 1e7
                 event.posErr = int(su.group(7)) / 1e3
                 self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr))
+                if event.posErr > self.cfg.TripData["GnssErrorLimit"]:
+                    event.alertText = appendAlertText(event.alertText, "GNSS error greater than threshold.")
 
                 # Check if out of trip event, i.e. end trip time > 0.
                 if self.tripEnd > 0:
@@ -1374,16 +1379,18 @@ class ZoneX():
 
                 # Add RSSI diagnostics.
                 event.rssi = int(su.group(8))
-                if event.rssi < 50:
-                    self.rssiLog.append(RssiInfo(int(su.group(4)), event.rssi))
+                if (event.rssi > 0) and (event.rssi < self.cfg.TripData["RssiErrorLimit"]):
+                    event.alertText = appendAlertText(event.alertText, "RSSI below threshold.")
                 else:
-                    event.alertText = appendAlertText(event.alertText, "Unreasonable RSSI value.")
+                    self.rssiLog.append(RssiInfo(int(su.group(4)), event.rssi))
 
                 # Add GNSS location.
                 event.lat = int(su.group(5)) / 1e7
                 event.long = int(su.group(6)) / 1e7
                 event.posErr = int(su.group(7)) / 1e3
                 self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr))
+                if event.posErr > self.cfg.TripData["GnssErrorLimit"]:
+                    event.alertText = appendAlertText(event.alertText, "GNSS error greater than threshold.")
 
                 # Increment event counters.
                 self.numTripEvents += 1
@@ -1423,18 +1430,21 @@ class ZoneX():
                                 self.speedLog.append(SpeedInfo(int(su.group(4)), int(su.group(9))))
                                 self.logger.debug("Logged speed: {0:d}, at {1:s}".format(int(su.group(9)), datetime.fromtimestamp(int(su.group(4))).strftime('%d/%m/%Y %H:%M:%S')))
 
+                        # Add RSSI diagnostics.
                         event.rssi = int(su.group(8))
-                        if event.rssi < 50:
-                            self.rssiLog.append(RssiInfo(int(su.group(4)), event.rssi))
+                        if (event.rssi > 0) and (event.rssi < self.cfg.TripData["RssiErrorLimit"]):
+                            event.alertText = appendAlertText(event.alertText, "RSSI below threshold.")
                         else:
-                            event.alertText = appendAlertText(event.alertText, "Unreasonable RSSI value.")
+                            self.rssiLog.append(RssiInfo(int(su.group(4)), event.rssi))
 
                         # Add GNSS location.
                         event.lat = int(su.group(5)) / 1e7
                         event.long = int(su.group(6)) / 1e7
                         event.posErr = int(su.group(7)) / 1e3
                         self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr))
-
+                        if event.posErr > self.cfg.TripData["GnssErrorLimit"]:
+                            event.alertText = appendAlertText(event.alertText, "GNSS error greater than threshold.")
+    
                 # Break out some of the event data explicitly.
                 eventSpecifics = su.group(11)
 

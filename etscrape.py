@@ -90,11 +90,8 @@ from eventsChart import *
 #
 # Fix bug with [markers] list; needs to be trimmed for zooming.
 # Fix bug with Show Input Events flag; seemed to get set after loading a file.
-# Add RSSI to trip exports.
 # Fix RSSI low warning message; make critical level configurable.
-# Add lat/long to events in display.
 # Add GNSS lat/long/error to trip exports.
-# Update help for: zoners, RSSI charts, exporting GNSS logs.
 # *******************************************
 
 # Program version.
@@ -1477,8 +1474,8 @@ class UI(QMainWindow):
                 # Check for null gnss data, i.e. 0,0 in log.
                 if (gd.latitude != 0.0) and (gd.longitude != 0.0):
                     if started == False:
-                        xf.write(f'{tNo},{idx},T,{timeTZ(gd.time, config.TimeUTC)},{gd.latitude},{gd.longitude},{usName}\n')
-                        xf.write(f'{tNo},{idx},W,,{gd.latitude},{gd.longitude},{usName},circle\n')
+                        xf.write(f'{tNo},{idx},W,{timeTZ(gd.time, config.TimeUTC)},{gd.latitude},{gd.longitude},{usName}\n')
+                        xf.write(f'{tNo},{idx},T,{timeTZ(gd.time, config.TimeUTC)},{gd.latitude},{gd.longitude},{usName},circle\n')
                         started = True
                     else:
                         xf.write(f'{tNo},{idx},T,{timeTZ(gd.time, config.TimeUTC)},{gd.latitude},{gd.longitude}\n')
@@ -1602,6 +1599,8 @@ class UI(QMainWindow):
         # Check for alert values as well.
         if event.event == "SIGNON":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
+            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), False))
             if event.driverId == "*":
@@ -1616,11 +1615,15 @@ class UI(QMainWindow):
         elif event.event == "OVERSPEED":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
+            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
         elif event.event == "ZONEOVERSPEED":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
+            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
             eventList.append(("Maximum Speed", "{0:d}".format(event.maxSpeed), (event.maxSpeed >= config.TripData["BadSpeedLimit"])))
@@ -1628,17 +1631,23 @@ class UI(QMainWindow):
         elif event.event == "ENGINEOVERSPEED":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
+            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
             eventList.append(("Maximum RPM", "{0:d}".format(event.maxRPM), (event.maxRPM >= config.TripData["BadRpmLimit"])))
         elif event.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP", "OFFSEAT", "OVERLOAD"}:
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
+            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
         elif event.event == "UNBUCKLED":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
+            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
             if event.seatOwner == "D":
@@ -1651,12 +1660,16 @@ class UI(QMainWindow):
         elif event.event == "ZONECHANGE":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
+            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("From Zone", "{0:d}".format(event.fromZone), False))
             eventList.append(("To Zone", "{0:d}".format(event.toZone), False))
             eventList.append(("Zone Output", "{0:d}".format(event.zoneOutput), (event.zoneOutput > 4)))
         elif event.event == "ZONETRANSITION":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
+            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("From Zone", "{0:d}".format(event.fromZone), False))
             eventList.append(("To Zone", "{0:d}".format(event.toZone), False))
@@ -1665,6 +1678,8 @@ class UI(QMainWindow):
         elif event.event == "IMPACT":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
+            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Forward G", "{0:0.1f}".format(event.fwdG), False))
             eventList.append(("Reverse G", "{0:0.1f}".format(event.revG), False))
@@ -1723,6 +1738,8 @@ class UI(QMainWindow):
         elif event.event == "CRITICALOUTPUTSET":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), (event.tripStartId != trip.tripStartId)))
+            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Critical Output Set", "{0:d}".format(event.criticalOutput), False))
         elif ((event.event == "OOS PM") or (event.event == "OOS UPM")):
@@ -1738,6 +1755,8 @@ class UI(QMainWindow):
             eventList.append(("Firmware Version", "{0:s}".format(event.firmware), False))
         elif event.event == "POWER":
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), (event.tripStartId != trip.tripStartId)))
+            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.voltage), (event.voltage < 0)))
             eventList.append(("Battery State", "{0:s}".format(event.batteryState), (event.batteryState != "OK")))
@@ -2736,7 +2755,9 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.17</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
-            "<li>Added reporting of GNSS position.</li>" \
+            "<li>Added reporting of GNSS position, as well as support for exporting GNSS logs.</li>" \
+            "<li>Added reporting of RSSI.</li>" \
+            "<li>Added GNSS location and RSSI to on-screen trip data, including alert indications.</li>" \
             "<li>Fixed bug in trip export for zoners.</li>" \
             "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.16</b></h2>")

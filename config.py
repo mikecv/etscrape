@@ -10,7 +10,7 @@ class Config():
     def __init__(self):
 
         # Version of configuration.
-        self.ConfigVersion = 13
+        self.ConfigVersion = 14
 
         # Logger configuration values
         self.DebugLevel = 20
@@ -70,7 +70,9 @@ class Config():
             "ShowReportEvents" : 0,
             "ShowOutOfTripEvents" : 0,
             "BadSpeedLimit" : 100,
-            "BadRpmLimit" : 5200
+            "BadRpmLimit" : 5200,
+            "GnssErrorLimit" : 20,
+            "RssiErrorLimit" : 5
         }
 
         # Speed plot data.
@@ -265,6 +267,20 @@ class Config():
                     self.TripData["BadRpmLimit"] = config["TripData"]["BadRpmLimit"]
                 except Exception:
                     self.TripData["BadRpmLimit"] = paramSaved
+                    updateConfig = True
+                # Try setting GnssErrorLimit from user configuration (json).
+                try:
+                    paramSaved = self.TripData["GnssErrorLimit"]
+                    self.TripData["GnssErrorLimit"] = config["TripData"]["GnssErrorLimit"]
+                except Exception:
+                    self.TripData["GnssErrorLimit"] = paramSaved
+                    updateConfig = True
+                # Try setting RssiErrorLimit from user configuration (json).
+                try:
+                    paramSaved = self.TripData["RssiErrorLimit"]
+                    self.TripData["RssiErrorLimit"] = config["TripData"]["RssiErrorLimit"]
+                except Exception:
+                    self.TripData["RssiErrorLimit"] = paramSaved
                     updateConfig = True
                 # *********************************************************
                 # Checking elements of SpdPlot from user configuration (json).

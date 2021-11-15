@@ -1,5 +1,5 @@
 {
-    "ConfigVersion": 13,
+    "ConfigVersion": 14,
     "DebugLevel": 10,
     "LogFileSize": 100000,
     "LogBackups": 3,
@@ -24,7 +24,9 @@
         "ShowReportEvents": 0,
         "ShowOutOfTripEvents": 0,
         "BadSpeedLimit": 100,
-        "BadRpmLimit": 5200
+        "BadRpmLimit": 5200,
+        "GnssErrorLimit": 20,
+        "RssiErrorLimit": 5
     },
     "SpdPlot": {
         "SpeedColour": "#0000ff",
