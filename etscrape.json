@@ -25,8 +25,8 @@
         "ShowOutOfTripEvents": 0,
         "BadSpeedLimit": 100,
         "BadRpmLimit": 5200,
-        "GnssErrorLimit": 20,
-        "RssiErrorLimit": 5
+        "GnssErrorLimit": 5,
+        "RssiErrorLimit": 10
     },
     "SpdPlot": {
         "SpeedColour": "#0000ff",
@@ -50,8 +50,8 @@
         "EventFillColour": "#0000ff",
         "TripFillColour": "#ffff00",
         "MaxTitleLineLength": 12,
-        "EventTraceColourXtra": "#DF7401",
-        "EventFillColourXtra": "#DF7401"
+        "EventTraceColourXtra": "#df7401",
+        "EventFillColourXtra": "#df7401"
     },
     "Channels": [
         {

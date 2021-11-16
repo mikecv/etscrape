@@ -83,15 +83,13 @@ from eventsChart import *
 # 0.15  MDC 20/05/2021  Fixed bug in selecting and moving between 'trips' for zoners.
 # 0.16  MDC 04/06/2021  Adding RSSI reporting from events functionality.
 # 0.17  MDC 09/11/2021  Added reporting of GPS positional information.
+#                       Added reporting of RSSI.
 # *******************************************
 
 # *******************************************
 # TODO List
 #
 # Fix bug with [markers] list; needs to be trimmed for zooming.
-# Fix bug with Show Input Events flag; seemed to get set after loading a file.
-# Fix RSSI low warning message; make critical level configurable.
-# Add GNSS lat/long/error to trip exports.
 # *******************************************
 
 # Program version.
@@ -1194,6 +1192,8 @@ class UI(QMainWindow):
             xf.write("\tTime                 : {0:s}\n".format(unixTimeString(ev.serverTime, config.TimeUTC)))
             if (ev.event == "SIGNON"):
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tDriver ID            : {0:s}\n".format(ev.driverId))
@@ -1204,11 +1204,15 @@ class UI(QMainWindow):
                 xf.write("\tCard Reader          : {0:s}\n".format(ev.cardReader))
             elif (ev.event == "OVERSPEED"):
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tDuration             : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
             elif (ev.event == "ZONEOVERSPEED"):
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tDuration             : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
@@ -1216,17 +1220,23 @@ class UI(QMainWindow):
                 xf.write("\tZone Output          : {0:d}\n".format(ev.zoneOutput))
             elif (ev.event == "ENGINEOVERSPEED"):
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tDuration             : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
                 xf.write("\tMaximum RPM          : {0:d}\n".format(ev.maxRPM))
             elif ev.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP"}:
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tDuration             : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
             elif ev.event == "UNBUCKLED":
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tDuration             : {0:s}\n".format(str(timedelta(seconds=ev.duration))))
@@ -1239,6 +1249,8 @@ class UI(QMainWindow):
                 xf.write("\tSeat Owner           : {0:s}\n".format(seatOwner))
             elif ev.event == "ZONECHANGE":
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tFrom Zone            : {0:d}\n".format(ev.fromZone))
@@ -1246,6 +1258,8 @@ class UI(QMainWindow):
                 xf.write("\tZone Output          : {0:d}\n".format(ev.zoneOutput))
             elif ev.event == "ZONETRANSITION":
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tFrom Zone            : {0:d}\n".format(ev.fromZone))
@@ -1254,6 +1268,8 @@ class UI(QMainWindow):
                 xf.write("\tTransition           : {0:s}\n".format(ev.transition))
             elif ev.event == "IMPACT":
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tForward G            : {0:0.1f}\n".format(ev.fwdG))
@@ -1271,6 +1287,8 @@ class UI(QMainWindow):
                 xf.write("\tSeverity             : {0:s}\n".format(severity))
             elif ev.event == "CHECKLIST":
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tResult               : {0:s}\n".format(ev.result))
@@ -1288,11 +1306,15 @@ class UI(QMainWindow):
                 xf.write("\tChecklist Type       : {0:s}\n".format(chkType))
             elif ev.event == "CLFAIL":
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tFailed Question      : {0:d}\n".format(ev.failedQNo))
             elif ev.event == "XSIDLESTART":
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
             elif ev.event == "XSIDLE":
@@ -1304,17 +1326,23 @@ class UI(QMainWindow):
             elif ev.event == "SERVICE":
                 xf.write("\tService ID           : {0:d}\n".format(ev.serviceId))
             elif ev.event == "REPORT":
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tReport Speed         : {0:d}\n".format(ev.speed))
                 xf.write("\tDirection            : {0:d}\n".format(ev.direction))
             elif ev.event == "CRITICALOUTPUTSET":
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tCritical Output      : {0:d}\n".format(ev.criticalOutput))
             elif ((ev.event == "OOS PM") or (ev.event == "OOS UPM")):
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tOOS Reason           : {0:d}\n".format(ev.oosReason))
@@ -1327,14 +1355,20 @@ class UI(QMainWindow):
                 xf.write("\tFirmware Version     : {0:s}\n".format(ev.firmware))
             elif ev.event == "POWER":
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tBattery State        : {0:s}\n".format(ev.batteryState))
             elif ev.event == "DEBUG":
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tDetails              : {0:s}\n".format(ev.debugInfo))
             elif ev.event == "TRIP":
                 xf.write("\tBattery Voltage      : {0:0.1f}\n".format(ev.battery))
+                xf.write("\tLat/Long/Error       : {0:.5f} / {1:.5f} / {2:.2f} m\n".format(ev.lat, ev.long, ev.posErr))
+                xf.write("\tRSSI                 : {0:d}\n".format(ev.rssi))
                 xf.write("\tCurrent Speed        : {0:d}\n".format(ev.speed))
                 xf.write("\tSign-on ID           : {0:d}\n".format(ev.tripStartId))
                 xf.write("\tTime Forward         : {0:s}\n".format(str(timedelta(seconds=ev.timeFwd))))
@@ -1599,7 +1633,7 @@ class UI(QMainWindow):
         # Check for alert values as well.
         if event.event == "SIGNON":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("Lat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
             eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), False))
@@ -1615,14 +1649,14 @@ class UI(QMainWindow):
         elif event.event == "OVERSPEED":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
-            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("Lat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
             eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
         elif event.event == "ZONEOVERSPEED":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
-            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("Lat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
             eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
@@ -1631,7 +1665,7 @@ class UI(QMainWindow):
         elif event.event == "ENGINEOVERSPEED":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
-            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("Lat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
             eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
@@ -1639,14 +1673,14 @@ class UI(QMainWindow):
         elif event.event in {"LOWCOOLANT", "OILPRESSURE", "ENGINETEMP", "OFFSEAT", "OVERLOAD"}:
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
-            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("Lat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
             eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
         elif event.event == "UNBUCKLED":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
-            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("Lat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
             eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Duration", "{0:s}".format(str(timedelta(seconds=event.duration))), (event.duration == 0)))
@@ -1660,7 +1694,7 @@ class UI(QMainWindow):
         elif event.event == "ZONECHANGE":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
-            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("Lat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
             eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("From Zone", "{0:d}".format(event.fromZone), False))
@@ -1668,7 +1702,7 @@ class UI(QMainWindow):
             eventList.append(("Zone Output", "{0:d}".format(event.zoneOutput), (event.zoneOutput > 4)))
         elif event.event == "ZONETRANSITION":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
-            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("Lat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
             eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("From Zone", "{0:d}".format(event.fromZone), False))
@@ -1678,7 +1712,7 @@ class UI(QMainWindow):
         elif event.event == "IMPACT":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), ((event.tripStartId != trip.tripStartId) and (not event.isOutOfTrip))))
-            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("Lat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
             eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Forward G", "{0:0.1f}".format(event.fwdG), False))
@@ -1738,7 +1772,7 @@ class UI(QMainWindow):
         elif event.event == "CRITICALOUTPUTSET":
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.battery), (event.battery < 0)))
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), (event.tripStartId != trip.tripStartId)))
-            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("Lat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
             eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Critical Output Set", "{0:d}".format(event.criticalOutput), False))
@@ -1755,7 +1789,7 @@ class UI(QMainWindow):
             eventList.append(("Firmware Version", "{0:s}".format(event.firmware), False))
         elif event.event == "POWER":
             eventList.append(("Sign-on ID", "{0:d}".format(event.tripStartId), (event.tripStartId != trip.tripStartId)))
-            eventList.append(("selfLat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
+            eventList.append(("Lat/Long/Error", "{0:.5f} / {1:.5f} / {2:.2f} m".format(event.lat, event.long, event.posErr), (event.posErr > config.TripData["GnssErrorLimit"])))
             eventList.append(("RSSI", "{0:d}".format(event.rssi), ((event.rssi > 0) and (event.rssi < config.TripData["RssiErrorLimit"]))))
             eventList.append(("Current Speed", "{0:d}".format(event.speed), (event.speed >= config.TripData["BadSpeedLimit"])))
             eventList.append(("Battery Voltage", "{0:2.1f} VDC".format(event.voltage), (event.voltage < 0)))
@@ -2003,13 +2037,14 @@ class PreferencesDialog(QDialog):
         # Validate rpmAlertLimVal 1 to 10000.
         self.rpmAlertLimVal.setValidator(self.regexValidator('^(([1-9][0-9][0-9][0-9])|10000)$'))
         self.rpmAlertLimVal.setText(str(self.config.TripData["BadRpmLimit"]))
+        # Validate GNSS error alert limit 1 to 10000.
+        self.gnssAlertLimVal.setValidator(self.regexValidator('^(([1-9][0-9][0-9][0-9])|10000)$'))
+        self.gnssAlertLimVal.setText(str(self.config.TripData["GnssErrorLimit"]))
+        # Validate RSSI alert limit 1 to 10.
+        self.rssiAlertLimVal.setValidator(self.regexValidator('^(([1-9])|10)$'))
+        self.rssiAlertLimVal.setText(str(self.config.TripData["RssiErrorLimit"]))
 
         # Speed plot values.
-        # Validate lowSpeedVal 1 to 160.
-        # self.lowSpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
-        # self.lowSpeedVal.setText(str(self.config.SpdPlot["DefaultLowLimit"]))
-
-
         self.openSpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
         self.openSpeedVal.setText(str(self.config.SpdPlot["zoneSpeed"][0]))
         self.output1SpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
@@ -2020,12 +2055,6 @@ class PreferencesDialog(QDialog):
         self.output3SpeedVal.setText(str(self.config.SpdPlot["zoneSpeed"][3]))
         self.output4SpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
         self.output4SpeedVal.setText(str(self.config.SpdPlot["zoneSpeed"][4]))
-
-
-
-        # Validate highSpeedVal 1 to 160.
-        # self.highSpeedVal.setValidator(self.regexValidator('^([1-9]|([1-9][0-9])|(1[0-5][0-9])|160)$'))
-        # self.highSpeedVal.setText(str(self.config.SpdPlot["DefaultHiLimit"]))
 
         # Speed line colours.
         self.speedLineColVal.setStyleSheet("QPushButton {{background-color: {0:s}; border: None}}".format(self.config.SpdPlot["SpeedColour"]))
@@ -2314,6 +2343,20 @@ class PreferencesDialog(QDialog):
             # Set the configuration value.
             self.config.TripData["BadRpmLimit"] = val
             logger.debug("Change to bad engine speed limit: {0:d}".format(self.config.TripData["BadRpmLimit"]))
+            prefChanged = True
+        # Bad GNSS error limit.
+        val = int(self.gnssAlertLimVal.text())
+        if val != self.config.TripData["GnssErrorLimit"]:
+            # Set the configuration value.
+            self.config.TripData["GnssErrorLimit"] = val
+            logger.debug("Change to GNSS error limit: {0:d}".format(self.config.TripData["GnssErrorLimit"]))
+            prefChanged = True
+        # Bad RSSI limit.
+        val = int(self.rssiAlertLimVal.text())
+        if val != self.config.TripData["RssiErrorLimit"]:
+            # Set the configuration value.
+            self.config.TripData["RssiErrorLimit"] = val
+            logger.debug("Change to RSSI limit: {0:d}".format(self.config.TripData["RssiErrorLimit"]))
             prefChanged = True
 
         ###########################
@@ -2758,7 +2801,9 @@ class ChangeLogDialog(QDialog):
             "<li>Added reporting of GNSS position, as well as support for exporting GNSS logs.</li>" \
             "<li>Added reporting of RSSI.</li>" \
             "<li>Added GNSS location and RSSI to on-screen trip data, including alert indications.</li>" \
+            "<li>Added GNSS location and RSSI to trip exports.</li>" \
             "<li>Fixed bug in trip export for zoners.</li>" \
+            "<li>Fixed bug with configuration of showInputEvents flag; was not being set from config file.</li>" \
             "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.16</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\

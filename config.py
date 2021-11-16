@@ -240,6 +240,13 @@ class Config():
                 except Exception:
                     self.TripData["InputEventColour"] = paramSaved
                     updateConfig = True
+                # Try setting ShowInputEvents from user configuration (json).
+                try:
+                    paramSaved = self.TripData["ShowInputEvents"]
+                    self.TripData["ShowInputEvents"] = config["TripData"]["ShowInputEvents"]
+                except Exception:
+                    self.TripData["ShowInputEvents"] = paramSaved
+                    updateConfig = True
                 # Try setting ShowDebugEvents from user configuration (json).
                 try:
                     paramSaved = self.TripData["ShowDebugEvents"]
