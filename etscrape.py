@@ -2833,6 +2833,10 @@ class ChangeLogDialog(QDialog):
 
         # Update change log.
         self.changeLogText.textCursor().insertHtml("<h1><b>CHANGE LOG</b></h1><br>")
+        self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.18 (RC)</b></h2>")
+        self.changeLogText.textCursor().insertHtml("<ul>"\
+            "<li>Changes to do exported in GNSS logs, including waypoints, labels, and additional data.</li>" \
+            "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.17</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Added reporting of GNSS position, as well as support for exporting GNSS logs.</li>" \
