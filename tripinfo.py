@@ -98,12 +98,13 @@ class Event():
 # *******************************************
 class GnssInfo():
     # Initializer / Instance Attributes
-    def __init__(self, eTime, eLat, eLong, eErr):
+    def __init__(self, eTime, eLat, eLong, eErr, eSpeed):
 
         self.time = eTime
         self.latitude = eLat
         self.longitude = eLong
         self.error = eErr
+        self.speed = eSpeed
 
 # *******************************************
 # Speed Info class.
@@ -301,7 +302,7 @@ class Trip():
                 event.lat = int(su.group(5)) / 1e7
                 event.long = int(su.group(6)) / 1e7
                 event.posErr = int(su.group(7)) / 1e3
-                self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr))
+                self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr, event.speed))
                 if event.posErr > self.cfg.TripData["GnssErrorLimit"]:
                     event.alertText = appendAlertText(event.alertText, "GNSS error greater than threshold.")
 
@@ -354,7 +355,7 @@ class Trip():
                 event.lat = int(su.group(5)) / 1e7
                 event.long = int(su.group(6)) / 1e7
                 event.posErr = int(su.group(7)) / 1e3
-                self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr))
+                self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr, event.speed))
                 if event.posErr > self.cfg.TripData["GnssErrorLimit"]:
                     event.alertText = appendAlertText(event.alertText, "GNSS error greater than threshold.")
 
@@ -1388,7 +1389,7 @@ class ZoneX():
                 event.lat = int(su.group(5)) / 1e7
                 event.long = int(su.group(6)) / 1e7
                 event.posErr = int(su.group(7)) / 1e3
-                self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr))
+                self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr, event.speed))
                 if event.posErr > self.cfg.TripData["GnssErrorLimit"]:
                     event.alertText = appendAlertText(event.alertText, "GNSS error greater than threshold.")
 
@@ -1441,7 +1442,7 @@ class ZoneX():
                         event.lat = int(su.group(5)) / 1e7
                         event.long = int(su.group(6)) / 1e7
                         event.posErr = int(su.group(7)) / 1e3
-                        self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr))
+                        self.gnssLog.append(GnssInfo(int(su.group(4)), event.lat, event.long, event.posErr, event.speed))
                         if event.posErr > self.cfg.TripData["GnssErrorLimit"]:
                             event.alertText = appendAlertText(event.alertText, "GNSS error greater than threshold.")
     

@@ -84,6 +84,7 @@ from eventsChart import *
 # 0.16  MDC 04/06/2021  Adding RSSI reporting from events functionality.
 # 0.17  MDC 09/11/2021  Added reporting of GPS positional information.
 #                       Added reporting of RSSI.
+# 0.18  MDC 17/11/2021  Changes to GNSS location log export.
 # *******************************************
 
 # *******************************************
@@ -93,7 +94,7 @@ from eventsChart import *
 # *******************************************
 
 # Program version.
-progVersion = "0.17"
+progVersion = "0.18 (RC)"
 
 # Program date (for About dialog).
 progDate = "2020/21"
@@ -1420,23 +1421,43 @@ class UI(QMainWindow):
                 else:
                     tLog = self.zoneXLog
 
+                # Initialise track number for GNSS log file.
+                tNo = 0
                 for tidx, t in enumerate(tLog):
 
-                    # If exporting filtered trips then need to check for anything to filter.
-                    if filtered:
-                        # Check if anything to filter.
-                        if not self.tripDataTree.topLevelItem(tidx).isHidden():
-                        # Export GNSS log for trip.
-                            self.exportGnssLog(xf, t, (tidx+1))
-                    else:
-                        # Export GNSS log for trip.
-                        self.exportGnssLog(xf, t, (tidx+1))
+                    # First check if there are any valid points in the track.
+                    # Don't export if nothing in the track.
+                    validData = False
+                    for gd in t.gnssLog:
+                        # Check for null gnss data, i.e. 0,0 in log.
+                        if (gd.latitude != 0.0) and (gd.longitude != 0.0):
+                            validData = True
+                            break
+
+                    # If we have some track data then export.
+                    if validData:
+                        # If exporting filtered trips then need to check for anything to filter.
+                        if filtered:
+                            # Check if anything to filter.
+                            if not self.tripDataTree.topLevelItem(tidx).isHidden():
+                            # Export GNSS log for trip.
+                                self.exportGnssLog(xf, t, (tNo+1))
+                        else:
+                            # Export GNSS log for trip.
+                            self.exportGnssLog(xf, t, (tNo+1))
+                        # Increment the track number.
+                        tNo += 1
 
                 # Retore the wait cursor now that export complete.
                 QApplication.restoreOverrideCursor()
 
-                logger.info("Opened and wrote GNSS Log file : {0:s}".format(filenames[0]))
-                self.showTempStatusMsg("{0:s}".format(filenames[0]), config.TripData["TmpStatusMessagesMsec"])
+                if tNo > 0:
+                    logger.info("Opened and wrote GNSS Log file : {0:s}".format(filenames[0]))
+                    self.showTempStatusMsg("{0:s}".format(filenames[0]), config.TripData["TmpStatusMessagesMsec"])
+                else:
+                    logger.info("No valid GNSS log data exported to : {0:s}".format(filenames[0]))
+                    self.showTempStatusMsg("{0:s}".format("No valid GNSS log data"), config.TripData["TmpStatusMessagesMsec"])
+                    showPopup("GNSS Log Export", "No valid GNSS log data to export.", "(Check GNSS data.)")
 
                 # Close file after writing.
                 xf.close()
@@ -1469,11 +1490,27 @@ class UI(QMainWindow):
                 else:
                     tLog = self.zoneXLog
 
-                # Export GNSS Log for selected trip.
-                self.exportGnssLog(xf, tLog[self.selectedTrip - 1], 1)
+                # First check if there are any valid points in the track.
+                # Don't export if nothing in the track.
+                validData = False
+                for gd in tLog[self.selectedTrip - 1].gnssLog:
+                    # Check for null gnss data, i.e. 0,0 in log.
+                    if (gd.latitude != 0.0) and (gd.longitude != 0.0):
+                        validData = True
+                        break
 
-                logger.info("Opened and wrote export GNSS Log file : {0:s}".format(filenames[0]))
-                self.showTempStatusMsg("{0:s}".format(filenames[0]), config.TripData["TmpStatusMessagesMsec"])
+                # If we have some track data then export.
+                if validData:
+
+                    # Export GNSS Log for selected trip.
+                    self.exportGnssLog(xf, tLog[self.selectedTrip - 1], 1)
+
+                    logger.info("Opened and wrote export GNSS Log file : {0:s}".format(filenames[0]))
+                    self.showTempStatusMsg("{0:s}".format(filenames[0]), config.TripData["TmpStatusMessagesMsec"])
+                else:
+                    logger.info("No valid GNSS log data exported to : {0:s}".format(filenames[0]))
+                    self.showTempStatusMsg("{0:s}".format("No valid GNSS log data"), config.TripData["TmpStatusMessagesMsec"])
+                    showPopup("GNSS Log Export", "No valid GNSS log data to export.", "(Check GNSS data.)")
 
                 # Close file after writing.
                 xf.close()
@@ -1499,20 +1536,20 @@ class UI(QMainWindow):
             # Export header row.
             started = False
             idx = 1
-            xf.write(f'gv_track_number,trackpoint,type,time,latitude,longitude,name,symbol\n')
+            xf.write(f'gv_track_number,trackpoint,type,time,latitude,longitude,name,desc,new_track,symbol,label\n')
             if self.isZoner == True:
-                usName = f'Zoner:{self.controllerID}'
+                usName = f'Zoner: {self.controllerID}'
             else:
-                usName = f'Trip:{ti.tripStartId}'
+                usName = f'Trip: {ti.tripStartId}'
             for gd in ti.gnssLog:
                 # Check for null gnss data, i.e. 0,0 in log.
                 if (gd.latitude != 0.0) and (gd.longitude != 0.0):
                     if started == False:
-                        xf.write(f'{tNo},{idx},W,{timeTZ(gd.time, config.TimeUTC)},{gd.latitude},{gd.longitude},{usName}\n')
-                        xf.write(f'{tNo},{idx},T,{timeTZ(gd.time, config.TimeUTC)},{gd.latitude},{gd.longitude},{usName},circle\n')
+                        xf.write(f'{tNo},{idx},W,{timeTZ(gd.time, config.TimeUTC)},{gd.latitude},{gd.longitude},{usName},,0,pin\n')
+                        xf.write(f'{tNo},{idx},R,{timeTZ(gd.time, config.TimeUTC)},{gd.latitude},{gd.longitude},{usName},,1,,{idx}\n')
                         started = True
                     else:
-                        xf.write(f'{tNo},{idx},T,{timeTZ(gd.time, config.TimeUTC)},{gd.latitude},{gd.longitude}\n')
+                        xf.write(f'{tNo},{idx},R,{timeTZ(gd.time, config.TimeUTC)},{gd.latitude},{gd.longitude},{timeTZ(gd.time, config.TimeUTC)},GNSS Error: {gd.error} (m) Speed: {gd.speed} (kph),,circle,{idx}\n')
                     idx += 1
 
     # *******************************************
