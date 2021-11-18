@@ -91,6 +91,9 @@ from eventsChart import *
 # TODO List
 #
 # Fix bug with [markers] list; needs to be trimmed for zooming.
+# On gnss plot remove subsequent points at same location.
+# On gnss plot consider dashed line if no gnss data.
+# Update help with new gnss plots and functionality.
 # *******************************************
 
 # Program version.
@@ -1277,8 +1280,8 @@ class UI(QMainWindow):
                 xf.write("\tReverse G            : {0:0.1f}\n".format(ev.revG))
                 xf.write("\tLeft G               : {0:0.1f}\n".format(ev.leftG))
                 xf.write("\tRight G              : {0:0.1f}\n".format(ev.rightG))
-                xf.write("\tMax G (1)            : {0:0.1f}\n".format(ev.maxG1))
-                xf.write("\tMax G (2)            : {0:0.1f}\n".format(ev.maxG2))
+                xf.write("\tVector (magnitude)   : {0:0.1f}\n".format(ev.vectorMag))
+                xf.write("\tVector (direction)   : {0:0.1f}\n".format(ev.vectorDirn))
                 if ev.severity == "C":
                     severity = "High"
                 elif ev.severity == "W":
@@ -1756,8 +1759,8 @@ class UI(QMainWindow):
             eventList.append(("Reverse G", "{0:0.1f}".format(event.revG), False))
             eventList.append(("Left G", "{0:0.1f}".format(event.leftG), False))
             eventList.append(("Right G", "{0:0.1f}".format(event.rightG), False))
-            eventList.append(("Max G (1)", "{0:0.1f}".format(event.maxG1), False))
-            eventList.append(("Max G (2)", "{0:0.1f}".format(event.maxG2), False))
+            eventList.append(("Vector (magnitude)", "{0:0.1f}".format(event.vectorMag), False))
+            eventList.append(("Vector (direction)", "{0:0.1f}".format(event.vectorDirn), False))
             if event.severity == "C":
                 severity = "High"
             elif event.severity == "W":
@@ -2836,6 +2839,7 @@ class ChangeLogDialog(QDialog):
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.18 (RC)</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\
             "<li>Changes to do exported in GNSS logs, including waypoints, labels, and additional data.</li>" \
+            "<li>Changed wording for impact event parameters for impact vector magnitude and direction.</li>" \
             "</ul><br>")
         self.changeLogText.textCursor().insertHtml("<h2><b>Version 0.17</b></h2>")
         self.changeLogText.textCursor().insertHtml("<ul>"\

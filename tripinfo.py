@@ -50,8 +50,8 @@ class Event():
         self.revG = 0.0
         self.leftG = 0.0
         self.rightG = 0.0
-        self.maxG1 = 0.0
-        self.maxG2 = 0.0
+        self.vectorMag = 0.0
+        self.vectorDirn = 0.0
         self.severity = ""
         self.failedQ = 0
         self.failedQNo = 0
@@ -620,8 +620,8 @@ class Trip():
                         event.revG = int(sp.group(3)) / 10.0
                         event.leftG = int(sp.group(4)) / 10.0
                         event.rightG = int(sp.group(5)) / 10.0
-                        event.maxG1 = int(sp.group(6)) / 10.0
-                        event.maxG2 = int(sp.group(7)) / 10.0
+                        event.vectorMag = int(sp.group(6)) / 10.0
+                        event.vectorDirn = int(sp.group(7)) / 10.0
                         event.severity = sp.group(8)
 
                         # Read battery voltage from event header.
